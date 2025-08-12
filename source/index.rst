@@ -49,9 +49,12 @@ Sistema, arquitectura, componentes
 
 ------
 
+Sistema Operativo(SO)
+=====================
+
 .. toctree::
    :maxdepth: 1
-   :caption: Instalación Sistema Operativo(SO):
+   :caption: Instalación y gestión del SO:
 
    OS/caracteristicasEquipo.rst
    OS/particionadorDeWindows.rst
@@ -80,4 +83,51 @@ Sistema, arquitectura, componentes
 
 	Documentos disponibles sobre la instalación del sistema operativo. También podrá inncluir ejercicios propuestos.
    
+-----
+
+Office, Word y Excel
+====================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Office, Word:
+
+   Office/Word-apuntes-parte1.rst
+   Office/Word-apuntes-parte2.rst
+   Office/Word-apuntes-parte3.rst
+   Office/prueba-1.rst
+   Office/prueba-2.rst
+   Office/prueba-3.rst
+   Office/apuntesRaulV-v3.rst
+
+.. tip::
    
+	**Word**: documentación sobre la herramienta *Word* de *Office*.
+	
+	
+.. toctree::
+   :maxdepth: 2
+   :caption: Office, Excel:
+	
+   Office/excel.rst
+   Office/excel-2.rst
+   Office/excel-3.rst
+   
+.. tip::
+   
+	**Excel**: documentación sobre la herramienta *Excel* de *Office*.
+	
+-----
+	
+Downloadable files
+=====================
+
+- Click to download: :download:`Tema 1 - Arquitectura de Sistema <descargas/Tema-1-Arquitecturas_de_un_sistema_microinformático.pdf>`
+- Click to download: :download:`Tema 2 - Funciones del SO <descargas/Tema-2_FuncionesSistemaOperativo.pdf>`
+- Click to download: :download:`Velocidad de la Ram <descargas/Artículo._La_velocidad_de_la_memoria_RAM_y_su_latencia.pdf>`
+- Click to download: :download:`Tema 3 - Elementos del SO <descargas/Tema_3._Elementos_de_un_Sistema_Operativo_Informático.pdf>`
+- Click to download: :download:`Tema 4 - Sistemas(SO) Actuales <descargas/Tema_4._Sistemas_operativos_informáticos_actuales.pdf>`
+
+.. warning::
+   
+	Esta sección contiene recursos descargables y podría estar sugeta a cambios sin previo aviso.
