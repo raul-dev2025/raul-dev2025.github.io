@@ -3,17 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Técnico Sistemas's documentation!
+Documentation de Técnico Sistemas !
 ============================================
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contenidos:
 
    Sistema/resume_modulo_0852
 
-Indices and tables
-==================
+Indices y tablas
+================
 
 * :ref:`genindex`
 * :ref:`modindex`
@@ -25,7 +25,7 @@ Sistema, arquitectura, componentes
 
 .. toctree::
    :maxdepth: 1
-   :caption: Sistema, arquitectura, componentes:
+   :caption: documentación del sistema:
 
    Sistema/evolucionProcesadores.rst
    Sistema/GeorgeBoole.rst
@@ -42,3 +42,42 @@ Sistema, arquitectura, componentes
    Sistema/UEFI.rst
    Sistema/UEFI-refs.rst
    Sistema/Ejercicios.rst
+
+.. note:: 
+
+   Esta sección contiene documentos de caracter académico. También podrá inncluir ejercicios propuestos.
+
+------
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Instalación Sistema Operativo(SO):
+
+   OS/caracteristicasEquipo.rst
+   OS/particionadorDeWindows.rst
+   OS/SO_portatil.rst
+   OS/EFIpartWindows.rst
+   OS/tipoArranquePS.rst
+   OS/SO.rst
+   OS/recuperarCuentas.rst
+   OS/recuperarCuentasPractica.rst
+   OS/resetUserpwd
+   OS/explorerWindows.rst
+   OS/caracteristicasDeWindows10.rst
+   OS/caracteristicasDeWindows11.rst
+   OS/caracteristicasDeLinux-rhelVSdebian.rst
+   OS/VirtualBox.rst
+   OS/info.rst
+   OS/plataforma.rst
+   OS/proxmox.rst
+   OS/atributos.rst
+   OS/administradorEquipos.rst
+   OS/asistenciaRemota.rst
+   OS/puntosRestauracion_Bauckups.rst
+   OS/ResgistroWindows.rst   
+   
+.. note::
+
+	Documentos disponibles sobre la instalación del sistema operativo. También podrá inncluir ejercicios propuestos.
+   
+   
