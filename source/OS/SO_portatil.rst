@@ -150,6 +150,7 @@ Comparación de métodos
 |     Instalación   |       Completa      |       Bueno (con SSD)     |   Uso diario sistema primario  |
 |   completa en USB |                     |                           |                                |
 +-------------------+---------------------+---------------------------+--------------------------------+
+
       
 **Notas importantes**:
 
