@@ -85,6 +85,22 @@ Sistema Operativo(SO)
    
 -----
 
+Aplicaciones de Sistema
+=======================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Aplicaciones Windows:
+
+   AplicacionesDeSistema/aplicacionesPortables
+   AplicacionesDeSistema/Cobian
+
+.. tip::   
+   **Aplicaciones de Sistema**: documentación sobre aplicaciones de sistema en Windows.
+
+-----
+
+
 Office, Word y Excel
 ====================
 
