@@ -186,6 +186,39 @@ Siempre que haya que hacer una operación entre dos celdas y una contenga ``%`` 
      </tbody>
    </table>
 
+   <style>
+   th.curso,
+   td.curso {
+      background-color: #fff9c4 !important;
+   }
+   td.magenta {
+      background-color: #be1385ff !important;
+   }
+   .code-box {
+      position: relative;
+      margin-top: 40px; /* space from the table */
+      padding: 1em;
+      background: #edf0f2;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+   }
+
+   /* Arrow pointing up from code box to table */
+   .code-box::before {
+      content: "";
+      position: absolute;
+      top: -20px;
+      left: 20px; /* adjust horizontally */
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 20px solid #404040; /* arrow color */
+   }
+   </style>
+
+
+
 Condicional simple, ``SI``
 ----------------------------
 
