@@ -139,6 +139,9 @@ Siempre que haya que hacer una operación entre dos celdas y una contenga ``%`` 
 
    Para poder utilizar en esta función la opción de "fijar celda y arrastrar" deberemos hacerlo sobre el rango ``($B$2:$B$8;D14)``. Este código muestra como hemos fijado el rango, y el argumento criterio es la celda especificada que hemos escrito específicamente para evitar que cambie su valor.
 
+----
+
+- **CONTAR.SI(): Cuenta las celdas que cumplen una condición.**
 Condicional simple, ``SI``
 ----------------------------
 
