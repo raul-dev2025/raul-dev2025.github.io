@@ -219,6 +219,15 @@ Siempre que haya que hacer una operación entre dos celdas y una contenga ``%`` 
 
 
 
+.. raw:: html
+
+   <div class="code-box">
+      <pre id="code-box"><code>=CONTAR.SI(<span style="background-color:#be1385ff;">rango</span>;<span style="background-color:#fff9c4;">criterio</span>)</code></pre>
+      <code>@: Rango 'Fijar celda' ($)</code>
+      <code>@: Criterio</code>
+   </div>
+
+
 Condicional simple, ``SI``
 ----------------------------
 
