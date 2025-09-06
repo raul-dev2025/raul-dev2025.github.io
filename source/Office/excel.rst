@@ -142,6 +142,50 @@ Siempre que haya que hacer una operación entre dos celdas y una contenga ``%`` 
 ----
 
 - **CONTAR.SI(): Cuenta las celdas que cumplen una condición.**
+
+.. raw:: html
+
+   <table class="docutils align-default">
+     <thead>
+       <tr class="row-odd">
+         <th class="head"><p>Alumnos</p></th>
+         <th class="head"><p>Curso</p></th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr class="row-even">
+         <td><p> - </p></td>
+         <td class="curso"><p>Word</p></td>
+       </tr>
+       <tr class="row-even">
+         <td><p> - </p></td>
+         <td class="curso"><p>Excel</p></td>
+       </tr>
+       <tr class="row-even">
+         <td><p> - </p></td>
+         <td class="curso"><p>Excel</p></td>
+       </tr>
+       <tr class="row-even">
+         <td><p> - </p></td>
+         <td class="curso"><p>Word</p></td>
+       </tr>
+     </tbody>
+   </table>
+   
+   <p><strong>Nº de cursos</strong></p>
+   <table class="docutils align-default">
+     <tbody>
+       <tr class="row-even">
+         <td class="magenta"><p>Word</p></td>
+         <td><p> - </p></td>
+       </tr>
+       <tr class="row-even">
+         <td><p>Excel</p></td>
+         <td><p> - </p></td>
+       </tr>
+     </tbody>
+   </table>
+
 Condicional simple, ``SI``
 ----------------------------
 
