@@ -132,7 +132,7 @@ Siempre que haya que hacer una operación entre dos celdas y una contenga ``%`` 
 
 - Función ``CONTARA()``, la encontramos en estadística o en todo. Cuenta celdas no vacías.
 
-- Función ``CONTARA.SI()``, cuenta las celdas que cumplen una condición. El bloque de argumentos acepta dos. la encontramos en estadística o en todo. El argumento criterio es mejor escribirlo en lugar de referenciarlo por celda. Argumentos:
+- Función ``CONTARA.SI()``, cuenta las celdas que cumplen una condición. El bloque de argumentos acepta dos. La encontramos en estadística o en todo. El argumento criterio es mejor escribirlo en lugar de referenciarlo por celda. Argumentos:
   
    - Rango; el rango de celdas aplicables.
    - Criterio; si son números: ``<>, <, <=, >, >=``. Si son letras, escribiremos la cadena literal exacta.
