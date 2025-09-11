@@ -128,11 +128,13 @@ Office, Word y Excel
    Office/excel.rst
    Office/excel-2.rst
    Office/excel-3.rst
+   Office/cuestionarios
    
 .. tip::
    
 	**Excel**: documentación sobre la herramienta *Excel* de *Office*.
-	
+
+
 -----
 	
 Downloadable files
