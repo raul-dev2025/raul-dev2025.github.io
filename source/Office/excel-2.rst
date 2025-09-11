@@ -4,23 +4,28 @@ Parte 2
 Mover datos
 --------------
 
-* Cambiar los datos para corregir un error al equivocarnos de columna o fila:
+Cambiar los datos para corregir un error al equivocarnos de columna o fila:
 
    - Ficha insertar, grupo celdas botón insertar. Inserta una columna a la izquierda.
-   - Seleccionamos los elementos de la columna y buscamos las cuatros flechas sobre el borde de la selección; cuando clicamos aparece el puntero blanco:
+   - Seleccionamos los elementos de la columna y buscamos las cuatro flechas sobre el borde de la selección; cuando clicamos aparece el puntero blanco:
    
-   * Si arrastramos la selección moveremos los datos al lugar elegido.
-   * Si al arrastrar la selección mantenemos pulsado la tecla :kbd:`ctrl` copiaremos los datos en su lugar.
+     * Si arrastramos la selección moveremos los datos al lugar elegido.
+     * Si al arrastrar la selección mantenemos pulsado la tecla :kbd:`ctrl` copiaremos los datos en su lugar.
 
 
 Referencias
 --------------
 
 - **Relativas**: cuando se arrastra una operación, a lo largo de las celdas contiguas. Se hace la misma operación pero siempre con las celdas que hay debajo.
+  
    *Situamos el cursor hasta que aparecer el cursor con la cruz negra(+).*
 - **Absoluta**: :kbd:`F4`. Es un tipo de referencia de celda que permanece constante, es decir, no cambia incluso cuando la fórmula se copia o se mueve a otra celda.
 
-   *Reflexión: es relativa...es Absoluta...*
+   .. attention:: 
+
+      - Una referencia **relativa** es aquella que se ajusta automáticamente cuando se copia o se arrastra una fórmula a otra celda. Por ejemplo, si tienes una fórmula =A1 en la celda B1 y la copias a la celda B2, la fórmula se convierte en =A2
+      - Una referencia **absoluta** es aquella que no cambia cuando se copia o se arrastra una fórmula a otra celda. Por ejemplo, si tienes una fórmula =$A$1 en la celda B1 y la copias a la celda B2, la fórmula sigue siendo =$A$1
+
 
 En primer lugar habrá que situar el puntero del ratón (o cursor) Sobre la barra de fórmulas, a continuación habrá que identificar la cadena de texto que define el campo en cuestión, y fijar el dato con :kbd:`F4`.
 
@@ -36,7 +41,7 @@ Cambiar tamaño de filas y columnas
 
 Seleccionar todas la filas a las que queramos cambiar la altura o anchura, y desplazar el ratón hasta ajustar.
 
-   Tecla :kbd:`F2` muestra por colores las cesldas a las que pertenece la oeración. 
+   Tecla :kbd:`F2` muestra por colores las cesldas a las que pertenece la operación. 
 
 Porcentaje de un valor
 -------------------------
@@ -54,8 +59,8 @@ Para calcular el porcentaje que representa un valor con respecto a la suma de un
          ----
          1900
          (200 / 1900) * 100 = 10,53%
-         # Lo pequeño entre lo grande, nos dá la relación del valor
-         # con restecto al total.
+
+Lo pequeño entre lo grande, nos dá la relación del valor con restecto al total.
 
 .. tip::
 
@@ -63,10 +68,10 @@ Para calcular el porcentaje que representa un valor con respecto a la suma de un
    
    .. code-block:: 
    
-      TOTAL =  TOTAL * DTO
-      TOTAL - DTO = TOTAL - DTO
-      IVA  = TOTAL - DTO * IVA
-      TOTAL - DTO + IVA = TOTAL + IVA
+      DTO =  TOTAL * DTO
+      TOTAL - DTO = TOTAL - TOTAL * DTO
+      IVA  = TOTAL * IVA
+      TOTAL + IVA = TOTAL + TOTAL * IVA
 
       val = 100
       dto = 10%
@@ -75,13 +80,12 @@ Para calcular el porcentaje que representa un valor con respecto a la suma de un
 			val - val * dto = valor con el descuento aplicado.
 			val * iva = valor del iva.
 			val + val * iva = valor con el iva ya aplicado.
-			# A la base imponible deberemos aplicarle el descuento.
-			# A la base imponible, con el descuento aplicado, 
-			# debemos cargarle el IVA(que siempre es repercutido).
-			###############
-			## Si queremos extraer el IVA de un valor:
-			121 / 1.21 = val # valor sin el IVA
-			
+
+ - A la base imponible deberemos aplicarle el descuento.
+ - A la base imponible, con el descuento aplicado, debemos cargarle el IVA(que siempre es repercutido).
+ - Si queremos extraer el IVA de un valor: val / 1.21 = val valor sin el IVA. Ejemplo;
+  
+			121 / 1.21 = 100
 
 Combinar rápidamente
 -----------------------
@@ -108,11 +112,11 @@ Permite aplicar una serie de formatos a las celdas que cumplen cierta condición
 2. Ficha inicio
 3. Desplegar Formato condicional
 
-En la opción :kbd:`reglas para resaltar celdas`, aparecerá un nuevo panel con varias opciones.
+En la opción ``reglas para resaltar celdas`` , aparecerá un nuevo panel con varias opciones.
 
-Para modificar un regla, desplegar :kbd:`Formato condicional` -> :kbd:`Administrar reglas`, y escogemos una de las funciones para modificar la regla: *Nueva regla*, *Editar regla* o *Eliminar regla*.
+Para modificar un regla, desplegar ``Formato condicional`` -> ``Administrar reglas``, y escogemos una de las funciones para modificar la regla: *Nueva regla*, *Editar regla* o *Eliminar regla*.
 
-:kbd:`Reglas para valores superiores e inferiores`, esta función se utilizará cuando sea el ordenador quien tenga que hacer el cálculo, por ejemplo el promedio.
+``Reglas para valores superiores e inferiores``, esta función se utilizará cuando sea el ordenador quien tenga que hacer el cálculo, por ejemplo el promedio.
 
 
 Instancia de hojas de Excel

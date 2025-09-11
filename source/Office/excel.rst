@@ -1,15 +1,15 @@
 Parte 1
-==========
-Extensión de archivo:
+=======
 
-- Word -> .docx -> Documento
-- Excel -> .xlsx -> Libro
+- Word -> :kbd:`.docx` -> Documento
+- Excel -> :kbd:`.xlsx` -> Libro
 
 Es importante en Excel confirmar o validar el valor de una celda. Para ello podremos utilizar la tecla intro, flecha dirección, tabulador o el ratón.
 
 
 Bóton borrar
----------------
+------------
+
 Al regresar a una hoja excel que ya estuvimos utilizando, habrá que asegurarse que los formatos definidos para valores anteriores, no afectan a los nuevos datos que se introducirán en la hoja. Para ello podremos utilizar el botón borrar, junto al lado izquirdo de la cinta de opciones Excel.
 
 - Borrar todo
@@ -20,12 +20,17 @@ Al regresar a una hoja excel que ya estuvimos utilizando, habrá que asegurarse 
 
 
 Bordes
----------
+------
+
 Para poner bordes en Excel habrá que seguir un orden concreto:
 
 1. Estilo y color
-2. Borde, seleccionamos el border a ma
+2. Borde, seleccionamos el border
 3. preestablecidos; ninguno, Contorno e interior
+
+
+Selección de celdas
+-------------------
 
 * Para seleccionar toda la columna, situaremos el cursor del ratón sobre la letra y haremos click sobre ella.
 
@@ -39,69 +44,67 @@ Para poner bordes en Excel habrá que seguir un orden concreto:
 
 .. note::
 
-   La tecla suprimir borra el texto, pero no el formato.
-   En la pestaña Inicio, al final; dentro del grupo Edición, podremos utilizar el deslegable de borrar, para ajustar qué borrar.
+   La tecla suprimir borra el texto, pero no el formato. En la pestaña Inicio, al final; dentro del grupo Edición, podremos utilizar el deslegable de borrar, para ajustar qué borrar.
 
 
 Formato en los números
--------------------------
+----------------------
 En la ficha inicio el grupo Número, nos permitirá activar un formato específico para las celdas.
 
 - **Formato de número de contabilidad** (Billete/monedas). Éste botón se utiliza para dinero.
-- **Estilo millares(000)**. Se utiliza para cantidades.
+- **Estilo millares** :kbd:`000`. Se utiliza para cantidades.
 - **Aumentar decimales**. Aumenta una cifra cada vez.
 - **Disminuir decimales**. Disminuye una cifra cada vez.
 - **General**, al desplegar este botón en "más formato de número" podremos elegir la moneda, además de otras características.
-- Botón de :kbd:`porcentaje`, multiplica por cien y coloca el símbolo. Para escribir el porcentaje lo mejor es utilizar la tecla.
+- **Botón porcentaje** :kbd:`%`, multiplica por cien y coloca el símbolo. Para escribir el porcentaje lo mejor es utilizar la tecla.
+  
    El Botón se comporta de forma diferente si hay o no algo escrito en la celda. Si no hay nada escrito, simplemente añadirá el símbolo, una vez escribamos el número.
 
 Fechas
----------
+------
 Siempre utilizaremos barra ``/`` o guiión ``-`` como separador. Los ceros para números menores de diez, tampoco se escriben.
 
-Si escribimos la fecha:
+**Si escribimos la fecha**: Desplegar el botón fecha -> más formatos de números -> categoría -> fecha.
 
-Desplegar el botón fecha -> más formatos de números -> categoría -> fecha
-
-Si escribimos la hora:
-
-Desplegar el botón :kbd:`fecha` -> más formatos de números -> categoría -> hora
+**Si escribimos la hora**: Desplegar el botón :kbd:`fecha` -> más formatos de números -> categoría -> hora.
 
 
 Cómo restar fechas
---------------------
+------------------
 En la ficha inicio, bloque Número, botón desplegable "Formato número", podremos elegir la opción número. Representa la fecha desde uno de enero de 1900.
 
 
 Series
-----------
-Excel es capaz de recordar listas conocidas; lunues, martes, miércoles.., Enero, Febrero, Marzo..
+------
+Excel es capaz de recordar listas conocidas; lunes, martes, miércoles.., Enero, Febrero, Marzo...
 Para indicar que escriba automáticamente el siguiente elemento en la lista  ...Abril, Mayo, Junio.., Deberemos iniciar el primer elemento y arrastrar con el ratón hasta la celda indicada, cuando sale la flecha negra.
 
 Si nos saltamos algún elemento 1, 3, 5..., o Enero, Marzo, Mayo...,  Habrá que indicar al menos, los dos primeros elementos de la lista.
 
 
 Estilo, nombre  y posición de las hojas
-------------------------------------------
-**Nombre de las hojas:** Con doble click se cambia el nombre de la hoja.
-**Estilo o color:** Es posible cambiar el color de la pestaña, si pulsamos el botón secundario del ratón y seleccionamos la opción: *color pestaña*.
-**Posición:** Arastrando con el ratón, deberemos posicinarla justo después del triángulo cuando salga.
+----------------------------------------
+- **Nombre de las hojas:** Con doble click se cambia el nombre de la hoja.
+- **Estilo o color:** Es posible cambiar el color de la pestaña, si pulsamos el botón secundario del ratón y seleccionamos la opción: *color pestaña*.
+- **Posición:** Arastrando con el ratón, deberemos posicinarla justo después del triángulo cuando salga.
 
 
 Operaciones
-----------------
+-----------
+
 En Excel se utilizan dos tipos de operaciones; fórmulas y funciones.
 
 
 Fórmulas
------------
+--------
 
-- **Aritméticas**; sumar(+), restar(-), multiplicar(*) y dividir(/).
-- **Lógicas**; mayor(>), menor(<), mayor que(>=), menor que(<=), distinto(<>).
+- **Aritméticas**; sumar ``+``, restar ``-``, multiplicar ``*``, dividir ``/``. 
+- **Lógicas**; ``=`` (igual), ``<>`` (distinto), ``<`` (menor), ``>`` (mayor), ``<=`` (menor o igual), ``>=`` (mayor o igual).
 
 Habrá que seguir siempre el procedimiento: nos situamos sobre la celda que contendrá el valor. Para iniciar una fórmula :
+
    1. Hay que escribir el símbolo igual `=`.
-   2. Seleccionar la primera celda con la que operarar
+   2. Seleccionar la primera celda con la que operarar.
    3. Definir la operación sumar(+), restar(-), multiplicar(*) y dividir(/).
    4. Seleccionar la siguiente celda con la que operarar.
    5. Repetir.
@@ -109,15 +112,15 @@ Habrá que seguir siempre el procedimiento: nos situamos sobre la celda que cont
    
 
 .. tip::
-   La propiedad asociada a la operación 3 + 2 * 5 = 13 es la **propiedad de precedencia de operadores** o **jerarquía de operaciones**.
+   La propiedad asociada a la operación 7 + 2 * 5 = 17 es la **propiedad de precedencia de operadores** o **jerarquía de operaciones**.
 
-   Específicamente, en matemáticas, la multiplicación y la división tienen mayor precedencia que la suma y la resta. Esto significa que en una expresión como 3 + 2 * 5, primero se realiza la multiplicación (2 * 5 = 10) y luego la suma (3 + 10 = 13).
+   Específicamente, en matemáticas, la multiplicación y la división tienen mayor precedencia que la suma y la resta. Esto significa que en una expresión como 7 + 2 * 5, primero se realiza la multiplicación (2 * 5 = 10) y luego la suma (7 + 10 = 17).
 
-   Si no se aplicara esta propiedad, y se operara de izquierda a derecha, el resultado sería incorrecto: (3 + 2) 5 = 5 * 5 = 25.
+   Si no se aplicase esta propiedad, y se operase de izquierda a derecha, el resultado sería incorrecto: (7 + 2) 5 = 9 * 5 = 45.
 
 
 Funciones
------------
+---------
 
 1. Colocarse en la celda.
 2. Botón Sigma. Auto suma; Desplegar botón.
@@ -130,9 +133,9 @@ Siempre que haya que hacer una operación entre dos celdas y una contenga ``%`` 
    
    No podemos utilizar la función contar números para contar letras, solo cuenta las celdas que contienen números y no están vacías.
 
+- Función ``CONTAR()``, cuenta celdas con números.
 - Función ``CONTARA()``, la encontramos en estadística o en todo. Cuenta celdas no vacías.
-
-- Función ``CONTARA.SI()``, cuenta las celdas que cumplen una condición. El bloque de argumentos acepta dos. La encontramos en estadística o en todo. El argumento criterio es mejor escribirlo en lugar de referenciarlo por celda. Argumentos:
+- Función ``CONTARA.SI()``, cuenta las celdas que cumplen una condición. El bloque de argumentos acepta dos. La encontramos en *estadística* o en *todo*. El argumento criterio es mejor escribirlo en lugar de referenciarlo por celda; la excepción sería una celda fija conteniendo el valor del *criterio*. Argumentos:
   
    - Rango; el rango de celdas aplicables.
    - Criterio; si son números: ``<>, <, <=, >, >=``. Si son letras, escribiremos la cadena literal exacta.
@@ -229,7 +232,7 @@ Siempre que haya que hacer una operación entre dos celdas y una contenga ``%`` 
 
 
 Condicional simple, ``SI``
-----------------------------
+--------------------------
 
 Con esta función se deberá cumplir una condición:
 
@@ -263,7 +266,7 @@ Esta función permite *anidar* operaciones; PROMEDIO, MAXimo, MINimo. Además, p
    =SI(J3=MAX($J$3:$J$8);A3;"")
 
 Inmobilizar el cuadro o tabla
---------------------------------
+-----------------------------
 
 Desde la ficha **Vista** botón **Inmobilizar/Mobilizar panales**.
 

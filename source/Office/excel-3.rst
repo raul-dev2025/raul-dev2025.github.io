@@ -32,7 +32,7 @@ A continuación o bien seleccionamos uno de los formatos propuestos, o bien lo d
 
 - Almohadilla ``#`` 
 
-.. todo::
+.. todo:
 
    Estos son los argumentos, habría que adjuntar un ejemplo y anotar la definición en cada caso.
    Revisa la sección funciones, y agrupa todo el contenido, podrías convertirlo todo en un solo archivo.
