@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verificar si la placa base integra tarjeta gráfica (GPU) &mdash; Técnico Sistemas 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)" href="anchoBusGPU.html" />
+    <link rel="prev" title="Periféricos clasificados por tipo" href="perifericos.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Técnico Sistemas
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">documentación del sistema:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Memorias.html">Tipos y características de memoria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Buses.html">Buses del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Verificar si la placa base integra tarjeta gráfica (GPU)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sistemas-windows">Sistemas Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-1-administrador-de-dispositivos">Método 1: Administrador de dispositivos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-2-informacion-del-sistema-msinfo32">Método 2: Información del sistema (msinfo32)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-3-herramienta-dxdiag">Método 3: Herramienta DXDiag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-4-consultar-modelo-de-placa-base">Método 4: Consultar modelo de placa base</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sistemas-linux">Sistemas Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-1-comando-lspci">Método 1: Comando <code class="docutils literal notranslate"><span class="pre">lspci</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-2-verificar-drivers-activos">Método 2: Verificar drivers activos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-3-detalles-de-hardware">Método 3: Detalles de hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-4-verificar-cpu">Método 4: Verificar CPU</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#notas-importantes">Notas importantes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI.html">¿Qué es el estándar UEFI?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/EFIpartWindows.html">Windows hardening, EFI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/SO.html">Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/info.html">Información del sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/plataforma.html">Concepto “Plataforma” en Computación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Técnico Sistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Verificar si la placa base integra tarjeta gráfica (GPU)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Sistema/integratedCards.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="verificar-si-la-placa-base-integra-tarjeta-grafica-gpu">
+<h1>Verificar si la placa base integra tarjeta gráfica (GPU)<a class="headerlink" href="#verificar-si-la-placa-base-integra-tarjeta-grafica-gpu" title="Link to this heading"></a></h1>
+<p>Este documento explica cómo comprobar si una placa base tiene gráficos integrados en sistemas <strong>Windows</strong> y <strong>Linux</strong>.</p>
+<hr class="docutils" />
+<section id="sistemas-windows">
+<h2>Sistemas Windows<a class="headerlink" href="#sistemas-windows" title="Link to this heading"></a></h2>
+<section id="metodo-1-administrador-de-dispositivos">
+<h3>Método 1: Administrador de dispositivos<a class="headerlink" href="#metodo-1-administrador-de-dispositivos" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Presiona <kbd class="kbd docutils literal notranslate">Win</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">X</kbd> y selecciona <strong>Administrador de dispositivos</strong>.</p></li>
+<li><p>Busca la sección <strong>Adaptadores de pantalla</strong>.
+- Si aparece un modelo (ej: <em>Intel HD Graphics</em>, <em>AMD Radeon Graphics</em>), hay GPU integrada.
+- Si solo muestra “Controlador de pantalla básica de Microsoft”, no hay gráficos integrados o faltan drivers.</p></li>
+</ol>
+</section>
+<section id="metodo-2-informacion-del-sistema-msinfo32">
+<h3>Método 2: Información del sistema (msinfo32)<a class="headerlink" href="#metodo-2-informacion-del-sistema-msinfo32" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Ejecuta <kbd class="kbd docutils literal notranslate">Win</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd>, escribe <code class="docutils literal notranslate"><span class="pre">msinfo32</span></code> y presiona <kbd class="kbd docutils literal notranslate">Enter</kbd>.</p></li>
+<li><p>Navega a:</p>
+<p><strong>Componentes → Pantalla</strong>.
+- Si hay datos en <strong>Nombre del adaptador</strong>, existe GPU integrada.</p>
+</li>
+</ol>
+</section>
+<section id="metodo-3-herramienta-dxdiag">
+<h3>Método 3: Herramienta DXDiag<a class="headerlink" href="#metodo-3-herramienta-dxdiag" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Ejecuta <kbd class="kbd docutils literal notranslate">Win</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd>, escribe <code class="docutils literal notranslate"><span class="pre">dxdiag</span></code> y presiona <kbd class="kbd docutils literal notranslate">Enter</kbd>.</p></li>
+<li><p>Revisa la pestaña <strong>Pantalla</strong>:</p>
+<ul class="simple">
+<li><p>El campo <strong>Nombre</strong> indica el modelo de GPU.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="metodo-4-consultar-modelo-de-placa-base">
+<h3>Método 4: Consultar modelo de placa base<a class="headerlink" href="#metodo-4-consultar-modelo-de-placa-base" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Abre <kbd class="kbd docutils literal notranslate">cmd</kbd> y ejecuta:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wmic<span class="w"> </span>baseboard<span class="w"> </span>get<span class="w"> </span>product,Manufacturer
+</pre></div>
+</div>
+</li>
+<li><p>Busca el modelo en Google (ej: <em>“Asus B550M specs”</em>) para confirmar si incluye gráficos.</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="sistemas-linux">
+<h2>Sistemas Linux<a class="headerlink" href="#sistemas-linux" title="Link to this heading"></a></h2>
+<section id="metodo-1-comando-lspci">
+<h3>Método 1: Comando <code class="docutils literal notranslate"><span class="pre">lspci</span></code><a class="headerlink" href="#metodo-1-comando-lspci" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Ejecuta en terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>vga
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Si muestra una GPU (ej: <em>Intel UHD Graphics</em>), está integrada.</p></li>
+<li><p>Sin salida = no hay GPU integrada.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="metodo-2-verificar-drivers-activos">
+<h3>Método 2: Verificar drivers activos<a class="headerlink" href="#metodo-2-verificar-drivers-activos" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Instala herramientas (si es necesario):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>mesa-utils<span class="w"> </span><span class="c1"># Debian/Ubuntu</span>
+</pre></div>
+</div>
+</li>
+<li><p>Ejecuta:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>glxinfo<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;OpenGL renderer&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="metodo-3-detalles-de-hardware">
+<h3>Método 3: Detalles de hardware<a class="headerlink" href="#metodo-3-detalles-de-hardware" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Usa:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>lshw<span class="w"> </span>-C<span class="w"> </span>display
+</pre></div>
+</div>
+<p>o:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hwinfo<span class="w"> </span>--gfxcard
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="metodo-4-verificar-cpu">
+<h3>Método 4: Verificar CPU<a class="headerlink" href="#metodo-4-verificar-cpu" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Ejecuta:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lscpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;model name&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Busca el modelo en:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ark.intel.com">Intel ARK</a></p></li>
+<li><p><a class="reference external" href="https://www.amd.com">AMD</a></p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="notas-importantes">
+<h2>Notas importantes<a class="headerlink" href="#notas-importantes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Intel</strong>: CPUs <strong>no</strong> terminadas en <em>F</em> (ej: i3-12100) suelen incluir GPU (Intel UHD/IRIS).</p></li>
+<li><p><strong>AMD</strong>: Modelos con <em>G</em> (ej: Ryzen 5 5600G) tienen gráficos integrados (Radeon Vega).</p></li>
+<li><p><strong>Placas base modernas</strong>: Dependen de la CPU para gráficos integrados.</p></li>
+</ul>
+<p>Si no se detecta GPU integrada, se requiere una tarjeta gráfica dedicada.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="perifericos.html" class="btn btn-neutral float-left" title="Periféricos clasificados por tipo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="anchoBusGPU.html" class="btn btn-neutral float-right" title="Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Raúl Vílchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

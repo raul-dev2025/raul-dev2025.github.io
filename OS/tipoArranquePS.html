@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Información del Sistema relacionada con UEFI usando PowerShell &mdash; Técnico Sistemas 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sistema Operativo" href="SO.html" />
+    <link rel="prev" title="Windows hardening, EFI" href="EFIpartWindows.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Técnico Sistemas
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">documentación del sistema:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Memorias.html">Tipos y características de memoria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Buses.html">Buses del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI.html">¿Qué es el estándar UEFI?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EFIpartWindows.html">Windows hardening, EFI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Información del Sistema relacionada con UEFI usando PowerShell</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#comprobar-si-el-sistema-usa-uefi-o-bios">1. Comprobar si el sistema usa UEFI o BIOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#obtener-detalles-del-firmware-bios-uefi">2. Obtener detalles del firmware (BIOS/UEFI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verificar-si-el-disco-de-sistema-utiliza-gpt-uefi-o-mbr-bios">3. Verificar si el disco de sistema utiliza GPT (UEFI) o MBR (BIOS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-completo-de-diagnostico-uefi">4. Script completo de diagnóstico UEFI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SO.html">Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="info.html">Información del sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plataforma.html">Concepto “Plataforma” en Computación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Técnico Sistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Información del Sistema relacionada con UEFI usando PowerShell</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/OS/tipoArranquePS.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informacion-del-sistema-relacionada-con-uefi-usando-powershell">
+<h1>Información del Sistema relacionada con UEFI usando PowerShell<a class="headerlink" href="#informacion-del-sistema-relacionada-con-uefi-usando-powershell" title="Link to this heading"></a></h1>
+<p>Este documento describe cómo obtener información sobre el firmware y el modo de arranque del sistema (UEFI o BIOS) utilizando PowerShell en Windows.</p>
+<section id="comprobar-si-el-sistema-usa-uefi-o-bios">
+<h2>1. Comprobar si el sistema usa UEFI o BIOS<a class="headerlink" href="#comprobar-si-el-sistema-usa-uefi-o-bios" title="Link to this heading"></a></h2>
+<p>Puedes determinar si el sistema está arrancando en modo UEFI, BIOS o UEFI con CSM usando el siguiente comando:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">Get-ItemProperty</span> <span class="n">-Path</span> <span class="s2">&quot;HKLM:\SYSTEM\CurrentControlSet\Control\&quot;</span><span class="p">).</span><span class="n">PEFirmwareType</span>
+</pre></div>
+</div>
+<p>Los valores posibles son:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>: BIOS</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>: UEFI</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code>: UEFI con CSM (Compatibility Support Module)</p></li>
+</ul>
+<p>Para mostrar una descripción legible:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="k">switch</span> <span class="p">((</span><span class="nb">Get-ItemProperty</span> <span class="n">-Path</span> <span class="s2">&quot;HKLM:\SYSTEM\CurrentControlSet\Control\&quot;</span><span class="p">).</span><span class="n">PEFirmwareType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">0</span> <span class="p">{</span> <span class="s2">&quot;BIOS&quot;</span> <span class="p">}</span>
+    <span class="n">1</span> <span class="p">{</span> <span class="s2">&quot;UEFI&quot;</span> <span class="p">}</span>
+    <span class="n">2</span> <span class="p">{</span> <span class="s2">&quot;UEFI con CSM&quot;</span> <span class="p">}</span>
+    <span class="k">default</span> <span class="p">{</span> <span class="s2">&quot;Desconocido&quot;</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="obtener-detalles-del-firmware-bios-uefi">
+<h2>2. Obtener detalles del firmware (BIOS/UEFI)<a class="headerlink" href="#obtener-detalles-del-firmware-bios-uefi" title="Link to this heading"></a></h2>
+<p>Para consultar el fabricante, versión y fecha del firmware:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Get-WmiObject</span> <span class="n">-Class</span> <span class="n">Win32_BIOS</span> <span class="p">|</span> <span class="nb">Format-List</span> <span class="n">Manufacturer</span><span class="p">,</span> <span class="n">SMBIOSBIOSVersion</span><span class="p">,</span> <span class="n">ReleaseDate</span>
+</pre></div>
+</div>
+</section>
+<section id="verificar-si-el-disco-de-sistema-utiliza-gpt-uefi-o-mbr-bios">
+<h2>3. Verificar si el disco de sistema utiliza GPT (UEFI) o MBR (BIOS)<a class="headerlink" href="#verificar-si-el-disco-de-sistema-utiliza-gpt-uefi-o-mbr-bios" title="Link to this heading"></a></h2>
+<p>El siguiente comando muestra el estilo de partición del disco del sistema operativo:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Get-Disk</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="n">IsSystem</span> <span class="o">-eq</span> <span class="nv">$true</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Number</span><span class="p">,</span> <span class="n">PartitionStyle</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GPT</span></code>: Usualmente indica una instalación en modo UEFI.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MBR</span></code>: Generalmente indica BIOS.</p></li>
+</ul>
+</section>
+<section id="script-completo-de-diagnostico-uefi">
+<h2>4. Script completo de diagnóstico UEFI<a class="headerlink" href="#script-completo-de-diagnostico-uefi" title="Link to this heading"></a></h2>
+<p>Este script combina todas las verificaciones anteriores y presenta un resumen:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Write-Host</span> <span class="s2">&quot;== Modo de arranque (UEFI/BIOS) ==&quot;</span>
+<span class="k">switch</span> <span class="p">((</span><span class="nb">Get-ItemProperty</span> <span class="n">-Path</span> <span class="s2">&quot;HKLM:\SYSTEM\CurrentControlSet\Control\&quot;</span><span class="p">).</span><span class="n">PEFirmwareType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">0</span> <span class="p">{</span> <span class="s2">&quot;BIOS&quot;</span> <span class="p">}</span>
+    <span class="n">1</span> <span class="p">{</span> <span class="s2">&quot;UEFI&quot;</span> <span class="p">}</span>
+    <span class="n">2</span> <span class="p">{</span> <span class="s2">&quot;UEFI con CSM&quot;</span> <span class="p">}</span>
+    <span class="k">default</span> <span class="p">{</span> <span class="s2">&quot;Desconocido&quot;</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">== Información del BIOS ==&quot;</span>
+<span class="nb">Get-WmiObject</span> <span class="n">-Class</span> <span class="n">Win32_BIOS</span> <span class="p">|</span> <span class="nb">Format-List</span> <span class="n">Manufacturer</span><span class="p">,</span> <span class="n">SMBIOSBIOSVersion</span><span class="p">,</span> <span class="n">ReleaseDate</span>
+
+<span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">== Estilo de partición del disco del sistema ==&quot;</span>
+<span class="nb">Get-Disk</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="n">IsSystem</span> <span class="o">-eq</span> <span class="nv">$true</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Number</span><span class="p">,</span> <span class="n">PartitionStyle</span>
+</pre></div>
+</div>
+<p>Opcionalmente, puedes redirigir esta salida a un archivo para generación de informes.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="EFIpartWindows.html" class="btn btn-neutral float-left" title="Windows hardening, EFI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SO.html" class="btn btn-neutral float-right" title="Sistema Operativo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Raúl Vílchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

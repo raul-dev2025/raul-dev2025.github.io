@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buses del equipo &mdash; Técnico Sistemas 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Velocidad en módulos DDR" href="velocidadModulDDR.html" />
+    <link rel="prev" title="Tipos y características de memoria" href="Memorias.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Técnico Sistemas
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">documentación del sistema:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Memorias.html">Tipos y características de memoria</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Buses del equipo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#caracteristicas">Características</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tipos-de-buses-de-un-so-sistema-operativo">Tipos de Buses de un SO (Sistema Operativo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bus-asociado-a-un-estandar-de-conexion">Bus asociado a un estandar de conexión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resumen-comparativo-de-buses-comunes">Resumen Comparativo de Buses Comunes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI.html">¿Qué es el estándar UEFI?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/EFIpartWindows.html">Windows hardening, EFI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/SO.html">Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/info.html">Información del sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/plataforma.html">Concepto “Plataforma” en Computación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Técnico Sistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Buses del equipo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Sistema/Buses.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="buses-del-equipo">
+<h1>Buses del equipo<a class="headerlink" href="#buses-del-equipo" title="Link to this heading"></a></h1>
+<p>EL <strong>bus</strong> es un canal, o sistema de comunicación digital, entre componentes de una computadora. El conjunto de líneas de transmisión formadas por cables, pistas en un circuito impreso o conexiones electrónicas, se ocupan de transportar las señales eléctricas entre los distintos componentes de hardware.</p>
+<p>Podría pensarse en un Bus, como en una autopista de datos; donde el intercambio de información, se produce bajo un protocolo en particular.</p>
+<section id="caracteristicas">
+<h2>Características<a class="headerlink" href="#caracteristicas" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Transmisión de datos</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Transporta la información mediante señales digitales, en forma de bits.</p></li>
+<li><p>La transmisión de dichos datos se puede producir tanto en paralelo, como en serie; si se produce en paralelo se enviarán varios <em>bits</em> a la vez. Si en cambio es en serie, se transmitirá un <em>bit</em> a la vez.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Direccionamiento</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Para indicar a qué componente se dirige la información, habrá líneas en el <em>bus</em> asociadas a direcciones de memoria.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p><strong>Control</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Es utilizado par regular el funcionamiento del sistema. Incluye señales de reloj, sincronización, lectura/escritura e interrupción y otras.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p><strong>Ancho de banda</strong>:</p></li>
+</ol>
+<p>El ancho de banda es un parámetro, mediante el cuál se mide la velociada de transmisión de los datos. Son dos las unidades de medida utilizadas; los bits/segundo (bps) o bytes/segundo (B/s).</p>
+</section>
+<section id="tipos-de-buses-de-un-so-sistema-operativo">
+<h2>Tipos de Buses de un SO (Sistema Operativo)<a class="headerlink" href="#tipos-de-buses-de-un-so-sistema-operativo" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Bus del sistema (Front Side Bus - FSB)</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Conecta principalmente el procesador o CPU, con la memoria primaria del sistema, o memoria RAM.</p></li>
+<li><p>Algunos sistemas modernos, han reemplazado este <em>bus</em>, por tecnologías más modernas; como <strong>HyperTransport</strong> en el caso de <strong>AMD</strong>, o <strong>QuickPath Interconnect</strong> utilizado por <strong>Intel</strong>.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>bus de E/S (Input/Output)</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Utilizado para la conexión de periféricos como discos duros, tarjetas gráficas o dispositivos <strong>USB</strong>, entre otros. Algunos ejemplos conocidos como el <em>bus</em> <strong>SATA</strong>, para discos duros, el <strong>PCI Express</strong> para <em>tarjetas gráficas</em> o el <em>bus</em> <strong>USB</strong> para todo tipo de dispositivos periféricos, son de uso frecuente y actual. Otros como el <em>bus</em> <strong>PCI</strong>, aunque siguen siendo utilizados, están siendo generalizadamente reemplazados, por otros standares más modernos; como en este último caso, que viene siendo reemplazado por el estandar <strong>PCI Express</strong>.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p><strong>Bus de direcciones</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Transporta las direcciones de memoria a las que el procesador quiere acceder.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p><strong>Bus de datos</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Transporta la  información entre el procesador la memoria y dispositivos.</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p><strong>Bus de control</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Gestiona o administra señales de tipo lectura/escritura, interrupcioes y sincronización.</p></li>
+</ul>
+</section>
+<section id="bus-asociado-a-un-estandar-de-conexion">
+<h2>Bus asociado a un estandar de conexión<a class="headerlink" href="#bus-asociado-a-un-estandar-de-conexion" title="Link to this heading"></a></h2>
+</section>
+<section id="resumen-comparativo-de-buses-comunes">
+<h2>Resumen Comparativo de Buses Comunes<a class="headerlink" href="#resumen-comparativo-de-buses-comunes" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Bus</strong></p></th>
+<th class="head"><p><strong>Tipo</strong></p></th>
+<th class="head"><p><strong>Velocidad Máxima</strong></p></th>
+<th class="head"><p><strong>Estándar</strong></p></th>
+<th class="head"><p><strong>Uso Principal</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PCIe 5.0 x16</p></td>
+<td><dl class="simple">
+<dt>Serial (punto a</dt><dd><p>punto)</p>
+</dd>
+</dl>
+</td>
+<td><p>~64 GB/s</p></td>
+<td><blockquote>
+<div><p>PCI-SIG</p>
+</div></blockquote>
+<p>(PCI Express)</p>
+</td>
+<td><p>GPUs, NVMe SSDs</p></td>
+</tr>
+<tr class="row-odd"><td><p>SATA III</p></td>
+<td><blockquote>
+<div><p>Serial</p>
+</div></blockquote>
+<p>(almacenamiento)</p>
+</td>
+<td><p>6 Gbps (~600 MB/s)</p></td>
+<td><blockquote>
+<div><p>SATA-IO</p>
+</div></blockquote>
+<p>(Serial ATA)</p>
+</td>
+<td><p>HDDs, SSDs SATA</p></td>
+</tr>
+<tr class="row-even"><td><p>USB4</p></td>
+<td><p>Serial (universal)</p></td>
+<td><p>40 Gbps</p></td>
+<td><blockquote>
+<div><p>USB-IF</p>
+</div></blockquote>
+<p>(Universal Serial Bus)</p>
+</td>
+<td><p>Periféricos, almacenamiento</p></td>
+</tr>
+<tr class="row-odd"><td><p>Thunderbolt 4</p></td>
+<td><blockquote>
+<div><p>Serial</p>
+</div></blockquote>
+<p>(multipropósito)</p>
+</td>
+<td><p>40 Gbps</p></td>
+<td><p>Intel + Apple
+(Thunderbolt)</p></td>
+<td><p>eGPUs, docks, monitores</p></td>
+</tr>
+<tr class="row-even"><td><p>NVLink 4.0</p></td>
+<td><dl class="simple">
+<dt>Punto a punto</dt><dd><p>(GPU-GPU)</p>
+</dd>
+</dl>
+</td>
+<td><p>900 GB/s</p></td>
+<td><blockquote>
+<div><p>NVIDIA</p>
+</div></blockquote>
+<p>(NVLink)</p>
+</td>
+<td><p>Supercomputación, AI</p></td>
+</tr>
+<tr class="row-odd"><td><p>AGP 8x</p></td>
+<td><blockquote>
+<div><p>Paralelo</p>
+</div></blockquote>
+<p>(dedicado)</p>
+</td>
+<td><p>2.1 GB/s</p></td>
+<td><blockquote>
+<div><p>Intel</p>
+</div></blockquote>
+<p>(Accelerated Graphics)</p>
+</td>
+<td><p>Gráficas (obsoleto)</p></td>
+</tr>
+<tr class="row-even"><td><p>PCI-X</p></td>
+<td><p>Paralelo</p></td>
+<td><p>533 MB/s</p></td>
+<td><blockquote>
+<div><p>PCI-SIG</p>
+</div></blockquote>
+<p>(PCI Extended)</p>
+</td>
+<td><p>Servidores (obsoleto)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Memorias.html" class="btn btn-neutral float-left" title="Tipos y características de memoria" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="velocidadModulDDR.html" class="btn btn-neutral float-right" title="Velocidad en módulos DDR" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Raúl Vílchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

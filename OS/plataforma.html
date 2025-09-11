@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concepto “Plataforma” en Computación &mdash; Técnico Sistemas 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PROXMOX" href="proxmox.html" />
+    <link rel="prev" title="Información del sistema" href="info.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Técnico Sistemas
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">documentación del sistema:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Memorias.html">Tipos y características de memoria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Buses.html">Buses del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI.html">¿Qué es el estándar UEFI?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EFIpartWindows.html">Windows hardening, EFI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SO.html">Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="info.html">Información del sistema</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Concepto “Plataforma” en Computación</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plataforma-de-hardware-nivel-fisico">1. Plataforma de Hardware: Nivel Físico</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#definicion-arquitectural">1.1 Definición Arquitectural</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#taxonomia-de-plataformas-hardware">1.2 Taxonomía de Plataformas Hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#consideraciones-de-performance">1.3 Consideraciones de Performance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plataforma-de-software-capa-de-abstraccion">2. Plataforma de Software: Capa de Abstracción</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#jerarquia-de-plataformas-software">2.1 Jerarquía de Plataformas Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tipos-de-plataformas-de-ejecucion">2.2 Tipos de Plataformas de Ejecución</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plataforma-como-servicio-paas-modelo-cloud">3. Plataforma como Servicio (PaaS): Modelo Cloud</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#componentes-clave">3.1 Componentes Clave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#comparativa-paas-vs-iaas-vs-saas">3.2 Comparativa PaaS vs IaaS vs SaaS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plataformas-digitales-aspectos-socio-tecnicos">4. Plataformas Digitales: Aspectos Socio-Técnicos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modelos-de-gobernanza">4.1 Modelos de Gobernanza</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#economia-de-plataformas">4.2 Economía de Plataformas</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#consideraciones-futuras">Consideraciones Futuras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#glosario-tecnico">Glosario Técnico</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#definiciones-de-plataforma-en-sistemas-operativos">Definiciones de “plataforma” en sistemas operativos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ejemplo-valido">Ejemplo válido</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nota-adicional">Nota adicional</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Técnico Sistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Concepto “Plataforma” en Computación</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/OS/plataforma.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="concepto-plataforma-en-computacion">
+<h1>Concepto “Plataforma” en Computación<a class="headerlink" href="#concepto-plataforma-en-computacion" title="Link to this heading"></a></h1>
+<section id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>El término <em>plataforma</em> en contextos computacionales presenta una polisemia controlada que refleja la evolución tecnológica. Este análisis estructural explora sus dimensiones técnicas, arquitectónicas y socio-técnicas.</p>
+</section>
+<section id="plataforma-de-hardware-nivel-fisico">
+<h2>1. Plataforma de Hardware: Nivel Físico<a class="headerlink" href="#plataforma-de-hardware-nivel-fisico" title="Link to this heading"></a></h2>
+<section id="definicion-arquitectural">
+<h3>1.1 Definición Arquitectural<a class="headerlink" href="#definicion-arquitectural" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Conjunto de componentes físicos que establecen las capacidades computacionales base</p></li>
+<li><p>Incluye interacciones eléctricas y mecánicas entre:
+* Unidad Central de Procesamiento (CPU)
+* Subsistemas de memoria
+* Buses de comunicación
+* Controladores de E/S</p></li>
+</ul>
+</section>
+<section id="taxonomia-de-plataformas-hardware">
+<h3>1.2 Taxonomía de Plataformas Hardware<a class="headerlink" href="#taxonomia-de-plataformas-hardware" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tipo</p></th>
+<th class="head"><p>Características</p></th>
+<th class="head"><p>Ejemplos Representativos</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Arquitectura CISC</p></td>
+<td><dl class="simple">
+<dt>Instrucciones complejas</dt><dd><p>Microcódigo extenso</p>
+</dd>
+</dl>
+</td>
+<td><blockquote>
+<div><p>x86 (Intel/AMD)</p>
+</div></blockquote>
+<p>Mainframes IBM z/Architecture</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Arquitectura RISC</p></td>
+<td><dl class="simple">
+<dt>Instrucciones reducidas</dt><dd><p>Pipeline optimizado</p>
+</dd>
+</dl>
+</td>
+<td><blockquote>
+<div><p>ARM (mobile/SOC)</p>
+</div></blockquote>
+<p>RISC-V (open-source)</p>
+</td>
+</tr>
+<tr class="row-even"><td><dl class="simple">
+<dt>Computación Hetero-</dt><dd><p>génea</p>
+</dd>
+</dl>
+</td>
+<td><blockquote>
+<div><p>Combinación de</p>
+</div></blockquote>
+<p>procesadores especiali-
+zados</p>
+</td>
+<td><p>GPGPU (NVIDIA CUDA)
+FPGA (Xilinx/Altera)</p>
+<blockquote>
+<div><p>TPU (Google)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="consideraciones-de-performance">
+<h3>1.3 Consideraciones de Performance<a class="headerlink" href="#consideraciones-de-performance" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Ley de Amdahl</strong>: Limitaciones en aceleración paralela</p></li>
+<li><p><strong>Von Neumann Bottleneck</strong>: Restricciones en transferencia memoria-CPU</p></li>
+<li><p><strong>Thermal Design Power (TDP)</strong>: Disipación térmica máxima</p></li>
+</ul>
+</section>
+</section>
+<section id="plataforma-de-software-capa-de-abstraccion">
+<h2>2. Plataforma de Software: Capa de Abstracción<a class="headerlink" href="#plataforma-de-software-capa-de-abstraccion" title="Link to this heading"></a></h2>
+<section id="jerarquia-de-plataformas-software">
+<h3>2.1 Jerarquía de Plataformas Software<a class="headerlink" href="#jerarquia-de-plataformas-software" title="Link to this heading"></a></h3>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">digraph</span><span class="w"> </span><span class="n">hierarchy</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">rankdir</span><span class="o">=</span><span class="n">BT</span>
+<span class="w">   </span><span class="s">&quot;Aplicación&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Middleware&quot;</span>
+<span class="w">   </span><span class="s">&quot;Middleware&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Sistema Operativo&quot;</span>
+<span class="w">   </span><span class="s">&quot;Sistema Operativo&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Firmware&quot;</span>
+<span class="w">   </span><span class="s">&quot;Firmware&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Hardware&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="tipos-de-plataformas-de-ejecucion">
+<h3>2.2 Tipos de Plataformas de Ejecución<a class="headerlink" href="#tipos-de-plataformas-de-ejecucion" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Máquinas Virtuales</strong>:</p>
+<ul>
+<li><p>JVM (Java Virtual Machine)</p></li>
+<li><p>CLR (Common Language Runtime)</p></li>
+<li><p>WASM (WebAssembly)</p></li>
+</ul>
+</li>
+<li><p><strong>Contenedores</strong>:</p>
+<ul>
+<li><p>Docker Runtime</p></li>
+<li><p>Kubernetes (orquestación)</p></li>
+</ul>
+</li>
+<li><p><strong>Serverless</strong>:</p>
+<ul>
+<li><p>AWS Lambda</p></li>
+<li><p>Azure Functions</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="plataforma-como-servicio-paas-modelo-cloud">
+<h2>3. Plataforma como Servicio (PaaS): Modelo Cloud<a class="headerlink" href="#plataforma-como-servicio-paas-modelo-cloud" title="Link to this heading"></a></h2>
+<section id="componentes-clave">
+<h3>3.1 Componentes Clave<a class="headerlink" href="#componentes-clave" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Runtime Management</strong>: Auto-escalado automático</p></li>
+<li><p><strong>Development Tools</strong>: CI/CD integrado</p></li>
+<li><p><strong>Data Services</strong>: Bases de datos gestionadas</p></li>
+<li><p><strong>API Gateway</strong>: Administración de endpoints</p></li>
+</ul>
+</section>
+<section id="comparativa-paas-vs-iaas-vs-saas">
+<h3>3.2 Comparativa PaaS vs IaaS vs SaaS<a class="headerlink" href="#comparativa-paas-vs-iaas-vs-saas" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Característica</p></th>
+<th class="head"><p>IaaS</p></th>
+<th class="head"><p>PaaS</p></th>
+<th class="head"><p>SaaS</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Control</p></td>
+<td><dl class="simple">
+<dt>Infraestructura</dt><dd><p>virtualizada</p>
+</dd>
+</dl>
+</td>
+<td><p>Aplicaciones</p></td>
+<td><p>Uso</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mantenimiento</p></td>
+<td><p>Cliente gestiona
+SO y middleware</p></td>
+<td><dl class="simple">
+<dt>Proveedor gestiona</dt><dd><p>runtime</p>
+</dd>
+</dl>
+</td>
+<td><dl class="simple">
+<dt>Proveedor gestiona</dt><dd><p>todo</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-even"><td><p>Flexibilidad</p></td>
+<td><p>Máxima</p></td>
+<td><p>Moderada</p></td>
+<td><p>Mínima</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="plataformas-digitales-aspectos-socio-tecnicos">
+<h2>4. Plataformas Digitales: Aspectos Socio-Técnicos<a class="headerlink" href="#plataformas-digitales-aspectos-socio-tecnicos" title="Link to this heading"></a></h2>
+<section id="modelos-de-gobernanza">
+<h3>4.1 Modelos de Gobernanza<a class="headerlink" href="#modelos-de-gobernanza" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Plataformas Centralizadas</strong>:</p>
+<ul>
+<li><p>Control unipolar (ej. App Store de Apple)</p></li>
+<li><p>Curated ecosystems</p></li>
+</ul>
+</li>
+<li><p><strong>Plataformas Descentralizadas</strong>:</p>
+<ul>
+<li><p>Blockchain-based (ej. Ethereum)</p></li>
+<li><p>Protocolos abiertos (ej. ActivityPub)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="economia-de-plataformas">
+<h3>4.2 Economía de Plataformas<a class="headerlink" href="#economia-de-plataformas" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Efectos de red (Ley de Metcalfe)</p></li>
+<li><p>Mercados bilaterales</p></li>
+<li><p>Data Network Effects</p></li>
+</ul>
+</section>
+</section>
+<section id="consideraciones-futuras">
+<h2>Consideraciones Futuras<a class="headerlink" href="#consideraciones-futuras" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Convergencia hardware/software (ej. Silicon Photonics)</p></li>
+<li><p>Plataformas cuánticas emergentes</p></li>
+<li><p>Evolución de edge computing platforms</p></li>
+</ul>
+</section>
+<section id="glosario-tecnico">
+<h2>Glosario Técnico<a class="headerlink" href="#glosario-tecnico" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>ISA</strong>: Instruction Set Architecture</p></li>
+<li><p><strong>ABI</strong>: Application Binary Interface</p></li>
+<li><p><strong>API</strong>: Application Programming Interface</p></li>
+<li><p><strong>SDK</strong>: Software Development Kit</p></li>
+<li><p><strong>TCO</strong>: Total Cost of Ownership</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>¿Está equivocado decir que “plataforma” tiene distintos significados según el contexto?</strong></p>
+<p>No, es correcto. El término <strong>“plataforma”</strong> es polisémico en informática, y su significado depende del contexto.</p>
+</section>
+<section id="definiciones-de-plataforma-en-sistemas-operativos">
+<h2>Definiciones de “plataforma” en sistemas operativos<a class="headerlink" href="#definiciones-de-plataforma-en-sistemas-operativos" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Sistema operativo base</strong>
+- Se refiere al SO donde se ejecuta un software.
+- <em>Ejemplo</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>“VirtualBox se instala en plataformas como Windows 11, Linux Mint o Kali Linux”.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Arquitectura de hardware</strong>
+- Alude a la CPU (x86, ARM, etc.).
+- <em>Ejemplo</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>“Este software solo corre en plataformas Intel de 64 bits”.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Entorno de ejecución</strong>
+- Depende de frameworks como JVM o .NET.
+- <em>Ejemplo</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>“Requiere la plataforma Java para funcionar”.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Distribución específica (Linux)</strong>
+- Hace referencia a distros como Ubuntu o Fedora.</p></li>
+</ol>
+</section>
+<section id="ejemplo-valido">
+<h2>Ejemplo válido<a class="headerlink" href="#ejemplo-valido" title="Link to this heading"></a></h2>
+<p>La frase:</p>
+<blockquote>
+<div><p>“Plataformas soportadas por VirtualBox: Windows 11, Linux Mint, Kali Linux…”</p>
+</div></blockquote>
+<p>usa correctamente el primer significado (<strong>SO como plataforma</strong>).</p>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>El término es ambiguo y contextual.</p></li>
+<li><p>Su uso en el ejemplo es preciso.</p></li>
+</ul>
+</section>
+<section id="nota-adicional">
+<h2>Nota adicional<a class="headerlink" href="#nota-adicional" title="Link to this heading"></a></h2>
+<p>¡OpenSUSE también es una plataforma válida para VirtualBox! :wink:</p>
+<hr class="docutils" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Polisemia</strong>: es la propiedad de una palabra que tiene múltiples significados relacionados entre sí. Estos significados derivan de un origen común y se han desarrollado por evolución semántica.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="info.html" class="btn btn-neutral float-left" title="Información del sistema" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="proxmox.html" class="btn btn-neutral float-right" title="PROXMOX" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Raúl Vílchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

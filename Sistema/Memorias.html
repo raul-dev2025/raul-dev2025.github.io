@@ -1,0 +1,451 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tipos y características de memoria &mdash; Técnico Sistemas 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Buses del equipo" href="Buses.html" />
+    <link rel="prev" title="John von Neumann" href="VonNeumann.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Técnico Sistemas
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">documentación del sistema:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tipos y características de memoria</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#memoria-principal-ram-memoria-de-acceso-aleatorio">1. Memoria Principal (RAM - Memoria de Acceso Aleatorio)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memoria-rom-read-only-memory">2. Memoria ROM (Read-Only Memory)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memoria-virtual">3. Memoria Virtual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memoria-flash">4. Memoria Flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memoria-de-almacenamiento-secundario">5. Memoria de Almacenamiento Secundario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memoria-cache">6. Memoria Caché</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modulos-de-memoria-gddr">7. Módulos de Memoria GDDR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#caracteristicas-generales">Características Generales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#comparacion-con-ddr">Comparación con DDR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aplicaciones-comunes">Aplicaciones Comunes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modulos-de-memoria-so-dimm">8. Módulos de Memoria SO-DIMM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ancho-de-banda-y-velocidad-de-reloj">9. Ancho de Banda y Velocidad de Reloj</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#velocidad-de-reloj-frecuencia">9.1 <strong>Velocidad de Reloj (Frecuencia)</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ancho-de-banda">9.2 <strong>Ancho de Banda</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#que-es-mas-importante">10. ¿Qué es Más Importante?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memoria-instalada-en-el-equipo">11. Memoria instalada en el equipo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Buses.html">Buses del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI.html">¿Qué es el estándar UEFI?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/EFIpartWindows.html">Windows hardening, EFI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/SO.html">Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/info.html">Información del sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/plataforma.html">Concepto “Plataforma” en Computación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Técnico Sistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tipos y características de memoria</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Sistema/Memorias.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tipos-y-caracteristicas-de-memoria">
+<h1>Tipos y características de memoria<a class="headerlink" href="#tipos-y-caracteristicas-de-memoria" title="Link to this heading"></a></h1>
+<p>En los equipos de cómputo se utilizan diversos tipos de memoria, cada una con funciones específicas. A continuación, se enumeran los principales tipos:</p>
+<section id="memoria-principal-ram-memoria-de-acceso-aleatorio">
+<h2>1. Memoria Principal (RAM - Memoria de Acceso Aleatorio)<a class="headerlink" href="#memoria-principal-ram-memoria-de-acceso-aleatorio" title="Link to this heading"></a></h2>
+<p>Es un tipo de memoria de lectura y escritura. Tanto la memoria RAM como la ROM son consideradas <em>la memoria principal del sistema</em>, ya que sin ellas no es posible inicializar el resto de componentes del equipo, como el sistema operativo o ciertos controladores esenciales.</p>
+<ul class="simple">
+<li><p><strong>DRAM (Dynamic RAM)</strong>: Volátil; necesita refrescarse constantemente.</p></li>
+<li><p><strong>SRAM (Static RAM)</strong>: Más rápida que la DRAM y no necesita refresco, pero más cara.</p></li>
+<li><p><strong>DDR (Double Data Rate)</strong>: Versiones DDR, DDR2, DDR3, DDR4, DDR5, con mejoras en velocidad y eficiencia.</p></li>
+</ul>
+</section>
+<section id="memoria-rom-read-only-memory">
+<h2>2. Memoria ROM (Read-Only Memory)<a class="headerlink" href="#memoria-rom-read-only-memory" title="Link to this heading"></a></h2>
+<p>Es una memoria de <em>sólo lectura</em>. Algunos componentes del equipo, utilizan esta memoria, para guardar el código necesario, como los controladores que inicializan distintos dispositivos o el <em>chipset</em> de la placa.</p>
+<ul class="simple">
+<li><p>No volátil; contiene datos permanentes o semipermanentes.</p></li>
+<li><p>Tipos: <strong>PROM, EPROM, EEPROM</strong>.</p></li>
+<li><p>Almacena firmware, como el BIOS o UEFI.</p></li>
+</ul>
+</section>
+<section id="memoria-virtual">
+<h2>3. Memoria Virtual<a class="headerlink" href="#memoria-virtual" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Espacio del disco duro que el sistema usa como si fuera RAM.</p></li>
+<li><p>Más lenta, pero útil cuando la RAM física se llena.</p></li>
+</ul>
+</section>
+<section id="memoria-flash">
+<h2>4. Memoria Flash<a class="headerlink" href="#memoria-flash" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>No volátil; utilizada en SSDs, USBs, tarjetas SD.</p></li>
+<li><p>Rápida, resistente y sin partes móviles.</p></li>
+</ul>
+</section>
+<section id="memoria-de-almacenamiento-secundario">
+<h2>5. Memoria de Almacenamiento Secundario<a class="headerlink" href="#memoria-de-almacenamiento-secundario" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>HDD (Disco Duro)</strong>: Más lento, pero con gran capacidad.</p></li>
+<li><p><strong>SSD (Solid State Disk)</strong>: Unidad de Estado Sólido, más rápido que el HDD; utiliza memoria flash.</p></li>
+<li><p><strong>CD/DVD/Blu-Ray</strong>: Medios ópticos, en desuso para la mayoría de los casos.</p></li>
+</ul>
+</section>
+<section id="memoria-cache">
+<h2>6. Memoria Caché<a class="headerlink" href="#memoria-cache" title="Link to this heading"></a></h2>
+<p>Las memorias caché son memorias intermedias ubicadas entre el procesador y la memoria principal (o entre el disco duro y el sistema), diseñadas para almacenar información de uso frecuente. En el caso del procesador, contienen datos e instrucciones accedidos recientemente. En discos duros, la caché mejora el rendimiento de lectura/escritura, almacenando bloques de datos usados por aplicaciones o por el sistema operativo (que además puede gestionar su propia caché a nivel de software).</p>
+<p>En los procesadores, las cachés se organizan en niveles jerárquicos (L1, L2, L3…), donde L1 (la más rápida) suele estar integrada en cada núcleo, L2 es compartida por unos pocos núcleos, y L3 (cuando existe) es común para todo el chip. En cambio, en los discos duros, la caché suele ser un búfer de hardware gestionado por el controlador del disco.</p>
+<p>Además de las mencionadas, existen otros tipos de memoria caché utilizados en distintos componentes hardware y sistemas, cada uno optimizado para reducir latencias y mejorar el rendimiento en sus respectivos contextos.</p>
+<ul class="simple">
+<li><p>Integrada en el procesador (niveles L1, L2, L3).</p></li>
+<li><p>Muy rápida y pequeña; almacena datos de uso frecuente.</p></li>
+</ul>
+</section>
+<section id="modulos-de-memoria-gddr">
+<h2>7. Módulos de Memoria GDDR<a class="headerlink" href="#modulos-de-memoria-gddr" title="Link to this heading"></a></h2>
+<p><strong>Modulos GDDR</strong>: Son módulos específicos para tarjetas de vídeo que contienen memoria <em>GDDR-SDRAM</em>.</p>
+<ul class="simple">
+<li><p>GDDR (Graphics Double Data Rate)</p></li>
+<li><p>SDRAM (Synchronous Dynamic Random-Acces Memory)</p></li>
+</ul>
+<p>La memoria GDDR, es un tipo de memoria RAM especializada utilizada en tarjetas gráficas y sistemas de procesamiento de gráficos. Está optimizada para ofrecer <strong>altos anchos de banda</strong> y <strong>baja latencia</strong>, esenciales en aplicaciones como videojuegos, diseño gráfico, simulaciones y aprendizaje automático.</p>
+<section id="caracteristicas-generales">
+<h3>Características Generales<a class="headerlink" href="#caracteristicas-generales" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Alto ancho de banda</strong>: Capacidad para transferir grandes cantidades de datos por segundo.</p></li>
+<li><p><strong>Interfaz especializada</strong>: Diseñada para acceso secuencial de grandes bloques de datos.</p></li>
+<li><p><strong>Memoria dedicada</strong>: Usada exclusivamente por la GPU, no compartida con la CPU.</p></li>
+<li><p><strong>Versiones disponibles</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">GDDR3</span></code>: Antiguo estándar, aún presente en hardware más antiguo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GDDR5</span></code>: Muy común en generaciones anteriores de GPUs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GDDR5X</span></code>: Variante mejorada con mayor velocidad.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GDDR6</span></code>: Estándar moderno en muchas GPUs actuales.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GDDR6X</span></code>: Usada en tarjetas gráficas de gama alta como la RTX 3080 y superiores.</p></li>
+</ul>
+</li>
+<li><p><strong>Prefetching</strong>: Técnica que permite al chip leer bloques de datos más grandes por ciclo, aumentando la eficiencia.</p></li>
+</ul>
+</section>
+<section id="comparacion-con-ddr">
+<h3>Comparación con DDR<a class="headerlink" href="#comparacion-con-ddr" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Característica</p></th>
+<th class="head"><p>GDDR</p></th>
+<th class="head"><p>DDR (DDR4, DDR5)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Uso principal</p></td>
+<td><p>GPU (gráficos)</p></td>
+<td><p>CPU (memoria del sistema)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ancho de banda</p></td>
+<td><p>Muy alto</p></td>
+<td><p>Moderado</p></td>
+</tr>
+<tr class="row-even"><td><p>Latencia</p></td>
+<td><p>Mayor que DDR</p></td>
+<td><p>Baja</p></td>
+</tr>
+<tr class="row-odd"><td><p>Arquitectura</p></td>
+<td><p>Más canales y buffers</p></td>
+<td><p>Menos canales</p></td>
+</tr>
+<tr class="row-even"><td><p>Consumo energético</p></td>
+<td><p>Optimizado para gráficos</p></td>
+<td><p>Optimizado para eficiencia</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="aplicaciones-comunes">
+<h3>Aplicaciones Comunes<a class="headerlink" href="#aplicaciones-comunes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Tarjetas gráficas (NVIDIA, AMD).</p></li>
+<li><p>Consolas de videojuegos (PS4, PS5, Xbox Series X/S).</p></li>
+<li><p>Workstations profesionales, para edición de video CAD y renderizado 3D.</p></li>
+<li><p>Algunos aceleradores de inteligencia artificial.</p></li>
+</ul>
+</section>
+</section>
+<section id="modulos-de-memoria-so-dimm">
+<h2>8. Módulos de Memoria SO-DIMM<a class="headerlink" href="#modulos-de-memoria-so-dimm" title="Link to this heading"></a></h2>
+<p><strong>modulos SO-DIMM</strong>: Módulos específicos para portátiles. Se trata de una versión reducida de los módulos de memoria con contactos duales(factor de forma DIMM).</p>
+<ul class="simple">
+<li><p>En cuanto a características y prestaciones, son similares a las de un equipo convencional.</p></li>
+</ul>
+</section>
+<section id="ancho-de-banda-y-velocidad-de-reloj">
+<h2>9. Ancho de Banda y Velocidad de Reloj<a class="headerlink" href="#ancho-de-banda-y-velocidad-de-reloj" title="Link to this heading"></a></h2>
+<p>La <strong>memoria RAM (Random Access Memory)</strong> es un componente clave en sistemas informáticos, ya que determina la velocidad de acceso a datos temporales. Dos factores críticos que afectan su rendimiento son:</p>
+<section id="velocidad-de-reloj-frecuencia">
+<h3>9.1 <strong>Velocidad de Reloj (Frecuencia)</strong><a class="headerlink" href="#velocidad-de-reloj-frecuencia" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Definición</strong>: Indica los ciclos de operación por segundo, medidos en <strong>MHz</strong> o <strong>GHz</strong>.</p></li>
+<li><p><strong>Ejemplo</strong>: DDR4-3200 opera a <strong>3200 MHz</strong> (3.2 mil millones de ciclos/segundo).</p></li>
+<li><p><strong>Impacto</strong>:
+- Mayor velocidad → Más operaciones por segundo.
+- El rendimiento real depende también de la <strong>latencia (CL)</strong>.</p></li>
+</ul>
+<p><strong>Relación con la Latencia (CAS Latency - CL)</strong>:
+- Mide el retraso (en ciclos) entre solicitud y disponibilidad de datos.
+- Ejemplo comparativo:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>DDR4-3200 CL16 vs DDR4-3600 CL18.</p></li>
+<li><p>Aunque 3600 MHz es más rápido, su mayor CL puede reducir la ventaja.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ancho-de-banda">
+<h3>9.2 <strong>Ancho de Banda</strong><a class="headerlink" href="#ancho-de-banda" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Definición</strong>: Cantidad de datos transferidos por segundo (GB/s).</p></li>
+<li><p><strong>Factores que lo determinan</strong>:</p>
+<ul>
+<li><p>Velocidad de reloj (MHz).</p></li>
+<li><p>Ancho del bus de datos (normalmente <strong>64 bits</strong> en Single Channel).</p></li>
+<li><p>Número de canales (Dual/Quad Channel multiplica el ancho efectivo).</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Cálculo del Ancho de Banda</strong>:
+Fórmula para módulos DDR (Double Data Rate):</p>
+<div class="math notranslate nohighlight">
+\[\text{Ancho de Banda (GB/s)} = \frac{\text{Velocidad efectiva (MHz)} \times \text{Ancho del bus (bits)}}{8}\]</div>
+<p><strong>Ejemplos</strong>:</p>
+<ul class="simple">
+<li><p><strong>Single Channel (DDR4-3200)</strong>:
+- <span class="math notranslate nohighlight">\(\frac{3200 \times 64}{8} = 25,\!600\ \text{MB/s} = 25.6\ \text{GB/s}\)</span></p></li>
+<li><p><strong>Dual Channel (DDR4-3200)</strong>:
+- <span class="math notranslate nohighlight">\(25.6\ \text{GB/s} \times 2 = 51.2\ \text{GB/s}\)</span></p></li>
+</ul>
+<p><strong>Tabla Comparativa (Ancho de Banda Single Channel)</strong>:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tipo de RAM</p></th>
+<th class="head"><p>Velocidad (MHz)</p></th>
+<th class="head"><p>Ancho de Banda (GB/s)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DDR4-2400</p></td>
+<td><p>2400</p></td>
+<td><p>19.2</p></td>
+</tr>
+<tr class="row-odd"><td><p>DDR4-3200</p></td>
+<td><p>3200</p></td>
+<td><p>25.6</p></td>
+</tr>
+<tr class="row-even"><td><p>DDR5-4800</p></td>
+<td><p>4800</p></td>
+<td><p>38.4</p></td>
+</tr>
+<tr class="row-odd"><td><p>DDR5-6400</p></td>
+<td><p>6400</p></td>
+<td><p>51.2</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="que-es-mas-importante">
+<h2>10. ¿Qué es Más Importante?<a class="headerlink" href="#que-es-mas-importante" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Uso general (ofimática/navegación)</strong>: Velocidad y ancho de banda no son críticos.</p></li>
+<li><p><strong>Gaming/Edición de video</strong>: Alta velocidad (≥3200 MHz) + bajo CL para mejor rendimiento.</p></li>
+<li><p><strong>Servidores/Workstations</strong>: Ancho de banda alto (Dual/Quad Channel + DDR5).</p></li>
+</ul>
+<p><strong>Conclusión</strong>:</p>
+<ul class="simple">
+<li><p><strong>Velocidad de reloj</strong>: Define la rapidez interna de la RAM.</p></li>
+<li><p><strong>Ancho de banda</strong>: Determina el volumen de datos transferibles al CPU.</p></li>
+<li><p><strong>Optimización ideal</strong>: Equilibrar <strong>alta frecuencia + baja latencia + múltiples canales</strong>.</p></li>
+</ul>
+</section>
+<section id="memoria-instalada-en-el-equipo">
+<h2>11. Memoria instalada en el equipo<a class="headerlink" href="#memoria-instalada-en-el-equipo" title="Link to this heading"></a></h2>
+<p><strong>En Windows</strong>, podemos consultar este dato mediante el siguiente comando en <em>PowerShell</em>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Get-CimInstance</span> <span class="pre">Win32_PhysicalMemory</span> <span class="pre">|</span> <span class="pre">Format-Table</span> <span class="pre">Manufacturer,</span> <span class="pre">Speed,</span> <span class="pre">MemoryType,</span> <span class="pre">Capacity</span></code></p></li>
+</ul>
+<p>También es posible hacer la consulta en el administrador de tareas, en el apartado memoria. Sin embargo el dato -tipo de memoria, no siempre aparece explícitamente, aunque si nos fijamos en la <strong>velocidad</strong> y la relacionamos con la <strong>capacidad</strong> del módulo y el <strong>factor de forma</strong> de la memoria instalada en el sistema; por ejemplo:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">8GB</span> <span class="pre">a</span> <span class="pre">2666</span> <span class="pre">factor</span> <span class="pre">de</span> <span class="pre">forma</span> <span class="pre">DIMM</span></code></p></li>
+</ul>
+<p>podremos determinar con una búsque en google: <code class="docutils literal notranslate"><span class="pre">memoria</span> <span class="pre">ram</span> <span class="pre">dimm</span> <span class="pre">8gb</span> <span class="pre">a</span> <span class="pre">2666</span></code>; que dicha memoria pertenece al tipo <strong>DDR (Double Data Rate)</strong>, en éste caso en particular se trataría de una memoria DDR4.
+Con el comando de PowerShell que indicabamos anteriormente, podremos ver también el
+fabricante, en este caso:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PS</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Bits</span><span class="o">-</span><span class="mi">2</span><span class="o">&gt;</span> <span class="n">Get</span><span class="o">-</span><span class="n">CimInstance</span> <span class="n">Win32_PhysicalMemory</span> <span class="o">|</span> <span class="n">Format</span><span class="o">-</span><span class="n">Table</span> <span class="n">Manufacturer</span><span class="p">,</span> <span class="n">Speed</span><span class="p">,</span> <span class="n">MemoryType</span><span class="p">,</span> <span class="n">Capacity</span>
+
+<span class="n">Manufacturer</span>       <span class="n">Speed</span> <span class="n">MemoryType</span>   <span class="n">Capacity</span>
+<span class="o">------------</span>       <span class="o">-----</span> <span class="o">----------</span>   <span class="o">--------</span>
+<span class="n">Crucial</span> <span class="n">Technology</span>  <span class="mi">2666</span>          <span class="mi">0</span> <span class="mi">8589934592</span>
+
+<span class="n">PS</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Bits</span><span class="o">-</span><span class="mi">2</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p><strong>En linux</strong>, también podemos comprobar qué memoria tenemos instalada en el sistema, por supuesto. El primer de los siguiente comandos nos permite consultar los datos mediante la aplicación <code class="docutils literal notranslate"><span class="pre">dmidecode</span></code> y filtrarla después con <code class="docutils literal notranslate"><span class="pre">grep</span></code>, con aquellos criterios que consideremos relevantes. Veremos que el resultado es una lista de líneas de información, agrupadas por el criterio de búsqueda. Ha sido añadido el paginador <code class="docutils literal notranslate"><span class="pre">less</span></code>, para facilitar su lectura sobre la cónsola.</p>
+<p>En la segunda línea de comando, ha sido omitido el filtro grep, y en cambio la llamada a la aplicación aparece con el parámetro <code class="docutils literal notranslate"><span class="pre">--type</span> <span class="pre">memory</span></code>. Jugando un poco con los datos y el filtro, obtendremos más o menos información; las posibles combinaciones son númerosas:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dmidecode</span> <span class="o">-</span><span class="n">t</span> <span class="n">memory</span> <span class="o">|</span><span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="s2">&quot;speed\|size\|manufacturer\|part number\|serial number&quot;</span> <span class="o">|</span> <span class="n">less</span>
+
+<span class="n">dmidecode</span> <span class="o">--</span><span class="nb">type</span> <span class="n">memory</span><span class="o">|</span><span class="n">less</span> <span class="o">-</span><span class="n">S</span>
+</pre></div>
+</div>
+<p>Con esta otra aplicación obtendremos una tabla resumida, con los datos relativos a la consulta que nos interesa; en este caso, el tipo de memoria instalada en nuestro sistema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lshw</span> <span class="o">-</span><span class="n">short</span> <span class="o">-</span><span class="n">C</span> <span class="n">memory</span>
+</pre></div>
+</div>
+<p>Otro recurso interesante, y siempre disponible ya que es parte de la
+información que presenta el kernel -o núcleo del sistema operativo, es:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">meminfo</span> <span class="o">|</span><span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="s2">&quot;memtotal\|swaptotal&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="VonNeumann.html" class="btn btn-neutral float-left" title="John von Neumann" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Buses.html" class="btn btn-neutral float-right" title="Buses del equipo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Raúl Vílchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
