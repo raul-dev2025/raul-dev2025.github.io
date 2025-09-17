@@ -25,9 +25,9 @@ Lista de los periféricos en equipo de usuario
 +---------------------+---------------------------------+
 |         Ratón       |     dispositivo de entrada      |
 +---------------------+---------------------------------+
-|       Pendrive      |  dispositivo de almacenamiento  |
+|       Pendrive      |  dispositivo de Alm. externo    |
 +---------------------+---------------------------------+
-|   Disco Duro- SSD   |  dispositivo de Alm. externo    |
+|   Disco Duro- SSD   |  dispositivo de almacenamiento  |
 +---------------------+---------------------------------+
 |    Tarjeta de Red   |  dispositivo de comunicación    |
 +---------------------+---------------------------------+

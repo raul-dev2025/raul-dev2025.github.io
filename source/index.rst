@@ -41,6 +41,7 @@ Sistema, arquitectura, componentes
    Sistema/conectoresDelEquipo.rst
    Sistema/UEFI.rst
    Sistema/UEFI-refs.rst
+   Sistema/Prefetching_en_Procesadores.rst
    Sistema/Ejercicios.rst
 
 .. note:: 
@@ -61,7 +62,7 @@ Sistema Operativo(SO)
    OS/SO_portatil.rst
    OS/EFIpartWindows.rst
    OS/tipoArranquePS.rst
-   OS/SO.rst
+   OS/funcionesSO.rst
    OS/recuperarCuentas.rst
    OS/recuperarCuentasPractica.rst
    OS/resetUserpwd
