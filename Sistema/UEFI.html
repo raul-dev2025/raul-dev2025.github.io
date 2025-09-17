@@ -1,0 +1,551 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Qué es el estándar UEFI? &mdash; Raul Vilchez  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Referenciando funciones en UEFI mediante identificadores" href="UEFI-refs.html" />
+    <link rel="prev" title="Conectores externos del equipo." href="conectoresDelEquipo.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Raul Vilchez
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">documentación del sistema:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Memorias.html">Tipos y características de memoria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Buses.html">Buses del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">¿Qué es el estándar UEFI?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#caracteristicas-principales">Características principales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#diferencias-clave-frente-al-bios">Diferencias clave frente al BIOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ventajas-adicionales">Ventajas adicionales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#limitaciones">Limitaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#diferencias-en-la-implementacion-de-uefi-entre-intel-y-amd">Diferencias en la implementación de UEFI entre Intel y AMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inicio-de-plataforma-platform-initialization-pi">1. Inicio de Plataforma (Platform Initialization - PI)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#implementacion-de-intel">1.1 Implementación de Intel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementacion-de-amd">1.2 Implementación de AMD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#seguridad-y-firmware">2. Seguridad y Firmware</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#soluciones-de-intel">2.1 Soluciones de Intel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#soluciones-de-amd">2.2 Soluciones de AMD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#compatibilidad-y-soporte-legacy">3. Compatibilidad y Soporte Legacy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enfoque-de-intel">3.1 Enfoque de Intel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enfoque-de-amd">3.2 Enfoque de AMD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#overclocking-y-personalizacion">4. Overclocking y Personalización</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#caracteristicas-de-intel">4.1 Características de Intel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#caracteristicas-de-amd">4.2 Características de AMD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#diferencias-en-arquitectura">5. Diferencias en Arquitectura</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#estructura-de-intel">5.1 Estructura de Intel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#estructura-de-amd">5.2 Estructura de AMD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#consideraciones-finales">Consideraciones Finales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notas-adicionales">Notas Adicionales</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Prefetching_en_Procesadores.html">Prefetching en Procesadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/EFIpartWindows.html">Windows hardening, EFI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/funcionesSO.html">Funciones del Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/info.html">Información del sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/plataforma.html">Concepto “Plataforma” en Computación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Raul Vilchez</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">¿Qué es el estándar UEFI?</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Sistema/UEFI.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="que-es-el-estandar-uefi">
+<h1>¿Qué es el estándar UEFI?<a class="headerlink" href="#que-es-el-estandar-uefi" title="Link to this heading"></a></h1>
+<p>UEFI (Unified Extensible Firmware Interface) es una especificación que define una interfaz de firmware moderno para computadoras, diseñada para reemplazar el sistema BIOS tradicional.</p>
+<section id="caracteristicas-principales">
+<h2>Características principales<a class="headerlink" href="#caracteristicas-principales" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Arranque más rápido</strong>:</p>
+<ul>
+<li><p>Utiliza un diseño modular que evita procesos lentos de inicialización.</p></li>
+<li><p>Soporta ejecución de aplicaciones UEFI antes de cargar el sistema operativo.</p></li>
+</ul>
+</li>
+<li><p><strong>Compatibilidad con discos grandes</strong>:</p>
+<ul>
+<li><p>Admite particiones GPT (GUID Partition Table), permitiendo discos mayores a 2 TB.</p></li>
+<li><p>Elimina limitaciones del BIOS con MBR (Master Boot Record).</p></li>
+</ul>
+</li>
+<li><p><strong>Interfaz avanzada</strong>:</p>
+<ul>
+<li><p>Soporta gráficos y control mediante ratón, a diferencia del BIOS basado en texto.</p></li>
+<li><p>Incluye capacidades de red para arranque remoto y actualizaciones de firmware.</p></li>
+</ul>
+</li>
+<li><p><strong>Seguridad mejorada</strong>:</p>
+<ul>
+<li><p><strong>Secure Boot</strong>: Verifica la firma digital del sistema operativo para evitar malware en el arranque.</p></li>
+<li><p>Soporte para cifrado y autenticación durante el inicio.</p></li>
+</ul>
+</li>
+<li><p><strong>Independencia de arquitectura</strong>:</p>
+<ul>
+<li><p>Funciona en procesadores x86, x86-64, ARM y otras arquitecturas.</p></li>
+<li><p>No está ligado a modos heredados de 16 bits como el BIOS.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="diferencias-clave-frente-al-bios">
+<h2>Diferencias clave frente al BIOS<a class="headerlink" href="#diferencias-clave-frente-al-bios" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Estructura</strong>:</p>
+<ul class="simple">
+<li><p>BIOS usa código ensamblador en 16 bits.</p></li>
+<li><p>UEFI emplea módulos en C, permitiendo mayor flexibilidad.</p></li>
+</ul>
+</li>
+<li><p><strong>Tiempo de inicio</strong>:</p>
+<ul class="simple">
+<li><p>UEFI reduce el POST (Power-On Self-Test) y acelera el arranque.</p></li>
+</ul>
+</li>
+<li><p><strong>Soporte de hardware</strong>:</p>
+<ul class="simple">
+<li><p>UEFI maneja mejor dispositivos modernos como NVMe y GPU integradas.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="ventajas-adicionales">
+<h2>Ventajas adicionales<a class="headerlink" href="#ventajas-adicionales" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Manejo de controladores</strong>:
+- Los controladores UEFI pueden cargarse dinámicamente, a diferencia del BIOS.</p></li>
+<li><p><strong>Entorno pre-OS</strong>:</p>
+<ul>
+<li><p>Permite ejecutar herramientas de diagnóstico o recuperación sin un sistema operativo.</p></li>
+</ul>
+</li>
+<li><p><strong>Actualizaciones más sencillas</strong>:</p>
+<ul>
+<li><p>El firmware puede actualizarse desde el sistema operativo.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="limitaciones">
+<h2>Limitaciones<a class="headerlink" href="#limitaciones" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Compatibilidad con sistemas antiguos</strong>:</p>
+<ul>
+<li><p>Algunos sistemas operativos legacy (ej. Windows XP) no son compatibles sin modo BIOS emulado (CSM).</p></li>
+</ul>
+</li>
+<li><p><strong>Complejidad</strong>:</p>
+<ul>
+<li><p>Mayor superficie de ataque potencial debido a su extensibilidad.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>UEFI representa la evolución del firmware en computadoras, ofreciendo mayor velocidad, seguridad y soporte para tecnologías modernas. Su adopción es universal en hardware actual, aunque en algunos casos se mantiene compatibilidad con BIOS mediante el <strong>CSM (Compatibility Support Module)</strong>.</p>
+</section>
+<section id="diferencias-en-la-implementacion-de-uefi-entre-intel-y-amd">
+<h2>Diferencias en la implementación de UEFI entre Intel y AMD<a class="headerlink" href="#diferencias-en-la-implementacion-de-uefi-entre-intel-y-amd" title="Link to this heading"></a></h2>
+</section>
+<section id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>Tanto Intel como AMD han adoptado el estándar UEFI en sus plataformas modernas,
+pero existen diferencias significativas en su implementación y características
+específicas relacionadas con el inicio de plataforma.</p>
+</section>
+<section id="inicio-de-plataforma-platform-initialization-pi">
+<h2>1. Inicio de Plataforma (Platform Initialization - PI)<a class="headerlink" href="#inicio-de-plataforma-platform-initialization-pi" title="Link to this heading"></a></h2>
+<section id="implementacion-de-intel">
+<h3>1.1 Implementación de Intel<a class="headerlink" href="#implementacion-de-intel" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Utiliza el <strong>Intel Platform Innovation Framework for UEFI</strong> (basado en TianoCore).</p></li>
+<li><p>Componentes clave:</p>
+<ul>
+<li><p>Módulos específicos para gestión de características Intel:</p>
+<ul>
+<li><p>Turbo Boost</p></li>
+<li><p>Hyper-Threading</p></li>
+<li><p>Gestión térmica avanzada</p></li>
+</ul>
+</li>
+<li><p>Integración con tecnologías propietarias:</p>
+<ul>
+<li><p>Intel Boot Guard (protección del proceso de arranque)</p></li>
+<li><p>Intel Management Engine (ME)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Arquitectura modular que permite:</p>
+<ul>
+<li><p>Inicialización por fases</p></li>
+<li><p>Soporte para múltiples arquitecturas</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="implementacion-de-amd">
+<h3>1.2 Implementación de AMD<a class="headerlink" href="#implementacion-de-amd" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Basado en <strong>AGESA</strong> (AMD Generic Encapsulated Software Architecture).</p></li>
+<li><p>Características principales:</p>
+<ul>
+<li><p>Bloque de código autónomo para inicialización de hardware:</p>
+<ul>
+<li><p>Procesador</p></li>
+<li><p>Controlador de memoria</p></li>
+<li><p>Bus PCIe</p></li>
+</ul>
+</li>
+<li><p>Actualizaciones frecuentes por generación de CPU:</p>
+<ul>
+<li><p>Cada versión de Ryzen/EPYC requiere AGESA específico</p></li>
+<li><p>Ejemplo: AGESA 1.2.0.7 para soporte de DDR5 en Ryzen 7000</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="seguridad-y-firmware">
+<h2>2. Seguridad y Firmware<a class="headerlink" href="#seguridad-y-firmware" title="Link to this heading"></a></h2>
+<section id="soluciones-de-intel">
+<h3>2.1 Soluciones de Intel<a class="headerlink" href="#soluciones-de-intel" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Secure Boot con extensiones propietarias:</p>
+<ul>
+<li><p>Intel Trusted Execution Technology (TXT)</p></li>
+<li><p>Intel Software Guard Extensions (SGX)</p></li>
+<li><p>Intel Platform Trust Technology (PTT)</p></li>
+</ul>
+</li>
+<li><p>Protecciones adicionales:</p>
+<ul>
+<li><p>Boot Guard (verificación de firmware)</p></li>
+<li><p>Hardware Shield (protección contra ataques)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="soluciones-de-amd">
+<h3>2.2 Soluciones de AMD<a class="headerlink" href="#soluciones-de-amd" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Implementación de seguridad:</p>
+<ul>
+<li><p>AMD Secure Processor (coprocesador de seguridad)</p></li>
+<li><p>AMD Memory Guard (encriptación de memoria)</p></li>
+<li><p>Soporte para Microsoft Pluton (en Ryzen 6000+)</p></li>
+</ul>
+</li>
+<li><p>Características únicas:</p>
+<ul>
+<li><p>Firmware TPM integrado</p></li>
+<li><p>Protección contra ataques físicos</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="compatibilidad-y-soporte-legacy">
+<h2>3. Compatibilidad y Soporte Legacy<a class="headerlink" href="#compatibilidad-y-soporte-legacy" title="Link to this heading"></a></h2>
+<section id="enfoque-de-intel">
+<h3>3.1 Enfoque de Intel<a class="headerlink" href="#enfoque-de-intel" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Transición más agresiva a UEFI puro:</p>
+<ul>
+<li><p>Eliminación de CSM en plataformas recientes (Alder Lake/Raptor Lake)</p></li>
+<li><p>Requerimiento de UEFI Class 3 en sistemas empresariales</p></li>
+</ul>
+</li>
+<li><p>Excepciones:</p>
+<ul>
+<li><p>Algunas placas base mantienen CSM mediante configuración</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="enfoque-de-amd">
+<h3>3.2 Enfoque de AMD<a class="headerlink" href="#enfoque-de-amd" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Mayor flexibilidad en compatibilidad:</p>
+<ul>
+<li><p>Soporte prolongado para CSM</p></li>
+<li><p>Mejor compatibilidad con sistemas heredados</p></li>
+</ul>
+</li>
+<li><p>Detalles de implementación:</p>
+<ul>
+<li><p>AGESA incluye modos de compatibilidad</p></li>
+<li><p>Soporte para arranque MBR en más configuraciones</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="overclocking-y-personalizacion">
+<h2>4. Overclocking y Personalización<a class="headerlink" href="#overclocking-y-personalizacion" title="Link to this heading"></a></h2>
+<section id="caracteristicas-de-intel">
+<h3>4.1 Características de Intel<a class="headerlink" href="#caracteristicas-de-intel" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Limitaciones en capacidades:</p>
+<ul>
+<li><p>Overclocking restringido a CPUs con sufijo “K”</p></li>
+<li><p>Requiere chipsets “Z” para ajustes avanzados</p></li>
+</ul>
+</li>
+<li><p>Implementación UEFI:</p>
+<ul>
+<li><p>Interfaces más estandarizadas entre fabricantes</p></li>
+<li><p>Menos ajustes de bajo nivel expuestos</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="caracteristicas-de-amd">
+<h3>4.2 Características de AMD<a class="headerlink" href="#caracteristicas-de-amd" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Mayor flexibilidad:</p>
+<ul>
+<li><p>Overclocking disponible en casi toda la gama</p></li>
+<li><p>Ajustes avanzados incluso en chipsets serie B</p></li>
+</ul>
+</li>
+<li><p>Ventajas en implementación:</p>
+<ul>
+<li><p>AGESA expone más parámetros ajustables</p></li>
+<li><p>Soporte para:</p>
+<ul>
+<li><p>Curve Optimizer (ajuste fino de voltajes)</p></li>
+<li><p>Precision Boost Overdrive</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="diferencias-en-arquitectura">
+<h2>5. Diferencias en Arquitectura<a class="headerlink" href="#diferencias-en-arquitectura" title="Link to this heading"></a></h2>
+<section id="estructura-de-intel">
+<h3>5.1 Estructura de Intel<a class="headerlink" href="#estructura-de-intel" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Jerarquía de inicialización:</p>
+<ul>
+<li><p>Fase de Pre-EFI (PEI)</p></li>
+<li><p>Fase de Driver Execution Environment (DXE)</p></li>
+<li><p>Módulos específicos por plataforma</p></li>
+</ul>
+</li>
+<li><p>Integración con:</p>
+<ul>
+<li><p>Intel Management Engine</p></li>
+<li><p>Converged Security Engine</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="estructura-de-amd">
+<h3>5.2 Estructura de AMD<a class="headerlink" href="#estructura-de-amd" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Flujo basado en AGESA:</p>
+<ul>
+<li><p>Inicialización temprana del silicon</p></li>
+<li><p>Protocolos UEFI estándar</p></li>
+<li><p>Extensibilidad mediante PSP (Platform Security Processor)</p></li>
+</ul>
+</li>
+<li><p>Particularidades:</p>
+<ul>
+<li><p>Mayor independencia entre componentes</p></li>
+<li><p>Actualizaciones más frecuentes del core</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="consideraciones-finales">
+<h2>Consideraciones Finales<a class="headerlink" href="#consideraciones-finales" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Intel</strong>:</p>
+<ul>
+<li><p>Implementación más estandarizada</p></li>
+<li><p>Mayor integración con tecnologías propietarias</p></li>
+<li><p>Transición más rápida a UEFI puro</p></li>
+</ul>
+</li>
+<li><p><strong>AMD</strong>:</p>
+<ul>
+<li><p>Mayor flexibilidad y ajustes</p></li>
+<li><p>Soporte más prolongado para legacy</p></li>
+<li><p>Dependencia de versiones AGESA</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="notas-adicionales">
+<h2>Notas Adicionales<a class="headerlink" href="#notas-adicionales" title="Link to this heading"></a></h2>
+<p>Las implementaciones pueden variar según el fabricante de la placa base (ASUS,
+Gigabyte, MSI, etc.), que personalizan la interfaz UEFI y añaden características
+propias sobre la base proporcionada por Intel o AMD.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="conectoresDelEquipo.html" class="btn btn-neutral float-left" title="Conectores externos del equipo." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="UEFI-refs.html" class="btn btn-neutral float-right" title="Referenciando funciones en UEFI mediante identificadores" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,495 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reiniciar contraseña de usuario &mdash; Raul Vilchez  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Práctica - forzar la carga del explorer de windows" href="explorerWindows.html" />
+    <link rel="prev" title="Práctica - Recuperación de cuentas de usuario" href="recuperarCuentasPractica.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Raul Vilchez
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">documentación del sistema:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Memorias.html">Tipos y características de memoria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Buses.html">Buses del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI.html">¿Qué es el estándar UEFI?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Prefetching_en_Procesadores.html">Prefetching en Procesadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EFIpartWindows.html">Windows hardening, EFI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="funcionesSO.html">Funciones del Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reiniciar contraseña de usuario</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#funcionalidades-clave-de-net-user">Funcionalidades clave de <em>net user</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#consideraciones-importantes">Consideraciones importantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ejemplos-practicos">Ejemplos prácticos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cuando-usarlo">¿Cuándo usarlo?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comando-attrib">Comando <code class="docutils literal notranslate"><span class="pre">attrib</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#atributos-comunes-de-archivos-y-directorios">Atributos Comunes de Archivos y Directorios:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sintaxis-basica-del-comando-attrib">Sintaxis Básica del Comando <em>attrib</em>:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ejemplos-de-uso">Ejemplos de Uso:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Consideraciones Importantes:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#funcion-hibernacion-en-windows">Función hibernación en Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#como-usarlo">¿Cómo usarlo?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="info.html">Información del sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plataforma.html">Concepto “Plataforma” en Computación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Raul Vilchez</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Reiniciar contraseña de usuario</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/OS/resetUserpwd.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="reiniciar-contrasena-de-usuario">
+<h1>Reiniciar contraseña de usuario<a class="headerlink" href="#reiniciar-contrasena-de-usuario" title="Link to this heading"></a></h1>
+<p>El comando <strong>net user</strong> es una herramienta fundamental en Windows, para gestionar las cuentas locales de usuario. Permite a los administradores realizar diversas operaciones, como crear nuevas cuentas, modificar las existentes o ver información detallada sobre ellas.</p>
+<hr class="docutils" />
+<section id="funcionalidades-clave-de-net-user">
+<h2>Funcionalidades clave de <em>net user</em><a class="headerlink" href="#funcionalidades-clave-de-net-user" title="Link to this heading"></a></h2>
+<ul>
+<li><p><strong>Ver todas las cuentas de usuario locales:</strong> Simplemente ejecutando <code class="docutils literal notranslate"><span class="pre">net</span> <span class="pre">user</span></code> sin ningún parámetro adicional, obtendrás una lista de todas las cuentas de usuario activas en el sistema.</p></li>
+<li><p><strong>Ver información detallada de una cuenta específica:</strong> Para obtener información detallada sobre una cuenta en particular, utiliza la siguiente sintaxis:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">net</span> <span class="n">user</span> <span class="no">[nombre_de_usuario]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Esto mostrará datos como el nombre completo, si la cuenta está activa o deshabilitada, cuándo fue la última vez que se inició sesión, la fecha de caducidad de la contraseña, etc.</p>
+<ul>
+<li><p><strong>Crear una nueva cuenta de usuario:</strong> Puedes crear una nueva cuenta de usuario con una contraseña utilizando:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">net</span> <span class="n">user</span> <span class="no">[nombre_de_usuario] [contraseña]</span> <span class="p">/</span><span class="n">add</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Por ejemplo, <code class="docutils literal notranslate"><span class="pre">net</span> <span class="pre">user</span> <span class="pre">pepito</span> <span class="pre">P&#64;ssw0rd123</span> <span class="pre">/add</span></code> crearía una cuenta llamada <em>pepito</em> con la contraseña <em>P&#64;ssw0rd123</em>.</p>
+<ul>
+<li><p><strong>Cambiar la contraseña de una cuenta existente:</strong> Si necesitas cambiar la contraseña de un usuario, puedes hacerlo con:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">net</span> <span class="n">user</span> <span class="no">[nombre_de_usuario] [nueva_contraseña]</span>
+</pre></div>
+</div>
+<p>Si la contraseña está en blanco,</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">net</span> <span class="n">user</span> <span class="no">[nombre_de_usuario]</span> <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>se establecerá una contraseña vacía (no recomendado por seguridad).</p>
+</li>
+<li><p><strong>Eliminar una cuenta de usuario:</strong> Para eliminar una cuenta de usuario, utiliza:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">net</span> <span class="n">user</span> <span class="no">[nombre_de_usuario]</span> <span class="p">/</span><span class="n">delete</span>
+</pre></div>
+</div>
+<p>¡Ten cuidado con este comando, ya que la eliminación es irreversible!</p>
+</li>
+<li><p><strong>Activar o desactivar una cuenta de usuario:</strong> Puedes activar o desactivar una cuenta sin eliminarla:</p>
+<ul class="simple">
+<li><p>Activar: <code class="docutils literal notranslate"><span class="pre">net</span> <span class="pre">user</span> <span class="pre">[nombre_de_usuario]</span> <span class="pre">/active:yes</span></code></p></li>
+<li><p>Desactivar: <code class="docutils literal notranslate"><span class="pre">net</span> <span class="pre">user</span> <span class="pre">[nombre_de_usuario]</span> <span class="pre">/active:no</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Agregar un usuario a un grupo local:</strong> Aunque no es directamente con <code class="docutils literal notranslate"><span class="pre">net</span> <span class="pre">user</span></code>, a menudo se usa en conjunto con <code class="docutils literal notranslate"><span class="pre">net</span> <span class="pre">localgroup</span></code> para asignar usuarios a grupos. Por ejemplo, para agregar <em>pepito</em> al grupo de <em>Administradores</em>:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">net</span> <span class="n">localgroup</span> <span class="n">Administradores</span> <span class="n">pepito</span> <span class="p">/</span><span class="n">add</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Reiniciar una contraseña</strong></p>
+<p>El comando <cite>net user UserName *</cite> en Windows se utiliza específicamente para <strong>cambiar la contraseña de una cuenta de usuario local de forma interactiva</strong>.</p>
+<p>Cuando ejecutas:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">net</span> <span class="n">user</span> <span class="no">[nombre_de_usuario]</span> <span class="p">*</span>
+</pre></div>
+</div>
+<p>el sistema hace lo siguiente:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>Solicita la nueva contraseña:</strong> Después de presionar Enter, el sistema te pedirá que ingreses la nueva contraseña para el usuario especificado.</p></li>
+<li><p><strong>Confirma la nueva contraseña:</strong> Para asegurar que no hay errores tipográficos, te pedirá que ingreses la contraseña de nuevo.</p></li>
+</ol>
+</div></blockquote>
+<p>Es un método muy útil porque <strong>la contraseña que escribes no se muestra en la pantalla</strong> (aparecen asteriscos o simplemente el cursor se mueve, dependiendo de la terminal), lo que aumenta la seguridad al evitar que alguien mire por encima de tu hombro y la vea.</p>
+</li>
+</ul>
+</section>
+<section id="consideraciones-importantes">
+<h2>Consideraciones importantes<a class="headerlink" href="#consideraciones-importantes" title="Link to this heading"></a></h2>
+<p><strong>Permisos de administrador:</strong> Para la mayoría de las operaciones de <code class="docutils literal notranslate"><span class="pre">net</span> <span class="pre">user</span></code> que modifican o crean cuentas, necesitas ejecutar el Símbolo del sistema (CMD) o PowerShell <strong>como administrador</strong>.</p>
+<p><strong>Seguridad:</strong> Ten precaución al establecer contraseñas, especialmente si estás creando scripts. Evita contraseñas fáciles de adivinar.</p>
+<p><strong>Contexto de dominio vs. local:</strong> Este comando gestiona cuentas de <strong>usuario locales</strong>. Si tu equipo forma parte de un dominio de Active Directory, las cuentas de dominio se gestionan de otra manera (por ejemplo, con herramientas de Usuarios y equipos de <em>Active Directory</em>).</p>
+<p>El comando <code class="docutils literal notranslate"><span class="pre">net</span> <span class="pre">user</span></code> es una herramienta potente y esencial para la administración básica de usuarios en entornos Windows.</p>
+</section>
+<hr class="docutils" />
+<section id="ejemplos-practicos">
+<h2>Ejemplos prácticos<a class="headerlink" href="#ejemplos-practicos" title="Link to this heading"></a></h2>
+<p>Imagina que tienes un usuario llamado “Administrador” y quieres cambiar su contraseña:</p>
+<ol class="arabic simple">
+<li><p><strong>Abre el Símbolo del sistema (CMD) o PowerShell como administrador.</strong> Esto es crucial, ya que necesitas permisos elevados para modificar contraseñas de usuario.</p></li>
+<li><p>Escribe el comando: <code class="docutils literal notranslate"><span class="pre">net</span> <span class="pre">user</span> <span class="pre">Administrador</span> <span class="pre">*</span></code></p></li>
+<li><p>Presiona <kbd class="kbd docutils literal notranslate">Enter</kbd>.</p></li>
+<li><p>El sistema te pedirá:</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">Escriba</span> <span class="n">una</span> <span class="n">contraseña</span> <span class="n">para</span> <span class="n">el</span> <span class="n">usuario</span><span class="p">:</span>
+<span class="c">## Aquí, ingresa la nueva contraseña (no se mostrará).</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>Presiona <kbd class="kbd docutils literal notranslate">Enter</kbd>.</p></li>
+<li><p>El sistema te pedirá:</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">Vuelva</span> <span class="n">a</span> <span class="n">escribir</span> <span class="n">la</span> <span class="n">contraseña</span> <span class="n">para</span> <span class="n">confirmar</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>Ingresa la misma contraseña nuevamente.</p>
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li><p>Presiona <em>Enter</em>. Si las contraseñas coinciden, verás un mensaje que dice: <code class="docutils literal notranslate"><span class="pre">El</span> <span class="pre">comando</span> <span class="pre">se</span> <span class="pre">completó</span> <span class="pre">correctamente.</span></code> La contraseña del usuario <em>Administrador</em> habrá sido cambiada.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="cuando-usarlo">
+<h2>¿Cuándo usarlo?<a class="headerlink" href="#cuando-usarlo" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Cambiar una contraseña existente:</strong> Es el uso más común y seguro para actualizar la contraseña de una cuenta de usuario local.</p></li>
+<li><p><strong>Restablecer una contraseña olvidada:</strong> Si eres un administrador y alguien ha olvidado su contraseña en un equipo local, puedes usar este comando para establecer una nueva contraseña sin necesidad de conocer la anterior.</p></li>
+<li><p><strong>Scripts interactivos:</strong> Aunque para scripts automatizados se prefiere especificar la contraseña directamente (con <cite>net user UserName Password</cite>), el asterisco es útil cuando se necesita una entrada manual y segura.</p></li>
+</ul>
+<blockquote>
+<div><p>Recuerda que, al igual que con cualquier comando <cite>net user</cite> que modifica cuentas, debes tener <strong>permisos de administrador</strong> para ejecutarlo con éxito.</p>
+</div></blockquote>
+</div></blockquote>
+</section>
+<section id="comando-attrib">
+<h2>Comando <code class="docutils literal notranslate"><span class="pre">attrib</span></code><a class="headerlink" href="#comando-attrib" title="Link to this heading"></a></h2>
+<p>El comando <code class="docutils literal notranslate"><span class="pre">attrib</span></code> en Windows es una herramienta de línea de comandos utilizada para <strong>mostrar o cambiar los atributos de archivos y directorios</strong>. Los atributos son marcadores que el sistema operativo utiliza para controlar cómo se comporta un archivo.</p>
+<blockquote>
+<div><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:\&gt;</span><span class="n">attrib</span>
+</pre></div>
+</div>
+</div></blockquote>
+<section id="atributos-comunes-de-archivos-y-directorios">
+<h3>Atributos Comunes de Archivos y Directorios:<a class="headerlink" href="#atributos-comunes-de-archivos-y-directorios" title="Link to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>R (Solo lectura - Read-only):</strong> Indica que un archivo no se puede modificar, eliminar o sobrescribir fácilmente. Es una protección básica para evitar cambios accidentales.</p></li>
+<li><p><strong>A (Archivo - Archive):</strong> Este atributo se establece automáticamente cada vez que un archivo es modificado. Los programas de respaldo (copias de seguridad) suelen usar este atributo para identificar qué archivos han cambiado desde la última copia de seguridad y necesitan ser respaldados de nuevo. Después de la copia de seguridad, el atributo de archivo generalmente se borra.</p></li>
+<li><p><strong>S (Sistema - System):</strong> Indica que un archivo es un archivo del sistema operativo, esencial para el funcionamiento de Windows. Estos archivos suelen estar ocultos y protegidos para evitar que los usuarios los modifiquen o eliminen accidentalmente, lo que podría causar problemas al sistema.</p></li>
+<li><p><strong>H (Oculto - Hidden):</strong> Hace que un archivo o directorio sea invisible en la Explorador de Archivos de Windows a menos que se configure para mostrar archivos ocultos. Se usa para mantener fuera de la vista archivos que no son de interés para el usuario promedio o para ocultar archivos del sistema.</p></li>
+<li><p><strong>I (No Indexado - Not Content Indexed):</strong> Este atributo indica que el archivo no debe ser indexado por el servicio de indexación de contenido de Windows. Esto puede mejorar el rendimiento de búsqueda en grandes volúmenes de datos, ya que estos archivos se omiten durante la indexación.</p></li>
+<li><p><strong>O (Fuera de línea - Offline):</strong> Indica que el archivo está almacenado fuera de línea. Este atributo suele ser establecido por sistemas de administración de almacenamiento jerárquico (HSM).</p></li>
+<li><p><strong>P (Analizado - Reparse Point):</strong> Indica que el archivo o directorio tiene un punto de reanálisis asociado. Se utiliza para funcionalidades avanzadas como enlaces simbólicos, puntos de montaje de volúmenes, o la desduplicación de datos.</p></li>
+<li><p><strong>U (Anclado - Unpinned):</strong> Este atributo se usa en el contexto de OneDrive y significa que el archivo solo está disponible en la nube y no está descargado localmente.</p></li>
+<li><p><strong>V (Integridad - Integrity):</strong> Este atributo se usa en el contexto de los Espacios de Almacenamiento (Storage Spaces) y se relaciona con la integridad de los datos.</p></li>
+<li><p><strong>X (Sin Scrubbing - No Scrub):</strong> Relacionado con los Espacios de Almacenamiento, indica que un archivo no debe ser sometido a un “scrubbing” (proceso de verificación de integridad de datos).</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="sintaxis-basica-del-comando-attrib">
+<h2>Sintaxis Básica del Comando <em>attrib</em>:<a class="headerlink" href="#sintaxis-basica-del-comando-attrib" title="Link to this heading"></a></h2>
+<p>La sintaxis general del comando <code class="docutils literal notranslate"><span class="pre">attrib</span></code> es la siguiente:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">ATTRIB</span> <span class="p">[+</span><span class="nb">R </span><span class="p">|</span> <span class="n">-R</span><span class="p">]</span> <span class="p">[+</span><span class="n">A</span> <span class="p">|</span> <span class="n">-A</span><span class="p">]</span> <span class="p">[+</span><span class="n">S</span> <span class="p">|</span> <span class="n">-S</span><span class="p">]</span> <span class="p">[+</span><span class="nb">H </span><span class="p">|</span> <span class="n">-H</span><span class="p">]</span> <span class="p">[+</span><span class="n">I</span> <span class="p">|</span> <span class="n">-I</span><span class="p">]</span>
+   <span class="p">[+</span><span class="n">O</span> <span class="p">|</span> <span class="n">-O</span><span class="p">]</span> <span class="p">[+</span><span class="n">P</span> <span class="p">|</span> <span class="n">-P</span><span class="p">]</span> <span class="p">[+</span><span class="n">U</span> <span class="p">|</span> <span class="n">-U</span><span class="p">]</span> <span class="p">[+</span><span class="n">V</span> <span class="p">|</span> <span class="n">-V</span><span class="p">]</span> <span class="p">[+</span><span class="n">X</span> <span class="p">|</span> <span class="n">-X</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">unidad</span><span class="p">:]</span><span class="no">[ruta][nombre de archivo]</span> <span class="p">[/</span><span class="n">S</span> <span class="p">[/</span><span class="n">D</span><span class="p">]]</span> <span class="p">[/</span><span class="n">L</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Donde:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">+</span></code>: Establece un atributo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-</span></code>: Borra un atributo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R</span></code>, <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">S</span></code>, <code class="docutils literal notranslate"><span class="pre">H</span></code>, <code class="docutils literal notranslate"><span class="pre">I</span></code>, <code class="docutils literal notranslate"><span class="pre">O</span></code>, <code class="docutils literal notranslate"><span class="pre">P</span></code>, <code class="docutils literal notranslate"><span class="pre">U</span></code>, <code class="docutils literal notranslate"><span class="pre">V</span></code>, <code class="docutils literal notranslate"><span class="pre">X</span></code>: Son los atributos que puedes establecer o borrar.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[unidad:][ruta][nombre</span> <span class="pre">de</span> <span class="pre">archivo]</span></code>: Especifica la ubicación y el nombre del archivo o directorio al que quieres aplicar los cambios. Puedes usar comodines (<code class="docutils literal notranslate"><span class="pre">*</span></code> y <code class="docutils literal notranslate"><span class="pre">?</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/S</span></code>: Procesa archivos que coinciden en el directorio actual y todos sus subdirectorios.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/D</span></code>: Incluye directorios en la operación <code class="docutils literal notranslate"><span class="pre">/S</span></code>. (Es decir, si quieres aplicar el cambio de atributo a los directorios y no solo a los archivos dentro de ellos).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/L</span></code>: Trabaja en el atributo del enlace simbólico en lugar del destino del enlace simbólico.</p></li>
+</ul>
+</div></blockquote>
+<section id="ejemplos-de-uso">
+<h3>Ejemplos de Uso:<a class="headerlink" href="#ejemplos-de-uso" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Hacer un archivo de solo lectura:</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">attrib</span> <span class="p">+</span><span class="nb">R </span><span class="n">miarchivo</span><span class="p">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><strong>Quitar el atributo de solo lectura de un archivo:</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">attrib</span> <span class="n">-R</span> <span class="n">miarchivo</span><span class="p">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>Ocultar un archivo:</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">attrib</span> <span class="p">+</span><span class="nb">H </span><span class="n">archivo_secreto</span><span class="p">.</span><span class="n">docx</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p><strong>Mostrar un archivo oculto:</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">attrib</span> <span class="n">-H</span> <span class="n">archivo_secreto</span><span class="p">.</span><span class="n">docx</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p><strong>Establecer un archivo como oculto y de sistema:</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">attrib</span> <span class="p">+</span><span class="nb">H </span><span class="p">+</span><span class="n">S</span> <span class="n">programa</span><span class="p">.</span><span class="n">exe</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p><strong>Quitar los atributos de oculto y sistema de un archivo:</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">attrib</span> <span class="n">-H</span> <span class="n">-S</span> <span class="n">programa</span><span class="p">.</span><span class="n">exe</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li><p><strong>Quitar el atributo de solo lectura de todos los archivos .txt en el directorio actual y sus subdirectorios:</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">attrib</span> <span class="n">-R</span> <span class="p">*.</span><span class="n">txt</span> <span class="p">/</span><span class="n">S</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li><p><strong>Hacer un directorio y todos sus subdirectorios ocultos:</strong></p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">attrib</span> <span class="p">+</span><span class="nb">H </span><span class="n">mi_carpeta</span> <span class="p">/</span><span class="n">S</span> <span class="p">/</span><span class="n">D</span>
+</pre></div>
+</div>
+<p>Aquí, <code class="docutils literal notranslate"><span class="pre">/D</span></code> es crucial para aplicar el atributo a las carpetas mismas, no solo a su contenido.
+Dentro  de la carpeta Win/Windows/System32/ hay un archivo llamado osk.exe que pertenece al teclado virtual:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">/</span><span class="n">Windows</span><span class="p">/</span><span class="n">System32</span><span class="p">/</span><span class="n">osk</span><span class="p">.</span><span class="n">exe</span>
+</pre></div>
+</div>
+<p>Renombraremos este archivo a:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">/</span><span class="n">Windows</span><span class="p">/</span><span class="n">System32</span><span class="p">/</span><span class="n">osk</span><span class="p">.</span><span class="n">old</span>
+</pre></div>
+</div>
+<p>Buscaremos también el archivo cmd.exe y lo copiaremos en:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">/</span><span class="n">Windows</span><span class="p">/</span><span class="n">System32</span><span class="p">/</span><span class="n">osk</span><span class="p">.</span><span class="n">exe</span>
+</pre></div>
+</div>
+<p>Cuando hayamos completado la tarea; <em>reiniciar la contraseña olvidada</em> habrá que:</p>
+</div></blockquote>
+<p>1. Borrar <code class="docutils literal notranslate"><span class="pre">/Windows/System32/osk.exe</span></code>, ya que hemos jaqueado el sistema, copiando la aplicación <code class="docutils literal notranslate"><span class="pre">cmd</span></code>, con el nombre del <em>teclado virtual</em>. Si lo dejamos
+tal cuál, dejariamos abierta una puerta trasera; esto rompe la integridad del sistema; hay que arreglarlo!
+2. Devolvemos el acceso al teclado virtual desde el login o pantalla de inicio de usuario. Para ello copiamos <code class="docutils literal notranslate"><span class="pre">/Windows/System32/osk.old</span></code> en <code class="docutils literal notranslate"><span class="pre">/Windows/System32/osk.exe</span></code>. Otras combinaciones de este “mecalnismo” podían resultar en problemas
+con los permisos que el sistema confiere al archivo.</p>
+</section>
+</section>
+<section id="id1">
+<h2>Consideraciones Importantes:<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Permisos:</strong> Necesitas tener los permisos adecuados (generalmente permisos de administrador) para modificar los atributos de algunos archivos, especialmente los de sistema.</p></li>
+<li><p><strong>Archivos de Sistema:</strong> Modificar los atributos de los archivos del sistema (<code class="docutils literal notranslate"><span class="pre">+S</span></code>) o archivos ocultos de sistema (<code class="docutils literal notranslate"><span class="pre">+H</span> <span class="pre">+S</span></code>) sin saber exactamente lo que haces puede causar inestabilidad en el sistema operativo. <em>¡Úsalo con precaución!</em></p></li>
+<li><p><strong>Comodines:</strong> Los comodines <code class="docutils literal notranslate"><span class="pre">*</span></code> (cero o más caracteres) y <code class="docutils literal notranslate"><span class="pre">?</span></code> (un solo carácter) son muy útiles para aplicar cambios a múltiples archivos a la vez.</p></li>
+</ul>
+</div></blockquote>
+<p>El comando <code class="docutils literal notranslate"><span class="pre">attrib</span></code> es una herramienta potente para gestionar la visibilidad y el comportamiento de archivos y directorios en Windows, especialmente útil en scripts o para solucionar problemas específicos de archivos.</p>
+</section>
+<hr class="docutils" />
+<section id="funcion-hibernacion-en-windows">
+<h2>Función hibernación en Windows<a class="headerlink" href="#funcion-hibernacion-en-windows" title="Link to this heading"></a></h2>
+<p>Abrimos el simbolo de sistema como administrador. El siguiente comado desactiva el fichero de hibernación, que a veces crea windows, y que impide montar la partición en modo r/w si arrancamos desde un <em>Live</em>.</p>
+<blockquote>
+<div><div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:\</span><span class="n">Windows</span><span class="p">\</span><span class="n">system32</span><span class="p">&gt;</span><span class="n">powercfg</span> <span class="p">/</span><span class="n">hibernate</span> <span class="n">off</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>El comando <code class="docutils literal notranslate"><span class="pre">powercfg</span> <span class="pre">/hibernate</span> <span class="pre">off</span></code> en el contexto de Windows se utiliza para <strong>desactivar la función de hibernación</strong> en tu sistema.</p>
+<p>Aquí te desgloso lo que significa y para qué sirve:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">powercfg</span></code>: Es una utilidad de línea de comandos de Windows que se usa para configurar y controlar la configuración de energía del sistema. Te permite gestionar planes de energía, ver el estado de la batería, analizar el uso de energía, y controlar funciones como la hibernación y la suspensión.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/hibernate</span></code>: Es un parámetro específico de <cite>powercfg</cite> que se relaciona con la función de hibernación.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">off</span></code>: Es el valor que se le da al parámetro <cite>/hibernate</cite> para indicar que la hibernación debe ser <strong>desactivada</strong>. Si quisieras activarla de nuevo, usarías <cite>powercfg /hibernate on</cite>.</p></li>
+</ul>
+<p><strong>¿Qué es la hibernación y por qué querrías desactivarla?</strong></p>
+<p>La <strong>hibernación</strong> es una característica de ahorro de energía en Windows que guarda el contenido de tu memoria RAM en el disco duro antes de apagar completamente el equipo. Cuando vuelves a encenderlo, el sistema carga ese contenido guardado desde el disco duro, permitiéndote reanudar tu trabajo exactamente donde lo dejaste, con todas tus aplicaciones y documentos abiertos, pero sin consumir energía. Es similar a la suspensión, pero a diferencia de esta, la hibernación no necesita energía para mantener el estado.</p>
+<p><strong>Razones para desactivar la hibernación:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Liberar espacio en el disco duro:</strong> Cuando la hibernación está activada, Windows reserva un archivo oculto llamado <kbd class="kbd docutils literal notranslate">hiberfil.sys</kbd> en la unidad del sistema (normalmente <code class="docutils literal notranslate"><span class="pre">C:\</span></code>). El tamaño de este archivo es aproximadamente el mismo que la cantidad de RAM instalada en tu equipo. Desactivar la hibernación elimina este archivo, liberando ese espacio en disco, lo cual puede ser útil en equipos con SSDs pequeños o poco espacio disponible.</p></li>
+<li><p><strong>Solución de problemas:</strong> En raras ocasiones, la hibernación puede causar problemas de inicio o estabilidad en ciertos sistemas. Desactivarla puede ser un paso de solución de problemas.</p></li>
+<li><p><strong>No la usas:</strong> Si nunca utilizas la función de hibernación y prefieres apagar el equipo completamente o usar solo la suspensión, desactivarla evita que se reserve espacio innecesariamente.</p></li>
+</ol>
+<p><strong>Consideraciones antes de desactivarla:</strong></p>
+<ul class="simple">
+<li><p>Si desactivas la hibernación, no podrás usar la función de “Inicio rápido” (Fast Startup) de Windows 10/11, ya que esta característica utiliza la hibernación para un arranque más rápido.</p></li>
+<li><p>Perderás la capacidad de guardar tu sesión y apagar completamente el equipo sin consumir energía.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="como-usarlo">
+<h2>¿Cómo usarlo?<a class="headerlink" href="#como-usarlo" title="Link to this heading"></a></h2>
+<p>Para ejecutar este comando, necesitas abrir el Símbolo del sistema o PowerShell <strong>como administrador</strong>.</p>
+<ol class="arabic simple">
+<li><p>Busca “cmd” o “PowerShell” en el menú de inicio.</p></li>
+<li><p>Haz clic derecho sobre la aplicación y selecciona “Ejecutar como administrador”.</p></li>
+<li><p>Una vez abierta la ventana de comandos, escribe <code class="docutils literal notranslate"><span class="pre">powercfg</span> <span class="pre">/hibernate</span> <span class="pre">off</span></code> y presiona <kbd class="kbd docutils literal notranslate">Enter</kbd>.</p></li>
+</ol>
+<p>Después de ejecutarlo, el archivo <code class="docutils literal notranslate"><span class="pre">hiberfil.sys</span></code> debería desaparecer de tu disco duro y la opción de hibernar ya no estará disponible en el menú de apagado.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="recuperarCuentasPractica.html" class="btn btn-neutral float-left" title="Práctica - Recuperación de cuentas de usuario" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="explorerWindows.html" class="btn btn-neutral float-right" title="Práctica - forzar la carga del explorer de windows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

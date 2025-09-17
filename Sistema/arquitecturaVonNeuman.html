@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La arquitectura Von Neumann &mdash; Raul Vilchez  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="John von Neumann" href="VonNeumann.html" />
+    <link rel="prev" title="Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones" href="GeorgeBoole.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Raul Vilchez
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">documentación del sistema:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">La arquitectura Von Neumann</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#caracteristicas-principales">Características principales:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ventajas">Ventajas:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desventajas">Desventajas:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#soluciones-modernas">Soluciones Modernas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#esquema-de-un-procesador-moderno">Esquema de un Procesador Moderno</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#componentes-clave">Componentes Clave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusión</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Memorias.html">Tipos y características de memoria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Buses.html">Buses del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI.html">¿Qué es el estándar UEFI?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Prefetching_en_Procesadores.html">Prefetching en Procesadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/EFIpartWindows.html">Windows hardening, EFI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/funcionesSO.html">Funciones del Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/info.html">Información del sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/plataforma.html">Concepto “Plataforma” en Computación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Raul Vilchez</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">La arquitectura Von Neumann</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Sistema/arquitecturaVonNeuman.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="la-arquitectura-von-neumann">
+<h1>La arquitectura Von Neumann<a class="headerlink" href="#la-arquitectura-von-neumann" title="Link to this heading"></a></h1>
+<p>La arquitectura Von Neumann es también conocida como modelo de Von Neumann o arquitectura Princeton.
+Es un modelo de diseño para computadoras propuesto por <strong>John Von Neumann</strong> en 1945. Es la base de la mayoría de las computadoras modernas.</p>
+<section id="caracteristicas-principales">
+<h2>Características principales:<a class="headerlink" href="#caracteristicas-principales" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Unidad de memoria única</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Almacena tanto <strong>instrucciones (programas)</strong> como <strong>datos</strong> en el mismo espacio de memoria.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Unidad Central de Procesamiento (CPU)</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Se encarga de ejecutar las instrucciones. Está compuesta por:</p>
+<ul>
+<li><p><strong>Unidad de Control</strong>: Interpreta las instrucciones.</p></li>
+<li><p><strong>Unidad Aritmético-Lógica (ALU)</strong>: Realiza operaciones matemáticas y lógicas.</p></li>
+</ul>
+</li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p><strong>Ejecución secuencial</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Las instrucciones se ejecutan una tras otra, en orden, a menos que haya instrucciones de salto.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p><strong>Sistema de entrada/salida (E/S)</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Permite la comunicación entre la computadora y el exterior (teclado, pantalla, etc.).</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p><strong>Bus de datos y direcciones</strong>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Permiten el transporte de datos e instrucciones entre la memoria, la CPU y los dispositivos de E/S.</p></li>
+</ul>
+<figure class="align-left">
+<a class="reference internal image-reference" href="../_images/arch.png"><img alt="Diagrama arquitectura Von Neumann" src="../_images/arch.png" style="width: 250px;" />
+</a>
+</figure>
+<figure class="align-right">
+<a class="reference internal image-reference" href="../_images/archCPU.png"><img alt="Diagrama arquitectura Von Neumann" src="../_images/archCPU.png" style="width: 250px;" />
+</a>
+</figure>
+</section>
+<section id="ventajas">
+<h2>Ventajas:<a class="headerlink" href="#ventajas" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Simplicidad y flexibilidad del diseño.</p></li>
+<li><p>Facilita la programación y la construcción de computadoras.</p></li>
+</ul>
+</section>
+<section id="desventajas">
+<h2>Desventajas:<a class="headerlink" href="#desventajas" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Cuello de botella de Von Neumann</strong>: La CPU y la memoria comparten el mismo bus, lo que limita la velocidad de transferencia de datos e instrucciones.</p></li>
+</ul>
+<p>En resumen, la arquitectura de Von Neumann describe un sistema informático con una sola memoria para datos e instrucciones, donde un procesador ejecuta instrucciones de forma secuencial.</p>
+<p><em>bibliografía</em>: <a class="reference external" href="https://es.wikipedia.org/wiki/Arquitectura_de_Von_Neumann">https://es.wikipedia.org/wiki/Arquitectura_de_Von_Neumann</a></p>
+</section>
+<section id="soluciones-modernas">
+<h2>Soluciones Modernas<a class="headerlink" href="#soluciones-modernas" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Memoria Caché (L1, L2, L3)</strong></p>
+<ul class="simple">
+<li><p>Almacena datos e instrucciones frecuentes cerca del CPU.</p></li>
+<li><p>L1 (por núcleo, separada en instrucciones/datos).</p></li>
+<li><p>L2 (por núcleo o compartida).</p></li>
+<li><p>L3 (compartida entre todos los núcleos).</p></li>
+</ul>
+</li>
+<li><p><strong>Arquitectura Harvard Modificada</strong></p>
+<ul class="simple">
+<li><p>Buses separados para datos e instrucciones <strong>solo en caché</strong> (L1).</p></li>
+<li><p>En RAM sigue siendo <em>la arquitectura de Von Neumann</em>.</p></li>
+</ul>
+</li>
+<li><p><strong>Prefetching</strong></p>
+<ul class="simple">
+<li><p>Predice y carga datos antes de que el CPU los solicite.</p></li>
+</ul>
+</li>
+<li><p><strong>Pipelines y Ejecución Paralela</strong></p>
+<ul class="simple">
+<li><p>Procesamiento simultáneo de múltiples instrucciones.</p></li>
+</ul>
+</li>
+<li><p><strong>Memorias Rápidas</strong></p>
+<ul class="simple">
+<li><p>DDR5, HBM (High Bandwidth Memory), GDDR6.</p></li>
+</ul>
+</li>
+<li><p><strong>Multi-Núcleo y Multihilo</strong></p>
+<ul class="simple">
+<li><p>Distribuye la carga entre varios núcleos/hilos.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="esquema-de-un-procesador-moderno">
+<h2>Esquema de un Procesador Moderno<a class="headerlink" href="#esquema-de-un-procesador-moderno" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+---------------------------------------------------+</span>
+<span class="o">|</span>                  <span class="n">CPU</span> <span class="n">Multicore</span>                    <span class="o">|</span>
+<span class="o">|</span> <span class="o">+-----------+</span>    <span class="o">+-----------+</span>    <span class="o">+-----------+</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">Core</span> <span class="mi">1</span>    <span class="o">|</span>    <span class="o">|</span> <span class="n">Core</span> <span class="mi">2</span>    <span class="o">|</span>    <span class="o">|</span> <span class="n">Core</span> <span class="n">N</span>    <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|+---------+|</span>    <span class="o">|+---------+|</span>    <span class="o">|+---------+|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">||</span>   <span class="n">ALU</span>   <span class="o">||</span>    <span class="o">||</span>   <span class="n">ALU</span>   <span class="o">||</span>    <span class="o">||</span>   <span class="n">ALU</span>   <span class="o">||</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|+---------+|</span>    <span class="o">|+---------+|</span>    <span class="o">|+---------+|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">||</span><span class="n">Registros</span><span class="o">||</span>    <span class="o">||</span><span class="n">Registros</span><span class="o">||</span>    <span class="o">||</span><span class="n">Registros</span><span class="o">||</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|+---------+|</span>    <span class="o">|+---------+|</span>    <span class="o">|+---------+|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">+-----^-----+</span>    <span class="o">+-----^-----+</span>    <span class="o">+-----^-----+</span>   <span class="o">|</span>
+<span class="o">|</span>       <span class="o">|</span>                <span class="o">|</span>                <span class="o">|</span>         <span class="o">|</span>
+<span class="o">|</span> <span class="o">+-----</span><span class="n">v</span><span class="o">---------------------------------</span><span class="n">v</span><span class="o">---+</span>     <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span>             <span class="n">Caché</span> <span class="n">L3</span> <span class="n">compartida</span>           <span class="o">|</span>     <span class="o">|</span>
+<span class="o">|</span> <span class="o">+----------------------^--------------------+</span>     <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span>                      <span class="o">|</span>                          <span class="o">|</span>
+<span class="o">|</span> <span class="o">+----------------+</span>     <span class="o">|</span>   <span class="o">+----------------+</span>     <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">Caché</span> <span class="n">L1</span> <span class="p">(</span><span class="n">I</span><span class="o">/</span><span class="n">D</span><span class="p">)</span> <span class="o">&lt;-----+-----&gt;</span> <span class="n">Caché</span> <span class="n">L2</span>     <span class="o">|</span>     <span class="o">|</span>
+<span class="o">|</span> <span class="o">+----------------+</span>         <span class="o">+----------------+</span>     <span class="o">|</span>
+<span class="o">+---------------------------------------------------+</span>
+           <span class="o">|</span>                        <span class="o">^</span>
+           <span class="n">v</span>                        <span class="o">|</span>
+<span class="o">+---------------------------------------------------+</span>
+<span class="o">|</span>              <span class="n">Controlador</span> <span class="n">de</span> <span class="n">Memoria</span>               <span class="o">|</span>
+<span class="o">|</span> <span class="o">+----------------+</span> <span class="o">+----------------+</span>             <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span>  <span class="n">Prefetching</span>   <span class="o">|</span> <span class="o">|</span> <span class="n">DDR5</span> <span class="o">/</span> <span class="n">HBM</span>     <span class="o">|</span>             <span class="o">|</span>
+<span class="o">|</span> <span class="o">+----------------+</span> <span class="o">+----------------+</span>             <span class="o">|</span>
+<span class="o">+---------------------------------------------------+</span>
+                          <span class="o">|</span>
+                          <span class="n">v</span>
+                   <span class="o">+----------------+</span>
+                   <span class="o">|</span>       <span class="n">RAM</span>      <span class="o">|</span>
+                   <span class="o">+----------------+</span>
+</pre></div>
+</div>
+</section>
+<section id="componentes-clave">
+<h2>Componentes Clave<a class="headerlink" href="#componentes-clave" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Núcleos (Cores)</strong>
+- Cada uno con ALU, registros y caché L1 (Harvard modificado).</p></li>
+<li><p><strong>Caché L2</strong>
+- Por núcleo o compartida.</p></li>
+<li><p><strong>Caché L3</strong>
+- Compartida para reducir accesos a RAM.</p></li>
+<li><p><strong>Controlador de Memoria</strong>
+- Gestiona prefetching y comunicación con RAM.</p></li>
+<li><p><strong>RAM</strong>
+- Sigue modelo Von Neumann, pero con buses de alta velocidad (DDR5).</p></li>
+</ul>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/intel286.svg.png"><img alt="Diagrama arquitectura Von Neumann" src="../_images/intel286.svg.png" style="width: 250px;" />
+</a>
+</figure>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>Las técnicas modernas combinan:</p>
+<ul class="simple">
+<li><p>Separación de buses en caché (Harvard).</p></li>
+<li><p>Jerarquía de memoria (caché L1/L2/L3).</p></li>
+<li><p>Paralelismo (multi-núcleo, pipelines).</p></li>
+</ul>
+<p>Para mitigar el cuello de botella manteniendo compatibilidad.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="GeorgeBoole.html" class="btn btn-neutral float-left" title="Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="VonNeumann.html" class="btn btn-neutral float-right" title="John von Neumann" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

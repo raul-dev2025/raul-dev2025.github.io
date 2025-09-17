@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU) &mdash; Raul Vilchez  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Conectores externos del equipo." href="conectoresDelEquipo.html" />
+    <link rel="prev" title="Verificar si la placa base integra tarjeta gráfica (GPU)" href="integratedCards.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Raul Vilchez
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">documentación del sistema:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Memorias.html">Tipos y características de memoria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Buses.html">Buses del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#que-es-el-ancho-del-bus-en-una-gpu">1. ¿Qué es el “Ancho del Bus” en una GPU?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calculo-del-ancho-de-banda-de-la-memoria">2. Cálculo del Ancho de Banda de la Memoria</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#por-que-se-confunde-con-pcie">3. ¿Por qué se confunde con PCIe?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comparativa-ancho-de-bus-vs-pcie">4. Comparativa: Ancho de Bus vs. PCIe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cuando-importa-mas-el-ancho-del-bus">5. ¿Cuándo importa más el ancho del bus?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">6. Conclusión</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI.html">¿Qué es el estándar UEFI?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Prefetching_en_Procesadores.html">Prefetching en Procesadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/EFIpartWindows.html">Windows hardening, EFI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/funcionesSO.html">Funciones del Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/info.html">Información del sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/plataforma.html">Concepto “Plataforma” en Computación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Raul Vilchez</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Sistema/anchoBusGPU.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="interpretacion-del-ancho-del-bus-en-tarjetas-graficas-gpu">
+<h1>Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)<a class="headerlink" href="#interpretacion-del-ancho-del-bus-en-tarjetas-graficas-gpu" title="Link to this heading"></a></h1>
+<p>Cuando se habla del <strong>“ancho del bus”</strong> en una tarjeta gráfica (ej: 128 bits, 256 bits, 384 bits), <strong>no se refiere al bus PCIe</strong>, sino al <strong>bus de memoria interno de la GPU</strong>, que conecta el chip gráfico con su memoria VRAM (GDDR5, GDDR6, etc.). Este concepto es independiente del estándar PCIe (que sí es serial). Aquí la explicación detallada:</p>
+<section id="que-es-el-ancho-del-bus-en-una-gpu">
+<h2>1. ¿Qué es el “Ancho del Bus” en una GPU?<a class="headerlink" href="#que-es-el-ancho-del-bus-en-una-gpu" title="Link to this heading"></a></h2>
+<ul>
+<li><p><strong>Definición:</strong></p>
+<p>Es el <strong>número de bits</strong> que la GPU puede transferir <strong>en paralelo</strong> entre su núcleo (chip gráfico) y la memoria de video (VRAM) en <strong>un ciclo de reloj</strong>.
+- Ejemplo: Un bus de <strong>256 bits</strong> puede mover <strong>256 bits (32 bytes) por ciclo</strong>.</p>
+</li>
+<li><p><strong>Relación con el rendimiento:</strong></p>
+<p>A mayor ancho de bus, mayor <strong>ancho de banda teórico</strong> de la memoria, lo que mejora el rendimiento en resoluciones altas (4K, texturas complejas, etc.).</p>
+</li>
+</ul>
+</section>
+<section id="calculo-del-ancho-de-banda-de-la-memoria">
+<h2>2. Cálculo del Ancho de Banda de la Memoria<a class="headerlink" href="#calculo-del-ancho-de-banda-de-la-memoria" title="Link to this heading"></a></h2>
+<p>La fórmula para calcular el <strong>ancho de banda total</strong> (en GB/s) es:</p>
+<div class="math notranslate nohighlight">
+\[\text{Ancho de Banda} = \frac{\text{Ancho del Bus (bits)} \times \text{Frecuencia de Memoria (MHz)} \times 2}{8 \times 1000}\]</div>
+<ul>
+<li><p><strong>Ejemplo (RTX 3080, GDDR6X):</strong></p>
+<ul>
+<li><p>Ancho del bus: <strong>384 bits</strong></p></li>
+<li><p>Frecuencia efectiva: <strong>19,000 MHz (19 GHz)</strong></p></li>
+<li><p>Cálculo:</p>
+<div class="math notranslate nohighlight">
+\[\frac{384 \times 19000 \times 2}{8 \times 1000} = 912 \text{ GB/s}\]</div>
+</li>
+<li><p>Esto explica por qué tarjetas con <strong>más bits</strong> (ej: 384 vs 128) tienen mejor rendimiento en juegos 4K.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="por-que-se-confunde-con-pcie">
+<h2>3. ¿Por qué se confunde con PCIe?<a class="headerlink" href="#por-que-se-confunde-con-pcie" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>PCIe es serial (punto a punto):</strong></p>
+<ul>
+<li><p>Su “ancho” se mide en <strong>carriles (lanes: x1, x4, x8, x16)</strong>, no en bits.</p></li>
+<li><p>PCIe 4.0 x16 ofrece ~32 GB/s (bidireccional), pero <strong>no limita el ancho de bus de la GPU</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>El bus de memoria de la GPU es paralelo:</strong></p>
+<ul>
+<li><p>Opera de manera independiente al PCIe.</p></li>
+<li><p>Mientras PCIe lleva datos entre la GPU y la CPU/RAM, el <strong>bus de memoria</strong> gestiona la VRAM.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="comparativa-ancho-de-bus-vs-pcie">
+<h2>4. Comparativa: Ancho de Bus vs. PCIe<a class="headerlink" href="#comparativa-ancho-de-bus-vs-pcie" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Característica</strong></p></th>
+<th class="head"><p><strong>Bus de Memoria (GPU)</strong></p></th>
+<th class="head"><p><strong>PCIe (GPU-CPU)</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Tipo</strong></p></td>
+<td><p>Paralelo</p></td>
+<td><p>Serial (punto a punto)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Unidad de medida</strong></p></td>
+<td><p>Bits (128, 256, 384, etc.)</p></td>
+<td><p>Carriles (x1, x4, x8, x16)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Frecuencia</strong></p></td>
+<td><p>MHz (ej: 14,000 MHz GDDR6)</p></td>
+<td><p>Versión (PCIe 3.0, 4.0, 5.0)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Ejemplo típico</strong></p></td>
+<td><p>256 bits &#64; 14 GHz = 448 GB/s</p></td>
+<td><p>PCIe 4.0 x16 = 32 GB/s</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Impacto en rendimiento</strong></p></td>
+<td><p>Crítico en resoluciones altas</p></td>
+<td><p>Menor impacto (satura en casos extremos)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cuando-importa-mas-el-ancho-del-bus">
+<h2>5. ¿Cuándo importa más el ancho del bus?<a class="headerlink" href="#cuando-importa-mas-el-ancho-del-bus" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Juegos en 4K/8K:</strong> Más bits evitan cuellos de botella al mover texturas pesadas.</p></li>
+<li><p><strong>IA y renderizado:</strong> Modelos como DLSS/RTX requieren alto ancho de banda.</p></li>
+<li><p><strong>Minado de criptomonedas:</strong> Algunos algoritmos dependen de la VRAM.</p></li>
+</ul>
+<p><strong>Ejemplo práctico:</strong></p>
+<ul class="simple">
+<li><p>Una GPU con <strong>128 bits y GDDR6 rápido</strong> puede ser mejor que una de <strong>256 bits con GDDR5 lento</strong>.
+- Por eso NVIDIA/AMD usan tecnologías como <strong>GDDR6X</strong> o <strong>HBM</strong> (mayor frecuencia para compensar menos bits).</p></li>
+</ul>
+</section>
+<section id="conclusion">
+<h2>6. Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>El <strong>“ancho del bus”</strong> en una GPU <strong>no tiene relación con PCIe</strong>; es una métrica de su <strong>memoria interna</strong>.</p></li>
+<li><p>Un bus más ancho (ej: 256 bits vs 128 bits) mejora el <strong>ancho de banda</strong>, pero debe combinarse con <strong>VRAM rápida</strong> (GDDR6, HBM).</p></li>
+<li><p>PCIe solo afecta en casos muy específicos (ej: GPUs en x8 en vez de x16).</p></li>
+</ul>
+<p><strong>Recomendación:</strong></p>
+<p>Al comparar GPUs, fíjate en:</p>
+<ol class="arabic simple">
+<li><p><strong>Ancho de bus</strong> (bits).</p></li>
+<li><p><strong>Tipo de memoria</strong> (GDDR6 &gt; GDDR5).</p></li>
+<li><p><strong>Ancho de banda total</strong> (GB/s).</p></li>
+<li><p><strong>PCIe</strong> (solo revisa si usas x8 o x4 en lugar de x16).</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Una RTX 3060 (192 bits, GDDR6) puede superar a una antigua GPU con 256 bits y GDDR5, gracias a la mejora en frecuencia y eficiencia.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="integratedCards.html" class="btn btn-neutral float-left" title="Verificar si la placa base integra tarjeta gráfica (GPU)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="conectoresDelEquipo.html" class="btn btn-neutral float-right" title="Conectores externos del equipo." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

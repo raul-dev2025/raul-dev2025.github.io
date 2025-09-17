@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Windows hardening, EFI &mdash; Raul Vilchez  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Información del Sistema relacionada con UEFI usando PowerShell" href="tipoArranquePS.html" />
+    <link rel="prev" title="Creación de medios de instalación" href="SO_portatil.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Raul Vilchez
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">documentación del sistema:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Memorias.html">Tipos y características de memoria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Buses.html">Buses del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI.html">¿Qué es el estándar UEFI?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Prefetching_en_Procesadores.html">Prefetching en Procesadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Windows hardening, EFI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pasos">Pasos:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="funcionesSO.html">Funciones del Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="info.html">Información del sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plataforma.html">Concepto “Plataforma” en Computación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Raul Vilchez</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Windows hardening, EFI</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/OS/EFIpartWindows.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="windows-hardening-efi">
+<h1>Windows hardening, EFI<a class="headerlink" href="#windows-hardening-efi" title="Link to this heading"></a></h1>
+<p>Para montar una partición del Sistema EFI (ESP) y asignarle una letra para su inspección, generalmente no se recomienda hacerlo directamente desde el Administrador de Discos de Windows de forma gráfica, ya que es una partición protegida. Sin embargo, puedes lograrlo usando la línea de comandos con <cite>diskpart</cite>.</p>
+<p>Cómo montar una partición de sistema EFI (ESP) y asignarle una letra</p>
+<p>Para inspeccionar el contenido de una partición de sistema EFI (ESP), necesitas asignarle una letra de unidad. Esto se hace de forma segura utilizando la herramienta de línea de comandos <cite>diskpart</cite>.</p>
+<blockquote>
+<div><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Manipular particiones del sistema puede ser peligroso si no se
+realiza correctamente. Asegúrate de seguir los pasos cuidadosamente.</p>
+</div>
+</div></blockquote>
+<section id="pasos">
+<h2>Pasos:<a class="headerlink" href="#pasos" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>Abrir el Símbolo del sistema como administrador</strong>:</p>
+<ul class="simple">
+<li><p>Presiona <kbd class="kbd docutils literal notranslate">Win</kbd> <kbd class="kbd docutils literal notranslate"></kbd>+<kbd class="kbd docutils literal notranslate"></kbd> <kbd class="kbd docutils literal notranslate">R</kbd> para abrir el cuadro de diálogo “Ejecutar”.</p></li>
+<li><p>Escribe <code class="docutils literal notranslate"><span class="pre">cmd</span></code> y presiona <kbd class="kbd docutils literal notranslate">Ctrl</kbd> + <kbd class="kbd docutils literal notranslate">Shift</kbd> + <kbd class="kbd docutils literal notranslate">Enter</kbd> para abrir el Símbolo del sistema con privilegios de administrador.</p></li>
+<li><p>Confirma el aviso de Control de cuentas de usuario (UAC) si aparece.</p></li>
+</ul>
+</li>
+<li><p><strong>Iniciar Diskpart</strong>:</p>
+<ul class="simple">
+<li><p>En la ventana del Símbolo del sistema, escribe <code class="docutils literal notranslate"><span class="pre">diskpart</span></code> y presiona <kbd class="kbd docutils literal notranslate">Enter</kbd>.</p></li>
+</ul>
+</li>
+<li><p><strong>Listar discos</strong>:</p>
+<ul class="simple">
+<li><p>Una vez dentro de <code class="docutils literal notranslate"><span class="pre">diskpart</span></code>, escribe <code class="docutils literal notranslate"><span class="pre">list</span> <span class="pre">disk</span></code> y presiona <kbd class="kbd docutils literal notranslate">Enter</kbd>. Esto mostrará todos los discos conectados a tu sistema.</p></li>
+<li><p>Identifica el disco que contiene la partición EFI. Generalmente, es el disco donde está instalado Windows (normalmente <cite>Disco 0</cite>).</p></li>
+</ul>
+</li>
+<li><p><strong>Seleccionar el disco</strong>:</p>
+<ul class="simple">
+<li><p>Escribe <code class="docutils literal notranslate"><span class="pre">select</span> <span class="pre">disk</span> <span class="pre">X</span></code> (reemplaza <cite>X</cite> con el número del disco identificado en el paso anterior) y presiona <em>Enter</em>. Por ejemplo: <code class="docutils literal notranslate"><span class="pre">select</span> <span class="pre">disk</span> <span class="pre">0</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Listar particiones del disco seleccionado</strong>:</p>
+<ul class="simple">
+<li><p>Escribe <cite>list partition</cite> y presiona <cite>Enter</cite>. Esto mostrará todas las particiones del disco seleccionado.</p></li>
+<li><p>Busca la partición de “Sistema” (System) que es de tipo “Sistema EFI” o “EFI System Partition”. Su tamaño suele ser pequeño (entre 100 MB y 500 MB).</p></li>
+</ul>
+</li>
+<li><p><strong>Seleccionar la partición EFI</strong>:</p>
+<ul class="simple">
+<li><p>Escribe <cite>select partition Y</cite> (reemplaza <cite>Y</cite> con el número de la partición EFI identificada en el paso anterior) y presiona <cite>Enter</cite>. Por ejemplo: <code class="docutils literal notranslate"><span class="pre">select</span> <span class="pre">partition</span> <span class="pre">1</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Asignar una letra de unidad</strong>:</p>
+<ul class="simple">
+<li><p>Escribe <code class="docutils literal notranslate"><span class="pre">assign</span> <span class="pre">letter=Z</span></code> (reemplaza <cite>Z</cite> con una letra de unidad disponible que desees asignar, por ejemplo, <cite>S</cite> para “Sistema”) y presiona <cite>Enter</cite>. Por ejemplo: <code class="docutils literal notranslate"><span class="pre">assign</span> <span class="pre">letter=S</span></code>,</p></li>
+<li><p>Si la asignación es exitosa, recibirás un mensaje indicando que Diskpart ha asignado correctamente la letra de unidad o el punto de montaje.</p></li>
+</ul>
+</li>
+<li><p><strong>Salir de Diskpart</strong>:</p>
+<ul class="simple">
+<li><p>Escribe <cite>exit</cite> y presiona <cite>Enter</cite> para salir de <cite>diskpart</cite>.</p></li>
+<li><p>Escribe <cite>exit</cite> de nuevo para cerrar la ventana del Símbolo del sistema.</p></li>
+</ul>
+</li>
+</ol>
+</div></blockquote>
+<p>Ahora la partición EFI estará montada y visible en el Explorador de Archivos de  Windows con la letra de unidad que le asignaste. Puedes navegar a ella para inspeccionar su contenido.</p>
+<blockquote>
+<div><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Después de inspeccionar la partición, se recomienda <strong>quitar la letra de
+unidad</strong> para volver a ocultar la partición y mantener la configuración
+por defecto. Para hacer esto, repite los pasos 1 a 6, y en el paso 7,
+usa el comando <code class="docutils literal notranslate"><span class="pre">remove</span> <span class="pre">letter=Z</span></code> (reemplazando <cite>Z</cite> con la letra que
+asignaste).</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ejemplo de comandos en Símbolo del sistema para montar:</span>
+diskpart
+list<span class="w"> </span>disk
+<span class="k">select</span><span class="w"> </span>disk<span class="w"> </span><span class="m">0</span>
+list<span class="w"> </span>partition
+<span class="k">select</span><span class="w"> </span>partition<span class="w"> </span><span class="m">1</span><span class="w">  </span>rem<span class="w"> </span><span class="o">(</span>asumiendo<span class="w"> </span>que<span class="w"> </span>la<span class="w"> </span>EFI<span class="w"> </span>es<span class="w"> </span>la<span class="w"> </span>partición<span class="w"> </span><span class="m">1</span><span class="o">)</span>
+assign<span class="w"> </span><span class="nv">letter</span><span class="o">=</span>S
+<span class="nb">exit</span>
+
+<span class="c1"># Ejemplo de comandos para quitar la letra después de inspeccionar:</span>
+diskpart
+<span class="k">select</span><span class="w"> </span>disk<span class="w"> </span><span class="m">0</span>
+<span class="k">select</span><span class="w"> </span>partition<span class="w"> </span><span class="m">1</span>
+remove<span class="w"> </span><span class="nv">letter</span><span class="o">=</span>S
+<span class="nb">exit</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SO_portatil.html" class="btn btn-neutral float-left" title="Creación de medios de instalación" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tipoArranquePS.html" class="btn btn-neutral float-right" title="Información del Sistema relacionada con UEFI usando PowerShell" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
