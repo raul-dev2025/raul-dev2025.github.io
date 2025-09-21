@@ -1,7 +1,6 @@
 build/
 *.bak
 make.bat
-.env
 .doctrees/
 .buildinfo
 objects.inv
