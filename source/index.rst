@@ -46,7 +46,7 @@ Sistema, arquitectura, componentes
 
 .. note:: 
 
-   Esta sección contiene documentos de caracter académico. También podrá inncluir ejercicios propuestos.
+   Esta sección contiene documentos de caracter académico. También podrá incluir ejercicios propuestos.
 
 ------
 
@@ -82,7 +82,7 @@ Sistema Operativo(SO)
    
 .. note::
 
-	Documentos disponibles sobre la instalación del sistema operativo. También podrá inncluir ejercicios propuestos.
+	Documentos disponibles sobre la instalación del sistema operativo. También podrá incluir ejercicios propuestos.
    
 -----
 
