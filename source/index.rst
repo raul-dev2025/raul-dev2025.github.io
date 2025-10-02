@@ -7,7 +7,7 @@ Documentation de Técnico Sistemas !
 ============================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contenidos:
 
    Sistema/resume_modulo_0852
@@ -22,6 +22,10 @@ Indices y tablas
 
 Sistema, arquitectura, componentes
 ==================================
+
+.. note:: 
+
+   Esta sección contiene documentos de caracter académico. También podrá incluir ejercicios propuestos.
 
 .. toctree::
    :maxdepth: 1
@@ -44,14 +48,14 @@ Sistema, arquitectura, componentes
    Sistema/Prefetching_en_Procesadores.rst
    Sistema/Ejercicios.rst
 
-.. note:: 
-
-   Esta sección contiene documentos de caracter académico. También podrá incluir ejercicios propuestos.
-
 ------
 
 Sistema Operativo(SO)
 =====================
+
+.. note::
+
+	Documentos disponibles sobre la instalación del sistema operativo. También podrá incluir ejercicios propuestos.
 
 .. toctree::
    :maxdepth: 1
@@ -80,30 +84,50 @@ Sistema Operativo(SO)
    OS/puntosRestauracion_Bauckups.rst
    OS/ResgistroWindows.rst   
    
-.. note::
-
-	Documentos disponibles sobre la instalación del sistema operativo. También podrá incluir ejercicios propuestos.
-   
 -----
 
 Aplicaciones de Sistema
 =======================
 
+.. tip::
+
+   **Aplicaciones de Sistema**: documentación sobre aplicaciones de sistema en Windows.
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Aplicaciones Windows:
 
    AplicacionesDeSistema/aplicacionesPortables
    AplicacionesDeSistema/Cobian
-
-.. tip::   
-   **Aplicaciones de Sistema**: documentación sobre aplicaciones de sistema en Windows.
+   AplicacionesDeSistema/antivirus
+   AplicacionesDeSistema/cortafuegos
+   AplicacionesDeSistema/OS-msconfig
 
 -----
+
+Redes
+======
+
+.. tip::
+
+   **Redes **: documentación sobre redes informáticas en sistemas Windows.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Redes ethernet/WiFi:
+
+   Redes/ProtocoloTCP_IP
+   Redes/Redes
+   Redes/redesInalambricas
 
 
 Office, Word y Excel
 ====================
+
+.. tip::
+   
+	**Word**: documentación sobre la herramienta *Word* de *Office*.
+   **Excel**: documentación sobre la herramienta *Excel* de *Office*.
 
 .. toctree::
    :maxdepth: 2
@@ -117,11 +141,8 @@ Office, Word y Excel
    Office/prueba-3.rst
    Office/apuntesRaulV-v3.rst
 
-.. tip::
-   
-	**Word**: documentación sobre la herramienta *Word* de *Office*.
-	
-	
+------
+
 .. toctree::
    :maxdepth: 2
    :caption: Office, Excel:
@@ -131,22 +152,20 @@ Office, Word y Excel
    Office/excel-3.rst
    Office/cuestionarios
    
-.. tip::
-   
-	**Excel**: documentación sobre la herramienta *Excel* de *Office*.
-
-
 -----
 	
 Downloadable files
 =====================
 
-- Click to download: :download:`Tema 1 - Arquitectura de Sistema <descargas/Tema-1-Arquitecturas_de_un_sistema_microinformático.pdf>`
-- Click to download: :download:`Tema 2 - Funciones del SO <descargas/Tema-2_FuncionesSistemaOperativo.pdf>`
-- Click to download: :download:`Velocidad de la Ram <descargas/Artículo._La_velocidad_de_la_memoria_RAM_y_su_latencia.pdf>`
-- Click to download: :download:`Tema 3 - Elementos del SO <descargas/Tema_3._Elementos_de_un_Sistema_Operativo_Informático.pdf>`
-- Click to download: :download:`Tema 4 - Sistemas(SO) Actuales <descargas/Tema_4._Sistemas_operativos_informáticos_actuales.pdf>`
-
 .. warning::
    
 	Esta sección contiene recursos descargables y podría estar sugeta a cambios sin previo aviso.
+
+- Click to download: :download:`(sistema/OS) Tema 1 - Arquitectura de Sistema <descargas/Tema-1-Arquitecturas_de_un_sistema_microinformático.pdf>`
+- Click to download: :download:`(sistema/OS) Tema 2 - Funciones del SO <descargas/Tema-2_FuncionesSistemaOperativo.pdf>`
+- Click to download: :download:`(sistema/OS) Velocidad de la Ram <descargas/Artículo._La_velocidad_de_la_memoria_RAM_y_su_latencia.pdf>`
+- Click to download: :download:`(sistema/OS) Tema 3 - Elementos del SO <descargas/Tema_3._Elementos_de_un_Sistema_Operativo_Informático.pdf>`
+- Click to download: :download:`(sistema/OS) Tema 4 - Sistemas(SO) Actuales <descargas/Tema_4._Sistemas_operativos_informáticos_actuales.pdf>`
+- Click to download: :download:`(Redes) Tema 1 - Arquitectura de redes de área local <descargas/Tema_1.Arquitectura_de_redes_de_área_local.pdf>`
+- Click to download: :download:`(Redes) Tema 2 - Elementos de una red de área local <descargas/Tema_2.Elementos_de_una_red_de_área_local.pdf>`
+
