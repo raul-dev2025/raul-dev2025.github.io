@@ -77,6 +77,7 @@ Nº de IPs
 Las IPs se identifican en octetos, cada octeto contiene 8 bits.
 
 .. code:: bash
+   
    :linenos:
 
    2^8 = 256
