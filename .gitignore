@@ -4,3 +4,4 @@ make.bat
 .doctrees/
 .buildinfo
 objects.inv
+.env/
