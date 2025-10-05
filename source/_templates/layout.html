@@ -1,6 +1,11 @@
 {% extends "!layout.html" %}
 
-{% block side_nav_search %}
-  {{ super() }}
-  <a href="https://raulvilchez.org" class="icon icon-home">TécnicoSistemas</a>
+{% block sidebartitle %}
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="{{ pathto('search') }}" method="get">
+      <input type="text" name="q" placeholder="{{ _('Search docs') }}" />
+    </form>
+  </div>
 {% endblock %}
