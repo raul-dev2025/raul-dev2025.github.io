@@ -1,0 +1,227 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protocolo TCP/IP &mdash; Raul Vilchez  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Redes" href="Redes.html" />
+    <link rel="prev" title="Arranque del sistema en Windows" href="../AplicacionesDeSistema/OS-msconfig.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Raul Vilchez
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">documentación del sistema:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Memorias.html">Tipos y características de memoria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Buses.html">Buses del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI.html">¿Qué es el estándar UEFI?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Prefetching_en_Procesadores.html">Prefetching en Procesadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/EFIpartWindows.html">Windows hardening, EFI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/funcionesSO.html">Funciones del Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/info.html">Información del sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/plataforma.html">Concepto “Plataforma” en Computación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/antivirus.html">¿Qué es un antivirus?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/cortafuegos.html">¿Qué es un cortafuegos?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/OS-msconfig.html">Arranque del sistema en Windows</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Redes ethernet/WiFi:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Protocolo TCP/IP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#historia">Historia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#funcionamiento">Funcionamiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#versiones">Versiones</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Redes.html">Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redesInalambricas.html">Redes inalámbricas</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Power Point:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/PowerPoint.html">Power Point</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Raul Vilchez</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Protocolo TCP/IP</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Redes/ProtocoloTCP_IP.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="protocolo-tcp-ip">
+<h1>Protocolo TCP/IP<a class="headerlink" href="#protocolo-tcp-ip" title="Link to this heading"></a></h1>
+<section id="historia">
+<h2>Historia<a class="headerlink" href="#historia" title="Link to this heading"></a></h2>
+<p>En la década de los ‘70, Vinton Cerf y Robert E. Kahn crearon el protocolo TCP/IP (Transmission Control Protocol/Internet Protocol) con el objetivo de proporcionar una capa de abstracción entre las aplicaciones de usuario y la infraestructura de red subyacente.</p>
+<p>Fué el Departamento de defensa de los EEUU, quien encargó el desarrollo de un proyecto ambicioso, que terminaría por convertirse en <em>el estandard de facto</em>.
+Su implementación tuvo lugar en la red ARPANET, también conocida por ser la primera red de área ámplia(WAN), a su vez, desarrollada por DARPA(Departamento de Defensa de los Estados Unidos).</p>
+<p>Buscaron una manera de comunicar computadoras de diferentes fabricantes, de forma fiable y reproducible. Consiguieron conectar <em>al mundo</em>, en una red global y sentaron las base de la comunicación entre máquinas distantes y dispares.</p>
+</section>
+<section id="funcionamiento">
+<h2>Funcionamiento<a class="headerlink" href="#funcionamiento" title="Link to this heading"></a></h2>
+<p>TCP/IP es un protocolo de comunicaciones de red que se utiliza para establecer conexiones de red confiables y seguras entre dispositivos en una red.</p>
+<ol class="arabic simple">
+<li><p><strong>Conexión</strong>: Cuando un dispositivo desea establecer una conexión con otro dispositivo, envía un paquete de solicitud (SYN) al dispositivo de destino. Este paquete incluye información sobre la conexión, como el puerto de destino y la dirección IP.</p></li>
+<li><p><strong>Aceptación</strong>: El dispositivo de destino recibe el paquete de solicitud y, si está dispuesto a establecer la conexión, envía un paquete de aceptación (SYN-ACK) de vuelta al dispositivo original. Este paquete confirma la aceptación de la conexión y proporciona información sobre la conexión, como el puerto de origen y el puerto de destino.</p></li>
+<li><p><strong>Establecimiento de la conexión</strong>: Después de recibir el paquete de aceptación, el dispositivo original envía un paquete de confirmación (ACK) al dispositivo de destino para confirmar que ha recibido el paquete de aceptación. Esto completa el proceso de establecimiento de la conexión.</p></li>
+<li><p><strong>Comunicación</strong>: Una vez que la conexión está establecida, los dispositivos pueden enviar datos entre sí a través de la conexión. Los datos se envían en paquetes, que se dividen en segmentos para facilitar su transferencia a través de la red.</p></li>
+<li><p><strong>Control de errores</strong>: TCP/IP utiliza varios mecanismos para detectar y corregir errores en la transferencia de datos. Por ejemplo, los dispositivos envían paquetes de control, como los paquetes ACK, para confirmar la recepción de datos y los paquetes de retransmisión para reenviar datos perdidos.</p></li>
+<li><p><strong>Cierre de la conexión</strong>: Cuando un dispositivo desea cerrar la conexión, envía un paquete de cierre (FIN) al otro dispositivo. El otro dispositivo recibe el paquete de cierre y envía un paquete de confirmación (ACK) de vuelta para confirmar que ha recibido el paquete de cierre. Después de recibir el paquete ACK, el dispositivo original cierra la conexión.</p></li>
+</ol>
+<p>En resumen, TCP/IP proporciona una conexión de red confiable y segura a través de la transferencia de datos segmentados y el control de errores. Esto permite una comunicación fiable entre dispositivos en una red.</p>
+</section>
+<section id="versiones">
+<h2>Versiones<a class="headerlink" href="#versiones" title="Link to this heading"></a></h2>
+<p>TCP/IP es un conjunto de protocolos de comunicaciones de red que ha evolucionado a lo largo del tiempo. Aquí hay un breve resumen de las principales versiones de TCP/IP:</p>
+<ol class="arabic simple">
+<li><p><strong>TCP/IP versión 4 (IPv4)</strong>: Esta es la versión más antigua y ampliamente utilizada de TCP/IP. Utiliza direcciones IP de 32 bits para identificar dispositivos en una red. IPv4 es el estándar actualmente utilizado en la mayoría de las redes.</p></li>
+<li><p><strong>TCP/IP versión 6 (IPv6)</strong>: Esta versión de TCP/IP fue diseñada para solucionar los problemas de escala y direcciones limitadas de IPv4. Utiliza direcciones IP de 128 bits para proporcionar una mayor cantidad de direcciones únicas. IPv6 también introduce nuevas características, como la capacidad de encapsular tráfico IPv6 dentro de tráfico IPv4.</p></li>
+<li><p><strong>TCP Selectivo (SCTP)</strong>: SCTP es un protocolo de transporte que proporciona características adicionales a TCP, como la capacidad de establecer múltiples conexiones simultáneas sobre una única conexión de red. SCTP es ampliamente utilizado en aplicaciones de comunicaciones en tiempo real, como la transmisión de video y audio.</p></li>
+<li><p><strong>TCP con QoS (Quality of Service)</strong>: Este es un conjunto de extensiones de TCP que permite proporcionar diferentes niveles de calidad de servicio a diferentes tipos de tráfico en una red. Esto es especialmente útil en redes donde se requiere garantizar un rendimiento específico para ciertos tipos de tráfico, como la transmisión de video en alta resolución.</p></li>
+<li><p><strong>TCP con DCCP (DCCP - Datagram Congestion Control Protocol)</strong>: DCCP es un protocolo de transporte que permite la transferencia de datos en forma de datagramas, en lugar de segmentos, como lo hace TCP. DCCP es útil en aplicaciones donde se requiere un control de congestion más preciso, como en la transferencia de datos multimedia.</p></li>
+</ol>
+<p>Estas son solo algunas de las versiones principales de TCP/IP. Cada una de ellas introduce características y mejoras en relación con la transferencia de datos en redes.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../AplicacionesDeSistema/OS-msconfig.html" class="btn btn-neutral float-left" title="Arranque del sistema en Windows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Redes.html" class="btn btn-neutral float-right" title="Redes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
