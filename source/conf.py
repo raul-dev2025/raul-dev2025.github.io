@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Raul Vilchez'
+project = 'TecnicoSistemas'
 copyright = '2024, Raul Vilchez'
 author = 'Raul Vilchez'
 
@@ -18,7 +18,8 @@ extensions = []
 templates_path = ['_templates']
 exclude_patterns = []
 
-
+# Branded icon
+html_favicon = '_static/simulation.png'
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -38,6 +39,7 @@ html_theme_options = {
     'style_external_links': False,
     'vcs_pageview_mode': '',
     'style_nav_header_background': '#2980B9',
+    "search_bar_text": "Search docs",
     # Toc options
     'collapse_navigation': True,
     'sticky_navigation': True,
