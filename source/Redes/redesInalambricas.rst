@@ -141,6 +141,6 @@ Esta tabla corresponde a la página 39 del archivo PDF que proporcionaste.
    - Zigbee
    - UWB
    
-**Grupo2**: WLAN (Wireless Local Area Network, Wi-Fi)
-**Grupo3**: WMAN (Wireless Metropolitan Area Network, Wi-MaNet, WiMAX)
-**Grupo4**: WWAN (Wireless Wide Area Network, Wi-World, GSM, GPRS, UMTS, LTE)
+- **Grupo2**: WLAN (Wireless Local Area Network, Wi-Fi)
+- **Grupo3**: WMAN (Wireless Metropolitan Area Network, Wi-MaNet, WiMAX)
+- **Grupo4**: WWAN (Wireless Wide Area Network, Wi-World, GSM, GPRS, UMTS, LTE)
