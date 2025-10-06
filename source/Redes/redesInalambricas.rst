@@ -118,9 +118,6 @@ Mis disculpas por la confusión. Aquí está la tabla en formato de texto reestr
      - > 50 km
      - 60 Mbps
 
-Esta tabla corresponde a la página 39 del archivo PDF que proporcionaste.
-
-
 .. code::
    
      Grupo1   Grupo2   Grupo3   Grupo4
