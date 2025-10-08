@@ -1,15 +1,15 @@
 Redes
 =====
 
-Podría definrse como un conjunto de dispositivos interconectados entre sí; un mecanismo que permite la comunicación entre dos o más computadoras.
+Podría definirse como un conjunto de dispositivos interconectados entre sí; un mecanismo que permite la comunicación entre dos o más computadoras.
 
 Clasificación
 -------------
 
-LAN (Local Area Network)
-MAN (Metropolitan Area Network)
-WAN (Wide Area Network)
-IN (Internet)
+- LAN (Local Area Network)
+- MAN (Metropolitan Area Network)
+- WAN (Wide Area Network)
+- IN (Internet)
 
 Características
 ---------------
@@ -19,7 +19,7 @@ Características
 
     - *Canal de comunicación*: medio por el que circula la información.
     - *Elementos de interconexión*: interconectan los terminales de la red. Se encargan también de determinar la mejor ruta por la que circulará la información.
-    - *Adaptadores de red*: su función principal es convertir el formato de los datos utilizado por los terminales, en el formta que utilizará la red de comunicación; habitualmente señales eléctricas u ondas de raio.
+    - *Adaptadores de red*: su función principal es convertir el formato de los datos utilizado por los terminales, en el formato que utilizará la red de comunicación; habitualmente señales eléctricas u ondas de radio.
     - *Programas de red*: son un conjunto de aplicaciones destinadas a facilitar la gestión de la red.
 
 Arquitectura de Red
@@ -42,8 +42,9 @@ Podrían ser definidas tres características esenciales:
 
    - Protocolos de comunicaciones: es el conjunto de reglas y procedimientos utilizados con el objeto de llevar a cabo la comunicación.
 
-   Topologías básicas
-   ~~~~~~~~~~~~~~~~~~
+
+Topologías básicas
+~~~~~~~~~~~~~~~~~~
 
    - **Malla (Mesh)**: Cada dispositivo está conectado a todos los demás. Ofrece alta redundancia y fiabilidad, pero es costosa y compleja de instalar y gestionar.
    - **Estrella (Star)**: Todos los dispositivos se conectan a un nodo central (como un switch o hub). Es fácil de administrar y añadir nuevos equipos. Su principal desventaja es que si el nodo central falla, toda la red se cae. Es la topología más común en redes LAN.
@@ -55,10 +56,10 @@ Podrían ser definidas tres características esenciales:
 
 Protocolos
 ----------
-Son un conjunto de normas o reglas, utilizadas para coordinar el funcionamientos de los distintos componentes que conforman la red.
+Son un conjunto de normas o reglas, utilizadas para coordinar el funcionamiento de los distintos componentes que conforman la red.
 
 - **Encaminamiento**: se encarga de determinar la mejor ruta por la que circulará la información.
-- **Direccionamiento**: se encarga de identificar los dispositivos de la red y asignarles un identificador unico.
+- **Direccionamiento**: se encarga de identificar los dispositivos de la red y asignarles un identificador único.
 - **Acceso al medio**: se encarga de transmitir la información por el medio de comunicación.
 - **Saturación del receptor**: se encarga de detectar y evitar la saturación del receptor.
 - **Mantenimiento del orden**: consiste en un mecanismo que permite ordenar los mensajes en el destino; por ejemplo al numerar los fragmentos.
@@ -66,13 +67,13 @@ Son un conjunto de normas o reglas, utilizadas para coordinar el funcionamientos
 - **control de errores**: se encarga de detectar y corregir errores en la información transmitida.
 - **Multiplexación**: se encarga de compartir el medio de comunicación entre varios dispositivos.
 
-TCP (Transmission Control Protocol)
-UDP (User Datagram Protocol)    
-ICMP (Internet Control Message Protocol)
+- TCP (Transmission Control Protocol).
+- UDP (User Datagram Protocol).
+- ICMP (Internet Control Message Protocol).
 
 
-Nº de IPs
----------
+Números de IPs
+--------------
 
 Las IPs se identifican en octetos, cada octeto contiene 8 bits.
 
@@ -101,7 +102,7 @@ Para limitar el número de máquinas configurables en una red, puedes ajustar la
 
 Por ejemplo, la máscara 255.255.128.0 (o /17 en notación CIDR) permite 32,766 direcciones de host (2¹⁵ - 2, restando la dirección de red y broadcast).
 
-¿Cómo funciona?
+**¿Cómo funciona?**
 
 Cuantos más bits pongas en 255 (o en 1 en binario), menos hosts podrás tener.
 Ejemplo:
@@ -207,6 +208,7 @@ Open Group
 ~~~~~~~~~~
 El Grupo Abierto es una organización no gubernamental que se encarga de promover la creación de estándares para la comunicación y la información en el mundo.
 
+-----
 
 Ethernet
 --------
@@ -223,38 +225,36 @@ En resumen, Ethernet es un protocolo de red de área local ampliamente utilizado
 
 FDDI
 ----
-FDDI (Fiber Distributed Data Interface) es un protocolo de red de área local (LAN) que utiliza fibreros ópticos para la transmisión de datos. Fue desarrollado en la década de 1980 y se utilizó principalmente en redes de alta velocidad.
+FDDI (Fiber Distributed Data Interface) es un protocolo de red de área local (LAN) que utiliza cables de fibra óptica para la transmisión de datos. Fue desarrollado en la década de 1980 y se utilizó principalmente en redes de alta velocidad.
 
-FDDI utiliza fibreros ópticos para conectar dispositivos en una red, lo que permite una transmisión de datos más rápida y segura que la transmisión a través de cables de cobre. FDDI puede alcanzar velocidades de transmisión de hasta 100 Mbps, lo que lo convierte en una opción adecuada para redes de gran tamaño y alto tráfico.
+FDDI utiliza cables de fibra óptica para conectar dispositivos en una red, lo que permite una transmisión de datos más rápida y segura que la transmisión a través de cables de cobre. FDDI puede alcanzar velocidades de transmisión de hasta 100 Mbps, lo que lo convierte en una opción adecuada para redes de gran tamaño y alto tráfico.
 
 FDDI utiliza un enfoque de anillo de transmisión, donde los datos se envían en un bucle continuo a través de la red. Los dispositivos en una red FDDI se conectan a un conmutador o a un switch FDDI, que actúa como intermediario para enrutar los datos a través de la red.
 
 Aunque FDDI fue ampliamente utilizado en la década de 1990, en la actualidad ha sido desplazado por otros protocolos de red de alta velocidad, como Gigabit Ethernet y Fibra Óptica. Sin embargo, FDDI sigue siendo utilizado en algunas redes antiguas o en situaciones específicas donde se requieren velocidades de transmisión más altas.
 
-En resumen, FDDI es un protocolo de red de área local que utiliza fibreros ópticos para la transmisión de datos en redes de alta velocidad. Fue ampliamente utilizado en la década de 1990, pero ha sido desplazado por otros protocolos de red más modernos.
-
-
+En resumen, FDDI es un protocolo de red de área local que utiliza cables de fibra óptica para la transmisión de datos en redes de alta velocidad. Fue ampliamente utilizado en la década de 1990, pero ha sido desplazado por otros protocolos de red más modernos.
 
 
 Patchpanel
 ----------
-Un patch panel es un dispositivo utilizado en redes de datos para conectar y conectar cables de red. Se utiliza principalmente en instalaciones de red grandes y complejas, como oficinas, centros de datos y establecimientos de telecomunicaciones.
+Un patch panel es un dispositivo que permite administrar y organizar las conexiones de los cables de una red. Se utiliza principalmente en instalaciones de red grandes y complejas, como oficinas, centros de datos y establecimientos de telecomunicaciones.
 
-Un patch panel consta de una placa de metal o plástico con múltiples puertos de conexión, generalmente RJ-45 o BNC, y permite conectar y conectar cables de red a través de la red. Los cables se conectan a los puertos del patch panel y luego se conectan a otros dispositivos de red, como switches, routers o computadoras.
+Un patch panel consta de una placa con múltiples puertos de conexión (generalmente RJ-45) que centraliza el cableado de la red. Los cables de la instalación terminan en la parte trasera del panel y, mediante cables más cortos (patch cords), se conectan desde la parte frontal a otros dispositivos como switches o routers.
 
 El objetivo principal del patch panel es facilitar la administración y la configuración de la red. Permite a los administradores de red conectar y desconectar cables de red fácilmente, lo que facilita la configuración de la red, la reparación de problemas y la gestión del tráfico de red.
 
 Además, los patch panels también permiten una mayor flexibilidad y escalabilidad en la red, ya que los cables se pueden conectar y desconectar fácilmente sin tener que manipular los dispositivos de red directamente.
 
-En resumen, un patch panel es un dispositivo utilizado en redes de datos para conectar y conectar cables de red. Permite a los administradores de red conectar y desconectar cables fácilmente, facilitando la configuración, la reparación y la gestión de la red. También proporciona flexibilidad y escalabilidad en la red.
+En resumen, un patch panel es un componente esencial para organizar el cableado de una red de datos. Facilita la administración, los cambios y la resolución de problemas al centralizar los puntos de conexión, proporcionando flexibilidad y escalabilidad a la infraestructura de red.
 
 Switch
 ------
-Un switch es un dispositivo de red que actúa como intermediario para enrutar y distribuir el tráfico de datos en una red local (LAN). Es una de las piezas fundamentales de una red y se utiliza para conectar y conectar dispositivos en una red local.
+Un switch es un dispositivo de red que actúa como intermediario para enrutar y distribuir el tráfico de datos en una red local (LAN). Su función principal es recibir, procesar y reenviar datos de manera eficiente al dispositivo de destino correcto.
 
-Un switch tiene múltiples puertos de conexión, generalmente Ethernet, que permiten conectar dispositivos de red, como computadoras, impresoras y otros dispositivos. Cuando un dispositivo envía datos a través de la red, el switch utiliza la dirección MAC (dirección física de red) del dispositivo para determinar a qué puerto debe enviar los datos.
+Un switch opera principalmente en la capa 2 (Enlace de Datos) del modelo OSI. Aprende las direcciones MAC (la dirección física única de cada tarjeta de red) de los dispositivos conectados a cada uno de sus puertos. Cuando recibe un paquete de datos (trama), lo reenvía únicamente al puerto donde se encuentra el dispositivo de destino, en lugar de difundirlo a todos los puertos como haría un hub. Esto reduce el tráfico innecesario y mejora el rendimiento de la red.
 
-El switch realiza el enrutamiento de datos a nivel 2 del modelo OSI, utilizando la dirección MAC para enrutar los paquetes de datos a través de la red. Esto permite que los datos se envíen directamente al dispositivo destinatario, en lugar de enviarlos a todos los dispositivos en la red, como ocurre en una red de área pública (PAN) o en una red sin switch.
+Algunos switches más avanzados, conocidos como switches de capa 3, también pueden realizar funciones de enrutamiento, propias de la capa 3 (Red) del modelo OSI. Esto significa que pueden tomar decisiones de reenvío basadas en direcciones IP, permitiendo la comunicación entre diferentes subredes (VLANs) sin necesidad de un router dedicado.
 
 Además, los switches modernos también pueden realizar enrutamiento a nivel 3, utilizando direcciones IP, lo que permite que los switches se comuniquen con dispositivos en otras redes, utilizando protocolos como DHCP y DNS.
 

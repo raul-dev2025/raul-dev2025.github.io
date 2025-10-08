@@ -6,12 +6,13 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redes &mdash; Raul Vilchez  documentation</title>
+  <title>Redes &mdash; TecnicoSistemas  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
+    <link rel="shortcut icon" href="../_static/simulation.png"/>
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=8d563738"></script>
@@ -30,19 +31,14 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
 
-          
-          
-          <a href="../index.html" class="icon icon-home">
-            Raul Vilchez
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
 <ul>
@@ -106,9 +102,12 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Redes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#clasificacion">Clasificación</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#caracteristicas">Características</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#arquitectura-de-red">Arquitectura de Red</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arquitectura-de-red">Arquitectura de Red</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#topologias-basicas">Topologías básicas</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#protocolos">Protocolos</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#no-de-ips">Nº de IPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#numeros-de-ips">Números de IPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mascara-de-subred">Máscara de subred</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#notacion-cidr-y-notacion-de-mascara-de-subred">notación CIDR y notación de máscara de subred</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#netbios">Netbios</a></li>
@@ -162,7 +161,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Raul Vilchez</a>
+          <a href="../index.html">TecnicoSistemas</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -182,13 +181,15 @@
              
   <section id="redes">
 <h1>Redes<a class="headerlink" href="#redes" title="Link to this heading"></a></h1>
-<p>Podría definrse como un conjunto de dispositivos interconectados entre sí; un mecanismo que permite la comunicación entre dos o más computadoras.</p>
+<p>Podría definirse como un conjunto de dispositivos interconectados entre sí; un mecanismo que permite la comunicación entre dos o más computadoras.</p>
 <section id="clasificacion">
 <h2>Clasificación<a class="headerlink" href="#clasificacion" title="Link to this heading"></a></h2>
-<p>LAN (Local Area Network)
-MAN (Metropolitan Area Network)
-WAN (Wide Area Network)
-IN (Internet)</p>
+<ul class="simple">
+<li><p>LAN (Local Area Network)</p></li>
+<li><p>MAN (Metropolitan Area Network)</p></li>
+<li><p>WAN (Wide Area Network)</p></li>
+<li><p>IN (Internet)</p></li>
+</ul>
 </section>
 <section id="caracteristicas">
 <h2>Características<a class="headerlink" href="#caracteristicas" title="Link to this heading"></a></h2>
@@ -199,7 +200,7 @@ IN (Internet)</p>
 <div><ul class="simple">
 <li><p><em>Canal de comunicación</em>: medio por el que circula la información.</p></li>
 <li><p><em>Elementos de interconexión</em>: interconectan los terminales de la red. Se encargan también de determinar la mejor ruta por la que circulará la información.</p></li>
-<li><p><em>Adaptadores de red</em>: su función principal es convertir el formato de los datos utilizado por los terminales, en el formta que utilizará la red de comunicación; habitualmente señales eléctricas u ondas de raio.</p></li>
+<li><p><em>Adaptadores de red</em>: su función principal es convertir el formato de los datos utilizado por los terminales, en el formato que utilizará la red de comunicación; habitualmente señales eléctricas u ondas de radio.</p></li>
 <li><p><em>Programas de red</em>: son un conjunto de aplicaciones destinadas a facilitar la gestión de la red.</p></li>
 </ul>
 </div></blockquote>
@@ -228,7 +229,12 @@ IN (Internet)</p>
 </li>
 <li><p>Protocolos de comunicaciones: es el conjunto de reglas y procedimientos utilizados con el objeto de llevar a cabo la comunicación.</p></li>
 </ul>
-<ul class="simple">
+</dd>
+</dl>
+<section id="topologias-basicas">
+<h3>Topologías básicas<a class="headerlink" href="#topologias-basicas" title="Link to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
 <li><p><strong>Malla (Mesh)</strong>: Cada dispositivo está conectado a todos los demás. Ofrece alta redundancia y fiabilidad, pero es costosa y compleja de instalar y gestionar.</p></li>
 <li><p><strong>Estrella (Star)</strong>: Todos los dispositivos se conectan a un nodo central (como un switch o hub). Es fácil de administrar y añadir nuevos equipos. Su principal desventaja es que si el nodo central falla, toda la red se cae. Es la topología más común en redes LAN.</p></li>
 <li><p><strong>Árbol (Tree)</strong>: Es una combinación de la topología de bus y estrella. Los nodos están conectados en forma de árbol, con un nodo raíz y ramas. Permite un crecimiento escalonado de la red.</p></li>
@@ -237,28 +243,28 @@ IN (Internet)</p>
 <li><p><strong>Bus</strong>: Todos los dispositivos comparten un único canal de comunicación (el “bus”). Es una topología simple y económica, pero si el cable principal falla, toda la red deja de funcionar. Además, el rendimiento disminuye a medida que se añaden más dispositivos.</p></li>
 <li><p><strong>Irregular o Híbrida</strong>: Combina dos o más topologías diferentes para formar una red más grande y compleja. Por ejemplo, conectar varias redes en estrella a una troncal de bus.</p></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
+</section>
 </section>
 <section id="protocolos">
 <h2>Protocolos<a class="headerlink" href="#protocolos" title="Link to this heading"></a></h2>
-<p>Son un conjunto de normas o reglas, utilizadas para coordinar el funcionamientos de los distintos componentes que conforman la red.</p>
+<p>Son un conjunto de normas o reglas, utilizadas para coordinar el funcionamiento de los distintos componentes que conforman la red.</p>
 <ul class="simple">
 <li><p><strong>Encaminamiento</strong>: se encarga de determinar la mejor ruta por la que circulará la información.</p></li>
-<li><p><strong>Direccionamiento</strong>: se encarga de identificar los dispositivos de la red y asignarles un identificador unico.</p></li>
+<li><p><strong>Direccionamiento</strong>: se encarga de identificar los dispositivos de la red y asignarles un identificador único.</p></li>
 <li><p><strong>Acceso al medio</strong>: se encarga de transmitir la información por el medio de comunicación.</p></li>
 <li><p><strong>Saturación del receptor</strong>: se encarga de detectar y evitar la saturación del receptor.</p></li>
 <li><p><strong>Mantenimiento del orden</strong>: consiste en un mecanismo que permite ordenar los mensajes en el destino; por ejemplo al numerar los fragmentos.</p></li>
 <li><p><strong>control de flujo</strong>: se encarga de controlar el flujo de datos entre los dispositivos de la red.</p></li>
 <li><p><strong>control de errores</strong>: se encarga de detectar y corregir errores en la información transmitida.</p></li>
 <li><p><strong>Multiplexación</strong>: se encarga de compartir el medio de comunicación entre varios dispositivos.</p></li>
+<li><p>TCP (Transmission Control Protocol).</p></li>
+<li><p>UDP (User Datagram Protocol).</p></li>
+<li><p>ICMP (Internet Control Message Protocol).</p></li>
 </ul>
-<p>TCP (Transmission Control Protocol)
-UDP (User Datagram Protocol)
-ICMP (Internet Control Message Protocol)</p>
 </section>
-<section id="no-de-ips">
-<h2>Nº de IPs<a class="headerlink" href="#no-de-ips" title="Link to this heading"></a></h2>
+<section id="numeros-de-ips">
+<h2>Números de IPs<a class="headerlink" href="#numeros-de-ips" title="Link to this heading"></a></h2>
 <p>Las IPs se identifican en octetos, cada octeto contiene 8 bits.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>:linenos:
 
@@ -278,7 +284,7 @@ El segundo octeto (255) se utiliza para la parte de subred.
 Los dos  ú ltimos octetos (255.0) se utilizan para la parte de host.</p>
 <p>Para limitar el número de máquinas configurables en una red, puedes ajustar la máscara de subred. La máscara determina cuántas direcciones IP están disponibles para los hosts.</p>
 <p>Por ejemplo, la máscara 255.255.128.0 (o /17 en notación CIDR) permite 32,766 direcciones de host (2¹⁵ - 2, restando la dirección de red y broadcast).</p>
-<p>¿Cómo funciona?</p>
+<p><strong>¿Cómo funciona?</strong></p>
 <p>Cuantos más bits pongas en 255 (o en 1 en binario), menos hosts podrás tener.
 Ejemplo:
 255.255.255.0 (/24) → 254 hosts
@@ -363,6 +369,7 @@ Ajusta la máscara de subred para limitar el número de máquinas configurables 
 <p>El Grupo Abierto es una organización no gubernamental que se encarga de promover la creación de estándares para la comunicación y la información en el mundo.</p>
 </section>
 </section>
+<hr class="docutils" />
 <section id="ethernet">
 <h2>Ethernet<a class="headerlink" href="#ethernet" title="Link to this heading"></a></h2>
 <p>Ethernet es un protocolo de red de área local (LAN) ampliamente utilizado para conectar dispositivos en una red local. Fue desarrollado por Xerox y Digital Equipment Corporation (DEC) y se basa en el estándar IEEE 802.3.</p>
@@ -373,25 +380,25 @@ Ajusta la máscara de subred para limitar el número de máquinas configurables 
 </section>
 <section id="fddi">
 <h2>FDDI<a class="headerlink" href="#fddi" title="Link to this heading"></a></h2>
-<p>FDDI (Fiber Distributed Data Interface) es un protocolo de red de área local (LAN) que utiliza fibreros ópticos para la transmisión de datos. Fue desarrollado en la década de 1980 y se utilizó principalmente en redes de alta velocidad.</p>
-<p>FDDI utiliza fibreros ópticos para conectar dispositivos en una red, lo que permite una transmisión de datos más rápida y segura que la transmisión a través de cables de cobre. FDDI puede alcanzar velocidades de transmisión de hasta 100 Mbps, lo que lo convierte en una opción adecuada para redes de gran tamaño y alto tráfico.</p>
+<p>FDDI (Fiber Distributed Data Interface) es un protocolo de red de área local (LAN) que utiliza cables de fibra óptica para la transmisión de datos. Fue desarrollado en la década de 1980 y se utilizó principalmente en redes de alta velocidad.</p>
+<p>FDDI utiliza cables de fibra óptica para conectar dispositivos en una red, lo que permite una transmisión de datos más rápida y segura que la transmisión a través de cables de cobre. FDDI puede alcanzar velocidades de transmisión de hasta 100 Mbps, lo que lo convierte en una opción adecuada para redes de gran tamaño y alto tráfico.</p>
 <p>FDDI utiliza un enfoque de anillo de transmisión, donde los datos se envían en un bucle continuo a través de la red. Los dispositivos en una red FDDI se conectan a un conmutador o a un switch FDDI, que actúa como intermediario para enrutar los datos a través de la red.</p>
 <p>Aunque FDDI fue ampliamente utilizado en la década de 1990, en la actualidad ha sido desplazado por otros protocolos de red de alta velocidad, como Gigabit Ethernet y Fibra Óptica. Sin embargo, FDDI sigue siendo utilizado en algunas redes antiguas o en situaciones específicas donde se requieren velocidades de transmisión más altas.</p>
-<p>En resumen, FDDI es un protocolo de red de área local que utiliza fibreros ópticos para la transmisión de datos en redes de alta velocidad. Fue ampliamente utilizado en la década de 1990, pero ha sido desplazado por otros protocolos de red más modernos.</p>
+<p>En resumen, FDDI es un protocolo de red de área local que utiliza cables de fibra óptica para la transmisión de datos en redes de alta velocidad. Fue ampliamente utilizado en la década de 1990, pero ha sido desplazado por otros protocolos de red más modernos.</p>
 </section>
 <section id="patchpanel">
 <h2>Patchpanel<a class="headerlink" href="#patchpanel" title="Link to this heading"></a></h2>
-<p>Un patch panel es un dispositivo utilizado en redes de datos para conectar y conectar cables de red. Se utiliza principalmente en instalaciones de red grandes y complejas, como oficinas, centros de datos y establecimientos de telecomunicaciones.</p>
-<p>Un patch panel consta de una placa de metal o plástico con múltiples puertos de conexión, generalmente RJ-45 o BNC, y permite conectar y conectar cables de red a través de la red. Los cables se conectan a los puertos del patch panel y luego se conectan a otros dispositivos de red, como switches, routers o computadoras.</p>
+<p>Un patch panel es un dispositivo que permite administrar y organizar las conexiones de los cables de una red. Se utiliza principalmente en instalaciones de red grandes y complejas, como oficinas, centros de datos y establecimientos de telecomunicaciones.</p>
+<p>Un patch panel consta de una placa con múltiples puertos de conexión (generalmente RJ-45) que centraliza el cableado de la red. Los cables de la instalación terminan en la parte trasera del panel y, mediante cables más cortos (patch cords), se conectan desde la parte frontal a otros dispositivos como switches o routers.</p>
 <p>El objetivo principal del patch panel es facilitar la administración y la configuración de la red. Permite a los administradores de red conectar y desconectar cables de red fácilmente, lo que facilita la configuración de la red, la reparación de problemas y la gestión del tráfico de red.</p>
 <p>Además, los patch panels también permiten una mayor flexibilidad y escalabilidad en la red, ya que los cables se pueden conectar y desconectar fácilmente sin tener que manipular los dispositivos de red directamente.</p>
-<p>En resumen, un patch panel es un dispositivo utilizado en redes de datos para conectar y conectar cables de red. Permite a los administradores de red conectar y desconectar cables fácilmente, facilitando la configuración, la reparación y la gestión de la red. También proporciona flexibilidad y escalabilidad en la red.</p>
+<p>En resumen, un patch panel es un componente esencial para organizar el cableado de una red de datos. Facilita la administración, los cambios y la resolución de problemas al centralizar los puntos de conexión, proporcionando flexibilidad y escalabilidad a la infraestructura de red.</p>
 </section>
 <section id="switch">
 <h2>Switch<a class="headerlink" href="#switch" title="Link to this heading"></a></h2>
-<p>Un switch es un dispositivo de red que actúa como intermediario para enrutar y distribuir el tráfico de datos en una red local (LAN). Es una de las piezas fundamentales de una red y se utiliza para conectar y conectar dispositivos en una red local.</p>
-<p>Un switch tiene múltiples puertos de conexión, generalmente Ethernet, que permiten conectar dispositivos de red, como computadoras, impresoras y otros dispositivos. Cuando un dispositivo envía datos a través de la red, el switch utiliza la dirección MAC (dirección física de red) del dispositivo para determinar a qué puerto debe enviar los datos.</p>
-<p>El switch realiza el enrutamiento de datos a nivel 2 del modelo OSI, utilizando la dirección MAC para enrutar los paquetes de datos a través de la red. Esto permite que los datos se envíen directamente al dispositivo destinatario, en lugar de enviarlos a todos los dispositivos en la red, como ocurre en una red de área pública (PAN) o en una red sin switch.</p>
+<p>Un switch es un dispositivo de red que actúa como intermediario para enrutar y distribuir el tráfico de datos en una red local (LAN). Su función principal es recibir, procesar y reenviar datos de manera eficiente al dispositivo de destino correcto.</p>
+<p>Un switch opera principalmente en la capa 2 (Enlace de Datos) del modelo OSI. Aprende las direcciones MAC (la dirección física única de cada tarjeta de red) de los dispositivos conectados a cada uno de sus puertos. Cuando recibe un paquete de datos (trama), lo reenvía únicamente al puerto donde se encuentra el dispositivo de destino, en lugar de difundirlo a todos los puertos como haría un hub. Esto reduce el tráfico innecesario y mejora el rendimiento de la red.</p>
+<p>Algunos switches más avanzados, conocidos como switches de capa 3, también pueden realizar funciones de enrutamiento, propias de la capa 3 (Red) del modelo OSI. Esto significa que pueden tomar decisiones de reenvío basadas en direcciones IP, permitiendo la comunicación entre diferentes subredes (VLANs) sin necesidad de un router dedicado.</p>
 <p>Además, los switches modernos también pueden realizar enrutamiento a nivel 3, utilizando direcciones IP, lo que permite que los switches se comuniquen con dispositivos en otras redes, utilizando protocolos como DHCP y DNS.</p>
 <p>En resumen, un switch es un dispositivo de red que actúa como intermediario para enrutar y distribuir el tráfico de datos en una red local. Conecta y conecta dispositivos en una red local, utilizando direcciones MAC para enrutar los datos. Los switches modernos también pueden realizar enrutamiento a nivel 3, utilizando direcciones IP, lo que permite que los switches se comuniquen con dispositivos en otras redes.</p>
 </section>
