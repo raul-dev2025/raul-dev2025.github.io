@@ -29,7 +29,7 @@ Sistema, arquitectura, componentes
 
 .. toctree::
    :maxdepth: 1
-   :caption: documentación del sistema:
+   :caption: Sistemas:
 
    Sistema/evolucionProcesadores.rst
    Sistema/GeorgeBoole.rst
