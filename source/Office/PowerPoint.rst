@@ -20,7 +20,7 @@ La barra latelar izquiera, irá mostrando las diapositivas.
 
 
 **Cómo evitar el autoajustado de los cuadros de texto.**
-Situamos el cursor del ratón sobre el perfil del cuadro de texto y damos un click con el botón derecho del ratón. A continuación, seleccionamos la opción "Opciones de texto", seleccionamos el botón "cuadro de texto" y seleccionamos la opción "No ajustar".
+Situamos el cursor del ratón sobre el perfil del cuadro de texto y damos un click con el botón derecho del ratón. A continuación, seleccionamos la opción "Opciones de texto", un click sobre el botón "cuadro de texto" y seleccionamos nuevamente, la opción "No ajustar".
 
 Capturas
 --------
@@ -35,7 +35,7 @@ Capturas
     * Si sólo está abierto PowerPoint, recortar en el escritorio.
     * Si, además de Power Point, hay abierta otra ventana, recortar en esa ventana.
     * Si, además de Power Point, hay abierta otras ventanas, recortar en la última ventana abierta.
-    Si minimizamos la ventana, no se tiene en cuenta para hacer la captura.
+    * Al minimizar la ventana, no se tendrá en cuenta para hacer la captura.
 
 Formas
 ------
@@ -55,11 +55,10 @@ Tablas
 1. Ficha "Insertar"
 2. Botón "Tablas"
 
+.. Atención::
 
-Atención
---------
+   Cambiar el ESTILO de la Tabla
 
-Cambiar el ESTILO de la Tabla
 
 1. Ficha "Diseño"
 2. Botón "Estilo"
@@ -73,7 +72,7 @@ Vistas
 La barra inferior, o barra de estado, nos permitirá ver las cuatro vistas principales.
 
 - Normal, donde trabajaremos normalmente.
-- Clasificador, pocremos organizar las diapositivas. Es una imagen general de la presentación.
+- Clasificador, podremos organizar las diapositivas. Es una imagen general de la presentación.
 - Lectura, podremos ver el texto de las diapositivas; las imagenes son escondidas.
 - Presentación. Podremos ver una presentación de las diapositivas que tengamos guardadas.
 
@@ -84,14 +83,14 @@ Hipervínculos
 2. Botón desplegable "Vínculos"
 3. Vínculos
 
-Aparecen una ventna ¨Insertar/Modificar hipervínculo¨ en función de si creamos uno desde cero o si modificamos uno ya existente.
+Aparece una ventna "Insertar/Modificar hipervínculo" en función de si creamos uno desde cero o si modificamos uno ya existente.
 La lista a la izquierda, mostrará las distintas opciones.
 
 Transiciones
 ------------
 Ficha Transiciones. 
 
-Es el Movimiento entre diapositiva. Las transiciones son un conjunto de eventos o efectos que serán aplicados a cada diapositiva ligada a dicho efecto. Podrán elegirse distintas transiciones, dentro de la sección "Transición a esta diapositiva".
+Es el Movimiento entre diapositivas. Las transiciones son un conjunto de eventos o efectos que serán aplicados a cada diapositiva ligada a dicho efecto. Podrán elegirse distintas transiciones, dentro de la sección "Transición a esta diapositiva".
 
 1. Seleccionar la diapositiva.
 2. Ficha "Transiciones".
