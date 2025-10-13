@@ -1,10 +1,9 @@
 Tercera parte
-===============
+=============
 
 
 Tabuladores
-----------------
-
+-----------
 Tipos de tabulados; de izquierda, derecha, centro y numérico o decimal
 
 - Colocar los tabuladores en la regla.
@@ -17,12 +16,12 @@ Para eliminar un tabulador situamos el puntero sobre el tabulado que deseamos el
     Un tabulador extra, el *tabulador de barra* nos servirá colocar un separador *-una línea*, entre el texto.
 
 Rellenos
-~~~~~~~~~~~
-
+--------
 Utilizando los tabuladores, podemos incorporar *rellenos*. Son un tipo de marca que nos ayudará en la lectura del texto.
+
     1. Seleccionar las líneas a las que les queremos poner el relleno.
     2. Doble click sobre el tabulador que nos interesa.
-    3. En el cuadro que aparece, seleccionamos el tabulador en cuestión y coniguramos el tipo de relleno, a continuación botón aceptar.
+    3. En el cuadro que aparece, seleccionamos el tabulador en cuestión y configuramos el tipo de relleno, a continuación botón aceptar.
 
 .. tip::
 
@@ -32,13 +31,14 @@ Desplazar un tabulador manteniendo la tecla "alt" pulsada, desplaza el puntero p
 
 
 Combinar correspondencia
----------------------------
+------------------------
 
 Consiste en combinar un documento con una base de datos;
 
 1. Cambiar a ficha correspondencia. 
 2. Desplegamos el botón "Iniciar combinación de correspondencia".
 3. Paso a paso por el asistente ...
+
     - Paso 1, carta
     - Paso 2, Utilizar documento actual
     - Paso 3, escribir una lista nueva. Aquí utilizaremos el otón crear para modelar los campo de la tabla que será nuestra "lista".
