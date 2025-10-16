@@ -45,11 +45,4 @@ Consiste en combinar un documento con una base de datos;
     - Paso 5, inserta los campos con el botón "Insertar campo combinado". El botón ABC vista previa nos muestra el nombre de la variable. Activando/desactivando este botón, 
     - Paso 6, se utiliza para imprimir.
 4. "Editar lista de destinatarios", nos permitirá filtrar los datos. En la ventana Destinatarios de combinar correspondencia,  escogemos "Filtrar".
-  Para borrar el Filtro, volveremos a escoger el botón "Editar lista de destinatarios".
-  
-  
-
-
-
-
-
+   Para borrar el Filtro, volveremos a escoger el botón "Editar lista de destinatarios".

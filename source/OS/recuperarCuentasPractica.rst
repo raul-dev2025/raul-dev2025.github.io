@@ -1,6 +1,6 @@
 
 Práctica - Recuperación de cuentas de usuario
-================================================
+=============================================
 
 - `net user <recuperarCuentas.html#net_user>`_
 - :ref:`chntpw<chntpw>`
@@ -8,7 +8,7 @@ Práctica - Recuperación de cuentas de usuario
 -------
 
 ``net user``
----------------
+------------
 Resulta útil éste comando cuando las cuentas de usuario son locales y tenemos acceso al sistema. *Se deben cumplir ambas condiciones*. Podremos utilizar el comando desde otra cuenta distinta, a la que vayamos a modificar.
 
 *  **Reiniciar una contraseña** El comando ``net user UserName *`` en Windows se utiliza específicamente para **cambiar la contraseña de una cuenta de usuario local de forma interactiva**.
@@ -47,7 +47,7 @@ Resulta útil éste comando cuando las cuentas de usuario son locales y tenemos 
    Queda implícito la opción *cuenta sin contraseña*; si en lugar de escribir la contraseña cuando sea solicitada, pulsamos :kbd:`enter`, y volvemos a confirmar con *enter* nuevamente. La contraseña estará vacía. No es muy útil para una cuenta administrador, pero sí para otro tipo de cuenta *usuario*.
 
 ¿Qué pasa si únicamente hay una cuenta de usuario y hemos perdido la contraseña?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Si la cuenta es local, es decir; la cuenta **no está asociada** a un servidor *Active Directory* o cuenta *Microsoft*; aún podremos recuperar la cuenta, utilizando herramientas externas al sistema.
 
 En esta situación, serán utilizadas herramientas Linux para montar -o definir una ruta hacia los datos, la partición Windows que contiene la contraseña olvidada, y se utilizará la própia aplicación que proporciona Windows, para la gestión de cuentas de usuario: ``net user``.
@@ -85,8 +85,7 @@ En esta situación, serán utilizadas herramientas Linux para montar -o definir 
 
    Cuando hayamos completado la tarea; *reiniciar la contraseña olvidada* habrá que:
 
-   1. Borrar ``/Windows/System32/osk.exe``, ya que hemos jaqueado el sistema, copiando la aplicación ``cmd``, con el nombre del *teclado virtual*. Si lo dejamos
-tal cuál, dejariamos abierta una puerta trasera; esto rompe la integridad del sistema; hay que arreglarlo!
+   1. Borrar ``/Windows/System32/osk.exe``, ya que hemos jaqueado el sistema, copiando la aplicación ``cmd``, con el nombre del *teclado virtual*. Si lo dejamos tal cuál, dejariamos abierta una puerta trasera; esto rompe la integridad del sistema; hay que arreglarlo!
    2. Devolvemos el acceso al teclado virtual desde el login o pantalla de inicio de usuario. Para ello copiamos ``/Windows/System32/osk.old`` en ``/Windows/System32/osk.exe``. Otras combinaciones de este "mecanismo" podían resultar en problemas con los permisos que el sistema confiere al archivo.
 
 .. tip::
@@ -97,7 +96,7 @@ tal cuál, dejariamos abierta una puerta trasera; esto rompe la integridad del s
 --------
 
 Gestión de particiones
--------------------------
+----------------------
 
 Problemática asociada al montaje de una partición, con el objeto de "recuperar" de alguna manera una cuenta de usuario, de la que hayamos perdido u olvidado la contraseña.
 
@@ -109,7 +108,7 @@ Conocemos algunos problemas que podrían ocasionar dificultades, al tratar de mo
 .. _alternativa-1:
 
 El archivo hibernación que guardó Windows
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 En una situación como esta, el archivo que utiliza Windows para guardar el estado del sistema -estado del procesador y la RAM; evita que la partición sea montada normalmente. ¿Porqué? por que el gestor de particiones detecta que hay datos importantes que afectan al sistema, guardados en disco. En otras palabras; el contexto de ejecución del procesador, y los datos de la RAM en el momento de cierre, son guardados a disco con el objeto de ser recuperados en el próximo inicio.
 
 Abrimos el simbolo de sistema como administrador. El siguiente comado desactiva el fichero de hibernación, que a veces crea Windows, y que impide montar la partición en modo *r/w*(lectura/escritura) si arrancamos desde un *Live*.
@@ -130,7 +129,7 @@ Comprobamos que la característica *modo hibernación* está desactivada. A cont
 .. _chntpw:
 
 ``chntpw``
--------------
+----------
 
 
 En esta otra práctica, vamos a utilizar comandos Linux. Daremos solución a otro poblema de montaje, ya que la partición, *nuevamente se resiste*, y concluiremos el ejercio de la misma forma que en prácticas anteriores: borrando o reiniciando la contraseña olvidada, de una cuenta de usuario Windows.
@@ -149,6 +148,7 @@ No necesariamente debe ser **kali**, puede se cualquier sistema operativo que pr
     ntfs-3g /dev/sdaX /mnt/Windows -o force
 
     (Reemplaza ``/dev/sdaX`` con la ruta de tu partición de Windows). El ``-o force`` ayuda si Windows se apagó de forma incorrecta.
+
 3.  **Acceder al directorio de la base de datos SAM:**
 
    .. code-block:: bash
@@ -164,6 +164,7 @@ No necesariamente debe ser **kali**, puede se cualquier sistema operativo que pr
    
       * ``1``: Borrar la contraseña del usuario.
       * ``2``: Cambiar la contraseña (a veces problemático, la opción 1 es preferible).
+
 5. **Guardar los cambios y salir:** Sigue las instrucciones de `chntpw` para guardar los cambios (normalmente presionando `q` y luego `y` para confirmar).
 6. **Desmontar la partición y reiniciar:**
 
@@ -182,6 +183,7 @@ No necesariamente debe ser **kali**, puede se cualquier sistema operativo que pr
       * **Cuentas de Microsoft:** Este método **solo funciona para cuentas de usuario locales de Windows.** Si la cuenta que quieres restablecer es una cuenta de Microsoft (conectada a un correo electrónico de Outlook, Hotmail, etc.), este método no funcionará. Para cuentas de Microsoft, necesitas usar la opción de restablecimiento de contraseña en línea de Microsoft.
       * **Cuentas de dominio:** Tampoco funciona para cuentas de dominio en redes corporativas(IDM - Active Directory).
       * **Precaución:** Manipular archivos del sistema puede ser delicado. Sigue las instrucciones cuidadosamente.
+
       En resumen, SystemRescueCd es una excelente y potente herramienta para solucionar problemas de Windows, incluyendo el restablecimiento de contraseñas de cuentas locales.
 
 .. tip::
@@ -193,7 +195,7 @@ No necesariamente debe ser **kali**, puede se cualquier sistema operativo que pr
 .. _alternativa-2:
 
 Errores de superbloque que impiden el montaje
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Si Windows rechaza montar la partición "debido a un fs erroneo o `superbloque <recuperarCuentas.html#superbloque>`_ defectuoso", la partición podría contener algún tipo de error. La función  Windows **Comprobación de errores** tratará de solucionar la problematica, para esto:
 

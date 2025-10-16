@@ -147,11 +147,11 @@ Comparación de métodos
 +-------------------+---------------------+---------------------------+--------------------------------+
 |     Live USB      | Parcial/Configurable|           Regular         |        Pruebas/reparación      |
 +-------------------+---------------------+---------------------------+--------------------------------+
-|     Instalación   |       Completa      |       Bueno (con SSD)     |   Uso diario sistema primario  |
+|   Instalación     |       Completa      |       Bueno (con SSD)     |   Uso diario sistema primario  |
 |   completa en USB |                     |                           |                                |
 +-------------------+---------------------+---------------------------+--------------------------------+
 
-      
+
 **Notas importantes**:
 
 - Para mejores resultados con instalaciones completas, usar SSD externos USB 3.0+.

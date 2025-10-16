@@ -28,7 +28,7 @@ Capturas
 1. Ficha "Insertar".
 2. Botón Capturas
 
-.. note:
+.. note::
 
     Atención!
 
@@ -55,7 +55,7 @@ Tablas
 1. Ficha "Insertar"
 2. Botón "Tablas"
 
-.. Atención::
+.. attention::
 
    Cambiar el ESTILO de la Tabla
 
@@ -96,13 +96,13 @@ Es el Movimiento entre diapositivas. Las transiciones son un conjunto de eventos
 2. Ficha "Transiciones".
 3. Seleccionar el tipo de transición:
    
-   - Opciones de efectos       |
-   - Sonido                    |
-   - Duración                  |
-   - Avanzar a la diapositiva: |> Aplicar a todo
-                               |
-      - Al hacer click.        |
-      - Después de ...         | 
+   - Opciones de efectos       
+   - Sonido                    
+   - Duración                  
+   - Avanzar a la diapositiva:  (Aplicar a todo)
+                               
+      - Al hacer click.        
+      - Después de ...          
    
 Animaciones
 -----------
@@ -127,5 +127,3 @@ Inicio:
 - Duración, aumenta el tiempo que dura la animación.
 - Retraso, retrasa el inicio de la animación.
 - Panel de animación, en este panel aparecen las animaciones de los objetos de ésta diapositiva.
-
-

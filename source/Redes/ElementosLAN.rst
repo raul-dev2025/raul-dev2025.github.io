@@ -124,6 +124,9 @@ Por ejemplo, se convertirá el número 211 en su formato binario. Para ello empe
 
 A continuación se sumarán las cifras de la cadena hasta conseguir el número buscado, en este caso el 211. Cada vez que la suma de las cifras decimales se acerquen al número buscado sin pasarse, encenderemos el bit(1) y lo apagaremos, cuando suceda lo contrario(0). 
 
+
+.. code-block:: bash  
+   
    128 64 32 16 8 4 2 1
     1  1
    128+64=192 -> encendemos los dos primeros bits
