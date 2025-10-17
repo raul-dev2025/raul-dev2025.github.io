@@ -63,25 +63,25 @@ Resumen Comparativo de Buses Comunes
 +-------------------+---------------------+----------------------+---------------------------+--------------------------------+
 |      **Bus**      |       **Tipo**      | **Velocidad Máxima** |        **Estándar**       |        **Uso Principal**       |
 +===================+=====================+======================+===========================+================================+
-|    PCIe 5.0 x16   |   Serial (punto a   |       ~64 GB/s       |           PCI-SIG         |         GPUs, NVMe SSDs        |
-|                   |            punto)   |                      |         (PCI Express)     |                                |
+|    PCIe 5.0 x16   |   Serial (punto a   |       ~64 GB/s       |         PCI-SIG           |         GPUs, NVMe SSDs        |
+|                   |   punto)            |                      |         (PCI Express)     |                                |
 +-------------------+---------------------+----------------------+---------------------------+--------------------------------+
-|      SATA III     |        Serial       |   6 Gbps (~600 MB/s) |          SATA-IO          |        HDDs, SSDs SATA         |
+|      SATA III     |  Serial             |   6 Gbps (~600 MB/s) |       SATA-IO             |        HDDs, SSDs SATA         |
 |                   |  (almacenamiento)   |                      |       (Serial ATA)        |                                |
 +-------------------+---------------------+----------------------+---------------------------+--------------------------------+
-|        USB4       |  Serial (universal) |        40 Gbps       |           USB-IF          |  Periféricos, almacenamiento   |
+|        USB4       |  Serial (universal) |        40 Gbps       |   USB-IF                  |  Periféricos, almacenamiento   |
 |                   |                     |                      |   (Universal Serial Bus)  |                                |
 +-------------------+---------------------+----------------------+---------------------------+--------------------------------+
-|   Thunderbolt 4   |       Serial        |        40 Gbps       |        Intel + Apple      |    eGPUs, docks, monitores     |
+|   Thunderbolt 4   |   Serial            |        40 Gbps       |        Intel + Apple      |    eGPUs, docks, monitores     |
 |                   |   (multipropósito)  |                      |        (Thunderbolt)      |                                |
 +-------------------+---------------------+----------------------+---------------------------+--------------------------------+
-|     NVLink 4.0    |    Punto a punto    |       900 GB/s       |          NVIDIA           |      Supercomputación, AI      |
-|                   |      (GPU-GPU)      |                      |         (NVLink)          |                                |
+|     NVLink 4.0    |    Punto a punto    |       900 GB/s       |         NVIDIA            |      Supercomputación, AI      |
+|                   |    (GPU-GPU)        |                      |         (NVLink)          |                                |
 +-------------------+---------------------+----------------------+---------------------------+--------------------------------+
-|      AGP 8x       |      Paralelo       |         2.1 GB/s     |           Intel           |       Gráficas (obsoleto)      |
+|      AGP 8x       |     Paralelo        |         2.1 GB/s     |  Intel                    |       Gráficas (obsoleto)      |
 |                   |     (dedicado)      |                      |  (Accelerated Graphics)   |                                |
 +-------------------+---------------------+----------------------+---------------------------+--------------------------------+
-|      PCI-X        |      Paralelo       |         533 MB/s     |          PCI-SIG          |      Servidores (obsoleto)     |
+|      PCI-X        |      Paralelo       |         533 MB/s     |       PCI-SIG             |      Servidores (obsoleto)     |
 |                   |                     |                      |       (PCI Extended)      |                                |
 +-------------------+---------------------+----------------------+---------------------------+--------------------------------+
 

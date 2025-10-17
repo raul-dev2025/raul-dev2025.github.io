@@ -1,15 +1,15 @@
 Concepto "Plataforma" en Computación
-=======================================
+====================================
 
 Introducción
----------------
+------------
 El término *plataforma* en contextos computacionales presenta una polisemia controlada que refleja la evolución tecnológica. Este análisis estructural explora sus dimensiones técnicas, arquitectónicas y socio-técnicas.
 
 1. Plataforma de Hardware: Nivel Físico
-------------------------------------------
+---------------------------------------
 
 1.1 Definición Arquitectural
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Conjunto de componentes físicos que establecen las capacidades computacionales base
 - Incluye interacciones eléctricas y mecánicas entre:
   * Unidad Central de Procesamiento (CPU)
@@ -18,33 +18,34 @@ El término *plataforma* en contextos computacionales presenta una polisemia con
   * Controladores de E/S
 
 1.2 Taxonomía de Plataformas Hardware
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+---------------------+--------------------------+------------------------------+
-|         Tipo        |     Características      |   Ejemplos Representativos   |
-+=====================+==========================+==============================+
-| Arquitectura CISC   |  Instrucciones complejas |       x86 (Intel/AMD)        |
-|                     |   Microcódigo extenso    | Mainframes IBM z/Architecture|
-+---------------------+--------------------------+------------------------------+
-|  Arquitectura RISC  |  Instrucciones reducidas |       ARM (mobile/SOC)       |
-|                     |   Pipeline optimizado    |      RISC-V (open-source)    |
-+---------------------+--------------------------+------------------------------+
-| Computación Hetero- |      Combinación de      |      GPGPU (NVIDIA CUDA)     |
-|   génea             |  procesadores especiali- |      FPGA (Xilinx/Altera)    |
-|                     |  zados                   |            TPU (Google)      |
-+---------------------+--------------------------+------------------------------+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++---------------------+--------------------------+-------------------------------+
+|         Tipo        |     Características      |   Ejemplos Representativos    |
++=====================+==========================+===============================+
+| Arquitectura CISC   |  Instrucciones complejas | x86 (Intel/AMD)               |
+|                     |  Microcódigo extenso     | Mainframes IBM z/Architecture |
++---------------------+--------------------------+-------------------------------+
+|  Arquitectura RISC  |  Instrucciones reducidas |      ARM (mobile/SOC)         |
+|                     |  Pipeline optimizado     |      RISC-V (open-source)     |
++---------------------+--------------------------+-------------------------------+
+| Computación Hetero- |  Combinación de          |      GPGPU (NVIDIA CUDA)      |
+| génea               |  procesadores especiali- |      FPGA (Xilinx/Altera)     |
+|                     |  zados                   |      TPU (Google)             |
++---------------------+--------------------------+-------------------------------+
 
     
 1.3 Consideraciones de Performance
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - **Ley de Amdahl**: Limitaciones en aceleración paralela
 - **Von Neumann Bottleneck**: Restricciones en transferencia memoria-CPU
 - **Thermal Design Power (TDP)**: Disipación térmica máxima
 
 2. Plataforma de Software: Capa de Abstracción
--------------------------------------------------
+----------------------------------------------
 
 2.1 Jerarquía de Plataformas Software
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: C
 
    digraph hierarchy {
@@ -55,8 +56,9 @@ El término *plataforma* en contextos computacionales presenta una polisemia con
       "Firmware" -> "Hardware"
    }
 
+
 2.2 Tipos de Plataformas de Ejecución
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - **Máquinas Virtuales**:
 
   * JVM (Java Virtual Machine)
@@ -74,10 +76,10 @@ El término *plataforma* en contextos computacionales presenta una polisemia con
   * Azure Functions
 
 3. Plataforma como Servicio (PaaS): Modelo Cloud
-----------------------------------------------------
+------------------------------------------------
 
 3.1 Componentes Clave
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 - **Runtime Management**: Auto-escalado automático
 - **Development Tools**: CI/CD integrado
 - **Data Services**: Bases de datos gestionadas

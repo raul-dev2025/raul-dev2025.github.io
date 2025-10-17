@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elementos de una red de área local &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+    <link rel="shortcut icon" href="../_static/simulation.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Primera parte" href="../Office/Word-apuntes-parte1.html" />
+    <link rel="prev" title="Redes inalámbricas" href="redesInalambricas.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Sistemas:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Memorias.html">Tipos y características de memoria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Buses.html">Buses del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI.html">¿Qué es el estándar UEFI?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Prefetching_en_Procesadores.html">Prefetching en Procesadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/EFIpartWindows.html">Windows hardening, EFI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/funcionesSO.html">Funciones del Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/info.html">Información del sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/plataforma.html">Concepto “Plataforma” en Computación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/antivirus.html">¿Qué es un antivirus?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/cortafuegos.html">¿Qué es un cortafuegos?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/OS-msconfig.html">Arranque del sistema en Windows</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Redes ethernet/WiFi:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ProtocoloTCP_IP.html">Protocolo TCP/IP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Redes.html">Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redesInalambricas.html">Redes inalámbricas</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Elementos de una red de área local</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#caracteristicas-y-funciones">Características y funciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#estaciones-de-trabajo">Estaciones de trabajo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#servidores">Servidores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tarjetas-de-red">Tarjetas de red</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#equipos-de-conectividad">Equipos de conectividad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sistemas-operativos-de-red">Sistemas operativos de red</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#medios-de-transmision">Medios de transmisión</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#medios-guiados-cableados">Medios Guiados (Cableados)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#medios-no-guiados-inalambricos">Medios no Guiados (Inalámbricos)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#los-numeros-ip">Los números IP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conversion-decimal-a-binario">Conversión decimal a binario</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mascara-de-subred">Máscara de subred</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loopback">loopback</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Power Point:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/PowerPoint.html">Power Point</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Elementos de una red de área local</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Redes/ElementosLAN.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="elementos-de-una-red-de-area-local">
+<h1>Elementos de una red de área local<a class="headerlink" href="#elementos-de-una-red-de-area-local" title="Link to this heading"></a></h1>
+<section id="caracteristicas-y-funciones">
+<h2>Características y funciones<a class="headerlink" href="#caracteristicas-y-funciones" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Estaciones de trabajo y servidores; se trata de los dispositivos que sirven a la comunicación y determinarán el tipo de información a transmitir.</p></li>
+<li><p>Sistemas operativos; Es un conjunto de aplicaciones esenciales que permiten el aprovechamiento de los recursos de hardware, la máquina. A groso modo podría dividirse en dos partes; el Kernel y las aplicaciones de usuario.</p></li>
+<li><p>Canal de comunicacion; medio por el que circula la información.</p></li>
+<li><p>Adaptadores de red; convierten las señales eléctricas utilizadas por los terminales, al formato utilizado por las redes de comunicación (señales eléctricas, ondas de radio, etc.).</p></li>
+<li><p>Elementos de interconexión; son elementos <em>intermedios</em> que interconectan los terminales de la red. Ayudan a determinar el mejor camino en la transmisión de los datos.</p></li>
+</ul>
+</section>
+<section id="estaciones-de-trabajo">
+<h2>Estaciones de trabajo<a class="headerlink" href="#estaciones-de-trabajo" title="Link to this heading"></a></h2>
+<p>Una estación de trabajo es un ordenador (PC, portátil, etc.) conectado a la red que es utilizado por un usuario final para realizar sus tareas. Actúa como un cliente que solicita y consume recursos y servicios proporcionados por los servidores de la red.</p>
+<ol class="arabic simple">
+<li><p><strong>Actua como un terminal</strong>: utilizado por el usuario para iniciar peticiones, como navegar en una <em>web</em>, enviar un correo electrónico o recibir datos.</p></li>
+<li><p><strong>Correr aplicaciones</strong>: ejecuta el software que requiere de conectividad para su kfuncionamiento.</p></li>
+<li><p><strong>Consume recursos</strong>: accede a los servicios y a los datos proporcionados por otras computadoras en la red; servidores principalmente -como servidores de archivo, de páginas web o servidores de impresión.</p></li>
+</ol>
+</section>
+<section id="servidores">
+<h2>Servidores<a class="headerlink" href="#servidores" title="Link to this heading"></a></h2>
+<p>Un servidor es un ordenador de alto rendimiento que proporciona servicios, datos y recursos a otros dispositivos de la red, conocidos como clientes (que suelen ser las estaciones de trabajo). A diferencia de una estación de trabajo, que es utilizada por un usuario para consumir recursos, un servidor está diseñado para gestionar, almacenar y distribuir información de forma centralizada y responder a las peticiones de múltiples clientes.</p>
+<p>Algunos ejemplos de servidores:</p>
+<ul class="simple">
+<li><p>Servidor web, hospeda páginas y aplicaciones web.</p></li>
+<li><p>Servidores de archivo; almacena y gestiona archivos y carpetas compartidas.</p></li>
+<li><p>Servidores de impresora; gestiona los trabajos de impresión, enviados por las impresoras en red.</p></li>
+<li><p>Servidores de base de datos; gestiona y proporciona acceso a una o más basees de datos.</p></li>
+<li><p>Servidores DHCP; Asigna automáticamente direcciones IP, a los dispositivos de la red.</p></li>
+</ul>
+</section>
+<section id="tarjetas-de-red">
+<h2>Tarjetas de red<a class="headerlink" href="#tarjetas-de-red" title="Link to this heading"></a></h2>
+<p>Una tarjeta de red, también conocida como NIC (del inglés <em>Network Interface Card</em>) o adaptador de red, es el componente de hardware que conecta un ordenador a una red informática. Actúa como la interfaz física entre el ordenador y el medio de transmisión.</p>
+<p>Su función principal es preparar, enviar y controlar los datos en la red. Para ello, convierte los datos digitales del ordenador en señales eléctricas, pulsos de luz u ondas de radio que pueden ser transmitidas por el medio correspondiente.</p>
+<p>Cada tarjeta de red tiene una dirección <strong>MAC (Media Access Control)</strong> única, que es un identificador físico de 48 bits asignado por el fabricante. Esta dirección se utiliza para identificar de forma inequívoca a un dispositivo dentro de una red local.</p>
+</section>
+<section id="equipos-de-conectividad">
+<h2>Equipos de conectividad<a class="headerlink" href="#equipos-de-conectividad" title="Link to this heading"></a></h2>
+<p>Son utilizados para conectar los equipos y seleccionar el camino por el que circulará la información. Se trata de dispositivos especializados en tareas específicas. La siguiente es una lista no exahustiva, de dispositivos utilizados en la configuración física de una red.</p>
+<ul class="simple">
+<li><p><strong>Repetidores (Repeaters)</strong>: Operan en la capa 1 (Física). Su función es regenerar la señal de red para extender la distancia a la que puede viajar. No interpretan los datos, solo amplifican y retransmiten la señal.</p></li>
+<li><p><strong>Concentradores (Hubs)</strong>: También de capa 1. Es un punto central que conecta varios dispositivos. Cuando recibe datos por un puerto, los retransmite a todos los demás puertos, lo que genera tráfico innecesario y reduce el rendimiento. Han sido reemplazados por los switches.</p></li>
+<li><p><strong>Puentes (Bridges)</strong>: Operan en la capa 2 (Enlace de Datos). Conectan dos segmentos de red y filtran el tráfico basándose en las direcciones MAC. Solo reenvían los datos al otro segmento si el destinatario se encuentra allí, reduciendo colisiones. Un switch es, en esencia, un puente con muchos puertos.</p></li>
+<li><p><strong>Conmutadores (Switches)</strong>: Son el pilar de las redes LAN modernas y operan en la capa 2. A diferencia de un hub, un switch aprende la dirección MAC de los dispositivos conectados a cada uno de sus puertos y envía los datos únicamente al puerto del destinatario. Esto mejora drásticamente la eficiencia y la seguridad de la red.</p></li>
+<li><p><strong>Encaminadores (Routers)</strong>: Operan en la capa 3 (Red). Su función principal es interconectar redes distintas (por ejemplo, una LAN con Internet). Toman decisiones de enrutamiento basadas en direcciones IP para determinar el mejor camino que deben seguir los paquetes de datos.</p></li>
+<li><p><strong>Pasarelas (Gateways)</strong>: Es un dispositivo que actúa como punto de entrada y salida entre dos redes, a menudo con protocolos diferentes. Un router es un tipo de gateway, pero el término es más amplio y puede incluir dispositivos que realizan traducción de protocolos a niveles superiores.</p></li>
+<li><p><strong>Dispositivos inalámbricos</strong>: El más común es el <strong>Punto de Acceso Inalámbrico (Access Point o AP)</strong>. Permite que los dispositivos con capacidad Wi-Fi se conecten a una red cableada, actuando como un puente entre el medio inalámbrico y el cableado.</p></li>
+</ul>
+</section>
+<section id="sistemas-operativos-de-red">
+<h2>Sistemas operativos de red<a class="headerlink" href="#sistemas-operativos-de-red" title="Link to this heading"></a></h2>
+<p>En la actualidad, todos los dispositivos, desde ordenadores de sobremesa hasta móviles, utilizan sistemas operativos en red. Estos sistemas operativos permiten la conexión a la red y son fundamentales en la era del Internet de las cosas (IoT), donde la conectividad es esencial.</p>
+<p>Los sistemas operativos basados en UNIX, como Linux, han sido concebidos desde un primer momento para trabajar en red. Linux, en particular, se ha consolidado como el sistema operativo más utilizado en entornos de servidor. Esta característica de trabajar en red es clave para garantizar la estabilidad y la fiabilidad de los sistemas.</p>
+<p>El trabajo colaborativo es fundamental para el rápido y constante desarrollo del código en el mundo empresarial. El código está siempre disponible y se puede revisar por múltiples grupos de trabajo. Esto contribuye a mejorar la calidad del código y a garantizar su mantenimiento a largo del tiempo.</p>
+<p>En resumen, los sistemas operativos de red son esenciales en la actualidad. Los sistemas operativos basados en UNIX, como Linux, se han adaptado a las necesidades del mundo actual, especialmente en cuanto a la conectividad en red y el trabajo colaborativo. Estas características han contribuido a su éxito en entornos de servidor y en el desarrollo de software</p>
+</section>
+<section id="medios-de-transmision">
+<h2>Medios de transmisión<a class="headerlink" href="#medios-de-transmision" title="Link to this heading"></a></h2>
+<p>Los medios de transmisión constituyen el canal físico o inalámbrico a través del cual viajan los datos entre los dispositivos de una red. Son el soporte que permite el envío de bits de un punto a otro. Se dividen principalmente en dos categorías: medios guiados y medios no guiados.</p>
+<section id="medios-guiados-cableados">
+<h3>Medios Guiados (Cableados)<a class="headerlink" href="#medios-guiados-cableados" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Cable de Par Trenzado (Twisted Pair):</strong> Es el medio más común en redes LAN (Ethernet). Consiste en pares de hilos de cobre trenzados para reducir la interferencia electromagnética. Existen variantes como UTP (sin apantallar) y STP (apantallado).</p></li>
+<li><p><strong>Cable Coaxial:</strong> Similar al cable de antena de TV, consta de un núcleo de cobre rodeado por un aislante, una malla metálica y una cubierta exterior. Fue muy popular en las primeras redes, pero ha sido mayormente reemplazado por el par trenzado y la fibra óptica.</p></li>
+<li><p><strong>Fibra Óptica:</strong> Utiliza pulsos de luz para transmitir datos a través de hilos de vidrio o plástico. Ofrece velocidades muy altas, gran ancho de banda, mayor distancia y es inmune a las interferencias electromagnéticas. Es el medio preferido para conexiones troncales y de alta velocidad.</p></li>
+</ul>
+</section>
+<section id="medios-no-guiados-inalambricos">
+<h3>Medios no Guiados (Inalámbricos)<a class="headerlink" href="#medios-no-guiados-inalambricos" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Ondas de Radio (Wi-Fi):</strong> Utilizan ondas de radiofrecuencia para transmitir datos por el aire. Es la tecnología detrás de las redes WLAN (Wireless Local Area Network), permitiendo la conexión sin necesidad de cables.</p></li>
+<li><p><strong>Infrarrojos:</strong> Utilizan ondas de luz infrarroja para la comunicación a corta distancia y sin obstáculos (requieren línea de visión directa). Su uso en redes es limitado, siendo más común en mandos a distancia.</p></li>
+<li><p><strong>Microondas:</strong> Se utilizan para enlaces de larga distancia, tanto terrestres (entre antenas) como por satélite.</p></li>
+</ul>
+</section>
+</section>
+<section id="los-numeros-ip">
+<h2>Los números IP<a class="headerlink" href="#los-numeros-ip" title="Link to this heading"></a></h2>
+<p>Los números IP tienen como función principal conectar una máquina a una red. Aunque también cumplen otro propósito; el de identificar un equipo. De manera que en una misma red no puede haber dos equipos con el mismo número IP.</p>
+<p>La versión IPv4 configura los números dividiéndolos en cuatro octetos. Siendo cada octeto un número entre 0 y 255. Esto es, 2^8=256. Decimos que son doscientos cincuenta y seis números, pero empezamos a contar desde cero.
+De forma que nunca vemos expresado en un octeto el número 256; <em>su parte literal</em>.</p>
+<p>Son cuatro octetos, por lo que el número que se utiliza para conectar la máquina a la red es significativamente más grande que 256. Es en realidad 2^32=4.294.967.296. Que son <em>cuatro mil millones largos</em> de números. Para hacerlo humanamente legible, se divide en cuatro partes a las que llamamos octetos.</p>
+<section id="conversion-decimal-a-binario">
+<h3>Conversión decimal a binario<a class="headerlink" href="#conversion-decimal-a-binario" title="Link to this heading"></a></h3>
+<p>El sistema decimal utiliza diez cifras para representar un número, (1, 2, 3, 4, 5, 6, 7, 8, 9, 0). por esta razón se le llama sistema decimal. El sistema binario en cambio, utiliza dos cifras el cero y el uno (0, 1).
+A continuación se presenta una técnica, para convertir los números decimales en binarios.</p>
+<p>2^32=4294 967 296
+2^24=16 777 216
+2^16=65 536
+2^8=256
+2^7=128
+2^6=64
+2^5=32
+2^4=16
+2^3=8
+2^2=4
+2^1=2
+2^0=1</p>
+<p>Imaginemos que pudiesemos posicionar cada una de las cifras del número binario que constituye un octeto, de manera que fuese posible <em>encender</em> o <em>apagar</em> el bit.</p>
+<dl class="simple">
+<dt>128 64 32 16 8 4 2 1</dt><dd><p>0  0  0  0  0 0 0 0 &lt;–todos apagados(0).</p>
+</dd>
+<dt>128 64 32 16 8 4 2 1</dt><dd><p>1  1  1  1  1 1 1 1 &lt;–todos encendidos(255).</p>
+</dd>
+</dl>
+<p>De esta forma, encendiendo o apagando convenientemente la cifra asociada a su posicion, podremos configurar cualquier número en el rango del octeto o en sus doscientas cincuenta y seis posibilidades(0-255).</p>
+<p>Por ejemplo, se convertirá el número 211 en su formato binario. Para ello empezamos por posicionar los bits del octeto, en una cadena o lista de números decimales separados por espacio.</p>
+<blockquote>
+<div><p>128 64 32 16 8 4 2 1</p>
+</div></blockquote>
+<p>A continuación se sumarán las cifras de la cadena hasta conseguir el número buscado, en este caso el 211. Cada vez que la suma de las cifras decimales se acerquen al número buscado sin pasarse, encenderemos el bit(1) y lo apagaremos, cuando suceda lo contrario(0).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">128</span><span class="w"> </span><span class="m">64</span><span class="w"> </span><span class="m">32</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1</span>
+<span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="m">1</span>
+<span class="m">128</span>+64<span class="o">=</span><span class="m">192</span><span class="w"> </span>-&gt;<span class="w"> </span>encendemos<span class="w"> </span>los<span class="w"> </span>dos<span class="w"> </span>primeros<span class="w"> </span>bits
+
+
+<span class="m">128</span><span class="w"> </span><span class="m">64</span><span class="w"> </span><span class="m">32</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1</span>
+<span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="m">1</span><span class="w">  </span><span class="m">0</span>
+<span class="m">192</span>+32<span class="o">=</span><span class="m">224</span><span class="w"> </span>-&gt;<span class="w"> </span>apagamos<span class="w"> </span>el<span class="w"> </span>tercer<span class="w"> </span>bit<span class="w"> </span>por<span class="w"> </span>que<span class="w"> </span>se<span class="w"> </span>pasa<span class="o">(</span><span class="m">224</span><span class="w"> </span>&gt;<span class="w"> </span><span class="m">211</span><span class="o">)</span>.
+
+
+<span class="m">128</span><span class="w"> </span><span class="m">64</span><span class="w"> </span><span class="m">32</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1</span>
+<span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="m">1</span><span class="w">  </span><span class="m">0</span><span class="w">  </span><span class="m">1</span>
+<span class="m">192</span>+16<span class="o">=</span><span class="m">208</span><span class="w"> </span>-&gt;<span class="w"> </span>encendemos<span class="w"> </span>el<span class="w"> </span>cuarto<span class="w"> </span>bit<span class="o">(</span><span class="m">208</span><span class="w"> </span>&lt;<span class="w"> </span><span class="m">211</span><span class="o">)</span>.
+
+
+<span class="m">128</span><span class="w"> </span><span class="m">64</span><span class="w"> </span><span class="m">32</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1</span>
+<span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="m">1</span><span class="w">  </span><span class="m">0</span><span class="w">  </span><span class="m">1</span><span class="w">  </span><span class="m">0</span>
+<span class="m">208</span>+8<span class="o">=</span><span class="m">216</span><span class="w"> </span>-&gt;<span class="w"> </span>apagamos<span class="w"> </span>el<span class="w"> </span>quinto<span class="w"> </span>bit<span class="o">(</span><span class="m">216</span><span class="w"> </span>&gt;<span class="w"> </span><span class="m">211</span><span class="o">)</span>.
+
+
+<span class="m">128</span><span class="w"> </span><span class="m">64</span><span class="w"> </span><span class="m">32</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1</span>
+<span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="m">1</span><span class="w">  </span><span class="m">0</span><span class="w">  </span><span class="m">1</span><span class="w">  </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
+<span class="m">208</span>+4<span class="o">=</span><span class="m">212</span><span class="w"> </span>-&gt;<span class="w"> </span>apagamos<span class="w"> </span>el<span class="w"> </span>sexto<span class="w"> </span>bit<span class="o">(</span><span class="m">212</span><span class="w"> </span>&gt;<span class="w"> </span><span class="m">211</span><span class="o">)</span>.
+
+
+<span class="m">128</span><span class="w"> </span><span class="m">64</span><span class="w"> </span><span class="m">32</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1</span>
+<span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="m">1</span><span class="w">  </span><span class="m">0</span><span class="w">  </span><span class="m">1</span><span class="w">  </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span>
+<span class="m">208</span>+2<span class="o">=</span><span class="m">210</span><span class="w"> </span>-&gt;<span class="w"> </span>encendemos<span class="w"> </span>el<span class="w"> </span>septimo<span class="w"> </span>bit<span class="o">(</span><span class="m">210</span><span class="w"> </span>&lt;<span class="w"> </span><span class="m">211</span><span class="o">)</span>.
+
+
+<span class="m">128</span><span class="w"> </span><span class="m">64</span><span class="w"> </span><span class="m">32</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1</span>
+<span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="m">1</span><span class="w">  </span><span class="m">0</span><span class="w">  </span><span class="m">1</span><span class="w">  </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span>
+<span class="m">210</span>+1<span class="o">=</span><span class="m">211</span><span class="w"> </span>-&gt;<span class="w"> </span>encendemos<span class="w"> </span>el<span class="w"> </span>octavo<span class="w"> </span>bit<span class="o">(</span><span class="nv">211</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">211</span><span class="o">)</span>.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="mascara-de-subred">
+<h2>Máscara de subred<a class="headerlink" href="#mascara-de-subred" title="Link to this heading"></a></h2>
+<p>Se refiere a un conjunto de bits en la dirección de una subred que determinan el rango de direcciones IP que pertenecen a esa subred.</p>
+<p>La máscara de subred se utiliza para dividir una dirección IP en dos partes: la parte de la subred y la parte de host. La parte de la subred define el rango de direcciones IP que pertenecen a la subred, mientras que la parte de host define las direcciones IP individuales que se pueden utilizar dentro de esa subred.</p>
+<p>La máscara de subred se representa como una dirección IP con un número fijo de bits establecidos en 1, seguido por un número fijo de bits establecidos en 0. Por ejemplo, si se utiliza una máscara de subred de /24, significa que los primeros 24 bits de la dirección IP son los bits de la subred, mientras que los siguientes 8 bits son los bits de host.</p>
+<p>La máscara de subred se utiliza en la configuración de routers y en la asignación de direcciones IP en redes locales. Permite determinar qué direcciones IP pertenecen a la subred actual y qué direcciones IP están en otras subredes.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>La notación CIDR <code class="docutils literal notranslate"><span class="pre">/24</span></code> representa los tres primeros octetos asignados a la red. Lo máximo que podría asignarse sería <code class="docutils literal notranslate"><span class="pre">/32</span></code> bits; está claro que entonces no podríamos asignar ningún número IP a ninguna máquina porque todas los números IP estarían destinados a identificar la red.</p>
+</div>
+</section>
+<section id="loopback">
+<h2>loopback<a class="headerlink" href="#loopback" title="Link to this heading"></a></h2>
+<p>El loopback 127.0.0.1 es una dirección IP especial que se utiliza para dirigirse a sí mismo. Es conocida como “dirección IP loopback” o “dirección IP de red local”. Esta dirección IP se utiliza para realizar pruebas y comunicaciones locales dentro del mismo equipo o máquina.</p>
+<p>Cuando se envía un paquete de red a la dirección IP 127.0.0.1, el software de red del equipo lo captura y lo envía de nuevo a la misma máquina, lo que permite realizar pruebas y comprobar la funcionalidad del software de red.</p>
+<p>Es importante tener en cuenta que el loopback 127.0.0.1 no se puede utilizar para comunicarse con otros equipos en una red externa. Es específicamente utilizado para comunicaciones locales dentro del mismo equipo.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="redesInalambricas.html" class="btn btn-neutral float-left" title="Redes inalámbricas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Office/Word-apuntes-parte1.html" class="btn btn-neutral float-right" title="Primera parte" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

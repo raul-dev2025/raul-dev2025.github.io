@@ -105,7 +105,7 @@ desplazarlo.
 Formas
 ---------
 
-- Localizado en la *ficha insertar*, junto al botón imágenes en línea casis a la izquierda del todo. Cuando ya tenemos la objeto insertado en el documento podemos utilizar el botón Editar forma, que está a la izuierda del todo en el menú Formato. Es un dibujo con forma de puntitos unidos por un la línea.
+- Localizado en la *ficha insertar*, junto al botón imágenes en línea casi a la izquierda del todo. Cuando ya tenemos el objeto insertado en el documento podemos utilizar el botón Editar forma, que está a la izuierda del todo en el menú Formato. Es un dibujo con forma de puntitos unidos por un la línea.
 
 
 Símbolos
@@ -126,7 +126,7 @@ Definir nueva viñeta:
 - Click en :kbd:`símbolo` .
 - Seleccionamos la fuente; *windings* o *webdings*.
 
-Para desactivar el numerador de lista, lo mejor es darle otravez al mismo botón -viñeta o numeración.
+Para desactivar el numerador de lista, lo mejor es darle otra vez al mismo botón -viñeta o numeración.
 
 Para crear una **lista anidada** -*o lista multinivel*, empezamos creando la lista normalmente. Sin borrar el índice que queramos anidar, pulsamos :kbd:`tabulador`.
 Para terminar la *lista anidada*, deberemos pulsar :kbd:`mayúscula` + :kbd:`tabulador` y para terminar dicha lista, lo mejor es darle otra vez al mismo botón -*viñeta o numeración*.
