@@ -222,6 +222,21 @@ Ethernet también soporta diferentes velocidades de transmisión, como 10 Mbps, 
 
 En resumen, Ethernet es un protocolo de red de área local ampliamente utilizado para conectar dispositivos en una red local, permitiendo la transmisión de datos a través de cables de cobre. Proporciona una forma eficiente y confiable de conectar dispositivos en una red local, con velocidades de transmisión variadas.
 
+802.3
+~~~~~
+El estándar 802.3 es un estándar de la IEEE (Instituto de Ingenieros Eléctricos y Electrónicos) que define las especificaciones técnicas para la implementación de redes de área local (LAN) utilizando tecnología Ethernet.
+
+El estándar 802.3 se divide en varias versiones, cada una con sus propias especificaciones y capacidades de transmisión. Algunas de las versiones más comunes del estándar 802.3 son:
+
+- 802.3-1985: Esta es la primera versión del estándar 802.3 y define la especificación para redes Ethernet de 10 Mbps utilizando cableado de pare de pares (twisted pair) de tipo A y B.
+- 802.3u-1998: Esta versión del estándar define la especificación para redes Ethernet de 100 Mbps utilizando cableado de pare de pares (twisted pair) de tipo A, B y C, así como fibra óptica.
+- 802.3ab-1999: Esta versión del estándar define la especificación para redes Ethernet de 1000 Mbps utilizando cableado de pare de pares (twisted pair) de tipo A, B y C, así como fibra óptica.
+- 802.3ae-2002: Esta versión del estándar define la especificación para redes Ethernet de 10 Gbps utilizando fibra óptica.
+- 802.3an-2006: Esta versión del estándar define la especificación para redes Ethernet de 1000 Mbps utilizando cableado de pare de pares (twisted pair) de tipo A, B y C, así como fibra óptica, con una distancia máxima de 100 metros.
+El estándar 802.3 también define las especificaciones para los dispositivos de red, como switches, hubs, y adaptadores de red. Además, define las especificaciones para los cables y conectores utilizados en las redes Ethernet.
+
+En resumen, el estándar 802.3 define las especificaciones técnicas para la implementación de redes de área local (LAN) utilizando tecnología Ethernet, con capacidades de transmisión que van desde 10 Mbps hasta 10 Gbps, utilizando diferentes tipos de cableado y dispositivos de red.
+
 
 FDDI
 ----
@@ -235,27 +250,25 @@ Aunque FDDI fue ampliamente utilizado en la década de 1990, en la actualidad ha
 
 En resumen, FDDI es un protocolo de red de área local que utiliza cables de fibra óptica para la transmisión de datos en redes de alta velocidad. Fue ampliamente utilizado en la década de 1990, pero ha sido desplazado por otros protocolos de red más modernos.
 
+Trama Ethernet
+--------------
+La trama Ethernet es el formato de datos utilizado en la capa de enlace de datos del modelo OSI para la transmisión de datos a través de una red Ethernet. La trama Ethernet, también conocida como frame, está compuesta por varios campos que proporcionan información adicional para la transmisión y recepción de datos.
 
-Patchpanel
+La trama Ethernet está compuesta por los siguientes campos:
+
+1. Preambulo: Un conjunto de bits predefinidos que se utilizan para sincronizar los relojes de las máquinas transmisoras y receptoras.
+2. Destino: Un campo que contiene la dirección MAC (dirección física) de destino del paquete.
+3. Fuente: Un campo que contiene la dirección MAC de origen del paquete.
+4. Tipo: Un campo que indica el tipo de datos que se están transmitiendo (por ejemplo, datos, control, etc.).
+5. Longitud del cuerpo: Un campo que indica la longitud en bytes del cuerpo de datos.
+6. Cuerpo: Un campo que contiene los datos que se están transmitiendo.
+7. CRC: Un campo que contiene un código de redundancia cíclica (CRC) que se utiliza para detectar errores en la transmisión.
+8. Fin del frame: Un campo que indica el final del paquete.
+
+La trama Ethernet es utilizada en redes Ethernet y en la capa de enlace de datos del modelo OSI.
+
+En esencia, la trama Ethernet está compuesta por cuatro campos fundamentales; las direcciones MAC de los equipos de origen y destino, un relleno que asegura una longitud fija, y un código de redundancia cíclica (CRC) que se utiliza para detectar errores en la transmisión.
+
+
+modelo OSI
 ----------
-Un patch panel es un dispositivo que permite administrar y organizar las conexiones de los cables de una red. Se utiliza principalmente en instalaciones de red grandes y complejas, como oficinas, centros de datos y establecimientos de telecomunicaciones.
-
-Un patch panel consta de una placa con múltiples puertos de conexión (generalmente RJ-45) que centraliza el cableado de la red. Los cables de la instalación terminan en la parte trasera del panel y, mediante cables más cortos (patch cords), se conectan desde la parte frontal a otros dispositivos como switches o routers.
-
-El objetivo principal del patch panel es facilitar la administración y la configuración de la red. Permite a los administradores de red conectar y desconectar cables de red fácilmente, lo que facilita la configuración de la red, la reparación de problemas y la gestión del tráfico de red.
-
-Además, los patch panels también permiten una mayor flexibilidad y escalabilidad en la red, ya que los cables se pueden conectar y desconectar fácilmente sin tener que manipular los dispositivos de red directamente.
-
-En resumen, un patch panel es un componente esencial para organizar el cableado de una red de datos. Facilita la administración, los cambios y la resolución de problemas al centralizar los puntos de conexión, proporcionando flexibilidad y escalabilidad a la infraestructura de red.
-
-Switch
-------
-Un switch es un dispositivo de red que actúa como intermediario para enrutar y distribuir el tráfico de datos en una red local (LAN). Su función principal es recibir, procesar y reenviar datos de manera eficiente al dispositivo de destino correcto.
-
-Un switch opera principalmente en la capa 2 (Enlace de Datos) del modelo OSI. Aprende las direcciones MAC (la dirección física única de cada tarjeta de red) de los dispositivos conectados a cada uno de sus puertos. Cuando recibe un paquete de datos (trama), lo reenvía únicamente al puerto donde se encuentra el dispositivo de destino, en lugar de difundirlo a todos los puertos como haría un hub. Esto reduce el tráfico innecesario y mejora el rendimiento de la red.
-
-Algunos switches más avanzados, conocidos como switches de capa 3, también pueden realizar funciones de enrutamiento, propias de la capa 3 (Red) del modelo OSI. Esto significa que pueden tomar decisiones de reenvío basadas en direcciones IP, permitiendo la comunicación entre diferentes subredes (VLANs) sin necesidad de un router dedicado.
-
-Además, los switches modernos también pueden realizar enrutamiento a nivel 3, utilizando direcciones IP, lo que permite que los switches se comuniquen con dispositivos en otras redes, utilizando protocolos como DHCP y DNS.
-
-En resumen, un switch es un dispositivo de red que actúa como intermediario para enrutar y distribuir el tráfico de datos en una red local. Conecta y conecta dispositivos en una red local, utilizando direcciones MAC para enrutar los datos. Los switches modernos también pueden realizar enrutamiento a nivel 3, utilizando direcciones IP, lo que permite que los switches se comuniquen con dispositivos en otras redes.
