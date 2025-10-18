@@ -127,7 +127,7 @@ notación CIDR y notación de máscara de subred
 
 La notación de máscara de subred y la notación CIDR son dos formas diferentes de representar la cantidad de direcciones de host disponibles en una subred. 
 
-La notación de máscara de subred es una forma más tradicional de representar una subred. En esta notación, la máscara de subred se expresa como un número de cuatro octetos en formato de punto decimal (por ejemplo, 255.255.255.0). Cada octeto de la máscara de subred representa una parte de la dirección IP. Los bits de la dirección IP que corresponden a los octetos de la máscara de subred son 1, mientras que los bits restantes son 0. 
+La notación de máscara de subred es una forma más tradicional de representar una subred. En esta notación, la máscara de subred se expresa como un número de cuatro octetos en formato de punto decimal (por ejemplo, 255.255.255.0). Los bits de la máscara que son '1' representan la porción de la red, y los bits que son '0' representan la porción del host.
 
 Por ejemplo, la máscara de subred 255.255.255.0 indica que los primeros tres octetos de la dirección IP son parte de la subred, mientras que el último octeto representa las direcciones de host. Esto significa que hay 256 direcciones de host disponibles en esta subred (2⁸ - 2, restando la dirección de red y broadcast).
 
