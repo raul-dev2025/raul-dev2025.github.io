@@ -254,7 +254,10 @@ Trama Ethernet
 --------------
 La trama Ethernet es el formato de datos utilizado en la capa de enlace de datos del modelo OSI para la transmisión de datos a través de una red Ethernet. La trama Ethernet, también conocida como frame, está compuesta por varios campos que proporcionan información adicional para la transmisión y recepción de datos.
 
-La trama Ethernet está compuesta por los siguientes campos:
+
+La trama Ethernet es el formato de datos utilizado en la capa de enlace de datos del modelo OSI para la transmisión de datos a través de una red Ethernet. La trama Ethernet, también conocida como frame, está compuesta por varios campos que proporcionan información adicional para la transmisión y recepción de datos.
+
+La trama Ethernet (específicamente Ethernet II) está compuesta por los siguientes campos:
 
 1. Preambulo: Un conjunto de bits predefinidos que se utilizan para sincronizar los relojes de las máquinas transmisoras y receptoras.
 2. Destino: Un campo que contiene la dirección MAC (dirección física) de destino del paquete.
