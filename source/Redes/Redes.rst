@@ -89,7 +89,7 @@ Las IPs se identifican en octetos, cada octeto contiene 8 bits.
 Máscara de subred
 -----------------
 
-Máscara de subred es un conjunto de bits que se utiliza para identificar a las subredes dentro de una red local.
+La máscara de subred es un conjunto de bits que se utiliza para identificar la porción de red y la porción de host en una dirección IP, permitiendo la creación de subredes dentro de una red más grande.
 
 255.255.255.0
 
