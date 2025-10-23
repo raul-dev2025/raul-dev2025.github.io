@@ -30,6 +30,9 @@ La normativa actual sobre protección de datos se articula en torno a dos leyes 
 - **Reglamento General de Protección de Datos (RGPD)**: Es el reglamento europeo, de aplicación directa en toda la UE desde 2018, que establece las reglas para la protección de los datos personales.
 - **Ley Orgánica de Protección de Datos y Garantía de los Derechos Digitales (LOPDGDD)**: Es la ley española (Ley Orgánica 3/2018) que adapta el derecho español al RGPD y desarrolla sus disposiciones. Esta ley derogó la anterior LOPD de 1999.
 
+Además de la protección de datos personales en general, la LOPDGDD introduce y refuerza otros derechos digitales fundamentales. Entre ellos, destacan el derecho a la intimidad frente al uso de dispositivos de geolocalización y videovigilancia, que garantiza el control sobre la propia imagen y ubicación; y el derecho a la desconexión digital, que permite a los trabajadores limitar el uso de herramientas digitales fuera de su horario laboral para asegurar el descanso y la conciliación personal y familiar.
+
+
 Sanciones
 ~~~~~~~~~
 - Infracciones leves: Por ejemplo, no informar debidamente al usuario sobre el tratamiento de sus datos.
