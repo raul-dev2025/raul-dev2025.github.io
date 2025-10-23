@@ -159,7 +159,7 @@ A continuación se sumarán las cifras de la cadena hasta conseguir el número b
 
    128 64 32 16 8 4 2 1
     1  1  0  1  0 0 1 1
-   210+1=211 -> encendemos el octavo bit(211 = 211).
+   210+1=211 -> encendemos el octavo bit(211).
 
 
 Máscara de subred

@@ -32,7 +32,7 @@ A continuación seleccionamos la ruta al binario o ejecutable, en este caso "C:\
 
 
 El comando "chkdsk
-==================
+------------------
 
 El comando "chkdsk /f d:" es una instrucción de administración de Windows que ejecuta un análisis y reparación de errores en el sistema de archivos del disco duro especificado. Aquí está lo que cada parte del comando significa:
 
@@ -53,12 +53,24 @@ Es importante tener en cuenta que el comando "chkdsk" requiere privilegios de ad
     chkdsk /r /f
 
 
-Redes cableadas
-===============
-802.3
+------
+Convertir a su forma binaria los siguientes números:
 
-
-
+33  -> 0010 0001
+145 -> 1001 0001
+103 -> 0110 0111
+3   -> 0000 0011
+128 -> 1000 0000
+249 -> 1111 1001
+248 -> 1111 1000
+48  -> 0011 0000
+184 -> 1011 1000
+153 -> 1001 1001
+118 -> 0111 0110
+247 -> 1111 0111
+197 -> 1100 0101
+100 -> 0110 0100
+99  -> 0110 0011
 
 
 ------
@@ -69,3 +81,4 @@ Redes cableadas
 5. configuración de la red
 
 
+windows+R "mmc" 
