@@ -22,6 +22,18 @@ Características
     - *Adaptadores de red*: su función principal es convertir el formato de los datos utilizado por los terminales, en el formato que utilizará la red de comunicación; habitualmente señales eléctricas u ondas de radio.
     - *Programas de red*: son un conjunto de aplicaciones destinadas a facilitar la gestión de la red.
 
+Modos de Comunicación
+---------------------
+
+El modo de comunicación define la direccionalidad del flujo de datos entre dos dispositivos.
+
+- **Simplex**: La comunicación es unidireccional. Un dispositivo transmite y el otro solo recibe. Un ejemplo es una emisora de radio.
+
+- **Semidúplex (Half-Duplex)**: La comunicación es bidireccional, pero no simultánea. Los dispositivos se turnan para transmitir. Un ejemplo son los walkie-talkies o las redes Wi-Fi, donde los dispositivos deben esperar a que el canal esté libre para hablar.
+
+- **Dúplex Integral (Full-Duplex)**: La comunicación es bidireccional y simultánea. Ambos dispositivos pueden enviar y recibir datos al mismo tiempo. Un ejemplo es una llamada telefónica. Las redes Ethernet modernas con switches operan en este modo, utilizando pares de hilos separados para transmitir y recibir.
+
+
 Arquitectura de Red
 -------------------
 
@@ -53,6 +65,26 @@ Topologías básicas
    - **Intersección de anillo**: Se refiere a la conexión de dos o más topologías de anillo a través de un dispositivo común, creando una red más grande y compleja.
    - **Bus**: Todos los dispositivos comparten un único canal de comunicación (el "bus"). Es una topología simple y económica, pero si el cable principal falla, toda la red deja de funcionar. Además, el rendimiento disminuye a medida que se añaden más dispositivos.
    - **Irregular o Híbrida**: Combina dos o más topologías diferentes para formar una red más grande y compleja. Por ejemplo, conectar varias redes en estrella a una troncal de bus.
+
+A continuación, se muestra una tabla que resume las ventajas y desventajas de las topologías más comunes:
+
+.. table:: Resumen de Topologías
+
+   +-----------+--------------------------+------------------------------------+
+   | Topología | Ventajas                 | Desventajas                        |
+   +===========+==========================+====================================+
+   | Estrella  | Fácil de administrar,    | Punto único de fallo (el nodo      |
+   |           | un fallo no afecta al    | central).                          |
+   |           | resto.                   |                                    |
+   +-----------+--------------------------+------------------------------------+
+   | Anillo    | Rendimiento predecible,  | Un fallo en un nodo o cable        |
+   |           | sin colisiones.          | interrumpe toda la red.            |
+   +-----------+--------------------------+------------------------------------+
+   | Bus       | Económica y simple de    | Difícil de solucionar, el fallo    |
+   |           | instalar.                | del cable principal detiene la red.|
+   +-----------+--------------------------+------------------------------------+
+   | Malla     | Muy fiable y redundante. | Costosa y compleja de instalar.    |
+   +-----------+--------------------------+------------------------------------+
 
 Protocolos
 ----------
@@ -91,12 +123,7 @@ Máscara de subred
 
 La máscara de subred es un conjunto de bits que se utiliza para identificar la porción de red y la porción de host en una dirección IP, permitiendo la creación de subredes dentro de una red más grande.
 
-255.255.255.0
-
-El número de cuatro octetos se organiza de la siguiente manera:
-El primer octeto (255) se utiliza para la parte de red.
-El segundo octeto (255) se utiliza para la parte de subred.
-Los dos  ú ltimos octetos (255.0) se utilizan para la parte de host.
+Por ejemplo, con una máscara `255.255.255.0`, los primeros tres octetos (24 bits) se usan para identificar la red, mientras que el último octeto (8 bits) se usa para identificar a los equipos (hosts) dentro de esa red.
 
 Para limitar el número de máquinas configurables en una red, puedes ajustar la máscara de subred. La máscara determina cuántas direcciones IP están disponibles para los hosts.
 
@@ -129,7 +156,7 @@ La notación de máscara de subred y la notación CIDR son dos formas diferentes
 
 La notación de máscara de subred es una forma más tradicional de representar una subred. En esta notación, la máscara de subred se expresa como un número de cuatro octetos en formato de punto decimal (por ejemplo, 255.255.255.0). Los bits de la máscara que son '1' representan la porción de la red, y los bits que son '0' representan la porción del host.
 
-Por ejemplo, la máscara de subred 255.255.255.0 indica que los primeros tres octetos de la dirección IP son parte de la subred, mientras que el último octeto representa las direcciones de host. Esto significa que hay 256 direcciones de host disponibles en esta subred (2⁸ - 2, restando la dirección de red y broadcast).
+Por ejemplo, la máscara de subred 255.255.255.0 indica que los primeros tres octetos de la dirección IP son parte de la subred, mientras que el último octeto representa las direcciones de host. Esto significa que hay 254 direcciones de host disponibles en esta subred (2⁸ - 2, restando la dirección de red y la de broadcast).
 
 La notación CIDR, por otro lado, es una forma más concisa de representar una subred. En esta notación, la máscara de subred se expresa como una combinación de un número y una barra ("/"). El número indica cuántos bits de la dirección IP son parte de la subred, mientras que la barra separa el número de la dirección IP. 
 
@@ -174,11 +201,11 @@ Comités de estandardización
 
 ITU
 ~~~
-La Unión Internacional de Telecomunicaciones (ITU) es una organización intergubernamental que se encarga de establecer estándares para la comunicación y la información en el mundo.
+La **Unión Internacional de Telecomunicaciones (ITU)** es una organización intergubernamental que se encarga de establecer estándares para la comunicación y la información en el mundo.
 
 ISO
 ~~~
-La Organización Internacional para la Estandarización (ISO) es una organización no gubernamental que se encarga de establecer estándares para una amplia gama de temas, incluyendo la comunicación y la información.
+La **Organización Internacional de Normalización (ISO)** es una organización no gubernamental que se encarga de establecer estándares para una amplia gama de temas, incluyendo la comunicación y la información.
 
 ANSI
 ~~~~
@@ -254,9 +281,6 @@ Trama Ethernet
 --------------
 La trama Ethernet es el formato de datos utilizado en la capa de enlace de datos del modelo OSI para la transmisión de datos a través de una red Ethernet. La trama Ethernet, también conocida como frame, está compuesta por varios campos que proporcionan información adicional para la transmisión y recepción de datos.
 
-
-La trama Ethernet es el formato de datos utilizado en la capa de enlace de datos del modelo OSI para la transmisión de datos a través de una red Ethernet. La trama Ethernet, también conocida como frame, está compuesta por varios campos que proporcionan información adicional para la transmisión y recepción de datos.
-
 La trama Ethernet (específicamente Ethernet II) está compuesta por los siguientes campos:
 
 1. Preambulo: Un conjunto de bits predefinidos que se utilizan para sincronizar los relojes de las máquinas transmisoras y receptoras.
@@ -275,3 +299,29 @@ En esencia, la trama Ethernet está compuesta por cuatro campos fundamentales; l
 
 modelo OSI
 ----------
+El modelo OSI (Open System Interconnection Model) o "Modelo de Interconexión de Sistemas Abiertos" es un marco conceptual descrito por el estándar **ISO/IEC 7498-1**.
+
+.. table:: Resumen de Topologías
+   +---------+-----------------+
+   |    7    | Aplicación      |
+   +=========+=================+
+   |    6    | Presentación    |
+   +---------+-----------------+
+   |    5    | Sesión          |
+   +---------+-----------------+
+   |    4    | Transporte      |
+   +---------+-----------------+
+   |    3    | Red             |
+   +---------+-----------------+
+   |    2    | Enlace de datos |
+   +---------+-----------------+
+   |    1    | Físico          |
+   +---------+-----------------+
+   
+- **Nivel físico**: se encarga de la transmisión de dígitos binarios a través del medio de comunicación.
+- **Nivel enlace**: su función es detectar y corregir los errores.
+- **Nivel de red**: identifica la mejor ruta por la que circulará la información.
+- **Nivel de transporte**: pasa los datos del nivel de sesión, a la capa de red y ayuda a que sean entregados de forma correcta en el nivel de sesión del otro extremo.
+- **Nivel se sesión**: establece las conexiones de comunicación(sesiones), entre los equipos.
+- **Nivel de presentación**: su función consiste en controlar el significado de la información que es transmitida.
+- **Nivel de aplicación**: Sirve de *enlace* entre los programas de los equipos.
