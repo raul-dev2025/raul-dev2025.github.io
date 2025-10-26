@@ -177,6 +177,7 @@ Downloadable files
    - Click to download: :download:`(Redes) Tema 6 - Tipos de incidencias en una LAN <descargas/Tema6.TiposDeIncidenciasQueSePuedenProducirEnUnaRedDeAreaLocal.pdf>`
    - Click to download: :download:`(Redes) Tema 7 - Detección y diagnóstico de incidencias en una LAN <descargas/Tema7.DetecciónYDiagnósticoDeIncidenciasEnRedesDeAreaLocal.pdf>`
    - Click to download: :download:`(Redes) Tema 8 - Comprobación del cable estructurado <descargas/Tema8.ComprobaciónDeCablesDeParTrenzadoYCoaxial.pdf>`
+   - Click to download: :download:`(Redes) Tema 9 - Comprovación y solución de incidencias en Red <descargas/Tema9.ComprobaciónYSoluciónDeIncidenciasAnivelDeRed.pdf>`
    - Click to download: :download:`(Redes) Instalación y configuración de aplicaciones <descargas/Instalación_y_configuración_de_aplicaciones_informáticas.pdf>`
 
 
