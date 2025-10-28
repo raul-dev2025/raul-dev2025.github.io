@@ -61,15 +61,6 @@ Una vez identificado el canal óptimo, el último paso es configurar el punto de
 Este ajuste debería reducir las interferencias y mejorar significativamente la estabilidad y velocidad de la red inalámbrica.
 
 
-
-
-
-
-Aquí está la tabla en formato de texto reestructurado:
-
-Mis disculpas por la confusión. Aquí está la tabla en formato de texto reestructurado:
-
-
 .. list-table::
    :widths: 10 10 15 30 15 15
    :header-rows: 1
