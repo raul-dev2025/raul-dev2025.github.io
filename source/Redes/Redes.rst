@@ -110,9 +110,8 @@ Números de IPs
 Las IPs se identifican en octetos, cada octeto contiene 8 bits.
 
 .. code:: bash
-   
    :linenos:
-
+   
    2^8 = 256
    x.x.x.x
    2^32 = 4,294,967,296
@@ -295,6 +294,42 @@ La trama Ethernet (específicamente Ethernet II) está compuesta por los siguien
 La trama Ethernet es utilizada en redes Ethernet y en la capa de enlace de datos del modelo OSI.
 
 En esencia, la trama Ethernet está compuesta por cuatro campos fundamentales; las direcciones MAC de los equipos de origen y destino, un relleno que asegura una longitud fija, y un código de redundancia cíclica (CRC) que se utiliza para detectar errores en la transmisión.
+
+
+Modelo TCP/IP
+-------------
+
+A diferencia del modelo OSI, que es un marco teórico, el modelo TCP/IP es un conjunto de protocolos que se implementan en la práctica y que son la base de Internet. Se suele describir con un modelo de cuatro capas que se correlaciona con el modelo OSI.
+
+A continuación se muestra la equivalencia y los nombres que pueden recibir las capas:
+
+.. table:: Comparación Modelos OSI y TCP/IP
+
+   +-----------------+-------------------------+---------------------------+
+   | Capa OSI        | Capa TCP/IP (Estándar)  | Capa TCP/IP (Alternativo) |
+   +=================+=========================+===========================+
+   | 7. Aplicación   |                         |                           |
+   +-----------------+ \multirow{3}{*}{**Aplicación**}    | \multirow{3}{*}{**Aplicación**}   |
+   | 6. Presentación |                         |                           |
+   +-----------------+                         |                           |
+   | 5. Sesión       |                         |                           |
+   +-----------------+-------------------------+---------------------------+
+   | 4. Transporte   | **Transporte**          | **Transporte**            |
+   +-----------------+-------------------------+---------------------------+
+   | 3. Red          | **Internet**            | **Interred**              |
+   +-----------------+-------------------------+---------------------------+
+   | 2. Enlace       | \multirow{2}{*}{**Acceso a la Red**} | \multirow{2}{*}{**Subred**}      |
+   +-----------------+                         |                           |
+   | 1. Físico       |                         |                           |
+   +-----------------+-------------------------+---------------------------+
+
+- **Capa de Acceso a la Red (o Subred)**: Agrupa las funciones de las capas Física y de Enlace del modelo OSI. Se encarga de la transmisión de datos por el medio físico (cables, ondas de radio) y del direccionamiento físico (direcciones MAC) dentro de una misma red local.
+
+- **Capa de Internet (o Interred)**: Equivalente a la capa de Red del modelo OSI. Su función es el direccionamiento lógico (direcciones IP) y el enrutamiento de paquetes a través de diferentes redes para que lleguen a su destino final. Aquí operan los routers.
+
+- **Capa de Transporte**: Corresponde a la capa de Transporte del modelo OSI. Proporciona la comunicación extremo a extremo entre las aplicaciones de los dispositivos de origen y destino. Los protocolos principales son TCP (fiable y orientado a conexión) y UDP (rápido y no orientado a conexión).
+
+- **Capa de Aplicación**: Combina las capas de Sesión, Presentación y Aplicación del modelo OSI. Es la capa con la que interactúan las aplicaciones del usuario. Define los protocolos que usan las aplicaciones para intercambiar datos, como HTTP (navegación web), SMTP (correo electrónico) o FTP (transferencia de archivos).
 
 
 modelo OSI
