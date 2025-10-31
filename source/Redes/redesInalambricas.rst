@@ -58,8 +58,8 @@ Una vez identificado el canal óptimo, el último paso es configurar el punto de
 3.  **Cambiar el canal**: Localiza la opción "Canal" o "Channel" para la banda de 2.4 GHz. Por defecto, suele estar en "Automático". Cámbiala manualmente al canal que has elegido (1, 6 u 11).
 4.  **Guardar y reiniciar**: Aplica los cambios. El router se reiniciará con la nueva configuración.
 
-Este ajuste debería reducir las interferencias y mejorar significativamente la estabilidad y velocidad de la red inalámbrica.
 
+------
 
 .. list-table::
    :widths: 10 10 15 30 15 15

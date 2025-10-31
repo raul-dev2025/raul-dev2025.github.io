@@ -254,7 +254,7 @@ El estándar 802.3 es un estándar de la IEEE (Instituto de Ingenieros Eléctric
 
 El estándar 802.3 se divide en varias versiones, cada una con sus propias especificaciones y capacidades de transmisión. Algunas de las versiones más comunes del estándar 802.3 son:
 
-- 802.3-1985: Esta es la primera versión del estándar 802.3 y define la especificación para redes Ethernet de 10 Mbps utilizando cableado de pare de pares (twisted pair) de tipo A y B.
+- 802.3-1985: Esta es la primera versión del estándar 802.3 y define la especificación para redes Ethernet de 10 Mbps utilizando cableado de pares (twisted pair) de tipo A y B.
 - 802.3u-1998: Esta versión del estándar define la especificación para redes Ethernet de 100 Mbps utilizando cableado de pare de pares (twisted pair) de tipo A, B y C, así como fibra óptica.
 - 802.3ab-1999: Esta versión del estándar define la especificación para redes Ethernet de 1000 Mbps utilizando cableado de pare de pares (twisted pair) de tipo A, B y C, así como fibra óptica.
 - 802.3ae-2002: Esta versión del estándar define la especificación para redes Ethernet de 10 Gbps utilizando fibra óptica.
