@@ -109,7 +109,7 @@ Números de IPs
 
 Las IPs se identifican en octetos, cada octeto contiene 8 bits.
 
-.. code:: bash
+.. code-block:: bash
    :linenos:
    
    2^8 = 256
@@ -259,6 +259,7 @@ El estándar 802.3 se divide en varias versiones, cada una con sus propias espec
 - 802.3ab-1999: Esta versión del estándar define la especificación para redes Ethernet de 1000 Mbps utilizando cableado de pare de pares (twisted pair) de tipo A, B y C, así como fibra óptica.
 - 802.3ae-2002: Esta versión del estándar define la especificación para redes Ethernet de 10 Gbps utilizando fibra óptica.
 - 802.3an-2006: Esta versión del estándar define la especificación para redes Ethernet de 1000 Mbps utilizando cableado de pare de pares (twisted pair) de tipo A, B y C, así como fibra óptica, con una distancia máxima de 100 metros.
+
 El estándar 802.3 también define las especificaciones para los dispositivos de red, como switches, hubs, y adaptadores de red. Además, define las especificaciones para los cables y conectores utilizados en las redes Ethernet.
 
 En resumen, el estándar 802.3 define las especificaciones técnicas para la implementación de redes de área local (LAN) utilizando tecnología Ethernet, con capacidades de transmisión que van desde 10 Mbps hasta 10 Gbps, utilizando diferentes tipos de cableado y dispositivos de red.
@@ -305,23 +306,23 @@ A continuación se muestra la equivalencia y los nombres que pueden recibir las 
 
 .. table:: Comparación Modelos OSI y TCP/IP
 
-   +-----------------+-------------------------+---------------------------+
-   | Capa OSI        | Capa TCP/IP (Estándar)  | Capa TCP/IP (Alternativo) |
-   +=================+=========================+===========================+
-   | 7. Aplicación   |                         |                           |
-   +-----------------+ \multirow{3}{*}{**Aplicación**}    | \multirow{3}{*}{**Aplicación**}   |
-   | 6. Presentación |                         |                           |
-   +-----------------+                         |                           |
-   | 5. Sesión       |                         |                           |
-   +-----------------+-------------------------+---------------------------+
-   | 4. Transporte   | **Transporte**          | **Transporte**            |
-   +-----------------+-------------------------+---------------------------+
-   | 3. Red          | **Internet**            | **Interred**              |
-   +-----------------+-------------------------+---------------------------+
-   | 2. Enlace       | \multirow{2}{*}{**Acceso a la Red**} | \multirow{2}{*}{**Subred**}      |
-   +-----------------+                         |                           |
-   | 1. Físico       |                         |                           |
-   +-----------------+-------------------------+---------------------------+
+   +-----------------+--------------------------------------+-----------------------------------+
+   | Capa OSI        | Capa TCP/IP (Estándar)               | Capa TCP/IP (Alternativo)         |
+   +=================+======================================+===================================+
+   | 7. Aplicación   |                                      |                                   |
+   +-----------------+ \multirow{3}{*}{**Aplicación**}      | \multirow{3}{*}{**Aplicación**}   |
+   | 6. Presentación |                                      |                                   |
+   +-----------------+                                      |                                   |
+   | 5. Sesión       |                                      |                                   |
+   +-----------------+--------------------------------------+-----------------------------------+
+   | 4. Transporte   | **Transporte**                       | **Transporte**                    |
+   +-----------------+--------------------------------------+-----------------------------------+
+   | 3. Red          | **Internet**                         | **Interred**                      |
+   +-----------------+--------------------------------------+-----------------------------------+
+   | 2. Enlace       | \multirow{2}{*}{**Acceso a la Red**} | \multirow{2}{*}{**Subred**}       |
+   +-----------------+                                      |                                   |
+   | 1. Físico       |                                      |                                   |
+   +-----------------+--------------------------------------+-----------------------------------+
 
 - **Capa de Acceso a la Red (o Subred)**: Agrupa las funciones de las capas Física y de Enlace del modelo OSI. Se encarga de la transmisión de datos por el medio físico (cables, ondas de radio) y del direccionamiento físico (direcciones MAC) dentro de una misma red local.
 
@@ -336,7 +337,8 @@ modelo OSI
 ----------
 El modelo OSI (Open System Interconnection Model) o "Modelo de Interconexión de Sistemas Abiertos" es un marco conceptual descrito por el estándar **ISO/IEC 7498-1**.
 
-.. table:: Resumen de Topologías
+.. table:: Capas del Modelo OSI
+
    +---------+-----------------+
    |    7    | Aplicación      |
    +=========+=================+
