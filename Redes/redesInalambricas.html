@@ -40,11 +40,7 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Sistemas:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Sistemas:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Sistema/evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Sistema/GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
@@ -102,9 +98,18 @@
 <li class="toctree-l1"><a class="reference internal" href="Redes.html">Redes</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Redes inalámbricas</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id1">802.11</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gestion-de-canales-e-interferencias">Gestión de Canales e Interferencias</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#canales-wi-fi-y-solapamiento">Canales Wi-Fi y Solapamiento</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#analisis-y-seleccion-de-canal">Análisis y Selección de Canal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuracion-del-canal-en-el-router">Configuración del Canal en el Router</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ElementosLAN.html">Elementos de una red de área local</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instConfApp.html">Instalación y configuración de aplicadiones informáticas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dispositivosDeRed.html">Patchpanel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dispositivosDeRed.html#switch">Switch</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
 <ul>
@@ -126,6 +131,11 @@
 <p class="caption" role="heading"><span class="caption-text">Office, Power Point:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Office/PowerPoint.html">Power Point</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes &amp; Changelog</a></li>
 </ul>
 
         </div>
@@ -164,8 +174,50 @@ dispositivos, sin la necesidad de utilizar cables de ningún tipo.</p>
 <li><p>Cifrado: El standard 802.11 define mecanismos de cifrado para proteger los datos transmitidos por la red.</p></li>
 <li><p>QoS: El standard 802.11 define mecanismos de gestión de la calidad de servicio (QoS) para garantizar que los datos se transmitan a través de la red con la calidad y prioridad adecuadas.</p></li>
 </ul>
-<p>Aquí está la tabla en formato de texto reestructurado:</p>
-<p>Mis disculpas por la confusión. Aquí está la tabla en formato de texto reestructurado:</p>
+</section>
+<section id="gestion-de-canales-e-interferencias">
+<h2>Gestión de Canales e Interferencias<a class="headerlink" href="#gestion-de-canales-e-interferencias" title="Link to this heading"></a></h2>
+<p>Uno de los problemas más comunes en las redes Wi-Fi, especialmente en la banda de 2.4 GHz, son las interferencias provocadas por la saturación de canales.</p>
+<section id="canales-wi-fi-y-solapamiento">
+<h3>Canales Wi-Fi y Solapamiento<a class="headerlink" href="#canales-wi-fi-y-solapamiento" title="Link to this heading"></a></h3>
+<p>Las frecuencias que usa el Wi-Fi se dividen en varios carriles o <strong>canales</strong>.</p>
+<ul class="simple">
+<li><p><strong>Banda de 2.4 GHz</strong>: Es la más común, con mayor alcance pero más lenta. Dispone de 11 o 13 canales, pero la mayoría se solapan entre sí. Solo los canales <strong>1, 6 y 11</strong> son independientes y no se interfieren mutuamente, por lo que son los más recomendados.</p></li>
+<li><p><strong>Banda de 5 GHz</strong>: Es más rápida y tiene muchos más canales que no se solapan, por lo que sufre menos interferencias, aunque su alcance es menor.</p></li>
+</ul>
+<p>Cuando varios puntos de acceso (el tuyo y los de tus vecinos) transmiten en el mismo canal o en canales solapados, se produce una <strong>interferencia</strong>. Esto es como si varias personas intentaran hablar a la vez en el mismo tono, generando “ruido” que degrada la comunicación.</p>
+<p>Los síntomas de la interferencia de canal son:</p>
+<ul class="simple">
+<li><p>Velocidad de conexión lenta e inestable.</p></li>
+<li><p>Microcortes o desconexiones frecuentes.</p></li>
+<li><p>Latencia alta (ping alto).</p></li>
+<li><p>Menor alcance de la señal.</p></li>
+</ul>
+</section>
+<section id="analisis-y-seleccion-de-canal">
+<h3>Análisis y Selección de Canal<a class="headerlink" href="#analisis-y-seleccion-de-canal" title="Link to this heading"></a></h3>
+<p>Para solucionar la incidencia, es necesario identificar qué canales están más saturados y cuál es la mejor alternativa. Esto se realiza con un <strong>analizador de Wi-Fi</strong>.</p>
+<ol class="arabic simple">
+<li><p><strong>Utilizar una herramienta de análisis</strong>:</p>
+<ul class="simple">
+<li><p><strong>Windows</strong>: Se puede usar <cite>inSSIDer</cite>, <cite>NetSpot</cite> o el comando <cite>netsh wlan show networks mode=bssid</cite> en la terminal.</p></li>
+<li><p><strong>Android</strong>: <cite>Wifi Analyzer</cite> es una de las aplicaciones más populares y visuales.</p></li>
+<li><p><strong>macOS</strong>: Incluye una herramienta nativa accesible manteniendo la tecla <cite>Opción</cite> (⌥) y haciendo clic en el icono de Wi-Fi -&gt; “Abrir Diagnóstico Inalámbrico” -&gt; Menú <cite>Ventana</cite> -&gt; <cite>Escanear</cite>.</p></li>
+</ul>
+</li>
+<li><p><strong>Interpretar los resultados</strong>: Estas herramientas muestran un gráfico con todas las redes Wi-Fi cercanas, su potencia y el canal que ocupan. El objetivo es encontrar un canal (idealmente el 1, 6 o 11) que esté libre o tenga el menor número de redes posible.</p></li>
+</ol>
+</section>
+<section id="configuracion-del-canal-en-el-router">
+<h3>Configuración del Canal en el Router<a class="headerlink" href="#configuracion-del-canal-en-el-router" title="Link to this heading"></a></h3>
+<p>Una vez identificado el canal óptimo, el último paso es configurar el punto de acceso o router para que lo utilice.</p>
+<ol class="arabic simple">
+<li><p><strong>Acceder a la configuración del router</strong>: Abre un navegador y entra en la puerta de enlace del router (normalmente <cite>192.168.1.1</cite> o <cite>192.168.0.1</cite>).</p></li>
+<li><p><strong>Ir a la configuración inalámbrica</strong>: Busca la sección de configuración “Wireless” o “Red inalámbrica”.</p></li>
+<li><p><strong>Cambiar el canal</strong>: Localiza la opción “Canal” o “Channel” para la banda de 2.4 GHz. Por defecto, suele estar en “Automático”. Cámbiala manualmente al canal que has elegido (1, 6 u 11).</p></li>
+<li><p><strong>Guardar y reiniciar</strong>: Aplica los cambios. El router se reiniciará con la nueva configuración.</p></li>
+</ol>
+<hr class="docutils" />
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 10.5%" />
@@ -311,6 +363,7 @@ dispositivos, sin la necesidad de utilizar cables de ningún tipo.</p>
 <li><p><strong>Grupo3</strong>: WMAN (Wireless Metropolitan Area Network, Wi-MaNet, WiMAX)</p></li>
 <li><p><strong>Grupo4</strong>: WWAN (Wireless Wide Area Network, Wi-World, GSM, GPRS, UMTS, LTE)</p></li>
 </ul>
+</section>
 </section>
 </section>
 

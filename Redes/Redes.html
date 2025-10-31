@@ -40,11 +40,7 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Sistemas:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Sistemas:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Sistema/evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Sistema/GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
@@ -102,6 +98,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Redes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#clasificacion">Clasificación</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#caracteristicas">Características</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modos-de-comunicacion">Modos de Comunicación</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#arquitectura-de-red">Arquitectura de Red</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#topologias-basicas">Topologías básicas</a></li>
 </ul>
@@ -125,14 +122,21 @@
 <li class="toctree-l3"><a class="reference internal" href="#open-group">Open Group</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#ethernet">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ethernet">Ethernet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">802.3</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#fddi">FDDI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#patchpanel">Patchpanel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#switch">Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#trama-ethernet">Trama Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modelo-tcp-ip">Modelo TCP/IP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modelo-osi">modelo OSI</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="redesInalambricas.html">Redes inalámbricas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ElementosLAN.html">Elementos de una red de área local</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instConfApp.html">Instalación y configuración de aplicadiones informáticas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dispositivosDeRed.html">Patchpanel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dispositivosDeRed.html#switch">Switch</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
 <ul>
@@ -154,6 +158,11 @@
 <p class="caption" role="heading"><span class="caption-text">Office, Power Point:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Office/PowerPoint.html">Power Point</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes &amp; Changelog</a></li>
 </ul>
 
         </div>
@@ -208,6 +217,15 @@
 </li>
 </ul>
 </section>
+<section id="modos-de-comunicacion">
+<h2>Modos de Comunicación<a class="headerlink" href="#modos-de-comunicacion" title="Link to this heading"></a></h2>
+<p>El modo de comunicación define la direccionalidad del flujo de datos entre dos dispositivos.</p>
+<ul class="simple">
+<li><p><strong>Simplex</strong>: La comunicación es unidireccional. Un dispositivo transmite y el otro solo recibe. Un ejemplo es una emisora de radio.</p></li>
+<li><p><strong>Semidúplex (Half-Duplex)</strong>: La comunicación es bidireccional, pero no simultánea. Los dispositivos se turnan para transmitir. Un ejemplo son los walkie-talkies o las redes Wi-Fi, donde los dispositivos deben esperar a que el canal esté libre para hablar.</p></li>
+<li><p><strong>Dúplex Integral (Full-Duplex)</strong>: La comunicación es bidireccional y simultánea. Ambos dispositivos pueden enviar y recibir datos al mismo tiempo. Un ejemplo es una llamada telefónica. Las redes Ethernet modernas con switches operan en este modo, utilizando pares de hilos separados para transmitir y recibir.</p></li>
+</ul>
+</section>
 <section id="arquitectura-de-red">
 <h2>Arquitectura de Red<a class="headerlink" href="#arquitectura-de-red" title="Link to this heading"></a></h2>
 <p>La arquitectura de red se refiere al diseño de una red de comunicaciones. Es un marco que define cómo se organizan los componentes físicos y lógicos de la red, sus principios operativos y los servicios que ofrece.</p>
@@ -245,6 +263,41 @@
 <li><p><strong>Irregular o Híbrida</strong>: Combina dos o más topologías diferentes para formar una red más grande y compleja. Por ejemplo, conectar varias redes en estrella a una troncal de bus.</p></li>
 </ul>
 </div></blockquote>
+<p>A continuación, se muestra una tabla que resume las ventajas y desventajas de las topologías más comunes:</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Resumen de Topologías</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Topología</p></th>
+<th class="head"><p>Ventajas</p></th>
+<th class="head"><p>Desventajas</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Estrella</p></td>
+<td><p>Fácil de administrar,
+un fallo no afecta al
+resto.</p></td>
+<td><p>Punto único de fallo (el nodo
+central).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Anillo</p></td>
+<td><p>Rendimiento predecible,
+sin colisiones.</p></td>
+<td><p>Un fallo en un nodo o cable
+interrumpe toda la red.</p></td>
+</tr>
+<tr class="row-even"><td><p>Bus</p></td>
+<td><p>Económica y simple de
+instalar.</p></td>
+<td><p>Difícil de solucionar, el fallo
+del cable principal detiene la red.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Malla</p></td>
+<td><p>Muy fiable y redundante.</p></td>
+<td><p>Costosa y compleja de instalar.</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 <section id="protocolos">
@@ -267,22 +320,16 @@
 <section id="numeros-de-ips">
 <h2>Números de IPs<a class="headerlink" href="#numeros-de-ips" title="Link to this heading"></a></h2>
 <p>Las IPs se identifican en octetos, cada octeto contiene 8 bits.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>:linenos:
-
-<span class="m">2</span>^8<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">256</span>
-x.x.x.x
-<span class="m">2</span>^32<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span>,294,967,296
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="m">2</span>^8<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">256</span>
+<span class="linenos">2</span>x.x.x.x
+<span class="linenos">3</span><span class="m">2</span>^32<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span>,294,967,296
 </pre></div>
 </div>
 </section>
 <section id="mascara-de-subred">
 <h2>Máscara de subred<a class="headerlink" href="#mascara-de-subred" title="Link to this heading"></a></h2>
-<p>Máscara de subred es un conjunto de bits que se utiliza para identificar a las subredes dentro de una red local.</p>
-<p>255.255.255.0</p>
-<p>El número de cuatro octetos se organiza de la siguiente manera:
-El primer octeto (255) se utiliza para la parte de red.
-El segundo octeto (255) se utiliza para la parte de subred.
-Los dos  ú ltimos octetos (255.0) se utilizan para la parte de host.</p>
+<p>La máscara de subred es un conjunto de bits que se utiliza para identificar la porción de red y la porción de host en una dirección IP, permitiendo la creación de subredes dentro de una red más grande.</p>
+<p>Por ejemplo, con una máscara <cite>255.255.255.0</cite>, los primeros tres octetos (24 bits) se usan para identificar la red, mientras que el último octeto (8 bits) se usa para identificar a los equipos (hosts) dentro de esa red.</p>
 <p>Para limitar el número de máquinas configurables en una red, puedes ajustar la máscara de subred. La máscara determina cuántas direcciones IP están disponibles para los hosts.</p>
 <p>Por ejemplo, la máscara 255.255.128.0 (o /17 en notación CIDR) permite 32,766 direcciones de host (2¹⁵ - 2, restando la dirección de red y broadcast).</p>
 <p><strong>¿Cómo funciona?</strong></p>
@@ -304,8 +351,8 @@ Ajusta la máscara de subred para limitar el número de máquinas configurables 
 <section id="notacion-cidr-y-notacion-de-mascara-de-subred">
 <h2>notación CIDR y notación de máscara de subred<a class="headerlink" href="#notacion-cidr-y-notacion-de-mascara-de-subred" title="Link to this heading"></a></h2>
 <p>La notación de máscara de subred y la notación CIDR son dos formas diferentes de representar la cantidad de direcciones de host disponibles en una subred.</p>
-<p>La notación de máscara de subred es una forma más tradicional de representar una subred. En esta notación, la máscara de subred se expresa como un número de cuatro octetos en formato de punto decimal (por ejemplo, 255.255.255.0). Cada octeto de la máscara de subred representa una parte de la dirección IP. Los bits de la dirección IP que corresponden a los octetos de la máscara de subred son 1, mientras que los bits restantes son 0.</p>
-<p>Por ejemplo, la máscara de subred 255.255.255.0 indica que los primeros tres octetos de la dirección IP son parte de la subred, mientras que el último octeto representa las direcciones de host. Esto significa que hay 256 direcciones de host disponibles en esta subred (2⁸ - 2, restando la dirección de red y broadcast).</p>
+<p>La notación de máscara de subred es una forma más tradicional de representar una subred. En esta notación, la máscara de subred se expresa como un número de cuatro octetos en formato de punto decimal (por ejemplo, 255.255.255.0). Los bits de la máscara que son ‘1’ representan la porción de la red, y los bits que son ‘0’ representan la porción del host.</p>
+<p>Por ejemplo, la máscara de subred 255.255.255.0 indica que los primeros tres octetos de la dirección IP son parte de la subred, mientras que el último octeto representa las direcciones de host. Esto significa que hay 254 direcciones de host disponibles en esta subred (2⁸ - 2, restando la dirección de red y la de broadcast).</p>
 <p>La notación CIDR, por otro lado, es una forma más concisa de representar una subred. En esta notación, la máscara de subred se expresa como una combinación de un número y una barra (“/”). El número indica cuántos bits de la dirección IP son parte de la subred, mientras que la barra separa el número de la dirección IP.</p>
 <p>Por ejemplo, la máscara CIDR /17 indica que los primeros 17 bits de la dirección IP son parte de la subred. Esto significa que hay 32,766 direcciones de host disponibles en esta subred (2¹⁵ - 2, restando la dirección de red y broadcast).</p>
 <p>En resumen, tanto la notación de máscara de subred como la notación CIDR se utilizan para representar la cantidad de direcciones de host disponibles en una subred. La notación de máscara de subred es más tradicional y utiliza un número de cuatro octetos en formato de punto decimal, mientras que la notación CIDR es más concisa y utiliza un número y una barra para representar la cantidad de bits de la dirección IP que son parte de la subred.</p>
@@ -335,11 +382,11 @@ Ajusta la máscara de subred para limitar el número de máquinas configurables 
 <h2>Comités de estandardización<a class="headerlink" href="#comites-de-estandardizacion" title="Link to this heading"></a></h2>
 <section id="itu">
 <h3>ITU<a class="headerlink" href="#itu" title="Link to this heading"></a></h3>
-<p>La Unión Internacional de Telecomunicaciones (ITU) es una organización intergubernamental que se encarga de establecer estándares para la comunicación y la información en el mundo.</p>
+<p>La <strong>Unión Internacional de Telecomunicaciones (ITU)</strong> es una organización intergubernamental que se encarga de establecer estándares para la comunicación y la información en el mundo.</p>
 </section>
 <section id="iso">
 <h3>ISO<a class="headerlink" href="#iso" title="Link to this heading"></a></h3>
-<p>La Organización Internacional para la Estandarización (ISO) es una organización no gubernamental que se encarga de establecer estándares para una amplia gama de temas, incluyendo la comunicación y la información.</p>
+<p>La <strong>Organización Internacional de Normalización (ISO)</strong> es una organización no gubernamental que se encarga de establecer estándares para una amplia gama de temas, incluyendo la comunicación y la información.</p>
 </section>
 <section id="ansi">
 <h3>ANSI<a class="headerlink" href="#ansi" title="Link to this heading"></a></h3>
@@ -378,6 +425,20 @@ Ajusta la máscara de subred para limitar el número de máquinas configurables 
 <p>Ethernet utiliza el protocolo de enrutamiento Ethernet para enviar paquetes de datos a través de la red. Los dispositivos en una red Ethernet se conectan a un switch o a un conmutador, que actúa como intermediario para enrutar los paquetes de datos entre los dispositivos.</p>
 <p>Ethernet también soporta diferentes velocidades de transmisión, como 10 Mbps, 100 Mbps y 1 Gbps, lo que permite adaptarse a las necesidades de velocidad de la red.</p>
 <p>En resumen, Ethernet es un protocolo de red de área local ampliamente utilizado para conectar dispositivos en una red local, permitiendo la transmisión de datos a través de cables de cobre. Proporciona una forma eficiente y confiable de conectar dispositivos en una red local, con velocidades de transmisión variadas.</p>
+<section id="id1">
+<h3>802.3<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>El estándar 802.3 es un estándar de la IEEE (Instituto de Ingenieros Eléctricos y Electrónicos) que define las especificaciones técnicas para la implementación de redes de área local (LAN) utilizando tecnología Ethernet.</p>
+<p>El estándar 802.3 se divide en varias versiones, cada una con sus propias especificaciones y capacidades de transmisión. Algunas de las versiones más comunes del estándar 802.3 son:</p>
+<ul class="simple">
+<li><p>802.3-1985: Esta es la primera versión del estándar 802.3 y define la especificación para redes Ethernet de 10 Mbps utilizando cableado de pares (twisted pair) de tipo A y B.</p></li>
+<li><p>802.3u-1998: Esta versión del estándar define la especificación para redes Ethernet de 100 Mbps utilizando cableado de pare de pares (twisted pair) de tipo A, B y C, así como fibra óptica.</p></li>
+<li><p>802.3ab-1999: Esta versión del estándar define la especificación para redes Ethernet de 1000 Mbps utilizando cableado de pare de pares (twisted pair) de tipo A, B y C, así como fibra óptica.</p></li>
+<li><p>802.3ae-2002: Esta versión del estándar define la especificación para redes Ethernet de 10 Gbps utilizando fibra óptica.</p></li>
+<li><p>802.3an-2006: Esta versión del estándar define la especificación para redes Ethernet de 1000 Mbps utilizando cableado de pare de pares (twisted pair) de tipo A, B y C, así como fibra óptica, con una distancia máxima de 100 metros.</p></li>
+</ul>
+<p>El estándar 802.3 también define las especificaciones para los dispositivos de red, como switches, hubs, y adaptadores de red. Además, define las especificaciones para los cables y conectores utilizados en las redes Ethernet.</p>
+<p>En resumen, el estándar 802.3 define las especificaciones técnicas para la implementación de redes de área local (LAN) utilizando tecnología Ethernet, con capacidades de transmisión que van desde 10 Mbps hasta 10 Gbps, utilizando diferentes tipos de cableado y dispositivos de red.</p>
+</section>
 </section>
 <section id="fddi">
 <h2>FDDI<a class="headerlink" href="#fddi" title="Link to this heading"></a></h2>
@@ -387,21 +448,128 @@ Ajusta la máscara de subred para limitar el número de máquinas configurables 
 <p>Aunque FDDI fue ampliamente utilizado en la década de 1990, en la actualidad ha sido desplazado por otros protocolos de red de alta velocidad, como Gigabit Ethernet y Fibra Óptica. Sin embargo, FDDI sigue siendo utilizado en algunas redes antiguas o en situaciones específicas donde se requieren velocidades de transmisión más altas.</p>
 <p>En resumen, FDDI es un protocolo de red de área local que utiliza cables de fibra óptica para la transmisión de datos en redes de alta velocidad. Fue ampliamente utilizado en la década de 1990, pero ha sido desplazado por otros protocolos de red más modernos.</p>
 </section>
-<section id="patchpanel">
-<h2>Patchpanel<a class="headerlink" href="#patchpanel" title="Link to this heading"></a></h2>
-<p>Un patch panel es un dispositivo que permite administrar y organizar las conexiones de los cables de una red. Se utiliza principalmente en instalaciones de red grandes y complejas, como oficinas, centros de datos y establecimientos de telecomunicaciones.</p>
-<p>Un patch panel consta de una placa con múltiples puertos de conexión (generalmente RJ-45) que centraliza el cableado de la red. Los cables de la instalación terminan en la parte trasera del panel y, mediante cables más cortos (patch cords), se conectan desde la parte frontal a otros dispositivos como switches o routers.</p>
-<p>El objetivo principal del patch panel es facilitar la administración y la configuración de la red. Permite a los administradores de red conectar y desconectar cables de red fácilmente, lo que facilita la configuración de la red, la reparación de problemas y la gestión del tráfico de red.</p>
-<p>Además, los patch panels también permiten una mayor flexibilidad y escalabilidad en la red, ya que los cables se pueden conectar y desconectar fácilmente sin tener que manipular los dispositivos de red directamente.</p>
-<p>En resumen, un patch panel es un componente esencial para organizar el cableado de una red de datos. Facilita la administración, los cambios y la resolución de problemas al centralizar los puntos de conexión, proporcionando flexibilidad y escalabilidad a la infraestructura de red.</p>
+<section id="trama-ethernet">
+<h2>Trama Ethernet<a class="headerlink" href="#trama-ethernet" title="Link to this heading"></a></h2>
+<p>La trama Ethernet es el formato de datos utilizado en la capa de enlace de datos del modelo OSI para la transmisión de datos a través de una red Ethernet. La trama Ethernet, también conocida como frame, está compuesta por varios campos que proporcionan información adicional para la transmisión y recepción de datos.</p>
+<p>La trama Ethernet (específicamente Ethernet II) está compuesta por los siguientes campos:</p>
+<ol class="arabic simple">
+<li><p>Preambulo: Un conjunto de bits predefinidos que se utilizan para sincronizar los relojes de las máquinas transmisoras y receptoras.</p></li>
+<li><p>Destino: Un campo que contiene la dirección MAC (dirección física) de destino del paquete.</p></li>
+<li><p>Fuente: Un campo que contiene la dirección MAC de origen del paquete.</p></li>
+<li><p>Tipo: Un campo que indica el tipo de datos que se están transmitiendo (por ejemplo, datos, control, etc.).</p></li>
+<li><p>Longitud del cuerpo: Un campo que indica la longitud en bytes del cuerpo de datos.</p></li>
+<li><p>Cuerpo: Un campo que contiene los datos que se están transmitiendo.</p></li>
+<li><p>CRC: Un campo que contiene un código de redundancia cíclica (CRC) que se utiliza para detectar errores en la transmisión.</p></li>
+<li><p>Fin del frame: Un campo que indica el final del paquete.</p></li>
+</ol>
+<p>La trama Ethernet es utilizada en redes Ethernet y en la capa de enlace de datos del modelo OSI.</p>
+<p>En esencia, la trama Ethernet está compuesta por cuatro campos fundamentales; las direcciones MAC de los equipos de origen y destino, un relleno que asegura una longitud fija, y un código de redundancia cíclica (CRC) que se utiliza para detectar errores en la transmisión.</p>
 </section>
-<section id="switch">
-<h2>Switch<a class="headerlink" href="#switch" title="Link to this heading"></a></h2>
-<p>Un switch es un dispositivo de red que actúa como intermediario para enrutar y distribuir el tráfico de datos en una red local (LAN). Su función principal es recibir, procesar y reenviar datos de manera eficiente al dispositivo de destino correcto.</p>
-<p>Un switch opera principalmente en la capa 2 (Enlace de Datos) del modelo OSI. Aprende las direcciones MAC (la dirección física única de cada tarjeta de red) de los dispositivos conectados a cada uno de sus puertos. Cuando recibe un paquete de datos (trama), lo reenvía únicamente al puerto donde se encuentra el dispositivo de destino, en lugar de difundirlo a todos los puertos como haría un hub. Esto reduce el tráfico innecesario y mejora el rendimiento de la red.</p>
-<p>Algunos switches más avanzados, conocidos como switches de capa 3, también pueden realizar funciones de enrutamiento, propias de la capa 3 (Red) del modelo OSI. Esto significa que pueden tomar decisiones de reenvío basadas en direcciones IP, permitiendo la comunicación entre diferentes subredes (VLANs) sin necesidad de un router dedicado.</p>
-<p>Además, los switches modernos también pueden realizar enrutamiento a nivel 3, utilizando direcciones IP, lo que permite que los switches se comuniquen con dispositivos en otras redes, utilizando protocolos como DHCP y DNS.</p>
-<p>En resumen, un switch es un dispositivo de red que actúa como intermediario para enrutar y distribuir el tráfico de datos en una red local. Conecta y conecta dispositivos en una red local, utilizando direcciones MAC para enrutar los datos. Los switches modernos también pueden realizar enrutamiento a nivel 3, utilizando direcciones IP, lo que permite que los switches se comuniquen con dispositivos en otras redes.</p>
+<section id="modelo-tcp-ip">
+<h2>Modelo TCP/IP<a class="headerlink" href="#modelo-tcp-ip" title="Link to this heading"></a></h2>
+<p>A diferencia del modelo OSI, que es un marco teórico, el modelo TCP/IP es un conjunto de protocolos que se implementan en la práctica y que son la base de Internet. Se suele describir con un modelo de cuatro capas que se correlaciona con el modelo OSI.</p>
+<p>A continuación se muestra la equivalencia y los nombres que pueden recibir las capas:</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Comparación Modelos OSI y TCP/IP</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Capa OSI</p></th>
+<th class="head"><p>Capa TCP/IP (Estándar)</p></th>
+<th class="head"><p>Capa TCP/IP (Alternativo)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><ol class="arabic simple" start="7">
+<li><p>Aplicación</p></li>
+</ol>
+</td>
+<td rowspan="3"><p>multirow{3}{*}{<strong>Aplicación</strong>}</p></td>
+<td rowspan="3"><p>multirow{3}{*}{<strong>Aplicación</strong>}</p></td>
+</tr>
+<tr class="row-odd"><td><ol class="arabic simple" start="6">
+<li><p>Presentación</p></li>
+</ol>
+</td>
+</tr>
+<tr class="row-even"><td><ol class="arabic simple" start="5">
+<li><p>Sesión</p></li>
+</ol>
+</td>
+</tr>
+<tr class="row-odd"><td><ol class="arabic simple" start="4">
+<li><p>Transporte</p></li>
+</ol>
+</td>
+<td><p><strong>Transporte</strong></p></td>
+<td><p><strong>Transporte</strong></p></td>
+</tr>
+<tr class="row-even"><td><ol class="arabic simple" start="3">
+<li><p>Red</p></li>
+</ol>
+</td>
+<td><p><strong>Internet</strong></p></td>
+<td><p><strong>Interred</strong></p></td>
+</tr>
+<tr class="row-odd"><td><ol class="arabic simple" start="2">
+<li><p>Enlace</p></li>
+</ol>
+</td>
+<td rowspan="2"><p>multirow{2}{*}{<strong>Acceso a la Red</strong>}</p></td>
+<td rowspan="2"><p>multirow{2}{*}{<strong>Subred</strong>}</p></td>
+</tr>
+<tr class="row-even"><td><ol class="arabic simple">
+<li><p>Físico</p></li>
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><strong>Capa de Acceso a la Red (o Subred)</strong>: Agrupa las funciones de las capas Física y de Enlace del modelo OSI. Se encarga de la transmisión de datos por el medio físico (cables, ondas de radio) y del direccionamiento físico (direcciones MAC) dentro de una misma red local.</p></li>
+<li><p><strong>Capa de Internet (o Interred)</strong>: Equivalente a la capa de Red del modelo OSI. Su función es el direccionamiento lógico (direcciones IP) y el enrutamiento de paquetes a través de diferentes redes para que lleguen a su destino final. Aquí operan los routers.</p></li>
+<li><p><strong>Capa de Transporte</strong>: Corresponde a la capa de Transporte del modelo OSI. Proporciona la comunicación extremo a extremo entre las aplicaciones de los dispositivos de origen y destino. Los protocolos principales son TCP (fiable y orientado a conexión) y UDP (rápido y no orientado a conexión).</p></li>
+<li><p><strong>Capa de Aplicación</strong>: Combina las capas de Sesión, Presentación y Aplicación del modelo OSI. Es la capa con la que interactúan las aplicaciones del usuario. Define los protocolos que usan las aplicaciones para intercambiar datos, como HTTP (navegación web), SMTP (correo electrónico) o FTP (transferencia de archivos).</p></li>
+</ul>
+</section>
+<section id="modelo-osi">
+<h2>modelo OSI<a class="headerlink" href="#modelo-osi" title="Link to this heading"></a></h2>
+<p>El modelo OSI (Open System Interconnection Model) o “Modelo de Interconexión de Sistemas Abiertos” es un marco conceptual descrito por el estándar <strong>ISO/IEC 7498-1</strong>.</p>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Capas del Modelo OSI</span><a class="headerlink" href="#id4" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>7</p></th>
+<th class="head"><p>Aplicación</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>Presentación</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>Sesión</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Transporte</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Red</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Enlace de datos</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Físico</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><strong>Nivel físico</strong>: se encarga de la transmisión de dígitos binarios a través del medio de comunicación.</p></li>
+<li><p><strong>Nivel enlace</strong>: su función es detectar y corregir los errores.</p></li>
+<li><p><strong>Nivel de red</strong>: identifica la mejor ruta por la que circulará la información.</p></li>
+<li><p><strong>Nivel de transporte</strong>: pasa los datos del nivel de sesión, a la capa de red y ayuda a que sean entregados de forma correcta en el nivel de sesión del otro extremo.</p></li>
+<li><p><strong>Nivel se sesión</strong>: establece las conexiones de comunicación(sesiones), entre los equipos.</p></li>
+<li><p><strong>Nivel de presentación</strong>: su función consiste en controlar el significado de la información que es transmitida.</p></li>
+<li><p><strong>Nivel de aplicación</strong>: Sirve de <em>enlace</em> entre los programas de los equipos.</p></li>
+</ul>
 </section>
 </section>
 

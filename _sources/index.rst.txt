@@ -6,12 +6,6 @@
 Documentation de Técnico Sistemas !
 ============================================
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Contenidos:
-
-   Sistema/resume_modulo_0852
-
 Indices y tablas
 ================
 
@@ -120,6 +114,8 @@ Redes
    Redes/Redes
    Redes/redesInalambricas
    Redes/ElementosLAN
+   Redes/instConfApp
+   Redes/dispositivosDeRed
 
 
 Office, Word, Excel y PowerPoint
@@ -176,14 +172,23 @@ Downloadable files
    - Click to download: :download:`(sistema/OS) Tema 3 - Elementos del SO <descargas/Tema_3._Elementos_de_un_Sistema_Operativo_Informático.pdf>`
    - Click to download: :download:`(sistema/OS) Tema 4 - Sistemas(SO) Actuales <descargas/Tema_4._Sistemas_operativos_informáticos_actuales.pdf>`
    - Click to download: :download:`(Redes) Tema 1 - Arquitectura de redes de área local <descargas/Tema_1.Arquitectura_de_redes_de_área_local.pdf>`
-   - Click to download: :download:`(Redes) Tema 2 - Elementos de una LAN <descargas/Tema_2.Elementos_de_una_red_de_área_local.pdf>`
+   - Click to download: :download:`(Redes) Tema 2 - Elementos de una LAN <descargas/Tema_2.Elementos_de_una_red_de_área_local.pdf.pdf>`
    - Click to download: :download:`(Redes) Tema 3 - Protocolos de una LAN <descargas/Tema3.ProtocolosDeUnaRedDeAreaLocal.pdf>`
    - Click to download: :download:`(Redes) Tema 4 - Instalación y configuarión de nodos LAN <descargas/Tema4.InstalaciónYConfiguraciónDeLosNodosDeLaRedLocal.pdf>`
    - Click to download: :download:`(Redes) Tema 5 - Verificación y pruebas en una LAN <descargas/Tema5.VerificaciónYPruebaDeElementosDeConectividadDeRedesDeAreaLocal.pdf>`
    - Click to download: :download:`(Redes) Tema 6 - Tipos de incidencias en una LAN <descargas/Tema6.TiposDeIncidenciasQueSePuedenProducirEnUnaRedDeAreaLocal.pdf>`
    - Click to download: :download:`(Redes) Tema 7 - Detección y diagnóstico de incidencias en una LAN <descargas/Tema7.DetecciónYDiagnósticoDeIncidenciasEnRedesDeAreaLocal.pdf>`
+   - Click to download: :download:`(Redes) Tema 8 - Comprobación del cable estructurado <descargas/Tema8.ComprobaciónDeCablesDeParTrenzadoYCoaxial.pdf>`
+   - Click to download: :download:`(Redes) Tema 9 - Comprovación y solución de incidencias en Red <descargas/Tema9.ComprobaciónYSoluciónDeIncidenciasAnivelDeRed.pdf>`
    - Click to download: :download:`(Redes) Instalación y configuración de aplicaciones <descargas/Instalación_y_configuración_de_aplicaciones_informáticas.pdf>`
 
 
+Release Notes & Changelog
+==========================
 
-- Click to download: :download:`(Redes) Tema 8 - Comprobación del cable estructurado <descargas/Tema8.ComprobaciónDeCablesDeParTrenzadoYCoaxial.pdf>`
+.. toctree::
+   :maxdepth: 2
+   :caption: Contenidos:
+
+   Sistema/resume_modulo_0852
+   changelog.rst

@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instalación y configuración de aplicadiones informáticas &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+    <link rel="shortcut icon" href="../_static/simulation.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Patchpanel" href="dispositivosDeRed.html" />
+    <link rel="prev" title="Elementos de una red de área local" href="ElementosLAN.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Sistemas:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/VonNeumann.html">John von Neumann</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Memorias.html">Tipos y características de memoria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Buses.html">Buses del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/perifericos.html">Periféricos clasificados por tipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI.html">¿Qué es el estándar UEFI?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Prefetching_en_Procesadores.html">Prefetching en Procesadores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/Ejercicios.html">Ejercicios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instalación y gestión del SO:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/SO_portatil.html">Creación de medios de instalación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/EFIpartWindows.html">Windows hardening, EFI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/funcionesSO.html">Funciones del Sistema Operativo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/VirtualBox.html">Virtual Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/info.html">Información del sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/plataforma.html">Concepto “Plataforma” en Computación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/proxmox.html">PROXMOX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/administradorEquipos.html">Administrador de equipos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/asistenciaRemota.html">Asistencia remota</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OS/ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aplicaciones Windows:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/aplicacionesPortables.html">Aplicaciones Portables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/Cobian.html">Cobian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/antivirus.html">¿Qué es un antivirus?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/cortafuegos.html">¿Qué es un cortafuegos?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AplicacionesDeSistema/OS-msconfig.html">Arranque del sistema en Windows</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Redes ethernet/WiFi:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ProtocoloTCP_IP.html">Protocolo TCP/IP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Redes.html">Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="redesInalambricas.html">Redes inalámbricas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ElementosLAN.html">Elementos de una red de área local</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Instalación y configuración de aplicadiones informáticas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#lpi-ley-de-propiedad-intelectual">LPI, Ley de propiedad intelectual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proteccion-de-datos-rgpd-y-lopdgdd">Protección de Datos (RGPD y LOPDGDD)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sanciones">Sanciones</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tipos-de-software-segun-su-licencia">Tipos de Software según su licencia</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#licencias-de-software-libre-mas-comunes">Licencias de Software Libre más comunes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#requisitos-del-sistema-exigidos-por-las-aplicaciones-informaticas">Requisitos del sistema exigidos por las aplicaciones informáticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#objetivos">Objetivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instalacion-de-aplicaciones-informaticas">Instalación de aplicaciones informáticas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Objetivos</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#componentes-de-una-aplicacion">Componentes de una aplicación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#procedimientos-de-copia-de-seguridad">Procedimientos de copia de seguridad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instalacion-y-registro-de-aplicaciones">Instalación y registro de aplicaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#otras-aplicaciones-y-complementos">Otras aplicaciones y complementos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#activacion-y-registro-de-aplicaciones">Activación y registro de aplicaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#procedimeintos-de-prueba-y-verificacion">Procedimeintos de prueba y verificación</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dispositivosDeRed.html">Patchpanel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dispositivosDeRed.html#switch">Switch</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte1.html">Primera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte2.html">Segunda parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/Word-apuntes-parte3.html">Tercera parte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-1.html">Prueba -1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-2.html">Prueba 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/prueba-3.html">Prueba 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/apuntesRaulV-v3.html">Tercera Parte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Excel:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel.html">Parte 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-2.html">Parte 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/excel-3.html">Parte 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Office/cuestionarios.html">Enlace a cuestionarios</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Office, Power Point:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Office/PowerPoint.html">Power Point</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Instalación y configuración de aplicadiones informáticas</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Redes/instConfApp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="instalacion-y-configuracion-de-aplicadiones-informaticas">
+<h1>Instalación y configuración de aplicadiones informáticas<a class="headerlink" href="#instalacion-y-configuracion-de-aplicadiones-informaticas" title="Link to this heading"></a></h1>
+<section id="lpi-ley-de-propiedad-intelectual">
+<h2>LPI, Ley de propiedad intelectual<a class="headerlink" href="#lpi-ley-de-propiedad-intelectual" title="Link to this heading"></a></h2>
+<p>Protege las creaciones originales e interpretaciones artísticas. Excluye las ideas, procedimientos, métodos de operación y conceptos matemáticos en sí mismos, pero no la forma en que estos se expresan o explotan. Tampoco se incluyen las disposiciones legales o reglamentarias, las resoluciones de órganos judiciales ni los actos de organismos públicos.</p>
+<p><strong>Tipos de derechos recogidos</strong>
+- Derechos morales: Son derechos irrenunciables e inalienables que tiene el autor, como el derecho al reconocimiento de su autoría o a la integridad de la obra.
+- Derechos patrimoniales: Son los derechos que permiten al autor explotar económicamente su obra (reproducción, distribución, comunicación pública). Son transferibles y tienen una duración limitada.</p>
+<p><strong>Actuaciones que no requieren de autorización por parte del autor</strong>
+- Reproducciones provisionales y copias privadas: Uso personal sin ánimo de lucro.
+- Citas e ilustraciones en la enseñanza: Con fines educativos o de investigación.
+- Trabajos sobre temas de actualidad: Reseñas y críticas.
+- Utilización de obras en vías públicas: Reproducción de obras situadas permanentemente en lugares públicos (parques, calles) con fines informativos.
+- Actos oficiales y ceremonias religiosas.
+- Parodias de obras divulgadas: Siempre que no impliquen riesgo de confusión ni daño a la obra original.</p>
+<p><strong>Cuándo son de dominio público</strong>
+Una obra pasa a ser de dominio público, por regla general, 70 años después de la muerte del autor. En ese momento, puede ser utilizada por cualquiera sin necesidad de autorización, aunque se deben respetar los derechos morales de autoría e integridad.</p>
+</section>
+<section id="proteccion-de-datos-rgpd-y-lopdgdd">
+<h2>Protección de Datos (RGPD y LOPDGDD)<a class="headerlink" href="#proteccion-de-datos-rgpd-y-lopdgdd" title="Link to this heading"></a></h2>
+<p>La normativa actual sobre protección de datos se articula en torno a dos leyes fundamentales:</p>
+<ul class="simple">
+<li><p><strong>Reglamento General de Protección de Datos (RGPD)</strong>: Es el reglamento europeo, de aplicación directa en toda la UE desde 2018, que establece las reglas para la protección de los datos personales.</p></li>
+<li><p><strong>Ley Orgánica de Protección de Datos y Garantía de los Derechos Digitales (LOPDGDD)</strong>: Es la ley española (Ley Orgánica 3/2018) que adapta el derecho español al RGPD y desarrolla sus disposiciones. Esta ley derogó la anterior LOPD de 1999.</p></li>
+</ul>
+<p>Además de la protección de datos personales en general, la LOPDGDD introduce y refuerza otros derechos digitales fundamentales. Entre ellos, destacan el derecho a la intimidad frente al uso de dispositivos de geolocalización y videovigilancia, que garantiza el control sobre la propia imagen y ubicación; y el derecho a la desconexión digital, que permite a los trabajadores limitar el uso de herramientas digitales fuera de su horario laboral para asegurar el descanso y la conciliación personal y familiar.</p>
+<section id="sanciones">
+<h3>Sanciones<a class="headerlink" href="#sanciones" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Infracciones leves: Por ejemplo, no informar debidamente al usuario sobre el tratamiento de sus datos.</p></li>
+<li><p>Infracciones graves: Tratar datos de menores sin consentimiento o no implementar las medidas de seguridad adecuadas.</p></li>
+<li><p>Infracciones muy graves: Cesión internacional de datos sin garantías o el uso de datos para una finalidad distinta para la que fueron recogidos.</p></li>
+</ul>
+</section>
+</section>
+<section id="tipos-de-software-segun-su-licencia">
+<h2>Tipos de Software según su licencia<a class="headerlink" href="#tipos-de-software-segun-su-licencia" title="Link to this heading"></a></h2>
+<p><strong>Software propietario</strong>: El usuario tiene limitaciones en su uso, modificación o redistribución. El código fuente no está disponible. Ejemplo: Microsoft Windows, Adobe Photoshop.
+<strong>Software shareware o de evaluación</strong>: Se distribuye gratuitamente, pero con limitaciones, como un período de prueba. Pasado ese tiempo, el usuario debe pagar para seguir usándolo. Ejemplo: WinRAR.
+<strong>Software de demostración (Demo)</strong>: Versión gratuita de un programa con funcionalidades limitadas, diseñada para que el usuario pruebe el software antes de comprar la versión completa.
+<strong>Software libre</strong>: El usuario tiene la libertad de usar, estudiar, modificar y distribuir el software y su código fuente. No tiene por qué ser gratuito. Ejemplo: Linux, LibreOffice.
+<strong>Software de dominio público</strong>: Software sin derechos de autor. Cualquiera puede usarlo, modificarlo y distribuirlo sin ninguna restricción.
+<strong>Software semi-libre</strong>: Es software libre, pero incluye restricciones que no permiten su uso en ciertos ámbitos (por ejemplo, prohíbe su uso con fines de lucro).
+<strong>Software freeware</strong>: Se distribuye gratuitamente y se puede usar sin coste, pero no se puede modificar ni acceder a su código fuente. No es software libre. Ejemplo: Google Chrome, Skype.</p>
+<section id="licencias-de-software-libre-mas-comunes">
+<h3>Licencias de Software Libre más comunes<a class="headerlink" href="#licencias-de-software-libre-mas-comunes" title="Link to this heading"></a></h3>
+<p>Dentro del software libre, existen diferentes licencias que definen cómo se puede usar, modificar y distribuir el código. Algunas de las más importantes son:</p>
+<ul class="simple">
+<li><p><strong>Licencia Pública General de GNU (GPL)</strong>: Es una licencia <em>copyleft</em>. Esto significa que cualquier trabajo derivado de un software con licencia GPL debe ser distribuido bajo la misma licencia GPL. Su objetivo es garantizar que el software permanezca libre para siempre. Ejemplo: Linux, GIMP.</p></li>
+<li><p><strong>Licencia MIT</strong>: Es una licencia muy permisiva. Permite hacer casi cualquier cosa con el código (usar, copiar, modificar, fusionar, publicar, distribuir, sublicenciar y/o vender copias), con la única condición de que se mantenga el aviso de copyright y la licencia original en todas las copias. Ejemplo: Node.js, Angular.</p></li>
+<li><p><strong>Licencia Apache 2.0</strong>: Similar a la MIT, es una licencia permisiva que permite un uso muy libre del software. Además de los derechos de la licencia MIT, otorga explícitamente una licencia sobre las patentes del contribuidor que cubran su contribución. Requiere mantener el aviso de copyright y la licencia, y listar los cambios significativos realizados al código original. Ejemplo: Android, Swift.</p></li>
+</ul>
+</section>
+</section>
+<section id="requisitos-del-sistema-exigidos-por-las-aplicaciones-informaticas">
+<h2>Requisitos del sistema exigidos por las aplicaciones informáticas<a class="headerlink" href="#requisitos-del-sistema-exigidos-por-las-aplicaciones-informaticas" title="Link to this heading"></a></h2>
+</section>
+<section id="objetivos">
+<h2>Objetivos<a class="headerlink" href="#objetivos" title="Link to this heading"></a></h2>
+<p>Los objetivos al evaluar los requisitos de una aplicación son:</p>
+<ul class="simple">
+<li><p><strong>Identificar los requisitos de hardware</strong>: Reconocer los componentes físicos mínimos que necesita el equipo (CPU, RAM, espacio en disco, tarjeta gráfica, etc.).</p></li>
+<li><dl class="simple">
+<dt><strong>Identificar los requisitos de software</strong>:</dt><dd><ul>
+<li><p><strong>Sistema Operativo</strong>: Versión y arquitectura (32/64 bits) compatibles.</p></li>
+<li><p><strong>Dependencias</strong>: Otras aplicaciones o librerías necesarias para que el programa funcione correctamente (ej. Java, .NET Framework).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Interpretar la documentación técnica</strong>: Comprender los manuales de instalación y de usuario para realizar una correcta configuración.</p></li>
+<li><dl class="simple">
+<dt><strong>Conocer otros requisitos</strong>:</dt><dd><ul>
+<li><p><strong>Licencias y claves</strong>: Entender el tipo de licencia y si se necesita una clave de producto para la activación.</p></li>
+<li><p><strong>Procedimiento de instalación</strong>: Seguir la lógica específica de instalación si la hubiera.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Identificar las fuentes de obtención</strong>: Saber cómo y dónde adquirir las aplicaciones de forma legal y segura (sitio web oficial, tiendas de aplicaciones, etc.).</p></li>
+</ul>
+</section>
+<section id="instalacion-de-aplicaciones-informaticas">
+<h2>Instalación de aplicaciones informáticas<a class="headerlink" href="#instalacion-de-aplicaciones-informaticas" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>Objetivos<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Interpretar la documentación.</p></li>
+<li><p>Instalar y configurar las aplicaciones ofimáticas.</p></li>
+<li><p>Conocer los procedimientos existentes para realizar las copias de seguridad.</p></li>
+<li><p>Activar y registrar aplicaciones.</p></li>
+<li><p>Comprobar, instalar y desinstalar aplicaciones en el equipo.</p></li>
+</ul>
+</section>
+</section>
+<section id="componentes-de-una-aplicacion">
+<h2>Componentes de una aplicación<a class="headerlink" href="#componentes-de-una-aplicacion" title="Link to this heading"></a></h2>
+<p><strong>El formato</strong>: Se refiere a cómo se presenta la aplicación para su instalación. Puede ser un archivo ejecutable (<code class="docutils literal notranslate"><span class="pre">.exe</span></code>), un paquete de instalación (<code class="docutils literal notranslate"><span class="pre">.msi</span></code>), un archivo comprimido (<code class="docutils literal notranslate"><span class="pre">.zip</span></code>) o a través de una tienda de aplicaciones.
+<strong>Manual de instalación</strong>: Documento que guía al usuario paso a paso en el proceso de instalación y configuración inicial de la aplicación.
+<strong>Manual de usuario</strong>: Guía que explica cómo utilizar las diferentes funciones y características de la aplicación una vez instalada.</p>
+</section>
+<section id="procedimientos-de-copia-de-seguridad">
+<h2>Procedimientos de copia de seguridad<a class="headerlink" href="#procedimientos-de-copia-de-seguridad" title="Link to this heading"></a></h2>
+<p>Consisten en crear duplicados de los datos importantes de una aplicación o del sistema para poder restaurarlos en caso de pérdida por un fallo de hardware, un error humano o un ciberataque. Tipos comunes:
+- <strong>Copia completa</strong>: Se copian todos los datos.
+- <strong>Copia incremental</strong>: Se copian solo los datos que han cambiado desde la última copia (completa o incremental).
+- <strong>Copia diferencial</strong>: Se copian los datos que han cambiado desde la última copia completa.</p>
+</section>
+<section id="instalacion-y-registro-de-aplicaciones">
+<h2>Instalación y registro de aplicaciones<a class="headerlink" href="#instalacion-y-registro-de-aplicaciones" title="Link to this heading"></a></h2>
+<p>La piratería de software es la copia, distribución o uso no autorizado de software con derechos de autor.</p>
+<p><strong>Validación de software original</strong>: Proceso que comprueba que la copia del software que se está instalando es legal y no una copia pirata. A menudo se realiza en línea.
+<strong>Certificados de autenticidad (COA)</strong>: Etiqueta o documento que ayuda a identificar el software original. Suele incluir una clave de producto o número de serie.
+<strong>Instalación o actualización de componentes</strong>: Durante la instalación, el programa puede necesitar instalar o actualizar componentes compartidos del sistema operativo (como librerías .NET Framework o Visual C++) para su correcto funcionamiento.</p>
+<p>Ejemplos de aplicaciones que suelen incorporar una <em>suite</em> ofimática:
+- Procesador de textos.
+- Hoja de cálculo.
+- Presentación mediante diapositivas.
+- Bases de datos.
+- Cliente de correo.
+- Tratamiento de gráficos.</p>
+</section>
+<section id="otras-aplicaciones-y-complementos">
+<h2>Otras aplicaciones y complementos<a class="headerlink" href="#otras-aplicaciones-y-complementos" title="Link to this heading"></a></h2>
+<p><strong>Archivos comprimidos</strong>: Ficheros que contienen uno o más archivos o carpetas, cuyo tamaño se ha reducido mediante un algoritmo de compresión. Se usan para facilitar la descarga y el almacenamiento. Formatos comunes son .ZIP, .RAR, .7z.</p>
+</section>
+<section id="activacion-y-registro-de-aplicaciones">
+<h2>Activación y registro de aplicaciones<a class="headerlink" href="#activacion-y-registro-de-aplicaciones" title="Link to this heading"></a></h2>
+<p>La <strong>activación</strong> es un proceso anti-piratería que verifica que la clave de producto es válida y no se está usando en más equipos de los permitidos por la licencia. El <strong>registro</strong> es un proceso opcional en el que el usuario proporciona su información al fabricante para recibir soporte técnico, noticias y actualizaciones.</p>
+</section>
+<section id="procedimeintos-de-prueba-y-verificacion">
+<h2>Procedimeintos de prueba y verificación<a class="headerlink" href="#procedimeintos-de-prueba-y-verificacion" title="Link to this heading"></a></h2>
+<p>Una vez instalada la aplicación, es crucial verificar que funciona correctamente.</p>
+<p>Componentes instalados: Comprobar que todos los archivos, accesos directos y entradas de menú se han creado correctamente.
+Acceso a recursos propios: Verificar que la aplicación puede acceder a sus propios archivos y crear los documentos o datos necesarios para funcionar.
+Acceso a recursos compartidos: Probar que la aplicación puede acceder a recursos de red, como impresoras, escáneres o unidades de red compartidas, si es necesario para su funcionamiento.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ElementosLAN.html" class="btn btn-neutral float-left" title="Elementos de una red de área local" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dispositivosDeRed.html" class="btn btn-neutral float-right" title="Patchpanel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

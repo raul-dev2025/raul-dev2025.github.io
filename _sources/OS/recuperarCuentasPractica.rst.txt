@@ -63,30 +63,31 @@ En esta situación, serán utilizadas herramientas Linux para montar -o definir 
 
    Han sido preparadas otras dos prácticas, en caso de encontrar algún problema durante el montaje de la partición Windows. Ver secciones :ref:`hibernación<alternativa-1>` y :ref:`errores superbloque<alternativa-2>`.
 
-   AL observar la carpeta que aparece en el escritorio, se deberá localizar la carpeta ``/Windows/System32/``, dentro hay un archivo llamado osk.exe que pertenece al teclado virtual.
-   Nos situamos con ``nautilus`` -el explorador de archivos Linux, dentro de la carpeta mencionada y utilizaremos la barra de direcciones o rutas de archivo, para copiar la ruta hacia el archivo. Si esto resulta demasiado abstracto, lo mejor es ir copiando y pegando sobre la *shell*, los comandos que dejaré escritos a continuación.
+AL observar la carpeta que aparece en el escritorio, se deberá localizar la carpeta ``/Windows/System32/``, dentro hay un archivo llamado osk.exe que pertenece al teclado virtual.
+Nos situamos con ``nautilus`` -el explorador de archivos Linux, dentro de la carpeta mencionada y utilizaremos la barra de direcciones o rutas de archivo, para copiar la ruta hacia el archivo. Si esto resulta demasiado abstracto, lo mejor es ir copiando y pegando sobre la *shell*, los comandos que dejaré escritos a continuación.
 
-   .. code-block:: powershell
 
-      ls /Windows/System32/osk.exe
+.. code-block:: powershell
 
-   Renombraremos este archivo a:
+   ls /Windows/System32/osk.exe
 
-   .. code-block:: powershell
+Renombraremos este archivo a:
 
-      mv /Windows/System32/osk.exe /Windows/System32/osk.old
+.. code-block:: powershell
 
-   Buscaremos también el archivo cmd.exe y lo copiaremos en:
+   mv /Windows/System32/osk.exe /Windows/System32/osk.old
 
-   .. code-block:: powershell
+Buscaremos también el archivo cmd.exe y lo copiaremos en:
 
-      ls /Windows/System32/cmd.exe
-      cp /Windows/System32/cmd.exe /Windows/System32/osk.exe
+.. code-block:: powershell
 
-   Cuando hayamos completado la tarea; *reiniciar la contraseña olvidada* habrá que:
+   ls /Windows/System32/cmd.exe
+   cp /Windows/System32/cmd.exe /Windows/System32/osk.exe
 
-   1. Borrar ``/Windows/System32/osk.exe``, ya que hemos jaqueado el sistema, copiando la aplicación ``cmd``, con el nombre del *teclado virtual*. Si lo dejamos tal cuál, dejariamos abierta una puerta trasera; esto rompe la integridad del sistema; hay que arreglarlo!
-   2. Devolvemos el acceso al teclado virtual desde el login o pantalla de inicio de usuario. Para ello copiamos ``/Windows/System32/osk.old`` en ``/Windows/System32/osk.exe``. Otras combinaciones de este "mecanismo" podían resultar en problemas con los permisos que el sistema confiere al archivo.
+Cuando hayamos completado la tarea; *reiniciar la contraseña olvidada* habrá que:
+
+1. Borrar ``/Windows/System32/osk.exe``, ya que hemos jaqueado el sistema, copiando la aplicación ``cmd``, con el nombre del *teclado virtual*. Si lo dejamos tal cuál, dejariamos abierta una puerta trasera; esto rompe la integridad del sistema; hay que arreglarlo!
+2. Devolvemos el acceso al teclado virtual desde el login o pantalla de inicio de usuario. Para ello copiamos ``/Windows/System32/osk.old`` en ``/Windows/System32/osk.exe``. Otras combinaciones de este "mecanismo" podían resultar en problemas con los permisos que el sistema confiere al archivo.
 
 .. tip::
 

@@ -12,10 +12,54 @@ El standard 802.11 es un protocolo de red inalámbrica que define las caracterí
 * Cifrado: El standard 802.11 define mecanismos de cifrado para proteger los datos transmitidos por la red.
 * QoS: El standard 802.11 define mecanismos de gestión de la calidad de servicio (QoS) para garantizar que los datos se transmitan a través de la red con la calidad y prioridad adecuadas.
 
-Aquí está la tabla en formato de texto reestructurado:
 
-Mis disculpas por la confusión. Aquí está la tabla en formato de texto reestructurado:
+Gestión de Canales e Interferencias
+-----------------------------------
 
+Uno de los problemas más comunes en las redes Wi-Fi, especialmente en la banda de 2.4 GHz, son las interferencias provocadas por la saturación de canales.
+
+Canales Wi-Fi y Solapamiento
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Las frecuencias que usa el Wi-Fi se dividen en varios carriles o **canales**.
+
+- **Banda de 2.4 GHz**: Es la más común, con mayor alcance pero más lenta. Dispone de 11 o 13 canales, pero la mayoría se solapan entre sí. Solo los canales **1, 6 y 11** son independientes y no se interfieren mutuamente, por lo que son los más recomendados.
+- **Banda de 5 GHz**: Es más rápida y tiene muchos más canales que no se solapan, por lo que sufre menos interferencias, aunque su alcance es menor.
+
+Cuando varios puntos de acceso (el tuyo y los de tus vecinos) transmiten en el mismo canal o en canales solapados, se produce una **interferencia**. Esto es como si varias personas intentaran hablar a la vez en el mismo tono, generando "ruido" que degrada la comunicación.
+
+Los síntomas de la interferencia de canal son:
+
+- Velocidad de conexión lenta e inestable.
+- Microcortes o desconexiones frecuentes.
+- Latencia alta (ping alto).
+- Menor alcance de la señal.
+
+Análisis y Selección de Canal
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Para solucionar la incidencia, es necesario identificar qué canales están más saturados y cuál es la mejor alternativa. Esto se realiza con un **analizador de Wi-Fi**.
+
+1.  **Utilizar una herramienta de análisis**:
+
+    - **Windows**: Se puede usar `inSSIDer`, `NetSpot` o el comando `netsh wlan show networks mode=bssid` en la terminal.
+    - **Android**: `Wifi Analyzer` es una de las aplicaciones más populares y visuales.
+    - **macOS**: Incluye una herramienta nativa accesible manteniendo la tecla `Opción` (⌥) y haciendo clic en el icono de Wi-Fi -> "Abrir Diagnóstico Inalámbrico" -> Menú `Ventana` -> `Escanear`.
+
+2.  **Interpretar los resultados**: Estas herramientas muestran un gráfico con todas las redes Wi-Fi cercanas, su potencia y el canal que ocupan. El objetivo es encontrar un canal (idealmente el 1, 6 o 11) que esté libre o tenga el menor número de redes posible.
+
+Configuración del Canal en el Router
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Una vez identificado el canal óptimo, el último paso es configurar el punto de acceso o router para que lo utilice.
+
+1.  **Acceder a la configuración del router**: Abre un navegador y entra en la puerta de enlace del router (normalmente `192.168.1.1` o `192.168.0.1`).
+2.  **Ir a la configuración inalámbrica**: Busca la sección de configuración "Wireless" o "Red inalámbrica".
+3.  **Cambiar el canal**: Localiza la opción "Canal" o "Channel" para la banda de 2.4 GHz. Por defecto, suele estar en "Automático". Cámbiala manualmente al canal que has elegido (1, 6 u 11).
+4.  **Guardar y reiniciar**: Aplica los cambios. El router se reiniciará con la nueva configuración.
+
+
+------
 
 .. list-table::
    :widths: 10 10 15 30 15 15

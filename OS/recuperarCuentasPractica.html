@@ -40,11 +40,7 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Sistemas:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Sistemas:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Sistema/evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Sistema/GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a></li>
@@ -116,6 +112,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../Redes/Redes.html">Redes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Redes/redesInalambricas.html">Redes inalámbricas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Redes/ElementosLAN.html">Elementos de una red de área local</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Redes/instConfApp.html">Instalación y configuración de aplicadiones informáticas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Redes/dispositivosDeRed.html">Patchpanel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Redes/dispositivosDeRed.html#switch">Switch</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Office, Word:</span></p>
 <ul>
@@ -137,6 +136,11 @@
 <p class="caption" role="heading"><span class="caption-text">Office, Power Point:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Office/PowerPoint.html">Power Point</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contenidos:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Sistema/resume_modulo_0852.html">Preparación para el Examen - Módulo 0852</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes &amp; Changelog</a></li>
 </ul>
 
         </div>
@@ -231,6 +235,7 @@ La práctica descrita a continuación, asume que la partición Windows fue monta
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Han sido preparadas otras dos prácticas, en caso de encontrar algún problema durante el montaje de la partición Windows. Ver secciones <a class="reference internal" href="#alternativa-1"><span class="std std-ref">hibernación</span></a> y <a class="reference internal" href="#alternativa-2"><span class="std std-ref">errores superbloque</span></a>.</p>
+</div>
 <p>AL observar la carpeta que aparece en el escritorio, se deberá localizar la carpeta <code class="docutils literal notranslate"><span class="pre">/Windows/System32/</span></code>, dentro hay un archivo llamado osk.exe que pertenece al teclado virtual.
 Nos situamos con <code class="docutils literal notranslate"><span class="pre">nautilus</span></code> -el explorador de archivos Linux, dentro de la carpeta mencionada y utilizaremos la barra de direcciones o rutas de archivo, para copiar la ruta hacia el archivo. Si esto resulta demasiado abstracto, lo mejor es ir copiando y pegando sobre la <em>shell</em>, los comandos que dejaré escritos a continuación.</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">ls </span><span class="p">/</span><span class="n">Windows</span><span class="p">/</span><span class="n">System32</span><span class="p">/</span><span class="n">osk</span><span class="p">.</span><span class="n">exe</span>
@@ -250,7 +255,6 @@ Nos situamos con <code class="docutils literal notranslate"><span class="pre">na
 <li><p>Borrar <code class="docutils literal notranslate"><span class="pre">/Windows/System32/osk.exe</span></code>, ya que hemos jaqueado el sistema, copiando la aplicación <code class="docutils literal notranslate"><span class="pre">cmd</span></code>, con el nombre del <em>teclado virtual</em>. Si lo dejamos tal cuál, dejariamos abierta una puerta trasera; esto rompe la integridad del sistema; hay que arreglarlo!</p></li>
 <li><p>Devolvemos el acceso al teclado virtual desde el login o pantalla de inicio de usuario. Para ello copiamos <code class="docutils literal notranslate"><span class="pre">/Windows/System32/osk.old</span></code> en <code class="docutils literal notranslate"><span class="pre">/Windows/System32/osk.exe</span></code>. Otras combinaciones de este “mecanismo” podían resultar en problemas con los permisos que el sistema confiere al archivo.</p></li>
 </ol>
-</div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>En la pantalla de inicio de sesión(login) o bloqueo, hacer <kbd class="kbd docutils literal notranslate">click</kbd> en el icono accesibilidad(figura de persona con un círculo) en la esquina inferior derecha. Abrirá la shell, en lugar del teclado virtual, deberemos seguir la práctica descrita al pricipio de éste documto; comandos <code class="docutils literal notranslate"><span class="pre">net</span> <span class="pre">user</span></code> de Windows.</p>
