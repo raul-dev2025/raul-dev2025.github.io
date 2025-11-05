@@ -1,0 +1,16 @@
+Esto es un archivo con descripciones orientativas:
+
+- como evitar que git siga la pista a un 
+  determinado archivo:
+  * git rm --cached desarrollo.txt [este archivo]
+  -- el archivo debe estar siendo vigilado por
+  git. Si queremos excluirlo habrá que añadirlo 
+  en el archivo .gitignore.
+- Otra funcionalidad interesante es el 
+  git/info/exclude que se utiliza para excluir
+  la salida por cónsola de un/unos determinados
+  archivos. Pero apareceran en los logs de otros
+  usuarios trabajando en el proyecto. Ojo.
+  por ejemplo: si utilizamos un git log, todo lo
+  que haya sido indicado en este archivo, no aparecerá
+  en el log.
