@@ -186,9 +186,13 @@ Downloadable files
 Release Notes & Changelog
 ==========================
 
+.. tip::
+
+   Contenido de referencia general, glosarios y notas de la versión.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contenidos:
 
-   Sistema/resume_modulo_0852
+   Recursos/siglas.md
    changelog.rst
