@@ -1,5 +1,5 @@
-Indice
-======
+Indice de siglas
+================
 
 1.  `Referencias Generales <#i1>`__
     1.1 `Referencias SO <#i1i1>`__
