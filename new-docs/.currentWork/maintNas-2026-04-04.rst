@@ -1,0 +1,64 @@
+    ============================================================
+    Informe de Actualización de Infraestructura: Nodo NAS (DSM)
+    ============================================================
+
+    :Fecha: 04 de abril de 2026
+    :Proyecto: Mantenimiento y Redundancia IdM (FreeIPA)
+    :Responsable: Administrador de Sistemas
+    :Estado: Completado con éxito
+
+    Introducción
+    ============
+    Este informe detalla el proceso de actualización del sistema operativo del host Synology DS218+ y la posterior validación de la réplica de identidad (IdM) alojada en el mismo. El objetivo principal era realizar el salto de versión de DSM garantizando la persistencia de la hora del sistema (afectada por fallo físico de pila CMOS) y la integridad de los datos de réplica.
+
+    Configuración del Host (NAS)
+    ============================
+
+    Actualización de Software
+    -------------------------
+    * **Versión Origen:** DSM 7.0.1-42218 Update 7
+    * **Versión Destino:** DSM 7.1.1-42962 Update 9
+    * **Paquetes Reparados:** Virtual Machine Manager (VMM) migrado a la nueva arquitectura.
+
+    Mitigación de Errores de Tiempo (Pila CMOS)
+    -------------------------------------------
+    Para evitar desincronizaciones de Kerberos en el arranque, se ha validado la siguiente configuración de red en el NAS:
+    
+    * **DNS Preferido:** 192.168.17.39 (Maestro IdM)
+    * **DNS Alternativo:** 1.1.1.1 (Cloudflare) - *Garantiza sincronización NTP externa si las VMs están apagadas.*
+
+    Gestión de Máquina Virtual (ipa02)
+    ==================================
+
+    Proceso de Snapshot e Integridad
+    -------------------------------
+    1. Se realizó una **Snapshot en frío** denominada ``Pre-DSM_7.1.1_Update9_Sync_OK``.
+    2. Tras la actualización del host, se procedió al borrado de snapshots antiguas para consolidar el rendimiento del disco virtual.
+    3. Validación del servicio IdM mediante comandos internos:
+       
+       * ``ipactl status``: Todos los servicios en estado **RUNNING**.
+       * ``ipa-replica-manage list-ruv``: Sincronización de vectores confirmada entre Maestro y Réplica.
+
+    Seguridad y Backup
+    ==================
+
+    Mantenimiento de Credenciales
+    -----------------------------
+    Se ha realizado un reset manual de la contraseña del **Directory Manager (DM)** mediante la edición directa del archivo ``dse.ldif`` (hash SSHA512) y reinicio del servicio ``dirsrv``, recuperando el acceso total al motor LDAP.
+
+    Exportación de Respaldo (DRP)
+    ----------------------------
+    Se ha generado una exportación completa de la VM en formato **OVA**:
+    
+    * **Archivo:** ``ipa02.raulvilchez.org.ova``
+    * **Tamaño:** 1.68 GB
+    * **Ubicación:** Almacenamiento optimizado **VDO** en la Estación de Trabajo (WS).
+
+    Conclusiones
+    ============
+    La infraestructura se encuentra actualmente en un estado óptimo de producción. Se ha logrado la redundancia total del servicio de DNS/Identidad y se dispone de un plan de recuperación ante desastres (DRP) verificado y almacenado externamente.
+
+    .. note::
+       Se recomienda mantener el DNS 1.1.1.1 como alternativo en el NAS para mitigar permanentemente el fallo de la pila física en los reinicios programados.
+
+---
