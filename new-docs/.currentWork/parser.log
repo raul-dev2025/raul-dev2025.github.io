@@ -96,6 +96,8 @@ Destino: /mnt/datos_raul/Repos/web-docs/new-docs/.currentWork
 YAML parse exception at line 9, column 53:
 mapping values are not allowed in this context
 
+✅ Convertido: corrgido archivo disponible en Temas/A2-Supuestos/Qemu/qemu_notasOld.rst
+
 ✅ Convertido: Temas/A2-Supuestos/Xen/PrimerosPasos.md
 ✅ Convertido: Temas/A3-Certificados-TLS/OpenSSL/OpenSSL-saga.md
 ✅ Convertido: Temas/A3-Certificados-TLS/TLS-libvirt/1-concepts.md
