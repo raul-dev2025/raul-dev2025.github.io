@@ -5,3 +5,4 @@ make.bat
 .buildinfo
 objects.inv
 .env/
+.venv/
