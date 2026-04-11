@@ -4,34 +4,32 @@ Organizacidor
 Directorio actual
 -----------------
 source
-   |- AplicacionesDeSistema
-   |- descargas
-   |- Office
-   |- Redes
    |- _static
-   |- CVs
-   |- extra
-   |- OS
-   |- Sistema
    |- _templates
+   |- AplicacionesDeSistema
+   |- CVs
+   |- descargas
+   |- extra
+   |- Office
+   |- OS
+   |- Redes
+   |- Sistema
 
 
-Directorio Documentacion
-------------------------
+Directorio con nueva Documentacion
+----------------------------------
 
     new-docs
-      |- Documentacion
-            |- .currentwork
-            |- .ready
-            |- .toReview
-            |- Temas
-
-
+      |- .currentwork
+      |- .toReview
+      |- .ready
+    my-docs
+         
 
 Directorio my-docs
 ------------------
 
-   Documentacion
+   my-docs
       |- driver_dev
       |- hw_resources
       |- Images
@@ -41,6 +39,19 @@ Directorio my-docs
       |- Unordered
 
 
+   Temas
+      ├── A1-Kernel
+      ├── A2-Supuestos
+      ├── A3-Certificados-TLS
+      ├── A4-SO
+      ├── A5-Hardware
+      ├── A99-Programacion
+      ├── ISO9660
+      ├── Leyes
+      ├── OfensiveSecurity
+      ├── Servidor
+      └── siglas.rst
+
 
 Espacio de trabajo
 ------------------
@@ -48,26 +59,29 @@ Propose structure:
 
 source/
 ├── 01_Hardware/
+│   ├── sistemta/
 │   ├── driver_development/
 │   └── hardware_resources/
 │
-├── 02_Operating_Systems/
+├── 02 Kernel/
+|
+├── 03_Operating_Systems/
 │   ├── configuration/
 │   └── installation/
 │
-├── 03_System_Administration/
+├── 04_System_Administration/
 │   ├── system_apps/
 │   ├── system_configuration/
 │   └── test_environment_setup/
 │
-├── 04_Networking/
+├── 05_Networking/
 │   ├── configuration/
 │   └── services/
 │
-├── 05_Software_and_Applications/
+├── 06_Software_and_Applications/
 │   └── office/
 │
-├── 06_Development/
+├── 07_Development/
 │   └── scripts/
 │
 ├── 99_General/
