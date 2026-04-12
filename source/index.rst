@@ -1,10 +1,9 @@
-.. Técnico Sistemas documentation master file, created by
-   sphinx-quickstart on Sun Aug 10 12:28:30 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. Técnico Sistemas documentation master file.
 
-Documentation de Técnico Sistemas !
-============================================
+Documentación de Técnico Sistemas
+=================================
+
+Bienvenido a la base de conocimientos de infraestructura y sistemas. Este repositorio centraliza la documentación técnica, apuntes académicos y procedimientos de configuración organizados por dominios tecnológicos.
 
 Indices y tablas
 ================
@@ -13,159 +12,174 @@ Indices y tablas
 * :ref:`modindex`
 * :ref:`search`
 
+-----
 
-Sistema, arquitectura, componentes
-==================================
-
-.. note:: 
-
-   Esta sección contiene documentos de caracter académico. También podrá incluir ejercicios propuestos.
+Componentes, arquitectura de Sistema 
+====================================
 
 .. toctree::
    :maxdepth: 1
-   :caption: Sistemas:
+   :caption: 01 Hardware (Académico):
 
-   Sistema/evolucionProcesadores.rst
-   Sistema/GeorgeBoole.rst
-   Sistema/arquitecturaVonNeuman.rst
-   Sistema/VonNeumann.rst
-   Sistema/Memorias.rst
-   Sistema/Buses.rst
-   Sistema/velocidadModulDDR.rst
-   Sistema/modulosMemActuales.rst
-   Sistema/perifericos.rst
-   Sistema/integratedCards.rst
-   Sistema/anchoBusGPU.rst
-   Sistema/conectoresDelEquipo.rst
-   Sistema/UEFI.rst
-   Sistema/UEFI-refs.rst
-   Sistema/Prefetching_en_Procesadores.rst
-   Sistema/Ejercicios.rst
+   01_Hardware/sistema/evolucionProcesadores
+   01_Hardware/sistema/GeorgeBoole
+   01_Hardware/sistema/arquitecturaVonNeuman
+   01_Hardware/sistema/VonNeumann
+   01_Hardware/sistema/Memorias
+   01_Hardware/sistema/Buses
+   01_Hardware/sistema/velocidadModulDDR
+   01_Hardware/sistema/modulosMemActuales
+   01_Hardware/sistema/perifericos
+   01_Hardware/sistema/integratedCards
+   01_Hardware/sistema/anchoBusGPU
+   01_Hardware/sistema/conectoresDelEquipo
+   01_Hardware/sistema/UEFI
+   01_Hardware/sistema/UEFI-refs
+   01_Hardware/sistema/Prefetching_en_Procesadores
+   01_Hardware/sistema/Ejercicios
 
-------
+.. note::
+
+   Esta sección recopila los fundamentos teóricos y arquitectónicos del hardware. Incluye la evolución de los procesadores, lógica digital y estándares de componentes esenciales.
+   
+-----
+
+Kernel
+======
+
+.. toctree::
+   :maxdepth: 1
+   :caption: 02 Kernel & Low Level:
+
+   02_Kernel/A5-Hardware/acpi  .. Nota: Añadir aquí documentos del núcleo
+
+.. note::
+
+   Dedicada al núcleo del sistema y la interacción de bajo nivel. Contiene documentación sobre la gestión de energía (ACPI/APM) y especificaciones técnicas del Kernel Linux.
+
+-----
 
 Sistema Operativo(SO)
 =====================
 
+.. toctree::
+   :maxdepth: 1
+   :caption: 03 Sistemas Operativos:
+
+   03_Operating_Systems/Boot/EFIpartWindows
+   03_Operating_Systems/Boot/tipoArranquePS
+   03_Operating_Systems/configuration/caracteristicasEquipo
+   03_Operating_Systems/configuration/particionadorDeWindows
+   03_Operating_Systems/configuration/SO_portatil
+   03_Operating_Systems/configuration/funcionesSO
+   03_Operating_Systems/configuration/recuperarCuentas
+   03_Operating_Systems/configuration/recuperarCuentasPractica
+   03_Operating_Systems/configuration/resetUserpwd
+   03_Operating_Systems/configuration/explorerWindows
+   03_Operating_Systems/configuration/caracteristicasDeWindows10
+   03_Operating_Systems/configuration/caracteristicasDeWindows11
+   03_Operating_Systems/configuration/caracteristicasDeLinux-rhelVSdebian
+   03_Operating_Systems/configuration/VirtualBox
+   03_Operating_Systems/configuration/info
+   03_Operating_Systems/configuration/plataforma
+   03_Operating_Systems/configuration/proxmox
+   03_Operating_Systems/configuration/atributos
+   03_Operating_Systems/configuration/administradorEquipos
+   03_Operating_Systems/configuration/asistenciaRemota
+   03_Operating_Systems/configuration/puntosRestauracion_Bauckups
+   03_Operating_Systems/configuration/ResgistroWindows
+
 .. note::
 
-	Documentos disponibles sobre la instalación del sistema operativo. También podrá incluir ejercicios propuestos.
+   Guías detalladas sobre la administración de sistemas Windows y Linux. Cubre desde el proceso crítico de arranque hasta la configuración avanzada del registro y usuarios.
+
+-----
+
+Administración de Sistema
+=========================
 
 .. toctree::
    :maxdepth: 1
-   :caption: Instalación y gestión del SO:
+   :caption: 04 Administración de Sistemas:
 
-   OS/caracteristicasEquipo.rst
-   OS/particionadorDeWindows.rst
-   OS/SO_portatil.rst
-   OS/EFIpartWindows.rst
-   OS/tipoArranquePS.rst
-   OS/funcionesSO.rst
-   OS/recuperarCuentas.rst
-   OS/recuperarCuentasPractica.rst
-   OS/resetUserpwd
-   OS/explorerWindows.rst
-   OS/caracteristicasDeWindows10.rst
-   OS/caracteristicasDeWindows11.rst
-   OS/caracteristicasDeLinux-rhelVSdebian.rst
-   OS/VirtualBox.rst
-   OS/info.rst
-   OS/plataforma.rst
-   OS/proxmox.rst
-   OS/atributos.rst
-   OS/administradorEquipos.rst
-   OS/asistenciaRemota.rst
-   OS/puntosRestauracion_Bauckups.rst
-   OS/ResgistroWindows.rst   
-   
------
-
-Aplicaciones de Sistema
-=======================
+   04_System_Administration/system_apps/aplicacionesPortables
+   04_System_Administration/system_apps/Cobian
+   04_System_Administration/system_apps/antivirus
+   04_System_Administration/system_apps/cortafuegos
+   04_System_Administration/system_apps/OS-msconfig
 
 .. tip::
 
-   **Aplicaciones de Sistema**: documentación sobre aplicaciones de sistema en Windows.
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Aplicaciones Windows:
-
-   AplicacionesDeSistema/aplicacionesPortables
-   AplicacionesDeSistema/Cobian
-   AplicacionesDeSistema/antivirus
-   AplicacionesDeSistema/cortafuegos
-   AplicacionesDeSistema/OS-msconfig
+   **Administración de Sistema**: Enfoque práctico en la gestión de software de sistema y herramientas de administración. Incluye políticas de seguridad, gestión de backups y optimización de aplicaciones.
 
 -----
 
 Redes
 ======
 
-.. tip::
-
-    **Redes**: documentación sobre redes informáticas en sistemas Windows.
-
 .. toctree::
    :maxdepth: 1
-   :caption: Redes ethernet/WiFi:
+   :caption: 05 Redes & Networking:
 
-   Redes/ProtocoloTCP_IP
-   Redes/Redes
-   Redes/redesInalambricas
-   Redes/ElementosLAN
-   Redes/instConfApp
-   Redes/dispositivosDeRed
+   05_Networking/legacy_lan/ProtocoloTCP_IP
+   05_Networking/legacy_lan/Redes
+   05_Networking/legacy_lan/redesInalambricas
+   05_Networking/legacy_lan/ElementosLAN
+   05_Networking/legacy_lan/instConfApp
+   05_Networking/legacy_lan/dispositivosDeRed
 
+.. tip::
+
+    **Redes**: Documentación sobre infraestructura de red local y protocolos de comunicación. Analiza los estándares TCP/IP, dispositivos de interconexión y despliegue de redes inalámbricas.
+
+-----
 
 Office, Word, Excel y PowerPoint
 ================================
 
+.. toctree::
+   :maxdepth: 1
+   :caption: 06 Software & Office:
+
+   06_Software_and_Applications/office/Word-apuntes-parte1
+   06_Software_and_Applications/office/Word-apuntes-parte2
+   06_Software_and_Applications/office/Word-apuntes-parte3
+   06_Software_and_Applications/office/apuntesRaulV-v3
+   06_Software_and_Applications/office/excel
+   06_Software_and_Applications/office/excel-2
+   06_Software_and_Applications/office/excel-3
+   06_Software_and_Applications/office/cuestionarios
+   06_Software_and_Applications/office/PowerPoint
+
 .. tip::
-   
+    
+   Manuales de usuario y formación en herramientas de ofimática. Centraliza los apuntes y ejercicios prácticos relacionados con la suite de productividad Microsoft Office.
    * **Word**: documentación sobre la herramienta *Word* de *Office*.
    * **Excel**: documentación sobre la herramienta *Excel* de *Office*.
    * **Power Point**: documentación sobre la herramienta *Power Point* de *Office*.
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Office, Word:
+-----
 
-   Office/Word-apuntes-parte1
-   Office/Word-apuntes-parte2
-   Office/Word-apuntes-parte3
-   Office/prueba-1
-   Office/prueba-2
-   Office/prueba-3
-   Office/apuntesRaulV-v3
-
-------
+Release Notes & Changelog
+==========================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Office, Excel:
-	
-   Office/excel
-   Office/excel-2
-   Office/excel-3
-   Office/cuestionarios
-   
+   :maxdepth: 1
+   :caption: 99 General & Recursos:
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Office, Power Point:
-	
-   Office/PowerPoint
-   
+   99_General/CVs/CV-proyectos-2025
+   99_General/siglas
+   changelog
+
+.. tip::
+
+   Información complementaria y recursos generales del repositorio. Contiene el historial de cambios, glosarios de siglas técnicas y perfiles profesionales actualizados.
+
 -----
 	
 Downloadable files
 =====================
 
-.. warning::
-   
-	Esta sección contiene recursos descargables y podría estar sugeta a cambios sin previo aviso.
-	
    - Click to download: :download:`(sistema/OS) Tema 1 - Arquitectura de Sistema <descargas/Tema-1-Arquitecturas_de_un_sistema_microinformático.pdf>`
    - Click to download: :download:`(sistema/OS) Tema 2 - Funciones del SO <descargas/Tema-2_FuncionesSistemaOperativo.pdf>`
    - Click to download: :download:`(sistema/OS) Velocidad de la Ram <descargas/Artículo._La_velocidad_de_la_memoria_RAM_y_su_latencia.pdf>`
@@ -182,17 +196,8 @@ Downloadable files
    - Click to download: :download:`(Redes) Tema 9 - Comprovación y solución de incidencias en Red <descargas/Tema9.ComprobaciónYSoluciónDeIncidenciasAnivelDeRed.pdf>`
    - Click to download: :download:`(Redes) Instalación y configuración de aplicaciones <descargas/Instalación_y_configuración_de_aplicaciones_informáticas.pdf>`
 
+.. note::
+   Espacio destinado a la distribución de recursos binarios, guías en formato PDF y material de apoyo externo. Permite el acceso directo a documentación consolidada y esquemas técnicos listos para consulta fuera de línea.
 
-Release Notes & Changelog
-==========================
-
-.. tip::
-
-   Contenido de referencia general, glosarios y notas de la versión.
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contenidos:
-
-   Recursos/siglas.md
-   changelog.rst
+.. warning::
+   Esta sección contiene recursos descargables y podría estar sujeta a cambios sin previo aviso.
