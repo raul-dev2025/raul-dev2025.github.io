@@ -4,7 +4,7 @@ source/
 │   ├── driver_development/           # De my-docs/driver_dev
 │   └── hardware_resources/           # De my-docs/hw_resources
 │
-├── 02_Kernel/                        # DIRECTORIO RAÍZ (Contenido de A1-Kernel y A5-Hardware) 
+├── 02_Kernel/                        # DIRECTORIO RAÍZ (A1-Kernel y A5-Hardware) 
 │   ├── (No vamos a inventar nada, seguiremos la estructura de Linux)
 │   └── A5-Hardware                   # Acpi, Apm ...
 │
@@ -34,14 +34,13 @@ source/
 │
 ├── 07_Development/
 │   ├── scripts/                      # De my-docs/scripts
-│   └── A99-Programacion/             # De Temas/A99-Programacion
+│   └── Programacion/             # De Temas/A99-Programacion
 │
 ├── 08_Security_and_Compliance/       # Nueva categoría para organizar Temas sueltos
 │   ├── OfensiveSecurity/             # De Temas/OfensiveSecurity 
 │   ├── Leyes/                        # De Temas/Leyes
 │
 ├── 99_General/
-│   ├── downloads/                    # De descargas/
 │   ├── CVs/                          # De CVs/
 │   ├── miscellaneous/                # De extra/ y Unordered
 │   └── siglas.rst                    # De Temas/siglas.rst 
