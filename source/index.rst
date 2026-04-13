@@ -1,5 +1,6 @@
-Documentación Maestra
-=====================
+======
+Índice
+======
 
 .. toctree::
    :maxdepth: 1
