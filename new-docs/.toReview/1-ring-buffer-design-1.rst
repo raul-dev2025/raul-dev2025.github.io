@@ -9,26 +9,14 @@ Diseño del anillo de búfer
 `Terminología utilizada <i2>`__
 -------------------------------
 
-``tail`` – Dónde las *nuevas escrituras*, suceden en el *anillo del
-búfer*. ``head`` – Dónde las *nuevas lecturas*, suceden en el *anillo
-del búfer*. ``producer`` – La tarea de escribir dentro del *anillo del
-búfer* (igual que ``writer``). ``writer`` – Igual que ``producer``.
-``consumer`` – La tarea de escribir desde el *búfer* (igual que
-``reader``). ``reader`` – Igual que ``consumer``. ``reader_page`` – Una
-página fuera del *anillo de búfer*, únicamente utilizada -mayor- mente,
-por el ``reader``. ``head_page`` – Puntero a la página, que el
-``reader`` leerá en la próxima lectura. ``tail_page`` – Puntero a la
-página, que el ``writer`` escribirá en la próxima escritura.
-``commit_page`` – Puntero a la página, con la última y finalizada,
-escritura no anidada. ``cmpxchg`` – Transacción *atómica* asistida por
-*hardware*, que lleva a cabo lo siguiente: \* ``A = B`` si previamente
-``A == C``. \* ``R = cmpxchg(A, C, B)``, está diciendo que será
-reemplazado ``A`` por ``B`` si, y sólo *si*\ (condicional), el
-*presente* ``A`` es igual a ``C``, se pondrá el antiguo(presente) ``A``
-dentro de ``R``. \* ``R`` obtiene el anterior ``A``, en *función* de
-*si* ``A`` es actualizado con ``B`` o *no*. \* Para ver si la
-*actualización*, fué existosa, una comparación ``R == C`` podrá ser
-usada.
+- ``tail`` - Dónde las *nuevas escrituras*, suceden en el *anillo del búfer*. 
+- ``head`` - Dónde las *nuevas lecturas*, suceden en el *anillo del búfer*. 
+- ``producer`` - La tarea de escribir dentro del *anillo del búfer* (igual que ``writer``). 
+- ``writer`` - Igual que ``producer``.
+- ``consumer`` - La tarea de escribir desde el *búfer* (igual que ``reader``). 
+- ``reader`` - Igual que ``consumer``. ``reader_page`` - Una página fuera del *anillo de búfer*, únicamente utilizada -mayor- mente, por el ``reader``. 
+- ``head_page`` - Puntero a la página, que el ``reader`` leerá en la próxima lectura. ``tail_page`` - Puntero a la página, que el ``writer`` escribirá en la próxima escritura.
+- ``commit_page`` - Puntero a la página, con la última y finalizada, escritura no anidada. ``cmpxchg`` - Transacción *atómica* asistida por *hardware*, que lleva a cabo lo siguiente: \* ``A = B`` si previamente ``A == C``. \* ``R = cmpxchg(A, C, B)``, está diciendo que será reemplazado ``A`` por ``B`` si, y sólo *si*\ (condicional), el *presente* ``A`` es igual a ``C``, se pondrá el antiguo(presente) ``A`` dentro de ``R``. \* ``R`` obtiene el anterior ``A``, en *función* de *si* ``A`` es actualizado con ``B`` o *no*. \* Para ver si la *actualización*, fué existosa, una comparación ``R == C`` podrá ser usada.
 
 `El anillo de búfer genérico <i3>`__
 ------------------------------------
@@ -115,14 +103,14 @@ búfer*.
 
 Los punteros principales:
 
-- ``reader`` de página – La página únicamente utilizada por el
+- ``reader`` de página - La página únicamente utilizada por el
   ``reader`` que no es parte del *anillo de buffer* -podría
   intercambiarse dentro.
-- ``head`` de página – la siguiente página en el *anillo de búfer* que
+- ``head`` de página - la siguiente página en el *anillo de búfer* que
   sea intercambiada con el lector de página.
-- ``tail``\ de página – La página donde toma lugar, la siguiente
+- ``tail``\ de página - La página donde toma lugar, la siguiente
   escritura.
-- ``commit`` de página – la página que terminó por última vez una
+- ``commit`` de página - la página que terminó por última vez una
   escritura.
 
 La página de ``commit`` sólo es actualizada por el ``writer`` más
