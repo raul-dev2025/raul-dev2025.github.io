@@ -1,5 +1,5 @@
 Viewing Stashed Changes in Git
-=============================
+==============================
 
 You can inspect the content of a stashed change in Git using the following commands:
 

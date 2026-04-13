@@ -1,5 +1,5 @@
 Network Connectivity Troubleshooting Guide
-=========================================
+==========================================
 
 Initial Symptoms
 ------------------
@@ -10,10 +10,10 @@ Initial Symptoms
 - ``mtr`` and ``traceroute`` show no relevant data
 
 Diagnostic Steps
------------------
+----------------
 
 1. Basic Network Interface Check
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -21,11 +21,12 @@ Diagnostic Steps
    ip a
 
 Expected:
+
 - Interface should show ``state UP``
 - Should have valid IP address
 
 2. Routing Table Verification
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. code-block:: bash
 
    ip route
@@ -35,7 +36,7 @@ Expected:
 - Default gateway route present (e.g., ``default via 192.168.1.1 dev eth0``)
 
 3. DNS Resolution Test
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -49,7 +50,7 @@ Fallback DNS Configuration:
    echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
 
 4. Raw TCP Connection Test
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -57,7 +58,7 @@ Fallback DNS Configuration:
    telnet 8.8.8.8 80
 
 5. Firewall Inspection
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -72,7 +73,7 @@ Temporary Firewall Disable:
    sudo nft flush ruleset
 
 6. Network Service Restart
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -82,7 +83,7 @@ Temporary Firewall Disable:
    sudo systemctl restart network # RHEL/CentOS
 
 7. Kernel-Level Network Debugging
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -91,7 +92,7 @@ Temporary Firewall Disable:
    sudo sysctl net.ipv4.icmp_echo_ignore_all
 
 8. Advanced Diagnostics
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Packet Capture:
 
@@ -107,7 +108,7 @@ Strace Analysis:
    grep -E 'connect|sendto|poll' ping.log
 
 Critical Findings
--------------------
+-----------------
 
 From strace output:
 .. code-block:: text
@@ -117,7 +118,7 @@ From strace output:
    poll() = 0 (Timeout) # No replies received
 
 Root Cause Analysis
----------------------
+-------------------
 
 1. Outbound packets are being sent (sendto succeeds)
 2. No inbound replies received (poll timeouts)
@@ -128,7 +129,7 @@ Root Cause Analysis
    - Middlebox filtering traffic
 
 Recommended Solutions
------------------------
+---------------------
 
 1. Gateway Testing:
 
@@ -154,7 +155,7 @@ Recommended Solutions
    sudo sysctl -w net.ipv4.icmp_echo_ignore_all=0
 
 Additional Notes
-------------------
+----------------
 - Time updates suggest intermittent NTP functionality
 - Consider checking chrony/NTPD configuration
 - For persistent issues, test with Live USB to isolate hardware problems

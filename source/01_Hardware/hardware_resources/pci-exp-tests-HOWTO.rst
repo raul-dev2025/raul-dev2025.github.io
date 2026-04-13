@@ -1,5 +1,5 @@
-HOWTO -->	PCI-Express test scripts for LTP
-============================================
+HOWTO --> PCI-Express test scripts for LTP
+==========================================
 
 .. code-block::
 
@@ -7,18 +7,18 @@ HOWTO -->	PCI-Express test scripts for LTP
 		08/20/2004
 
 1. About this HOWTO
----------------------
+-------------------
 
 This document describes the addition of PCI-Express test cases to the existing LTP project.
 These test ``cases/scripts`` will enhance the LTP's capability to test PCI-Express devices/drivers.
 
 
 2. Copyright (c) Intel Corporation, 2004
-------------------------------------------
+----------------------------------------
 
 
 3. What is this patch doing?
-------------------------------
+----------------------------
 
 a. A function ``test_find_pci_exp_cap`` has been added to the *tpci.c* file of LTP project. (``\ltp\testcases\kernel\device-drivers\pci\tpci\pci.c``)
 	 This function makes a call to ``pci_find_capability``, which will determine if a device has PCI-Express capability. A PCI Express device function indicates PCI-Express support by implementing the PCI-Express capability structure in its capability list.
@@ -32,27 +32,23 @@ c. A user space function ``ki_generic()`` is already available in user_tpci.c fi
 
 
 4. Including PCI-Express support into the kernel
---------------------------------------------------
+------------------------------------------------
 
-By default, the kernel may not enable PCI-Express feature. A kernel
-configuration option must be selected to enable PCI-Express support.
+By default, the kernel may not enable PCI-Express feature. A kernel configuration option must be selected to enable PCI-Express support.
 
-To include PCI-Express support into the kernel requires users to enable PCI-Access mode with
-"Any" or "MMCFG" in the ``General Setup`` menu in the kernel configuration menu.
+To include PCI-Express support into the kernel requires users to enable PCI-Access mode with "Any" or "MMCFG" in the ``General Setup`` menu in the kernel configuration menu.
 
 
 5. FAQ
---------
+------
 
 **Q1**. Are there any limitations on using this patch?
 
-**A1**. If the device supports PCI-Express feature and the PCI-Express feature is enabled in the kernel,
-then only a user will be able to access the PCI-Express space.
+**A1**. If the device supports PCI-Express feature and the PCI-Express feature is enabled in the kernel, then only a user will be able to access the PCI-Express space.
 Even if the device doesn't support PCI-Express feature, the traditional PCI-space would still be accessible.
 
 **Q2**. What is this ```AER_CAP_ID_VALUE``` macro defined in tpci.h?
 
 **A2**. ``AER_CAP_ID_VALUE`` represents the value of Advanced Error Reporting Capability ID in the PCI Express config space.
 The default value of this is always same for all PCI-Express devices. i.e. ``0x14011``.
-In the function ``test_read_pci_exp_config`` in ``tpci.c`` file, it is compared with the value retrieved from a PCI-Express
-capable device. If both the values match that means that the PCI-Express driver is accessing the PCI-Express config space SUCCESSFULLY.
+In the function ``test_read_pci_exp_config`` in ``tpci.c`` file, it is compared with the value retrieved from a PCI-Express capable device. If both the values match that means that the PCI-Express driver is accessing the PCI-Express config space SUCCESSFULLY.

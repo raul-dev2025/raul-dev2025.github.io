@@ -1,5 +1,5 @@
 Vertical Space in reStructuredText
-===================================
+==================================
 
 In reStructuredText (reST), there is no specific directive exclusively for adding vertical space. However, you can achieve vertical spacing using a combination of techniques, such as **blank lines**, **comments**, or **substitution definitions**. Below are the common methods to add vertical space in reST.
 
@@ -91,7 +91,7 @@ Example:
    This is the second paragraph, with custom vertical space.
 
 6. Using Admonitions (Indirect Spacing)
---------------------------------------
+---------------------------------------
 
 Admonitions (e.g., ``.. note::``, ``.. warning::``) inherently add vertical space around them. You can use an empty admonition to create spacing.
 

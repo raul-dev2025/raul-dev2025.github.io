@@ -1,5 +1,5 @@
 Common Files and Directories in ``/sys/bus/pci/devices/0000:00:XX.x``
--------------------------------------------------------------------
+=====================================================================
 
 - ``class``
   - Contains the device class code in hexadecimal format (e.g., ``0x060000`` for a host bridge).
@@ -48,6 +48,7 @@ Common Files and Directories in ``/sys/bus/pci/devices/0000:00:XX.x``
 
 - ``power/``
   - A directory containing power management-related files:
+  
     - ``control``: Controls the device's power state.
     - ``runtime_status``: Shows the current runtime power state of the device.
     - ``wakeup``: Indicates whether the device can wake the system from sleep.

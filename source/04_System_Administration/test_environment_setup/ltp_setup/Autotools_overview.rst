@@ -1,17 +1,17 @@
 Overview of Autotools Primary Concepts
-========================================
+======================================
 
 Autotools is a suite of programming tools (autoconf, automake, libtool) designed to make source code packages portable across Unix-like systems. Here are its core concepts:
 
 Primary Components
----------------------
+------------------
 
 1. **Autoconf** - Generates ``configure`` scripts that check system features
 2. **Automake** - Creates portable ``Makefile.in`` templates from ``Makefile.am`` files
 3. **Libtool** - Manages the creation of static and shared libraries portably
 
 Workflow
-----------
+--------
 
 1. Developer writes:
 
@@ -25,15 +25,15 @@ Workflow
    
 3. End user runs:
 
-   * ``./configure`` → generates ``Makefile``s
+   * ``./configure`` → generates ``Makefile``\ s
    * ``make`` → builds the software
    * ``make install`` → installs the software
 
 Frequently Used Variables
-----------------------------
+-------------------------
 
 Project Information Variables (set in configure.ac)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * ``AC_INIT([package], [version], [bug-report])`` - Initializes package info
 * ``AC_CONFIG_SRCDIR([file])`` - Identifies project location
@@ -41,7 +41,7 @@ Project Information Variables (set in configure.ac)
 * ``AC_CONFIG_FILES([Makefile dir/Makefile])`` - Specifies output files
 
 Build Control Variables (often set before running configure)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * ``CC`` - C compiler to use (e.g., ``CC=gcc``)
 * ``CFLAGS`` - C compiler flags
@@ -58,7 +58,7 @@ Build Control Variables (often set before running configure)
 * ``datarootdir`` - Read-only architecture-independent data root
 
 Automake Variables (set in Makefile.am)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * ``bin_PROGRAMS`` - Programs to install in bindir
 * ``lib_LIBRARIES`` - Libraries to install in libdir
@@ -72,7 +72,7 @@ Automake Variables (set in Makefile.am)
 * ``TESTS`` - Test programs to run with ``make check``
 
 Commonly Used Macros
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 * ``AC_PROG_CC`` - Check for C compiler
 * ``AC_PROG_CXX`` - Check for C++ compiler

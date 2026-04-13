@@ -1,8 +1,8 @@
 Introduction to GNUPlot for Mathematical Visualization
-========================================================
+======================================================
 
 What is GNUPlot?
-------------------
+----------------
 
 GNUPlot is a command-line-driven graphing utility for Linux (and other OSes) that enables dynamic visualization of mathematical functions, datasets, and 3D surfaces. It supports:
 
@@ -12,7 +12,7 @@ GNUPlot is a command-line-driven graphing utility for Linux (and other OSes) tha
 - Export to PNG, PDF, SVG, etc.
 
 Starting GNUPlot
-------------------
+----------------
 
 Launch GNUPlot in your Linux terminal:
 
@@ -21,17 +21,17 @@ Launch GNUPlot in your Linux terminal:
    gnuplot
 
 Clearing the Screen
----------------------
+-------------------
 
 To clear the GNUPlot console (not the plot window):
 
-.. code-block:: gnuplot
+.. code-block:: console
 
    !clear # Linux/macOS
    !cls # Windows
 
 Basic Example: Plotting a Function
-------------------------------------
+----------------------------------
 
 Plot a simple quadratic equation:
 
@@ -41,7 +41,7 @@ Plot a simple quadratic equation:
    plot x**2 + 3*x - 5 title "Quadratic Function"
 
 Handling Multiple Operations
-------------------------------
+----------------------------
 
 GNUPlot executes commands sequentially. To avoid clashes when plotting multiple calculus operations:
 
@@ -53,7 +53,7 @@ GNUPlot executes commands sequentially. To avoid clashes when plotting multiple 
 
 2. **Temporary Variables**: Use ``set`` for complex expressions.
 
-   .. code-block:: gnuplot
+   .. code-block:: console
    
       set dummy t
       parametric = "plot sin(t),cos(t)"
@@ -88,7 +88,7 @@ Output Options
 
 To save plots without displaying them:
 
-.. code-block:: gnuplot
+.. code-block:: console
 
    set terminal png
    set output "plot.png"

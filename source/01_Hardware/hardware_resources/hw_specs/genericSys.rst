@@ -1,17 +1,17 @@
 Is the List Architecture-Specific or Generic?
-============================================
+=============================================
 
 The list provided is **generic** and represents the typical files and directories you would find in ``/sys/bus/pci/devices/0000:00:18.x`` on a **Linux system**. However, there are some nuances to consider.
 
 Generic Nature of the List
--------------------------
+--------------------------
 
 - The files and directories listed are common across most Linux systems and architectures (e.g., x86, ARM, PowerPC).
 - These files are part of the **Linux kernel's sysfs interface**, which standardizes how device information is exposed to userspace.
 - For example, files like ``vendor``, ``device``, ``class``, ``resource``, and ``driver`` are present on almost all systems with PCI devices.
 
 Architecture-Specific or Hardware-Specific Variations
-----------------------------------------------------
+-----------------------------------------------------
 
 While the list is generic, some files or directories may **vary depending on**:
 
@@ -21,7 +21,7 @@ While the list is generic, some files or directories may **vary depending on**:
 - **Driver Implementation**: Some files (e.g., ``driver_override``, ``uevent``) depend on how the device driver interacts with the kernel.
 
 Examples of Architecture-Specific or Hardware-Specific Files
------------------------------------------------------------
+------------------------------------------------------------
 
 Here are some examples of files or directories that might not be present on all systems:
 

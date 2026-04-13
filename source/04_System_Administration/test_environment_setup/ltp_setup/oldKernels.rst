@@ -1,13 +1,14 @@
+========================================================================
 Working with Older Kernel Versions on CentOS 7: Challenges and Solutions
-======================================================================
+========================================================================
 
 Introduction
---------------
+------------
 
 When developing or testing kernel-related code on CentOS 7 systems, working with older kernel versions presents unique challenges. This document outlines solutions specifically validated on CentOS 7.9 (Final).
 
 Challenges with Older Kernels on CentOS 7
-------------------------------------------
+-----------------------------------------
 
 1. **Header Availability Issues**
 
@@ -28,10 +29,10 @@ Challenges with Older Kernels on CentOS 7
    - EPEL repository often needed for additional dependencies
 
 Case Study: LTP Build System Header Missing Issue
----------------------------------------------------
+-------------------------------------------------
 
 The Problem
-~~~~~~~~~~~~~~
+~~~~~~~~~~~
 
 On CentOS 7.9, the LTP build system failed because:
 
@@ -40,7 +41,7 @@ On CentOS 7.9, the LTP build system failed because:
 - Build system expected legacy header locations
 
 CentOS 7 Solution Approach
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **Verify and Install Correct Headers**
 
@@ -74,7 +75,7 @@ CentOS 7 Solution Approach
       gcc --version
 
 Best Practices for CentOS 7
-----------------------------
+---------------------------
 
 1. **Environment Isolation**
 
@@ -101,7 +102,7 @@ Best Practices for CentOS 7
       sudo rpm --verify kernel-devel
 
 CentOS 7 Specific Notes
-------------------------
+-----------------------
 
 - Tested on CentOS 7.9 with kernel versions 3.10.0-1160 through 3.10.0-1160.76.1
 - Requires EPEL repository for some dependencies::
@@ -113,12 +114,12 @@ CentOS 7 Specific Notes
     sudo yum install devtoolset-9
 
 Conclusion
------------
+----------
 
 Working with older kernels on CentOS 7 requires careful version management and understanding of RHEL-based system conventions. The presented solution provides a stable foundation for LTP development while maintaining system integrity.
 
 Version History
-----------------
+---------------
 
 - 2023-11-15: Initial version validated on CentOS 7.9.2009
 - 2023-11-16: Added devtoolset and EPEL notes

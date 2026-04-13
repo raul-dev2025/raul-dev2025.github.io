@@ -1,20 +1,21 @@
+========================================
 Debugging Linux Keyboard Ctrl Key Issues
-===========================================
+========================================
 
 Problem Description
----------------------
+-------------------
 
 - **Symptom**: Left Ctrl key combinations (e.g., ``Ctrl+a``, ``Ctrl+d``) not working in both terminal and editor.
 
 - **Key Observations**:
 
-  - Affects only current user (works for other users)
-  - Persists across applications (terminal + editor)
-  - Not a hardware issue (key works for other users)
-  - Not application-specific (fails in Bash and editors)
+  - Affects only current user (works for other users).
+  - Persists across applications (terminal + editor).
+  - Not a hardware issue (key works for other users).
+  - Not application-specific (fails in Bash and editors).
 
 Diagnosis
------------
+---------
 
 Likely causes in order of probability:
 
@@ -24,10 +25,10 @@ Likely causes in order of probability:
 4. **Bash Shell Keybindings Interference**
 
 Debugging Steps
------------------
+---------------
 
 1. Check Terminal Settings (stty)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -36,22 +37,22 @@ Debugging Steps
 
 Key flags to verify:
    
-  - ``-ignbrk`` (should be set)
-  - ``brkint`` (should be set)
-  - ``-ixon`` (should be set)
+  - ``-ignbrk`` (should be set).
+  - ``brkint`` (should be set).
+  - ``-ixon`` (should be set).
 
 2. Test Raw Terminal Input
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
    stty raw; cat
 
-- Press ``Ctrl+d`` (should exit)
-- Press ``Ctrl+c`` (should abort)
+- Press ``Ctrl+d`` (should exit).
+- Press ``Ctrl+c`` (should abort).
 
 3. Examine Readline Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -62,16 +63,16 @@ Key flags to verify:
    mv ~/.inputrc ~/.inputrc.bak
 
 4. Verify X11 Key Events
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
    xev | grep -i -A2 KeyPress
 
-- Check if Control modifier appears when pressing ``Ctrl+a``
+- Check if Control modifier appears when pressing ``Ctrl+a``.
 
 5. Reset Keyboard Mappings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -81,7 +82,7 @@ Key flags to verify:
    xmodmap -e "add control = Control_L Control_R"
 
 6. Check Bash Bindings
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -89,24 +90,26 @@ Key flags to verify:
    bind -r "\C-a" # Reset binding
 
 Recommended Resolution Path
------------------------------
+---------------------------
 
-1. First try resetting terminal::
+1. First try resetting terminal:
+
+.. code-block:: bash
 
       stty sane
       bash --norc --noprofile
 
-2. If persists, check X11 events with ``xev``
+2. If persists, check X11 events with ``xev``.
 
-3. Finally examine and clean::
+3. Finally examine and clean:
    
 - ``~/.inputrc``
 - ``~/.Xmodmap``
    
-- Desktop environment shortcuts
+- Desktop environment shortcuts.
 
 Additional Notes
--------------------
+----------------
 
-- For Wayland systems, use ``libinput debug-events`` instead of ``xev``
-- Consider testing in virtual console (Ctrl+Alt+F1) to rule out display manager issues
+- For Wayland systems, use ``libinput debug-events`` instead of ``xev``.
+- Consider testing in virtual console (Ctrl+Alt+F1) to rule out display manager issues.

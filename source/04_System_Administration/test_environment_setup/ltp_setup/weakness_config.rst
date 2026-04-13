@@ -1,12 +1,12 @@
 LTP build log
-===============
+=============
 
 While the ``configure`` log indicates a successful configuration process, there are a few *weak points* or potential areas of concern that could be improved or might cause issues later in the build process. These are not critical failures, but they are worth noting for future reference or troubleshooting:
 
 ----
 
 1. Missing Headers	
---------------------
+------------------
 
 	- ``dmapi.h``: Not found. This header is related to Data Management API (DMAPI), which is used for hierarchical storage management (HSM) in some filesystems (e.g., XFS). If the software relies on DMAPI functionality, this could cause issues.
 	
@@ -27,7 +27,7 @@ While the ``configure`` log indicates a successful configuration process, there 
 ----
 
 2. Missing Structs
---------------------
+------------------
 
 	- ``Not found``: This struct is used for low-level process tracing and debugging (e.g., with `ptrace`). Its absence might limit certain debugging or tracing features.
 		- **Action**: Ensure the correct kernel headers are installed. This struct is typically defined in `<sys/user.h>` or `<sys/reg.h>`.
@@ -39,7 +39,7 @@ While the ``configure`` log indicates a successful configuration process, there 
 ----
 
 3. XFS Quota Support
-----------------------
+--------------------
 
 	- ``xfs/xqm.h``: Not found. This header is related to XFS quota management. If the software relies on XFS quota functionality, this could cause issues.
    
@@ -48,7 +48,7 @@ While the ``configure`` log indicates a successful configuration process, there 
 ----
 
 4. Weak or Missing Kernel Features
-------------------------------------
+----------------------------------
 
 	- ``clone()`` with 7 arguments: Supported. However, if the system or kernel is updated, this might change. The `clone()` system call is used for creating lightweight processes (threads), and its behavior can vary across kernel versions.
 	
@@ -61,12 +61,15 @@ While the ``configure`` log indicates a successful configuration process, there 
 ----
 
 5. Potential Library Issues
------------------------------
+---------------------------
 
 	- ``libaio``: While ``libaio.h`` and ``io_setup`` are found, the script checks for ``io_set_eventfd``, which is defined. However, if the library version is outdated, this could cause issues.
-		- **Action**: Ensure the `libaio` library is up to date.
-   - ``libnuma``: While ``numa_alloc_onnode``, ``numa_move_pages``, and ``numa_available`` are found, NUMA functionality depends on the system's hardware and kernel support.
-		- **Action**: Verify that the system has NUMA-enabled hardware and that the kernel supports NUMA operations.
+	
+	  - **Action**: Ensure the `libaio` library is up to date.
+    
+	- ``libnuma``: While ``numa_alloc_onnode``, ``numa_move_pages``, and ``numa_available`` are found, NUMA functionality depends on the system's hardware and kernel support.
+	
+	  - **Action**: Verify that the system has NUMA-enabled hardware and that the kernel supports NUMA operations.
 
 ----
 

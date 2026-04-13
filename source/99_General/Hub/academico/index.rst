@@ -6,7 +6,7 @@ Documentación de Técnico Sistemas
 Bienvenido a la base de conocimientos de infraestructura y sistemas. Este repositorio centraliza la documentación técnica, apuntes académicos y procedimientos de configuración organizados por dominios tecnológicos.
 
 Indices y tablas
-================
+----------------
 
 * :ref:`genindex`
 * :ref:`modindex`
@@ -15,7 +15,7 @@ Indices y tablas
 -----
 
 Componentes, arquitectura de Sistema 
-====================================
+------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -45,13 +45,13 @@ Componentes, arquitectura de Sistema
 -----
 
 Kernel
-======
+------
 
 .. toctree::
    :maxdepth: 1
    :caption: 02 Kernel & Low Level:
 
-   .. /02_Kernel/A5-Hardware/
+   /02_Kernel/A5-Hardware/borrar
 
 .. note::
 
@@ -60,7 +60,7 @@ Kernel
 -----
 
 Sistema Operativo(SO)
-=====================
+---------------------
 
 .. toctree::
    :maxdepth: 1
@@ -96,7 +96,7 @@ Sistema Operativo(SO)
 -----
 
 Administración de Sistema
-=========================
+-------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -115,7 +115,7 @@ Administración de Sistema
 -----
 
 Redes
-======
+-----
 
 .. toctree::
    :maxdepth: 1
@@ -135,7 +135,7 @@ Redes
 -----
 
 Office, Word, Excel y PowerPoint
-================================
+--------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -161,7 +161,7 @@ Office, Word, Excel y PowerPoint
 -----
 
 Release Notes & Changelog
-==========================
+-------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -178,7 +178,7 @@ Release Notes & Changelog
 -----
 	
 Downloadable files
-=====================
+------------------
 
    - Click to download: :download:`(sistema/OS) Tema 1 - Arquitectura de Sistema </descargas/Tema-1-Arquitecturas_de_un_sistema_microinformático.pdf>`
    - Click to download: :download:`(sistema/OS) Tema 2 - Funciones del SO </descargas/Tema-2_FuncionesSistemaOperativo.pdf>`
