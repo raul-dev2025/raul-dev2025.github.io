@@ -8,7 +8,7 @@
 - `Apéncice A: dispositivos AMBA <#i8>`__
 - `Referencias y agradfecimientos <#i9>`__
 
---------------
+-----
 
 Linux y el árbol de dispositivo
 -------------------------------
