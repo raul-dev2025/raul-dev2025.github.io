@@ -1,10 +1,11 @@
 Querying XML File Configuration with libvirt Shell
-=================================================
+==================================================
 
 Yes, you can query an XML configuration file for a libvirt domain (virtual machine) using the ``virsh`` command-line tool, which is the libvirt shell. Specifically, you can check for the presence of ``<kernel>`` and ``<initrd>`` elements in the domain's XML configuration.
 
 1. Dump the XML Configuration
 -----------------------------
+
 Use the ``virsh dumpxml`` command to output the XML configuration of a specific domain. Replace ``<domain-name>`` with the name or UUID of your virtual machine.
 
 .. code-block:: bash
@@ -14,7 +15,8 @@ Use the ``virsh dumpxml`` command to output the XML configuration of a specific 
 This will output the entire XML configuration of the domain to the terminal.
 
 2. Search for ``<kernel>`` and ``<initrd>`` Elements
-------------------------------------------------
+----------------------------------------------------
+
 You can either manually inspect the output for the ``<kernel>`` and ``<initrd>`` elements, or you can use tools like ``grep`` to filter the output.
 
 For example, to check if ``<kernel>`` and ``<initrd>`` are defined:
@@ -42,6 +44,7 @@ In this example, the ``<kernel>`` and ``<initrd>`` elements are defined with pat
 
 4. Edit the XML Configuration (Optional)
 ----------------------------------------
+
 If you need to modify the ``<kernel>`` or ``<initrd>`` elements, you can edit the XML configuration using:
 
 .. code-block:: bash
@@ -52,10 +55,12 @@ This will open the XML configuration in your default text editor, allowing you t
 
 5. Check for Direct Kernel Boot
 -------------------------------
+
 If the domain is configured for direct kernel boot, the ``<kernel>`` and ``<initrd>`` elements will be present. If not, these elements will be absent, and the domain will typically boot from a BIOS or UEFI configuration.
 
 Summary
 -------
+
 - Use ``virsh dumpxml <domain-name>`` to view the XML configuration.
 - Use ``grep`` to filter for ``<kernel>`` and ``<initrd>`` elements.
 - Use ``virsh edit <domain-name>`` to modify the configuration if needed.

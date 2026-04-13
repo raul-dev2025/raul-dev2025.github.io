@@ -9,18 +9,18 @@ This section covers system configuration files, kernel configuration, and handli
    :maxdepth: 1
    :caption: System Files:
 
-   sys_files/dummy-build.rst
-   sys_files/save_rmdir.rst
-   sys_files/sensitiveFiles.rst
-   sys_files/doc-ifSysCollector.rst
+   /04_System_Administration/system_configuration/sys_files/dummy-build.rst
+   /04_System_Administration/system_configuration/sys_files/save_rmdir.rst
+   /04_System_Administration/system_configuration/sys_files/sensitiveFiles.rst
+   /04_System_Administration/system_configuration/sys_files/doc-ifSysCollector.rst
 
 
 .. toctree::
    :maxdepth: 1
    :caption: OS installation:
 
-   sys_files/advancedOSinstallation.rst
-   sys_files/preserveUserData.rst
+   /04_System_Administration/system_configuration/sys_files/advancedOSinstallation.rst
+   /04_System_Administration/system_configuration/sys_files/preserveUserData.rst
 
 Available documentation relateted to operating system installation. 
 
@@ -59,7 +59,7 @@ Available documentation relateted to operating system installation.
    :maxdepth: 1
    :caption: Kernel Configuration:
 
-   kernel_conf/environ-kconf.rst
+   /04_System_Administration/system_configuration/kernel_conf/environ-kconf.rst
    
    
 

@@ -48,13 +48,13 @@ De la lista relacionada en este documento, los siguientes puertos están en uso;
 - El ratón y el teclado ocupun dos de los conectores **USB v2.0**; el resto de conectores USB están libres.
 - Por último, el cable de red ocupa el único puerto disponible de tipo **RJ45**. Como es un entorno académico, el cable no está conectado directamene al router. En su lugar, la configuración sugiere una conexión a la red de área local(LAN), que presumiblemente pasa por un switch. 
 
-.. figure:: ../descargas/conectores.jpg
+.. figure:: /descargas/conectores.jpg
    :alt: Estación de Trabajo - Conectores
    :height: 250px
    :align: right
 
 
-.. figure:: ../descargas/conectoresGrafica.jpg
+.. figure:: /descargas/conectoresGrafica.jpg
    :alt: Estación de Trabajo - Conectores
    :width: 250px
    :align: left

@@ -1,10 +1,10 @@
 Focusing on the VM Context: How the Kernel and Initramfs Are Loaded
-==================================================================
+===================================================================
 
 Given the observations, we can now focus on the **VM context** and explore how the kernel and initramfs might be loaded in a **paravirtualized KVM environment**. Since GRUB is confirmed to be the bootloader (via the MBR), but the ``grub.cfg`` file does not contain the expected ``linux`` and ``initrd`` parameters, it’s likely that the boot process is being handled in a non-standard way.
 
 Key Observations
---------------------------------------------------
+----------------
 
 1. **GRUB is the Bootloader**:
 
@@ -22,7 +22,7 @@ Key Observations
    - The VM is running under KVM with paravirtualized drivers, which can influence how the boot process works.
 
 Possible Mechanisms for Loading the Kernel and Initramfs
---------------------------------------------------
+--------------------------------------------------------
 
 Given the above observations, here are the most likely mechanisms for how the kernel and initramfs are being loaded:
 
@@ -33,11 +33,13 @@ Given the above observations, here are the most likely mechanisms for how the ke
    **How to Check**:
    
    - Inspect the GRUB environment variables:
+
      .. code-block:: bash
 
          sudo grub2-editenv list
 
    - Check if GRUB’s ``core.img`` contains embedded configuration:
+
      .. code-block:: bash
 
          strings /boot/grub2/i386-pc/core.img | grep -iE 'linux|initrd'
@@ -62,6 +64,7 @@ Given the above observations, here are the most likely mechanisms for how the ke
    **How to Check**:
    
    - Inspect the ``grub.cfg`` file for ``chainloader`` entries:
+
      .. code-block:: bash
 
          cat /boot/grub2/grub.cfg | grep chainloader
@@ -73,6 +76,7 @@ Given the above observations, here are the most likely mechanisms for how the ke
    **How to Check**:
    
    - Look for custom GRUB modules in ``/boot/grub2/i386-pc/``:
+
      .. code-block:: bash
 
          ls /boot/grub2/i386-pc/
@@ -83,7 +87,7 @@ Given the above observations, here are the most likely mechanisms for how the ke
          ls /etc/grub.d/
 
 Next Steps
---------------------------------------------------
+----------
 
 1. **Check GRUB Environment Variables**:
 
@@ -112,7 +116,7 @@ Next Steps
    Check for ``chainloader`` entries in ``grub.cfg`` or other bootloaders in ``/boot/``.
 
 Summary of Likely Mechanisms
---------------------------------------------------
+----------------------------
 
 1. **Embedded Configuration in GRUB**:
 

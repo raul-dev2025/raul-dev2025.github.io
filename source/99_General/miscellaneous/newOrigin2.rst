@@ -6,7 +6,7 @@ Se considera un sistema de coordenadas con origen en :math:`O` y un punto :math:
 1. La función :math:`coseno(θ)` está definida como la coordenada :math:`x` del punto :math:`B`.
 2. La función :math:`seno(θ)` está definida como la coordenada :math:`y` del punto :math:`B`.
 
-.. figure:: ../Images/fig_16_6.png 
+.. figure:: /descargas/fig_16_6.png 
    :alt: Diagrama de funciones trigonométricas
    :align: center
    :width: 300px
