@@ -20,7 +20,7 @@ Dada una imagen de la placa base de un ordenador, identifica y etiqueta los sigu
 
 -----
 
-.. image:: ../descargas/placa-etiquetas.JPG
+.. image:: /descargas/placa-etiquetas.JPG
    :alt: Placa base etiquetada
    :align: center
    :width: 250

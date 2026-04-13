@@ -1,5 +1,5 @@
 Inspecting the MBR to Identify the Bootloader
-============================================
+=============================================
 
 The command:
 
@@ -16,7 +16,7 @@ reads the **first 512 bytes** of the disk (``/dev/vda``), which is the **Master 
 By piping the output to ``strings``, we can extract human-readable text from the MBR, which often includes clues about the bootloader (e.g., "GRUB" or "LILO").
 
 Purpose of the ``dd`` Command
---------------------------------------------------
+-----------------------------
 
 The ``dd`` command helps us:
 
@@ -34,11 +34,11 @@ The ``dd`` command helps us:
    - If the MBR contains a chainloader (e.g., to load another bootloader from a partition), you might see related strings.
 
 Expected Output
---------------------------------------------------
+---------------
 
 Here’s an example of what you might see if GRUB is installed:
 
-.. code-block:: plaintext
+.. code-block:: text
 
     GRUB Geom
     Hard Disk
@@ -47,12 +47,12 @@ Here’s an example of what you might see if GRUB is installed:
 If another bootloader is installed, you might see different strings (e.g., "LILO" or "SYSLINUX").
 
 What About ``/dev/vda1``?
---------------------------------------------------
+-------------------------
 
 The partition ``/dev/vda1`` contains the root filesystem (``/``), but the **bootloader is installed on ``/dev/vda`` (the entire disk)**, not on the partition. The bootloader code in the MBR loads the second-stage bootloader (e.g., GRUB’s ``core.img``), which then reads the boot configuration (e.g., ``grub.cfg``) from the filesystem on ``/dev/vda1``.
 
 Next Steps
---------------------------------------------------
+----------
 
 1. **Run the** ``dd`` **Command**:
 
@@ -102,7 +102,7 @@ Next Steps
    Look for files like ``vmlinuz-<version>`` and ``initrd.img-<version>``.
 
 Summary
---------------------------------------------------
+-------
 
 - The ``dd`` command reads the MBR on ``/dev/vda``, which contains the bootloader code.
 - The partition ``/dev/vda1`` contains the root filesystem, but the bootloader is installed on ``/dev/vda``.

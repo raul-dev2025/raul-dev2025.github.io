@@ -9,16 +9,16 @@ This section covers hardware specifications, system tasks, and PCI express testi
    :maxdepth: 1
    :caption: System Tasks:
 
-   sysTasks.rst
-   bus-map-refact.rst
-   pci-exp-tests-HOWTO.rst
-   compCPU.rst
+   /01_Hardware/hardware_resources/sysTasks.rst
+   /01_Hardware/hardware_resources/bus-map-refact.rst
+   /01_Hardware/hardware_resources/pci-exp-tests-HOWTO.rst
+   /01_Hardware/hardware_resources/compCPU.rst
 
 .. toctree::
    :maxdepth: 1
    :caption: Hardware Specifications:
 
-   hw_specs/workFlow-strace.rst
-   hw_specs/privateInvestigations.rst
-   hw_specs/longWalkOnSys.rst
-   hw_specs/genericSys.rst
+   /01_Hardware/hardware_resources/hw_specs/workFlow-strace.rst
+   /01_Hardware/hardware_resources/hw_specs/privateInvestigations.rst
+   /01_Hardware/hardware_resources/hw_specs/longWalkOnSys.rst
+   /01_Hardware/hardware_resources/hw_specs/genericSys.rst

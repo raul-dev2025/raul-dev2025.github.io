@@ -1,16 +1,18 @@
 Setting Up a VM to Boot with a Copied Kernel
-===========================================
+============================================
 
 This guide explains how to copy the running kernel on a Linux VM and configure the VM to boot using the copied kernel.
 
 Prerequisites
 -------------
+
 - A Linux-based virtual machine (e.g., Ubuntu, CentOS, or Debian).
 - Root or sudo access on the VM.
 - Basic familiarity with Linux commands and bootloader configuration.
 
 Step 1: Identify the Running Kernel
 -----------------------------------
+
 1. Check the currently running kernel version:
 
    .. code-block:: bash
@@ -30,6 +32,7 @@ Step 1: Identify the Running Kernel
 
 Step 2: Copy the Kernel Files
 -----------------------------
+
 1. Create a directory to store the copied kernel files:
 
    .. code-block:: bash
@@ -47,6 +50,7 @@ Step 2: Copy the Kernel Files
 
 Step 3: Update the Bootloader (GRUB)
 ------------------------------------
+
 1. Open the GRUB configuration file for editing:
 
    .. code-block:: bash
@@ -76,6 +80,7 @@ Step 3: Update the Bootloader (GRUB)
 
 Step 4: Reboot and Select the Copied Kernel
 -------------------------------------------
+
 1. Reboot the VM:
 
    .. code-block:: bash
@@ -87,6 +92,7 @@ Step 4: Reboot and Select the Copied Kernel
 
 Step 5: Verify the Booted Kernel
 --------------------------------
+
 1. After booting, verify that the VM is running the copied kernel:
 
    .. code-block:: bash
@@ -97,11 +103,13 @@ Step 5: Verify the Booted Kernel
 
 Step 6: Test the Kernel
 -----------------------
+
 1. Run tests or workloads to ensure the copied kernel functions as expected.
 2. If issues arise, you can reboot and select the original kernel from the GRUB menu.
 
 Conclusion
 ----------
+
 You have successfully copied the running kernel and configured the VM to boot using the copied kernel. This setup is useful for testing and validating kernel behavior in a controlled environment.
 
 For advanced use cases, consider using tools like `kexec` for faster kernel switching or creating custom kernel builds for testing.

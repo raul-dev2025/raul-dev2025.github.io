@@ -30,12 +30,12 @@ Características principales:
 
 - Permiten el transporte de datos e instrucciones entre la memoria, la CPU y los dispositivos de E/S.
 
-.. figure:: ../descargas/arch.png
+.. figure:: /descargas/arch.png
    :alt: Diagrama arquitectura Von Neumann
    :width: 250px
    :align: left
 
-.. figure:: ../descargas/archCPU.png
+.. figure:: /descargas/archCPU.png
    :alt: Diagrama arquitectura Von Neumann
    :width: 250px
    :align: right
@@ -141,7 +141,7 @@ Componentes Clave
   - Sigue modelo Von Neumann, pero con buses de alta velocidad (DDR5).
 
 
-.. figure:: ../descargas/intel286.svg.png
+.. figure:: /descargas/intel286.svg.png
    :alt: Diagrama arquitectura Von Neumann
    :width: 250px
    :align: center

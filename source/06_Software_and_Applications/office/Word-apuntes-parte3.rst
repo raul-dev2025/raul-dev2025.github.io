@@ -53,13 +53,13 @@ Consiste en combinar un documento con una base de datos;
 Resumen
 -------
 
-.. figure:: ../descargas/repasoWord-1.jpg
+.. figure:: /descargas/repasoWord-1.jpg
    :alt: Diagrama arquitectura Von Neumann
    :width: 250px
    :align: left
 
 
-.. figure:: ../descargas/repasoWord-2.jpg
+.. figure:: /descargas/repasoWord-2.jpg
    :alt: Diagrama arquitectura Von Neumann
    :width: 250px
    :align: right

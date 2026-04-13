@@ -1,5 +1,5 @@
 Understanding Bootloader Directories and Customizing GRUB
-========================================================
+=========================================================
 
 To understand where to place the provided GRUB configuration snippet, let's break down the directories and their purposes.
 
