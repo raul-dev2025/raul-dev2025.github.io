@@ -1,5 +1,5 @@
 How to Get a Resumed (Counter) Output Using ``diff``
-==================================================
+====================================================
 
 To get a resumed (counter) output when using the ``diff`` command in the command line, you can use the following options and techniques:
 

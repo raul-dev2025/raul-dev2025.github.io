@@ -1,5 +1,5 @@
 struct pci_device_id
-===================
+====================
 
 The ``struct pci_device_id`` is a fundamental structure in Linux kernel programming, particularly for PCI device drivers. Its primary purpose is to hold PCI device identifiers, which are used to match the driver with specific PCI devices. This structure is essential for the kernel to determine which devices a particular driver can handle.
 

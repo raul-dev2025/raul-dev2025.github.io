@@ -1,10 +1,11 @@
+========================================================================
 Handling ``remove`` and ``rescan`` Files in Linux PCI Device Directories
-===================================================================
+========================================================================
 
 In the context of Linux system and device driver development, the files ``remove`` and ``rescan`` in the PCI device directory (e.g., ``/sys/bus/pci/devices/...``) are special files used for device management. These files require careful handling due to their sensitive nature and permission requirements.
 
 Purpose of ``remove`` and ``rescan`` Files
---------------------------------------------
+------------------------------------------
 
 1. ``remove`` **File**:
 
@@ -21,7 +22,7 @@ Purpose of ``remove`` and ``rescan`` Files
    - If a user without sufficient permissions tries to write to this file, a **permission denied** error will occur.
 
 Challenges with ``remove`` and ``rescan`` Files
--------------------------------------------------
+-----------------------------------------------
 
 1. **Permission Issues**:
 
@@ -36,7 +37,7 @@ Challenges with ``remove`` and ``rescan`` Files
    - These operations should be handled with caution and only by users who understand the implications.
 
 Handling ``remove`` and ``rescan`` in the Script
--------------------------------------------------
+------------------------------------------------
 
 Before refactoring the script, consider the following approaches for handling these files:
 
@@ -58,7 +59,7 @@ Before refactoring the script, consider the following approaches for handling th
    - If the script is not designed to handle ``remove`` and ``rescan``, skip these files or log a warning when encountering them.
 
 Example of Handling ``remove`` and ``rescan`` Files
------------------------------------------------------
+---------------------------------------------------
 
 .. note::
 	 See your Python Repo. File ``ifSysCollector.py``
@@ -68,7 +69,7 @@ Example of Handling ``remove`` and ``rescan`` Files
 
 
 Key Considerations
---------------------
+------------------
 
 1. **User Awareness**:
 
@@ -83,11 +84,11 @@ Key Considerations
    - Add a confirmation prompt or a command-line flag (e.g., ``--allow-dangerous-operations``) to prevent accidental misuse of these files.
 
 Next Steps
-------------
+----------
 
 Decide whether the script should:
 
-1. Skip ``remove`` and ``rescan` files entirely.
+1. Skip ``remove`` and ``rescan`` files entirely.
 2. Handle them with special logic (e.g., only if the user has root privileges).
 3. Warn the user about their presence and potential risks.
 

@@ -1,10 +1,10 @@
 How to Limit CPU Computation Consumption for Builds and Compilation
-==================================================================
+===================================================================
 
 This guide provides strategies to limit CPU usage for CPU-intensive processes like **compilation** or **builds**.
 
 1. Limit Parallel Jobs
------------------------
+----------------------
 Many build systems and compilers allow you to control the number of parallel jobs, which directly affects CPU usage.
 
 - **For** ``make``:
@@ -55,7 +55,7 @@ Dynamically limit the CPU usage of the build process to a specific percentage.
     cpulimit -l 50 -e make
 
 5. Control System-Wide CPU Usage
----------------------------------
+--------------------------------
 If you're running builds in a shared environment, you can use system-wide tools to limit CPU usage.
 
 - **Using** ``cgroups`` **(Linux):**

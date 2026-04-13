@@ -1,8 +1,9 @@
+====================================
 Definitions of Integral and Function
-===================================
+====================================
 
 Function
-----------
+--------
 
 A **function** is a relationship or rule that assigns to each element from one set (the **domain**) exactly one element from another set (the **codomain** or **range**). 
 
@@ -10,6 +11,7 @@ Key Properties:
 
 - **Input-Output Relationship:** For every input :math:`x` in the domain, there is exactly one output :math:`f(x)`.
 - **Notation:** Written as :math:`f: X \to Y`, where :math:`X` is the domain and :math:`Y` is the codomain.
+
 - **Examples:**
 
   - Linear function: :math:`f(x) = 2x + 3`
@@ -41,14 +43,14 @@ Applications:
 - Work, displacement, and solving differential equations.
 
 Relationship (Fundamental Theorem of Calculus):
--------------------------------------------------
+-----------------------------------------------
 
 :math:`\frac{d}{dx} \left( \int f(x) \, dx \right) = f(x)`.
 
 
 
 Difference Definition of the Derivative (Using df)
-----------------------------------------------------
+--------------------------------------------------
 
 The derivative of a function :math:`f` at a point :math:`x_0` can be expressed using the difference quotient with differential notation:
 
@@ -62,9 +64,9 @@ Where:
 - :math:`dx` = infinitesimal change in :math:`x`
 - :math:`\Delta x` = finite change in :math:`x`
 
-
 Integral Form (Fundamental Theorem of Calculus)
-----------------------------------------------
+-----------------------------------------------
+
 For an integral :math:`F(x) = \int f(x) \, dx`, the derivative is:
 
 .. math::

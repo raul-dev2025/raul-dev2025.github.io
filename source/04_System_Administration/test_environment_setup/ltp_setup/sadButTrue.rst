@@ -1,5 +1,6 @@
+================================
 The /usr/src/linux Reality Check
-===============================
+================================
 
 1. The Hard Truth
 -----------------
@@ -11,7 +12,7 @@ The /usr/src/linux Reality Check
   * Isn't documented as required in most modern docs
 
 2. Why This Causes Pain
-----------------------
+-----------------------
 
 - Historical assumptions collide with modern practices:
 
@@ -36,7 +37,7 @@ The /usr/src/linux Reality Check
   * DKMS handles paths differently
 
 4. Why This Wastes Days
-----------------------
+-----------------------
 
 - Symptoms appear as "missing headers"
 - Error messages don't reveal root cause
@@ -62,7 +63,7 @@ Why This Works Despite Being "Wrong"
 - Provides the "magic" path everything looks for
 
 6. Why Nobody Tells You This
----------------------------
+----------------------------
 
 - Considered "tribal knowledge"
 - Assumed to be "obvious" to kernel developers

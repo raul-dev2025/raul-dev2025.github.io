@@ -16,7 +16,18 @@ author = 'Raul Vilchez'
 extensions = []
 
 templates_path = ['_templates']
-exclude_patterns = []
+exclude_patterns = [
+    '**/template.rst',
+    '**/prueba-*.rst',
+    '99_General/miscellaneous/planing_stim.rst',
+    '99_General/miscellaneous/guestRequirements.rst',
+    # Puedes excluir carpetas enteras de trabajo
+    '01_Hardware/driver_development/drv_refs/cleanSlab.rst',
+    '01_Hardware/hardware_resources/bus-map.rst',
+    '01_Hardware/sistema/resume_modulo_0852.rst',
+    '99_General/miscellaneous/newOrigin.rst'
+
+]
 
 # Branded icon
 html_favicon = '_static/simulation.png'

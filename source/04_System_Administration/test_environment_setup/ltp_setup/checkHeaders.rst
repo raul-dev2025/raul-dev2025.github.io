@@ -1,10 +1,11 @@
+=============
 Check Headers
-==============
+=============
 
 1. **Can** ``AC_CHECK_HEADERS`` **be defined more than once in** ``configure.ac`` **?**
    Yes, ``AC_CHECK_HEADERS`` can be used multiple times in ``configure.ac``. Each call to ``AC_CHECK_HEADERS`` checks for the presence of the specified headers and defines preprocessor macros (e.g., ``HAVE_HEADER_H``) if the headers are found. For example:
 
-   .. code-block:: m4
+   .. code-block:: text
 
       AC_CHECK_HEADERS([dmapi.h ifaddrs.h libaio.h])
       AC_CHECK_HEADERS([mm.h linux/module.h])
@@ -47,7 +48,6 @@ Check Headers
    Together, these macros provide feedback to the user about the search paths being used for header files. This is useful for debugging or verifying that the correct paths are being used.
 
 4. **How to use** ``CPPFLAGS`` **to specify custom include paths**,
-i59
    If you want to ensure that the *configure* script searches for headers in ``/usr/src/k-ver/include``, you can set the ``CPPFLAGS`` environment variable before running ``configure``:
 
    .. code-block:: bash
@@ -60,7 +60,7 @@ i59
 5. **Modifying** ``configure.ac`` **to handle custom paths,**
    If you want to modify ``configure.ac`` to handle custom paths or provide better feedback, you can add the following:
 
-   .. code-block:: m4
+   .. code-block:: text
 
       # Check for custom header paths
       AC_MSG_CHECKING([for header search paths])

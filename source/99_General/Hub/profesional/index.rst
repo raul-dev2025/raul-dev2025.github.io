@@ -40,15 +40,7 @@ This section covers hardware specifications, system tasks, and PCI express testi
 
 This section covers System configuration.
 
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Sistemas Microinformaticos:
-
-   /99_General/Hub/academico/index.rst
-
-Esta sección contiene los documentos disponibles sobre el curso de Sistemas Microinformáticos.
-
+-----
 
 .. toctree::
    :maxdepth: 1

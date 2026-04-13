@@ -1,14 +1,16 @@
+==============================================
 Integrating Path Truncation into Read the Docs
 ==============================================
 
 This guide explains how to propagate the `truncatePath` functionality into your Read the Docs (Sphinx) project. You can achieve this by either injecting custom JavaScript into the generated HTML files or modifying paths during the Sphinx build process.
 
 Option 1: Inject Custom JavaScript into Sphinx HTML Output
----------------------------------------------------------
+----------------------------------------------------------
 
 This approach dynamically truncates paths in the browser when the documentation is viewed.
 
-### Steps:
+Steps:
+^^^^^^
 
 1. **Create a Custom JavaScript File**
    Save the `truncatePath` function in a file named `truncator.js` inside your Sphinx project's `_static` directory (e.g., `_static/js/truncator.js`).

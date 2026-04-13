@@ -1,5 +1,6 @@
+=======================
 Debuggin Kernel Headers
-=========================
+=======================
 
 
 If the ``configure`` script is still not finding the four headers (``dmapi.h``, ``mm.h``, ``linux/module.h``, and ``sys/jfsdmapi.h``) even after defining ``CPPFLAGS="-I/usr/src/k-ver/include"``, there could be several reasons for this. Let’s troubleshoot step by step:
@@ -101,12 +102,15 @@ Here’s what it means:
    - ``d``: The entry is a directory.
 
 2. **Permissions**:
+
    - ``rwxr-xr-x``: The permissions are divided into three groups:
+
      - **Owner** (``root``): Has read, write, and execute permissions (``rwx``).
      - **Group** (``developers``): Has read and execute permissions (``r-x``).
      - **Others**: Have read and execute permissions (``r-x``).
 
 3. **Extended ACL**:
+
    - The ``.`` at the end indicates that the directory has an extended ACL. Use ``getfacl`` to view the additional permissions:
 
      .. code-block:: bash
@@ -114,12 +118,15 @@ Here’s what it means:
         getfacl /usr/src/k-ver/include
 
 4. **Number of Links**:
+
    - ``28``: The directory has 28 hard links (typically representing subdirectories).
 
 5. **Owner and Group**:
+
    - The directory is owned by ``root`` and belongs to the ``developers`` group.
 
 6. **Directory Path**:
+
    - The path to the directory is ``/usr/src/k-ver/include``.
 
 **Is This Configuration Appropriate?**
@@ -139,7 +146,7 @@ Here’s what it means:
 
    - The ``configure`` script might not be using ``CPPFLAGS`` correctly. To verify, add debugging output to the ``configure.ac`` file:
 
-     .. code-block:: m4
+     .. code-block:: text
 
         AC_MSG_CHECKING([for CPPFLAGS])
         AC_MSG_RESULT([$CPPFLAGS])
@@ -159,7 +166,7 @@ Here’s what it means:
    - Some headers might depend on other headers or macros being defined. For example, ``linux/module.h`` might require ``LINUX_VERSION_CODE`` or other kernel-specific macros.
    - Modify the ``AC_CHECK_HEADERS`` macro to include necessary dependencies:
 
-     .. code-block:: m4
+     .. code-block:: text
 
         AC_CHECK_HEADERS([dmapi.h mm.h linux/module.h sys/jfsdmapi.h], [], [], [
           #include <linux/version.h>
@@ -225,7 +232,7 @@ Here’s what it means:
 ----
 
 Summary of Steps:
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 1. Verify the headers exist in ``/usr/src/k-ver/include``.
 2. Check for subdirectories and permissions.

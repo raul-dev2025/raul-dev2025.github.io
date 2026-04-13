@@ -1,5 +1,5 @@
 Why ``kzalloc()`` Over ``kmalloc()`` in the Linux Kernel
-=======================================================
+========================================================
 
 Overview
 --------
@@ -9,22 +9,23 @@ In the Linux kernel, both ``kmalloc()`` and ``kzalloc()`` are used for dynamic m
 Key Differences
 ---------------
 
-+-------------------+--------------------------------+--------------------------------+
-|      Function     |           Behavior             |        Typical Use Case        |
-+===================+================================+================================+
-|    ``kmalloc()``  |    Allocates *uninitialized*   |  When you need raw memory and  |
-|                   |     memory (garbage values).   |will initialize fields manually.|
-+-------------------+--------------------------------+--------------------------------+
-|    ``kzalloc()``  |  Allocates *zero-initialized*  |   When you want clean slate    |
-|                   |  memory (all bytes set to 0).  |    (e.g., structs, arrays).    |
-+-------------------+--------------------------------+--------------------------------+
++-------------------+--------------------------------+----------------------------------+
+|      Function     |            Behavior            |        Typical Use Case          |
++===================+================================+==================================+
+|   ``kmalloc()``   |  Allocates *uninitialized*     |  When you need raw memory and    |
+|                   |  memory (garbage values).      |  will initialize fields anually. |
++-------------------+--------------------------------+----------------------------------+
+|   ``kzalloc()``   |  Allocates *zero-initialized*  |  When you want clean slate       |
+|                   |  memory (all bytes set to 0).  |  (e.g., structs, arrays).        |
++-------------------+--------------------------------+----------------------------------+
 
 Why ``kzalloc()`` Was Used in the Example
-----------------------------------------
+-----------------------------------------
 
 1. **Safer Defaults**:
 
    - Zero-initialization ensures:
+   
      - Pointers → ``NULL``.
      - Booleans → ``false``.
      - Integers → ``0``.
@@ -64,7 +65,7 @@ When to Use ``kmalloc()``
    - Slab caches (``kmem_cache``) often handle initialization separately.
 
 Performance Consideration
----------------------------
+-------------------------
 
 - ``kzalloc()`` adds a tiny overhead (zeroing memory).
 - Modern kernels optimize this, so prefer ``kzalloc()`` unless profiling shows a bottleneck.

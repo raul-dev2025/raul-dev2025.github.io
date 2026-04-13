@@ -1,8 +1,9 @@
+====================================
 LTP Configuration Debugging Analysis
-======================================
+====================================
 
 Flex (Lex) Error Resolution
------------------------------
+---------------------------
 
 - **Issue**: Linker error ``undefined reference to yywrap`` due to missing Flex library (``-lfl``).
 - **Resolution**: Configure script auto-detected and added ``-lfl`` to linker flags::
@@ -13,23 +14,52 @@ Flex (Lex) Error Resolution
 - **Action**: Ensure ``flex-devel`` is installed (verified in logs).
 
 Missing Headers
------------------
+---------------
 
 Critical Missing Headers
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------+-------------------------------------------+-----------------------------------+----------------------------------+
-| Header | Error | Impact | Fix |
+| Header               | Error                                     | Impact                            | Fix                              |
 +======================+===========================================+===================================+==================================+
-| ``dmapi.h`` | ``fatal error: dmapi.h: No such file`` | DMAPI tests disabled. | Install ``xfsprogs-devel``. |
+| ``dmapi.h``          | ``fatal error: dmapi.h: No such file``    | DMAPI tests disabled.             | Install ``xfsprogs-devel``.      |
 +----------------------+-------------------------------------------+-----------------------------------+----------------------------------+
-| ``linux/module.h`` | ``fatal error: linux/module.h: Not found``| Kernel module tests skipped. | Install ``kernel-devel``. |
+| ``linux/module.h``   | ``fatal error: linux/module.h: Not found``| Kernel module tests skipped.      | Install ``kernel-devel``.        |
 +----------------------+-------------------------------------------+-----------------------------------+----------------------------------+
-| ``sys/jfsdmapi.h`` | JFS-specific tests disabled. | Rarely required. | Ignore if JFS not used. |
+| ``sys/jfsdmapi.h``   | JFS-specific tests disabled.              | Rarely required.                  | Ignore if JFS not used.          |
 +----------------------+-------------------------------------------+-----------------------------------+----------------------------------+
+
+-----
+
+Critical Missing Headers
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table:: Analysis of Missing LTP Headers
+   :widths: 20 30 25 25
+   :header-rows: 1
+
+   * - Header
+     - Error
+     - Impact
+     - Fix
+   * - ``dmapi.h``
+     - ``fatal error: dmapi.h: No such file``
+     - DMAPI tests disabled.
+     - Install ``xfsprogs-devel``.
+   * - ``linux/module.h``
+     - ``fatal error: linux/module.h: Not found``
+     - Kernel module tests skipped.
+     - Install ``kernel-devel``.
+   * - ``sys/jfsdmapi.h``
+     - JFS-specific tests disabled.
+     - Rarely required.
+     - Ignore if JFS not used.
+
+
+
 
 Successful Header Checks
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Core headers found:
 

@@ -1,5 +1,5 @@
 Función seno y coseno
-====================
+=====================
 
 Se considera un sistema de coordenadas con origen en :math:`O` y un punto :math:`A` en :math:`(1,0)`. Se rota la flecha :math:`OA` sobre un ángulo de theta (:math:`θ`) grados hacia una nueva posición en :math:`OB`. Ver figura 16-6.
 

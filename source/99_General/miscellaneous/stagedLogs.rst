@@ -1,5 +1,5 @@
 Viewing the Log of Staged Changes in Git
-=======================================
+========================================
 
 To view the log of changes that are staged (to be committed) in Git, you can use the ``git diff`` command with the ``--cached`` option. This shows the differences between the staging area (index) and the last commit.
 
@@ -30,7 +30,7 @@ Example Output
     }
 
 Additional Options
------------------
+------------------
 
 1. **View Staged Changes for a Specific File**
    If you only want to see the staged changes for a specific file, you can specify the file path:

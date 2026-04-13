@@ -1,5 +1,5 @@
 Linux Kernel-Style JSON Struct Example
-=====================================
+======================================
 
 Principles
 ----------
@@ -10,7 +10,8 @@ Principles
 5. **Error codes**: Return ``-ENOMEM`` or ``-EINVAL`` instead of aborting.
 
 Struct Definitions
------------------
+------------------
+
 .. code-block:: c
 
     #include <linux/types.h>
@@ -41,7 +42,8 @@ Struct Definitions
     };
 
 Memory Allocation
-----------------
+-----------------
+
 .. code-block:: c
 
     struct person *person_alloc(void)
@@ -55,7 +57,8 @@ Memory Allocation
     }
 
 Data Initialization
-------------------
+-------------------
+
 .. code-block:: c
 
     int person_set_name(struct person *p, const char *name)
@@ -78,7 +81,8 @@ Data Initialization
     }
 
 Example Usage
-------------
+-------------
+
 .. code-block:: c
 
     int example_init(void)
@@ -114,14 +118,14 @@ Example Usage
     }
 
 Key Differences from Userspace
------------------------------
+------------------------------
 - Uses ``kzalloc()`` instead of ``malloc()``.
 - No ``strdup``; fixed buffers with ``strscpy()``.
 - Initialization is explicit (no constructors).
 - Error handling via return codes (``-EINVAL``, ``-ENOMEM``).
 
 Dynamic Sizes (Advanced)
------------------------
+------------------------
 For variable-length data, the kernel would:
 
 1. Use ``struct list_head`` for linked lists.
