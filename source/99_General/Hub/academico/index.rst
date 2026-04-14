@@ -50,8 +50,8 @@ Kernel
 .. toctree::
    :maxdepth: 1
    :caption: 02 Kernel & Low Level:
-
-   /02_Kernel/A5-Hardware/borrar
+   
+   /01_Hardware/A5-Hardware/Processador/borrar
 
 .. note::
 
@@ -167,8 +167,7 @@ Release Notes & Changelog
    :maxdepth: 1
    :caption: 99 General & Recursos:
 
-   /99_General/CVs/CV-proyectos-2025
-   /99_General/siglas
+   /99_General/CVs/CV-proyectos-2025   
    /changelog
 
 .. tip::
