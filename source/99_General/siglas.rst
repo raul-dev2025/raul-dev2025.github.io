@@ -1,26 +1,23 @@
 Indice
 ------
 
-Indice
-------
-
-1.  :ref:`siglas-1`
-    1.1 :ref:`siglas-2`
-    1.2 :ref:`siglas-3`
-2.  :ref:`siglas-4`
-3.  :ref:`siglas-5`
-4.  :ref:`siglas-6`
-5.  :ref:`siglas-7`
-6.  :ref:`siglas-8`
-7.  :ref:`siglas-9`
-8.  :ref:`siglas-10`
-9.  :ref:`siglas-11`
-10. :ref:`siglas-12`
-11. :ref:`siglas-13`
-    11.1 :ref:`siglas-14`
-    11.1.1 :ref:`siglas-15`
-    11.1.2 :ref:`siglas-16`
-    11.2 :ref:`siglas-17`
+* :ref:`siglas-1`
+   * :ref:`siglas-2`
+   * :ref:`siglas-3`
+* :ref:`siglas-4`
+* :ref:`siglas-5`
+* :ref:`siglas-6`
+* :ref:`siglas-7`
+* :ref:`siglas-8`
+* :ref:`siglas-9`
+* :ref:`siglas-10`
+* :ref:`siglas-11`
+* :ref:`siglas-12`
+   * :ref:`siglas-13`
+* :ref:`siglas-14`
+   * :ref:`siglas-15`
+   * :ref:`siglas-16`
+   * :ref:`siglas-17`
 
 .. _siglas-1:
 
@@ -97,8 +94,9 @@ Indice
 
 -  **PMMU** — paged memory management unit
 
--  **RCU** — Read Copy Update `rcu <Temas/A5-Hardware/Procesador/rcu.rst>`__
 .. TODO: mover a source/01_Hardware/A5-Hardware/Processador
+
+-  **RCU** — Read Copy Update `rcu <Temas/A5-Hardware/Procesador/rcu.rst>`__
 
 -  **PME** — power management event support
 
@@ -179,6 +177,7 @@ Indice
 -  **AoE** — ATA over Ethernet
 
 .. TODO: mover a source/01_Hardware/A5-Hardware/Drivers/hid.rst
+
 -  **HID** — Human Interface Device, it take INPUTS and give OUTPUTS. `hid <Temas/A5-Hardware/Drivers/hid.rst>`__
 
 -  **HCI** — Host Controller Interface
@@ -194,6 +193,7 @@ Indice
 -  **AHCI** — Advanced Host Controller Interface
 
 .. TODO: mover a source/01_Hardware/A5-Hardware/Drivers/xHCI.rst
+
 -  **xHCI** — Extensible Host Controller Interface `xHCI <Temas/A5-Hardware/Drivers/xHCI.rst>`__
 
 -  **OC** — OverClocking
@@ -415,6 +415,7 @@ Indice
 ---------------------------------------------
 
 .. TODO: mover a source/01_Hardware/A5-Hardware/Apm
+
 -  **APM** — Advanced Power Management `apm <Temas/A5-Hardware/Apm/apm.rst>`__
 
 .. _siglas-8:
@@ -577,8 +578,8 @@ Indice
 
 .. _siglas-13:
 
-Transaccion de bitcoin
-----------------------
+10.1 Transaccion de bitcoin
+---------------------------
 
 -  **Block** — record in the block chain contining “confirms” and many “waiting transactions”
 
