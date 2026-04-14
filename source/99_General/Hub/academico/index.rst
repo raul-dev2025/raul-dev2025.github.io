@@ -1,7 +1,7 @@
 .. Técnico Sistemas documentation master file.
 
-Documentación de Técnico Sistemas
-=================================
+Técnico Sistemas
+================
 
 Bienvenido a la base de conocimientos de infraestructura y sistemas. Este repositorio centraliza la documentación técnica, apuntes académicos y procedimientos de configuración organizados por dominios tecnológicos.
 

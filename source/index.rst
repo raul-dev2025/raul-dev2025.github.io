@@ -9,3 +9,10 @@
    99_General/Hub/academico/index
    99_General/Hub/profesional/index
 .. 99_General/Hub/desarrollo/index
+
+.. Glosario técnico: Lista de siglas y acrónimos
+.. toctree::
+   :maxdepth: 1
+   :caption: Referencias:
+
+   99_General/siglas
