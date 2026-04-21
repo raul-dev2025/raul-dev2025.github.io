@@ -6,3 +6,4 @@ make.bat
 objects.inv
 .env/
 .venv/
+*workspace

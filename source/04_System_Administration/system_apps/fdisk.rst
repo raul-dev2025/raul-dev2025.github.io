@@ -57,10 +57,12 @@ Conceptos Técnicos
 Tipos de Tablas de Partición
 ----------------------------
 
-* **MBR (Master Boot Record)**: 
+* **MBR (Master Boot Record)**:
+
     - Tamaño máximo de 2 TiB.
     - Máximo 4 particiones primarias (o 3 primarias y 1 extendida con hasta 12 particiones lógicas).
 * **GPT (GUID Partition Table)**:
+
     - Tamaño máximo de 8 ZiB.
     - Hasta 128 particiones.
 
