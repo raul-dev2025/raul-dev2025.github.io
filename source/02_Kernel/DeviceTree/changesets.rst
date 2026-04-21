@@ -3,9 +3,9 @@
 
 .. _1-changesets_1:
 
-===================================
-*************** conjunto de cambios
-===================================
+===================
+conjunto de cambios
+===================
 
 El conjunto de cambios de un *DT*, es un método que permite aplicar cambios sobre un árbol *activo*, de tal forma, que sean aplicados el *conjunto de cambios totales* o, puede que ninguno de ellos. Si ocurre un error *parcial*, mientras es aplicado el *conjunto de cambios*, se retrocederá al *estado anterior*.
 
@@ -20,7 +20,7 @@ La secuenccia de un cambio es como sigue:
 .. _1-changesets_2:
 
 Referencias y agradecimientos
------------------------------
+=============================
 
 **[f1]** nota d.t. el *núcleo*, referido a la *aplicación*, o "motor", que lleva a cabo los cambios. No al kernel.
 

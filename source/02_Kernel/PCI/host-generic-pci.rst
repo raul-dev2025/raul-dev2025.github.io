@@ -1,8 +1,13 @@
+.. contents:: Tabla de contenidos
+   :depth: 3
+
+.. _1-host-generic-pci_1:
+
+===================================
 Controlador de *host* PCI, genérico
 ===================================
 
-Los controladores de host PCI, inicializdos por el *firmaware*, como la implementación *virtio-pci*, encontrada en ``kvmtool`` y otros sistemas paravirtualizados, no requieren soporte complejo, al controlador; como la gestión del *regulador(vrm?)* o al reloj.
-De hecho, el controlador podría no requerir la configuración de una interfase de control, por el sistema operativo. En su lugar, es presentada un conjunto de ventanas fijas, describiendo un subconjunto de IO, *memoria* y, *expacios de configuración*.
+Los controladores de host PCI, inicializdos por el *firmaware*, como la implementación *virtio-pci*, encontrada en ``kvmtool`` y otros sistemas paravirtualizados, no requieren soporte complejo, al controlador; como la gestión del *regulador(vrm?)* o al reloj. De hecho, el controlador podría no requerir la configuración de una interfase de control, por el sistema operativo. En su lugar, es presentada un conjunto de ventanas fijas, describiendo un subconjunto de IO, *memoria* y, *expacios de configuración*.
 
 Este tipo de controladores pueden ser descritos, estrictamente, en términos de las vinculaciones al *Árbol de dispositivo* estandarizado; comunicadas en ``pci.txt``
 
@@ -14,8 +19,7 @@ Propiedades de nodo, del *controlador pci host*:
 
 - ``ranges``: Descrito en *IEEE Std 1275-1994*, pero deberá proporcionar, como mínimo, una definición de *memoria no predecible*. Uno o ambos espacios de memoria e IO, podrían ser proporcionados.
 
-- ``bus-range``: Propiedad opcional -también descrita en *IEEE Std 1275-1994*, para indicar un rango de números de bus, para este controlador.
-  De estar ausente, por defecto es ``<0 255>`` -todos los buses.
+- ``bus-range``: Propiedad opcional -también descrita en *IEEE Std 1275-1994*, para indicar un rango de números de bus, para este controlador. De estar ausente, por defecto es ``<0 255>`` -todos los buses.
 
 - ``#address-cells``: Debe ser 3.
 
@@ -25,8 +29,7 @@ Propiedades de nodo, del *controlador pci host*:
 
 Propiedades del nodo ``/chosen``:
 
-``linux,pci-probe-only``: Propiedad opcional, la cuál toma un sólo argumento de celda.
-Si ``0``, entonces *Linux* asignará dispositivos de manera habitual. de cualquier otra forma, no intentará asignar dispositivos y en su lugar, los utilizará tal y como están ya configurados.
+``linux,pci-probe-only``: Propiedad opcional, la cuál toma un sólo argumento de celda. Si ``0``, entonces *Linux* asignará dispositivos de manera habitual. de cualquier otra forma, no intentará asignar dispositivos y en su lugar, los utilizará tal y como están ya configurados.
 
 Es asumido el espacio de configuración, para ser mapeados en la memoria -en oposición, a ser accedidos vía un *ioport*. Permanecen  con una correspondencia directam a la geografía, de una dirección bus PCI, por medio de la concatenación de varios componentes y, formar así un ``offset``.
 
@@ -44,13 +47,9 @@ Mientras que ECAM, extiende esto en 4 bits, para acomodar un espacio de función
     cfg_offset(bus, device, function, register) =
           bus << 20 | device << 15 | function << 12 | register
 
-
 El *mapa de interrupciones*,  es excactamente igual, a como está descrito en *Open Firmware Recommended Practice: Interrupt Mapping* y, requiere las siguientes propiedades:
 
-- ``#interrupt-cells``: Debe ser 1.
-- ``interrupt-map``: ver especificaciones mencionadas anteriormente.
-- ``interrupt-map-mask`` : ver especificaciones mencionadas anteriormente.
-
+- ``#interrupt-cells``: Debe ser 1. - ``interrupt-map``: ver especificaciones mencionadas anteriormente. - ``interrupt-map-mask`` : ver especificaciones mencionadas anteriormente.
 
 Ejemplo:
 
@@ -83,11 +82,9 @@ Ejemplo:
         interrupt-map-mask = <0xf800 0x0 0x0  0x7>;
     }
 
-.. _i199_2:
+.. _1-host-generic-pci_2:
 
 Referencias y agradecimientos
 =============================
 
-vrm -- voltage regulator module
-
-pci-- peripheral component interconnect
+vrm -- voltage regulator module pci-- peripheral component interconnect
