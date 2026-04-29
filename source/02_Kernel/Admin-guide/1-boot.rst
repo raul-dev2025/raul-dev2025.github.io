@@ -1,13 +1,13 @@
 .. contents:: Tabla de contenidos
-
-:depth: 3
+   :depth: 3
 
 
 .. _1-boot_1:
 
-=============================
-Referencias y agradecimientos
-=============================
+====
+Boot
+====
+
 
 .. _1-boot_2:
 
@@ -979,8 +979,7 @@ Referencias y agradecimientos
 **stub**, colilla, parte restante del lápiz, la parte del cigarrillo que es presionada contra algo, para apagarlo.
 
 
-.. class:: firma
+.. container:: firma
 
    **Traducción:** Heliogabalo S.J.
    *www.raulvilchez.org*
-
