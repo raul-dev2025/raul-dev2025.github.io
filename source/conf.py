@@ -63,6 +63,7 @@ html_theme_options = {
 # Custom CSS
 html_css_files = [
     'css/theme.css',
+    'css/custom.css',
 ]
 
 # Custom JavaScript
