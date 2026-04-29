@@ -39,10 +39,10 @@ El reqquisito principal, definido en detalle más abajo, será la presencia de u
 
 .. _1-booting-without-of_5:
 
-Punto de entrada en ``arch/arm``\
----------------------------------
+Punto de entrada en ``arch/arm``
+--------------------------------
 
-Existe un único punto de entrada al *kernel*; al principio de la imagen del núcleo. El punto de entrada soporta dos llamadas convencionales. El sumario de la interfase será aquí descrita. Podrá encontrarse una completa descripción de los requisitos para el arranque, documentada en `Documentation/arm/Booting``\ `[f1] .
+Existe un único punto de entrada al *kernel*; al principio de la imagen del núcleo. El punto de entrada soporta dos llamadas convencionales. El sumario de la interfase será aquí descrita. Podrá encontrarse una completa descripción de los requisitos para el arranque, documentada en `Documentation/arm/Booting` [f1] .
 
 1. Interfase ATAGS. Mínima información, pasada por el *firmware* al *kernel*, con una lista etiquetada, de parámetros predefinidos.
 
@@ -184,7 +184,7 @@ Todos los valores de la cabecera son escritos en formato *big endian*, los disti
 
 - ``totalsize`` es el tamaño total del bloque DT, incluida la cabecera. El bloque DT debería *encerrar* todos los datos de estructura definidos en este capítulo -quien es apuntado por el ``offset`` en la cabecera. Esto es, la estructura DT, cadenas y, el mapa de memoria reservada.
 
-- `off_dt_struct`` es un ``offset`` desde el principio de la cabecera, al comienzo de la estructura de datos, parte del DT. Ver *2)* `árbol de dispositivo .
+- ``off_dt_struct`` es un ``offset`` desde el principio de la cabecera, al comienzo de la estructura de datos, parte del DT. Ver *2* árbol de dispositivo .
 
 - ``off_dt_strings`` es un ``offset`` desde en comienzo de la cabecera al principio de las ``strings``\ (cadenas), parte del DT.
 
@@ -244,11 +244,11 @@ La *capa del DT*, asume la definiciónexpuesta en *Open Firmware IEEE 1275*. Es 
 
 Es un *árbol*, así que cada nodo, tiene un -y sólo un, ascendente; excepto para el nodo raíz que no tiene ninguno.
 
-Un nodo tiene 2 nombres. El nombre de nodo *activo*, generalmente está contenido en la propiedad *tipo* `name``, dentro de la lista de *propiedades de nodo*, cuyo valor es una cadena con terminación nula `[f7] , de uso obligado en *versiones de 1 a 3*,para el formato de definición -descrito en Open Firmware. En la *versión 16* es opcional puesto que podrá ser generado desde la *unidad de nombres*, descrita más abajo.
+Un nodo tiene 2 nombres. El nombre de nodo *activo*, generalmente está contenido en la propiedad *tipo* ``name``, dentro de la lista de *propiedades de nodo*, cuyo valor es una cadena con terminación nula [f7] , de uso obligado en *versiones de 1 a 3*,para el formato de definición -descrito en Open Firmware. En la *versión 16* es opcional puesto que podrá ser generado desde la *unidad de nombres*, descrita más abajo.
 
 También hay una *unidad de nombres*,utilizada para diferenciar nodos con el mismo nombre en el mismo nivel, habitualmente, *constucción* del ``node names``, el símbolo ``@`` y, una ``unit address``, cuya definición es específica para el *tipo de bus*, donde reside.
 
-La ``unit name``, no exite como propiedad, pero es incluida en la estructura DT. Es utilizada para representar la_ruta\_ al DT. Líneas abajo, será descrito con más detalle.
+La ``unit name``, no exite como propiedad, pero es incluida en la estructura DT. Es utilizada para representar la_ruta al DT. Líneas abajo, será descrito con más detalle.
 
 El código genérico del kernel, no hace ningún uso formal de la *unit addres*-a pesar de que alguna placa podría utilizarla, así que el único requisito real, es asegurar la uniquidad? del nodo *unit name*, en un determinado nivel del árbol. Nodos sin anotaciones de *dirección*, y sin ningún posible *afín*, con el mismo nombre, como ``/memory`` o ``/cpus``, podrán omitir la *unit address*, en el contexto de esta especificación, la *unit address* por defecto ``@0``.La *unit name*, es utilizada para definir una *ruta absoluta*, la cuál es la concatenación de todos los nodos ascendentes *unit names*, separados por ``/``.
 
@@ -1029,28 +1029,8 @@ Un Gb. Dos palabras de 32b.
 
 (c) 2006 MontaVista Software, Inc. Flash chip node definition
 
-.. raw:: html
+.. container:: firma
 
-<ul id="firma">
+   **Traducción:** Heliogabalo S.J.
+   *www.raulvilchez.org*
 
-.. raw:: html
-
-<li>
-
-Traductor: Heliogabalo S.J.
-
-.. raw:: html
-
-</li>
-
-.. raw:: html
-
-<li> www.territoriolinux.net
-
-.. raw:: html
-
-</li>
-
-.. raw:: html
-
-</ul>
