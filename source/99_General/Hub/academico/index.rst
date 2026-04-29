@@ -14,12 +14,10 @@ Indices y tablas
 
 -----
 
-Componentes, arquitectura de Sistema 
-------------------------------------
 
 .. toctree::
    :maxdepth: 1
-   :caption: 01 Hardware (Académico):
+   :caption: Hardware (Académico):
 
    /01_Hardware/sistema/evolucionProcesadores
    /01_Hardware/sistema/GeorgeBoole
@@ -37,34 +35,19 @@ Componentes, arquitectura de Sistema
    /01_Hardware/sistema/UEFI-refs
    /01_Hardware/sistema/Prefetching_en_Procesadores
    /01_Hardware/sistema/Ejercicios
+   /01_Hardware/A5-Hardware/Processador/borrar.rst
 
 .. note::
 
+   **Componentes, arquitectura de Sistema**
    Esta sección recopila los fundamentos teóricos y arquitectónicos del hardware. Incluye la evolución de los procesadores, lógica digital y estándares de componentes esenciales.
    
 -----
 
-Kernel
-------
 
 .. toctree::
    :maxdepth: 1
-   :caption: 02 Kernel & Low Level:
-   
-   /01_Hardware/A5-Hardware/Processador/borrar
-
-.. note::
-
-   Dedicada al núcleo del sistema y la interacción de bajo nivel. Contiene documentación sobre la gestión de energía (ACPI/APM) y especificaciones técnicas del Kernel Linux.
-
------
-
-Sistema Operativo(SO)
----------------------
-
-.. toctree::
-   :maxdepth: 1
-   :caption: 03 Sistemas Operativos:
+   :caption: Sistemas Operativos:
 
    /03_Operating_Systems/Boot/EFIpartWindows
    /03_Operating_Systems/Boot/tipoArranquePS
@@ -91,16 +74,15 @@ Sistema Operativo(SO)
 
 .. note::
 
+   **Sistema Operativo(SO)**
    Guías detalladas sobre la administración de sistemas Windows y Linux. Cubre desde el proceso crítico de arranque hasta la configuración avanzada del registro y usuarios.
 
 -----
 
-Administración de Sistema
--------------------------
 
 .. toctree::
    :maxdepth: 1
-   :caption: 04 Administración de Sistemas:
+   :caption: Administración de Sistemas:
 
    /04_System_Administration/system_apps/aplicacionesPortables
    /04_System_Administration/system_apps/Cobian
@@ -114,12 +96,10 @@ Administración de Sistema
 
 -----
 
-Redes
------
 
 .. toctree::
    :maxdepth: 1
-   :caption: 05 Redes & Networking:
+   :caption: Redes & Networking:
 
    /05_Networking/legacy_lan/ProtocoloTCP_IP
    /05_Networking/legacy_lan/Redes
@@ -134,12 +114,10 @@ Redes
 
 -----
 
-Office, Word, Excel y PowerPoint
---------------------------------
 
 .. toctree::
    :maxdepth: 1
-   :caption: 06 Software & Office:
+   :caption: Software & Office:
 
    /06_Software_and_Applications/office/Word-apuntes-parte1
    /06_Software_and_Applications/office/Word-apuntes-parte2
@@ -152,7 +130,8 @@ Office, Word, Excel y PowerPoint
    /06_Software_and_Applications/office/PowerPoint
 
 .. tip::
-    
+
+   **Office, Word, Excel y PowerPoint**
    Manuales de usuario y formación en herramientas de ofimática. Centraliza los apuntes y ejercicios prácticos relacionados con la suite de productividad Microsoft Office.
    * **Word**: documentación sobre la herramienta *Word* de *Office*.
    * **Excel**: documentación sobre la herramienta *Excel* de *Office*.
@@ -165,7 +144,7 @@ Release Notes & Changelog
 
 .. toctree::
    :maxdepth: 1
-   :caption: 99 General & Recursos:
+   :caption: General & Recursos:
 
    /99_General/CVs/CV-proyectos-2025   
    /changelog
