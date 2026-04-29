@@ -33,13 +33,13 @@ El archivo fuente, del árbol de dispositivo ``drivers/of/unittest-data/testcase
 
 ::
 
-drivers/of/unittest-data/tests-interrupts.dtsi drivers/of/unittest-data/tests-platform.dtsi drivers/of/unittest-data/tests-phandle.dtsi drivers/of/unittest-data/tests-match.dtsi
+   drivers/of/unittest-data/tests-interrupts.dtsi drivers/of/unittest-data/tests-platform.dtsi drivers/of/unittest-data/tests-phandle.dtsi drivers/of/unittest-data/tests-match.dtsi
 
 Cuándo el kernel es construido con ``OF_SELFTEST`` activada, son aplicadas las reglas ``make``:
 
 ::
 
-$(obj)/%.dtb: $(src)/%.dts FORCE $(call if_changed_dep, dtc)
+   $(obj)/%.dtb: $(src)/%.dts FORCE $(call if_changed_dep, dtc)
 
 … utilizadas para compilar el archivo fuente ``testcases.dts``, a un *pequeño binario* ``testcases.dtb``. En ocasiones referido como *DT nivelado*\ (… equilibrado, comparado, coincidente).
 
@@ -47,7 +47,7 @@ Después de esto, utilizando las siguientes reglas del *pequeño binario* de arr
 
 ::
 
-$(obj)/%.dtb.S: $(obj)/%.dtb $(call cmd, dt_S_dtb)
+   $(obj)/%.dtb.S: $(obj)/%.dtb $(call cmd, dt_S_dtb)
 
 El archivo ``assembly``, es compilado dentro del archivo *objeto* ``testcases.dtb.o``, que será enlazado a la imagen del kernel.
 
@@ -65,8 +65,6 @@ Consiste en un ``device_node``\ s -nodo de dispositivo, en forma de *estructura 
 // following struct members are used to construct the tree struct device_node { ... struct  device_node *parent; struct  device_node *descendiente; struct  device_node *parejo; ... };
 
 **Figura 1**. Describe una estructura genérica *DT* desnivelada, en una máquina. Considera, únicamente, punteros *descendientes* y *parejos*. Existe otro puntero; *ascendiente*, utilizado para *atravesar* el árbol, en dirección opuesta. Así, en un determinado nivel, el *nodo descendiente* y, todos los nodos parejos, estarán asociados a un puntero ascendente, en un *nodo común*. Ejemplo, los: descendiente1, parejo2, parejo3, parejo4, del ascendente apuntan a del nodo raíz.
-
-::
 
 ::
 
@@ -98,7 +96,7 @@ Antes de ejecutar *Unidad de prueba*, es un requisito *acoplar* los datos de ens
 
 ::
 
-root ('/') | testcase-data | test-descendiente0 -> test-parejo1 -> test-parejo2 -> test-parejo3 -> null | test-descendiente01     null             null             null
+   root ('/') | testcase-data | test-descendiente0 -> test-parejo1 -> test-parejo2 -> test-parejo3 -> null | test-descendiente01     null             null             null
 
 **Figura 2**. Ejemplo de los datos de ensayo de un árbol, siendo acoplados a un árbol activo.
 
@@ -167,7 +165,7 @@ Referencias y agradecimientos
 nota d.t. parent, ascendientes, u organizados de manera ascendente. nota d.t. descendiente, descendientes, u organizados de forma descendiente. nota d.t. sibling, parejos u organizados *en la horizontal*. Kall 7o Poli23.
 
 
-.. class:: firma
-   **Traducción:** Heliogabalo S.J.
-   *www.raulvilchez.org*
+.. container:: firma
 
+   **Traducción:** Heliogabalo S.J.
+   `www.raulvilchez.org <https://www.raulvilchez.org>`_
