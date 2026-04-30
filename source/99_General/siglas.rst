@@ -1,5 +1,7 @@
-Indice
-------
+======
+Siglas
+======
+
 
 * :ref:`siglas-1`
    * :ref:`siglas-2`
