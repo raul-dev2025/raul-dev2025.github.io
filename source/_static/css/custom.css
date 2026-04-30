@@ -1,0 +1,37 @@
+/* PASO 1: Quitar bullets exclusivamente de los toctree (menús de navegación) */
+
+.toctree-wrapper li {
+  list-style: none !important;
+  list-style-type: none !important;
+}
+
+/* AJUSTE ESPECÍFICO PARA LA TABLA DE CONTENIDOS LOCAL */
+
+
+/* Ajuste del titulo "Tabla contenidos"*/
+nav.contents p.topic-title {
+  margin-left: 5em !important;
+  margin-bottom: 0.5em !important;
+  font-weight: bold;
+}
+
+/* 1. Eliminar bullets y ajustar el contenedor de la lista */
+nav.contents ul.simple {
+  list-style: none !important;
+  padding-left: 5em !important;
+  margin-left: 0 !important;
+}
+
+/* 2. Quitar el margen de los párrafos internos (los que separan las líneas) */
+nav.contents ul.simple li p {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+  /* Ajusta este valor para más o menos pegado */
+}
+
+/* 3. Asegurar que el ítem de la lista no añada espacio extra */
+nav.contents ul.simple li {
+  list-style: none !important;
+  margin-bottom: 2px !important;
+}
