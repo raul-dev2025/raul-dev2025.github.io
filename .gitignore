@@ -7,4 +7,4 @@ objects.inv
 .env/
 .venv/
 *workspace
-.git-msg
+msg
