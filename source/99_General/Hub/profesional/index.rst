@@ -1,58 +1,40 @@
 .. SPDX-License-Identifier: GPL-2.0-or-later
 
-Sistema y desarrollo
-====================
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Testing Environment Setup (testenv_setup):
-
-   /04_System_Administration/test_environment_setup/index
-
-The folowing documents cover the configuration of virtual machine for testing purposes.
+=========
+Supuestos
+=========
 
 
 .. toctree::
    :maxdepth: 1
-   :caption: Driver Development (driver_dev):
-
-   /01_Hardware/driver_development/index
-
-Available documents for driver development, including planning, PCI device identification, and quick references for PCI and MMIO.
-
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Hardware and System Resources (hw_resources):
-
-   /01_Hardware/hardware_resources/index
-
-This section covers hardware specifications, system tasks, and PCI express testing.
-
-
-.. toctree::
-   :maxdepth: 1
-   :caption: System Configuration (sys_config):
-
-   /04_System_Administration/system_configuration/index
-
-This section covers System configuration.
-
------
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Unordered:
+   :caption: Config
    
-   /99_General/miscellaneous/index
-   
-This section contains miscellaneous topics that do not fit into the other categories, including Git-related topics and path truncation.
+   /06_Software_and_Applications/Supuestos/Config/sharedFolder-nfs.rst
+   /06_Software_and_Applications/Supuestos/Config/configSSH
 
+Los siguientes documentos detallan las tareas de configuración inicial de los servicios base de red y las directrices de securización para los accesos remotos.
 
------
 
 .. toctree::
    :maxdepth: 1
-   :caption: Linux Kernel documents
+   :caption: Testing
 
-   /99_General/Hub/profesional/Kernel/index
+   /06_Software_and_Applications/Supuestos/Testing/vmTunning.rst
+
+Las siguientes guías recopilan los procedimientos de validación de rendimiento y los ajustes aplicados sobre el hipervisor para optimizar la carga de trabajo de las máquinas virtuales.
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Imagen de base(Golden image)
+   
+   /06_Software_and_Applications/Supuestos/Golden/clone_golden
+   /06_Software_and_Applications/Supuestos/Golden/get_otp
+   /06_Software_and_Applications/Supuestos/Golden/prepare_clone
+   /06_Software_and_Applications/Supuestos/Golden/golden_purificacion
+   /06_Software_and_Applications/Supuestos/Golden/goldenImage
+   /06_Software_and_Applications/Supuestos/Golden/idm-first-boot
+   /06_Software_and_Applications/Supuestos/Golden/idm-join
+   /06_Software_and_Applications/Supuestos/Golden/Sellado
+
+Esta sección compendia el ciclo de vida completo para la provisión, depuración, despliegue automatizado e integración de imágenes de referencia en el dominio de gestión de identidades.

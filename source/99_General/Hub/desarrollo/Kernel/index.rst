@@ -21,6 +21,14 @@ Aquí organizo mi trabajo e investigación sobre el kernel de Linux.
 
 .. toctree::
    :maxdepth: 1
+   :caption: arm
+
+   /02_Kernel/arm/Booting.rst
+
+
+
+.. toctree::
+   :maxdepth: 1
    :caption: DeviceTree
 
    /02_Kernel/DeviceTree/0-of_unittest

@@ -394,7 +394,7 @@ comprovación* -o incluso algún tipo de autodetección.
 
 Al fín, sin terminar; distribuidores de CD-ROMs, podrían utilizarlo con
 objeto de ofrecer una mejor instalación desde un CD. Ejemplo, el uso de
-un disco de arranque y, situando en memoria[f5] un disco RAM mayor, por
+un disco de arranque y, situando en memoria[#f5] un disco RAM mayor, por
 medio de *initrd* desde un CD. Incluso arrancando desde un gestor como
 ``LOADLIN`` o directamente desde el CD-ROM y, cargando el disco RAM
 desde un CD sin necesidad de *discos flexibles -floppies*.
@@ -464,7 +464,7 @@ Referencias, agradecimientos y recursos
     https://www.sourceware.org/newlib/
 [#f3] util-linux: Miscellaneous utilities for Linux
     https://www.kernel.org/pub/linux/utils/util-linux/
-[f4](#f4) -- Sistema de ficheros
-[f5] situando en memoria, o trampa de arranque -bootstrapping.
-[f6] NFS, Network File System, sismtema de ficheros de uso compartido, habitualmente utilizado entre distintos sistemas operativos.
-[f7](f7) -- http://the-man-proove-of-work
+   [f4](#f4) -- Sistema de ficheros
+   [f5] situando en memoria, o trampa de arranque -bootstrapping.
+   [f6] NFS, Network File System, sismtema de ficheros de uso compartido, habitualmente utilizado entre distintos sistemas operativos.
+   [f7](f7) -- http://the-man-proove-of-work

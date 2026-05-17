@@ -10,16 +10,16 @@ This section covers the setup and configuration of the testing environment, incl
    :maxdepth: 1
    :caption: VM Configuration:
 
-   /06_Software_and_Applications/Supuestos/vm_config/cxt4testing.rst
-   /06_Software_and_Applications/Supuestos/vm_config/vm-setup.rst
-   /06_Software_and_Applications/Supuestos/vm_config/enableBootMenu.rst
-   /06_Software_and_Applications/Supuestos/vm_config/bootloader-dirs.rst
-   /06_Software_and_Applications/Supuestos/vm_config/bootloader-mode.rst
-   /06_Software_and_Applications/Supuestos/vm_config/queringXML.rst
-   /06_Software_and_Applications/Supuestos/vm_config/identifyBootloader.rst
-   /06_Software_and_Applications/Supuestos/vm_config/bootloaderDebug.rst
-   /06_Software_and_Applications/Supuestos/vm_config/vmCxtBootLoad.rst
-   /06_Software_and_Applications/Supuestos/vm_config/envsWithGrub.rst
+   /06_Software_and_Applications/Supuestos/Testing/cxt4testing.rst
+   /06_Software_and_Applications/Supuestos/Config/vm-setup.rst
+   /06_Software_and_Applications/Supuestos/Boot/enableBootMenu.rst
+   /06_Software_and_Applications/Supuestos/Boot/bootloader-dirs.rst
+   /06_Software_and_Applications/Supuestos/Boot/bootloader-mode.rst
+   /06_Software_and_Applications/Supuestos/Config/queringXML.rst
+   /06_Software_and_Applications/Supuestos/Boot/identifyBootloader.rst
+   /06_Software_and_Applications/Supuestos/Boot/bootloaderDebug.rst
+   /06_Software_and_Applications/Supuestos/Boot/vmCxtBootLoad.rst
+   /06_Software_and_Applications/Supuestos/Boot/envsWithGrub.rst
 
 Available documents covering the configuration of virtual machine for testing purposes.
 
