@@ -15,7 +15,7 @@ La secuenccia de un cambio es como sigue:
 
 1. ``of_changeset_init()`` -- inicializa un *conjunto de cambios*.
 2. Un número de llamadas a *cambios* en el árbol *DT*, ``of_changeset_attach_node(), of_changeset_detach_node(), of_changeset_add_property(), of_changeset_remove_property, of_changeset_update_property()``, para preparar el *conjunto de cambios*. En este momento no se realizará ningún cambio. Todas las operaciones de cambio, son guardadas en la lista de *entradas* ``of_changeset``.
-3. ``of_changeset_apply()`` -- aplica los cambios al árbol. Ya sean aplicados, el *conjunto de cambios* al completo o, si hubo un error en el árbol y tuvo que ser restaurado, a un estado anterior. El :ref:`[f1] <f1>`_ *núcleo*, asegura la *serialización* correcta, a través de un bloqueo. Una versión desbloqueada de ``__of_changeset_apply``, estará disponible si fuese necesaria.
+3. ``of_changeset_apply()`` -- aplica los cambios al árbol. Ya sean aplicados, el *conjunto de cambios* al completo o, si hubo un error en el árbol y tuvo que ser restaurado, a un estado anterior. El :ref:`[f1] <f1>` *núcleo*, asegura la *serialización* correcta, a través de un bloqueo. Una versión desbloqueada de ``__of_changeset_apply``, estará disponible si fuese necesaria.
 4. Si los cambios son aplicados correctamente, el *conjunto de cambios*, necesitará ser retirado, esto podrá llevarse a cabo por medio de ``of_changeset_revert()``.
 
 -----
@@ -24,6 +24,8 @@ La secuenccia de un cambio es como sigue:
 
 Referencias y agradecimientos
 =============================
+
+.. _f1:
 
 **[f1]** nota d.t. el *núcleo*, referido a la *aplicación*, o "motor", que lleva a cabo los cambios. No al kernel.
 
