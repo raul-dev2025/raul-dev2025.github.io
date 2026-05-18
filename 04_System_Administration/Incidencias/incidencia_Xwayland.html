@@ -1,0 +1,220 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Incident Report: GNOME/Xwayland Session Freeze on Rocky Linux 10 Start &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Informe de Auditoría: Preparación de Réplica FreeIPA" href="portAuditIdM.html" />
+    <link rel="prev" title="Paso 1: Montaje de Repositorio Externo vía NFS" href="incidenciaMontajeNFS.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../06_Software_and_Applications/Supuestos/index.html">Infraestructura virtual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Registro de Incidencias</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="autenticationError.html">Informe de Incidencia: Error de Autenticación en Réplica IPA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="incidenciaMontajeNFS.html">Paso 1: Montaje de Repositorio Externo vía NFS</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Incident Report: GNOME/Xwayland Session Freeze on Rocky Linux 10 Start</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#symptoms">Symptoms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#root-cause-analysis">Root Cause Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resolution">Resolution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="portAuditIdM.html">Informe de Auditoría: Preparación de Réplica FreeIPA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Registro de Incidencias</a></li>
+      <li class="breadcrumb-item active">Incident Report: GNOME/Xwayland Session Freeze on Rocky Linux 10 Start</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/04_System_Administration/Incidencias/incidencia_Xwayland.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="incident-report-gnome-xwayland-session-freeze-on-rocky-linux-10-start">
+<h1>Incident Report: GNOME/Xwayland Session Freeze on Rocky Linux 10 Start<a class="headerlink" href="#incident-report-gnome-xwayland-session-freeze-on-rocky-linux-10-start" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Date<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-05-18</p>
+</dd>
+<dt class="field-even">Target System<span class="colon">:</span></dt>
+<dd class="field-even"><p>dev.raulvilchez.org</p>
+</dd>
+<dt class="field-odd">OS Version<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Rocky Linux 10 (GNOME 47.5 / Mutter)</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Resolved</p>
+</dd>
+<dt class="field-odd">Severity<span class="colon">:</span></dt>
+<dd class="field-odd"><p>High</p>
+</dd>
+</dl>
+<section id="symptoms">
+<h2>Symptoms<a class="headerlink" href="#symptoms" title="Link to this heading"></a></h2>
+<p>Immediately after a successful user authentication via GDM, the desktop
+environment became completely unresponsive.</p>
+<ul class="simple">
+<li><p>The mouse pointer remained operational (KMS thread responsive).</p></li>
+<li><p>Keyboard shortcuts, including Virtual Terminal switching (e.g., <code class="docutils literal notranslate"><span class="pre">Ctrl+Alt+F3</span></code>),
+failed to interrupt the state.</p></li>
+<li><p>A hard reset was required to regain system control.</p></li>
+</ul>
+</section>
+<section id="root-cause-analysis">
+<h2>Root Cause Analysis<a class="headerlink" href="#root-cause-analysis" title="Link to this heading"></a></h2>
+<p>Log analysis from the failed boot sequence highlighted a sudden termination
+of the X11 compatibility layer within the Wayland session due to storage
+exhaustion within the local root-mapped home logical volume (<code class="docutils literal notranslate"><span class="pre">/dev/mapper/rl_dev-home</span></code>).</p>
+<p>The partition was overloaded by local IDE configurations under the <code class="docutils literal notranslate"><span class="pre">raul</span></code> profile and static runtime binaries within the <code class="docutils literal notranslate"><span class="pre">raul-ipa</span></code> profile.</p>
+</section>
+<section id="resolution">
+<h2>Resolution<a class="headerlink" href="#resolution" title="Link to this heading"></a></h2>
+<p>Heavy configuration subdirectories and static binary clusters were migrated to the
+dedicated secondary storage mount point (<code class="docutils literal notranslate"><span class="pre">/mnt/datos_raul/</span></code>) and linked back
+symmetrically, followed by a purge of non-critical transient user caches.</p>
+<section id="execution-steps">
+<h3>Execution Steps<a class="headerlink" href="#execution-steps" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p><strong>Profile Migration: raul</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mkdir -p /mnt/datos_raul/home_raul_config/</span>
+<span class="c1"># cp -ax /home/raul/.vscode /mnt/datos_raul/home_raul_config/</span>
+<span class="c1"># rm -rf /home/raul/.vscode</span>
+<span class="c1"># ln -s /mnt/datos_raul/home_raul_config/.vscode /home/raul/.vscode</span>
+
+<span class="c1"># cp -ax /home/raul/.config /mnt/datos_raul/home_raul_config/</span>
+<span class="c1"># rm -rf /home/raul/.config</span>
+<span class="c1"># ln -s /mnt/datos_raul/home_raul_config/.config /home/raul/.config</span>
+
+<span class="c1"># cp -ax /home/raul/.local/ /mnt/datos_raul/home_raul_config/</span>
+<span class="c1"># rm -rf /home/raul/.local</span>
+<span class="c1"># ln -s /mnt/datos_raul/home_raul_config/.local /home/raul/.local</span>
+
+<span class="c1"># rm -rf /home/raul/.cache/*</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Profile Migration: raul-ipa</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mkdir -p /mnt/datos_raul/home_config/bin</span>
+<span class="c1"># cp -ax /home/raul-ipa/bin/. /mnt/datos_raul/home_config/bin/</span>
+<span class="c1"># rm -rf /home/raul-ipa/bin</span>
+<span class="c1"># ln -s /mnt/datos_raul/home_config/bin /home/raul-ipa/bin</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Permissions &amp; Ownership Rectification</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># chown -R raul:raul /mnt/datos_raul/home_raul_config/</span>
+<span class="c1"># chown -h raul:raul /home/raul/.vscode /home/raul/.config /home/raul/.local</span>
+
+<span class="c1"># chown -R raul-ipa:raul-ipa /mnt/datos_raul/home_config/bin/</span>
+<span class="c1"># chown -h raul-ipa:raul-ipa /home/raul-ipa/bin</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="results">
+<h3>Results<a class="headerlink" href="#results" title="Link to this heading"></a></h3>
+<p>The localized storage footprint for the entire <code class="docutils literal notranslate"><span class="pre">/home</span></code> tree dropped from
+<strong>3.5 GB to 7.5 MB</strong> (a 99.7% volume reduction). The local logical volume is now
+effectively stateless regarding user data, preventing application runtime stalls
+and securing long-term OS stability.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="incidenciaMontajeNFS.html" class="btn btn-neutral float-left" title="Paso 1: Montaje de Repositorio Externo vía NFS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="portAuditIdM.html" class="btn btn-neutral float-right" title="Informe de Auditoría: Preparación de Réplica FreeIPA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

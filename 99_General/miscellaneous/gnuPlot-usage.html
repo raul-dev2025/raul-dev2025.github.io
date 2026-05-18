@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction to GNUPlot for Mathematical Visualization &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GNUPlot Example: Plotting Mathematical Functions in Linux" href="gnuPlot-intro.html" />
+    <link rel="prev" title="How to Open a GitHub Issue for LTP Kernel Headers Problem" href="gitIssue.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Unordered Topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gitTrackNoStage.html">Tracking Untracked Files Without Staging Them</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitSplitHunks.html">Splitting Files into Smaller Hunks for Staging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stagedLogs.html">Viewing the Log of Staged Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashedTask.html">Viewing Stashed Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashingFiles.html">Stashing Files Independently in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitIssue.html">How to Open a GitHub Issue for LTP Kernel Headers Problem</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Introduction to GNUPlot for Mathematical Visualization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-gnuplot">What is GNUPlot?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#starting-gnuplot">Starting GNUPlot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clearing-the-screen">Clearing the Screen</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-example-plotting-a-function">Basic Example: Plotting a Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#handling-multiple-operations">Handling Multiple Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#key-notes">Key Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-example-multiple-calculus-operations">Advanced Example: Multiple Calculus Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-options">Output Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-intro.html">GNUPlot Example: Plotting Mathematical Functions in Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="newOrigin2.html">Función seno y coseno</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mathSymbols.html">Definitions of Integral and Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws-overview.html">AWS (Amazon Web Services)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailDrafts.html">Saving Draft Emails with the <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailCmds.html">Linux Mail Command Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pathTruncator.html">Integrating Path Truncation into Read the Docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regexNotation.html">REGEX notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="a_diffCounter.html">How to Get a Resumed (Counter) Output Using <code class="docutils literal notranslate"><span class="pre">diff</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="verticalS.html">Vertical Space in reStructuredText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeToLog.html">What Happens When You Pipe a Build Process to <code class="docutils literal notranslate"><span class="pre">less</span></code>: Processor Impact</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate-summary.html">Network Debugging Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate.html">Network Connectivity Troubleshooting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="keyboard_debug.html">Debugging Linux Keyboard Ctrl Key Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commitTypes.html">Tipos de Commits Estándar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Unordered Topics</a></li>
+      <li class="breadcrumb-item active">Introduction to GNUPlot for Mathematical Visualization</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/99_General/miscellaneous/gnuPlot-usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction-to-gnuplot-for-mathematical-visualization">
+<h1>Introduction to GNUPlot for Mathematical Visualization<a class="headerlink" href="#introduction-to-gnuplot-for-mathematical-visualization" title="Link to this heading"></a></h1>
+<section id="what-is-gnuplot">
+<h2>What is GNUPlot?<a class="headerlink" href="#what-is-gnuplot" title="Link to this heading"></a></h2>
+<p>GNUPlot is a command-line-driven graphing utility for Linux (and other OSes) that enables dynamic visualization of mathematical functions, datasets, and 3D surfaces. It supports:</p>
+<ul class="simple">
+<li><p>2D/3D plotting</p></li>
+<li><p>Multiple functions on the same graph</p></li>
+<li><p>Script automation</p></li>
+<li><p>Export to PNG, PDF, SVG, etc.</p></li>
+</ul>
+</section>
+<section id="starting-gnuplot">
+<h2>Starting GNUPlot<a class="headerlink" href="#starting-gnuplot" title="Link to this heading"></a></h2>
+<p>Launch GNUPlot in your Linux terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gnuplot
+</pre></div>
+</div>
+</section>
+<section id="clearing-the-screen">
+<h2>Clearing the Screen<a class="headerlink" href="#clearing-the-screen" title="Link to this heading"></a></h2>
+<p>To clear the GNUPlot console (not the plot window):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">!clear # Linux/macOS</span>
+<span class="go">!cls # Windows</span>
+</pre></div>
+</div>
+</section>
+<section id="basic-example-plotting-a-function">
+<h2>Basic Example: Plotting a Function<a class="headerlink" href="#basic-example-plotting-a-function" title="Link to this heading"></a></h2>
+<p>Plot a simple quadratic equation:</p>
+<div class="highlight-gnuplot notranslate"><div class="highlight"><pre><span></span><span class="k">reset</span><span class="w"> </span><span class="c"># Clears all previous settings</span>
+<span class="k">plot</span><span class="w"> </span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;Quadratic Function&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="handling-multiple-operations">
+<h2>Handling Multiple Operations<a class="headerlink" href="#handling-multiple-operations" title="Link to this heading"></a></h2>
+<p>GNUPlot executes commands sequentially. To avoid clashes when plotting multiple calculus operations:</p>
+<ol class="arabic">
+<li><p><strong>Explicit Parentheses</strong>: Always group operations.</p>
+<div class="highlight-gnuplot notranslate"><div class="highlight"><pre><span></span><span class="k">plot</span><span class="w"> </span><span class="p">(</span><span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Temporary Variables</strong>: Use <code class="docutils literal notranslate"><span class="pre">set</span></code> for complex expressions.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">set dummy t</span>
+<span class="go">parametric = &quot;plot sin(t),cos(t)&quot;</span>
+<span class="go">eval parametric</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Reset Between Plots</strong>: Prevent variable/function collisions.</p>
+<div class="highlight-gnuplot notranslate"><div class="highlight"><pre><span></span><span class="k">reset</span>
+<span class="k">plot</span><span class="w"> </span><span class="nf">integral</span><span class="p">(</span><span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="nf">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="key-notes">
+<h2>Key Notes<a class="headerlink" href="#key-notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Clashing Operations</strong>: Functions like <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">integral</span></code>, and <code class="docutils literal notranslate"><span class="pre">derivative</span></code> may conflict if not properly scoped. Use <code class="docutils literal notranslate"><span class="pre">reset</span></code> between unrelated plots.</p></li>
+<li><p><strong>Persistent Variables</strong>: Defined variables (e.g., <code class="docutils literal notranslate"><span class="pre">a=5</span></code>) remain active until manually unset or reset.</p></li>
+<li><p><strong>Thread Safety</strong>: GNUPlot is single-threaded; concurrent instances require separate sessions.</p></li>
+</ul>
+</section>
+<section id="advanced-example-multiple-calculus-operations">
+<h2>Advanced Example: Multiple Calculus Operations<a class="headerlink" href="#advanced-example-multiple-calculus-operations" title="Link to this heading"></a></h2>
+<div class="highlight-gnuplot notranslate"><div class="highlight"><pre><span></span><span class="k">reset</span>
+<span class="k">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">x</span>
+<span class="k">set</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;Function and its Derivative&quot;</span>
+<span class="k">plot</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;f(x)&quot;</span><span class="o">,</span><span class="w"> </span>\
+<span class="w">     </span><span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mf">0.01</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="mf">0.01</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;Numerical Derivative&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="output-options">
+<h2>Output Options<a class="headerlink" href="#output-options" title="Link to this heading"></a></h2>
+<p>To save plots without displaying them:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">set terminal png</span>
+<span class="go">set output &quot;plot.png&quot;</span>
+<span class="go">replot # Repeats the last plot command</span>
+<span class="go">!feh plot.png # View in Linux (requires feh)</span>
+</pre></div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>GNUPlot provides powerful mathematical visualization while requiring careful handling of operational scope. Always use <code class="docutils literal notranslate"><span class="pre">reset</span></code> when switching between unrelated tasks.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gitIssue.html" class="btn btn-neutral float-left" title="How to Open a GitHub Issue for LTP Kernel Headers Problem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gnuPlot-intro.html" class="btn btn-neutral float-right" title="GNUPlot Example: Plotting Mathematical Functions in Linux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

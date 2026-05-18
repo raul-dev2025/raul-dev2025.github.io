@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paso 1: Montaje de Repositorio Externo vía NFS &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Incident Report: GNOME/Xwayland Session Freeze on Rocky Linux 10 Start" href="incidencia_Xwayland.html" />
+    <link rel="prev" title="Informe de Incidencia: Error de Autenticación en Réplica IPA" href="autenticationError.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../06_Software_and_Applications/Supuestos/index.html">Infraestructura virtual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Registro de Incidencias</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="autenticationError.html">Informe de Incidencia: Error de Autenticación en Réplica IPA</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Paso 1: Montaje de Repositorio Externo vía NFS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#descripcion">Descripción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#incidencia-detectada">Incidencia Detectada</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#causa-raiz">Causa Raíz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accion-correctiva-propuesta">Acción Correctiva Propuesta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resolucion-de-dependencias-mediante-repo-local">Resolución de Dependencias mediante Repo Local</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#incidencia">Incidencia</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resolucion-metodica">Resolución Metódica</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proximo-paso">Próximo Paso</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reporte-de-fase-preparacion-de-binarios-paso-2">Reporte de Fase: Preparación de Binarios (Paso 2)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Descripción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acciones-realizadas">Acciones Realizadas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comandos-utilizados">Comandos Utilizados</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#herramientas-de-gestion-creadas">Herramientas de Gestión Creadas</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="incidencia_Xwayland.html">Incident Report: GNOME/Xwayland Session Freeze on Rocky Linux 10 Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="portAuditIdM.html">Informe de Auditoría: Preparación de Réplica FreeIPA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Registro de Incidencias</a></li>
+      <li class="breadcrumb-item active">Paso 1: Montaje de Repositorio Externo vía NFS</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/04_System_Administration/Incidencias/incidenciaMontajeNFS.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="paso-1-montaje-de-repositorio-externo-via-nfs">
+<h1>Paso 1: Montaje de Repositorio Externo vía NFS<a class="headerlink" href="#paso-1-montaje-de-repositorio-externo-via-nfs" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-02-24</p>
+</dd>
+<dt class="field-even">Proyecto<span class="colon">:</span></dt>
+<dd class="field-even"><p>Réplica FreeIPA en Synology DS218+</p>
+</dd>
+<dt class="field-odd">Origen (WS)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>192.168.17.26</p>
+</dd>
+<dt class="field-even">Punto de Montaje<span class="colon">:</span></dt>
+<dd class="field-even"><p>/mnt/repo_nfs</p>
+</dd>
+</dl>
+<section id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Link to this heading"></a></h2>
+<p>Intento de conexión al almacenamiento de la Workstation (WS) para acceder a los paquetes de instalación de Rocky Linux 9.</p>
+</section>
+<section id="incidencia-detectada">
+<h2>Incidencia Detectada<a class="headerlink" href="#incidencia-detectada" title="Link to this heading"></a></h2>
+<p>Al ejecutar el comando de montaje, el sistema devolvió el error:
+<code class="docutils literal notranslate"><span class="pre">mount:</span> <span class="pre">/mnt/repo_nfs:</span> <span class="pre">bad</span> <span class="pre">option;</span> <span class="pre">[...]</span> <span class="pre">you</span> <span class="pre">might</span> <span class="pre">need</span> <span class="pre">a</span> <span class="pre">/sbin/mount.nfs</span> <span class="pre">helper</span> <span class="pre">program.</span></code></p>
+</section>
+<section id="causa-raiz">
+<h2>Causa Raíz<a class="headerlink" href="#causa-raiz" title="Link to this heading"></a></h2>
+<p>La instalación realizada es de tipo <strong>Minimal</strong>, la cual no incluye por defecto el paquete <code class="docutils literal notranslate"><span class="pre">nfs-utils</span></code> necesario para manejar sistemas de archivos de red NFS.</p>
+</section>
+<section id="accion-correctiva-propuesta">
+<h2>Acción Correctiva Propuesta<a class="headerlink" href="#accion-correctiva-propuesta" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Habilitar temporalmente la salida a internet si los repositorios oficiales aún están activos.</p></li>
+<li><p>Ejecutar <code class="docutils literal notranslate"><span class="pre">dnf</span> <span class="pre">install</span> <span class="pre">nfs-utils</span> <span class="pre">-y</span></code>.</p></li>
+<li><p>Reintentar el montaje una vez el binario <code class="docutils literal notranslate"><span class="pre">/sbin/mount.nfs</span></code> esté presente.</p></li>
+</ol>
+</section>
+<section id="resolucion-de-dependencias-mediante-repo-local">
+<h2>Resolución de Dependencias mediante Repo Local<a class="headerlink" href="#resolucion-de-dependencias-mediante-repo-local" title="Link to this heading"></a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-02-24</p>
+</dd>
+<dt class="field-even">Estado<span class="colon">:</span></dt>
+<dd class="field-even"><p>Bloqueo de dependencias (Python/GSSProxy)</p>
+</dd>
+</dl>
+</section>
+<section id="incidencia">
+<h2>Incidencia<a class="headerlink" href="#incidencia" title="Link to this heading"></a></h2>
+<p>La instalación manual de RPMs falló debido a dependencias circulares y componentes de Python ausentes en el sistema base.</p>
+</section>
+<section id="resolucion-metodica">
+<h2>Resolución Metódica<a class="headerlink" href="#resolucion-metodica" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Se define un repositorio temporal (<code class="docutils literal notranslate"><span class="pre">emergency-cd</span></code>) que apunta directamente a la estructura de la ISO montada.</p></li>
+<li><p>Se delega en <code class="docutils literal notranslate"><span class="pre">dnf</span></code> la resolución de dependencias para asegurar que <code class="docutils literal notranslate"><span class="pre">nfs-utils</span></code> se instale con todos sus componentes necesarios presentes en el medio físico.</p></li>
+</ol>
+</section>
+<section id="proximo-paso">
+<h2>Próximo Paso<a class="headerlink" href="#proximo-paso" title="Link to this heading"></a></h2>
+<p>Una vez confirmado el funcionamiento de NFS, se eliminará el repositorio de emergencia para proceder con el repositorio definitivo de la WS.</p>
+</section>
+<section id="reporte-de-fase-preparacion-de-binarios-paso-2">
+<h2>Reporte de Fase: Preparación de Binarios (Paso 2)<a class="headerlink" href="#reporte-de-fase-preparacion-de-binarios-paso-2" title="Link to this heading"></a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-02-24</p>
+</dd>
+<dt class="field-even">Servidor<span class="colon">:</span></dt>
+<dd class="field-even"><p>ipa02.raulvilchez.org</p>
+</dd>
+<dt class="field-odd">Estado<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Completado</p>
+</dd>
+</dl>
+</section>
+<section id="id1">
+<h2>Descripción<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>Configuración de fuentes de software en entorno aislado (Air-gapped) mediante el uso de medios locales (ISO) y congelación de repositorios externos para garantizar la inmutabilidad del sistema antes de la promoción a réplica.</p>
+</section>
+<section id="acciones-realizadas">
+<h2>Acciones Realizadas<a class="headerlink" href="#acciones-realizadas" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Aislamiento de Repositorios</strong>: Se han movido los archivos de configuración de repositorios externos al directorio <code class="docutils literal notranslate"><span class="pre">/etc/yum.repos.d/backup</span></code>.</p></li>
+<li><p><strong>Montaje de Medios</strong>: Montaje por bucle (loop) de la imagen ISO de Rocky Linux 9.7 desde un recurso NFS.</p></li>
+<li><p><strong>Instalación de Paquetes</strong>: Instalación del core de FreeIPA mediante el uso de repositorios locales temporales.</p></li>
+</ol>
+</section>
+<section id="comandos-utilizados">
+<h2>Comandos Utilizados<a class="headerlink" href="#comandos-utilizados" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Aislamiento</span>
+mv<span class="w"> </span>/etc/yum.repos.d/rocky*<span class="w"> </span>/etc/yum.repos.d/backup/
+
+<span class="c1"># Montaje (vía NFS Synology)</span>
+mount<span class="w"> </span>-o<span class="w"> </span>loop<span class="w"> </span>/mnt/repo_nfs/Rocky-9.7-x86_64-dvd.iso<span class="w"> </span>/mnt/cdrom
+
+<span class="c1"># Corrección de rutas y limpieza</span>
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s|/mnt/repo_nfs|/mnt/cdrom|g&#39;</span><span class="w"> </span>/etc/yum.repos.d/local_nfs.repo
+dnf<span class="w"> </span>clean<span class="w"> </span>all
+
+<span class="c1"># Instalación quirúrgica</span>
+dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--enablerepo<span class="o">=</span>dvd*<span class="w"> </span>ipa-server<span class="w"> </span>ipa-server-dns<span class="w"> </span>ipa-client
+</pre></div>
+</div>
+</section>
+<section id="herramientas-de-gestion-creadas">
+<h2>Herramientas de Gestión Creadas<a class="headerlink" href="#herramientas-de-gestion-creadas" title="Link to this heading"></a></h2>
+<p>Se han instalado scripts en la jerarquía canónica de Linux:
+* <code class="docutils literal notranslate"><span class="pre">/usr/local/sbin/ipa-repo-thaw</span></code>: Activa repositorios y monta ISO.
+* <code class="docutils literal notranslate"><span class="pre">/usr/local/sbin/ipa-repo-freeze</span></code>: Desactiva repositorios y desmonta medios.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="autenticationError.html" class="btn btn-neutral float-left" title="Informe de Incidencia: Error de Autenticación en Réplica IPA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="incidencia_Xwayland.html" class="btn btn-neutral float-right" title="Incident Report: GNOME/Xwayland Session Freeze on Rocky Linux 10 Start" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

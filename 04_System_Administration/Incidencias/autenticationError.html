@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe de Incidencia: Error de Autenticación en Réplica IPA &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Paso 1: Montaje de Repositorio Externo vía NFS" href="incidenciaMontajeNFS.html" />
+    <link rel="prev" title="Registro de Incidencias" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../06_Software_and_Applications/Supuestos/index.html">Infraestructura virtual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Registro de Incidencias</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Informe de Incidencia: Error de Autenticación en Réplica IPA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#resumen">Resumen</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analisis-de-la-causa-raiz">Análisis de la Causa Raíz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pasos-de-resolucion">Pasos de Resolución</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comandos-clave-utilizados">Comandos Clave Utilizados</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lecciones-aprendidas">Lecciones Aprendidas</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="incidenciaMontajeNFS.html">Paso 1: Montaje de Repositorio Externo vía NFS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="incidencia_Xwayland.html">Incident Report: GNOME/Xwayland Session Freeze on Rocky Linux 10 Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="portAuditIdM.html">Informe de Auditoría: Preparación de Réplica FreeIPA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Registro de Incidencias</a></li>
+      <li class="breadcrumb-item active">Informe de Incidencia: Error de Autenticación en Réplica IPA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/04_System_Administration/Incidencias/autenticationError.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-de-incidencia-error-de-autenticacion-en-replica-ipa">
+<h1>Informe de Incidencia: Error de Autenticación en Réplica IPA<a class="headerlink" href="#informe-de-incidencia-error-de-autenticacion-en-replica-ipa" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>26 de febrero de 2026</p>
+</dd>
+<dt class="field-even">Estado<span class="colon">:</span></dt>
+<dd class="field-even"><p>Resuelto</p>
+</dd>
+<dt class="field-odd">ID de Incidencia<span class="colon">:</span></dt>
+<dd class="field-odd"><p>INC-20260226-01</p>
+</dd>
+<dt class="field-even">Sistemas Afectados<span class="colon">:</span></dt>
+<dd class="field-even"><p>ipa.raulvilchez.org (Maestro), ipa02.raulvilchez.org (Réplica)</p>
+</dd>
+</dl>
+<section id="resumen">
+<h2>Resumen<a class="headerlink" href="#resumen" title="Link to this heading"></a></h2>
+<p>Durante el despliegue de una réplica de FreeIPA sobre Rocky Linux 9 en un entorno virtualizado (Synology VMM), el instalador fallaba persistentemente con errores de credenciales inválidas (SASL Bind error 49). La investigación reveló una corrupción crítica en el archivo de configuración del motor LDAP del servidor Maestro.</p>
+</section>
+<section id="analisis-de-la-causa-raiz">
+<h2>Análisis de la Causa Raíz<a class="headerlink" href="#analisis-de-la-causa-raiz" title="Link to this heading"></a></h2>
+<p>Tras monitorizar los logs de acceso del servidor Directory Server (389-ds) en el maestro, se identificó el código de error <code class="docutils literal notranslate"><span class="pre">err=49</span> <span class="pre">tag=97</span> <span class="pre">-</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">entry</span></code> y <code class="docutils literal notranslate"><span class="pre">Invalid</span> <span class="pre">credentials</span></code> al intentar autenticar al usuario <code class="docutils literal notranslate"><span class="pre">cn=directory</span> <span class="pre">manager</span></code>.</p>
+<p>La causa raíz fue una <strong>corrupción del parámetro ``nsslapd-rootpw``</strong> en el archivo <code class="docutils literal notranslate"><span class="pre">dse.ldif</span></code>. Múltiples hashes de contraseñas se habían concatenado o codificado incorrectamente en Base64, impidiendo que el motor LDAP validara la cuenta administrativa raíz necesaria para autorizar la unión de nuevas réplicas.</p>
+</section>
+<section id="pasos-de-resolucion">
+<h2>Pasos de Resolución<a class="headerlink" href="#pasos-de-resolucion" title="Link to this heading"></a></h2>
+<section id="diagnostico-del-maestro">
+<h3>1. Diagnóstico del Maestro<a class="headerlink" href="#diagnostico-del-maestro" title="Link to this heading"></a></h3>
+<p>Se intentó realizar una búsqueda LDAP local en el maestro para verificar la “llave maestra”:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ldapsearch<span class="w"> </span>-x<span class="w"> </span>-D<span class="w"> </span><span class="s2">&quot;cn=directory manager&quot;</span><span class="w"> </span>-W<span class="w"> </span>-b<span class="w"> </span><span class="s2">&quot;dc=raulvilchez,dc=org&quot;</span><span class="w"> </span><span class="s2">&quot;(uid=admin)&quot;</span>
+</pre></div>
+</div>
+<p>El comando devolvió <code class="docutils literal notranslate"><span class="pre">ldap_bind:</span> <span class="pre">Invalid</span> <span class="pre">credentials</span> <span class="pre">(49)</span></code>, confirmando que el problema residía en el Maestro y no en la Réplica.</p>
+</section>
+<section id="saneamiento-de-la-configuracion-ldap-maestro">
+<h3>2. Saneamiento de la Configuración LDAP (Maestro)<a class="headerlink" href="#saneamiento-de-la-configuracion-ldap-maestro" title="Link to this heading"></a></h3>
+<p>Para recuperar el control del motor LDAP, se procedió a resetear manualmente la contraseña del Directory Manager.</p>
+<p><strong>A. Generación de un hash limpio (formato SSHA):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MYHASH</span><span class="o">=</span><span class="k">$(</span>/usr/bin/pwdhash<span class="w"> </span><span class="s2">&quot;vilchez2026aa&quot;</span><span class="k">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$MYHASH</span>
+</pre></div>
+</div>
+<p>Alternativamente, se podrá utilizar un algoritmo criptográfico mas ligero;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/usr/bin/pwdhash<span class="w"> </span>-s<span class="w"> </span>SSHA<span class="w"> </span><span class="s2">&quot;Contraseña_Elegida&quot;</span>
+</pre></div>
+</div>
+<p><strong>B. Edición del archivo de configuración:</strong></p>
+<p>Es crítico detener el servicio antes de editar para evitar que los cambios sean sobrescritos por el proceso en memoria.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl<span class="w"> </span>stop<span class="w"> </span>dirsrv.target
+vi<span class="w"> </span>/etc/dirsrv/slapd-RAULVILCHEZ-ORG/dse.ldif
+</pre></div>
+</div>
+<p>Es mejor evitar pegar caracteres extraños, para ello puede utilizarse el comando sed; que incrusta la cadena de texto en el lugar adecuado.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;s|^nsslapd-rootpw:.*|nsslapd-rootpw: </span><span class="nv">$MYHASH</span><span class="s2">|&quot;</span><span class="w"> </span>/etc/dirsrv/slapd-RAULVILCHEZ-ORG/dse.ldif
+</pre></div>
+</div>
+<p><strong>C. Corrección del parámetro:</strong></p>
+<p>Se eliminó el bloque de texto corrupto y se sustituyó por una línea limpia (un solo punto para texto plano):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>nsslapd-rootpw: {SSHA}Hash_Generado_Previamente...
+</pre></div>
+</div>
+</section>
+<section id="verificacion-de-integridad">
+<h3>3. Verificación de Integridad<a class="headerlink" href="#verificacion-de-integridad" title="Link to this heading"></a></h3>
+<p>Tras reiniciar los servicios, se confirmó que el Maestro ya aceptaba conexiones administrativas:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl<span class="w"> </span>start<span class="w"> </span>dirsrv.target
+ldapsearch<span class="w"> </span>-x<span class="w"> </span>-D<span class="w"> </span><span class="s2">&quot;cn=directory manager&quot;</span><span class="w"> </span>-W<span class="w"> </span>-s<span class="w"> </span>base<span class="w"> </span>-b<span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="s2">&quot;objectclass=*&quot;</span>
+ipactl<span class="w"> </span>restart
+</pre></div>
+</div>
+</section>
+<section id="ejecucion-de-la-instalacion-replica">
+<h3>4. Ejecución de la Instalación (Réplica)<a class="headerlink" href="#ejecucion-de-la-instalacion-replica" title="Link to this heading"></a></h3>
+<p>Con el Maestro sano, se procedió a la limpieza y promoción de la réplica:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># En ipa02.raulvilchez.org</span>
+./ipa-clean.sh
+./install-replica.sh
+</pre></div>
+</div>
+</section>
+</section>
+<section id="comandos-clave-utilizados">
+<h2>Comandos Clave Utilizados<a class="headerlink" href="#comandos-clave-utilizados" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Comando</p></th>
+<th class="head"><p>Propósito</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pwdhash</span></code></p></td>
+<td><p>Generar hashes compatibles con LDAP (SSHA/PBKDF2).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">stop</span> <span class="pre">dirsrv.target</span></code></p></td>
+<td><p>Detener el motor LDAP para edición física de la BD.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ldapsearch</span> <span class="pre">-x</span> <span class="pre">-D</span> <span class="pre">&quot;cn=...&quot;</span></code></p></td>
+<td><p>Validar manualmente la autenticación contra el árbol LDAP.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">-i</span> <span class="pre">&quot;s|...|...|&quot;</span></code></p></td>
+<td><p>Inyectar valores de forma programática evitando errores de edición manual.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lecciones-aprendidas">
+<h2>Lecciones Aprendidas<a class="headerlink" href="#lecciones-aprendidas" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Validación del Maestro:</strong> Antes de depurar una réplica, es esencial validar que el Maestro responde correctamente a su propia cuenta de <code class="docutils literal notranslate"><span class="pre">Directory</span> <span class="pre">Manager</span></code>.</p></li>
+<li><p><strong>Manipulación de LDIF:</strong> El uso de dos puntos dobles (<code class="docutils literal notranslate"><span class="pre">::</span></code>) en archivos LDIF indica codificación Base64 automática por parte del sistema ante caracteres especiales o longitudes excesivas.</p></li>
+<li><p><strong>Simplicidad de Hashes:</strong> En recuperaciones de emergencia, el formato <code class="docutils literal notranslate"><span class="pre">{SSHA}</span></code> es preferible al editar manualmente por ser más corto y menos propenso a errores de “escaping” que <code class="docutils literal notranslate"><span class="pre">{PBKDF2}</span></code>.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Registro de Incidencias" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="incidenciaMontajeNFS.html" class="btn btn-neutral float-right" title="Paso 1: Montaje de Repositorio Externo vía NFS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

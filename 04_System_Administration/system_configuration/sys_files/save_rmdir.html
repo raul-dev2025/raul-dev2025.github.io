@@ -1,0 +1,249 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Involuntary Directory Removal &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Handling remove and rescan Files in Linux PCI Device Directories" href="sensitiveFiles.html" />
+    <link rel="prev" title="Safe Dry-Run for Sphinx Builds" href="dummy-build.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">System Configuration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dummy-build.html">Safe Dry-Run for Sphinx Builds</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Involuntary Directory Removal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensitiveFiles.html">Handling <code class="docutils literal notranslate"><span class="pre">remove</span></code> and <code class="docutils literal notranslate"><span class="pre">rescan</span></code> Files in Linux PCI Device Directories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doc-ifSysCollector.html">ifSysCollector.py - PCI Device Data Fetcher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advancedOSinstallation.html">How to Preserve <cite>/home</cite> and VDO During OS Reinstallation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preserveUserData.html">Preserving <code class="docutils literal notranslate"><span class="pre">/home/userData</span></code> and <code class="docutils literal notranslate"><span class="pre">/usr/src/vdo</span></code> During System Reinstallation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kernel_conf/environ-kconf.html">Kernel Configuration for KUnit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">System Configuration</a></li>
+      <li class="breadcrumb-item active">Involuntary Directory Removal</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/04_System_Administration/system_configuration/sys_files/save_rmdir.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="involuntary-directory-removal">
+<h1>Involuntary Directory Removal<a class="headerlink" href="#involuntary-directory-removal" title="Link to this heading"></a></h1>
+<p>In Linux, there are several mechanisms you can use to warn users about the potential risks of <em>involuntary directory removal</em>. Here are a few approaches:</p>
+<ol class="arabic">
+<li><p><strong>Alias for</strong> <code class="docutils literal notranslate"><span class="pre">rm</span></code> <strong>Command</strong></p>
+<p>You can create an alias for the <code class="docutils literal notranslate"><span class="pre">rm</span></code> command that warns users before deleting directories. Add the following to your shell configuration file (e.g., <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>, <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code>):</p>
+</li>
+</ol>
+<blockquote>
+<div><p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span><span class="w"> </span><span class="nv">rm</span><span class="o">=</span><span class="s1">&#39;rm -i&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>This will prompt the user for confirmation before deleting any file or directory. However, this is not specific to directories.
+To make it directory-specific, you could create a custom function:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">              </span>rm<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">                        </span><span class="k">for</span><span class="w"> </span>arg<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">                            </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$arg</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                                </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Warning: You are about to remove a directory: </span><span class="nv">$arg</span><span class="s2">&quot;</span>
+<span class="w">                                </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Are you sure? (y/n) &quot;</span><span class="w"> </span>confirm
+<span class="w">                                </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$confirm</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;y&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                                    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Aborted.&quot;</span>
+<span class="w">                                    </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+<span class="w">                                </span><span class="k">fi</span>
+<span class="w">                            </span><span class="k">fi</span>
+<span class="w">                        </span><span class="k">done</span>
+<span class="w">                        </span><span class="nb">command</span><span class="w"> </span>rm<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<span class="w">              </span><span class="o">}</span>
+
+
+Add<span class="w"> </span>this<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>shell<span class="w"> </span>configuration<span class="w"> </span>file,<span class="w"> </span>and<span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>warn<span class="w"> </span>users<span class="w"> </span>before<span class="w"> </span>deleting<span class="w"> </span>directories.
+</pre></div>
+</div>
+</div></blockquote>
+<hr class="docutils" />
+<ol class="arabic" start="2">
+<li><p><strong>Using</strong> <code class="docutils literal notranslate"><span class="pre">chattr</span></code> <strong>to Make Directories Immutable</strong></p>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">chattr</span></code> command to make directories immutable, preventing them from being deleted accidentally:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chattr<span class="w"> </span>+i<span class="w"> </span>/path/to/directory
+</pre></div>
+</div>
+<p>This will make the directory immutable, and even the root user won’t be able to delete it without first removing the immutable flag:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chattr<span class="w"> </span>-i<span class="w"> </span>/path/to/directory
+</pre></div>
+</div>
+<p>This is a strong measure but may not be practical for all use cases.</p>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="3">
+<li><p><strong>Custom Script for Directory Deletion</strong></p>
+<p>Create a custom script for directory deletion that includes warnings and checks. For example:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: safe_rmdir &lt;directory&gt;&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Warning: You are about to remove the directory: </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Are you sure? (y/n) &quot;</span><span class="w"> </span>confirm
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$confirm</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;y&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>rm<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Directory removed.&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Aborted.&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: </span><span class="nv">$1</span><span class="s2"> is not a directory.&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Save this script as <code class="docutils literal notranslate"><span class="pre">safe_rmdir</span></code>, make it executable (<code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">safe_rmdir</span></code>), and place it in a directory in your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. Encourage users to use this script instead of <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span></code>.</p>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="4">
+<li><p><strong>Using</strong> <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-I</span></code> <strong>for Interactive Prompts</strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">rm</span></code> command has an <code class="docutils literal notranslate"><span class="pre">-I</span></code> option that provides a single prompt before removing more than three files or when removing recursively. This is less intrusive than <code class="docutils literal notranslate"><span class="pre">-i</span></code> but still provides some protection:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-I<span class="w"> </span>-r<span class="w"> </span>/path/to/directory
+</pre></div>
+</div>
+</div></blockquote>
+<p>You can alias <code class="docutils literal notranslate"><span class="pre">rm</span></code> to always include <code class="docutils literal notranslate"><span class="pre">-I</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span><span class="w"> </span><span class="nv">rm</span><span class="o">=</span><span class="s1">&#39;rm -I&#39;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="5">
+<li><p><strong>Filesystem-Level Protections</strong></p>
+<p>If you have control over the filesystem, you can use tools like <code class="docutils literal notranslate"><span class="pre">btrfs</span></code> or <code class="docutils literal notranslate"><span class="pre">zfs</span></code> to create snapshots of directories. This won’t prevent deletion, but it allows you to recover deleted directories easily.</p>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="6">
+<li><p><strong>Audit and Monitoring Tools</strong></p>
+<p>Use tools like <code class="docutils literal notranslate"><span class="pre">auditd</span></code> to monitor file and directory deletions. While this won’t prevent deletions, it can log them and alert administrators:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>auditctl<span class="w"> </span>-w<span class="w"> </span>/path/to/directory<span class="w"> </span>-p<span class="w"> </span>wa<span class="w"> </span>-k<span class="w"> </span>dir_deletion
+</pre></div>
+</div>
+<p>This will log any write or attribute changes to the directory, including deletions.</p>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="7">
+<li><p><strong>Educate Users</strong></p>
+<p>Sometimes the best mechanism is education. Make sure users understand the risks of using commands like <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span></code> and encourage them to double-check paths before executing such commands.</p>
+</li>
+</ol>
+<p>By combining these approaches, you can significantly reduce the risk of involuntary directory removal.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dummy-build.html" class="btn btn-neutral float-left" title="Safe Dry-Run for Sphinx Builds" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sensitiveFiles.html" class="btn btn-neutral float-right" title="Handling remove and rescan Files in Linux PCI Device Directories" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

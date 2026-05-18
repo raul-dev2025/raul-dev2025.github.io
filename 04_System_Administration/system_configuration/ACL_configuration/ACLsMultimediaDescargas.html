@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe de Configuración: Directorios Compartidos de Usuario &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Informe de Configuración: ACLs para Nodo Virt-metadatos" href="ACLsVirtMetadatos.html" />
+    <link rel="prev" title="Saneamiento de Permisos en Documents" href="ACLsDocuments.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/index.html">Infraestructura virtual</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Configuración de Control de Acceso</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ACLsText.html">Saneamiento de Directorios de Perfil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ACLsDocuments.html">Saneamiento de Permisos en Documents</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Informe de Configuración: Directorios Compartidos de Usuario</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#objetivo">Objetivo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementacion-tecnica">Implementación Técnica</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resultados-validados">Resultados Validados</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conclusion">Conclusión</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#informe-de-configuracion-politica-unificada-de-no-ejecucion">Informe de Configuración: Política Unificada de No-Ejecución</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#principios-de-la-configuracion">Principios de la Configuración</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#detalles-tecnicos">Detalles Técnicos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resultados-esperados">Resultados Esperados</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementacion">Implementación</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ACLsVirtMetadatos.html">Informe de Configuración: ACLs para Nodo Virt-metadatos</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Incidencias/index.html">Registro de Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Configuración de Control de Acceso</a></li>
+      <li class="breadcrumb-item active">Informe de Configuración: Directorios Compartidos de Usuario</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/04_System_Administration/system_configuration/ACL_configuration/ACLsMultimediaDescargas.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-de-configuracion-directorios-compartidos-de-usuario">
+<h1>Informe de Configuración: Directorios Compartidos de Usuario<a class="headerlink" href="#informe-de-configuracion-directorios-compartidos-de-usuario" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-03-20</p>
+</dd>
+<dt class="field-even">Responsable<span class="colon">:</span></dt>
+<dd class="field-even"><p>Administrador de Sistemas</p>
+</dd>
+<dt class="field-odd">Usuarios<span class="colon">:</span></dt>
+<dd class="field-odd"><p>raul-ipa (Red/IdM), raul (Local/Contingencia)</p>
+</dd>
+<dt class="field-even">Ruta Física<span class="colon">:</span></dt>
+<dd class="field-even"><p>/mnt/datos_raul/home_config/</p>
+</dd>
+<dt class="field-odd">Directorios<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Downloads, Music, Pictures, Videos</p>
+</dd>
+</dl>
+<section id="objetivo">
+<h2>Objetivo<a class="headerlink" href="#objetivo" title="Link to this heading"></a></h2>
+<p>Configurar una infraestructura de archivos agnóstica al usuario que permita la interoperabilidad total entre una cuenta de dominio (IdM) y una cuenta de rescate local, manteniendo una política estricta de “No-Ejecución” para mitigar riesgos de seguridad.</p>
+</section>
+<section id="implementacion-tecnica">
+<h2>Implementación Técnica<a class="headerlink" href="#implementacion-tecnica" title="Link to this heading"></a></h2>
+<section id="propiedad-y-grupos">
+<h3>1. Propiedad y Grupos<a class="headerlink" href="#propiedad-y-grupos" title="Link to this heading"></a></h3>
+<p>Se ha establecido el grupo <code class="docutils literal notranslate"><span class="pre">raul</span></code> como propietario de toda la estructura en el almacenamiento físico. Esto permite que cualquier cambio de contexto (switch user) mantenga los privilegios de lectura y escritura (<code class="docutils literal notranslate"><span class="pre">rw-</span></code>) sin depender de la disponibilidad de los servicios de red de IdM.</p>
+</section>
+<section id="politica-de-no-ejecucion">
+<h3>2. Política de No-Ejecución<a class="headerlink" href="#politica-de-no-ejecucion" title="Link to this heading"></a></h3>
+<p>Se han normalizado los permisos de los archivos existentes a <code class="docutils literal notranslate"><span class="pre">644</span></code> (<code class="docutils literal notranslate"><span class="pre">rw-r--r--</span></code>).
+* <strong>Motivación:</strong> Evitar que binarios descargados o archivos multimedia malformados se ejecuten accidentalmente.
+* <strong>Procedimiento:</strong> Eliminación del bit <code class="docutils literal notranslate"><span class="pre">setgid</span></code> y limpieza de máscaras de ACL restrictivas.</p>
+</section>
+<section id="factoria-de-herencia-defaults">
+<h3>3. Factoría de Herencia (Defaults)<a class="headerlink" href="#factoria-de-herencia-defaults" title="Link to this heading"></a></h3>
+<p>Se ha configurado la herencia de directorios mediante ACLs por defecto:
+* <strong>Directorios nuevos:</strong> Reciben <code class="docutils literal notranslate"><span class="pre">rwx</span></code> para permitir la navegación (traversing).
+* <strong>Archivos nuevos:</strong> Reciben <code class="docutils literal notranslate"><span class="pre">rw-</span></code> de forma mandatoria.</p>
+</section>
+</section>
+<section id="resultados-validados">
+<h2>Resultados Validados<a class="headerlink" href="#resultados-validados" title="Link to this heading"></a></h2>
+<p>La verificación mediante <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span></code> confirma que:
+* Los archivos son identificados correctamente como datos no ejecutables.
+* El grupo <code class="docutils literal notranslate"><span class="pre">raul</span></code> tiene privilegios de escritura simétricos.
+* La ruta es accesible de forma transparente desde <code class="docutils literal notranslate"><span class="pre">/home/raul-ipa/</span></code> y <code class="docutils literal notranslate"><span class="pre">/home/raul/</span></code>.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>La infraestructura es ahora resiliente ante fallos de autenticación en red, garantizando que el usuario local de contingencia pueda trabajar sobre el mismo set de datos con las mismas garantías de seguridad.</p>
+</section>
+</section>
+<section id="informe-de-configuracion-politica-unificada-de-no-ejecucion">
+<h1>Informe de Configuración: Política Unificada de No-Ejecución<a class="headerlink" href="#informe-de-configuracion-politica-unificada-de-no-ejecucion" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-03-20</p>
+</dd>
+<dt class="field-even">Responsable<span class="colon">:</span></dt>
+<dd class="field-even"><p>Administrador de Sistemas (Gemini AI Collaboration)</p>
+</dd>
+<dt class="field-odd">Directorios<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Downloads, Music, Pictures, Videos</p>
+</dd>
+<dt class="field-even">Estado<span class="colon">:</span></dt>
+<dd class="field-even"><p>Implementado</p>
+</dd>
+</dl>
+<section id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>Se ha implementado una política de seguridad restrictiva en los directorios de contenido dinámico y multimedia. El objetivo es mitigar riesgos de ejecución accidental de código malicioso o scripts no verificados, especialmente en el área de descargas.</p>
+</section>
+<section id="principios-de-la-configuracion">
+<h2>Principios de la Configuración<a class="headerlink" href="#principios-de-la-configuracion" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Denegación de Ejecución por Defecto:</strong> Ningún archivo dentro de estas rutas posee el bit de ejecución (<code class="docutils literal notranslate"><span class="pre">x</span></code>) activo. Esto aplica tanto a archivos existentes como a los que se generen en el futuro.</p></li>
+<li><p><strong>Arquitectura de Herencia:</strong> Las ACLs por defecto (<code class="docutils literal notranslate"><span class="pre">default</span></code>) se han ajustado para permitir la creación de subestructuras de directorios navegables (manteniendo <code class="docutils literal notranslate"><span class="pre">rwx</span></code> para carpetas), pero forzando archivos de datos puros (<code class="docutils literal notranslate"><span class="pre">rw-</span></code>).</p></li>
+<li><p><strong>Intervención Manual en Descargas:</strong> Se establece como norma operativa que cualquier binario o script legítimo en <code class="docutils literal notranslate"><span class="pre">Downloads</span></code> que requiera ser ejecutado, deberá recibir permisos de forma explícita por el usuario propietario.</p></li>
+</ol>
+</section>
+<section id="detalles-tecnicos">
+<h2>Detalles Técnicos<a class="headerlink" href="#detalles-tecnicos" title="Link to this heading"></a></h2>
+<p>La configuración asegura que la máscara de ACL (<code class="docutils literal notranslate"><span class="pre">mask</span></code>) no permita la promoción accidental de privilegios. Esto limpia la visibilidad de archivos en el sistema, eliminando resaltados de color (típicos de archivos ejecutables) en la terminal para archivos que son estrictamente datos.</p>
+</section>
+<section id="resultados-esperados">
+<h2>Resultados Esperados<a class="headerlink" href="#resultados-esperados" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Eliminación del riesgo de “doble clic” accidental sobre scripts descargados.</p></li>
+<li><p>Consistencia visual en el listado de archivos multimedia.</p></li>
+<li><p>Compatibilidad total con el grupo de IdM <code class="docutils literal notranslate"><span class="pre">raul</span></code> para futuras colaboraciones en red.</p></li>
+</ul>
+</section>
+<section id="implementacion">
+<h2>Implementación<a class="headerlink" href="#implementacion" title="Link to this heading"></a></h2>
+<p>La automatización de esta política se encuentra disponible en el script de gestión:</p>
+<p><strong>Archivo de referencia:</strong> <code class="docutils literal notranslate"><span class="pre">ACLsMultimediaDescargas.sh</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Esta configuración es especialmente crítica para el directorio <code class="docutils literal notranslate"><span class="pre">Downloads</span></code>, actuando como una “zona de cuarentena” donde nada es ejecutable por omisión.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ACLsDocuments.html" class="btn btn-neutral float-left" title="Saneamiento de Permisos en Documents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ACLsVirtMetadatos.html" class="btn btn-neutral float-right" title="Informe de Configuración: ACLs para Nodo Virt-metadatos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

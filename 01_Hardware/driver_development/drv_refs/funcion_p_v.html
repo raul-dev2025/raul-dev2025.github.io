@@ -1,0 +1,197 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Funciones P() y V() &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Hardware and System Resources" href="../../hardware_resources/index.html" />
+    <link rel="prev" title="Why kzalloc() Over kmalloc() in the Linux Kernel" href="../watcherDocs/cleanSlab.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/driverPlaning.html">Planning a Mechanism to Fetch and Translate PCI Device Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/st_pci_device_id.html">struct pci_device_id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/init.html">device_watcher_init()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/overview.html">Plan-Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/overview-2.html">Plan-overview 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/planingStructures.html">Planing Structures - JSON to C Struct Translation Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/kernelStructures.html">Linux Kernel-Style JSON Struct Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmioVsIOports.html">Briefing: Memory-Mapped I/O vs. I/O Ports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcie-symobls.html">PCIe Symobls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deadline-iosched.html">Deadline IO scheduler tunables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quick-ref-pci.html">PCI Functions Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/cleanSlab.html">Why <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> Over <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> in the Linux Kernel</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#semaforos-un-concepto-clave">Semáforos: Un Concepto Clave</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#funcion-p-tambien-conocida-como-wait-o-down">Función P() (También Conocida como <em>wait</em> o <strong>down</strong>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#funcion-v-tambien-conocida-como-signal-o-up">Función V() (También Conocida como <em>signal</em> o <strong>up</strong>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aplicacion-en-controladores-de-dispositivo">Aplicación en Controladores de Dispositivo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Driver Development</a></li>
+      <li class="breadcrumb-item active">Funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/01_Hardware/driver_development/drv_refs/funcion_p_v.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="funciones-p-y-v">
+<h1>Funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code><a class="headerlink" href="#funciones-p-y-v" title="Link to this heading"></a></h1>
+<p>En el contexto de los <strong>controladores de dispositivo</strong> y la <strong>sincronización de procesos</strong> en sistemas operativos, las funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code> son operaciones fundamentales asociadas a los <strong>semáforos</strong>. Estas funciones fueron propuestas por Edsger W. Dijkstra para resolver problemas de concurrencia y garantizar el acceso seguro a recursos compartidos.</p>
+<section id="semaforos-un-concepto-clave">
+<h2>Semáforos: Un Concepto Clave<a class="headerlink" href="#semaforos-un-concepto-clave" title="Link to this heading"></a></h2>
+<p>Antes de describir <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code>, es importante entender qué es un semáforo. Un <strong>semáforo</strong> es una variable entera (o un tipo de dato abstracto) que, aparte de su inicialización, solo puede ser modificada por las operaciones atómicas <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code>. Sirven para controlar el acceso a una sección crítica (una parte del código donde se accede a recursos compartidos) y para señalar la ocurrencia de eventos.</p>
+<p>Existen dos tipos principales de semáforos:</p>
+<ul class="simple">
+<li><p><strong>Semáforos binarios (o mutex):</strong> Solo pueden tomar los valores 0 o 1. Se utilizan para garantizar la exclusión mutua, es decir, que solo un proceso a la vez acceda a un recurso.</p></li>
+<li><p><strong>Semáforos de conteo:</strong> Pueden tomar cualquier valor entero no negativo. Se utilizan para controlar el acceso a un recurso que tiene múltiples instancias disponibles.</p></li>
+</ul>
+</section>
+<section id="funcion-p-tambien-conocida-como-wait-o-down">
+<h2>Función P() (También Conocida como <em>wait</em> o <strong>down</strong>)<a class="headerlink" href="#funcion-p-tambien-conocida-como-wait-o-down" title="Link to this heading"></a></h2>
+<p>La función <code class="docutils literal notranslate"><span class="pre">P()</span></code>, que proviene del holandés <em>proberen</em> (probar) o <em>passeren</em> (pasar), tiene la siguiente funcionalidad:</p>
+<ul class="simple">
+<li><p><strong>Disminuye el valor del semáforo en 1.</strong></p></li>
+<li><p><strong>Si el valor resultante del semáforo es negativo, el proceso que invocó</strong> <code class="docutils literal notranslate"><span class="pre">P()</span></code> <strong>se bloquea.</strong> Esto significa que el proceso es puesto en una cola de espera asociada al semáforo y no puede continuar su ejecución hasta que el semáforo tenga un valor no negativo.</p></li>
+<li><p><strong>Si el valor resultante del semáforo es no negativo, el proceso continúa su ejecución.</strong></p></li>
+</ul>
+<p>En esencia, <code class="docutils literal notranslate"><span class="pre">P()</span></code> se utiliza para <strong>solicitar un recurso</strong>. Si el recurso no está disponible (semáforo en 0 para semáforos binarios, o el conteo de instancias disponibles llega a 0 para semáforos de conteo), el proceso espera.</p>
+</section>
+<section id="funcion-v-tambien-conocida-como-signal-o-up">
+<h2>Función V() (También Conocida como <em>signal</em> o <strong>up</strong>)<a class="headerlink" href="#funcion-v-tambien-conocida-como-signal-o-up" title="Link to this heading"></a></h2>
+<p>La función <code class="docutils literal notranslate"><span class="pre">V()</span></code>, que proviene del holandés <em>verhogen</em> (incrementar) o <em>vrijgeven</em> (liberar), tiene la siguiente funcionalidad:</p>
+<ul class="simple">
+<li><p><strong>Incrementa el valor del semáforo en 1.</strong></p></li>
+<li><p><strong>Si había uno o más procesos bloqueados en la cola de espera del semáforo (debido a una operación</strong> <code class="docutils literal notranslate"><span class="pre">P()</span></code> <strong>previa), uno de esos procesos es despertado y se le permite continuar su ejecución.</strong> Normalmente, se despierta el proceso que lleva más tiempo esperando (política FIFO), aunque no es un requisito estricto.</p></li>
+</ul>
+<p>En esencia, <code class="docutils literal notranslate"><span class="pre">V()</span></code> se utiliza para <strong>liberar un recurso</strong> o para <strong>señalar que un evento ha ocurrido</strong>. Al liberar un recurso, permite que un proceso que estaba esperando por él, pueda continuar.</p>
+</section>
+<section id="aplicacion-en-controladores-de-dispositivo">
+<h2>Aplicación en Controladores de Dispositivo<a class="headerlink" href="#aplicacion-en-controladores-de-dispositivo" title="Link to this heading"></a></h2>
+<p>En los controladores de dispositivo, <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code> son cruciales para:</p>
+<ol class="arabic simple">
+<li><p><strong>Exclusión Mutua para Acceso al Hardware:</strong> Un controlador a menudo necesita acceder a registros de hardware específicos o a datos compartidos (como buffers de E/S). Las funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code> (usando un semáforo binario) garantizan que solo un proceso o hilo del controlador acceda a estas secciones críticas en un momento dado, evitando condiciones de carrera y corrupción de datos.</p>
+<ul class="simple">
+<li><p><strong>Ejemplo:</strong> Antes de escribir en un registro de control de un dispositivo, el controlador podría ejecutar <code class="docutils literal notranslate"><span class="pre">P(mutex\_registro)</span></code>; después de la escritura, ejecutaría <code class="docutils literal notranslate"><span class="pre">V(mutex\_registro)</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Sincronización entre el Controlador y los Procesos de Usuario:</strong> Un proceso de usuario puede solicitar una operación de E/S al controlador. El controlador puede necesitar esperar a que la operación de hardware finalice (por ejemplo, una interrupción del dispositivo) antes de notificar al proceso de usuario.</p>
+<ul class="simple">
+<li><p><strong>Ejemplo:</strong> Un proceso de usuario llama a <cite>read()</cite>. El controlador inicia la lectura del disco y ejecuta <code class="docutils literal notranslate"><span class="pre">P(sem\_lectura)</span></code>. Cuando la interrupción del disco indica que la lectura ha terminado, el manejador de interrupciones del controlador ejecuta <code class="docutils literal notranslate"><span class="pre">V(sem\_lectura)</span></code>, lo que permite al proceso de usuario continuar.</p></li>
+</ul>
+</li>
+<li><p><strong>Gestión de Buffers de E/S:</strong> Si el controlador utiliza buffers para manejar datos entre el dispositivo y la memoria del sistema, los semáforos de conteo pueden ser usados para gestionar el número de espacios disponibles en el buffer (productores) y el número de elementos llenos (consumidores).</p>
+<ul class="simple">
+<li><p><strong>Ejemplo:</strong> Un semáforo <cite>espacios_libres</cite> (inicializado al tamaño del buffer) y un semáforo <cite>elementos_llenos</cite> (inicializado en 0). Un proceso que escribe en el buffer (productor) ejecutaría <code class="docutils literal notranslate"><span class="pre">P(espacios\_libres)</span></code> antes de escribir y <code class="docutils literal notranslate"><span class="pre">V(elementos\_llenos)</span></code> después. Un proceso que lee del buffer (consumidor) ejecutaría <code class="docutils literal notranslate"><span class="pre">P(elementos\_llenos)</span></code> antes de leer y <code class="docutils literal notranslate"><span class="pre">V(espacios\_libres)</span></code> después.</p></li>
+</ul>
+</li>
+</ol>
+<p>En resumen, las funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code> proporcionan un mecanismo robusto y eficiente para la <strong>sincronización</strong> y la <strong>exclusión mutua</strong> en entornos concurrentes, siendo herramientas indispensables en el desarrollo de controladores de dispositivo para garantizar la estabilidad y el correcto funcionamiento del sistema operativo.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../watcherDocs/cleanSlab.html" class="btn btn-neutral float-left" title="Why kzalloc() Over kmalloc() in the Linux Kernel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../hardware_resources/index.html" class="btn btn-neutral float-right" title="Hardware and System Resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

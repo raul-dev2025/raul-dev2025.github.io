@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planning a Mechanism to Fetch and Translate PCI Device Data &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="struct pci_device_id" href="st_pci_device_id.html" />
+    <link rel="prev" title="Driver Development" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Planning a Mechanism to Fetch and Translate PCI Device Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#objective">Objective</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-fetching-data-from-sys">Step 1: Fetching Data from <code class="docutils literal notranslate"><span class="pre">/sys</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-translating-hexadecimal-values">Step 2: Translating Hexadecimal Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-organizing-data-into-a-table">Step 3: Organizing Data into a Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-implementing-the-mechanism">Step 4: Implementing the Mechanism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-5-planning-driver-features">Step 5: Planning Driver Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-6-validation-mechanism">Step 6: Validation Mechanism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-output">Example Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="st_pci_device_id.html">struct pci_device_id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="init.html">device_watcher_init()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html">Plan-Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview-2.html">Plan-overview 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="planingStructures.html">Planing Structures - JSON to C Struct Translation Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kernelStructures.html">Linux Kernel-Style JSON Struct Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/mmioVsIOports.html">Briefing: Memory-Mapped I/O vs. I/O Ports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/pcie-symobls.html">PCIe Symobls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/deadline-iosched.html">Deadline IO scheduler tunables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/quick-ref-pci.html">PCI Functions Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanSlab.html">Why <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> Over <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> in the Linux Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/funcion_p_v.html">Funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Driver Development</a></li>
+      <li class="breadcrumb-item active">Planning a Mechanism to Fetch and Translate PCI Device Data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/01_Hardware/driver_development/watcherDocs/driverPlaning.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="planning-a-mechanism-to-fetch-and-translate-pci-device-data">
+<h1>Planning a Mechanism to Fetch and Translate PCI Device Data<a class="headerlink" href="#planning-a-mechanism-to-fetch-and-translate-pci-device-data" title="Link to this heading"></a></h1>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Link to this heading"></a></h2>
+<p>The goal of this exercise is to develop a mechanism to fetch data from the directory <code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices/0000:00:18.x</span></code>, translate hexadecimal values into human-readable meanings, and organize the data into a structured format. This will help plan the features of the driver and create a validation mechanism to ensure data consistency.</p>
+</section>
+<section id="step-1-fetching-data-from-sys">
+<h2>Step 1: Fetching Data from <code class="docutils literal notranslate"><span class="pre">/sys</span></code><a class="headerlink" href="#step-1-fetching-data-from-sys" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>List Files in the Directory</strong>:</p>
+<ul class="simple">
+<li><p>Use a tool like <code class="docutils literal notranslate"><span class="pre">ls</span></code> or a script to list all files in <code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices/0000:00:18.x</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Read File Contents</strong>:</p>
+<ul class="simple">
+<li><p>For each file, read its contents. Most files in <code class="docutils literal notranslate"><span class="pre">/sys</span></code> contain plain text or hexadecimal values.</p></li>
+</ul>
+</li>
+<li><p><strong>Translate Hexadecimal Values</strong>:</p>
+<ul class="simple">
+<li><p>Some files (e.g., <code class="docutils literal notranslate"><span class="pre">vendor</span></code>, <code class="docutils literal notranslate"><span class="pre">device</span></code>, <code class="docutils literal notranslate"><span class="pre">class</span></code>) contain hexadecimal values that need to be translated into human-readable meanings (e.g., <code class="docutils literal notranslate"><span class="pre">0x1022</span></code> → Advanced Micro Devices).</p></li>
+</ul>
+</li>
+<li><p><strong>Store Data in a Structured Format</strong>:</p>
+<ul class="simple">
+<li><p>Organize the data into a table or JSON-like structure for easy querying and comparison.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-2-translating-hexadecimal-values">
+<h2>Step 2: Translating Hexadecimal Values<a class="headerlink" href="#step-2-translating-hexadecimal-values" title="Link to this heading"></a></h2>
+<p>To translate hexadecimal values into human-readable meanings, we need a mapping of known values. For example:</p>
+<ul class="simple">
+<li><p><strong>Vendor IDs</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0x1022</span></code> → Advanced Micro Devices (AMD)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0x8086</span></code> → Intel Corporation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0x10DE</span></code> → NVIDIA Corporation</p></li>
+</ul>
+</li>
+<li><p><strong>Device Classes</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0x060000</span></code> → Host bridge</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0x030000</span></code> → VGA compatible controller</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0x0C0300</span></code> → USB controller</p></li>
+</ul>
+</li>
+</ul>
+<p>We can create a lookup table or database for these mappings.</p>
+</section>
+<section id="step-3-organizing-data-into-a-table">
+<h2>Step 3: Organizing Data into a Table<a class="headerlink" href="#step-3-organizing-data-into-a-table" title="Link to this heading"></a></h2>
+<p>Once the data is fetched and translated, we can organize it into a table for easy querying. Here’s an example structure:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>File Name</p></th>
+<th class="head"><p>Raw Value</p></th>
+<th class="head"><p>Translated Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">vendor</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x1022</span></code></p></td>
+<td><p>Advanced Micro Devices</p></td>
+<td><p>Vendor of the PCI device</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">device</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x1450</span></code></p></td>
+<td><p>AMD Family 17h Root Bridge</p></td>
+<td><p>Device ID of the PCI device</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">class</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x060000</span></code></p></td>
+<td><p>Host bridge</p></td>
+<td><p>Class of the PCI device</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resource</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x...</span></code></p></td>
+<td><p>Memory range</p></td>
+<td><p>Resource allocation for device</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">irq</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">16</span></code></p></td>
+<td><p>Interrupt 16</p></td>
+<td><p>Interrupt assigned to device</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="step-4-implementing-the-mechanism">
+<h2>Step 4: Implementing the Mechanism<a class="headerlink" href="#step-4-implementing-the-mechanism" title="Link to this heading"></a></h2>
+<p>We can implement this mechanism using a scripting language like Python or Bash.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See your python Repo. File: <code class="docutils literal notranslate"><span class="pre">ifSysCollector.py</span></code>.</p>
+</div>
+</section>
+<section id="step-5-planning-driver-features">
+<h2>Step 5: Planning Driver Features<a class="headerlink" href="#step-5-planning-driver-features" title="Link to this heading"></a></h2>
+<p>Based on this exercise, we can plan the following features for the driver:</p>
+<ol class="arabic simple">
+<li><p><strong>Data Fetching</strong>:</p>
+<ul class="simple">
+<li><p>The driver should be able to fetch data from <code class="docutils literal notranslate"><span class="pre">/sys</span></code> or directly from the PCI configuration space.</p></li>
+</ul>
+</li>
+<li><p><strong>Data Translation</strong>:</p>
+<ul class="simple">
+<li><p>The driver should include a mechanism to translate raw hexadecimal values into human-readable meanings.</p></li>
+</ul>
+</li>
+<li><p><strong>Data Validation</strong>:</p>
+<ul class="simple">
+<li><p>The driver should compare fetched data with expected values (e.g., known vendor IDs, device classes) to ensure consistency.</p></li>
+</ul>
+</li>
+<li><p><strong>Structured Output</strong>:</p>
+<ul class="simple">
+<li><p>The driver should organize data into a structured format (e.g., JSON, table) for easy querying and analysis.</p></li>
+</ul>
+</li>
+<li><p><strong>Error Handling</strong>:</p>
+<ul class="simple">
+<li><p>The driver should handle missing files, invalid data, or unsupported features gracefully.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-6-validation-mechanism">
+<h2>Step 6: Validation Mechanism<a class="headerlink" href="#step-6-validation-mechanism" title="Link to this heading"></a></h2>
+<p>To validate the data retrieved by the driver, we can:</p>
+<ol class="arabic simple">
+<li><p><strong>Compare with</strong> <code class="docutils literal notranslate"><span class="pre">/sys</span></code> <strong>Data</strong>:</p>
+<ul class="simple">
+<li><p>Use the script above to fetch data from <code class="docutils literal notranslate"><span class="pre">/sys</span></code> and compare it with the data retrieved by the driver.</p></li>
+</ul>
+</li>
+<li><p><strong>Check for Consistency</strong>:</p>
+<ul class="simple">
+<li><p>Ensure that values like <code class="docutils literal notranslate"><span class="pre">vendor</span></code>, <code class="docutils literal notranslate"><span class="pre">device</span></code>, and <code class="docutils literal notranslate"><span class="pre">class</span></code> match expected values.</p></li>
+</ul>
+</li>
+<li><p><strong>Log Discrepancies</strong>:</p>
+<ul class="simple">
+<li><p>Log any discrepancies for further investigation.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="example-output">
+<h2>Example Output<a class="headerlink" href="#example-output" title="Link to this heading"></a></h2>
+<p>Here’s an example of what the output might look like:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>File Name</p></th>
+<th class="head"><p>Raw Value</p></th>
+<th class="head"><p>Translated Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">vendor</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x1022</span></code></p></td>
+<td><p>Advanced Micro Devices</p></td>
+<td><p>Vendor of the PCI device</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">device</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x1450</span></code></p></td>
+<td><p>AMD Family 17h Root Bridge</p></td>
+<td><p>Device ID of the PCI device</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">class</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x060000</span></code></p></td>
+<td><p>Host bridge</p></td>
+<td><p>Class of the PCI device</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resource</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x...</span></code></p></td>
+<td><p>Memory range</p></td>
+<td><p>Resource allocation for device</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">irq</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">16</span></code></p></td>
+<td><p>Interrupt 16</p></td>
+<td><p>Interrupt assigned to device</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Implement the script to fetch and translate data.</p></li>
+<li><p>Extend the script to handle all files in <code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices/0000:00:18.x</span></code>.</p></li>
+<li><p>Plan the driver features based on the findings.</p></li>
+<li><p>Develop a validation mechanism to compare driver data with <code class="docutils literal notranslate"><span class="pre">/sys</span></code> data.</p></li>
+</ol>
+<p>Let me know if you’d like help with any specific part of this process!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Driver Development" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="st_pci_device_id.html" class="btn btn-neutral float-right" title="struct pci_device_id" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

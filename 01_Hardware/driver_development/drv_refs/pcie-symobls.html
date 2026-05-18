@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PCIe Symobls &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Deadline IO scheduler tunables" href="deadline-iosched.html" />
+    <link rel="prev" title="Briefing: Memory-Mapped I/O vs. I/O Ports" href="mmioVsIOports.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/driverPlaning.html">Planning a Mechanism to Fetch and Translate PCI Device Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/st_pci_device_id.html">struct pci_device_id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/init.html">device_watcher_init()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/overview.html">Plan-Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/overview-2.html">Plan-overview 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/planingStructures.html">Planing Structures - JSON to C Struct Translation Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/kernelStructures.html">Linux Kernel-Style JSON Struct Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmioVsIOports.html">Briefing: Memory-Mapped I/O vs. I/O Ports</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">PCIe Symobls</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-mmcfg">What is MMCFG?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-mmcfg-works">How MMCFG Works</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mmcfg-in-the-linux-kernel">MMCFG in the Linux Kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-mmcfg-is-important">Why MMCFG is Important</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deadline-iosched.html">Deadline IO scheduler tunables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quick-ref-pci.html">PCI Functions Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/cleanSlab.html">Why <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> Over <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> in the Linux Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="funcion_p_v.html">Funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Driver Development</a></li>
+      <li class="breadcrumb-item active">PCIe Symobls</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/01_Hardware/driver_development/drv_refs/pcie-symobls.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pcie-symobls">
+<h1>PCIe Symobls<a class="headerlink" href="#pcie-symobls" title="Link to this heading"></a></h1>
+<p>In the context of PCI Express (PCIe) and the Linux kernel, <strong>MMCFG</strong> stands for <em>Memory-Mapped Configuration Space</em>. It refers to the mechanism used by the PCIe specification to access the configuration space of PCIe devices.</p>
+<section id="what-is-mmcfg">
+<h2>What is MMCFG?<a class="headerlink" href="#what-is-mmcfg" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>PCIe devices have a <em>configuration space</em>, which is a set of registers used to configure and control the device.</p></li>
+<li><p>In traditional PCI, the configuration space is accessed using I/O ports (e.g., <code class="docutils literal notranslate"><span class="pre">CONFIG_ADDRESS</span></code> and <code class="docutils literal notranslate"><span class="pre">CONFIG_DATA</span></code> ports).</p></li>
+<li><p>In PCIe, the configuration space is accessed via <code class="docutils literal notranslate"><span class="pre">memory-mapped</span> <span class="pre">I/O</span> <span class="pre">(MMIO)</span></code>. This is called the <em>MMCFG (Memory-Mapped Configuration)</em> mechanism.</p></li>
+<li><p>The MMCFG region is a portion of the system’s physical memory address space reserved for accessing PCIe configuration space. The base address of this region is typically defined in the system’s ACPI tables (e.g., the <cite>MCFG</cite> table).</p></li>
+</ul>
+</section>
+<section id="how-mmcfg-works">
+<h2>How MMCFG Works<a class="headerlink" href="#how-mmcfg-works" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>The firmware (e.g., <em>BIOS</em> or <em>UEFI</em>) provides the base address of the MMCFG region in the ACPI <code class="docutils literal notranslate"><span class="pre">MCFG</span></code> table.</p></li>
+<li><p>The operating system (e.g., Linux kernel) uses this base address to map the PCIe configuration space into its virtual address space.</p></li>
+<li><p>The kernel can then access the configuration space of PCIe devices by reading from or writing to specific memory addresses within the MMCFG region.</p></li>
+</ol>
+</section>
+<section id="mmcfg-in-the-linux-kernel">
+<h2>MMCFG in the Linux Kernel<a class="headerlink" href="#mmcfg-in-the-linux-kernel" title="Link to this heading"></a></h2>
+<p>In the Linux kernel, MMCFG support is enabled by the following configuration option:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">CONFIG_PCI_MMCONFIG</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>This option enables the use of the memory-mapped configuration space for PCIe devices.</p></li>
+<li><p>It is typically enabled by default in modern kernels, as most systems use PCIe and rely on MMCFG for configuration space access.</p></li>
+</ul>
+</section>
+<section id="why-mmcfg-is-important">
+<h2>Why MMCFG is Important<a class="headerlink" href="#why-mmcfg-is-important" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>MMCFG provides a faster and more efficient way to access PCIe configuration space compared to the legacy PCI mechanism.</p></li>
+<li><p>It is essential for systems with PCIe devices, as it allows the kernel to discover, configure, and manage these devices during boot and runtime.</p></li>
+</ul>
+<p>If you’re debugging or working with PCIe devices in the Linux kernel, you might encounter references to MMCFG in logs or code related to PCIe initialization and configuration. For example, during boot, the kernel might log the MMCFG base address and the size of the MMCFG region.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mmioVsIOports.html" class="btn btn-neutral float-left" title="Briefing: Memory-Mapped I/O vs. I/O Ports" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="deadline-iosched.html" class="btn btn-neutral float-right" title="Deadline IO scheduler tunables" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

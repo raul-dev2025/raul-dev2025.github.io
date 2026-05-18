@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HOWTO –&gt; PCI-Express test scripts for LTP &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to Limit CPU Computation Consumption for Builds and Compilation" href="compCPU.html" />
+    <link rel="prev" title="Bus Map" href="bus-map-refact.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Hardware and System Resources</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#system-tasks">System Tasks</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="sysTasks.html">Concurrent ltp build with system tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bus-map-refact.html">Bus Map</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">HOWTO –&gt; PCI-Express test scripts for LTP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="compCPU.html">How to Limit CPU Computation Consumption for Builds and Compilation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#network-infrastructure">Network Infrastructure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Hardware and System Resources</a></li>
+      <li class="breadcrumb-item active">HOWTO –&gt; PCI-Express test scripts for LTP</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/hardware_resources/pci-exp-tests-HOWTO.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="howto-pci-express-test-scripts-for-ltp">
+<h1>HOWTO –&gt; PCI-Express test scripts for LTP<a class="headerlink" href="#howto-pci-express-test-scripts-for-ltp" title="Link to this heading"></a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Amit</span> <span class="n">Khanna</span> <span class="n">amit</span><span class="o">.</span><span class="n">khanna</span><span class="nd">@intel</span><span class="o">.</span><span class="n">com</span>
+<span class="mi">08</span><span class="o">/</span><span class="mi">20</span><span class="o">/</span><span class="mi">2004</span>
+</pre></div>
+</div>
+<section id="about-this-howto">
+<h2>1. About this HOWTO<a class="headerlink" href="#about-this-howto" title="Link to this heading"></a></h2>
+<p>This document describes the addition of PCI-Express test cases to the existing LTP project.
+These test <code class="docutils literal notranslate"><span class="pre">cases/scripts</span></code> will enhance the LTP’s capability to test PCI-Express devices/drivers.</p>
+</section>
+<section id="copyright-c-intel-corporation-2004">
+<h2>2. Copyright (c) Intel Corporation, 2004<a class="headerlink" href="#copyright-c-intel-corporation-2004" title="Link to this heading"></a></h2>
+</section>
+<section id="what-is-this-patch-doing">
+<h2>3. What is this patch doing?<a class="headerlink" href="#what-is-this-patch-doing" title="Link to this heading"></a></h2>
+<ol class="loweralpha">
+<li><dl class="simple">
+<dt>A function <code class="docutils literal notranslate"><span class="pre">test_find_pci_exp_cap</span></code> has been added to the <em>tpci.c</em> file of LTP project. (<code class="docutils literal notranslate"><span class="pre">\ltp\testcases\kernel\device-drivers\pci\tpci\pci.c</span></code>)</dt><dd><p>This function makes a call to <code class="docutils literal notranslate"><span class="pre">pci_find_capability</span></code>, which will determine if a device has PCI-Express capability. A PCI Express device function indicates PCI-Express support by implementing the PCI-Express capability structure in its capability list.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>A function <code class="docutils literal notranslate"><span class="pre">test_read_pci_exp_config</span></code> has been added to the <code class="docutils literal notranslate"><span class="pre">tpci.c</span></code> file of LTP project.</dt><dd><p>This function calls <code class="docutils literal notranslate"><span class="pre">pci_config_read</span></code> and determines if the PCI-Express enhanced config space of the device can be read successfully or not.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pci_config_read</span></code> function here reads the Advanced Error Reporting CAP-ID register located at the PCI-Express enhanced config space address 0x100. The value of this register is a READ-ONLY value which is constant on all the PCI-Express devices. If the value read from this register matches with the defined macro AER_CAP_ID_VALUE (in tpci.h) that means that PCI-Express driver is accessing the enhanced config space SUCCESSFULLY.</p>
+</dd>
+</dl>
+</li>
+<li><p>A user space function <code class="docutils literal notranslate"><span class="pre">ki_generic()</span></code> is already available in user_tpci.c file of LTP project. (<code class="docutils literal notranslate"><span class="pre">\ltp\testcases\kernel\device-drivers\pci\user_tpci\user_tpci.c</span></code>) which will drive the kernel module tpci to test various pci and pci-express functions (defined &amp; prototyped in <code class="docutils literal notranslate"><span class="pre">tpci.c</span></code>).</p></li>
+</ol>
+</section>
+<section id="including-pci-express-support-into-the-kernel">
+<h2>4. Including PCI-Express support into the kernel<a class="headerlink" href="#including-pci-express-support-into-the-kernel" title="Link to this heading"></a></h2>
+<p>By default, the kernel may not enable PCI-Express feature. A kernel configuration option must be selected to enable PCI-Express support.</p>
+<p>To include PCI-Express support into the kernel requires users to enable PCI-Access mode with “Any” or “MMCFG” in the <code class="docutils literal notranslate"><span class="pre">General</span> <span class="pre">Setup</span></code> menu in the kernel configuration menu.</p>
+</section>
+<section id="faq">
+<h2>5. FAQ<a class="headerlink" href="#faq" title="Link to this heading"></a></h2>
+<p><strong>Q1</strong>. Are there any limitations on using this patch?</p>
+<p><strong>A1</strong>. If the device supports PCI-Express feature and the PCI-Express feature is enabled in the kernel, then only a user will be able to access the PCI-Express space.
+Even if the device doesn’t support PCI-Express feature, the traditional PCI-space would still be accessible.</p>
+<p><strong>Q2</strong>. What is this <code class="docutils literal notranslate"><span class="pre">`AER_CAP_ID_VALUE`</span></code> macro defined in tpci.h?</p>
+<p><strong>A2</strong>. <code class="docutils literal notranslate"><span class="pre">AER_CAP_ID_VALUE</span></code> represents the value of Advanced Error Reporting Capability ID in the PCI Express config space.
+The default value of this is always same for all PCI-Express devices. i.e. <code class="docutils literal notranslate"><span class="pre">0x14011</span></code>.
+In the function <code class="docutils literal notranslate"><span class="pre">test_read_pci_exp_config</span></code> in <code class="docutils literal notranslate"><span class="pre">tpci.c</span></code> file, it is compared with the value retrieved from a PCI-Express capable device. If both the values match that means that the PCI-Express driver is accessing the PCI-Express config space SUCCESSFULLY.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bus-map-refact.html" class="btn btn-neutral float-left" title="Bus Map" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="compCPU.html" class="btn btn-neutral float-right" title="How to Limit CPU Computation Consumption for Builds and Compilation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

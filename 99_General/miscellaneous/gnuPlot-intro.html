@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GNUPlot Example: Plotting Mathematical Functions in Linux &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Función seno y coseno" href="newOrigin2.html" />
+    <link rel="prev" title="Introduction to GNUPlot for Mathematical Visualization" href="gnuPlot-usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Unordered Topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gitTrackNoStage.html">Tracking Untracked Files Without Staging Them</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitSplitHunks.html">Splitting Files into Smaller Hunks for Staging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stagedLogs.html">Viewing the Log of Staged Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashedTask.html">Viewing Stashed Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashingFiles.html">Stashing Files Independently in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitIssue.html">How to Open a GitHub Issue for LTP Kernel Headers Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-usage.html">Introduction to GNUPlot for Mathematical Visualization</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GNUPlot Example: Plotting Mathematical Functions in Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-plot-example-sine-wave">Basic Plot Example (Sine Wave)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saving-the-plot-to-a-file">Saving the Plot to a File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multiple-functions-example">Multiple Functions Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#script-based-plotting">Script-Based Plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#d-plot-example">3D Plot Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#viewing-the-plot">Viewing the Plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="newOrigin2.html">Función seno y coseno</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mathSymbols.html">Definitions of Integral and Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws-overview.html">AWS (Amazon Web Services)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailDrafts.html">Saving Draft Emails with the <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailCmds.html">Linux Mail Command Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pathTruncator.html">Integrating Path Truncation into Read the Docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regexNotation.html">REGEX notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="a_diffCounter.html">How to Get a Resumed (Counter) Output Using <code class="docutils literal notranslate"><span class="pre">diff</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="verticalS.html">Vertical Space in reStructuredText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeToLog.html">What Happens When You Pipe a Build Process to <code class="docutils literal notranslate"><span class="pre">less</span></code>: Processor Impact</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate-summary.html">Network Debugging Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate.html">Network Connectivity Troubleshooting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="keyboard_debug.html">Debugging Linux Keyboard Ctrl Key Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commitTypes.html">Tipos de Commits Estándar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Unordered Topics</a></li>
+      <li class="breadcrumb-item active">GNUPlot Example: Plotting Mathematical Functions in Linux</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/99_General/miscellaneous/gnuPlot-intro.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gnuplot-example-plotting-mathematical-functions-in-linux">
+<h1>GNUPlot Example: Plotting Mathematical Functions in Linux<a class="headerlink" href="#gnuplot-example-plotting-mathematical-functions-in-linux" title="Link to this heading"></a></h1>
+<p>This guide demonstrates how to use GNUPlot to visualize mathematical functions in a Linux environment.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p>Install GNUPlot using your package manager:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Debian/Ubuntu</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gnuplot
+
+<span class="c1"># Fedora/RHEL</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>gnuplot
+
+<span class="c1"># Arch Linux</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>gnuplot
+</pre></div>
+</div>
+</section>
+<section id="basic-plot-example-sine-wave">
+<h2>Basic Plot Example (Sine Wave)<a class="headerlink" href="#basic-plot-example-sine-wave" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Launch GNUPlot:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gnuplot
+</pre></div>
+</div>
+</li>
+<li><p>Enter the following commands in the GNUPlot prompt:</p>
+<div class="highlight-gnuplot notranslate"><div class="highlight"><pre><span></span><span class="k">set</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;Sine Wave Example&quot;</span>
+<span class="k">set</span><span class="w"> </span><span class="nb">xlabel</span><span class="w"> </span><span class="s">&quot;x&quot;</span>
+<span class="k">set</span><span class="w"> </span><span class="nb">ylabel</span><span class="w"> </span><span class="s">&quot;sin(x)&quot;</span>
+<span class="k">plot</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nb">with</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;y = sin(x)&quot;</span>
+</pre></div>
+</div>
+<p>This will display an interactive plot of the sine function.</p>
+</li>
+</ol>
+</section>
+<section id="saving-the-plot-to-a-file">
+<h2>Saving the Plot to a File<a class="headerlink" href="#saving-the-plot-to-a-file" title="Link to this heading"></a></h2>
+<p>To save the plot as a PNG image:</p>
+<div class="highlight-gnuplot notranslate"><div class="highlight"><pre><span></span><span class="k">set</span><span class="w"> </span><span class="nb">terminal</span><span class="w"> </span><span class="n">png</span>
+<span class="k">set</span><span class="w"> </span><span class="nb">output</span><span class="w"> </span><span class="s">&quot;sine_wave.png&quot;</span>
+<span class="k">plot</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nb">with</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;y = sin(x)&quot;</span>
+</pre></div>
+</div>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sine_wave.png</span></code> will be created in the current directory.</p>
+</section>
+<section id="multiple-functions-example">
+<h2>Multiple Functions Example<a class="headerlink" href="#multiple-functions-example" title="Link to this heading"></a></h2>
+<p>Plot both sine and cosine functions:</p>
+<div class="highlight-gnuplot notranslate"><div class="highlight"><pre><span></span><span class="k">set</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;Trigonometric Functions&quot;</span>
+<span class="k">set</span><span class="w"> </span><span class="nb">xlabel</span><span class="w"> </span><span class="s">&quot;x&quot;</span>
+<span class="k">set</span><span class="w"> </span><span class="nb">ylabel</span><span class="w"> </span><span class="s">&quot;y&quot;</span>
+<span class="k">set</span><span class="w"> </span><span class="nb">xrange</span><span class="w"> </span><span class="p">[</span><span class="mi">-2</span><span class="o">*</span><span class="n">pi</span><span class="o">:</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">]</span>
+<span class="k">plot</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nb">with</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;sin(x)&quot;</span><span class="o">,</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="nb">with</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;cos(x)&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="script-based-plotting">
+<h2>Script-Based Plotting<a class="headerlink" href="#script-based-plotting" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Create a script file (e.g., <code class="docutils literal notranslate"><span class="pre">plot_script.gp</span></code>):</p>
+<div class="highlight-gnuplot notranslate"><div class="highlight"><pre><span></span><span class="k">set</span><span class="w"> </span><span class="nb">terminal</span><span class="w"> </span><span class="n">png</span>
+<span class="k">set</span><span class="w"> </span><span class="nb">output</span><span class="w"> </span><span class="s">&quot;math_plot.png&quot;</span>
+<span class="k">set</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;Quadratic Function&quot;</span>
+<span class="k">set</span><span class="w"> </span><span class="nb">xlabel</span><span class="w"> </span><span class="s">&quot;x&quot;</span>
+<span class="k">set</span><span class="w"> </span><span class="nb">ylabel</span><span class="w"> </span><span class="s">&quot;y&quot;</span>
+<span class="k">plot</span><span class="w"> </span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="nb">with</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;y = x^2&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Execute the script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gnuplot<span class="w"> </span>plot_script.gp
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="d-plot-example">
+<h2>3D Plot Example<a class="headerlink" href="#d-plot-example" title="Link to this heading"></a></h2>
+<p>Generate a 3D surface plot:</p>
+<div class="highlight-gnuplot notranslate"><div class="highlight"><pre><span></span><span class="k">set</span><span class="w"> </span><span class="nb">terminal</span><span class="w"> </span><span class="n">png</span>
+<span class="k">set</span><span class="w"> </span><span class="nb">output</span><span class="w"> </span><span class="s">&quot;3d_plot.png&quot;</span>
+<span class="k">splot</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="nf">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="nb">with</span><span class="w"> </span><span class="n">pm3d</span><span class="w"> </span><span class="nb">title</span><span class="w"> </span><span class="s">&quot;sin(x)*cos(y)&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="viewing-the-plot">
+<h2>Viewing the Plot<a class="headerlink" href="#viewing-the-plot" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>GUI Environment</strong>: GNUPlot will display the plot in a new window.</p></li>
+<li><p><strong>Terminal/SSH</strong>: Save the plot as an image (PNG/PDF) and transfer it for viewing.</p></li>
+</ul>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">x**2</span></code> with any mathematical function (e.g., <code class="docutils literal notranslate"><span class="pre">exp(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">log(x)</span></code>).</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">xrange</span> <span class="pre">[min:max]</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">yrange</span> <span class="pre">[min:max]</span></code> to adjust axes.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gnuPlot-usage.html" class="btn btn-neutral float-left" title="Introduction to GNUPlot for Mathematical Visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="newOrigin2.html" class="btn btn-neutral float-right" title="Función seno y coseno" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

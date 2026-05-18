@@ -1,0 +1,226 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Check Headers &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Debuggin Kernel Headers" href="debugHeaders.html" />
+    <link rel="prev" title="Building the Documentation" href="documents-build.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Testing Environment Setup</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Testing/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Config/queringXML.html">Querying XML File Configuration with libvirt Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/envsWithGrub.html">Understanding <code class="docutils literal notranslate"><span class="pre">grub2-editenv</span> <span class="pre">list</span></code> Output: Saved Entry Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oldKernels.html">Working with Older Kernel Versions on CentOS 7: Challenges and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="weakness_config.html">LTP build log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Check Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configLog_analysis.html">LTP Configuration Debugging Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="headerResolution.html">How to Fix Missing <cite>linux/module.h</cite> in LTP Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="relevantLinuxSource.html">Understanding /usr/src/linux Symlink Importance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sadButTrue.html">The /usr/src/linux Reality Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../99_General/miscellaneous/diagnosticMissingHeaders.html">Debugging Missing Kernel Headers in LTP Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoConfHd.html">Using text Macros to Check for Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gccSearchPath.html">Check GCC Search Path for Kernel Headers in GNU/Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Autotools_overview.html">Overview of Autotools Primary Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Testing Environment Setup</a></li>
+      <li class="breadcrumb-item active">Check Headers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/04_System_Administration/test_environment_setup/ltp_setup/checkHeaders.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="check-headers">
+<h1>Check Headers<a class="headerlink" href="#check-headers" title="Link to this heading"></a></h1>
+<ol class="arabic">
+<li><p><strong>Can</strong> <code class="docutils literal notranslate"><span class="pre">AC_CHECK_HEADERS</span></code> <strong>be defined more than once in</strong> <code class="docutils literal notranslate"><span class="pre">configure.ac</span></code> <strong>?</strong>
+Yes, <code class="docutils literal notranslate"><span class="pre">AC_CHECK_HEADERS</span></code> can be used multiple times in <code class="docutils literal notranslate"><span class="pre">configure.ac</span></code>. Each call to <code class="docutils literal notranslate"><span class="pre">AC_CHECK_HEADERS</span></code> checks for the presence of the specified headers and defines preprocessor macros (e.g., <code class="docutils literal notranslate"><span class="pre">HAVE_HEADER_H</span></code>) if the headers are found. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>AC_CHECK_HEADERS([dmapi.h ifaddrs.h libaio.h])
+AC_CHECK_HEADERS([mm.h linux/module.h])
+</pre></div>
+</div>
+<p>This is perfectly valid and allows you to organize the checks logically or add new checks without modifying existing ones.</p>
+</li>
+<li><p><strong>Explanation of</strong> <code class="docutils literal notranslate"><span class="pre">--with-kernel</span></code> <strong>or similar options</strong>;</p>
+<p>In the <em>confFlags.log</em> file you provided, there are two relevant options for specifying kernel-related paths:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--with-linux-version=VERSION</span></code>: This option allows you to specify the Linux kernel version for which the LTP (Linux Test Project) should be configured. This is useful if you are building kernel modules or tests that depend on a specific kernel version.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--with-linux-dir=DIR</span></code> : This option allows you to specify the path to the kernel development directory (e.g., <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver</span></code>). This directory typically contains the kernel headers and source files needed for building kernel modules or tests.</p></li>
+</ul>
+<p>For example, if your kernel headers are located in <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver</span></code>, you can run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--with-linux-dir<span class="o">=</span>/usr/src/k-ver
+</pre></div>
+</div>
+<p>This tells the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script to look for kernel headers in <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code> instead of the default locations like <code class="docutils literal notranslate"><span class="pre">/usr/include</span></code>.</p>
+</li>
+<li><p><strong>Explanation of</strong> <code class="docutils literal notranslate"><span class="pre">AC_MSG_CHECKING</span></code> <strong>and</strong> <code class="docutils literal notranslate"><span class="pre">AC_MSG_RESULT</span></code>;
+These are Autoconf macros used to provide user-friendly output during the configuration process.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_MSG_CHECKING([for</span> <span class="pre">header</span> <span class="pre">search</span> <span class="pre">paths])</span></code>:
+This macro prints a message to the user indicating what the script is currently checking. In this case, it will print:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>checking for header search paths...
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_MSG_RESULT([$CPPFLAGS])</span></code>:
+This macro prints the result of the check. It takes a single argument, which is typically a variable or value. In this case, it will print the value of <code class="docutils literal notranslate"><span class="pre">$CPPFLAGS</span></code>, which contains the preprocessor flags (e.g., <code class="docutils literal notranslate"><span class="pre">-I</span></code> include paths). For example, if <em>CPPFLAGS</em> is set to <code class="docutils literal notranslate"><span class="pre">-I/usr/src/k-ver/include</span></code>, the output will look like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>checking for header search paths... -I/usr/src/k-ver/include
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Together, these macros provide feedback to the user about the search paths being used for header files. This is useful for debugging or verifying that the correct paths are being used.</p>
+</li>
+<li><p><strong>How to use</strong> <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> <strong>to specify custom include paths</strong>,
+If you want to ensure that the <em>configure</em> script searches for headers in <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code>, you can set the <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> environment variable before running <code class="docutils literal notranslate"><span class="pre">configure</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CPPFLAGS</span><span class="o">=</span><span class="s2">&quot;-I/usr/src/k-ver/include&quot;</span>
+./configure
+</pre></div>
+</div>
+<p>This adds <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code> to the list of directories where the preprocessor will look for header files.</p>
+</li>
+<li><p><strong>Modifying</strong> <code class="docutils literal notranslate"><span class="pre">configure.ac</span></code> <strong>to handle custom paths,</strong>
+If you want to modify <code class="docutils literal notranslate"><span class="pre">configure.ac</span></code> to handle custom paths or provide better feedback, you can add the following:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Check for custom header paths
+AC_MSG_CHECKING([for header search paths])
+AC_MSG_RESULT([$CPPFLAGS])
+
+# Check for specific headers
+AC_CHECK_HEADERS([dmapi.h mm.h linux/module.h sys/jfsdmapi.h], [], [
+  AC_MSG_WARN([Required headers not found. Ensure kernel headers are installed.])
+])
+
+  This will:
+          - Print the header search paths being used.
+          - Check for the required headers.
+          - Print a warning if any headers are missing.
+</pre></div>
+</div>
+</li>
+</ol>
+<p><strong>Summary</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_CHECK_HEADERS</span></code> can be used multiple times in <code class="docutils literal notranslate"><span class="pre">configure.ac</span></code>.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">--with-linux-dir</span></code> to specify the kernel headers directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_MSG_CHECKING</span></code> and <code class="docutils literal notranslate"><span class="pre">AC_MSG_RESULT</span></code> provide user-friendly output during configuration.</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> to add custom include paths for header searches.</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="documents-build.html" class="btn btn-neutral float-left" title="Building the Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="debugHeaders.html" class="btn btn-neutral float-right" title="Debuggin Kernel Headers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

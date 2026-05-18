@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saneamiento de Permisos en Documents &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Informe de Configuración: Directorios Compartidos de Usuario" href="ACLsMultimediaDescargas.html" />
+    <link rel="prev" title="Saneamiento de Directorios de Perfil" href="ACLsText.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/index.html">Infraestructura virtual</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Configuración de Control de Acceso</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ACLsText.html">Saneamiento de Directorios de Perfil</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Saneamiento de Permisos en Documents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#objetivos-de-la-intervencion">Objetivos de la Intervención</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodologia-aplicada">Metodología Aplicada</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resultados-y-verificacion">Resultados y Verificación</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementacion-tecnica">Implementación Técnica</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ACLsMultimediaDescargas.html">Informe de Configuración: Directorios Compartidos de Usuario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ACLsMultimediaDescargas.html#informe-de-configuracion-politica-unificada-de-no-ejecucion">Informe de Configuración: Política Unificada de No-Ejecución</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ACLsVirtMetadatos.html">Informe de Configuración: ACLs para Nodo Virt-metadatos</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Incidencias/index.html">Registro de Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Configuración de Control de Acceso</a></li>
+      <li class="breadcrumb-item active">Saneamiento de Permisos en Documents</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/04_System_Administration/system_configuration/ACL_configuration/ACLsDocuments.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="saneamiento-de-permisos-en-documents">
+<h1>Saneamiento de Permisos en Documents<a class="headerlink" href="#saneamiento-de-permisos-en-documents" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-03-20</p>
+</dd>
+<dt class="field-even">Responsable<span class="colon">:</span></dt>
+<dd class="field-even"><p>Administrador de Sistemas (Gemini AI Collaboration)</p>
+</dd>
+<dt class="field-odd">Estado<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Finalizado</p>
+</dd>
+<dt class="field-even">Ámbito<span class="colon">:</span></dt>
+<dd class="field-even"><p>Directorio de Usuario / home_config</p>
+</dd>
+</dl>
+<section id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>Este informe documenta las acciones realizadas para normalizar los permisos de acceso en el directorio <code class="docutils literal notranslate"><span class="pre">Documents</span></code> del usuario <code class="docutils literal notranslate"><span class="pre">raul-ipa</span></code>. El objetivo principal ha sido la eliminación de bits de ejecución en archivos de datos, garantizando la seguridad y la correcta visualización de atributos en el sistema de archivos.</p>
+</section>
+<section id="objetivos-de-la-intervencion">
+<h2>Objetivos de la Intervención<a class="headerlink" href="#objetivos-de-la-intervencion" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Eliminar la Ejecución Residual:</strong> Asegurar que ningún archivo (<code class="docutils literal notranslate"><span class="pre">.rst</span></code>, <code class="docutils literal notranslate"><span class="pre">.xml</span></code>, <code class="docutils literal notranslate"><span class="pre">.txt</span></code>, etc.) dentro de <code class="docutils literal notranslate"><span class="pre">Documents</span></code> posea permisos de ejecución (<code class="docutils literal notranslate"><span class="pre">x</span></code>).</p></li>
+<li><p><strong>Protección de Zonas Excluidas:</strong> Garantizar que la configuración previa aplicada en el subdirectorio <code class="docutils literal notranslate"><span class="pre">Virt-metadatos</span></code> (área de trabajo de <code class="docutils literal notranslate"><span class="pre">virt-admin</span></code>) permanezca intacta y no se vea afectada por la limpieza masiva.</p></li>
+<li><p><strong>Mantenimiento de la Navegabilidad:</strong> Conservar el bit de ejecución estrictamente en los directorios para permitir el acceso y listado de subcarpetas.</p></li>
+<li><p><strong>Control de Herencia:</strong> Configurar entradas de ACL por defecto para prevenir que nuevos archivos creados en el futuro adquieran permisos de ejecución de forma automática.</p></li>
+</ol>
+</section>
+<section id="metodologia-aplicada">
+<h2>Metodología Aplicada<a class="headerlink" href="#metodologia-aplicada" title="Link to this heading"></a></h2>
+<section id="aislamiento-de-la-zona-protegida">
+<h3>Aislamiento de la Zona Protegida<a class="headerlink" href="#aislamiento-de-la-zona-protegida" title="Link to this heading"></a></h3>
+<p>Se ha utilizado una técnica de “poda” (pruning) durante el escaneo del sistema de archivos. Esta técnica permite al motor de búsqueda identificar la ruta <code class="docutils literal notranslate"><span class="pre">Virt-metadatos</span></code> y omitir cualquier modificación sobre ella, protegiendo así las ACLs específicas configuradas para el flujo de trabajo de virtualización.</p>
+</section>
+<section id="saneamiento-de-archivos-existentes">
+<h3>Saneamiento de Archivos Existentes<a class="headerlink" href="#saneamiento-de-archivos-existentes" title="Link to this heading"></a></h3>
+<p>Se ha aplicado una reconfiguración de ACLs sobre todos los objetos de tipo “archivo” encontrados en la jerarquía de <code class="docutils literal notranslate"><span class="pre">Documents</span></code>. Esta acción ha normalizado la máscara (<code class="docutils literal notranslate"><span class="pre">mask</span></code>) de los archivos, eliminando la confusión visual en la salida de comandos como <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span></code> y restringiendo los permisos efectivos a lectura y escritura (<code class="docutils literal notranslate"><span class="pre">rw-</span></code>).</p>
+</section>
+<section id="ajuste-de-acls-por-defecto">
+<h3>Ajuste de ACLs por Defecto<a class="headerlink" href="#ajuste-de-acls-por-defecto" title="Link to this heading"></a></h3>
+<p>Se ha modificado la estructura de herencia del directorio raíz <code class="docutils literal notranslate"><span class="pre">Documents</span></code>. La nueva configuración asegura que:
+* Los <strong>directorios</strong> nuevos hereden permisos de acceso total.
+* Los <strong>archivos</strong> nuevos se creen sin el bit de ejecución activo para el usuario, el grupo y otros.</p>
+</section>
+</section>
+<section id="resultados-y-verificacion">
+<h2>Resultados y Verificación<a class="headerlink" href="#resultados-y-verificacion" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Integridad:</strong> Se ha verificado que los archivos en <code class="docutils literal notranslate"><span class="pre">Documents</span></code> ya no muestran el bit de ejecución.</p></li>
+<li><p><strong>Persistencia:</strong> La zona de trabajo <code class="docutils literal notranslate"><span class="pre">Virt-metadatos</span></code> mantiene su configuración de acceso compartido para <code class="docutils literal notranslate"><span class="pre">virt-admin</span></code> sin alteraciones.</p></li>
+<li><p><strong>Accesibilidad:</strong> Los usuarios <code class="docutils literal notranslate"><span class="pre">raul-ipa</span></code> y <code class="docutils literal notranslate"><span class="pre">raul</span></code> conservan sus facultades de edición y navegación en todo el árbol de directorios.</p></li>
+</ul>
+</section>
+<section id="implementacion-tecnica">
+<h2>Implementación Técnica<a class="headerlink" href="#implementacion-tecnica" title="Link to this heading"></a></h2>
+<p>La lógica exacta de exclusión y los parámetros de máscara aplicados para este saneamiento se encuentran detallados y automatizados en el script de soporte:</p>
+<p><strong>Archivo de referencia:</strong> <code class="docutils literal notranslate"><span class="pre">ACLsDocuments.sh</span></code></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Cualquier despliegue de nuevos scripts ejecutables dentro de <code class="docutils literal notranslate"><span class="pre">Documents</span></code> (fuera de la zona protegida) requerirá una asignación manual de permisos de ejecución, dado que la política actual los restringe por defecto para mejorar la seguridad del entorno.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ACLsText.html" class="btn btn-neutral float-left" title="Saneamiento de Directorios de Perfil" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ACLsMultimediaDescargas.html" class="btn btn-neutral float-right" title="Informe de Configuración: Directorios Compartidos de Usuario" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

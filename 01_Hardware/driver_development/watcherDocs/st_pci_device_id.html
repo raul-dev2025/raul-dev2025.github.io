@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>struct pci_device_id &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="device_watcher_init()" href="init.html" />
+    <link rel="prev" title="Planning a Mechanism to Fetch and Translate PCI Device Data" href="driverPlaning.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="driverPlaning.html">Planning a Mechanism to Fetch and Translate PCI Device Data</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">struct pci_device_id</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#key-points">Key Points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="init.html">device_watcher_init()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html">Plan-Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview-2.html">Plan-overview 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="planingStructures.html">Planing Structures - JSON to C Struct Translation Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kernelStructures.html">Linux Kernel-Style JSON Struct Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/mmioVsIOports.html">Briefing: Memory-Mapped I/O vs. I/O Ports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/pcie-symobls.html">PCIe Symobls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/deadline-iosched.html">Deadline IO scheduler tunables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/quick-ref-pci.html">PCI Functions Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanSlab.html">Why <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> Over <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> in the Linux Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/funcion_p_v.html">Funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Driver Development</a></li>
+      <li class="breadcrumb-item active">struct pci_device_id</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/01_Hardware/driver_development/watcherDocs/st_pci_device_id.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="struct-pci-device-id">
+<h1>struct pci_device_id<a class="headerlink" href="#struct-pci-device-id" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pci_device_id</span></code> is a fundamental structure in Linux kernel programming, particularly for PCI device drivers. Its primary purpose is to hold PCI device identifiers, which are used to match the driver with specific PCI devices. This structure is essential for the kernel to determine which devices a particular driver can handle.</p>
+<section id="key-points">
+<h2>Key Points<a class="headerlink" href="#key-points" title="Link to this heading"></a></h2>
+<ul>
+<li><p><strong>Purpose</strong>:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pci_device_id</span></code> is used to define a table of PCI device IDs that the driver supports. This table is used by the kernel to match the driver with the appropriate PCI devices.</p>
+</li>
+<li><p><strong>Fields</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">vendor</span></code>: The vendor ID of the PCI device.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device</span></code>: The device ID of the PCI device.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subvendor</span></code>, <code class="docutils literal notranslate"><span class="pre">subdevice</span></code>: Subsystem vendor and device IDs (optional).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span></code>, <code class="docutils literal notranslate"><span class="pre">class_mask</span></code>: Class code and mask for class-based matching (optional).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">driver_data</span></code>: Private data for the driver (optional).</p></li>
+</ul>
+</li>
+<li><p><strong>Usage</strong>:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pci_device_id</span></code> structure is typically used in conjunction with the <code class="docutils literal notranslate"><span class="pre">MODULE_DEVICE_TABLE</span></code> macro, which exports the device ID table to user space, allowing tools like <code class="docutils literal notranslate"><span class="pre">modprobe</span></code> to load the appropriate driver for a given device.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">id_table</span></code> field in the <code class="docutils literal notranslate"><span class="pre">pci_driver</span></code> structure points to this table, enabling the kernel to match the driver with the correct devices.</p></li>
+</ul>
+</li>
+<li><p><strong>Example</strong>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">pci_device_id</span><span class="w"> </span><span class="n">pci_watcher_ids</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">PCI_DEVICE</span><span class="p">(</span><span class="n">VENDOR_ID</span><span class="p">,</span><span class="w"> </span><span class="n">DEVICE_ID</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>In this example, <code class="docutils literal notranslate"><span class="pre">pci_watcher_ids</span></code> is an array of <code class="docutils literal notranslate"><span class="pre">pci_device_id</span></code> structures. The <code class="docutils literal notranslate"><span class="pre">PCI_DEVICE</span></code> macro is used to define a specific vendor and device ID pair. The array is terminated with an all-zero entry, which is a common practice to mark the end of the table.</p></li>
+</ul>
+</li>
+<li><p><strong>Macros</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PCI_DEVICE(vendor,</span> <span class="pre">device)</span></code>: A macro that simplifies the creation of a <code class="docutils literal notranslate"><span class="pre">pci_device_id</span></code> entry by specifying the vendor and device IDs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MODULE_DEVICE_TABLE(pci,</span> <span class="pre">pci_watcher_ids)</span></code>: This macro exports the device ID table to user space, allowing the kernel to associate the driver with the specified PCI devices.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pci_device_id</span></code> is a crucial part of PCI device driver development. It allows the driver to declare which PCI devices it supports, enabling the kernel to match the driver with the appropriate hardware. The <code class="docutils literal notranslate"><span class="pre">pci_watcher_ids</span></code> array in the provided code is an example of how this structure is used to define a list of supported devices.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="driverPlaning.html" class="btn btn-neutral float-left" title="Planning a Mechanism to Fetch and Translate PCI Device Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="init.html" class="btn btn-neutral float-right" title="device_watcher_init()" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

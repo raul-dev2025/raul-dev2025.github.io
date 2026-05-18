@@ -1,0 +1,230 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Preserve /home and VDO During OS Reinstallation &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Preserving /home/userData and /usr/src/vdo During System Reinstallation" href="preserveUserData.html" />
+    <link rel="prev" title="ifSysCollector.py - PCI Device Data Fetcher" href="doc-ifSysCollector.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">System Configuration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dummy-build.html">Safe Dry-Run for Sphinx Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="save_rmdir.html">Involuntary Directory Removal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensitiveFiles.html">Handling <code class="docutils literal notranslate"><span class="pre">remove</span></code> and <code class="docutils literal notranslate"><span class="pre">rescan</span></code> Files in Linux PCI Device Directories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doc-ifSysCollector.html">ifSysCollector.py - PCI Device Data Fetcher</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Preserve <cite>/home</cite> and VDO During OS Reinstallation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#objective">Objective</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps">Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#important-notes">Important Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="preserveUserData.html">Preserving <code class="docutils literal notranslate"><span class="pre">/home/userData</span></code> and <code class="docutils literal notranslate"><span class="pre">/usr/src/vdo</span></code> During System Reinstallation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kernel_conf/environ-kconf.html">Kernel Configuration for KUnit Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">System Configuration</a></li>
+      <li class="breadcrumb-item active">How to Preserve <cite>/home</cite> and VDO During OS Reinstallation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/04_System_Administration/system_configuration/sys_files/advancedOSinstallation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-preserve-home-and-vdo-during-os-reinstallation">
+<h1>How to Preserve <cite>/home</cite> and VDO During OS Reinstallation<a class="headerlink" href="#how-to-preserve-home-and-vdo-during-os-reinstallation" title="Link to this heading"></a></h1>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Link to this heading"></a></h2>
+<p>Perform a fresh OS installation using Anaconda while preserving:</p>
+<ol class="arabic simple">
+<li><p>The existing <code class="docutils literal notranslate"><span class="pre">os-home</span></code> LVM partition (mounted at <code class="docutils literal notranslate"><span class="pre">/home</span></code>).</p></li>
+<li><p>The VDO volume on the <code class="docutils literal notranslate"><span class="pre">nvme</span></code> disk (mounted at <code class="docutils literal notranslate"><span class="pre">/path/to/vdo</span></code>).</p></li>
+<li><p>All other partitions (<code class="docutils literal notranslate"><span class="pre">/boot/efi</span></code>, <code class="docutils literal notranslate"><span class="pre">/boot</span></code>, <code class="docutils literal notranslate"><span class="pre">os-root</span></code>, <code class="docutils literal notranslate"><span class="pre">os-swap</span></code>) may be overwritten.</p></li>
+</ol>
+</section>
+<section id="steps">
+<h2>Steps<a class="headerlink" href="#steps" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Boot into Anaconda Installer</strong></p>
+<ul class="simple">
+<li><p>Boot from installation media (USB/DVD).</p></li>
+<li><p>Start the Anaconda installer.</p></li>
+</ul>
+</li>
+<li><p><strong>Select Manual Partitioning</strong></p>
+<ul class="simple">
+<li><p>Choose <strong>Manual</strong> or <strong>Custom</strong> partitioning mode.</p></li>
+</ul>
+</li>
+<li><p><strong>Configure Partitions</strong></p>
+<ul class="simple">
+<li><p><strong>EFI System Partition</strong> (<code class="docutils literal notranslate"><span class="pre">sdx1</span></code>):</p>
+<ul>
+<li><p>Reformat as <code class="docutils literal notranslate"><span class="pre">fat32</span></code>.</p></li>
+<li><p>Set mount point to <code class="docutils literal notranslate"><span class="pre">/boot/efi</span></code>.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/boot</span></code> <strong>Partition</strong> (<code class="docutils literal notranslate"><span class="pre">sdx2</span></code>):</p>
+<ul>
+<li><p>Reformat as <code class="docutils literal notranslate"><span class="pre">ext4</span></code> or <code class="docutils literal notranslate"><span class="pre">xfs</span></code>.</p></li>
+<li><p>Set mount point to <code class="docutils literal notranslate"><span class="pre">/boot</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>LVM Volume Group</strong> (<code class="docutils literal notranslate"><span class="pre">sdx3</span></code>):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">os-root</span></code>: Reformat (<code class="docutils literal notranslate"><span class="pre">ext4</span></code>/<code class="docutils literal notranslate"><span class="pre">xfs</span></code>) and assign to <code class="docutils literal notranslate"><span class="pre">/</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">os-swap</span></code>: Set as <code class="docutils literal notranslate"><span class="pre">swap</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">os-home</span></code>: <strong>Do not reformat</strong>. Assign to <code class="docutils literal notranslate"><span class="pre">/home</span></code> and check “Preserve data”.</p></li>
+</ul>
+</li>
+<li><p><strong>VDO Volume</strong> (<code class="docutils literal notranslate"><span class="pre">nvme</span></code>):</p>
+<ul>
+<li><p>If detected: Assign to <code class="docutils literal notranslate"><span class="pre">/path/to/vdo</span></code> <strong>without reformatting</strong>.</p></li>
+<li><p>If not detected: Ignore (will configure post-install).</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Complete Installation</strong></p>
+<ul class="simple">
+<li><p>Verify partition changes before proceeding.</p></li>
+<li><p>Confirm that only <code class="docutils literal notranslate"><span class="pre">os-home</span></code> and VDO are preserved.</p></li>
+</ul>
+</li>
+<li><p><strong>Post-Installation Steps</strong></p>
+<ul>
+<li><p>If VDO was not configured during install:</p>
+<ul>
+<li><p>Manually mount the VDO volume:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vdo<span class="w"> </span>start<span class="w"> </span>--name<span class="o">=</span>vdo-name
+sudo<span class="w"> </span>mount<span class="w"> </span>/dev/mapper/vdo-name<span class="w"> </span>/path/to/vdo
+</pre></div>
+</div>
+</li>
+<li><p>Add to <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/dev/mapper/vdo-name /path/to/vdo xfs defaults,_netdev 0 0
+</pre></div>
+</div>
+</li>
+<li><p>Enable the VDO service:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>vdo
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="important-notes">
+<h2>Important Notes<a class="headerlink" href="#important-notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Backup data</strong> before proceeding, even when preserving <code class="docutils literal notranslate"><span class="pre">/home</span></code>.</p></li>
+<li><p>Anaconda may not fully support VDO configuration. Manual setup might be required.</p></li>
+<li><p>Ensure LVM volume group names (e.g., <code class="docutils literal notranslate"><span class="pre">os</span></code>) do not conflict with the new OS.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="doc-ifSysCollector.html" class="btn btn-neutral float-left" title="ifSysCollector.py - PCI Device Data Fetcher" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="preserveUserData.html" class="btn btn-neutral float-right" title="Preserving /home/userData and /usr/src/vdo During System Reinstallation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

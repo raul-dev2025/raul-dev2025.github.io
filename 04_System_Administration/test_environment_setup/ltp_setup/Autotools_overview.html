@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview of Autotools Primary Concepts &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Confirming Bootloader and Kernel Loading with UUID" href="../Debugging/bootloaderChecks.html" />
+    <link rel="prev" title="Check GCC Search Path for Kernel Headers in GNU/Linux" href="gccSearchPath.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Testing Environment Setup</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Testing/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Config/queringXML.html">Querying XML File Configuration with libvirt Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/envsWithGrub.html">Understanding <code class="docutils literal notranslate"><span class="pre">grub2-editenv</span> <span class="pre">list</span></code> Output: Saved Entry Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oldKernels.html">Working with Older Kernel Versions on CentOS 7: Challenges and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="weakness_config.html">LTP build log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configLog_analysis.html">LTP Configuration Debugging Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="headerResolution.html">How to Fix Missing <cite>linux/module.h</cite> in LTP Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="relevantLinuxSource.html">Understanding /usr/src/linux Symlink Importance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sadButTrue.html">The /usr/src/linux Reality Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../99_General/miscellaneous/diagnosticMissingHeaders.html">Debugging Missing Kernel Headers in LTP Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoConfHd.html">Using text Macros to Check for Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gccSearchPath.html">Check GCC Search Path for Kernel Headers in GNU/Linux</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Overview of Autotools Primary Concepts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#primary-components">Primary Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#workflow">Workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#frequently-used-variables">Frequently Used Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Testing Environment Setup</a></li>
+      <li class="breadcrumb-item active">Overview of Autotools Primary Concepts</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/04_System_Administration/test_environment_setup/ltp_setup/Autotools_overview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="overview-of-autotools-primary-concepts">
+<h1>Overview of Autotools Primary Concepts<a class="headerlink" href="#overview-of-autotools-primary-concepts" title="Link to this heading"></a></h1>
+<p>Autotools is a suite of programming tools (autoconf, automake, libtool) designed to make source code packages portable across Unix-like systems. Here are its core concepts:</p>
+<section id="primary-components">
+<h2>Primary Components<a class="headerlink" href="#primary-components" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Autoconf</strong> - Generates <code class="docutils literal notranslate"><span class="pre">configure</span></code> scripts that check system features</p></li>
+<li><p><strong>Automake</strong> - Creates portable <code class="docutils literal notranslate"><span class="pre">Makefile.in</span></code> templates from <code class="docutils literal notranslate"><span class="pre">Makefile.am</span></code> files</p></li>
+<li><p><strong>Libtool</strong> - Manages the creation of static and shared libraries portably</p></li>
+</ol>
+</section>
+<section id="workflow">
+<h2>Workflow<a class="headerlink" href="#workflow" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Developer writes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">configure.ac</span></code> (input for autoconf)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Makefile.am</span></code> (input for automake)</p></li>
+</ul>
+</li>
+<li><p>Running <code class="docutils literal notranslate"><span class="pre">autoreconf</span></code> generates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">configure</span></code> script</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Makefile.in</span></code> templates</p></li>
+</ul>
+</li>
+<li><p>End user runs:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">./configure</span></code> → generates <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>s</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span></code> → builds the software</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> → installs the software</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="frequently-used-variables">
+<h2>Frequently Used Variables<a class="headerlink" href="#frequently-used-variables" title="Link to this heading"></a></h2>
+<section id="project-information-variables-set-in-configure-ac">
+<h3>Project Information Variables (set in configure.ac)<a class="headerlink" href="#project-information-variables-set-in-configure-ac" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_INIT([package],</span> <span class="pre">[version],</span> <span class="pre">[bug-report])</span></code> - Initializes package info</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_CONFIG_SRCDIR([file])</span></code> - Identifies project location</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_CONFIG_HEADERS([config.h])</span></code> - Sets up config header</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_CONFIG_FILES([Makefile</span> <span class="pre">dir/Makefile])</span></code> - Specifies output files</p></li>
+</ul>
+</section>
+<section id="build-control-variables-often-set-before-running-configure">
+<h3>Build Control Variables (often set before running configure)<a class="headerlink" href="#build-control-variables-often-set-before-running-configure" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CC</span></code> - C compiler to use (e.g., <code class="docutils literal notranslate"><span class="pre">CC=gcc</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CFLAGS</span></code> - C compiler flags</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CXX</span></code> - C++ compiler</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CXXFLAGS</span></code> - C++ compiler flags</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LDFLAGS</span></code> - Linker flags</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LIBS</span></code> - Libraries to link against</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> - C preprocessor flags (-I, -D options)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prefix</span></code> - Installation prefix (/usr/local by default)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exec_prefix</span></code> - Architecture-dependent files prefix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bindir</span></code> - User executables directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">libdir</span></code> - Library files directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">includedir</span></code> - Header files directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">datarootdir</span></code> - Read-only architecture-independent data root</p></li>
+</ul>
+</section>
+<section id="automake-variables-set-in-makefile-am">
+<h3>Automake Variables (set in Makefile.am)<a class="headerlink" href="#automake-variables-set-in-makefile-am" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">bin_PROGRAMS</span></code> - Programs to install in bindir</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lib_LIBRARIES</span></code> - Libraries to install in libdir</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">include_HEADERS</span></code> - Headers to install in includedir</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SOURCES</span></code> - Source files for a target</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CFLAGS</span></code>, <code class="docutils literal notranslate"><span class="pre">CXXFLAGS</span></code> - Package-specific flags</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LDADD</span></code> - Additional linker flags for a target</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SUBDIRS</span></code> - Subdirectories to process recursively</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EXTRA_DIST</span></code> - Additional files to include in distribution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BUILT_SOURCES</span></code> - Generated sources needed before compilation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TESTS</span></code> - Test programs to run with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code></p></li>
+</ul>
+</section>
+<section id="commonly-used-macros">
+<h3>Commonly Used Macros<a class="headerlink" href="#commonly-used-macros" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_PROG_CC</span></code> - Check for C compiler</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_PROG_CXX</span></code> - Check for C++ compiler</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_CHECK_LIB</span></code> - Check for library presence</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_CHECK_HEADER</span></code> - Check for header presence</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_PATH_PROG</span></code> - Check for program in PATH</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AC_MSG_CHECKING</span></code>/<code class="docutils literal notranslate"><span class="pre">AC_MSG_RESULT</span></code> - User feedback during configure</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AM_INIT_AUTOMAKE</span></code> - Initialize automake</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PKG_CHECK_MODULES</span></code> - Check for pkg-config modules</p></li>
+</ul>
+<p>Autotools provides a robust, portable build system that handles platform differences automatically, though it has a steep learning curve. The variables listed above are the most commonly used to control the build process.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gccSearchPath.html" class="btn btn-neutral float-left" title="Check GCC Search Path for Kernel Headers in GNU/Linux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Debugging/bootloaderChecks.html" class="btn btn-neutral float-right" title="Confirming Bootloader and Kernel Loading with UUID" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

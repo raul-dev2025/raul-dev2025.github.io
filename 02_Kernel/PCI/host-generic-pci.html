@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controlador de host PCI, genérico &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Repaso de fdisk" href="../../04_System_Administration/system_apps/fdisk.html" />
+    <link rel="prev" title="Soporte al espacio temprano de usuario" href="../EarlyUserSpace/README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Admin-guide/1-boot.html">Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../arch/powerpc/booting-without-of.html">El arranque del núcleo deLinux/ppc sin Open Firmware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../arm/Booting.html">Arrancando un ARM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DeviceTree/0-of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DeviceTree/changesets.html">conjunto de cambios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../EarlyUserSpace/README.html">Soporte al <em>espacio temprano de usuario</em></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Controlador de <em>host</em> PCI, genérico</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../04_System_Administration/system_apps/fdisk.html">Repaso de fdisk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+      <li class="breadcrumb-item active">Controlador de <em>host</em> PCI, genérico</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/PCI/host-generic-pci.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <nav class="contents" id="tabla-de-contenidos" role="doc-toc">
+<p class="topic-title">Tabla de contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#controlador-de-host-pci-generico" id="id1">Controlador de <em>host</em> PCI, genérico</a></p>
+<ul>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id2">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="controlador-de-host-pci-generico">
+<span id="host-generic-pci-1"></span><h1><a class="toc-backref" href="#id1" role="doc-backlink">Controlador de <em>host</em> PCI, genérico</a><a class="headerlink" href="#controlador-de-host-pci-generico" title="Link to this heading"></a></h1>
+<p>Los controladores de host PCI, inicializdos por el <em>firmaware</em>, como la implementación <em>virtio-pci</em>, encontrada en <code class="docutils literal notranslate"><span class="pre">kvmtool</span></code> y otros sistemas paravirtualizados, no requieren soporte complejo, al controlador; como la gestión del <em>regulador(vrm?)</em> o al reloj. De hecho, el controlador podría no requerir la configuración de una interfase de control, por el sistema operativo. En su lugar, es presentada un conjunto de ventanas fijas, describiendo un subconjunto de IO, <em>memoria</em> y, <em>expacios de configuración</em>.</p>
+<p>Este tipo de controladores pueden ser descritos, estrictamente, en términos de las vinculaciones al <em>Árbol de dispositivo</em> estandarizado; comunicadas en <code class="docutils literal notranslate"><span class="pre">pci.txt</span></code></p>
+<p>Propiedades de nodo, del <em>controlador pci host</em>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">compatible</span></code>: Debe ser <code class="docutils literal notranslate"><span class="pre">pci-host-cam-generic</span></code> o <code class="docutils literal notranslate"><span class="pre">pci-host-ecam-generic</span></code>, dependiendo de la <em>capa</em> para el espacio de configuración (CAM vs ECAM, respectívamente).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device_type</span></code>: Debe ser <code class="docutils literal notranslate"><span class="pre">pci</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ranges</span></code>: Descrito en <em>IEEE Std 1275-1994</em>, pero deberá proporcionar, como mínimo, una definición de <em>memoria no predecible</em>. Uno o ambos espacios de memoria e IO, podrían ser proporcionados.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bus-range</span></code>: Propiedad opcional -también descrita en <em>IEEE Std 1275-1994</em>, para indicar un rango de números de bus, para este controlador. De estar ausente, por defecto es <code class="docutils literal notranslate"><span class="pre">&lt;0</span> <span class="pre">255&gt;</span></code> -todos los buses.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#address-cells</span></code>: Debe ser 3.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#size-cells</span></code>: Debe ser 2.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reg</span></code>: La configuración del espacio base, de dirección y tamaño, tal y como es accedido desde el bus ascendente. La <em>dirección base</em>, corresponde al primer bus, en la propiedad <code class="docutils literal notranslate"><span class="pre">bus-range</span></code>. Si no es especificada <code class="docutils literal notranslate"><span class="pre">bus-range</span></code>, será el bus 0 -por defecto.</p></li>
+</ul>
+<p>Propiedades del nodo <code class="docutils literal notranslate"><span class="pre">/chosen</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">linux,pci-probe-only</span></code>: Propiedad opcional, la cuál toma un sólo argumento de celda. Si <code class="docutils literal notranslate"><span class="pre">0</span></code>, entonces <em>Linux</em> asignará dispositivos de manera habitual. de cualquier otra forma, no intentará asignar dispositivos y en su lugar, los utilizará tal y como están ya configurados.</p>
+<p>Es asumido el espacio de configuración, para ser mapeados en la memoria -en oposición, a ser accedidos vía un <em>ioport</em>. Permanecen  con una correspondencia directam a la geografía, de una dirección bus PCI, por medio de la concatenación de varios componentes y, formar así un <code class="docutils literal notranslate"><span class="pre">offset</span></code>.</p>
+<p>Para CAM, este <code class="docutils literal notranslate"><span class="pre">offset</span></code> de 24’bits es:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cfg_offset(bus, device, function, register) =
+      bus &lt;&lt; 16 | device &lt;&lt; 11 | function &lt;&lt; 8 | register
+</pre></div>
+</div>
+<p>Mientras que ECAM, extiende esto en 4 bits, para acomodar un espacio de función de <code class="docutils literal notranslate"><span class="pre">4K</span></code>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cfg_offset(bus, device, function, register) =
+      bus &lt;&lt; 20 | device &lt;&lt; 15 | function &lt;&lt; 12 | register
+</pre></div>
+</div>
+<p>El <em>mapa de interrupciones</em>,  es excactamente igual, a como está descrito en <em>Open Firmware Recommended Practice: Interrupt Mapping</em> y, requiere las siguientes propiedades:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">#interrupt-cells</span></code>: Debe ser 1. - <code class="docutils literal notranslate"><span class="pre">interrupt-map</span></code>: ver especificaciones mencionadas anteriormente. - <code class="docutils literal notranslate"><span class="pre">interrupt-map-mask</span></code> : ver especificaciones mencionadas anteriormente.</p></li>
+</ul>
+<p>Ejemplo:</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="nf">pci</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pci-host-cam-generic&quot;</span>
+<span class="w">    </span><span class="kr">device_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pci&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kr">#address-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="kr">#size-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bus-range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x1</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// CPU_PHYSICAL(2)  SIZE(2)</span>
+<span class="w">    </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x40000000</span><span class="w">  </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x1000000</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// BUS_ADDRESS(3)  CPU_PHYSICAL(2)  SIZE(2)</span>
+<span class="w">    </span><span class="kr">ranges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x01000000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x01000000</span><span class="w">  </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x01000000</span><span class="w">  </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x00010000</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">             </span><span class="o">&lt;</span><span class="mh">0x02000000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x41000000</span><span class="w">  </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x41000000</span><span class="w">  </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x3f000000</span><span class="o">&gt;</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="o">#</span><span class="n">interrupt-cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0x1</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// PCI_DEVICE(3)  INT#(1)  CONTROLLER(PHANDLE)  CONTROLLER_DATA(3)</span>
+<span class="w">    </span><span class="n">interrupt-map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x0</span><span class="w">  </span><span class="mh">0x1</span><span class="w">  </span><span class="o">&amp;</span><span class="na">gic</span><span class="w">  </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x4</span><span class="w"> </span><span class="mh">0x1</span>
+<span class="w">                     </span><span class="mh">0x800</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x0</span><span class="w">  </span><span class="mh">0x1</span><span class="w">  </span><span class="o">&amp;</span><span class="na">gic</span><span class="w">  </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x5</span><span class="w"> </span><span class="mh">0x1</span>
+<span class="w">                    </span><span class="mh">0x1000</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x0</span><span class="w">  </span><span class="mh">0x1</span><span class="w">  </span><span class="o">&amp;</span><span class="na">gic</span><span class="w">  </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x6</span><span class="w"> </span><span class="mh">0x1</span>
+<span class="w">                    </span><span class="mh">0x1800</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x0</span><span class="w">  </span><span class="mh">0x1</span><span class="w">  </span><span class="o">&amp;</span><span class="na">gic</span><span class="w">  </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x7</span><span class="w"> </span><span class="mh">0x1</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// PCI_DEVICE(3)  INT#(1)</span>
+<span class="w">    </span><span class="n">interrupt-map-mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mh">0xf800</span><span class="w"> </span><span class="mh">0x0</span><span class="w"> </span><span class="mh">0x0</span><span class="w">  </span><span class="mh">0x7</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="referencias-y-agradecimientos">
+<span id="host-generic-pci-2"></span><h2><a class="toc-backref" href="#id2" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<p>vrm – voltage regulator module pci– peripheral component interconnect</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../EarlyUserSpace/README.html" class="btn btn-neutral float-left" title="Soporte al espacio temprano de usuario" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../04_System_Administration/system_apps/fdisk.html" class="btn btn-neutral float-right" title="Repaso de fdisk" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

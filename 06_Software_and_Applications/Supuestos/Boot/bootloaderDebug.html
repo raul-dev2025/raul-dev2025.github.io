@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Focusing on the VM Context: How the Kernel and Initramfs Are Loaded" href="vmCxtBootLoad.html" />
+    <link rel="prev" title="Inspecting the MBR to Identify the Bootloader" href="identifyBootloader.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Testing/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Config/queringXML.html">Querying XML File Configuration with libvirt Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-verify-the-bootloader-in-use">Step 1: Verify the Bootloader in Use</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-confirm-kernel-and-initramfs-loading">Step 2: Confirm Kernel and Initramfs Loading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-analyze-the-boot-process">Step 3: Analyze the Boot Process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-verify-hypervisor-configuration">Step 4: Verify Hypervisor Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="envsWithGrub.html">Understanding <code class="docutils literal notranslate"><span class="pre">grub2-editenv</span> <span class="pre">list</span></code> Output: Saved Entry Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/oldKernels.html">Working with Older Kernel Versions on CentOS 7: Challenges and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/weakness_config.html">LTP build log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/debugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/configLog_analysis.html">LTP Configuration Debugging Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/headerResolution.html">How to Fix Missing <cite>linux/module.h</cite> in LTP Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/relevantLinuxSource.html">Understanding /usr/src/linux Symlink Importance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/sadButTrue.html">The /usr/src/linux Reality Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../99_General/miscellaneous/diagnosticMissingHeaders.html">Debugging Missing Kernel Headers in LTP Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/autoConfHd.html">Using text Macros to Check for Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/gccSearchPath.html">Check GCC Search Path for Kernel Headers in GNU/Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/Autotools_overview.html">Overview of Autotools Primary Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+      <li class="breadcrumb-item active">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/Boot/bootloaderDebug.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="determining-the-bootloader-and-kernel-ramdisk-loading-in-a-kvm-vm">
+<h1>Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM<a class="headerlink" href="#determining-the-bootloader-and-kernel-ramdisk-loading-in-a-kvm-vm" title="Link to this heading"></a></h1>
+<p>We are trying to determine which bootloader is in use by the VM and confirm from where the kernel (<code class="docutils literal notranslate"><span class="pre">vmlinuz</span></code>) and initial RAM disk (<code class="docutils literal notranslate"><span class="pre">initrd</span></code>) are being loaded. Since the VM is running on <strong>KVM (Kernel-based Virtual Machine)</strong>, let’s explore the possible bootloaders and how they load the kernel and initramfs.</p>
+<section id="step-1-verify-the-bootloader-in-use">
+<h2>Step 1: Verify the Bootloader in Use<a class="headerlink" href="#step-1-verify-the-bootloader-in-use" title="Link to this heading"></a></h2>
+<p>To determine the bootloader in use, we can check the following:</p>
+<ol class="arabic">
+<li><p><strong>Check for GRUB</strong>:</p>
+<ul>
+<li><p>GRUB is the most common bootloader for Linux systems. Check if GRUB is installed and configured:
+- Look for the GRUB configuration file:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/boot/grub2/grub.cfg
+</pre></div>
+</div>
+</div></blockquote>
+<ul>
+<li><p>Check if GRUB is installed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grub2-install<span class="w"> </span>--version
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Check for systemd-boot</strong>:</p>
+<ul>
+<li><p>Although <code class="docutils literal notranslate"><span class="pre">bootctl</span> <span class="pre">status</span></code> confirmed the system is not booted with EFI, it’s worth checking for systemd-boot configuration files:
+- Look for the systemd-boot configuration directory:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/boot/loader/entries/
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>Check for Other Bootloaders</strong>:</p>
+<ul>
+<li><p>If neither GRUB nor systemd-boot is in use, the system might be using a different bootloader (e.g., Syslinux, LILO, or a custom bootloader).
+- Look for configuration files in <code class="docutils literal notranslate"><span class="pre">/boot/</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/boot/
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-2-confirm-kernel-and-initramfs-loading">
+<h2>Step 2: Confirm Kernel and Initramfs Loading<a class="headerlink" href="#step-2-confirm-kernel-and-initramfs-loading" title="Link to this heading"></a></h2>
+<p>Once the bootloader is identified, we need to confirm how the kernel and initramfs are being loaded.</p>
+<ol class="arabic">
+<li><p><strong>If GRUB is in Use</strong>:</p>
+<ul>
+<li><p>The GRUB configuration file (<code class="docutils literal notranslate"><span class="pre">/boot/grub2/grub.cfg</span></code>) should contain entries like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>menuentry<span class="w"> </span><span class="s1">&#39;Linux Distribution&#39;</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">set</span><span class="w"> </span><span class="nv">root</span><span class="o">=</span><span class="s1">&#39;hd0,msdos1&#39;</span>
+<span class="w">    </span>linux<span class="w"> </span>/boot/vmlinuz-&lt;version&gt;<span class="w"> </span><span class="nv">root</span><span class="o">=</span>/dev/sda1
+<span class="w">    </span>initrd<span class="w"> </span>/boot/initrd.img-&lt;version&gt;
+<span class="o">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>If these entries are missing, GRUB might be using a custom configuration or chainloading another bootloader.</p></li>
+</ul>
+</li>
+<li><p><strong>If systemd-boot is in Use</strong>:</p>
+<ul>
+<li><p>The systemd-boot configuration files in <code class="docutils literal notranslate"><span class="pre">/boot/loader/entries/</span></code> should contain entries like:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">title Linux Distribution</span>
+<span class="na">version 5.15.0-83-generic</span>
+<span class="na">linux /boot/vmlinuz-5.15.0-83-generic</span>
+<span class="na">initrd /boot/initrd.img-5.15.0-83-generic</span>
+<span class="na">options root</span><span class="o">=</span><span class="s">/dev/sda1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>If Another Bootloader is in Use</strong>:</p>
+<ul class="simple">
+<li><p>Check the bootloader’s configuration files (e.g., <code class="docutils literal notranslate"><span class="pre">syslinux.cfg</span></code> for Syslinux or <code class="docutils literal notranslate"><span class="pre">lilo.conf</span></code> for LILO) for references to the kernel and initramfs.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-3-analyze-the-boot-process">
+<h2>Step 3: Analyze the Boot Process<a class="headerlink" href="#step-3-analyze-the-boot-process" title="Link to this heading"></a></h2>
+<p>To further understand how the kernel and initramfs are being loaded, we can analyze the boot process:</p>
+<ol class="arabic">
+<li><p><strong>Check the Kernel Command Line</strong>:</p>
+<ul>
+<li><p>Run the following command to inspect the kernel command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>/proc/cmdline
+</pre></div>
+</div>
+</li>
+<li><p>Look for parameters like <code class="docutils literal notranslate"><span class="pre">initrd=</span></code> or <code class="docutils literal notranslate"><span class="pre">root=</span></code> that indicate how the kernel and initramfs are loaded.</p></li>
+</ul>
+</li>
+<li><p><strong>Inspect the</strong> <code class="docutils literal notranslate"><span class="pre">dmesg</span></code> <strong>Output</strong>:</p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">dmesg</span></code> output provides detailed logs of the boot process. Look for messages related to the kernel and initramfs loading:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dmesg<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s1">&#39;linux|initrd|smpboot&#39;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Check for Paravirtualized Drivers</strong>:</p>
+<ul>
+<li><p>Since the VM is running on KVM, look for messages related to paravirtualized drivers (e.g., <code class="docutils literal notranslate"><span class="pre">virtio</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dmesg<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>virtio
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-4-verify-hypervisor-configuration">
+<h2>Step 4: Verify Hypervisor Configuration<a class="headerlink" href="#step-4-verify-hypervisor-configuration" title="Link to this heading"></a></h2>
+<p>Since the VM is running on KVM, the hypervisor configuration might influence how the kernel and initramfs are loaded:</p>
+<ol class="arabic">
+<li><p><strong>Check the VM Configuration</strong>:</p>
+<ul class="simple">
+<li><p>Verify the VM’s configuration file (e.g., <code class="docutils literal notranslate"><span class="pre">/etc/libvirt/qemu/&lt;vm-name&gt;.xml</span></code> for libvirt) to ensure the correct bootloader and kernel are specified.</p></li>
+</ul>
+</li>
+<li><p><strong>Check for Direct Kernel Boot</strong>:</p>
+<ul>
+<li><p>Some hypervisors allow direct kernel boot, bypassing the bootloader. Check if the VM is configured to boot the kernel directly:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span>-i<span class="w"> </span>kernel<span class="w"> </span>/etc/libvirt/qemu/&lt;vm-name&gt;.xml
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Verify the bootloader in use (GRUB, systemd-boot, or another bootloader).</p></li>
+<li><p>Confirm how the kernel and initramfs are being loaded by inspecting the bootloader configuration files.</p></li>
+<li><p>Analyze the boot process using <code class="docutils literal notranslate"><span class="pre">dmesg</span></code> and the kernel command line.</p></li>
+<li><p>Verify the hypervisor configuration to ensure the correct bootloader and kernel are being used.</p></li>
+</ol>
+<p>Let me know if you need further clarification or assistance!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="identifyBootloader.html" class="btn btn-neutral float-left" title="Inspecting the MBR to Identify the Bootloader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vmCxtBootLoad.html" class="btn btn-neutral float-right" title="Focusing on the VM Context: How the Kernel and Initramfs Are Loaded" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

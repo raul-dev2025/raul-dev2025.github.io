@@ -1,0 +1,228 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe de Diagnóstico y Optimización del Entorno KVM/IdM &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Infraestructura RAULVILCHEZ.ORG" href="../Golden/indice.html" />
+    <link rel="prev" title="Infraestructura y Almacenamiento" href="../Config/resumen.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Infraestructura virtual</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#virtualization-management">Virtualization Management</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../IV-management.html">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/sharedFolder-nfs.html">Informe de Configuración: Repositorio de ISOs vía NFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/configSSH.html">Configuración de Acceso Remoto Seguro (SSH)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/resumen.html">Infraestructura y Almacenamiento</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Golden/indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#gestion-de-identidad-idm">Gestión de Identidad (IdM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/Incidencias/index.html">Registro de Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Infraestructura virtual</a></li>
+      <li class="breadcrumb-item active">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/Testing/vmTunning.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-de-diagnostico-y-optimizacion-del-entorno-kvm-idm">
+<h1>Informe de Diagnóstico y Optimización del Entorno KVM/IdM<a class="headerlink" href="#informe-de-diagnostico-y-optimizacion-del-entorno-kvm-idm" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>24 de febrero de 2026</p>
+</dd>
+<dt class="field-even">Host<span class="colon">:</span></dt>
+<dd class="field-even"><p>dev.raulvilchez.org</p>
+</dd>
+<dt class="field-odd">Estado<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optimizado</p>
+</dd>
+<dt class="field-even">Autor<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gemini AI (Colaborador técnico)</p>
+</dd>
+</dl>
+<section id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>Este informe documenta las acciones realizadas tras detectar un error de hardware (MCE) en el host, así como la posterior optimización de recursos (RAM y CPU) para mejorar la estabilidad del entorno de virtualización y los servicios de FreeIPA/IdM.</p>
+</section>
+<section id="diagnostico-de-error-de-hardware-mce">
+<h2>1. Diagnóstico de Error de Hardware (MCE)<a class="headerlink" href="#diagnostico-de-error-de-hardware-mce" title="Link to this heading"></a></h2>
+<p>Se detectó un mensaje de error en el prompt de <code class="docutils literal notranslate"><span class="pre">virsh</span></code> proveniente del kernel referente a un “Machine Check Exception”.</p>
+<p><strong>Detalles del error</strong>:</p>
+<ul class="simple">
+<li><p><strong>Tipo:</strong> Deferred error (Error diferido).</p></li>
+<li><p><strong>CPU:</strong> 1 (Arquitectura AMD Zen).</p></li>
+<li><p><strong>Banco:</strong> 20 (Relacionado con la Caché L3).</p></li>
+<li><p><strong>Gravedad:</strong> Baja. El hardware corrigió el error mediante ECC sin afectar al sistema operativo.</p></li>
+</ul>
+<p><strong>Comandos de diagnóstico utilizados:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificación de errores en el log del kernel</span>
+dmesg<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;hardware error&quot;</span>
+
+<span class="c1"># Intento de decodificación (soporte limitado en AMD moderno)</span>
+mcelog
+
+<span class="c1"># Verificación de persistencia en el journal</span>
+journalctl<span class="w"> </span>-k<span class="w"> </span>--grep<span class="o">=</span><span class="s2">&quot;Hardware Error&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="optimizacion-de-memoria-hugepages">
+<h2>2. Optimización de Memoria (Hugepages)<a class="headerlink" href="#optimizacion-de-memoria-hugepages" title="Link to this heading"></a></h2>
+<p>Se identificó un consumo excesivo de RAM (aprox. 25.8 GB) debido a una reserva estática de <strong>Hugepages</strong> (16 GB) que no estaba siendo utilizada por las Máquinas Virtuales (VMs), provocando un “consumo doble”.</p>
+<p><strong>Estado detectado</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HugePages_Total</span></code>: 8192 (16 GB).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HugePages_Free</span></code>: 8192 (Inactivas).</p></li>
+</ul>
+<p><strong>Acción correctiva:</strong>
+Configuración del bloque <code class="docutils literal notranslate"><span class="pre">memoryBacking</span></code> en el XML de la VM para forzar el uso del pool reservado.</p>
+<p><strong>Verificación:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Comprobar el estado del pool de páginas grandes</span>
+grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;HugePages_Total|HugePages_Free&quot;</span><span class="w"> </span>/proc/meminfo
+</pre></div>
+</div>
+</section>
+<section id="sintonizacion-de-cpu-pinning-y-aislamiento">
+<h2>3. Sintonización de CPU (Pinning y Aislamiento)<a class="headerlink" href="#sintonizacion-de-cpu-pinning-y-aislamiento" title="Link to this heading"></a></h2>
+<p>Se ha implementado un esquema de aislamiento para proteger el rendimiento del Host (Hypervisor) y los servicios críticos de IdM, separándolos de la carga de las VMs.</p>
+<p><strong>Esquema de asignación</strong>:</p>
+<ul class="simple">
+<li><p><strong>Hypervisor / Host:</strong> CPUs 0, 1, 6, 7.</p></li>
+<li><p><strong>Máquina Virtual (VM):</strong> CPUs 2, 3.</p></li>
+<li><p><strong>Libres para escalado:</strong> CPUs 4, 5, 8, 9, 10, 11.</p></li>
+</ul>
+</section>
+<section id="cambios-en-la-configuracion-xml-libvirt">
+<h2>4. Cambios en la Configuración XML (Libvirt)<a class="headerlink" href="#cambios-en-la-configuracion-xml-libvirt" title="Link to this heading"></a></h2>
+<p>Se han aplicado los siguientes cambios estructurales en la configuración de la VM (<code class="docutils literal notranslate"><span class="pre">virsh</span> <span class="pre">edit</span></code>):</p>
+<p><strong>Configuración de Memoria y CPU:</strong></p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;memory</span><span class="w"> </span><span class="na">unit=</span><span class="s">&#39;KiB&#39;</span><span class="nt">&gt;</span>4194304<span class="nt">&lt;/memory&gt;</span>
+<span class="nt">&lt;memoryBacking&gt;</span>
+<span class="w">  </span><span class="nt">&lt;hugepages/&gt;</span>
+<span class="nt">&lt;/memoryBacking&gt;</span>
+<span class="nt">&lt;vcpu</span><span class="w"> </span><span class="na">placement=</span><span class="s">&#39;static&#39;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/vcpu&gt;</span>
+<span class="nt">&lt;cputune&gt;</span>
+<span class="w">  </span><span class="nt">&lt;vcpupin</span><span class="w"> </span><span class="na">vcpu=</span><span class="s">&#39;0&#39;</span><span class="w"> </span><span class="na">cpuset=</span><span class="s">&#39;2&#39;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;vcpupin</span><span class="w"> </span><span class="na">vcpu=</span><span class="s">&#39;1&#39;</span><span class="w"> </span><span class="na">cpuset=</span><span class="s">&#39;3&#39;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;emulatorpin</span><span class="w"> </span><span class="na">cpuset=</span><span class="s">&#39;0-1,6-7&#39;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/cputune&gt;</span>
+<span class="nt">&lt;cpu</span><span class="w"> </span><span class="na">mode=</span><span class="s">&#39;host-passthrough&#39;</span><span class="w"> </span><span class="na">check=</span><span class="s">&#39;none&#39;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;topology</span><span class="w"> </span><span class="na">sockets=</span><span class="s">&#39;1&#39;</span><span class="w"> </span><span class="na">dies=</span><span class="s">&#39;1&#39;</span><span class="w"> </span><span class="na">cores=</span><span class="s">&#39;2&#39;</span><span class="w"> </span><span class="na">threads=</span><span class="s">&#39;1&#39;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/cpu&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="conclusiones">
+<h2>Conclusiones<a class="headerlink" href="#conclusiones" title="Link to this heading"></a></h2>
+<p>El sistema muestra ahora un comportamiento estable:</p>
+<ol class="arabic simple">
+<li><p>El consumo de RAM ha bajado a <strong>20.8 GB</strong> (62.6%), eliminando el desperdicio previo.</p></li>
+<li><p>La VM opera con rendimiento nativo de CPU mediante passthrough y pinning.</p></li>
+<li><p>El aislamiento del Host asegura que el entorno de desarrollo y los servicios IdM no sufran degradación por el uso de las VMs.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Config/resumen.html" class="btn btn-neutral float-left" title="Infraestructura y Almacenamiento" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Golden/indice.html" class="btn btn-neutral float-right" title="Infraestructura RAULVILCHEZ.ORG" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arrancando un ARM &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unidad de prueba, del árbol de dispositivo Open Firmware" href="../DeviceTree/0-of_unittest.html" />
+    <link rel="prev" title="El arranque del núcleo deLinux/ppc sin Open Firmware" href="../arch/powerpc/booting-without-of.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Admin-guide/1-boot.html">Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../arch/powerpc/booting-without-of.html">El arranque del núcleo deLinux/ppc sin Open Firmware</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Arrancando un ARM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configura-e-inicializa-la-ram">Configura e inicializa la <em>RAM</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inicializa-un-puerto-en-serie">Inicializa un <em>puerto en serie</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deteccion-del-tipo-de-maquina">Detección del tipo de máquina</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuracion-de-los-datos-de-arranque">Configuración de los datos de arranque</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#carga-initramfs">Carga initramfs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#llamada-a-la-imagen-del-kernel">Llamada a la <em>imagen</em> del kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../DeviceTree/0-of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DeviceTree/changesets.html">conjunto de cambios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../EarlyUserSpace/README.html">Soporte al <em>espacio temprano de usuario</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PCI/host-generic-pci.html">Controlador de <em>host</em> PCI, genérico</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04_System_Administration/system_apps/fdisk.html">Repaso de fdisk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+      <li class="breadcrumb-item active">Arrancando un ARM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/arm/Booting.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <nav class="contents local" id="tabla-de-contenidos" role="doc-toc">
+<p class="topic-title">Tabla de contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#arrancando-un-arm" id="id2">Arrancando un ARM</a></p>
+<ul>
+<li><p><a class="reference internal" href="#introduccion" id="id3">Introducción</a></p></li>
+<li><p><a class="reference internal" href="#configura-e-inicializa-la-ram" id="id4">Configura e inicializa la <em>RAM</em></a></p></li>
+<li><p><a class="reference internal" href="#inicializa-un-puerto-en-serie" id="id5">Inicializa un <em>puerto en serie</em></a></p></li>
+<li><p><a class="reference internal" href="#deteccion-del-tipo-de-maquina" id="id6">Detección del tipo de máquina</a></p></li>
+<li><p><a class="reference internal" href="#configuracion-de-los-datos-de-arranque" id="id7">Configuración de los datos de arranque</a></p></li>
+<li><p><a class="reference internal" href="#carga-initramfs" id="id8">Carga initramfs</a></p></li>
+<li><p><a class="reference internal" href="#llamada-a-la-imagen-del-kernel" id="id9">Llamada a la <em>imagen</em> del kernel</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id10">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="arrancando-un-arm">
+<span id="booting-1"></span><h1>Arrancando un ARM<a class="headerlink" href="#arrancando-un-arm" title="Link to this heading"></a></h1>
+<section id="introduccion">
+<span id="booting-2"></span><h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>Para arrancar ARM Linux, es necesario un gestor de arranque, el cual es un pequeño programa, que <em>carga</em> antes que el <em>kernel principal</em>.
+Del gestor de arranque se espera que inicialice varios dispositivos, pudiendo llamar al kernel de Linux y, pasarle <em>distinta información</em>.</p>
+<p>En esencia, el gestor de arranque debería proporcionar -como mínimo, lo siguiente:</p>
+<ol class="arabic simple">
+<li><p>Configura e inicializa la <em>RAM</em>.</p></li>
+<li><p>Inicializa un <em>puerto en serie</em>.</p></li>
+<li><p>Detección del tipo de máquina.</p></li>
+<li><p>Configurar la lista de <em>etiquetas</em> del kernel.</p></li>
+<li><p>Carga initramfs.</p></li>
+<li><p>Llamada a la <em>imagen</em> del kernel.</p></li>
+</ol>
+<p>La siguiente documentación atañe a la versión v2.4.18-rmk6 y posteviores</p>
+</section>
+<section id="configura-e-inicializa-la-ram">
+<span id="booting-3"></span><h2>Configura e inicializa la <em>RAM</em><a class="headerlink" href="#configura-e-inicializa-la-ram" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Cargador de arranque <em>existente</em>: MANDATORY.</p></li>
+<li><p>Nuevos cargadores de arranque: MANDATORY.</p></li>
+</ul>
+<p>Del gestor de arranque se espera que encuentre e inicialice toda la <em>RAM</em>, que utilizará el kernel, para almacenar los <em>datos volátiles</em> del sistema. La tarea se lleva a cabo, de forma <em>dependiente</em> a la máquina.
+Podrían utilizarse algoritmos internos, para localizar y <em>dimensionar</em>, automáticamente la <em>RAM</em>, o podrían utilizarse los datos conocidos sobre la RAM de la máquina, e incluso otros métodos designados por el gestor de arranque como <em>coincidentes</em>.</p>
+</section>
+<section id="inicializa-un-puerto-en-serie">
+<span id="booting-4"></span><h2>Inicializa un <em>puerto en serie</em><a class="headerlink" href="#inicializa-un-puerto-en-serie" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Cargador de arranque <em>existente</em>: OPTIONAL, RECOMMENDED.</p></li>
+<li><p>Nuevos cargadores de arranque: OPTIONAL, RECOMMENDED.</p></li>
+</ul>
+<p>El cargador de arranque, debería inicializar y activar, un <em>puerto en serie</em>. Esto permite al controlador en serie del kernel, detectar automáticamente qué <em>puerto en serie</em> debe utilizarse para la cónsola del kernel. Usado normalmente en operaciones de depuración, o comunicación con la máquina.</p>
+<p>Como alternativa, el <em>gestor</em>, podrá pasar al kernel, la opción console=, a través de las listas etiquetadas, que especifiquen el <em>puerto</em> y, las opciones de <em>formato en serie</em>, descrito en <cite>Documentation/admin-guide/kernel-parameters.rst</cite>.</p>
+</section>
+<section id="deteccion-del-tipo-de-maquina">
+<span id="booting-5"></span><h2>Detección del tipo de máquina<a class="headerlink" href="#deteccion-del-tipo-de-maquina" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Cargador de arranque <em>existente</em>: OPTIONAL.</p></li>
+<li><p>Nuevos cargadores de arranque: MANDATORY, excepto para algunas plataformas DT.</p></li>
+</ul>
+<p>El cargador de arranque debería detectar el tipo de máquina, por medio de <em>algún método</em>. Tanto si es algún tipo de código <em>provisional</em> - <em>hard coded</em>, u otro algoritmo que busque el <em>hardware</em> conectado, queda fuera del <em>tema</em> de éste documento.</p>
+<p>En último término, el gestor de arranque deberá ser capaz de proporcionar al kernel, un valor tipo MACH_TYPE_xxx. ver linux/arch/arm/tools/mach-types. Es pasado al kernel en el registro r1.</p>
+<p>En plataformas DT-only, el tipo de máquina será determinada por el árbol de dispositivo. Configura el tipo de máquina para todas ellas ~0. Esto no es estríctamente necesario, pero asegura que no coincidirá con alguna otra existente.</p>
+</section>
+<section id="configuracion-de-los-datos-de-arranque">
+<span id="booting-6"></span><h2>Configuración de los datos de arranque<a class="headerlink" href="#configuracion-de-los-datos-de-arranque" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Cargador de arranque <em>existente</em>: OPTIONAL, HIGHLY RECOMMENDED.</p></li>
+<li><p>Nuevos cargadores de arranque: MANDATORY.</p></li>
+</ul>
+<p>El gestor de arranque debe proporcionar tanto una <em>lista etiquetada</em>, como una imagen <em>dtb</em>, para <em>pasar</em> los datos de configuración al kernel. La dirección física de los datos de arranque, son pasados al kernel, por el registro r2.</p>
+<p><strong>Configurar la lista de etiquetas del kernel</strong></p>
+<p>El gestor de arranque debe crear e inicializar la <em>lista etiquetada</em>.
+Una <em>lista</em> válida empieza por ATAG_CORE y termina por ATAG_NONE. La etiqueta ATAG_CORE podrá o no, estar vacía. Una etiqueta vacía ATAG_CORE, tendrá configurado el tamaño de campo a <em>2</em> 0x00000002. La etiqueta ATAG_NONE deberá definir el tamaño de campo a <em>cero</em>.</p>
+<p>La <em>lista</em> podrá tener un número indetermindado de etiquetas. Es indefinido dónde una etiqueta repetida, cuelga de la información descrita en la anterior etiqueta. Incluso si reemplaza la información en su totalidad; algunas etiquetas se comportan como la <em>primera</em>, otras como la última.</p>
+<p>El gestor de arranque deberá pasar -como mínimo, el tamaño y localización de la memoria del sistema y, la localización del <em>sistema de archivo</em> raíz. Por lo tanto, una <em>lista etiquetada</em> mínima, tendrá este aspecto:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        <span class="o">+-----------+</span>
+<span class="n">base</span> <span class="o">-&gt;</span> <span class="o">|</span> <span class="n">ATAG_CORE</span> <span class="o">|</span>  <span class="o">|</span>
+        <span class="o">+-----------+</span>  <span class="o">|</span>
+        <span class="o">|</span> <span class="n">ATAG_MEM</span>  <span class="o">|</span>  <span class="o">|</span> <span class="n">increasing</span> <span class="n">address</span>
+        <span class="o">+-----------+</span>  <span class="o">|</span>
+        <span class="o">|</span> <span class="n">ATAG_NONE</span> <span class="o">|</span>  <span class="o">|</span>
+        <span class="o">+-----------+</span>  <span class="n">v</span>
+</pre></div>
+</div>
+<p>La <em>lista etiquetada</em> deberá ser almacenada en la RAM.</p>
+<p>Debe ser situada en una región de la memoria donde ni el <em>decompresor</em> del kernel, ni el programa inird <em>bootp</em>, la sobreescriban. El lugar aconsejado es en los primeros 16KiB de la RAM.</p>
+<p><strong>Configuración del árbol de dispositivo</strong></p>
+<p>El gestor de arranque deberá cargar la imagen del árbol de dispositivo(dtb), en la memoria RAM del sistema, en una dirección de 64bit alineada e inicializada, con los <em>datos de arranque</em>. El formato dtb está documentado en Documentation/devicetree/booting-without-of.txt. El kernel buscará el valor 0xd00dfeed -<em>magic value</em>, en la dirección física del dtb, para determinar si ya ha sido pasado un dtb, en lugar de una <em>lista etiquetada</em>.</p>
+<p>El gestor de arranque debe <em>pasar</em>, -como mínimo, el tamaño y localicación de la memoria del lsistema y, la localización del <em>sistema de archivo</em> raíz. El dtb deberá ser situado en una región de la memoria donde el <em>decompresor</em> del kernel, no lo sobreescriba, deberá permanecer en la <em>región</em> cubierta por el mapa de memoria del kernel.</p>
+<p>Un localización segura es por encima del límite de 128MiB, desde el comienzo de la RAM.</p>
+</section>
+<section id="carga-initramfs">
+<span id="booting-7"></span><h2>Carga initramfs<a class="headerlink" href="#carga-initramfs" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Cargador de arranque <em>existente</em>: OPTIONAL.</p></li>
+<li><p>Nuevos cargadores de arranque: OPTIONAL.</p></li>
+</ul>
+<p>Estando en uso una initramfs junto al dtb, deberá ser situada en una región de la memoria, donde el <em>decompresor</em> del kernel, no lo sobreescriba. Tambíen deberá permanecer en la <em>región</em> cubierta por el mapa de memoria del kernel.</p>
+<p>Una localización segura, es encima del <em>pequeño</em> DT, el cuál él mismo será cargado encima del límite de 128MiB desde el comienzo de la RAM -recomendación líneas arriba.</p>
+</section>
+<section id="llamada-a-la-imagen-del-kernel">
+<span id="booting-8"></span><h2>Llamada a la <em>imagen</em> del kernel<a class="headerlink" href="#llamada-a-la-imagen-del-kernel" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Cargador de arranque <em>existente</em>: MANDATORY.</p></li>
+<li><p>Nuevos cargadores de arranque: MANDATORY.</p></li>
+</ul>
+<p>Hay dos opciones para llamar a la imagen zImage del kernel. Si laimagen zImage, está lmacenada en un <em>flash</em> y, enlazada correctamente para poder ser lanazda desde el flash*, el gestor de arranque podrá llamar a zImage directamente, desde el dispositivo.</p>
+<p>La imagen zImage, podría ser situada en el sistema RAM, y llamada desde allí. El kernel debería ser situado en los primeros 128MiB de la RAM. Es recomendable que <em>cargue</em> encima de 32MiB, para evitar la necesidad de <em>realojar</em>, una decompresión previa, lo que hará significativamente más rápido, el <em>proceso de arranque</em>.</p>
+<p>Cuando se arranca un kernel en <em>crudo</em>(no zImage), hay más restricciones. En este caso, el kernel deberá ser situado en un offset del sistema, igual a TEXT_OFFSET - PAGE_OFFSET.</p>
+<p>En cualquier caso, deberán aparecer las siguientes condiciones:</p>
+<ul class="simple">
+<li><p>Situar -lugar fijo, todos los dispositivos capaces de trabajar con el <em>acceso directo a memoria</em> (DMA), para que la memoria no sea corrompida por paquetes de red, o datos de disco <em>falsos</em>.</p></li>
+<li><p>Configuración de registros de la CPU.</p></li>
+<li><p>r0 = 0.</p></li>
+<li><p>r1 = número del tipo de máquinam descubierto en Detección del tipo de máquina.</p></li>
+<li><p>r2 = dirección física de la <em>lista etiquetada</em> en la RAM desistema, o dirección física el DTB -bloque del árbol de dispositivo, en la RAM de sistema.</p></li>
+<li><p>Modo CPU</p></li>
+</ul>
+<p>Todas la formas de interrupción, deberán ser deshabilitadas -IRQs y FIQs.</p>
+<p>En las CPUs, que no incluyan las extensiónes de virtualización ARM, la CPU deberá estar en modo SVC. Existe una excepción en Angel.</p>
+<p>CPUs, que incluyan soporte a la extensión de virtualización, entrarán en modo HYP, para que el kernel pueda activar un uso completo de las extensiones. Es este el método recomendado para el arranque, en este tipo de CPUs. A menos que la <em>virtualización</em>, se encuentre ya en uso, por el <em>hipervisor</em> preinstalado.</p>
+<p>Si por alguna razón, el kernel no ha entrado en modo HYP, deberá entrar en modo SVC.</p>
+<ul class="simple">
+<li><p>Cachés, MMUs El MMU debe estar apagado. La caché de instrucciones podrá estar apagada. La caché de datos <em>debe</em> estar apagada.</p></li>
+</ul>
+<p>Si el kernel entra en modo HYP, los anteriores requisitos serán aplicados al modo HYP de configuración, además de la configuración ordinaria PL1 -modos privilegiados del kernel. En el <em>hipervisor</em> deben ser deshabilitadas las trampas(traps) <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. El acceso a PL1, garantizado a todos los <em>periféricos</em> y recursos de CPU, en todos aquellos casos que sea posible. Exceptuando al entrar en el modo HYP, la configuración de sistema debería ser del <em>tipo</em> que, sino incluye soporte a las extensiones de virtualización, pueda arrancar correctamente sin ayuda extra.</p>
+<ul class="simple">
+<li><p>El gestor de arranque llamará a la imagen del kernel, saltando directamente a la primera instrucción de la imagen.</p></li>
+</ul>
+<p>En CPUs que soporte el conjunto de instrucciones ARM, la <em>entrada</em> debe estar hecha en <em>estado ARM</em>, inluso para un kernel <em>thumb-2</em>.</p>
+<p>En CPUs que soporten únicamente el conjunto de instrucciones <em>Thumb</em>, como la clase de CPUs Cortex-M, la <em>entrada</em> debe estar hecha en <em>estado Thumb</em>.</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<span id="booting-9"></span><h2>Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Traps, conjunto especial de instrucciones, ejecutadas habitualmente sobre la CPU. Ver <a class="reference external" href="https://en.wikipedia.org/wiki/CPUID">CPUID wikipedia</a>.</p>
+</aside>
+</aside>
+<p><strong>Autor</strong>: Russell King <strong>Fecha</strong>: 18 May 2002</p>
+<div class="firma docutils container">
+<p><strong>Traducción:</strong> Heliogabalo S.J.
+<a class="reference external" href="https://www.raulvilchez.org">www.raulvilchez.org</a></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../arch/powerpc/booting-without-of.html" class="btn btn-neutral float-left" title="El arranque del núcleo deLinux/ppc sin Open Firmware" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../DeviceTree/0-of_unittest.html" class="btn btn-neutral float-right" title="Unidad de prueba, del árbol de dispositivo Open Firmware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

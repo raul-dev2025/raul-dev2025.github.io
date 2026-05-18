@@ -1,0 +1,262 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Repaso de fdisk &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Siglas" href="../../99_General/siglas.html" />
+    <link rel="prev" title="Controlador de host PCI, genérico" href="../../02_Kernel/PCI/host-generic-pci.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../02_Kernel/Admin-guide/1-boot.html">Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../02_Kernel/arch/powerpc/booting-without-of.html">El arranque del núcleo deLinux/ppc sin Open Firmware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../02_Kernel/arm/Booting.html">Arrancando un ARM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../02_Kernel/DeviceTree/0-of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../02_Kernel/DeviceTree/changesets.html">conjunto de cambios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../02_Kernel/EarlyUserSpace/README.html">Soporte al <em>espacio temprano de usuario</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../02_Kernel/PCI/host-generic-pci.html">Controlador de <em>host</em> PCI, genérico</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Repaso de fdisk</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uso-de-la-aplicacion">Uso de la Aplicación</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conceptos-tecnicos">Conceptos Técnicos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sistemas-de-archivos-fs">Sistemas de Archivos (FS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y Agradecimientos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+      <li class="breadcrumb-item active">Repaso de fdisk</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/04_System_Administration/system_apps/fdisk.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="repaso-de-fdisk">
+<h1>Repaso de fdisk<a class="headerlink" href="#repaso-de-fdisk" title="Link to this heading"></a></h1>
+<section id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p><strong>Fdisk</strong> es una aplicación destinada a la creación y manipulación de tablas de particiones. Presenta una interfaz de usuario basada en texto, al estilo clásico de los sistemas GNU/Linux.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># fdisk -l</span>
+</pre></div>
+</div>
+<p>El comando anterior presenta un listado con las particiones definidas en el sistema.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Si acabas de añadir un disco al sistema y esperas ver información al respecto mediante <code class="docutils literal notranslate"><span class="pre">-l</span></code>, es probable que no aparezca nada si el disco carece de tabla de particiones.</p>
+</div>
+<section id="identificacion-del-dispositivo">
+<h3>Identificación del Dispositivo<a class="headerlink" href="#identificacion-del-dispositivo" title="Link to this heading"></a></h3>
+<p>Para trabajar con un disco específico, se debe hacer referencia directa al nodo de dispositivo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># fdisk /dev/sdX</span>
+</pre></div>
+</div>
+<p>Donde <em>X</em> representa la letra de la unidad. Existen varias alternativas para identificar el nombre correcto:</p>
+<ul class="simple">
+<li><p><strong>BIOS/UEFI</strong>: Consultar los dispositivos instalados físicamente; conocer el fabricante ayuda a distinguir las unidades.</p></li>
+<li><p><strong>Directorio /dev/</strong>: Aquí aparecen todos los dispositivos definidos por el kernel.</p></li>
+<li><p><strong>Archivo /etc/fstab</strong>: Muestra las particiones montadas. Es útil para confirmar que el dispositivo con el que vamos a trabajar <strong>no</strong> está montado.</p></li>
+<li><p><strong>Utilidad Disk (GUI)</strong>: Linux suele incluir aplicaciones gráficas. Aunque permiten realizar pruebas de rendimiento (<em>Benchmark Disk</em>), se recomienda el uso de terminal para tareas delicadas de particionado.</p></li>
+</ul>
+</section>
+</section>
+<section id="uso-de-la-aplicacion">
+<h2>Uso de la Aplicación<a class="headerlink" href="#uso-de-la-aplicacion" title="Link to this heading"></a></h2>
+<p>Una vez determinado el nombre del disco, apuntamos la aplicación hacia él:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># fdisk /dev/sdc</span>
+</pre></div>
+</div>
+<p>Si el disco es nuevo, recibiremos un aviso similar a este:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Device does not contain a recognized partition table.
+Create a new DOS disklabel with disk identifier 0x&lt;numero&gt;.
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Para definir particiones, el disco <strong>no debe estar montado</strong>. En sistemas críticos donde no se puede usar un LiveCD (como GParted), fdisk permite manipular la tabla, pero los cambios solo serán efectivos tras informar al kernel (ej. mediante <code class="docutils literal notranslate"><span class="pre">partprobe</span></code>).</p>
+</div>
+</section>
+<section id="conceptos-tecnicos">
+<h2>Conceptos Técnicos<a class="headerlink" href="#conceptos-tecnicos" title="Link to this heading"></a></h2>
+<section id="tipos-de-tablas-de-particion">
+<h3>Tipos de Tablas de Partición<a class="headerlink" href="#tipos-de-tablas-de-particion" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>MBR (Master Boot Record)</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Tamaño máximo de 2 TiB.</p></li>
+<li><p>Máximo 4 particiones primarias (o 3 primarias y 1 extendida con hasta 12 particiones lógicas).</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>GPT (GUID Partition Table)</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Tamaño máximo de 8 ZiB.</p></li>
+<li><p>Hasta 128 particiones.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="unidades-de-medida">
+<h3>Unidades de Medida<a class="headerlink" href="#unidades-de-medida" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Unidad</p></th>
+<th class="head"><p>Base</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MiB, GiB…</p></td>
+<td><p>Potencia de 2 (Binario)</p></td>
+</tr>
+<tr class="row-odd"><td><p>MB, GB…</p></td>
+<td><p>Potencia de 10 (Decimal)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tipos-de-identificadores">
+<h3>Tipos de Identificadores<a class="headerlink" href="#tipos-de-identificadores" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">8e</span></code>: Partición tipo LVM en MBR.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">8e00</span></code>: Partición tipo LVM en GPT.</p></li>
+</ul>
+</section>
+</section>
+<section id="sistemas-de-archivos-fs">
+<h2>Sistemas de Archivos (FS)<a class="headerlink" href="#sistemas-de-archivos-fs" title="Link to this heading"></a></h2>
+<section id="que-fs-debo-utilizar">
+<h3>¿Qué FS debo utilizar?<a class="headerlink" href="#que-fs-debo-utilizar" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>ReiserFS</dt><dd><p>Utiliza algoritmos de árboles binarios (<strong>B-tree</strong>). Es eficiente con ficheros pequeños al permitir guardar más de uno en un solo bloque.</p>
+</dd>
+<dt>XFS</dt><dd><p>Sistema por defecto en RHEL 7+. Implementa <em>journaling</em> y utiliza árboles para gestionar el espacio libre, lo que lo hace extremadamente rápido con ficheros de gran tamaño.</p>
+</dd>
+<dt>BTRFS</dt><dd><p>Sistema basado en <strong>COW</strong> (<em>Copy-On-Write</em>). Incluye <em>journaling</em> y funciones avanzadas de gestión de volúmenes.</p>
+</dd>
+<dt>ext3 / ext4</dt><dd><p>Evolución del sistema estándar de Linux con soporte de <em>journaling</em>.</p>
+</dd>
+<dt>ext2</dt><dd><p>Sistema antiguo <strong>sin journaling</strong>.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2>Referencias y Agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>“El particionado es el proceso de dividir un dispositivo de almacenamiento en secciones locales llamadas particiones… para ver donde empiezan estas particiones en el dispositivo, se escribe una pequeña tabla al principio, indicada como <strong>PT</strong>.”
+– <em>Documentación GNU Parted</em></p>
+</div></blockquote>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.funtoo.org">Funtoo</a></p></li>
+<li><p><a class="reference external" href="https://vger.kernel.org/vger-lists.html">Kernel Master List</a></p></li>
+<li><p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8-beta/html/configuring_and_managing_storage_hardware/assembly_getting-started-with-partitions_configuring-and-managing-storage-hardware">Configuring Storage (Red Hat)</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../02_Kernel/PCI/host-generic-pci.html" class="btn btn-neutral float-left" title="Controlador de host PCI, genérico" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../99_General/siglas.html" class="btn btn-neutral float-right" title="Siglas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

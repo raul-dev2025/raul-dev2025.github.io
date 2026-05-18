@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe de Reconfiguración de Red Virtual: Bridge br_lab &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="System Configuration" href="../../../04_System_Administration/system_configuration/index.html" />
+    <link rel="prev" title="Informe de Actualización de Infraestructura: Adaptador Red" href="QNAP.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Hardware and System Resources</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#system-tasks">System Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#network-infrastructure">Network Infrastructure</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="QNAP.html">Informe de Actualización de Infraestructura: Adaptador Red</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Informe de Reconfiguración de Red Virtual: Bridge br_lab</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Hardware and System Resources</a></li>
+      <li class="breadcrumb-item active">Informe de Reconfiguración de Red Virtual: Bridge br_lab</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/01_Hardware/hardware_resources/hw_specs/Bridge_Update.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-de-reconfiguracion-de-red-virtual-bridge-br-lab">
+<h1>Informe de Reconfiguración de Red Virtual: Bridge br_lab<a class="headerlink" href="#informe-de-reconfiguracion-de-red-virtual-bridge-br-lab" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>24 de marzo de 2026</p>
+</dd>
+<dt class="field-even">Proyecto<span class="colon">:</span></dt>
+<dd class="field-even"><p>Infraestructura Virtual (IV) - Migración de NIC</p>
+</dd>
+<dt class="field-odd">Host<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Servidor de Virtualización B550</p>
+</dd>
+<dt class="field-even">Estado<span class="colon">:</span></dt>
+<dd class="field-even"><p>Operacional</p>
+</dd>
+</dl>
+<section id="contexto-de-la-intervencion">
+<h2>Contexto de la Intervención<a class="headerlink" href="#contexto-de-la-intervencion" title="Link to this heading"></a></h2>
+<p>Tras la sustitución física de la tarjeta de red TX201 por la <strong>QNAP QXG-2G2T-1225</strong>, el bridge virtual <code class="docutils literal notranslate"><span class="pre">br_lab</span></code> perdió su conectividad con el mundo exterior. El perfil de conexión previo (denominado <em>Slave-TX201</em>) quedó huérfano al no detectar el hardware original, lo que aisló el tráfico de las máquinas virtuales (VMs) como el <code class="docutils literal notranslate"><span class="pre">ipa-server</span></code>.</p>
+</section>
+<section id="logica-de-reconfiguracion">
+<h2>Lógica de Reconfiguración<a class="headerlink" href="#logica-de-reconfiguracion" title="Link to this heading"></a></h2>
+<p>El objetivo no era asignar una IP al host en este bridge, sino restaurar el <strong>Switch Virtual de Capa 2</strong>. Se procedió a:</p>
+<ol class="arabic simple">
+<li><p>Eliminar los perfiles de red individuales que NetworkManager crea automáticamente para las nuevas NICs (para evitar conflictos de control).</p></li>
+<li><p>Vincular el puerto físico <code class="docutils literal notranslate"><span class="pre">enp6s0</span></code> de la QNAP como un “esclavo” (port) del bridge existente.</p></li>
+</ol>
+</section>
+<section id="comandos-utilizados-y-justificacion">
+<h2>Comandos Utilizados y Justificación<a class="headerlink" href="#comandos-utilizados-y-justificacion" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nmcli</span> <span class="pre">connection</span> <span class="pre">delete</span> <span class="pre">Slave-TX201</span></code>: Elimina la conexion esclava, ligada al dispositivo de la anterior NIC, ahora desconectada.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nmcli</span> <span class="pre">connection</span> <span class="pre">delete</span> <span class="pre">QXG1</span></code>: Elimina la configuración por defecto para liberar el dispositivo físico.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nmcli</span> <span class="pre">connection</span> <span class="pre">add</span> <span class="pre">type</span> <span class="pre">ethernet</span> <span class="pre">slave-type</span> <span class="pre">bridge</span> <span class="pre">con-name</span> <span class="pre">QXG-Slave1</span> <span class="pre">ifname</span> <span class="pre">enp6s0</span> <span class="pre">master</span> <span class="pre">br_lab</span></code>: Crea el enlace lógico que “pincha” el cable físico al switch virtual.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nmcli</span> <span class="pre">connection</span> <span class="pre">modify</span> <span class="pre">Slave-QXG</span> <span class="pre">ifname</span> <span class="pre">enp6s0</span></code>: asocia el dispositivo físico al esclavo creado.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nmcli</span> <span class="pre">connection</span> <span class="pre">up</span> <span class="pre">Slave-QXG</span></code>: Levanta la conexion si aun no lo ha hecho.</p></li>
+</ul>
+</section>
+<section id="analisis-de-la-salida-de-datos">
+<h2>Análisis de la Salida de Datos<a class="headerlink" href="#analisis-de-la-salida-de-datos" title="Link to this heading"></a></h2>
+<p>La ejecución de <code class="docutils literal notranslate"><span class="pre">bridge</span> <span class="pre">fdb</span> <span class="pre">show</span> <span class="pre">brport</span> <span class="pre">enp6s0</span></code> arrojó resultados positivos inmediatos:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>70:4d:7b:8e:f5:70 master br_lab  (MAC externa aprendida)
+24:5e:be:94:3a:94 master br_lab permanent (MAC local de la QNAP)
+10:ff:e0:7a:54:0b master br_lab
+24:5e:be:94:3a:93 master br_lab
+24:5e:be:94:3a:94 vlan 1 master br_lab permanent
+24:5e:be:94:3a:94 master br_lab permanent
+01:00:5e:00:00:01 self permanent
+33:33:00:00:00:01 self permanent
+</pre></div>
+</div>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">bridge</span> <span class="pre">fdb</span> <span class="pre">show</span> <span class="pre">brport</span> <span class="pre">enp6s0</span></code>: Muestra la tabla de reenvío (Forwarding Database). Es vital para confirmar que el bridge está “aprendiendo” direcciones MAC a través del puerto.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">addr</span> <span class="pre">show</span> <span class="pre">br_lab</span></code>: esto debera confirmar que el bridge dispone de conectividad.</p>
+<blockquote>
+<div><p>5: br_lab: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000
+link/ether 24:5e:be:94:3a:94 brd ff:ff:ff:ff:ff:ff</p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Interpretación:</strong> El bridge no solo está activo, sino que está detectando tráfico de otros dispositivos en la red física. Esto confirma que el “tubo” de datos está abierto para las VMs.</p>
+</section>
+<section id="incidencia-brctl-not-found">
+<h2>Incidencia: brctl not found<a class="headerlink" href="#incidencia-brctl-not-found" title="Link to this heading"></a></h2>
+<p>Se detectó la ausencia de la herramienta clásica <code class="docutils literal notranslate"><span class="pre">brctl</span></code>. En la infraestructura actual, esta se considera obsoleta. La verificación de la arquitectura se realiza ahora mediante el stack de iproute2:</p>
+<ul class="simple">
+<li><p><strong>Comando sustituto recomendado:</strong> <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">-d</span> <span class="pre">link</span> <span class="pre">show</span> <span class="pre">br_lab</span></code> o <code class="docutils literal notranslate"><span class="pre">bridge</span> <span class="pre">link</span> <span class="pre">show</span></code>.</p></li>
+</ul>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>La infraestructura virtual vuelve a tener salida a la red física. El servidor IdM (<code class="docutils literal notranslate"><span class="pre">ipa-server</span></code>) debería ser accesible sin cambios adicionales en su configuración interna, manteniendo la integridad del reino <code class="docutils literal notranslate"><span class="pre">RAULVILCHEZ.ORG</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="QNAP.html" class="btn btn-neutral float-left" title="Informe de Actualización de Infraestructura: Adaptador Red" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../04_System_Administration/system_configuration/index.html" class="btn btn-neutral float-right" title="System Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

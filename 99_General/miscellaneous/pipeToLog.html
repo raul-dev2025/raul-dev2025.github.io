@@ -1,0 +1,230 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Happens When You Pipe a Build Process to less: Processor Impact &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Network Debugging Guide" href="hardening-timedate-summary.html" />
+    <link rel="prev" title="Vertical Space in reStructuredText" href="verticalS.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Unordered Topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gitTrackNoStage.html">Tracking Untracked Files Without Staging Them</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitSplitHunks.html">Splitting Files into Smaller Hunks for Staging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stagedLogs.html">Viewing the Log of Staged Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashedTask.html">Viewing Stashed Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashingFiles.html">Stashing Files Independently in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitIssue.html">How to Open a GitHub Issue for LTP Kernel Headers Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-usage.html">Introduction to GNUPlot for Mathematical Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-intro.html">GNUPlot Example: Plotting Mathematical Functions in Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="newOrigin2.html">Función seno y coseno</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mathSymbols.html">Definitions of Integral and Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws-overview.html">AWS (Amazon Web Services)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailDrafts.html">Saving Draft Emails with the <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailCmds.html">Linux Mail Command Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pathTruncator.html">Integrating Path Truncation into Read the Docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regexNotation.html">REGEX notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="a_diffCounter.html">How to Get a Resumed (Counter) Output Using <code class="docutils literal notranslate"><span class="pre">diff</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="verticalS.html">Vertical Space in reStructuredText</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">What Happens When You Pipe a Build Process to <code class="docutils literal notranslate"><span class="pre">less</span></code>: Processor Impact</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cpu-utilization-process-scheduling">1. CPU Utilization &amp; Process Scheduling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#buffering-i-o-impact">2. Buffering &amp; I/O Impact</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-usage">3. Memory Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-core-systems">4. Multi-core Systems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#performance-overhead">5. Performance Overhead</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#key-takeaways">Key Takeaways</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-parallel-build-with-paging">Example: Parallel Build with Paging</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate-summary.html">Network Debugging Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate.html">Network Connectivity Troubleshooting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="keyboard_debug.html">Debugging Linux Keyboard Ctrl Key Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commitTypes.html">Tipos de Commits Estándar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Unordered Topics</a></li>
+      <li class="breadcrumb-item active">What Happens When You Pipe a Build Process to <code class="docutils literal notranslate"><span class="pre">less</span></code>: Processor Impact</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/99_General/miscellaneous/pipeToLog.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="what-happens-when-you-pipe-a-build-process-to-less-processor-impact">
+<h1>What Happens When You Pipe a Build Process to <code class="docutils literal notranslate"><span class="pre">less</span></code>: Processor Impact<a class="headerlink" href="#what-happens-when-you-pipe-a-build-process-to-less-processor-impact" title="Link to this heading"></a></h1>
+<p>When piping a build process (e.g., <code class="docutils literal notranslate"><span class="pre">make</span></code>, <code class="docutils literal notranslate"><span class="pre">gcc</span></code>, or <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">run</span> <span class="pre">build</span></code>) to <code class="docutils literal notranslate"><span class="pre">less</span></code>, the processor handles the workload as follows:</p>
+<section id="cpu-utilization-process-scheduling">
+<h2>1. CPU Utilization &amp; Process Scheduling<a class="headerlink" href="#cpu-utilization-process-scheduling" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The build process and <code class="docutils literal notranslate"><span class="pre">less</span></code> run <strong>concurrently</strong>, connected via a pipe (<code class="docutils literal notranslate"><span class="pre">|</span></code>).</p></li>
+<li><p>The <strong>CPU splits time</strong> between:</p>
+<ul>
+<li><p>The build process (generating output).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">less</span></code> (displaying/outputting the data).</p></li>
+</ul>
+</li>
+<li><p>If the build is <strong>CPU-intensive</strong> (e.g., compiling code), the system prioritizes it, while <code class="docutils literal notranslate"><span class="pre">less</span></code> mostly waits for input (unless scrolling/searching).</p></li>
+</ul>
+</section>
+<section id="buffering-i-o-impact">
+<h2>2. Buffering &amp; I/O Impact<a class="headerlink" href="#buffering-i-o-impact" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Stdout is <strong>line-buffered</strong> when printing to a terminal but <strong>fully buffered</strong> when piped.</p>
+<ul>
+<li><p>Build tools (e.g., <code class="docutils literal notranslate"><span class="pre">gcc</span></code>, <code class="docutils literal notranslate"><span class="pre">make</span></code>) may <strong>buffer output in chunks</strong>, causing slight delays in display.</p></li>
+<li><p>Output appears slower, but actual build speed remains unchanged.</p></li>
+</ul>
+</li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">less</span></code> reads slowly (e.g., manual scrolling), the build process may <strong>block temporarily</strong> when the pipe buffer fills.</p></li>
+</ul>
+</section>
+<section id="memory-usage">
+<h2>3. Memory Usage<a class="headerlink" href="#memory-usage" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The pipe uses a <strong>fixed-size buffer</strong> (typically 64KB on Linux).</p>
+<ul>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">less</span></code> doesn’t read fast enough, the build process pauses until buffer space frees.</p></li>
+<li><p>No significant extra memory is used unless <code class="docutils literal notranslate"><span class="pre">less</span></code> loads an extremely large log (rare for builds).</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="multi-core-systems">
+<h2>4. Multi-core Systems<a class="headerlink" href="#multi-core-systems" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>On multi-core CPUs:</p>
+<ul>
+<li><p>The build process and <code class="docutils literal notranslate"><span class="pre">less</span></code> can run on <strong>separate cores</strong>, minimizing interference.</p></li>
+<li><p>Parallel builds (e.g., <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-j4</span></code>) still utilize multiple cores; <code class="docutils literal notranslate"><span class="pre">less</span></code> merges their output.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="performance-overhead">
+<h2>5. Performance Overhead<a class="headerlink" href="#performance-overhead" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Piping to <code class="docutils literal notranslate"><span class="pre">less</span></code> adds <strong>negligible CPU overhead</strong> (only copying data between processes).</p></li>
+<li><p>The main cost is <strong>latency</strong>: output appears in chunks due to buffering.</p></li>
+</ul>
+</section>
+<section id="key-takeaways">
+<h2>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The <strong>processor runs the build at full speed</strong>, but output delivery may feel delayed.</p></li>
+<li><p>For <strong>long builds</strong>, piping to <code class="docutils literal notranslate"><span class="pre">less</span></code> has almost no performance penalty.</p></li>
+<li><p>For <strong>short builds</strong>, starting <code class="docutils literal notranslate"><span class="pre">less</span></code> may introduce minor overhead.</p></li>
+</ul>
+</section>
+<section id="example-parallel-build-with-paging">
+<h2>Example: Parallel Build with Paging<a class="headerlink" href="#example-parallel-build-with-paging" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>-j8<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w"> </span>-R<span class="w"> </span><span class="c1"># Uses 8 cores, pipes output to less</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">-j8</span></code> flag ensures parallel compilation across 8 cores.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">less</span></code> displays output as it arrives, with minimal CPU impact.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="verticalS.html" class="btn btn-neutral float-left" title="Vertical Space in reStructuredText" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hardening-timedate-summary.html" class="btn btn-neutral float-right" title="Network Debugging Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

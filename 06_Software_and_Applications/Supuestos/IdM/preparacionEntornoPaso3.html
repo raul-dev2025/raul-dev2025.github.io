@@ -1,0 +1,187 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preparación del Entorno (Paso 3) &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Réplica de Alta Disponibilidad FreeIPA" href="despliegue-replica.html" />
+    <link rel="prev" title="Informe de Purificación: Imagen Maestra GOLDEN_ROCKY10_IDM" href="../Golden/golden_purificacion.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Infraestructura virtual</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#virtualization-management">Virtualization Management</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../IV-management.html">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/sharedFolder-nfs.html">Informe de Configuración: Repositorio de ISOs vía NFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/configSSH.html">Configuración de Acceso Remoto Seguro (SSH)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/resumen.html">Infraestructura y Almacenamiento</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Testing/vmTunning.html">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Golden/indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#gestion-de-identidad-idm">Gestión de Identidad (IdM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/Incidencias/index.html">Registro de Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Infraestructura virtual</a></li>
+      <li class="breadcrumb-item active">Preparación del Entorno (Paso 3)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/IdM/preparacionEntornoPaso3.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="preparacion-del-entorno-paso-3">
+<h1>Preparación del Entorno (Paso 3)<a class="headerlink" href="#preparacion-del-entorno-paso-3" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-02-24</p>
+</dd>
+<dt class="field-even">Servidor<span class="colon">:</span></dt>
+<dd class="field-even"><p>ipa02.raulvilchez.org (Réplica)</p>
+</dd>
+<dt class="field-odd">Maestro<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ipa.raulvilchez.org</p>
+</dd>
+<dt class="field-even">Estado<span class="colon">:</span></dt>
+<dd class="field-even"><p>Completado y Verificado</p>
+</dd>
+</dl>
+<section id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Link to this heading"></a></h2>
+<p>Configuración de la identidad de red local y sincronización horaria persistente. Esta fase asegura que la réplica tenga una referencia de tiempo idéntica al maestro, requisito sine qua non para el funcionamiento de los tickets de Kerberos.</p>
+</section>
+<section id="acciones-realizadas">
+<h2>Acciones Realizadas<a class="headerlink" href="#acciones-realizadas" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Identidad Local</strong>: Configuración manual de resolución de nombres en <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> para garantizar la visibilidad mutua sin dependencia de DNS externos.</p></li>
+<li><p><strong>Sincronización NTP</strong>: Configuración de <code class="docutils literal notranslate"><span class="pre">chronyd</span></code> para actuar como cliente exclusivo del servidor maestro.</p></li>
+<li><p><strong>Autorización de Red</strong>: Apertura de puertos en el firewall para servicios de replicación y sincronización.</p></li>
+<li><p><strong>Validación de Latido</strong>: Verificación de conectividad UDP (puerto 123) y estado de sincronización (Reachability).</p></li>
+</ol>
+</section>
+<section id="comandos-utilizados">
+<h2>Comandos Utilizados<a class="headerlink" href="#comandos-utilizados" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuración de Identidad (Réplica)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;192.168.17.39   ipa.raulvilchez.org ipa&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/hosts
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;192.168.17.40   ipa02.raulvilchez.org ipa02&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/hosts
+
+<span class="c1"># Configuración de Tiempo (Réplica)</span>
+<span class="c1"># Editado /etc/chrony.conf: server ipa.raulvilchez.org iburst</span>
+systemctl<span class="w"> </span>restart<span class="w"> </span>chronyd
+chronyc<span class="w"> </span>sources<span class="w"> </span>-v
+
+<span class="c1"># Autorización en el Cortafuegos (Réplica)</span>
+firewall-cmd<span class="w"> </span>--permanent<span class="w"> </span>--add-service<span class="o">={</span>ntp,freeipa-replication,dns,http,https<span class="o">}</span>
+firewall-cmd<span class="w"> </span>--reload
+
+<span class="c1"># Verificación de conectividad (Bash-native)</span>
+timeout<span class="w"> </span><span class="m">1</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;cat &lt; /dev/null &gt; /dev/udp/ipa.raulvilchez.org/123&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Open&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="estado-final">
+<h2>Estado Final<a class="headerlink" href="#estado-final" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Chrony Status</strong>: Sincronizado (^* ipa.raulvilchez.org).</p></li>
+<li><p><strong>Firewall Services</strong>: cockpit, dhcpv6-client, dns, freeipa-replication, http, https, ntp, ssh.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Golden/golden_purificacion.html" class="btn btn-neutral float-left" title="Informe de Purificación: Imagen Maestra GOLDEN_ROCKY10_IDM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="despliegue-replica.html" class="btn btn-neutral float-right" title="Réplica de Alta Disponibilidad FreeIPA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

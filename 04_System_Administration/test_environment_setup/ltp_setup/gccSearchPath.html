@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Check GCC Search Path for Kernel Headers in GNU/Linux &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Overview of Autotools Primary Concepts" href="Autotools_overview.html" />
+    <link rel="prev" title="Understanding Directory Permission Strings" href="directoryPermissions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Testing Environment Setup</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Testing/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Config/queringXML.html">Querying XML File Configuration with libvirt Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/envsWithGrub.html">Understanding <code class="docutils literal notranslate"><span class="pre">grub2-editenv</span> <span class="pre">list</span></code> Output: Saved Entry Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oldKernels.html">Working with Older Kernel Versions on CentOS 7: Challenges and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="weakness_config.html">LTP build log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configLog_analysis.html">LTP Configuration Debugging Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="headerResolution.html">How to Fix Missing <cite>linux/module.h</cite> in LTP Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="relevantLinuxSource.html">Understanding /usr/src/linux Symlink Importance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sadButTrue.html">The /usr/src/linux Reality Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../99_General/miscellaneous/diagnosticMissingHeaders.html">Debugging Missing Kernel Headers in LTP Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoConfHd.html">Using text Macros to Check for Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Check GCC Search Path for Kernel Headers in GNU/Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#explanation">Explanation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expected-output">Expected Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#view-all-include-paths">View All Include Paths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#purpose-of-usr-src-kernels">Purpose of <code class="docutils literal notranslate"><span class="pre">/usr/src/kernels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-missing-headers">Install Missing Headers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Autotools_overview.html">Overview of Autotools Primary Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Testing Environment Setup</a></li>
+      <li class="breadcrumb-item active">Check GCC Search Path for Kernel Headers in GNU/Linux</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/04_System_Administration/test_environment_setup/ltp_setup/gccSearchPath.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="check-gcc-search-path-for-kernel-headers-in-gnu-linux">
+<h1>Check GCC Search Path for Kernel Headers in GNU/Linux<a class="headerlink" href="#check-gcc-search-path-for-kernel-headers-in-gnu-linux" title="Link to this heading"></a></h1>
+<p>To check if GCC searches for kernel headers in <code class="docutils literal notranslate"><span class="pre">/usr/src/kernels/</span></code> (common for kernel module development), use:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>-E<span class="w"> </span>-Wp,-v<span class="w"> </span>-<span class="w"> </span>&lt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;/usr/src/kernels&quot;</span>
+</pre></div>
+</div>
+<section id="explanation">
+<h2>Explanation<a class="headerlink" href="#explanation" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">-E</span> <span class="pre">-Wp,-v</span> <span class="pre">-</span> <span class="pre">&lt;/dev/null</span></code>
+- <code class="docutils literal notranslate"><span class="pre">-E</span></code>: Stop after preprocessing (shows include paths).
+- <code class="docutils literal notranslate"><span class="pre">-Wp,-v</span></code>: Pass verbose flag to the preprocessor.
+- <code class="docutils literal notranslate"><span class="pre">&lt;/dev/null</span></code>: Empty input (avoids waiting for stdin).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2&gt;&amp;1</span></code>: Redirects <code class="docutils literal notranslate"><span class="pre">stderr</span></code> to <code class="docutils literal notranslate"><span class="pre">stdout</span></code> (GCC outputs paths to <code class="docutils literal notranslate"><span class="pre">stderr</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">&quot;/usr/src/kernels&quot;</span></code>: Filters output to show only matching paths.</p></li>
+</ul>
+</section>
+<section id="expected-output">
+<h2>Expected Output<a class="headerlink" href="#expected-output" title="Link to this heading"></a></h2>
+<p>If GCC includes <code class="docutils literal notranslate"><span class="pre">/usr/src/kernels</span></code>, the output will resemble:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/usr/src/kernels/5.15.0-78-generic/include
+</pre></div>
+</div>
+<p>If no output appears, GCC does not search there.</p>
+</section>
+<section id="view-all-include-paths">
+<h2>View All Include Paths<a class="headerlink" href="#view-all-include-paths" title="Link to this heading"></a></h2>
+<p>To list <strong>all</strong> GCC header search paths:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>-E<span class="w"> </span>-Wp,-v<span class="w"> </span>-<span class="w"> </span>&lt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;^ &quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="purpose-of-usr-src-kernels">
+<h2>Purpose of <code class="docutils literal notranslate"><span class="pre">/usr/src/kernels</span></code><a class="headerlink" href="#purpose-of-usr-src-kernels" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Required for compiling <strong>kernel modules</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;linux/module.h&gt;</span></code>).</p></li>
+<li><p>Typical locations:</p>
+<ul>
+<li><p>Debian/Ubuntu: <code class="docutils literal notranslate"><span class="pre">/usr/src/linux-headers-$(uname</span> <span class="pre">-r)/</span></code></p></li>
+<li><p>RHEL/Fedora: <code class="docutils literal notranslate"><span class="pre">/usr/src/kernels/</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="install-missing-headers">
+<h2>Install Missing Headers<a class="headerlink" href="#install-missing-headers" title="Link to this heading"></a></h2>
+<ul>
+<li><p><strong>Debian/Ubuntu</strong>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>linux-headers-<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>RHEL/Fedora</strong>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>kernel-devel
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="directoryPermissions.html" class="btn btn-neutral float-left" title="Understanding Directory Permission Strings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Autotools_overview.html" class="btn btn-neutral float-right" title="Overview of Autotools Primary Concepts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

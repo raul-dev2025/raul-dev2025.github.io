@@ -1,0 +1,238 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan-Overview &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Plan-overview 2" href="overview-2.html" />
+    <link rel="prev" title="device_watcher_init()" href="init.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="driverPlaning.html">Planning a Mechanism to Fetch and Translate PCI Device Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="st_pci_device_id.html">struct pci_device_id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="init.html">device_watcher_init()</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Plan-Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#text-based-user-interface">1. Text-Based User Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#focus-on-pci-pcie">2. Focus on PCI/PCIe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#device-discovery">3. Device Discovery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#device-state-investigation">4. Device State Investigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-handling-and-user-guidance">5. Error Handling and User Guidance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#future-extensions">6. Future Extensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#security-considerations">7. Security Considerations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-and-validation">8. Testing and Validation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="overview-2.html">Plan-overview 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="planingStructures.html">Planing Structures - JSON to C Struct Translation Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kernelStructures.html">Linux Kernel-Style JSON Struct Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/mmioVsIOports.html">Briefing: Memory-Mapped I/O vs. I/O Ports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/pcie-symobls.html">PCIe Symobls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/deadline-iosched.html">Deadline IO scheduler tunables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/quick-ref-pci.html">PCI Functions Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanSlab.html">Why <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> Over <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> in the Linux Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/funcion_p_v.html">Funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Driver Development</a></li>
+      <li class="breadcrumb-item active">Plan-Overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/01_Hardware/driver_development/watcherDocs/overview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="plan-overview">
+<h1>Plan-Overview<a class="headerlink" href="#plan-overview" title="Link to this heading"></a></h1>
+<section id="text-based-user-interface">
+<h2>1. Text-Based User Interface<a class="headerlink" href="#text-based-user-interface" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>A text-based interface is a good choice for simplicity and flexibility, especially for system administration tools.</p></li>
+<li><p>Ensure the interface provides clear, structured output for device information.</p></li>
+<li><p>Include help commands or documentation to guide users on how to interact with the tool and interpret the output.</p></li>
+</ul>
+</section>
+<section id="focus-on-pci-pcie">
+<h2>2. Focus on PCI/PCIe<a class="headerlink" href="#focus-on-pci-pcie" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Centering the tool on PCI/PCIe is logical, as these are widely used standards for hardware interfacing.</p></li>
+<li><p>Ensure the tool can handle both PCI and PCIe devices, as they share similarities but have differences in capabilities (e.g., PCIe has higher bandwidth and additional features).</p></li>
+<li><p>Focus on querying and displaying device-specific information, such as:</p>
+<ul>
+<li><p>Vendor ID, Device ID, and Class Code.</p></li>
+<li><p>BAR (Base Address Registers) information.</p></li>
+<li><p>Interrupts (e.g., MSI/MSI-X capabilities).</p></li>
+<li><p>Power management states.</p></li>
+<li><p>Link status (for PCIe devices, e.g., speed and width).</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="device-discovery">
+<h2>3. Device Discovery<a class="headerlink" href="#device-discovery" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>User-Specified Device Path</strong>: Allow users to specify the device path (e.g., <code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices/0000:00:18.0</span></code>) if they know the exact device they want to investigate.</p></li>
+<li><p><strong>Listing Devices</strong>: If the user doesn’t know the device path, provide an option to list all PCI/PCIe devices on the system. This should include:</p>
+<ul>
+<li><p>Devices with drivers attached.</p></li>
+<li><p>Devices without drivers attached (unclaimed devices).</p></li>
+<li><p>Basic information for each device (e.g., vendor ID, device ID, class code, and device location).</p></li>
+</ul>
+</li>
+<li><p>Consider adding filters or search options to help users narrow down the list of devices (e.g., by vendor ID, device ID, or class code).</p></li>
+</ul>
+</section>
+<section id="device-state-investigation">
+<h2>4. Device State Investigation<a class="headerlink" href="#device-state-investigation" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Focus on providing detailed and actionable information about device states. For example:</p>
+<ul>
+<li><p><strong>Device Status</strong>: Is the device enabled, disabled, or in a low-power state?</p></li>
+<li><p><strong>Driver Association</strong>: Which driver (if any) is currently associated with the device?</p></li>
+<li><p><strong>Resource Allocation</strong>: Display memory and I/O resources allocated to the device (e.g., BARs).</p></li>
+<li><p><strong>Interrupts</strong>: Show interrupt information, including whether MSI/MSI-X is enabled.</p></li>
+<li><p><strong>PCIe-Specific Information</strong>: For PCIe devices, display link status (speed, width) and capabilities (e.g., Advanced Error Reporting, ACS).</p></li>
+</ul>
+</li>
+<li><p>Consider adding a “verbose” mode to display even more detailed information for debugging or advanced use cases.</p></li>
+</ul>
+</section>
+<section id="error-handling-and-user-guidance">
+<h2>5. Error Handling and User Guidance<a class="headerlink" href="#error-handling-and-user-guidance" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Provide clear error messages if the user inputs an invalid device path or if a device cannot be accessed.</p></li>
+<li><p>Include a help command or documentation within the tool to explain how to use it and interpret PCI/PCIe device information.</p></li>
+<li><p>Handle edge cases gracefully, such as devices that are not accessible or devices that return incomplete information.</p></li>
+</ul>
+</section>
+<section id="future-extensions">
+<h2>6. Future Extensions<a class="headerlink" href="#future-extensions" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Advanced Querying</strong>: Add options to query specific device capabilities, such as DMA support, MSI/MSI-X interrupts, or power management states.</p></li>
+<li><p><strong>Logging and Debugging</strong>: Include logging capabilities to help diagnose issues or track device behavior during investigation.</p></li>
+<li><p><strong>Exporting Data</strong>: Allow users to export device information in a structured format (e.g., JSON or CSV) for further analysis or reporting.</p></li>
+</ul>
+</section>
+<section id="security-considerations">
+<h2>7. Security Considerations<a class="headerlink" href="#security-considerations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Ensure the tool requires appropriate privileges (e.g., root access) to interact with PCI/PCIe devices, as improper access could destabilize the system.</p></li>
+<li><p>Validate user inputs to prevent potential security issues, such as path traversal attacks.</p></li>
+</ul>
+</section>
+<section id="testing-and-validation">
+<h2>8. Testing and Validation<a class="headerlink" href="#testing-and-validation" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Plan for testing on a variety of PCI/PCIe devices to ensure compatibility and robustness.</p></li>
+<li><p>Consider adding a “dry run” mode that simulates queries without making changes to the system, which can be useful for testing and debugging.</p></li>
+</ul>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>Your approach to building a PCI/PCIe-focused administration tool for investigating device states is well thought out. By focusing on querying and displaying detailed device information, providing clear user guidance, and ensuring robust error handling, you can create a valuable tool for system administrators and developers. Keep in mind the importance of security, testing, and future extensibility as you move forward with development.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="init.html" class="btn btn-neutral float-left" title="device_watcher_init()" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="overview-2.html" class="btn btn-neutral float-right" title="Plan-overview 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

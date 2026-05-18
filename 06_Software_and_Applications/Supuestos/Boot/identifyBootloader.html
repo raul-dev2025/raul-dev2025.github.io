@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inspecting the MBR to Identify the Bootloader &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM" href="bootloaderDebug.html" />
+    <link rel="prev" title="Querying XML File Configuration with libvirt Shell" href="../Config/queringXML.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Testing/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Config/queringXML.html">Querying XML File Configuration with libvirt Shell</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Inspecting the MBR to Identify the Bootloader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#purpose-of-the-dd-command">Purpose of the <code class="docutils literal notranslate"><span class="pre">dd</span></code> Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expected-output">Expected Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-about-dev-vda1">What About <code class="docutils literal notranslate"><span class="pre">/dev/vda1</span></code>?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="envsWithGrub.html">Understanding <code class="docutils literal notranslate"><span class="pre">grub2-editenv</span> <span class="pre">list</span></code> Output: Saved Entry Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/oldKernels.html">Working with Older Kernel Versions on CentOS 7: Challenges and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/weakness_config.html">LTP build log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/debugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/configLog_analysis.html">LTP Configuration Debugging Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/headerResolution.html">How to Fix Missing <cite>linux/module.h</cite> in LTP Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/relevantLinuxSource.html">Understanding /usr/src/linux Symlink Importance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/sadButTrue.html">The /usr/src/linux Reality Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../99_General/miscellaneous/diagnosticMissingHeaders.html">Debugging Missing Kernel Headers in LTP Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/autoConfHd.html">Using text Macros to Check for Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/gccSearchPath.html">Check GCC Search Path for Kernel Headers in GNU/Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/Autotools_overview.html">Overview of Autotools Primary Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+      <li class="breadcrumb-item active">Inspecting the MBR to Identify the Bootloader</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/Boot/identifyBootloader.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="inspecting-the-mbr-to-identify-the-bootloader">
+<h1>Inspecting the MBR to Identify the Bootloader<a class="headerlink" href="#inspecting-the-mbr-to-identify-the-bootloader" title="Link to this heading"></a></h1>
+<p>The command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/vda<span class="w"> </span><span class="nv">bs</span><span class="o">=</span><span class="m">512</span><span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>strings
+</pre></div>
+</div>
+<p>reads the <strong>first 512 bytes</strong> of the disk (<code class="docutils literal notranslate"><span class="pre">/dev/vda</span></code>), which is the <strong>Master Boot Record (MBR)</strong>. The MBR contains:</p>
+<ol class="arabic simple">
+<li><p>The <strong>bootloader code</strong> (first 446 bytes).</p></li>
+<li><p>The <strong>partition table</strong> (next 64 bytes).</p></li>
+<li><p>The <strong>MBR signature</strong> (last 2 bytes).</p></li>
+</ol>
+<p>By piping the output to <code class="docutils literal notranslate"><span class="pre">strings</span></code>, we can extract human-readable text from the MBR, which often includes clues about the bootloader (e.g., “GRUB” or “LILO”).</p>
+<section id="purpose-of-the-dd-command">
+<h2>Purpose of the <code class="docutils literal notranslate"><span class="pre">dd</span></code> Command<a class="headerlink" href="#purpose-of-the-dd-command" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">dd</span></code> command helps us:</p>
+<ol class="arabic simple">
+<li><p><strong>Identify the Bootloader</strong>:</p>
+<ul class="simple">
+<li><p>The MBR contains the first-stage bootloader code. If GRUB is installed, you’ll see strings like “GRUB” or “stage1”.</p></li>
+<li><p>If another bootloader (e.g., Syslinux or LILO) is installed, you might see related strings.</p></li>
+</ul>
+</li>
+<li><p><strong>Verify Bootloader Installation</strong>:</p>
+<ul class="simple">
+<li><p>If the MBR is empty or corrupted, the system may not boot properly. This command helps confirm that the bootloader is correctly installed.</p></li>
+</ul>
+</li>
+<li><p><strong>Check for Chainloading</strong>:</p>
+<ul class="simple">
+<li><p>If the MBR contains a chainloader (e.g., to load another bootloader from a partition), you might see related strings.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="expected-output">
+<h2>Expected Output<a class="headerlink" href="#expected-output" title="Link to this heading"></a></h2>
+<p>Here’s an example of what you might see if GRUB is installed:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>GRUB Geom
+Hard Disk
+Read Error
+</pre></div>
+</div>
+<p>If another bootloader is installed, you might see different strings (e.g., “LILO” or “SYSLINUX”).</p>
+</section>
+<section id="what-about-dev-vda1">
+<h2>What About <code class="docutils literal notranslate"><span class="pre">/dev/vda1</span></code>?<a class="headerlink" href="#what-about-dev-vda1" title="Link to this heading"></a></h2>
+<p>The partition <code class="docutils literal notranslate"><span class="pre">/dev/vda1</span></code> contains the root filesystem (<code class="docutils literal notranslate"><span class="pre">/</span></code>), but the <strong>bootloader is installed on ``/dev/vda`` (the entire disk)</strong>, not on the partition. The bootloader code in the MBR loads the second-stage bootloader (e.g., GRUB’s <code class="docutils literal notranslate"><span class="pre">core.img</span></code>), which then reads the boot configuration (e.g., <code class="docutils literal notranslate"><span class="pre">grub.cfg</span></code>) from the filesystem on <code class="docutils literal notranslate"><span class="pre">/dev/vda1</span></code>.</p>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Run the</strong> <code class="docutils literal notranslate"><span class="pre">dd</span></code> <strong>Command</strong>:</p>
+<p>Execute the command to inspect the MBR:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/vda<span class="w"> </span><span class="nv">bs</span><span class="o">=</span><span class="m">512</span><span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>strings
+</pre></div>
+</div>
+<p>Look for bootloader-related strings (e.g., “GRUB”, “LILO”, or “SYSLINUX”).</p>
+</li>
+<li><p><strong>Check for GRUB Configuration</strong>:</p>
+<p>If GRUB is installed, check the GRUB configuration files in <code class="docutils literal notranslate"><span class="pre">/boot/grub2/</span></code> or <code class="docutils literal notranslate"><span class="pre">/boot/grub/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/boot/grub2/
+cat<span class="w"> </span>/boot/grub2/grub.cfg
+</pre></div>
+</div>
+</li>
+<li><p><strong>Check for Other Bootloaders</strong>:</p>
+<p>If GRUB is not found, check for other bootloaders like Syslinux or LILO:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/boot/syslinux/
+ls<span class="w"> </span>/etc/lilo.conf
+</pre></div>
+</div>
+</li>
+<li><p><strong>Analyze</strong> <code class="docutils literal notranslate"><span class="pre">/proc/cmdline</span></code>:
+Check the kernel command line to see how the kernel and initramfs are loaded:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>/proc/cmdline
+</pre></div>
+</div>
+<p>Look for parameters like <code class="docutils literal notranslate"><span class="pre">root=</span></code>, <code class="docutils literal notranslate"><span class="pre">initrd=</span></code>, or <code class="docutils literal notranslate"><span class="pre">BOOT_IMAGE=</span></code>.</p>
+</li>
+<li><p><strong>Verify Kernel and Initramfs Files</strong>:</p>
+<p>Ensure the kernel and initramfs files exist in <code class="docutils literal notranslate"><span class="pre">/boot/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/boot/
+</pre></div>
+</div>
+<p>Look for files like <code class="docutils literal notranslate"><span class="pre">vmlinuz-&lt;version&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">initrd.img-&lt;version&gt;</span></code>.</p>
+</li>
+</ol>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">dd</span></code> command reads the MBR on <code class="docutils literal notranslate"><span class="pre">/dev/vda</span></code>, which contains the bootloader code.</p></li>
+<li><p>The partition <code class="docutils literal notranslate"><span class="pre">/dev/vda1</span></code> contains the root filesystem, but the bootloader is installed on <code class="docutils literal notranslate"><span class="pre">/dev/vda</span></code>.</p></li>
+<li><p>By analyzing the MBR and bootloader configuration files, we can determine how the kernel and initramfs are being loaded.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Config/queringXML.html" class="btn btn-neutral float-left" title="Querying XML File Configuration with libvirt Shell" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bootloaderDebug.html" class="btn btn-neutral float-right" title="Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

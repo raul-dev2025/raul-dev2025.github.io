@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investigating Device 18 (0000:00:18.x) &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Common Files and Directories in /sys/bus/pci/devices/0000:00:XX.x" href="longWalkOnSys.html" />
+    <link rel="prev" title="Workflow for Using strace to Trap System Calls" href="workFlow-strace.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Hardware and System Resources</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#system-tasks">System Tasks</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="workFlow-strace.html">Workflow for Using <code class="docutils literal notranslate"><span class="pre">strace</span></code> to Trap System Calls</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Investigating Device 18 (0000:00:18.x)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="longWalkOnSys.html">Common Files and Directories in <code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices/0000:00:XX.x</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="genericSys.html">Is the List Architecture-Specific or Generic?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#network-infrastructure">Network Infrastructure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Hardware and System Resources</a></li>
+      <li class="breadcrumb-item active">Investigating Device 18 (0000:00:18.x)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/01_Hardware/hardware_resources/hw_specs/privateInvestigations.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="investigating-device-18-0000-00-18-x">
+<h1>Investigating Device 18 (0000:00:18.x)<a class="headerlink" href="#investigating-device-18-0000-00-18-x" title="Link to this heading"></a></h1>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Link to this heading"></a></h2>
+<p>The goal of this exercise is to investigate the most populated address, specifically device 18 (0000:00:18.x), and gather all available information about it. Since we do not have a <code class="docutils literal notranslate"><span class="pre">pci_watcher</span></code> implemented yet, we will rely on system interfaces such as <code class="docutils literal notranslate"><span class="pre">/sys</span></code> and <code class="docutils literal notranslate"><span class="pre">/proc</span></code> to extract the necessary details.</p>
+</section>
+<section id="step-1-identify-the-device-in-sys">
+<h2>Step 1: Identify the Device in <code class="docutils literal notranslate"><span class="pre">/sys</span></code><a class="headerlink" href="#step-1-identify-the-device-in-sys" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">/sys</span></code> filesystem provides a hierarchical view of devices, including PCI devices. For device <code class="docutils literal notranslate"><span class="pre">0000:00:18.x</span></code>, we can explore the corresponding directory in <code class="docutils literal notranslate"><span class="pre">/sys</span></code>.</p>
+</section>
+<section id="path-to-device-18-in-sys">
+<h2>Path to Device 18 in <code class="docutils literal notranslate"><span class="pre">/sys</span></code>:<a class="headerlink" href="#path-to-device-18-in-sys" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">bus</span><span class="o">/</span><span class="n">pci</span><span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="mi">0000</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">18.</span><span class="n">x</span>
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">x</span></code> with the function numbers (0 through 7) to explore each function of device 18.</p>
+</section>
+<section id="step-2-gather-information-from-sys">
+<h2>Step 2: Gather Information from <code class="docutils literal notranslate"><span class="pre">/sys</span></code><a class="headerlink" href="#step-2-gather-information-from-sys" title="Link to this heading"></a></h2>
+<p>Here are the key files and directories to inspect for each function of device 18:</p>
+<ol class="arabic simple">
+<li><p><strong>Vendor and Device IDs</strong>:</p>
+<ul class="simple">
+<li><p>File: <code class="docutils literal notranslate"><span class="pre">vendor</span></code></p></li>
+<li><p>File: <code class="docutils literal notranslate"><span class="pre">device</span></code></p></li>
+<li><p>These files contain the vendor ID and device ID in hexadecimal format. For example:
+- <code class="docutils literal notranslate"><span class="pre">vendor</span></code> might contain <code class="docutils literal notranslate"><span class="pre">0x1022</span></code> (AMD).
+- <code class="docutils literal notranslate"><span class="pre">device</span></code> might contain a specific device ID for the host bridge.</p></li>
+</ul>
+</li>
+<li><p><strong>Class Code</strong>:</p>
+<ul class="simple">
+<li><p>File: <code class="docutils literal notranslate"><span class="pre">class</span></code></p></li>
+<li><p>This file contains the device class code, which indicates the type of device (e.g., host bridge, PCI bridge, etc.).</p></li>
+</ul>
+</li>
+<li><p><strong>Configuration Space</strong>:</p>
+<ul class="simple">
+<li><p>File: <code class="docutils literal notranslate"><span class="pre">config</span></code></p></li>
+<li><p>This binary file contains the raw PCI configuration space for the device. Tools like <code class="docutils literal notranslate"><span class="pre">lspci</span> <span class="pre">-xxxx</span></code> or <code class="docutils literal notranslate"><span class="pre">hexdump</span></code> can be used to inspect it.</p></li>
+</ul>
+</li>
+<li><p><strong>Resource Allocation</strong>:</p>
+<ul class="simple">
+<li><p>File: <code class="docutils literal notranslate"><span class="pre">resource</span></code></p></li>
+<li><p>This file contains the memory and I/O resources allocated to the device.</p></li>
+<li><p>Files: <code class="docutils literal notranslate"><span class="pre">resource0</span></code>, <code class="docutils literal notranslate"><span class="pre">resource1</span></code>, etc.
+- These files represent the actual memory or I/O regions allocated to the device.</p></li>
+</ul>
+</li>
+<li><p><strong>Driver Information</strong>:</p>
+<ul class="simple">
+<li><p>Symlink: <code class="docutils literal notranslate"><span class="pre">driver</span></code></p></li>
+<li><p>This symlink points to the driver currently bound to the device (if any).</p></li>
+</ul>
+</li>
+<li><p><strong>Power Management</strong>:</p>
+<ul class="simple">
+<li><p>Directory: <code class="docutils literal notranslate"><span class="pre">power/</span></code></p></li>
+<li><p>Contains information about the device’s power state (e.g., <code class="docutils literal notranslate"><span class="pre">control</span></code>, <code class="docutils literal notranslate"><span class="pre">runtime_status</span></code>).</p></li>
+</ul>
+</li>
+<li><p><strong>Device-specific Attributes</strong>:</p>
+<ul class="simple">
+<li><p>Directory: <code class="docutils literal notranslate"><span class="pre">device/</span></code></p></li>
+<li><p>Contains device-specific attributes and configuration options.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-3-gather-information-from-proc">
+<h2>Step 3: Gather Information from <code class="docutils literal notranslate"><span class="pre">/proc</span></code><a class="headerlink" href="#step-3-gather-information-from-proc" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">/proc</span></code> filesystem provides additional system-wide information. For PCI devices, the following files are particularly useful:</p>
+<ol class="arabic simple">
+<li><p><strong>PCI Device List</strong>:</p>
+<ul class="simple">
+<li><p>File: <code class="docutils literal notranslate"><span class="pre">/proc/bus/pci/devices</span></code></p></li>
+<li><p>This file lists all PCI devices in the system, along with their bus, device, function, and resource information.</p></li>
+</ul>
+</li>
+<li><p><strong>Interrupts</strong>:</p>
+<ul class="simple">
+<li><p>File: <code class="docutils literal notranslate"><span class="pre">/proc/interrupts</span></code></p></li>
+<li><p>This file lists interrupt usage across the system. Look for entries related to device 18 to determine if it uses interrupts.</p></li>
+</ul>
+</li>
+<li><p><strong>I/O Memory and Ports</strong>:</p>
+<ul class="simple">
+<li><p>File: <code class="docutils literal notranslate"><span class="pre">/proc/ioports</span></code></p></li>
+<li><p>Lists I/O port ranges used by devices.</p></li>
+<li><p>File: <code class="docutils literal notranslate"><span class="pre">/proc/iomem</span></code></p></li>
+<li><p>Lists memory ranges used by devices.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-4-investigate-device-18-functions">
+<h2>Step 4: Investigate Device 18 Functions<a class="headerlink" href="#step-4-investigate-device-18-functions" title="Link to this heading"></a></h2>
+<p>Since device 18 has multiple functions (0 through 7), we need to investigate each one individually. Here’s how we can approach it:</p>
+<ol class="arabic simple">
+<li><p><strong>Function 0 (0000:00:18.0)</strong>:</p>
+<ul class="simple">
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">vendor</span></code>, <code class="docutils literal notranslate"><span class="pre">device</span></code>, and <code class="docutils literal notranslate"><span class="pre">class</span></code> to confirm it’s a host bridge.</p></li>
+<li><p>Inspect <code class="docutils literal notranslate"><span class="pre">resource</span></code> to see memory and I/O allocations.</p></li>
+<li><p>Check if a driver is bound to it (<code class="docutils literal notranslate"><span class="pre">driver</span></code> symlink).</p></li>
+</ul>
+</li>
+<li><p><strong>Function 1 (0000:00:18.1)</strong>:</p>
+<ul class="simple">
+<li><p>Repeat the same steps as above.</p></li>
+<li><p>Compare the <code class="docutils literal notranslate"><span class="pre">class</span></code> and <code class="docutils literal notranslate"><span class="pre">resource</span></code> files to see if it differs from function 0.</p></li>
+</ul>
+</li>
+<li><p><strong>Functions 2-7 (0000:00:18.2 - 0000:00:18.7)</strong>:</p>
+<ul class="simple">
+<li><p>Investigate each function similarly.</p></li>
+<li><p>Look for differences in <code class="docutils literal notranslate"><span class="pre">class</span></code>, <code class="docutils literal notranslate"><span class="pre">resource</span></code>, and driver binding.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-5-use-tools-to-extract-information">
+<h2>Step 5: Use Tools to Extract Information<a class="headerlink" href="#step-5-use-tools-to-extract-information" title="Link to this heading"></a></h2>
+<p>To make this process easier, we can use tools like <code class="docutils literal notranslate"><span class="pre">lspci</span></code>, <code class="docutils literal notranslate"><span class="pre">setpci</span></code>, and <code class="docutils literal notranslate"><span class="pre">hexdump</span></code> to extract and interpret information.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lspci</span></code>:</p>
+<ul class="simple">
+<li><p>Command: <code class="docutils literal notranslate"><span class="pre">lspci</span> <span class="pre">-v</span> <span class="pre">-s</span> <span class="pre">0000:00:18.x</span></code></p></li>
+<li><p>This will show detailed information about the device, including its class, vendor, device ID, and resource allocation.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">setpci</span></code>:</p>
+<ul class="simple">
+<li><p>Command: <code class="docutils literal notranslate"><span class="pre">setpci</span> <span class="pre">-s</span> <span class="pre">0000:00:18.x</span></code></p></li>
+<li><p>This allows us to read and write directly to the PCI configuration space.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hexdump</span></code>:</p>
+<ul class="simple">
+<li><p>Command: <code class="docutils literal notranslate"><span class="pre">hexdump</span> <span class="pre">-C</span> <span class="pre">/sys/bus/pci/devices/0000:00:18.x/config</span></code></p></li>
+<li><p>This will dump the raw PCI configuration space for inspection.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-6-analyze-the-findings">
+<h2>Step 6: Analyze the Findings<a class="headerlink" href="#step-6-analyze-the-findings" title="Link to this heading"></a></h2>
+<p>Once we’ve gathered all the information, we can analyze it to determine:</p>
+<ul class="simple">
+<li><p>The exact role of each function of device 18.</p></li>
+<li><p>Whether the device is a host bridge, PCI bridge, or something else.</p></li>
+<li><p>How the device is configured (memory ranges, interrupts, etc.).</p></li>
+<li><p>Whether the device is properly initialized and bound to a driver.</p></li>
+</ul>
+</section>
+<section id="example-investigation-for-function-0-0000-00-18-0">
+<h2>Example Investigation for Function 0 (0000:00:18.0):<a class="headerlink" href="#example-investigation-for-function-0-0000-00-18-0" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Check Vendor and Device IDs</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/sys/bus/pci/devices/0000:00:18.0/vendor</span></code> → <code class="docutils literal notranslate"><span class="pre">0x1022</span></code> (AMD).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/sys/bus/pci/devices/0000:00:18.0/device</span></code> → <code class="docutils literal notranslate"><span class="pre">0x1450</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Check Class Code</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/sys/bus/pci/devices/0000:00:18.0/class</span></code> → <code class="docutils literal notranslate"><span class="pre">0x060000</span></code> (Host bridge).</p></li>
+</ul>
+</li>
+<li><p><strong>Check Resource Allocation</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/sys/bus/pci/devices/0000:00:18.0/resource</span></code> → Memory ranges and I/O ports.</p></li>
+</ul>
+</li>
+<li><p><strong>Check Driver Binding</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span> <span class="pre">/sys/bus/pci/devices/0000:00:18.0/driver</span></code> → Symlink to the bound driver (if any).</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="next-steps">
+<h2>Next Steps:<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Repeat the above steps for all functions of device 18 (0000:00:18.0 through 0000:00:18.7).</p></li>
+<li><p>Compare the findings to understand the purpose of each function.</p></li>
+<li><p>Document the results and share them for further analysis.</p></li>
+</ul>
+<p>Let me know if you need help with specific commands or interpreting the data!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="workFlow-strace.html" class="btn btn-neutral float-left" title="Workflow for Using strace to Trap System Calls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="longWalkOnSys.html" class="btn btn-neutral float-right" title="Common Files and Directories in /sys/bus/pci/devices/0000:00:XX.x" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

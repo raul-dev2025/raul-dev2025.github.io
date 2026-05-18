@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The /usr/src/linux Reality Check &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Debugging Missing Kernel Headers in LTP Build System" href="../../../99_General/miscellaneous/diagnosticMissingHeaders.html" />
+    <link rel="prev" title="Understanding /usr/src/linux Symlink Importance" href="relevantLinuxSource.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Testing Environment Setup</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Testing/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Config/queringXML.html">Querying XML File Configuration with libvirt Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/envsWithGrub.html">Understanding <code class="docutils literal notranslate"><span class="pre">grub2-editenv</span> <span class="pre">list</span></code> Output: Saved Entry Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oldKernels.html">Working with Older Kernel Versions on CentOS 7: Challenges and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="weakness_config.html">LTP build log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configLog_analysis.html">LTP Configuration Debugging Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="headerResolution.html">How to Fix Missing <cite>linux/module.h</cite> in LTP Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="relevantLinuxSource.html">Understanding /usr/src/linux Symlink Importance</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">The /usr/src/linux Reality Check</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-hard-truth">1. The Hard Truth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-this-causes-pain">2. Why This Causes Pain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-modern-reality">3. The Modern Reality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-this-wastes-days">4. Why This Wastes Days</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-brutal-fix">5. The Brutal Fix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-this-works-despite-being-wrong">Why This Works Despite Being “Wrong”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-nobody-tells-you-this">6. Why Nobody Tells You This</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#moving-forward">7. Moving Forward</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../99_General/miscellaneous/diagnosticMissingHeaders.html">Debugging Missing Kernel Headers in LTP Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoConfHd.html">Using text Macros to Check for Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gccSearchPath.html">Check GCC Search Path for Kernel Headers in GNU/Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Autotools_overview.html">Overview of Autotools Primary Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Testing Environment Setup</a></li>
+      <li class="breadcrumb-item active">The /usr/src/linux Reality Check</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/04_System_Administration/test_environment_setup/ltp_setup/sadButTrue.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="the-usr-src-linux-reality-check">
+<h1>The /usr/src/linux Reality Check<a class="headerlink" href="#the-usr-src-linux-reality-check" title="Link to this heading"></a></h1>
+<section id="the-hard-truth">
+<h2>1. The Hard Truth<a class="headerlink" href="#the-hard-truth" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The assumed critical path <code class="docutils literal notranslate"><span class="pre">/usr/src/linux</span></code>:</p>
+<ul>
+<li><p>Doesn’t exist by default on modern systems</p></li>
+<li><p>Was never created during kernel installation</p></li>
+<li><p>Isn’t documented as required in most modern docs</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="why-this-causes-pain">
+<h2>2. Why This Causes Pain<a class="headerlink" href="#why-this-causes-pain" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Historical assumptions collide with modern practices:</p>
+<ul>
+<li><p>Old documentation references this path</p></li>
+<li><p>Build systems hardcode this expectation</p></li>
+<li><p>Kernel developers take it for granted</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="the-modern-reality">
+<h2>3. The Modern Reality<a class="headerlink" href="#the-modern-reality" title="Link to this heading"></a></h2>
+<ul>
+<li><p>Current kernel header locations:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/usr/src/kernels/&lt;version&gt;/
+/lib/modules/&lt;version&gt;/build/
+</pre></div>
+</div>
+</li>
+<li><p>No symlink created automatically because:</p>
+<ul class="simple">
+<li><p>Multiple kernel versions may coexist</p></li>
+<li><p>Package managers avoid “surprise” symlinks</p></li>
+<li><p>DKMS handles paths differently</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="why-this-wastes-days">
+<h2>4. Why This Wastes Days<a class="headerlink" href="#why-this-wastes-days" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Symptoms appear as “missing headers”</p></li>
+<li><p>Error messages don’t reveal root cause</p></li>
+<li><p>Solutions focus on wrong fixes:
+* Reinstalling packages
+* Checking permissions
+* Verifying versions</p></li>
+<li><p>The actual fix (symlink) seems “too simple”</p></li>
+</ul>
+</section>
+<section id="the-brutal-fix">
+<h2>5. The Brutal Fix<a class="headerlink" href="#the-brutal-fix" title="Link to this heading"></a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/usr/src/kernels/<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span><span class="w"> </span>/usr/src/linux
+</pre></div>
+</div>
+</section>
+<section id="why-this-works-despite-being-wrong">
+<h2>Why This Works Despite Being “Wrong”<a class="headerlink" href="#why-this-works-despite-being-wrong" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Satisfies legacy build system expectations</p></li>
+<li><p>Doesn’t interfere with modern package management</p></li>
+<li><p>Matches what kernel build system ultimately wants</p></li>
+<li><p>Provides the “magic” path everything looks for</p></li>
+</ul>
+</section>
+<section id="why-nobody-tells-you-this">
+<h2>6. Why Nobody Tells You This<a class="headerlink" href="#why-nobody-tells-you-this" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Considered “tribal knowledge”</p></li>
+<li><p>Assumed to be “obvious” to kernel developers</p></li>
+<li><p>Not documented because “it just works” on maintainers’ systems</p></li>
+<li><p>Falls into “works on my machine” category</p></li>
+</ul>
+</section>
+<section id="moving-forward">
+<h2>7. Moving Forward<a class="headerlink" href="#moving-forward" title="Link to this heading"></a></h2>
+<ul>
+<li><p>Always check for:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>-ld<span class="w"> </span>/usr/src/linux
+ls<span class="w"> </span>-ld<span class="w"> </span>/usr/src/kernels
+</pre></div>
+</div>
+</li>
+<li><p>When building kernel-related code:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-L<span class="w"> </span>/usr/src/linux<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;WARNING: Missing /usr/src/linux symlink&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Run: sudo ln -s /usr/src/kernels/\$(uname -r) /usr/src/linux&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="relevantLinuxSource.html" class="btn btn-neutral float-left" title="Understanding /usr/src/linux Symlink Importance" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../99_General/miscellaneous/diagnosticMissingHeaders.html" class="btn btn-neutral float-right" title="Debugging Missing Kernel Headers in LTP Build System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

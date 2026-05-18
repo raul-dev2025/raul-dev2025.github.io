@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LTP Configuration Debugging Analysis &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="How to Fix Missing linux/module.h in LTP Configuration" href="headerResolution.html" />
+    <link rel="prev" title="Debuggin Kernel Headers" href="debugHeaders.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Testing Environment Setup</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Testing/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Config/queringXML.html">Querying XML File Configuration with libvirt Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/envsWithGrub.html">Understanding <code class="docutils literal notranslate"><span class="pre">grub2-editenv</span> <span class="pre">list</span></code> Output: Saved Entry Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oldKernels.html">Working with Older Kernel Versions on CentOS 7: Challenges and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="weakness_config.html">LTP build log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">LTP Configuration Debugging Analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#flex-lex-error-resolution">Flex (Lex) Error Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#missing-headers">Missing Headers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-headers-path-issue">Kernel Headers Path Issue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#security-hardening-fortify-source">Security Hardening (<code class="docutils literal notranslate"><span class="pre">_FORTIFY_SOURCE</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ptrace-support">Ptrace Support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#final-recommendations">Final Recommendations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="headerResolution.html">How to Fix Missing <cite>linux/module.h</cite> in LTP Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="relevantLinuxSource.html">Understanding /usr/src/linux Symlink Importance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sadButTrue.html">The /usr/src/linux Reality Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../99_General/miscellaneous/diagnosticMissingHeaders.html">Debugging Missing Kernel Headers in LTP Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoConfHd.html">Using text Macros to Check for Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gccSearchPath.html">Check GCC Search Path for Kernel Headers in GNU/Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Autotools_overview.html">Overview of Autotools Primary Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Testing Environment Setup</a></li>
+      <li class="breadcrumb-item active">LTP Configuration Debugging Analysis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/04_System_Administration/test_environment_setup/ltp_setup/configLog_analysis.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ltp-configuration-debugging-analysis">
+<h1>LTP Configuration Debugging Analysis<a class="headerlink" href="#ltp-configuration-debugging-analysis" title="Link to this heading"></a></h1>
+<section id="flex-lex-error-resolution">
+<h2>Flex (Lex) Error Resolution<a class="headerlink" href="#flex-lex-error-resolution" title="Link to this heading"></a></h2>
+<ul>
+<li><p><strong>Issue</strong>: Linker error <code class="docutils literal notranslate"><span class="pre">undefined</span> <span class="pre">reference</span> <span class="pre">to</span> <span class="pre">yywrap</span></code> due to missing Flex library (<code class="docutils literal notranslate"><span class="pre">-lfl</span></code>).</p></li>
+<li><p><strong>Resolution</strong>: Configure script auto-detected and added <code class="docutils literal notranslate"><span class="pre">-lfl</span></code> to linker flags:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>configure:4221: gcc -o conftest -DDISABLE_DMAPI conftest.c -lfl &gt;&amp;5
+configure:4221: $? = 0 # Success!
+</pre></div>
+</div>
+</li>
+<li><p><strong>Action</strong>: Ensure <code class="docutils literal notranslate"><span class="pre">flex-devel</span></code> is installed (verified in logs).</p></li>
+</ul>
+</section>
+<section id="missing-headers">
+<h2>Missing Headers<a class="headerlink" href="#missing-headers" title="Link to this heading"></a></h2>
+<section id="critical-missing-headers">
+<h3>Critical Missing Headers<a class="headerlink" href="#critical-missing-headers" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Header</p></th>
+<th class="head"><p>Error</p></th>
+<th class="head"><p>Impact</p></th>
+<th class="head"><p>Fix</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmapi.h</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fatal</span> <span class="pre">error:</span> <span class="pre">dmapi.h:</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">file</span></code></p></td>
+<td><p>DMAPI tests disabled.</p></td>
+<td><p>Install <code class="docutils literal notranslate"><span class="pre">xfsprogs-devel</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linux/module.h</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fatal</span> <span class="pre">error:</span> <span class="pre">linux/module.h:</span> <span class="pre">Not</span> <span class="pre">found</span></code></p></td>
+<td><p>Kernel module tests skipped.</p></td>
+<td><p>Install <code class="docutils literal notranslate"><span class="pre">kernel-devel</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sys/jfsdmapi.h</span></code></p></td>
+<td><p>JFS-specific tests disabled.</p></td>
+<td><p>Rarely required.</p></td>
+<td><p>Ignore if JFS not used.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h3>Critical Missing Headers<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Analysis of Missing LTP Headers</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 30.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Header</p></th>
+<th class="head"><p>Error</p></th>
+<th class="head"><p>Impact</p></th>
+<th class="head"><p>Fix</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dmapi.h</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fatal</span> <span class="pre">error:</span> <span class="pre">dmapi.h:</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">file</span></code></p></td>
+<td><p>DMAPI tests disabled.</p></td>
+<td><p>Install <code class="docutils literal notranslate"><span class="pre">xfsprogs-devel</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linux/module.h</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fatal</span> <span class="pre">error:</span> <span class="pre">linux/module.h:</span> <span class="pre">Not</span> <span class="pre">found</span></code></p></td>
+<td><p>Kernel module tests skipped.</p></td>
+<td><p>Install <code class="docutils literal notranslate"><span class="pre">kernel-devel</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sys/jfsdmapi.h</span></code></p></td>
+<td><p>JFS-specific tests disabled.</p></td>
+<td><p>Rarely required.</p></td>
+<td><p>Ignore if JFS not used.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="successful-header-checks">
+<h3>Successful Header Checks<a class="headerlink" href="#successful-header-checks" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Core headers found:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">pthread.h</span></code>, <code class="docutils literal notranslate"><span class="pre">libaio.h</span></code>, <code class="docutils literal notranslate"><span class="pre">sys/epoll.h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">openssl/sha.h</span></code>, <code class="docutils literal notranslate"><span class="pre">sys/prctl.h</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="kernel-headers-path-issue">
+<h2>Kernel Headers Path Issue<a class="headerlink" href="#kernel-headers-path-issue" title="Link to this heading"></a></h2>
+<ul>
+<li><p><strong>Error</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">kernels</span><span class="o">/</span><span class="mf">3.10.0</span><span class="o">-</span><span class="mf">1160.118.1</span><span class="o">.</span><span class="n">el7</span><span class="o">.</span><span class="n">x86_64</span><span class="o">/</span><span class="n">include</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">module</span><span class="o">.</span><span class="n">h</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span> <span class="n">fatal</span> <span class="n">error</span><span class="p">:</span> <span class="n">linux</span><span class="o">/</span><span class="nb">list</span><span class="o">.</span><span class="n">h</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Root Cause</strong>: Kernel headers missing or mislinked.</p></li>
+<li><p><strong>Fix</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo yum install kernel-devel-$(uname -r)
+ln -s /usr/src/kernels/$(uname -r) /usr/src/linux
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="security-hardening-fortify-source">
+<h2>Security Hardening (<code class="docutils literal notranslate"><span class="pre">_FORTIFY_SOURCE</span></code>)<a class="headerlink" href="#security-hardening-fortify-source" title="Link to this heading"></a></h2>
+<ul>
+<li><p><strong>Test Failed</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conftest</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span> <span class="n">error</span><span class="p">:</span> <span class="c1">#error Compiling without optimizations</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Reason</strong>: <code class="docutils literal notranslate"><span class="pre">_FORTIFY_SOURCE=2</span></code> requires <code class="docutils literal notranslate"><span class="pre">-O2</span></code> optimizations.</p></li>
+<li><p><strong>Fix</strong>: Re-run configure with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-O2&quot;</span> <span class="o">./</span><span class="n">configure</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="ptrace-support">
+<h2>Ptrace Support<a class="headerlink" href="#ptrace-support" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Detected</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">sys/ptrace.h</span></code>, <code class="docutils literal notranslate"><span class="pre">linux/ptrace.h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pt_regs</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Missing</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">user_regs_struct</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">ptrace_peeksiginfo_args</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="final-recommendations">
+<h2>Final Recommendations<a class="headerlink" href="#final-recommendations" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Install missing packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo yum install kernel-devel-$(uname -r) xfsprogs-devel libcap-devel openssl-devel
+</pre></div>
+</div>
+</li>
+<li><p>Re-run configure with optimizations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>CFLAGS=&quot;-O2&quot; ./configure --with-linux-version=$(uname -r) --with-linux-dir=/usr/src/kernels/$(uname -r)
+</pre></div>
+</div>
+</li>
+<li><p>Verify kernel headers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ls /usr/src/kernels/$(uname -r)/include/linux/module.h
+</pre></div>
+</div>
+</li>
+<li><p>Build LTP:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="debugHeaders.html" class="btn btn-neutral float-left" title="Debuggin Kernel Headers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="headerResolution.html" class="btn btn-neutral float-right" title="How to Fix Missing linux/module.h in LTP Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

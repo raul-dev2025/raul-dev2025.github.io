@@ -1,0 +1,212 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soporte al espacio temprano de usuario &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Controlador de host PCI, genérico" href="../PCI/host-generic-pci.html" />
+    <link rel="prev" title="conjunto de cambios" href="../DeviceTree/changesets.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Admin-guide/1-boot.html">Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../arch/powerpc/booting-without-of.html">El arranque del núcleo deLinux/ppc sin Open Firmware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../arm/Booting.html">Arrancando un ARM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DeviceTree/0-of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DeviceTree/changesets.html">conjunto de cambios</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Soporte al <em>espacio temprano de usuario</em></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#donde-nos-lleva-esto">¿Dónde nos lleva esto?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#como-funciona">¿Cómo funciona?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../PCI/host-generic-pci.html">Controlador de <em>host</em> PCI, genérico</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04_System_Administration/system_apps/fdisk.html">Repaso de fdisk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+      <li class="breadcrumb-item active">Soporte al <em>espacio temprano de usuario</em></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/EarlyUserSpace/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <nav class="contents" id="tabla-de-contenidos" role="doc-toc">
+<p class="topic-title">Tabla de contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#soporte-al-espacio-temprano-de-usuario" id="id1">Soporte al <em>espacio temprano de usuario</em></a></p>
+<ul>
+<li><p><a class="reference internal" href="#introduccion" id="id2">Introducción</a></p></li>
+<li><p><a class="reference internal" href="#donde-nos-lleva-esto" id="id3">¿Dónde nos lleva esto?</a></p></li>
+<li><p><a class="reference internal" href="#como-funciona" id="id4">¿Cómo funciona?</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id5">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="soporte-al-espacio-temprano-de-usuario">
+<span id="buffer-readme-1"></span><h1><a class="toc-backref" href="#id1" role="doc-backlink">Soporte al <em>espacio temprano de usuario</em></a><a class="headerlink" href="#soporte-al-espacio-temprano-de-usuario" title="Link to this heading"></a></h1>
+<section id="introduccion">
+<span id="buffer-readme-2"></span><h2><a class="toc-backref" href="#id2" role="doc-backlink">Introducción</a><a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>última actualización: 20/12/04</p>
+<p><em>El espacio temprano de usuario</em>, son un conjunto de librerías y programas que proporcionan varias piezas de funcionalidad, lo suficientemente importantes, como para estar disponibles durante el arranque del <em>núcleo</em>, pero que necesitan estar dentro del mismo.</p>
+<p>Consiste en una infraestructura de distintos componentes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gen_init_cpio</span></code>, es un programa que construye un <em>fichero</em> <code class="docutils literal notranslate"><span class="pre">cpio-format</span></code>, conteniendo una imagen de sistema de archivo ráiz. Éste fichero está comprimido y, la imagen comprimida está enlazada dentro de la imagen del <em>núcleo</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initramfs</span></code>,código que desempaqueta la imagen <code class="docutils literal notranslate"><span class="pre">cpio</span></code> comprimida, en medio del proceso de arranque.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">klibc</span></code>, una librería de <code class="docutils literal notranslate"><span class="pre">C</span></code>, para el <em>espacio de usuario</em> -actualmente empaquetado por separado, que es optimizado para mejorar su funcionamiento y minimizar su espacio.</p></li>
+</ul>
+<p>El formato de archivo <cite>cpio`</cite> usado por <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> el “newc” -también llamado”cpio -H newc”. Está documentado en el archivo <code class="docutils literal notranslate"><span class="pre">buffer-format.txt</span></code> <cite>f1 . Hay dos formas de añadir una imagen al *espacio de usuario*: especificando un *fichero* ``cpio`</cite> para ser usado como imagen, o dejar que el <em>kernel</em> contruya la imagen desde las especificaciones.</p>
+<p><strong>Método por fichero ``CPIO``.</strong></p>
+<p>Puede crearse un fichero <code class="docutils literal notranslate"><span class="pre">cpio</span></code> conteniendo la imagen del <em>espacio de usuario temprano</em>. El fichero <code class="docutils literal notranslate"><span class="pre">cpio</span></code>, debería ser especificado en <code class="docutils literal notranslate"><span class="pre">CONFIG_INITRAMFS_SOURCE</span></code>, y será usado directamente. Sólo puede ser especificado un archivo <code class="docutils literal notranslate"><span class="pre">cpio</span></code> en <code class="docutils literal notranslate"><span class="pre">CONFIG_INITRAMFS_SOURCE</span></code> y el nombre del archivo y del directorio, no está permitido combinarlos, con el fichero <code class="docutils literal notranslate"><span class="pre">cpio</span></code>.</p>
+<p><strong>Método por construción de imagen</strong></p>
+<p>El proceso de construcción del núcleo, puede también construir una imagen de espacio <em>temprano de usuario</em> desde las fuentes, en lugar de suministrar un <em>fichero</em> <code class="docutils literal notranslate"><span class="pre">cpio</span></code>. Éste método proporciona una forma de crear imágenes, con permisos de usuario <em>root</em> -o administrador, incluso cuando la imagen fué construida por un usuario no privilegiado.</p>
+<p>La imagen es especificada como <em>una</em>, o más fuentes, en <code class="docutils literal notranslate"><span class="pre">CONFIG_INITRAMFS_SOURCE</span></code>. Las fuentes, pueden ser también, <em>directorios</em> o <em>archivos</em>. Los ficheros <code class="docutils literal notranslate"><span class="pre">cpio</span></code> no están permitidos, cuando se construye desde la <em>fuente</em>.</p>
+<p>Un direcotorio de fuentes, tendrá su/sus contenidos empaquetados. El nombre de directorio especificado será <em>mapeado</em> en <code class="docutils literal notranslate"><span class="pre">/</span></code>. Cuando se empaqueta un directorio, podrán traducirse usuario e <em>ID</em>, de grupos no privilegiados. Podrá configurarse <em>INITRAMFS_ROOT_UID</em> a un <em>ID</em> de grupo que necesite ser <em>mapeado</em> como grupo <code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">(0)</span></code>.</p>
+<p>Un archivo de fuente, debe ser <em>directivas</em>, en formato requerido por la utilidad <code class="docutils literal notranslate"><span class="pre">usr/gen_init_cpio</span></code>. -ejecutar <code class="docutils literal notranslate"><span class="pre">usr/gen_init_cpio</span> <span class="pre">--help</span></code> para obtener el formato de archivo. Las directivas en el archivo, serán pasadas directamente a <code class="docutils literal notranslate"><span class="pre">usr/gen_init_cpio</span></code>.</p>
+<p>Cuando son especificados una combinación de directorios y archivos, la imagen <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> será agregada a todos ellos. De ésta forma, un usuario podrá crear un directorio <code class="docutils literal notranslate"><span class="pre">root-image</span></code> -imagen raíz, e instalar todos los archivos dentro. Debido a que archivos de dispositivos especiales, no pueden ser creados por usuarios no privilegiados, archivos especiales podrán ser listados en otro archivo <code class="docutils literal notranslate"><span class="pre">root-file</span></code>. Ambos; <code class="docutils literal notranslate"><span class="pre">root-image</span></code> y <code class="docutils literal notranslate"><span class="pre">root-file</span></code>, podrán ser listados en <code class="docutils literal notranslate"><span class="pre">CONFIG_INITRAMFS_SOURCE</span></code> y, una imagen completa del <em>espacio temprano de usuario</em>, podrá ser construida por usuarios no privilegiados.</p>
+<p>Como nota técnica, cuando directorios y archvos son especificados, se pasará énteramente <code class="docutils literal notranslate"><span class="pre">CONFIG_INITRAMFS_SOURCE</span></code> a <code class="docutils literal notranslate"><span class="pre">scripts/gen_initramfs_list.sh</span></code>. Ésto significa que <code class="docutils literal notranslate"><span class="pre">CONFIG_INITRAMFS_SOURCE</span></code> podrá ser interpretado como cualquier <em>argumento legal</em> por <code class="docutils literal notranslate"><span class="pre">gen_initramfs_list.sh</span></code>. Si es especificado un directorio como argumento, entonces el contenido será escaneado, llevándose a cabo <em>traducciones</em> de <em>uid/gid</em>, las directivas del archivo <code class="docutils literal notranslate"><span class="pre">usr/gen_init_cpio</span></code>, será la salida <em>-se interpreta fd1</em>. Si es especificado un directorio como argumento a <code class="docutils literal notranslate"><span class="pre">scripts/gen_initramfs_list.sh</span></code>, entonces el contenido del archivo, será copiado a la <em>salida</em>. Todas las directivas desde el escaneado de directorios, al copiado del contenido de un archivo, son procesados por <code class="docutils literal notranslate"><span class="pre">usr/gen_init_cpio</span></code>.</p>
+<p>Ver también <code class="docutils literal notranslate"><span class="pre">scripts/gen_initramfs_list.sh</span> <span class="pre">-h</span></code></p>
+</section>
+<section id="donde-nos-lleva-esto">
+<span id="buffer-readme-3"></span><h2><a class="toc-backref" href="#id3" role="doc-backlink">¿Dónde nos lleva esto?</a><a class="headerlink" href="#donde-nos-lleva-esto" title="Link to this heading"></a></h2>
+<p>La distribución de <code class="docutils literal notranslate"><span class="pre">klibc</span></code>, contiene algún <em>software</em> necesario para que el espacio de usuario temprano sea <em>útil</em>. La distribución de <code class="docutils literal notranslate"><span class="pre">klibc</span></code> es mantenida desde el kernel, de forma separada.</p>
+<p>Es posible conseguir algunas <em>capturas</em> -poco frecuentes, de <code class="docutils literal notranslate"><span class="pre">klibc</span></code>, desde: <a class="reference external" href="https://www.kernel.org/pub/linux/libs/klibc/">https://www.kernel.org/pub/linux/libs/klibc/</a>.</p>
+<p>Para usuarios activos, es recomendable el uso del repositorio por medio de <code class="docutils literal notranslate"><span class="pre">git</span></code>, en <a class="reference external" href="http://git.kernel.org/?p=libs/klibc/klibc.git">http://git.kernel.org/?p=libs/klibc/klibc.git</a>.</p>
+<p>La distribución en solitario de <code class="docutils literal notranslate"><span class="pre">klibc</span></code>, proporciona actualmente tres componentes, además de la librería <code class="docutils literal notranslate"><span class="pre">klibc</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ipconfig</span></code>, un programa que configura la <em>interfase de red</em>. Puede configurarla estáticamente, o utilizando DHCP, para obtener información dinámica -también llamado autoconfiguración IP.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nfsmount</span></code>, un programa que puede realizar el <em>montaje</em> del sistema de ficheros NFS.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kinit</span></code>, es el “pegamento”, utilizado por <code class="docutils literal notranslate"><span class="pre">ipconfig</span></code> y <code class="docutils literal notranslate"><span class="pre">nfsmount</span></code>, como reemplazo al anterior soporte a <em>IP autoconfig</em>. También montar el sistema de ficheros <code class="docutils literal notranslate"><span class="pre">NFS</span></code> y, continuar el arranque del sistema por medio del sistema de ficheros como raíz -usuario <em>root</em>.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">kinit</span></code> es construido y enlazado estáticamente, como un binario único, para ahorrar espacio. De forma alternativa, un grueso número de funcionalidades del kernel, habrán sido movidas, afortunadamente, al espacio de usuario temprano.</p>
+<ul class="simple">
+<li><p>Prácticamente todos los <code class="docutils literal notranslate"><span class="pre">init/do_mounts*</span></code> (el principio de todo esto, está ya en su lugar).</p></li>
+<li><p>ACPI, tabla del <em>analizador de sentencias(parsing)</em>.</p></li>
+<li><p>Insertados subsistemas <em>ligeros</em>, que no necesitan realmente, estar en el kernel.</p></li>
+</ul>
+<p>Si <cite>kinit`</cite>, no coincide con sus necesidades y, se dispone de espacio en el disco duro, la distribución de <code class="docutils literal notranslate"><span class="pre">klibc</span></code>, incluye una cónsola compatible con <em>Bourne</em><cite>f2  ``ash`</cite>, y un buen número de utilidades; por lo que es posible reemplazar <code class="docutils literal notranslate"><span class="pre">kinit</span></code> y, constuir una imagen de <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> personalizada, que mejor coincida con necesidades concretas.</p>
+<p>Para preguntas y ayuda, es posible subscribirse al grupo de noticias para el <em>espacio de usuario temprano -early user space</em>, en <a class="reference external" href="http://www.zytor.com/mailman/listinfo/klibc">http://www.zytor.com/mailman/listinfo/klibc</a>.</p>
+</section>
+<section id="como-funciona">
+<span id="buffer-readme-4"></span><h2><a class="toc-backref" href="#id4" role="doc-backlink">¿Cómo funciona?</a><a class="headerlink" href="#como-funciona" title="Link to this heading"></a></h2>
+<p>El kernel tiene, actualmente, tres formas de montar el sistema de ficheros raíz:</p>
+<ol class="arabic simple">
+<li><p>Todos los dispositivos y controladores del sistema de fichero requeridos, compilados en el kernel <code class="docutils literal notranslate"><span class="pre">initrd,</span> <span class="pre">init/main.c:init()</span></code> no, llamarán a <code class="docutils literal notranslate"><span class="pre">prepare_namespace()</span></code>, para montar el sistema de ficheros raíz final. Basado en la opción <code class="docutils literal notranslate"><span class="pre">root=</span></code> y <code class="docutils literal notranslate"><span class="pre">init=</span></code>, para correr otro binario <code class="docutils literal notranslate"><span class="pre">init</span></code>, al listado en <code class="docutils literal notranslate"><span class="pre">init/main.c:init()</span></code>.</p></li>
+<li><p>Algunos dispositivos y controladores del sistema de fichero, son construidos como módulos, almacenados en <code class="docutils literal notranslate"><span class="pre">initrd</span></code>. El <code class="docutils literal notranslate"><span class="pre">initrd</span></code> debe contener un binario <code class="docutils literal notranslate"><span class="pre">/linuxrc</span></code>, el cuál <em>se supone</em>, cargará éstos controladores como módulos. Es igualmente posible, montar el <em>sistema de fichero raíz final</em>, vía <code class="docutils literal notranslate"><span class="pre">linuxrc</span></code> y, utilizar la llamada de sistema <code class="docutils literal notranslate"><span class="pre">pivot_root</span></code>. El <code class="docutils literal notranslate"><span class="pre">initrd</span></code> es montado y ejecutado vía <code class="docutils literal notranslate"><span class="pre">prepare_namespace()</span></code>.</p></li>
+<li><p>Al utilizar <em>initramfs</em>, la llamada a <code class="docutils literal notranslate"><span class="pre">prepare_namespace()</span></code>, debe ser omitida. Esto significa que un binario deberá hacer todo el trabajo. Dicho binario puede ser almacenado dentro de <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>, también vía modificando <code class="docutils literal notranslate"><span class="pre">usr/gen_init_cpio.c</span></code> o por medio de un nuevo formato de <code class="docutils literal notranslate"><span class="pre">initrd</span></code>; un archivo <code class="docutils literal notranslate"><span class="pre">cpio</span></code>. Deberá ser llamado <code class="docutils literal notranslate"><span class="pre">/init</span></code>. Este binario es responsable de llevar a cabo las <em>tareas</em> efectuadas por <code class="docutils literal notranslate"><span class="pre">prepare_namespace()</span></code>.</p></li>
+</ol>
+<p>Para mantener una compativilidad <em>retroactiva</em>, el binario <code class="docutils literal notranslate"><span class="pre">/init</span></code>, únicamente correrá, si proviene através de un archivo <code class="docutils literal notranslate"><span class="pre">cpio</span></code> de <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>. Si no fuese el caso, <code class="docutils literal notranslate"><span class="pre">init/main.c:init()</span></code>, llamará a <code class="docutils literal notranslate"><span class="pre">prepare_namespace()</span></code> para montar el <em>raíz final</em> y, ejecutar de los binarios predefinidos.</p>
+<p><strong>Autor</strong>: Bryan O’Sullivan <a class="reference external" href="mailto:bos&#37;&#52;&#48;serpentine&#46;com">bos<span>&#64;</span>serpentine<span>&#46;</span>com</a></p>
+</section>
+<section id="referencias-y-agradecimientos">
+<span id="buffer-readme-5"></span><h2><a class="toc-backref" href="#id5" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<p><strong>Bash</strong>: Bourne Again Shell.</p>
+<p><strong>nota d.t.</strong> en la página <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code>  se definió el significado de las palabras archivo/fichero, desde una perspectiva <em>más inglesa!</em>. Pero como vemos en este documento, se toma una dirección opuesta; <strong>archivo</strong>, es la <em>unidad mínima</em>, <strong>fichero</strong> es el contenedor.</p>
+<p>nota d.t. <strong>mapeado</strong>: referido a registrar, localizar, situar.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../DeviceTree/changesets.html" class="btn btn-neutral float-left" title="conjunto de cambios" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../PCI/host-generic-pci.html" class="btn btn-neutral float-right" title="Controlador de host PCI, genérico" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

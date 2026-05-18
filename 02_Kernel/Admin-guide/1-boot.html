@@ -1,0 +1,872 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boot &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="El arranque del núcleo deLinux/ppc sin Open Firmware" href="../arch/powerpc/booting-without-of.html" />
+    <link rel="prev" title="Documentación del Kernel" href="../../99_General/Hub/desarrollo/Kernel/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Boot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#el-protocolo-de-arranque-de-linux-86">El protocolo de arranque de Linux/86</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../arch/powerpc/booting-without-of.html">El arranque del núcleo deLinux/ppc sin Open Firmware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../arm/Booting.html">Arrancando un ARM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DeviceTree/0-of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DeviceTree/changesets.html">conjunto de cambios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../EarlyUserSpace/README.html">Soporte al <em>espacio temprano de usuario</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PCI/host-generic-pci.html">Controlador de <em>host</em> PCI, genérico</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04_System_Administration/system_apps/fdisk.html">Repaso de fdisk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+      <li class="breadcrumb-item active">Boot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/Admin-guide/1-boot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <nav class="contents" id="tabla-de-contenidos" role="doc-toc">
+<p class="topic-title">Tabla de contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#boot" id="id1">Boot</a></p>
+<ul>
+<li><p><a class="reference internal" href="#el-protocolo-de-arranque-de-linux-86" id="id2">El protocolo de arranque de Linux/86</a></p>
+<ul>
+<li><p><a class="reference internal" href="#introduccion" id="id3">Introducción</a></p></li>
+<li><p><a class="reference internal" href="#capa-de-memoria" id="id4">Capa de memoria</a></p></li>
+<li><p><a class="reference internal" href="#la-cabecera-del-kernel-modo-real" id="id5">La cabecera del kernel, modo real</a></p></li>
+<li><p><a class="reference internal" href="#detalles-en-los-campos-de-la-cabecera" id="id6">Detalles en los campos de la cabecera</a></p></li>
+<li><p><a class="reference internal" href="#suma-de-comprobacion-de-la-imagen" id="id7">Suma de comprobación de la imagen</a></p></li>
+<li><p><a class="reference internal" href="#linea-de-comandos-del-kernel" id="id8">Línea de comandos del kernel</a></p></li>
+<li><p><a class="reference internal" href="#capa-de-memoria-para-el-codigo-del-modo-real" id="id9">Capa de memoria para el código del modo real</a></p></li>
+<li><p><a class="reference internal" href="#ejemplo-de-configuracion-de-arranque" id="id10">Ejemplo de configuración de arranque</a></p></li>
+<li><p><a class="reference internal" href="#carga-del-resto-del-kernel" id="id11">Carga del resto del kernel</a></p></li>
+<li><p><a class="reference internal" href="#opciones-especiales-para-la-linea-de-comandos" id="id12">opciones especiales para la línea de comandos</a></p></li>
+<li><p><a class="reference internal" href="#trabajando-con-el-kernel" id="id13">Trabajando con el kernel</a></p></li>
+<li><p><a class="reference internal" href="#enlaces-avanzados-para-el-gestor-de-arranque" id="id14">Enlaces avanzados, para el gestor de arranque</a></p></li>
+<li><p><a class="reference internal" href="#protocolo-de-arranque-de-32-bit" id="id15">Protocolo de arranque de 32-bit</a></p></li>
+<li><p><a class="reference internal" href="#protocolo-de-arranque-de-64-bito" id="id16">Protocolo de arranque de 64-bitº</a></p></li>
+<li><p><a class="reference internal" href="#automatizacion-del-protocolo-efi" id="id17">Automatización del protocolo EFI</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id18">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="boot">
+<span id="boot-1"></span><h1><a class="toc-backref" href="#id1" role="doc-backlink">Boot</a><a class="headerlink" href="#boot" title="Link to this heading"></a></h1>
+<section id="el-protocolo-de-arranque-de-linux-86">
+<span id="boot-2"></span><h2><a class="toc-backref" href="#id2" role="doc-backlink">El protocolo de arranque de Linux/86</a><a class="headerlink" href="#el-protocolo-de-arranque-de-linux-86" title="Link to this heading"></a></h2>
+<section id="introduccion">
+<span id="boot-3"></span><h3><a class="toc-backref" href="#id3" role="doc-backlink">Introducción</a><a class="headerlink" href="#introduccion" title="Link to this heading"></a></h3>
+<p>En plataformas x86, el kernel de Linux utiliza una serie de convenciones para el arranque. Estas han evolucionado debido a aspectos históricos, así como la intención, en etapas iniciales, de que el kernel en sí mismo, fuese una imagen arrancable,</p>
+<p>El complicado modelo de memoria PC, en un PC […] debido al cambio de espectativas en la insdustria del PC causada por efectiva desaparición, muerte, defunción, término como sistema operativo de <em>rama principal</em>, línea general</p>
+<p>Actualmente, existen las siguientes versiones para el protocolo de arranque de <em>Linux/86</em>.</p>
+<p>Anteriores kernels: sólo soporte a_zimage/image_. Alguno de los primeros kernels, podrían incluso, no dar soporte a la línea de comandos.</p>
+<p><strong>Protocolo 2.00</strong>: (kernel 1.3.73) Añadido el soporte a <em>bzimage</em> e <em>initrd</em>, así como la formalización de un procedimiento para comunicar al kernel, con el gestor de arranque. <code class="docutils literal notranslate"><span class="pre">setup.S</span></code> hizo <em>recolocable</em> al miso, aunque el area de configuración tradicional, continúa siendo <em>escribible</em>.</p>
+<p><strong>Protocolo 2.01</strong>: (kernel 1.3.76) Añadida una advertencia, para la <em>sobrecarga de pila</em>.</p>
+<p><strong>Protocolo 2.02</strong>: (kernel 2.4.0-test3-pre3) Nuevo protocolo, para la línea de comandos. Alcanzado el límite de memoria convencional. No hay sobreescritura en el área de configuración tradicional, facilitando un arranque seguro, en sistemas que utilizan EBDA desde SMM o un punto de entrada en la BIOS de 32-bit. Depreciada <em>zimage</em>, aunque mantenido el soporte.</p>
+<p><strong>Protocolo 2.03</strong>: (kernel 2.4.18-pre1) de forma explícita, se pone initdr a disposición del gestor de arranque, en una dirección lo más alta posible.</p>
+<p><strong>Protocol 2.04</strong>: (Kernel 2.6.14) Extendido el tamaño de campo <code class="docutils literal notranslate"><span class="pre">syssize</span></code>, a cuatro bytes.</p>
+<p><strong>Protocol 2.05</strong>: (Kernel 2.6.20) Construido el modo, <em>protegido</em> del kernel como <em>recolocable</em>. Son introducidos los campos <code class="docutils literal notranslate"><span class="pre">relocatable_kernel</span></code> y <code class="docutils literal notranslate"><span class="pre">kernel_alignment</span></code>.</p>
+<p><strong>Protocol 2.06</strong>: (Kernel 2.6.22) Añadido un campo, conteniendo el tamaño de la línea de comandos para el arranque.</p>
+<p><strong>Protocol 2.07</strong>: (Kernel 2.6.24) Añadido: <em>paravirtualización</em>, como el protocolo de arranque. Son intorucidas <code class="docutils literal notranslate"><span class="pre">hardware_subarch</span></code>y <code class="docutils literal notranslate"><span class="pre">hardware_subarch_data</span></code> y, las opciones <code class="docutils literal notranslate"><span class="pre">KEEP_SEGMENTS</span></code> en <code class="docutils literal notranslate"><span class="pre">load_flags</span></code>.</p>
+<p><strong>Protocol 2.08</strong>: (Kernel 2.6.26) Añadida la <em>suma de comprovación</em> <code class="docutils literal notranslate"><span class="pre">crc32</span></code> y el formato ELF de <em>payload(punto de carga?)</em>. Introducidos los campor <code class="docutils literal notranslate"><span class="pre">payload_offset</span></code> y <code class="docutils literal notranslate"><span class="pre">payload_length</span></code> para ayudar a localizar el <em>payload</em>.</p>
+<p><strong>Protocol 2.09</strong>: (Kernel 2.6.26) Añadido un campo tipo <em>puntero físico</em> de 64-bit, en una lista enlazada de <code class="docutils literal notranslate"><span class="pre">struct</span>&#160; <span class="pre">setup_data</span></code>.</p>
+<p><strong>Protocol 2.10</strong>: (Kernel 2.6.31) Añadido el protocolo para el <em>alineamiento relajado</em>, tras añadir <code class="docutils literal notranslate"><span class="pre">kernel_alignment</span></code>, nuevos campos <code class="docutils literal notranslate"><span class="pre">init_size</span></code> y <code class="docutils literal notranslate"><span class="pre">pref_address</span></code>. Añadida la extensión de identificador -ID, al gestor de arranque.</p>
+<p><strong>Protocol 2.11</strong>: (Kernel 3.6) Añadido un campo para el <em>offset</em> de EFI asistido, protocolo para el punto de entrada.</p>
+<p><strong>Protocol 2.12</strong>: (Kernel 3.8) Añadido el campo <code class="docutils literal notranslate"><span class="pre">xloadflags</span></code> y extensión de campos, en el <code class="docutils literal notranslate"><span class="pre">struct</span></code> -la estrctura, <code class="docutils literal notranslate"><span class="pre">boot_params</span></code>, para <em>bzImage</em> en carga y, el disco ram por encima de los 4G en 64bit.</p>
+</section>
+<section id="capa-de-memoria">
+<span id="boot-4"></span><h3><a class="toc-backref" href="#id4" role="doc-backlink">Capa de memoria</a><a class="headerlink" href="#capa-de-memoria" title="Link to this heading"></a></h3>
+<p>El mapa de memoria tradicional para el cargador del kernel, utilizó una Imagen o <em>zImage</em> del kernel, parecida:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">|</span>            <span class="o">|</span>
+<span class="mi">0</span><span class="n">A0000</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Reserved</span> <span class="k">for</span> <span class="n">BIOS</span>     <span class="o">|</span>  <span class="n">Do</span> <span class="ow">not</span> <span class="n">use</span><span class="o">.</span>  <span class="n">Reserved</span> <span class="k">for</span> <span class="n">BIOS</span> <span class="n">EBDA</span><span class="o">.</span>
+<span class="mi">09</span><span class="n">A000</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Command</span> <span class="n">line</span>      <span class="o">|</span>
+    <span class="o">|</span>  <span class="n">Stack</span><span class="o">/</span><span class="n">heap</span>        <span class="o">|</span>  <span class="n">For</span> <span class="n">use</span> <span class="n">by</span> <span class="n">the</span> <span class="n">kernel</span> <span class="n">real</span><span class="o">-</span><span class="n">mode</span> <span class="n">code</span><span class="o">.</span>
+<span class="mi">098000</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Kernel</span> <span class="n">setup</span>      <span class="o">|</span>  <span class="n">The</span> <span class="n">kernel</span> <span class="n">real</span><span class="o">-</span><span class="n">mode</span> <span class="n">code</span><span class="o">.</span>
+<span class="mi">090200</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Kernel</span> <span class="n">boot</span> <span class="n">sector</span>    <span class="o">|</span>  <span class="n">The</span> <span class="n">kernel</span> <span class="n">legacy</span> <span class="n">boot</span> <span class="n">sector</span><span class="o">.</span>
+<span class="mi">090000</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Protected</span><span class="o">-</span><span class="n">mode</span> <span class="n">kernel</span> <span class="o">|</span>  <span class="n">The</span> <span class="n">bulk</span> <span class="n">of</span> <span class="n">the</span> <span class="n">kernel</span> <span class="n">image</span><span class="o">.</span>
+<span class="mi">010000</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Boot</span> <span class="n">loader</span>       <span class="o">|</span>  <span class="o">&lt;-</span> <span class="n">Boot</span> <span class="n">sector</span> <span class="n">entry</span> <span class="n">point</span> <span class="mi">0000</span><span class="p">:</span><span class="mi">7</span><span class="n">C00</span>
+<span class="mi">001000</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Reserved</span> <span class="k">for</span> <span class="n">MBR</span><span class="o">/</span><span class="n">BIOS</span> <span class="o">|</span>
+<span class="mi">000800</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Typically</span> <span class="n">used</span> <span class="n">by</span> <span class="n">MBR</span> <span class="o">|</span>
+<span class="mi">000600</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">BIOS</span> <span class="n">use</span> <span class="n">only</span>     <span class="o">|</span>
+<span class="mi">000000</span>  <span class="o">+------------------------+</span>
+</pre></div>
+</div>
+<p>Al utilizar <em>bzImage</em>, el <em>modo protegido</em> del kernel, fue recolocado en <code class="docutils literal notranslate"><span class="pre">0x100000</span></code> -<em>memoria alta</em> y, el bloque del kernel en modo real -sector de arranque, configuración, pila/montón, fue hecha recoloable sobre cualquier dirección entre <code class="docutils literal notranslate"><span class="pre">0x100000</span></code> y el final de la <em>memoria baja</em>. Desafortunadamente, en los protocolos 2.00 y 2.01, el rango de memoria <code class="docutils literal notranslate"><span class="pre">0x90000+</span></code>, continúa siendo utilizado por el kernel; el protocolo 2.02, resuelve este problema.</p>
+<p>Es preferible guardar el <em>techo de memoria</em> -el punto más alto en una memoria baja, controlado por el gestor de arranque; tan bajo como sea posible, debido a que recientes BIOS, han empezado a colocar grandes cantidades de memoria. Llamada <em>Área de Datos Extendida BIOS</em>; junto a la parte más alta de la <em>memoria baja</em>. El gestor de arranque debería utilizar la <code class="docutils literal notranslate"><span class="pre">llamada()</span></code> a la BIOS <code class="docutils literal notranslate"><span class="pre">INT</span> <span class="pre">12h</span></code>, para verificar la cantidad de memoria disponible.</p>
+<p>Desgraciadamente, si <code class="docutils literal notranslate"><span class="pre">INT</span> <span class="pre">12h</span></code> devuelve una cantidad de memoria demasiado baja(pequeña?), no hay nada que pueda hacer el gestor de arranque, para comunicar el error al usuario. Por lo tanto, el gestor de arranque, debería estar diseñado para tomar espacios de memoria, en la memoria baja, tan pequeños como pueda.</p>
+<p>En imágenes <code class="docutils literal notranslate"><span class="pre">zimage</span></code> o anteriores imágenes del kernel <code class="docutils literal notranslate"><span class="pre">bzimage</span></code>, la cuales necesitan escribir datos en el segmento <code class="docutils literal notranslate"><span class="pre">0x90000</span></code>, el gestor de arranque debería asegurarse de no utilizar memoria por enciama <code class="docutils literal notranslate"><span class="pre">0x9A000</span></code>; hay muchas BIOS que <em>fallarán (to break)</em> por encima de este punto.</p>
+<p>En una imagen <code class="docutils literal notranslate"><span class="pre">bzimage</span></code> moderna, protocolo de arranque versión <em>&gt;= 2.02</em>, es recomendable un <em>modelo de memoria</em> como el que sigue:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">~</span>                        <span class="o">~</span>
+            <span class="o">|</span>  <span class="n">Protected</span><span class="o">-</span><span class="n">mode</span> <span class="n">kernel</span> <span class="o">|</span>
+<span class="mi">100000</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">I</span><span class="o">/</span><span class="n">O</span> <span class="n">memory</span> <span class="n">hole</span>   <span class="o">|</span>
+<span class="mi">0</span><span class="n">A0000</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Reserved</span> <span class="k">for</span> <span class="n">BIOS</span>     <span class="o">|</span>  <span class="n">Leave</span> <span class="k">as</span> <span class="n">much</span> <span class="k">as</span> <span class="n">possible</span> <span class="n">unused</span>
+    <span class="o">~</span>                        <span class="o">~</span>
+    <span class="o">|</span>  <span class="n">Command</span> <span class="n">line</span>      <span class="o">|</span>  <span class="p">(</span><span class="n">Can</span> <span class="n">also</span> <span class="n">be</span> <span class="n">below</span> <span class="n">the</span> <span class="n">X</span><span class="o">+</span><span class="mi">10000</span> <span class="n">mark</span><span class="p">)</span>
+<span class="n">X</span><span class="o">+</span><span class="mi">10000</span> <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Stack</span><span class="o">/</span><span class="n">heap</span>        <span class="o">|</span>  <span class="n">For</span> <span class="n">use</span> <span class="n">by</span> <span class="n">the</span> <span class="n">kernel</span> <span class="n">real</span><span class="o">-</span><span class="n">mode</span> <span class="n">code</span><span class="o">.</span>
+<span class="n">X</span><span class="o">+</span><span class="mi">08000</span> <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Kernel</span> <span class="n">setup</span>      <span class="o">|</span>  <span class="n">The</span> <span class="n">kernel</span> <span class="n">real</span><span class="o">-</span><span class="n">mode</span> <span class="n">code</span><span class="o">.</span>
+    <span class="o">|</span>  <span class="n">Kernel</span> <span class="n">boot</span> <span class="n">sector</span>    <span class="o">|</span>  <span class="n">The</span> <span class="n">kernel</span> <span class="n">legacy</span> <span class="n">boot</span> <span class="n">sector</span><span class="o">.</span>
+<span class="n">X</span>       <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Boot</span> <span class="n">loader</span>       <span class="o">|</span>  <span class="o">&lt;-</span> <span class="n">Boot</span> <span class="n">sector</span> <span class="n">entry</span> <span class="n">point</span> <span class="mi">0000</span><span class="p">:</span><span class="mi">7</span><span class="n">C00</span>
+<span class="mi">001000</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Reserved</span> <span class="k">for</span> <span class="n">MBR</span><span class="o">/</span><span class="n">BIOS</span> <span class="o">|</span>
+<span class="mi">000800</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">Typically</span> <span class="n">used</span> <span class="n">by</span> <span class="n">MBR</span> <span class="o">|</span>
+<span class="mi">000600</span>  <span class="o">+------------------------+</span>
+    <span class="o">|</span>  <span class="n">BIOS</span> <span class="n">use</span> <span class="n">only</span>     <span class="o">|</span>
+<span class="mi">000000</span>  <span class="o">+------------------------+</span>
+</pre></div>
+</div>
+<p>… donde la dirección <code class="docutils literal notranslate"><span class="pre">X</span></code>, es tan baja, como prermite el diseño del gestor de arranque.</p>
+</section>
+<section id="la-cabecera-del-kernel-modo-real">
+<span id="boot-5"></span><h3><a class="toc-backref" href="#id5" role="doc-backlink">La cabecera del kernel, modo real</a><a class="headerlink" href="#la-cabecera-del-kernel-modo-real" title="Link to this heading"></a></h3>
+<p>En el siguiente texto y, en cualquier parte en la secuencia de arranque del kernel, un “sector” es referido como 512 bytes. Es independiente del tamaño de sector del medio subyacente.</p>
+<p>El priemer paso para cargar una kernel Linux, debería ser cargar el código en modo <em>real</em> -sector de arranque y código de configuración. Después examinar la siguiente <em>cabecera</em> en el <code class="docutils literal notranslate"><span class="pre">offset</span></code> <code class="docutils literal notranslate"><span class="pre">0x01f1</span></code>. El código del <em>modo real</em>, puede sumar un total de 32K, aunque el gestor de arranque podría escoger, el cargar únicamente los primeros dos sectores (1K) y, examinar entonces, el tamaño del sector de arranque.</p>
+<p>La cabecera se parece a ésto:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Offset</span>  <span class="n">Proto</span>   <span class="n">Name</span>        <span class="n">Meaning</span>
+<span class="o">/</span><span class="n">Size</span>
+
+<span class="mi">01</span><span class="n">F1</span><span class="o">/</span><span class="mi">1</span>  <span class="n">ALL</span><span class="p">(</span><span class="mi">1</span>   <span class="n">setup_sects</span> <span class="n">The</span> <span class="n">size</span> <span class="n">of</span> <span class="n">the</span> <span class="n">setup</span> <span class="ow">in</span> <span class="n">sectors</span>
+<span class="mi">01</span><span class="n">F2</span><span class="o">/</span><span class="mi">2</span>  <span class="n">ALL</span> <span class="n">root_flags</span>  <span class="n">If</span> <span class="nb">set</span><span class="p">,</span> <span class="n">the</span> <span class="n">root</span> <span class="ow">is</span> <span class="n">mounted</span> <span class="n">readonly</span>
+<span class="mi">01</span><span class="n">F4</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.04</span><span class="o">+</span><span class="p">(</span><span class="mi">2</span> <span class="n">syssize</span>     <span class="n">The</span> <span class="n">size</span> <span class="n">of</span> <span class="n">the</span> <span class="mi">32</span><span class="o">-</span><span class="n">bit</span> <span class="n">code</span> <span class="ow">in</span> <span class="mi">16</span><span class="o">-</span><span class="n">byte</span> <span class="n">paras</span>
+<span class="mi">01</span><span class="n">F8</span><span class="o">/</span><span class="mi">2</span>  <span class="n">ALL</span> <span class="n">ram_size</span>    <span class="n">DO</span> <span class="n">NOT</span> <span class="n">USE</span> <span class="o">-</span> <span class="k">for</span> <span class="n">bootsect</span><span class="o">.</span><span class="n">S</span> <span class="n">use</span> <span class="n">only</span>
+<span class="mi">01</span><span class="n">FA</span><span class="o">/</span><span class="mi">2</span>  <span class="n">ALL</span> <span class="n">vid_mode</span>    <span class="n">Video</span> <span class="n">mode</span> <span class="n">control</span>
+<span class="mi">01</span><span class="n">FC</span><span class="o">/</span><span class="mi">2</span>  <span class="n">ALL</span> <span class="n">root_dev</span>    <span class="n">Default</span> <span class="n">root</span> <span class="n">device</span> <span class="n">number</span>
+<span class="mi">01</span><span class="n">FE</span><span class="o">/</span><span class="mi">2</span>  <span class="n">ALL</span> <span class="n">boot_flag</span>   <span class="mh">0xAA55</span> <span class="n">magic</span> <span class="n">number</span>
+<span class="mi">0200</span><span class="o">/</span><span class="mi">2</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">jump</span>        <span class="n">Jump</span> <span class="n">instruction</span>
+<span class="mi">0202</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">header</span>      <span class="n">Magic</span> <span class="n">signature</span> <span class="s2">&quot;HdrS&quot;</span>
+<span class="mi">0206</span><span class="o">/</span><span class="mi">2</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">version</span>     <span class="n">Boot</span> <span class="n">protocol</span> <span class="n">version</span> <span class="n">supported</span>
+<span class="mi">0208</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">realmode_swtch</span>  <span class="n">Boot</span> <span class="n">loader</span> <span class="n">hook</span> <span class="p">(</span><span class="n">see</span> <span class="n">below</span><span class="p">)</span>
+<span class="mi">020</span><span class="n">C</span><span class="o">/</span><span class="mi">2</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">start_sys_seg</span>   <span class="n">The</span> <span class="n">load</span><span class="o">-</span><span class="n">low</span> <span class="n">segment</span> <span class="p">(</span><span class="mh">0x1000</span><span class="p">)</span> <span class="p">(</span><span class="n">obsolete</span><span class="p">)</span>
+<span class="mi">020</span><span class="n">E</span><span class="o">/</span><span class="mi">2</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">kernel_version</span>  <span class="n">Pointer</span> <span class="n">to</span> <span class="n">kernel</span> <span class="n">version</span> <span class="n">string</span>
+<span class="mi">0210</span><span class="o">/</span><span class="mi">1</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">type_of_loader</span>  <span class="n">Boot</span> <span class="n">loader</span> <span class="n">identifier</span>
+<span class="mi">0211</span><span class="o">/</span><span class="mi">1</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">loadflags</span>   <span class="n">Boot</span> <span class="n">protocol</span> <span class="n">option</span> <span class="n">flags</span>
+<span class="mi">0212</span><span class="o">/</span><span class="mi">2</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">setup_move_size</span> <span class="n">Move</span> <span class="n">to</span> <span class="n">high</span> <span class="n">memory</span> <span class="n">size</span> <span class="p">(</span><span class="n">used</span> <span class="k">with</span> <span class="n">hooks</span><span class="p">)</span>
+<span class="mi">0214</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">code32_start</span>    <span class="n">Boot</span> <span class="n">loader</span> <span class="n">hook</span> <span class="p">(</span><span class="n">see</span> <span class="n">below</span><span class="p">)</span>
+<span class="mi">0218</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">ramdisk_image</span>   <span class="n">initrd</span> <span class="n">load</span> <span class="n">address</span> <span class="p">(</span><span class="nb">set</span> <span class="n">by</span> <span class="n">boot</span> <span class="n">loader</span><span class="p">)</span>
+<span class="mi">021</span><span class="n">C</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">ramdisk_size</span>    <span class="n">initrd</span> <span class="n">size</span> <span class="p">(</span><span class="nb">set</span> <span class="n">by</span> <span class="n">boot</span> <span class="n">loader</span><span class="p">)</span>
+<span class="mi">0220</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.00</span><span class="o">+</span>   <span class="n">bootsect_kludge</span> <span class="n">DO</span> <span class="n">NOT</span> <span class="n">USE</span> <span class="o">-</span> <span class="k">for</span> <span class="n">bootsect</span><span class="o">.</span><span class="n">S</span> <span class="n">use</span> <span class="n">only</span>
+<span class="mi">0224</span><span class="o">/</span><span class="mi">2</span>  <span class="mf">2.01</span><span class="o">+</span>   <span class="n">heap_end_ptr</span>    <span class="n">Free</span> <span class="n">memory</span> <span class="n">after</span> <span class="n">setup</span> <span class="n">end</span>
+<span class="mi">0226</span><span class="o">/</span><span class="mi">1</span>  <span class="mf">2.02</span><span class="o">+</span><span class="p">(</span><span class="mi">3</span> <span class="n">ext_loader_ver</span>  <span class="n">Extended</span> <span class="n">boot</span> <span class="n">loader</span> <span class="n">version</span>
+<span class="mi">0227</span><span class="o">/</span><span class="mi">1</span>  <span class="mf">2.02</span><span class="o">+</span><span class="p">(</span><span class="mi">3</span> <span class="n">ext_loader_type</span> <span class="n">Extended</span> <span class="n">boot</span> <span class="n">loader</span> <span class="n">ID</span>
+<span class="mi">0228</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.02</span><span class="o">+</span>   <span class="n">cmd_line_ptr</span>    <span class="mi">32</span><span class="o">-</span><span class="n">bit</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">the</span> <span class="n">kernel</span> <span class="n">command</span> <span class="n">line</span>
+<span class="mi">022</span><span class="n">C</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.03</span><span class="o">+</span>   <span class="n">initrd_addr_max</span> <span class="n">Highest</span> <span class="n">legal</span> <span class="n">initrd</span> <span class="n">address</span>
+<span class="mi">0230</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.05</span><span class="o">+</span>   <span class="n">kernel_alignment</span> <span class="n">Physical</span> <span class="n">addr</span> <span class="n">alignment</span> <span class="n">required</span> <span class="k">for</span> <span class="n">kernel</span>
+<span class="mi">0234</span><span class="o">/</span><span class="mi">1</span>  <span class="mf">2.05</span><span class="o">+</span>   <span class="n">relocatable_kernel</span> <span class="n">Whether</span> <span class="n">kernel</span> <span class="ow">is</span> <span class="n">relocatable</span> <span class="ow">or</span> <span class="ow">not</span>
+<span class="mi">0235</span><span class="o">/</span><span class="mi">1</span>  <span class="mf">2.10</span><span class="o">+</span>   <span class="n">min_alignment</span>   <span class="n">Minimum</span> <span class="n">alignment</span><span class="p">,</span> <span class="k">as</span> <span class="n">a</span> <span class="n">power</span> <span class="n">of</span> <span class="n">two</span>
+<span class="mi">0236</span><span class="o">/</span><span class="mi">2</span>  <span class="mf">2.12</span><span class="o">+</span>   <span class="n">xloadflags</span>  <span class="n">Boot</span> <span class="n">protocol</span> <span class="n">option</span> <span class="n">flags</span>
+<span class="mi">0238</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.06</span><span class="o">+</span>   <span class="n">cmdline_size</span>    <span class="n">Maximum</span> <span class="n">size</span> <span class="n">of</span> <span class="n">the</span> <span class="n">kernel</span> <span class="n">command</span> <span class="n">line</span>
+<span class="mi">023</span><span class="n">C</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.07</span><span class="o">+</span>   <span class="n">hardware_subarch</span> <span class="n">Hardware</span> <span class="n">subarchitecture</span>
+<span class="mi">0240</span><span class="o">/</span><span class="mi">8</span>  <span class="mf">2.07</span><span class="o">+</span>   <span class="n">hardware_subarch_data</span> <span class="n">Subarchitecture</span><span class="o">-</span><span class="n">specific</span> <span class="n">data</span>
+<span class="mi">0248</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.08</span><span class="o">+</span>   <span class="n">payload_offset</span>  <span class="n">Offset</span> <span class="n">of</span> <span class="n">kernel</span> <span class="n">payload</span>
+<span class="mi">024</span><span class="n">C</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.08</span><span class="o">+</span>   <span class="n">payload_length</span>  <span class="n">Length</span> <span class="n">of</span> <span class="n">kernel</span> <span class="n">payload</span>
+<span class="mi">0250</span><span class="o">/</span><span class="mi">8</span>  <span class="mf">2.09</span><span class="o">+</span>   <span class="n">setup_data</span>  <span class="mi">64</span><span class="o">-</span><span class="n">bit</span> <span class="n">physical</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">linked</span> <span class="nb">list</span>
+                <span class="n">of</span> <span class="n">struct</span> <span class="n">setup_data</span>
+<span class="mi">0258</span><span class="o">/</span><span class="mi">8</span>  <span class="mf">2.10</span><span class="o">+</span>   <span class="n">pref_address</span>    <span class="n">Preferred</span> <span class="n">loading</span> <span class="n">address</span>
+<span class="mi">0260</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.10</span><span class="o">+</span>   <span class="n">init_size</span>   <span class="n">Linear</span> <span class="n">memory</span> <span class="n">required</span> <span class="n">during</span> <span class="n">initialization</span>
+<span class="mi">0264</span><span class="o">/</span><span class="mi">4</span>  <span class="mf">2.11</span><span class="o">+</span>   <span class="n">handover_offset</span> <span class="n">Offset</span> <span class="n">of</span> <span class="n">handover</span> <span class="n">entry</span> <span class="n">point</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Por compatibilidad, si el campo <code class="docutils literal notranslate"><span class="pre">setup_sects</span></code> contiene <code class="docutils literal notranslate"><span class="pre">0</span></code>, el valor real es 4. (2) En versiones de protocolo anteriores a v2.04, los dos bytes más altos en el campo <code class="docutils literal notranslate"><span class="pre">syssize</span></code> son no-utilizables, lo que significa que el tamaño de la imagen <code class="docutils literal notranslate"><span class="pre">bzimage</span></code> del kernel, no podrá ser determinada. (3) Ignorado, aunque segura su configuración, con protocolos <code class="docutils literal notranslate"><span class="pre">v2.02</span></code> a <code class="docutils literal notranslate"><span class="pre">v2.09</span></code>.</p></li>
+</ol>
+<p>Si el <em>número mágico</em> en <em>HdrS</em> <code class="docutils literal notranslate"><span class="pre">0x53726448</span></code> no es encontrado en el <em>offset</em> <code class="docutils literal notranslate"><span class="pre">0x202</span></code>, la versión del protocolo de arranque es <em>vieja</em>. Para la carga de un kernel <em>antiguo</em>, deberían asumirse los siguientes parámetros:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">zImage</span>
+<span class="n">initrd</span> <span class="ow">not</span> <span class="n">supported</span>
+<span class="n">Real</span><span class="o">-</span><span class="n">mode</span> <span class="n">kernel</span> <span class="n">must</span> <span class="n">be</span> <span class="n">located</span> <span class="n">at</span> <span class="mh">0x90000</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>De cualquier otra forma, el campo <code class="docutils literal notranslate"><span class="pre">versión</span></code> contiene la versión del protocolo. Ejemplo, la versión del protocolo <em>2.01</em> contendrá en su campo <code class="docutils literal notranslate"><span class="pre">0x0201</span></code>. Al establecer los campos en la cabecera, habrá que comprobar que sean configurados únicamente los campos con soporte al protocolo de versión en uso.</p>
+</section>
+<section id="detalles-en-los-campos-de-la-cabecera">
+<span id="boot-6"></span><h3><a class="toc-backref" href="#id6" role="doc-backlink">Detalles en los campos de la cabecera</a><a class="headerlink" href="#detalles-en-los-campos-de-la-cabecera" title="Link to this heading"></a></h3>
+<p>Por cada campo, algunos, son información de <em>lectura</em> desde el kernel al gestor de arranque. Otros, serán considerados como de <em>escritura</em>, para el gestor de arranque y, algunos otros, interpretados como <em>lectura y escritura</em>; son <em>modificables</em> por el gestor de arranque.</p>
+<p>Los gestores de arranque de <em>propuesta general</em>, deberían escribir los campos marcados como <em>obligatorios</em>. Los gestores de arranque que carguen el kernel en una dirección no estandar, deberían rellenar los campos marcados como <code class="docutils literal notranslate"><span class="pre">reloc</span></code>; otros gestoroes podrán ignorar estos campos.</p>
+<p>El <em>orden de byte</em> de todos los campos es <strong>littlleEndian</strong> -esto es x86.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">setup_sects</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x1f1</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="n">ALL</span>
+</pre></div>
+</div>
+<p>El tamaño del código de configuración en sectores de 512-byte. Si el campo es <code class="docutils literal notranslate"><span class="pre">0</span></code>, el valor real es <code class="docutils literal notranslate"><span class="pre">4</span></code>. El código del modo real, consiste en el sector de arranque -siempre un sector de 512-byte, más el código de configuración.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span>  <span class="n">root_flags</span>
+<span class="n">Type</span><span class="p">:</span>        <span class="n">modify</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>     <span class="mh">0x1f2</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Protocol</span><span class="p">:</span>    <span class="n">ALL</span>
+</pre></div>
+</div>
+<p>Si el campo no es cero, la raíz será de <em>sólo lectura</em>. El uso de este campo es depreciado; utilizar las <em>opciones de línea</em> <code class="docutils literal notranslate"><span class="pre">ro</span></code> ó <code class="docutils literal notranslate"><span class="pre">rw</span></code>, en su lugar.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">syssize</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x1f4</span><span class="o">/</span><span class="mi">4</span> <span class="p">(</span><span class="n">protocol</span> <span class="mf">2.04</span><span class="o">+</span><span class="p">)</span> <span class="mh">0x1f4</span><span class="o">/</span><span class="mi">2</span> <span class="p">(</span><span class="n">protocol</span> <span class="n">ALL</span><span class="p">)</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.04</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>El tamaño del código en <em>modo protegido</em> en unidades es un parágrafo de 16-byte. En versiones del protocolo anteriores a <code class="docutils literal notranslate"><span class="pre">2.04</span></code>, el campo es de tan sólo 2-byte de amplitud, por lo que no puede considerarse como el tamaño de un kernel, si la opción <code class="docutils literal notranslate"><span class="pre">LOAD_HIGH</span></code> fue establecida.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">ram_size</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">kernel</span> <span class="n">internal</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x1f8</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="n">ALL</span>
+</pre></div>
+</div>
+<p>Es un campo obsoleto.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">vid_mode</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">modify</span> <span class="p">(</span><span class="n">obligatory</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x1fa</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>Por favor, ver la sección Opciones de línea de comando especiales .</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">root_dev</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">modify</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x1fc</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="n">ALL</span>
+</pre></div>
+</div>
+<p>El número de dispositivo raiz, por defecto. El empleo de este campo es derpeciado, utlizar la opción de línea<code class="docutils literal notranslate"><span class="pre">root=</span></code> en su lugar.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">boot_flag</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x1fe</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="n">ALL</span>
+</pre></div>
+</div>
+<p>Contiene <code class="docutils literal notranslate"><span class="pre">0xAA55</span></code>. Es la <em>aproximación</em> más cercana de un kernel antiguo, al <em>número mágico</em>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">jump</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x200</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Contiene un <em>salto de instrucción x86</em>, <code class="docutils literal notranslate"><span class="pre">0xEB</span></code> seguido de un <em>offset</em> señalado -(de señal +/-)?, relativo al byte <code class="docutils literal notranslate"><span class="pre">0x202</span></code>. Esto puede ser utilizado para determinar el tamaño de la cabecera.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">header</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x202</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Contiene el <em>número mágico</em> “HdrS” <code class="docutils literal notranslate"><span class="pre">0x53726448</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">version</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x206</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Contiene la versión del protocolo de arranque, en formato <em>(major &lt;&lt; 8)+minor</em>. Ejemplo, <code class="docutils literal notranslate"><span class="pre">0x0204</span></code> para la versión <code class="docutils literal notranslate"><span class="pre">2.04</span></code>, y <code class="docutils literal notranslate"><span class="pre">0x0a11</span></code> para una hipotética versión <code class="docutils literal notranslate"><span class="pre">10.17</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">realmode_swtch</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">modify</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x208</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Enlace del gestor de arranque. Ver Enlaces avanzados al gestor de arranque , abajo.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">start_sys_seg</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x20c</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>La carga de segmentos <em>bajos</em> <code class="docutils literal notranslate"><span class="pre">0x1000</span></code>. Obsoleto.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">kernel_version</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x20e</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Si es establecido a un valor <em>no-cero</em>, contendrá un puntero a una <em>cadena</em> con el número de versión del kernel, en <em>formato legible</em> y, con <em>terminación nula</em> menor que <code class="docutils literal notranslate"><span class="pre">0x200</span></code>. Puede utilizarse para mostrar al usuario, el número de versión del kernel. Debería ser un valor menor, que <code class="docutils literal notranslate"><span class="pre">0x200*setup_sects</span></code>.</p>
+<p>Por ejemplo, si el valor es configurado a <code class="docutils literal notranslate"><span class="pre">0x1c00</span></code>, el número de versión del kernel podrá encontrarse en el <em>offset</em> <code class="docutils literal notranslate"><span class="pre">0x1e00</span></code>, en el archivo del kernel. El valor es considerado válido, sólo si el campo <code class="docutils literal notranslate"><span class="pre">setup_sects</span></code> contiene el valor <code class="docutils literal notranslate"><span class="pre">15</span></code> u otro más alto:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mh">0x1c00</span>  <span class="o">&lt;</span> <span class="mi">15</span><span class="o">*</span><span class="mh">0x200</span> <span class="p">(</span><span class="o">=</span> <span class="mh">0x1e00</span><span class="p">)</span> <span class="n">but</span>
+<span class="mh">0x1c00</span> <span class="o">&gt;=</span> <span class="mi">14</span><span class="o">*</span><span class="mh">0x200</span> <span class="p">(</span><span class="o">=</span> <span class="mh">0x1c00</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">0x1c00</span> <span class="pre">&gt;&gt;</span> <span class="pre">9</span> <span class="pre">=</span> <span class="pre">14</span></code>, por lo que esl valor mínimo para <code class="docutils literal notranslate"><span class="pre">setup_secs</span></code> es 15.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">type_of_loader</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">write</span> <span class="p">(</span><span class="n">obligatory</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x210</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Si tu gestor de arranque tiene asignado un ID -ver más abajo, completar con <code class="docutils literal notranslate"><span class="pre">0xTV</span></code>, donde <code class="docutils literal notranslate"><span class="pre">T</span></code> es un identificador para el gestor de arrqnque y, <code class="docutils literal notranslate"><span class="pre">V</span></code> es un número de versión. De caulquier otro modo, completar con <code class="docutils literal notranslate"><span class="pre">0xFF</span></code>.</p>
+<p>Para IDs del gestor de arranque, encima de <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span> <span class="pre">0xD</span></code>, completar con <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span> <span class="pre">0xE</span></code> en este campo y, escrubur el ID extendido menos <code class="docutils literal notranslate"><span class="pre">0x10</span></code> en el campo <code class="docutils literal notranslate"><span class="pre">ext_loader_type</span></code>. Similarmente, el campo <code class="docutils literal notranslate"><span class="pre">ext_loader_ver</span></code>, podrá utilizarse para proporcionar más de cuatro bits a la <em>versión del gestor de arraque</em>.</p>
+<p>Por ejemplo, en <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span> <span class="pre">0x15,</span> <span class="pre">V</span> <span class="pre">=</span> <span class="pre">0x234</span></code> completar con:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">type_of_loader</span>  <span class="o">&lt;-</span> <span class="mh">0xE4</span>
+<span class="n">ext_loader_type</span> <span class="o">&lt;-</span> <span class="mh">0x05</span>
+<span class="n">ext_loader_ver</span>  <span class="o">&lt;-</span> <span class="mh">0x23</span>
+</pre></div>
+</div>
+<p>IDs asignados al gestor de arranque(hexadecimal):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>  <span class="n">LILO</span>         <span class="p">(</span><span class="mh">0x00</span> <span class="n">reservado</span> <span class="n">a</span> <span class="n">gestores</span> <span class="n">pre</span><span class="o">-</span><span class="mf">2.00</span><span class="p">)</span>
+<span class="mi">1</span>  <span class="n">Loadlin</span>
+<span class="mi">2</span>  <span class="n">bootsect</span><span class="o">-</span><span class="n">loader</span>  <span class="p">(</span><span class="mh">0x20</span><span class="p">,</span> <span class="n">reservados</span><span class="p">,</span> <span class="n">el</span> <span class="n">resto</span> <span class="n">de</span> <span class="n">valores</span><span class="p">)</span>
+<span class="mi">3</span>  <span class="n">Syslinux</span>
+<span class="mi">4</span>  <span class="n">Etherboot</span><span class="o">/</span><span class="n">gPXE</span><span class="o">/</span><span class="n">iPXE</span>
+<span class="mi">5</span>  <span class="n">ELILO</span>
+<span class="mi">7</span>  <span class="n">GRUB</span>
+<span class="mi">8</span>  <span class="n">U</span><span class="o">-</span><span class="n">Boot</span>
+<span class="mi">9</span>  <span class="n">Xen</span>
+<span class="n">A</span>  <span class="n">Gujin</span>
+<span class="n">B</span>  <span class="n">Qemu</span>
+<span class="n">C</span>  <span class="n">Arcturus</span> <span class="n">Networks</span> <span class="n">uCbootloader</span>
+<span class="n">D</span>  <span class="n">kexec</span><span class="o">-</span><span class="n">tools</span>
+<span class="n">E</span>  <span class="n">Extended</span>     <span class="p">(</span><span class="n">ver</span> <span class="n">ext_loader_type</span><span class="p">)</span>
+<span class="n">F</span>  <span class="n">Special</span>      <span class="p">(</span><span class="mh">0xFF</span> <span class="o">=</span> <span class="n">undefined</span><span class="p">)</span>
+          <span class="mi">10</span>  <span class="n">Reservado</span>
+          <span class="mi">11</span>  <span class="n">Minimal</span> <span class="n">Linux</span> <span class="n">Bootloader</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">sebastian</span><span class="o">-</span><span class="n">plotz</span><span class="o">.</span><span class="n">blogspot</span><span class="o">.</span><span class="n">de</span><span class="o">&gt;</span>
+          <span class="mi">12</span>  <span class="n">OVMF</span> <span class="n">UEFI</span> <span class="n">virtualization</span> <span class="n">stack</span>
+</pre></div>
+</div>
+<p>Por favor, contactar con <a class="reference external" href="mailto:hpa&#37;&#52;&#48;zytor&#46;com">hpa<span>&#64;</span>zytor<span>&#46;</span>com</a> si fuese necesario asignar un ID al gestor de arranque.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">loadflags</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">modify</span> <span class="p">(</span><span class="n">obligatory</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x211</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Este campo es una máscara de bit -bitmask.</p>
+<p>Bit 0 (read): LOADED_HIGH - Si <code class="docutils literal notranslate"><span class="pre">0</span></code>, el código en modo protegido es cargado en <code class="docutils literal notranslate"><span class="pre">0x10000</span></code>. - Si <code class="docutils literal notranslate"><span class="pre">1</span></code>, el código en modo protegido es cargado en <code class="docutils literal notranslate"><span class="pre">0x100000</span></code>.</p>
+<p>Bit 1 (kernel interno): KASLR_FLAG - Utilizado internamente por el kernel comprimido para comunicar - KASLR <em>estado</em> apropiado del kernel. - Si <code class="docutils literal notranslate"><span class="pre">1</span></code>, KASLR activado. - Si <code class="docutils literal notranslate"><span class="pre">0</span></code>, KASLR desactivado.</p>
+<p>Bit 5(escritura): <code class="docutils literal notranslate"><span class="pre">QUIET_FLAG</span></code> - Si <code class="docutils literal notranslate"><span class="pre">0</span></code>, imprime mensajes iniciales. - Si <code class="docutils literal notranslate"><span class="pre">1</span></code>, suprime mensajes iniciales. Esta petición al kernel -decompresor y kernel temprano, no escribe mensajes iniciales que requieran acceso al <em>hardware</em> mostrado directamente.</p>
+<p>Bit 6 (escritura): <code class="docutils literal notranslate"><span class="pre">KEEP_SEGMENTS</span></code> Protocolo: 2.07+ - Si <code class="docutils literal notranslate"><span class="pre">0</span></code>, recarga los registros de segmento en el punto de entrada de 32bit. - Si <code class="docutils literal notranslate"><span class="pre">1</span></code>, no recarga los registros de segmento en el punto de entrada de 32bit. - Asume que <code class="docutils literal notranslate"><span class="pre">%cs</span> <span class="pre">%ds</span> <span class="pre">%ss</span> <span class="pre">%es</span></code> serán configurados al nivel de segmento en base a <code class="docutils literal notranslate"><span class="pre">0</span></code> -ó su equivalente en su entorno.</p>
+<p>Bit 7 (escritura): <code class="docutils literal notranslate"><span class="pre">CAN_USE_HEAP</span></code> Establece el bit a <code class="docutils literal notranslate"><span class="pre">1</span></code>, para indicar que el valor asignado a <code class="docutils literal notranslate"><span class="pre">heap_end_ptr</span></code> es válido. Si el campo está vacio, cierta funcionalidad del código de configuración, será desactivada.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">setup_move_size</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">modify</span> <span class="p">(</span><span class="n">obligatory</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x212</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">-</span><span class="mf">2.01</span>
+</pre></div>
+</div>
+<p>Al utilizar el protocolo <code class="docutils literal notranslate"><span class="pre">2.00</span></code> o <code class="docutils literal notranslate"><span class="pre">2.01</span></code>, si el modo real del kernel no es cargado en <code class="docutils literal notranslate"><span class="pre">0x90000</span></code>, será movido ahí posteriormente, en <em>cargas sucesisvas</em>. Completar el campo, si fuese necesarios mover datos adicionales -como la línea de comandos del kernel, en adición al mode real del kernel.</p>
+<p>La unidad son bytes, desde el principio del sector de arranque.</p>
+<p>Podrá ignorarse el campom cuando el protocolo sea <code class="docutils literal notranslate"><span class="pre">2.02</span></code> o más alto, ó si el código del modo real fuese cargado en <code class="docutils literal notranslate"><span class="pre">0x90000</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">code32_start</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">modify</span> <span class="p">(</span><span class="n">optional</span><span class="p">,</span> <span class="n">reloc</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x214</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>La dirección de salto, en modo protegido. Establece los valores por defecto, en la dirección de cara del kernel y, puede ser utilizada por el gestor de arranque para determinar la dirección apropiada.</p>
+<p>El campo podrá ser modificado:</p>
+<ol class="arabic">
+<li><p>como enlace al gestor de arranque -ver Enlaces avanzados al gestor de arranque</p></li>
+<li><p>si un gestor de arranque, el cuál no instala el enlace, carga un kernel <em>recolocable</em>, sobre una dirección no estandar, tendrá que modificar este campo para apuntar la dirección de carga.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">ramdisk_image</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">write</span> <span class="p">(</span><span class="n">obligatory</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x218</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">+</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>La dirección lineal de 32bit, del disco ram o ramfs inicial. Deja a <code class="docutils literal notranslate"><span class="pre">0</span></code> cero, si no hubiese disco ram inicial, o ramfs.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">ramdisk_size</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">write</span> <span class="p">(</span><span class="n">obligatory</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x21c</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Tamaño del disco ram inicial o ramfs. Deja a <code class="docutils literal notranslate"><span class="pre">0</span></code> cero, si no hubiese disco ram inicial, o ramfs.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">bootsect_kludge</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">kernel</span> <span class="n">internal</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x220</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.00</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Campo obsoleto.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">heap_end_ptr</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">write</span> <span class="p">(</span><span class="n">obligatory</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x224</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.01</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Establce el campo con el <em>offset</em> -desde el principio del código en modo real, del final configurado en pila/montón, menos <code class="docutils literal notranslate"><span class="pre">0x0200</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">ext_loader_ver</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">write</span> <span class="p">(</span><span class="n">optional</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x226</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.02</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Campo utilizado como extensión al número de versión en <code class="docutils literal notranslate"><span class="pre">type_of_loader</span></code>. El número de versión total, será considerado <code class="docutils literal notranslate"><span class="pre">(type_of_loader</span> <span class="pre">&amp;</span> <span class="pre">0x0f)</span> <span class="pre">+</span> <span class="pre">(ext_loader_ver</span> <span class="pre">&lt;&lt;</span> <span class="pre">4)</span></code>.</p>
+<p>Uso de este campo en particular, para el gestor de arranque. Si no está escrito, es <code class="docutils literal notranslate"><span class="pre">0</span></code> cero.</p>
+<p>Kenels anteriores a <code class="docutils literal notranslate"><span class="pre">v2.6.31</span></code>, no reconocerán el campo, aunque es seguro escribirlo con protocolos <code class="docutils literal notranslate"><span class="pre">v2.02</span></code> o posteriores.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">ext_loader_type</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">write</span> <span class="p">(</span><span class="n">obligatory</span> <span class="k">if</span> <span class="p">(</span><span class="n">type_of_loader</span> <span class="o">&amp;</span> <span class="mh">0xf0</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0xe0</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x227</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.02</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Campo utilizado como extensión al tipo de número en <code class="docutils literal notranslate"><span class="pre">type_of_loader</span></code>. Si el tipo en <code class="docutils literal notranslate"><span class="pre">type_of_loader</span></code> es <code class="docutils literal notranslate"><span class="pre">0xE</span></code>, entoces será <code class="docutils literal notranslate"><span class="pre">ext_loader_type</span> <span class="pre">+</span> <span class="pre">0x10</span></code>.</p>
+<p>El campo es ignorado si el tipo <code class="docutils literal notranslate"><span class="pre">type_of_loader</span></code> no es <code class="docutils literal notranslate"><span class="pre">0xE</span></code>.</p>
+<p>Kenels anteriores a <code class="docutils literal notranslate"><span class="pre">v2.6.31</span></code>, no reconocerán el campo, aunque es seguro escribirlo con protocolos <code class="docutils literal notranslate"><span class="pre">v2.02</span></code> o posteriores.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">cmd_line_ptr</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">write</span> <span class="p">(</span><span class="n">obligatory</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x228</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.02</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Establece el campo en una dirección lineal de la cónsola del kernel. La línea de comandos del kernel, podrá ser localizada en cualquier parte entre en final establecido del montón -heap, y <code class="docutils literal notranslate"><span class="pre">0xA0000</span></code>; no tiene porqué estar localizado en los mismos 64K del segmento, como lo estaría el <em>modo real</em> en sí mismo.</p>
+<p>Completar este campo, incluso si el gestor de arranque no soporta la línea de comando, en cuyo caso, puede apuntarse a cualquier cadena vacía -o aún mejor, a la cadena “auto”. Si el campo mantiene <code class="docutils literal notranslate"><span class="pre">0</span></code>, el kernel asumirá que el gestor de arranque no soporta el protocolo <code class="docutils literal notranslate"><span class="pre">2.02+</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">initrd_addr_max</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x22c</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.03</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>La dirección más alta, que pueda ocupar el contenido del disco ram inicial. En protocolos <code class="docutils literal notranslate"><span class="pre">2.02</span></code> o anteriores, el campo no estará presente, siendo la máxima dirección <code class="docutils literal notranslate"><span class="pre">0x37FFFFFF</span></code>. Esta dirección es definida como la dirección más alta de <em>byte seguro</em>, por lo que si el disco ram es exáctamente de <code class="docutils literal notranslate"><span class="pre">131072</span></code> bytes, en tamaño y, el campo es <code class="docutils literal notranslate"><span class="pre">0x37FFFFFF</span></code>, el disco ram podrá comenzar en <code class="docutils literal notranslate"><span class="pre">0x37FE0000</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">kernel_alignment</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span><span class="o">/</span><span class="n">modify</span> <span class="p">(</span><span class="n">reloc</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x230</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.05</span><span class="o">+</span> <span class="p">(</span><span class="n">read</span><span class="p">),</span> <span class="mf">2.10</span><span class="o">+</span> <span class="p">(</span><span class="n">modify</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Unidad de alineamiento requerida por el kernel. Si <code class="docutils literal notranslate"><span class="pre">relocatable_kernel</span></code> es <code class="docutils literal notranslate"><span class="pre">true</span></code>. Un kernel recolocable que sea cargado en un alineamiento incompatible con el valor en este campo, será realineado durante la inicialización del kernel.</p>
+<p>Empezando con el protocolo de versión <code class="docutils literal notranslate"><span class="pre">2.10</span></code>, representa la preferencia de alineamiento, para un rendimiento óptimo. Es posible que el gestor modifique el campo, para evitar menos alineamientos. Ver <code class="docutils literal notranslate"><span class="pre">min_alignment</span></code> y <code class="docutils literal notranslate"><span class="pre">pref_address</span></code> más abajo.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">relocatable_kernel</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span> <span class="p">(</span><span class="n">reloc</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x234</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.05</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Si el campo no es cero, la parte del kernel en modo protegido, podrá ser cargada en cualquier dirección, que satisfaga el campo <code class="docutils literal notranslate"><span class="pre">kernel_alignment</span></code>. Después de la carga, el gestor de arranque deberá establecer ol código del campo <code class="docutils literal notranslate"><span class="pre">code32_start</span></code> para que apunte al códig cargado, o al enlace del gestor.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">min_alignment</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span> <span class="p">(</span><span class="n">reloc</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x235</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.10</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Este campo, si no es cero, indica como potencia de dos, el alineamiento mínimo requerido. En oposición al preferido por el kernel para arrancar. Si el gestor de arranque utiliza este campo, debería actualiza <code class="docutils literal notranslate"><span class="pre">kernel_alignment</span></code> con la unidad de alineamiento deseada, típicamente:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kernel_alignment</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">min_alignment</span>
+</pre></div>
+</div>
+<p>Podría haber un considerable coste en rendimiento, de producirse un desalineado excesivo en el kernel. Es más, el gestor debería intentar un alineamiento con potencia de dos, desde <code class="docutils literal notranslate"><span class="pre">kernel_alignment</span></code> en adelante.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span>     <span class="n">xloadflags</span>
+<span class="n">Type</span><span class="p">:</span>           <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x236</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">Protocol</span><span class="p">:</span>       <span class="mf">2.12</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>El campo es una máscara de bit -bitmask.</p>
+<p>Bit 0 (lectura): <code class="docutils literal notranslate"><span class="pre">XLF_KERNEL_64</span></code> - Si <code class="docutils literal notranslate"><span class="pre">1</span></code>, el kernel tendrá el punto de entrada legado, de 64-bit en <code class="docutils literal notranslate"><span class="pre">0x200</span></code>.</p>
+<p>Bit 1 (read): XLF_CAN_BE_LOADED_ABOVE_4G - Si <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">kernel/boot_params/cmdline/ramdisk</span></code> podrá superar los 4G.</p>
+<p>Bit 2 (read): XLF_EFI_HANDOVER_32 - Si <code class="docutils literal notranslate"><span class="pre">1</span></code>, el kernel soportará el punto de entrada automático tipo EFI de 32-bit, dado en <code class="docutils literal notranslate"><span class="pre">handover_offset</span></code>.</p>
+<p>Bit 3 (read): XLF_EFI_HANDOVER_64 - Si <code class="docutils literal notranslate"><span class="pre">1</span></code>, el kernel soportará el punto de entrada automático tipo EFI de 642-bit, dado en <code class="docutils literal notranslate"><span class="pre">handover_offset</span> <span class="pre">+</span> <span class="pre">0x200</span></code>.</p>
+<p>Bit 4 (read): XLF_EFI_KEXEC - If 1, the kernel supports kexec EFI boot with EFI runtime support.</p>
+<p>Si <code class="docutils literal notranslate"><span class="pre">1</span></code>, el kernel soportará el arranque EFI con soporte al tiempo de ejecución EFI.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">cmdline_size</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x238</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.06</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>El tamaño máximo de la línea de comandos, sin la terminación en cero. Significa que la línea de comandos podrá contener como mucho carácteres <code class="docutils literal notranslate"><span class="pre">cmdline_size</span></code>. En versiones de protocolos <code class="docutils literal notranslate"><span class="pre">2.05</span></code> y anteriores, el tamaño máximo es de <code class="docutils literal notranslate"><span class="pre">255</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">hardware_subarch</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">write</span> <span class="p">(</span><span class="n">optional</span><span class="p">,</span> <span class="n">defaults</span> <span class="n">to</span> <span class="n">x86</span><span class="o">/</span><span class="n">PC</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x23c</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.07</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>En entornos parivirtualizados, los componentes <em>hardware</em> a bajo nivel -como el <em>control de interrupciones</em>, control de tabla de página y, el acceso al registros para el control de procesos, necesitará ser realizado diréctamente.</p>
+<p>El campo permite al gestor de arranque informar al kernel, acerca de su situación en esos entornos.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mh">0x00000000</span>  <span class="n">The</span> <span class="n">default</span> <span class="n">x86</span><span class="o">/</span><span class="n">PC</span> <span class="n">environment</span>
+<span class="mh">0x00000001</span>  <span class="n">lguest</span>
+<span class="mh">0x00000002</span>  <span class="n">Xen</span>
+<span class="mh">0x00000003</span>  <span class="n">Moorestown</span> <span class="n">MID</span>
+<span class="mh">0x00000004</span>  <span class="n">CE4100</span> <span class="n">TV</span> <span class="n">Platform</span>
+
+<span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">hardware_subarch_data</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">write</span> <span class="p">(</span><span class="n">subarch</span><span class="o">-</span><span class="n">dependent</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x240</span><span class="o">/</span><span class="mi">8</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.07</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>Un puntero a datos específicos de la <em>sub-arquitectura de hardware</em>. Actualmente no utilizado, en el entorno por defecto <code class="docutils literal notranslate"><span class="pre">x86/PC</span></code>, no modificar.</p>
+<p>Si no es cero, entonces contiene el <em>offset</em> desde el principio del código en modo protegido, al punto de carga -payload.</p>
+<p>El punto de carga podrá ser comprimido. Tanto el formato de los datos comprimidos, como los descomprimidos, deberán ser determinados mediante el estandar <em>números mágicos</em>. Los formato de compresión actualmente soportados, son gzip (números mágicos 1F 8B or 1F 9E), bzip2 (números mágicos 42 5A), LZMA (números mágicos 5D 00), XZ (números mágicos FD 37), and LZ4 (números mágicos 02 21). El punto de carga es siempre ELF (números mágicos 7F 45 4C 46).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">payload_length</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x24c</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.08</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>La longitud del punto de carga.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">setup_data</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">write</span> <span class="p">(</span><span class="n">special</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x250</span><span class="o">/</span><span class="mi">8</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.09</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>El puntero físico de 64-bit a <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, terminado en una lista enlazada simple, del <code class="docutils literal notranslate"><span class="pre">struct</span></code> <code class="docutils literal notranslate"><span class="pre">setup_data</span></code>. Utilizado para definir un mecanismo más extensible, en cuanto a los parámetros del arranque. La definición de la <em>estructura</em> <code class="docutils literal notranslate"><span class="pre">setup_data</span></code>, es como sigue:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">setup_data</span> <span class="p">{</span>
+    <span class="n">u64</span> <span class="nb">next</span><span class="p">;</span>
+    <span class="n">u32</span> <span class="nb">type</span><span class="p">;</span>
+    <span class="n">u32</span> <span class="nb">len</span><span class="p">;</span>
+    <span class="n">u8</span>  <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Dónde, <code class="docutils literal notranslate"><span class="pre">next</span></code> es un puntero físico de 64-bit al siguiente nodo de la lista enlazada, el siguiente campo del último nodo es <code class="docutils literal notranslate"><span class="pre">0</span></code>; el <code class="docutils literal notranslate"><span class="pre">type</span></code> es utilizado para identificar el contenido de los datos; <code class="docutils literal notranslate"><span class="pre">len</span></code> es la longitud del campo; <code class="docutils literal notranslate"><span class="pre">data</span></code> sostiene el <em>punto de entrada real</em>.</p>
+<p>Esta lista puede ser modificada en cierto grado, durante el proceso de arranque. Es más, al modificar la lista, debería comprobarse siempre, dónde la lista enlazada, contiene entradas.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">pref_address</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span> <span class="p">(</span><span class="n">reloc</span><span class="p">)</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x258</span><span class="o">/</span><span class="mi">8</span>
+<span class="n">Protocol</span><span class="p">:</span>   <span class="mf">2.10</span><span class="o">+</span>
+</pre></div>
+</div>
+<p>El campo, si no es cero, representa la preferencia, en cuando a la dirección de carga del kernel. Un gestor recolocado, debería intentar cargar en esta dirección, si fuese posible.</p>
+<p>Un kernel no recolocable, se moverá a sí mismo de forma incondicional, para <em>correr</em> sobre esta dirección.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">init_size</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x260</span><span class="o">/</span><span class="mi">4</span>
+</pre></div>
+</div>
+<p>Este campo indica la cantidad de memoria lineal contigua necesaria, empezando desde la dirección del <em>tiempo de jecución del kernel</em>, antes de ser capaz de exminar su mapa de memoria. No es lo mismo que el <em>total de memoria, necesaria para arrancar el kernel</em>. Puede ser utilizado -el campo, para recolocar el gestor de arranque, en ayuda a una selección segura de dirección de carga del kernel.</p>
+<p>La dirección de inicio del <em>tiempo de ejecución</em>, es determinada por el siguiente algoritmo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">relocatable_kernel</span><span class="p">)</span>
+<span class="n">runtime_start</span> <span class="o">=</span> <span class="n">align_up</span><span class="p">(</span><span class="n">load_address</span><span class="p">,</span> <span class="n">kernel_alignment</span><span class="p">)</span>
+<span class="k">else</span>
+<span class="n">runtime_start</span> <span class="o">=</span> <span class="n">pref_address</span>
+</pre></div>
+</div>
+<p><strong>n. de t.</strong>: los delimitadores de bloque, parecen estar omitidos. Copia literal.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">name</span><span class="p">:</span> <span class="n">handover_offset</span>
+<span class="n">Type</span><span class="p">:</span>       <span class="n">read</span>
+<span class="n">Offset</span><span class="o">/</span><span class="n">size</span><span class="p">:</span>    <span class="mh">0x264</span><span class="o">/</span><span class="mi">4</span>
+</pre></div>
+</div>
+<p>Es este el <code class="docutils literal notranslate"><span class="pre">offset</span></code> desde el principio de la imagen del kernel, al punto de entrada del protocolo EFI. Los <em>gestores</em> que utilizen el protocolo EFI, para <em>arrancar</em> el kernel, deberían saltar a este punto(<code class="docutils literal notranslate"><span class="pre">ofsset</span></code>).</p>
+<p>Ver EFI HANDOVER PROTOCOL  abajo, para más detalles.</p>
+</section>
+<section id="suma-de-comprobacion-de-la-imagen">
+<span id="boot-7"></span><h3><a class="toc-backref" href="#id7" role="doc-backlink">Suma de comprobación de la imagen</a><a class="headerlink" href="#suma-de-comprobacion-de-la-imagen" title="Link to this heading"></a></h3>
+<p>Desde la versión 2.08 en adelante, el CRC-32 es calculado sobre <em>todo el archivo</em>, mediante una característica [cita requerida] <code class="docutils literal notranslate"><span class="pre">0x04C11DB7</span></code> y un inicial <code class="docutils literal notranslate"><span class="pre">0xffffffff</span></code>. La suma de comprobación será añadida al final del archivo; consecuentemente el CRC del archivo, hasta el límite especificado con el campo <code class="docutils literal notranslate"><span class="pre">syssize</span></code> de la cabecera, es siempre <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</section>
+<section id="linea-de-comandos-del-kernel">
+<span id="boot-8"></span><h3><a class="toc-backref" href="#id8" role="doc-backlink">Línea de comandos del kernel</a><a class="headerlink" href="#linea-de-comandos-del-kernel" title="Link to this heading"></a></h3>
+<p>La línea de comandos del kernel, es una herramienta esencial, en la comunicación entre el gestor de arranque y el kernel. Alguna de sus opciones son igulamente relevantes para el própio <em>gestor</em>, ver opciones especiales para la línea de comandos .</p>
+<p>La línea de comandos es una <em>cadena</em> con terminación nula. La longitud máxima podría ser restringida desde el campo <code class="docutils literal notranslate"><span class="pre">cmdline_size</span></code>. Antes del protocolo version 2.06, el máximo en caracteres fue de 255. Una cadena demasiado larga, será automáticamente alterada por el kernel.</p>
+<p>Si la version del protocolo es 2.02, o posterior, la dirección de la línea de comandos la entregará el campo de cabecera <code class="docutils literal notranslate"><span class="pre">cmd_line_ptr</span></code> -ver abajo. La dirección podría ser cualquiera; entre el final del montón -<em>heap</em>, establecido y, <code class="docutils literal notranslate"><span class="pre">0xA0000</span></code>.</p>
+<p>Si el protocolo de arranque no es la versión 2.02 o posterior, la línea de comandos utilizará el siguiente protocolo:</p>
+<ul class="simple">
+<li><p>En el <em>offset</em> <code class="docutils literal notranslate"><span class="pre">0x0020</span></code> -palabra, <code class="docutils literal notranslate"><span class="pre">cmd_line_magic</span></code>, con el <em>número mágico</em> <code class="docutils literal notranslate"><span class="pre">0xA33F</span></code>.</p></li>
+<li><p>En el <em>offset</em> <code class="docutils literal notranslate"><span class="pre">0x0022</span></code> -palabra, <code class="docutils literal notranslate"><span class="pre">cmd_line_offset</span></code>, introducir el <em>offset</em> de la línea del kernel -relativa al inicio del kernel en modo real.</p></li>
+<li><p>La línea de comandos del kernel, <strong>debe</strong> estar en la región de memoria cubierta por <code class="docutils literal notranslate"><span class="pre">setup_move_size</span></code>; podría ser necesario ajustar el campo.</p></li>
+</ul>
+</section>
+<section id="capa-de-memoria-para-el-codigo-del-modo-real">
+<span id="boot-9"></span><h3><a class="toc-backref" href="#id9" role="doc-backlink">Capa de memoria para el código del modo real</a><a class="headerlink" href="#capa-de-memoria-para-el-codigo-del-modo-real" title="Link to this heading"></a></h3>
+<p>El código del modo real, requiere que la pila/montón -stack/heap, hayan sido configurados, como también la asignación de memoria para la línea de comandos del kernel. Esto es necesario que sea llevado a cabo en en el <em>megabyte</em> de memoria más baja en <em>modo real</em>.</p>
+<p>Destacar en máquinas modernas, amenudo aparece un EBDA -o Area de Datos Extendida de la BIOS, dimensionable. Como resultado, es recomendable utilizar el área más <em>baja</em> del <em>megabyte</em>.</p>
+<p>Desafortunadamente, deberá ser utilizado el segmento de memoria <code class="docutils literal notranslate"><span class="pre">0x90000</span></code>, bajo las siguientes circunstancias:</p>
+<ul class="simple">
+<li><p>Al cargar una <code class="docutils literal notranslate"><span class="pre">zImage</span></code> del kernel <code class="docutils literal notranslate"><span class="pre">((loadflags</span> <span class="pre">&amp;</span> <span class="pre">0x01)</span> <span class="pre">==</span> <span class="pre">0)</span></code>. - Al cargar el protocolo de arranque v2.01 o anterior.</p></li>
+</ul>
+<p>Con los protocolos de arranque 2.00 y 2.01, el código en <em>modo real</em>, puden ser cargados en otra dirección, pero internamente serán recolocados en <code class="docutils literal notranslate"><span class="pre">0x90000</span></code>. Con el protocolo <em>antiguo</em>, el código del <em>modo real</em>, deberá ser cargado en <code class="docutils literal notranslate"><span class="pre">0x90000</span></code>.</p>
+<p>Al cargar en <code class="docutils literal notranslate"><span class="pre">0x90000</span></code>, evitar el uso de memoria por encima de <code class="docutils literal notranslate"><span class="pre">0x9a000</span></code>.</p>
+<p>En el protocolo de arranque 2.02 o posterior, la línea de comandos no tiene que estar localizada en el mismo segmento de 64K, como en el código de configuración del <em>modo real</em>; está igualmente permitido dar a la pila/montón, el segmento de 64K al completo y, localizar la línea de comandos por encima.</p>
+<p>La línea de comandos del kernel, no debería localizarse debajo del código del <em>modo real</em>, ni estar localizada en áreas <em>altas</em> de memoria.</p>
+</section>
+<section id="ejemplo-de-configuracion-de-arranque">
+<span id="boot-10"></span><h3><a class="toc-backref" href="#id10" role="doc-backlink">Ejemplo de configuración de arranque</a><a class="headerlink" href="#ejemplo-de-configuracion-de-arranque" title="Link to this heading"></a></h3>
+<p>Como ejemplo de configuración, es asumida la siguiente capa, en el segmento <em>modo real</em>:</p>
+<p>Al cargar por encima de <code class="docutils literal notranslate"><span class="pre">0x90000</span></code>, utilizar el segmento al completo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mh">0x0000</span><span class="o">-</span><span class="mh">0x7fff</span>    <span class="n">Modo</span> <span class="n">real</span> <span class="k">del</span> <span class="n">kernel</span>
+<span class="mh">0x8000</span><span class="o">-</span><span class="mh">0xdfff</span>    <span class="n">Pila</span> <span class="n">y</span> <span class="n">montón</span>
+<span class="mh">0xe000</span><span class="o">-</span><span class="mh">0xffff</span>   <span class="n">Kernel</span> <span class="n">command</span> <span class="n">line</span>
+</pre></div>
+</div>
+<p>Este tipo de gestor de arranque, debería incorporar los siguientes campos en la cabecera:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unsigned</span> <span class="n">long</span> <span class="n">base_ptr</span><span class="p">;</span> <span class="o">/*</span> <span class="n">base</span> <span class="n">address</span> <span class="k">for</span> <span class="n">real</span><span class="o">-</span><span class="n">mode</span> <span class="n">segment</span> <span class="o">*/</span>
+
+<span class="k">if</span> <span class="p">(</span> <span class="n">setup_sects</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">setup_sects</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span> <span class="n">protocol</span> <span class="o">&gt;=</span> <span class="mh">0x0200</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">type_of_loader</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="n">code</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">loading_initrd</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">ramdisk_image</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">initrd_address</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="n">ramdisk_size</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">initrd_size</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">protocol</span> <span class="o">&gt;=</span> <span class="mh">0x0202</span> <span class="o">&amp;&amp;</span> <span class="n">loadflags</span> <span class="o">&amp;</span> <span class="mh">0x01</span> <span class="p">)</span>
+        <span class="n">heap_end</span> <span class="o">=</span> <span class="mh">0xe000</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">heap_end</span> <span class="o">=</span> <span class="mh">0x9800</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">protocol</span> <span class="o">&gt;=</span> <span class="mh">0x0201</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">heap_end_ptr</span> <span class="o">=</span> <span class="n">heap_end</span> <span class="o">-</span> <span class="mh">0x200</span><span class="p">;</span>
+        <span class="n">loadflags</span> <span class="o">|=</span> <span class="mh">0x80</span><span class="p">;</span> <span class="o">/*</span> <span class="n">CAN_USE_HEAP</span> <span class="o">*/</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">protocol</span> <span class="o">&gt;=</span> <span class="mh">0x0202</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">cmd_line_ptr</span> <span class="o">=</span> <span class="n">base_ptr</span> <span class="o">+</span> <span class="n">heap_end</span><span class="p">;</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">cmd_line_ptr</span><span class="p">,</span> <span class="n">cmdline</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">cmd_line_magic</span>  <span class="o">=</span> <span class="mh">0xA33F</span><span class="p">;</span>
+        <span class="n">cmd_line_offset</span> <span class="o">=</span> <span class="n">heap_end</span><span class="p">;</span>
+        <span class="n">setup_move_size</span> <span class="o">=</span> <span class="n">heap_end</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">cmdline</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">base_ptr</span><span class="o">+</span><span class="n">cmd_line_offset</span><span class="p">,</span> <span class="n">cmdline</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="o">/*</span> <span class="n">Very</span> <span class="n">old</span> <span class="n">kernel</span> <span class="o">*/</span>
+
+    <span class="n">heap_end</span> <span class="o">=</span> <span class="mh">0x9800</span><span class="p">;</span>
+
+    <span class="n">cmd_line_magic</span>  <span class="o">=</span> <span class="mh">0xA33F</span><span class="p">;</span>
+    <span class="n">cmd_line_offset</span> <span class="o">=</span> <span class="n">heap_end</span><span class="p">;</span>
+
+    <span class="o">/*</span> <span class="n">A</span> <span class="n">very</span> <span class="n">old</span> <span class="n">kernel</span> <span class="n">MUST</span> <span class="n">have</span> <span class="n">its</span> <span class="n">real</span><span class="o">-</span><span class="n">mode</span> <span class="n">code</span>
+         <span class="n">loaded</span> <span class="n">at</span> <span class="mh">0x90000</span> <span class="o">*/</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">base_ptr</span> <span class="o">!=</span> <span class="mh">0x90000</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="o">/*</span> <span class="n">Copy</span> <span class="n">the</span> <span class="n">real</span><span class="o">-</span><span class="n">mode</span> <span class="n">kernel</span> <span class="o">*/</span>
+        <span class="n">memcpy</span><span class="p">(</span><span class="mh">0x90000</span><span class="p">,</span> <span class="n">base_ptr</span><span class="p">,</span> <span class="p">(</span><span class="n">setup_sects</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">512</span><span class="p">);</span>
+        <span class="n">base_ptr</span> <span class="o">=</span> <span class="mh">0x90000</span><span class="p">;</span>      <span class="o">/*</span> <span class="n">Relocated</span> <span class="o">*/</span>
+    <span class="p">}</span>
+
+    <span class="n">strcpy</span><span class="p">(</span><span class="mh">0x90000</span><span class="o">+</span><span class="n">cmd_line_offset</span><span class="p">,</span> <span class="n">cmdline</span><span class="p">);</span>
+
+    <span class="o">/*</span> <span class="n">It</span> <span class="ow">is</span> <span class="n">recommended</span> <span class="n">to</span> <span class="n">clear</span> <span class="n">memory</span> <span class="n">up</span> <span class="n">to</span> <span class="n">the</span> <span class="mi">32</span><span class="n">K</span> <span class="n">mark</span> <span class="o">*/</span>
+    <span class="n">memset</span><span class="p">(</span><span class="mh">0x90000</span> <span class="o">+</span> <span class="p">(</span><span class="n">setup_sects</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">512</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+               <span class="p">(</span><span class="mi">64</span><span class="o">-</span><span class="p">(</span><span class="n">setup_sects</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="mi">512</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="carga-del-resto-del-kernel">
+<span id="boot-11"></span><h3><a class="toc-backref" href="#id11" role="doc-backlink">Carga del resto del kernel</a><a class="headerlink" href="#carga-del-resto-del-kernel" title="Link to this heading"></a></h3>
+<p>Los 32-bits del kernel -en <em>modo no real</em>, empiezan en el <em>offset</em> <code class="docutils literal notranslate"><span class="pre">(setup_sects+1)*512</span></code>, en el archivo del kernel; de nuevo, si <code class="docutils literal notranslate"><span class="pre">setup_sects</span> <span class="pre">==</span> <span class="pre">0</span></code> el valor real es <em>4</em>. Debería ser cargado en la dirección <code class="docutils literal notranslate"><span class="pre">0x10000</span></code> en cuanto a una imagen del kernel tipo<code class="docutils literal notranslate"><span class="pre">Image/zImage</span></code> y, <code class="docutils literal notranslate"><span class="pre">0x100000</span></code> para imágenes del kernel <code class="docutils literal notranslate"><span class="pre">bzImage</span></code>.</p>
+<p>La imagen del kernel es del tipo <code class="docutils literal notranslate"><span class="pre">bzImage</span></code> si el protocolo es &gt;= 2.00 y el bit <code class="docutils literal notranslate"><span class="pre">0x01</span></code> (LOAD_HIGH) en el campo <em>loadflags</em> es configurado:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>is_bzImage = (protocol &gt;= 0x0200) &amp;&amp; (loadflags &amp; 0x01);
+load_address = is_bzImage ? 0x100000 : 0x10000;
+</pre></div>
+</div>
+<p>Nota, imágenes del kernel <code class="docutils literal notranslate"><span class="pre">Image/zImage</span></code>, podrán tener un tamaño de hasta 512K y utilizar por completo, el rango de memoria <code class="docutils literal notranslate"><span class="pre">0x10000-0x90000</span></code>. Esto significa que es algo más que un mero requisito, el cargar la parte <code class="docutils literal notranslate"><span class="pre">0x90000</span></code> en <em>modo real</em>. Kernels <code class="docutils literal notranslate"><span class="pre">bzImage</span></code> permiten mayor flexibilidad.</p>
+</section>
+<section id="opciones-especiales-para-la-linea-de-comandos">
+<span id="boot-12"></span><h3><a class="toc-backref" href="#id12" role="doc-backlink">opciones especiales para la línea de comandos</a><a class="headerlink" href="#opciones-especiales-para-la-linea-de-comandos" title="Link to this heading"></a></h3>
+<p>Si la línea de comandos proporcionada por el gestor de arranque es introducida por el usuario, cabría espera que las siguientes opciones tomasen efecto. Debería evitarse borrarlas, incluso si el kernel no hiciese uso de las mismas. <em>Autores</em> del gestor de arranque, con necesidad de opciones adicionales en <em>la línea de comandos</em>, para el própio gestor, deberían registrarlas en <code class="docutils literal notranslate"><span class="pre">Documentation/admin-guide/kernel-parameters.rst</span></code> y, comprobar que no existen conflictos con las opciones activas del kernel, ahora o en el futuro.</p>
+<p><code class="docutils literal notranslate"><span class="pre">vga=&lt;mode&gt;</span></code> <code class="docutils literal notranslate"><span class="pre">&lt;mode&gt;</span></code> aquí es un <em>entero</em> -con notación C, en decimal, octal o hexadecimal, o una de las cadenas <code class="docutils literal notranslate"><span class="pre">normal</span></code> -valor <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code>, <code class="docutils literal notranslate"><span class="pre">ext</span></code> -valor <code class="docutils literal notranslate"><span class="pre">0xFFFE</span></code>, o <code class="docutils literal notranslate"><span class="pre">ask</span></code> -valor <code class="docutils literal notranslate"><span class="pre">0xFFFD</span></code>. Estos valores deberían ser introducidos en el campo <code class="docutils literal notranslate"><span class="pre">vid_mode</span></code>, puesto que son utilizados por el kernel antes del <em>análisis de sentencia</em> de la línea de comandos.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mem=&lt;size&gt;</span></code> es un <em>entero</em> con notación C, opcionalmente seguido por -distingue la Capitalización de la letra, K, M, G, T, P o E, valor <code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span> <span class="pre">10,</span> <span class="pre">&lt;&lt;</span> <span class="pre">20,</span>&#160;&#160; <span class="pre">&lt;&lt;</span> <span class="pre">30,</span> <span class="pre">&lt;&lt;</span> <span class="pre">40,</span> <span class="pre">&lt;&lt;</span> <span class="pre">50</span> <span class="pre">or</span> <span class="pre">&lt;&lt;</span> <span class="pre">60</span></code>. Esto indica al kernel, el final de memoria. Afecta al posible emplazamiento de un <code class="docutils literal notranslate"><span class="pre">initrd</span></code>, ya que debería colocarse cerca del final de memoria. Resaltar, como opción para ambos; el kernel y elgestor de arranque!</p>
+<p><code class="docutils literal notranslate"><span class="pre">initrd=&lt;file&gt;</span></code> Debería cargar un <code class="docutils literal notranslate"><span class="pre">initrd</span></code>. El significado de <code class="docutils literal notranslate"><span class="pre">&lt;file&gt;</span></code>, es obviamente dependiente del gestor. Algunos gestores, ejemplo LILO, no contemplan este comando.</p>
+<p>Además, otros gestores añaden las siguientes opciones específicadas por el usuario, a la línea de comandos:</p>
+<p><code class="docutils literal notranslate"><span class="pre">BOOT_IMAGE=&lt;file&gt;</span></code> La imagen de arranque a ser cargada. Nuevamente, el significado de <code class="docutils literal notranslate"><span class="pre">&lt;file&gt;</span></code> es obviamente dependiente del gestor.</p>
+<p><code class="docutils literal notranslate"><span class="pre">auto</span></code> El kernel arrancó sin una intervención explícita del usuario.</p>
+<p>De ser añadidas estas opciones por el gestor, es <em>más que recomendable</em>, localizarlas <strong>antes</strong>, de la configuración específica, indicada por el usuario. Al contrario, <code class="docutils literal notranslate"><span class="pre">init=/bin/sh</span></code> confundirá la opción <code class="docutils literal notranslate"><span class="pre">auto</span></code>.</p>
+</section>
+<section id="trabajando-con-el-kernel">
+<span id="boot-13"></span><h3><a class="toc-backref" href="#id13" role="doc-backlink">Trabajando con el kernel</a><a class="headerlink" href="#trabajando-con-el-kernel" title="Link to this heading"></a></h3>
+<p>El kernel es activado, mediante un <em>salto</em> al punto de entrada, el cuál es localizado en el <strong>segmento</strong> <em>offset</em> <code class="docutils literal notranslate"><span class="pre">0x20</span></code>, desde el principio del kernel en modo real. Esto significa que de haber sido cargado el código del kernel en modo real en <code class="docutils literal notranslate"><span class="pre">0x90000</span></code>, el punto de entrada es <code class="docutils literal notranslate"><span class="pre">9020:0000</span></code>.</p>
+<p>La entradad <code class="docutils literal notranslate"><span class="pre">ds</span> <span class="pre">=</span> <span class="pre">es</span> <span class="pre">=</span> <span class="pre">ss</span></code> debería apuntar al principio del código del kernel en modo real -<code class="docutils literal notranslate"><span class="pre">0x9000</span></code> si el código es cargado en <code class="docutils literal notranslate"><span class="pre">0x90000</span></code>, <code class="docutils literal notranslate"><span class="pre">sp</span></code> debería ser configurado apropiadamente, apuntando al principio del <em>montón</em>, y las interrupciones, desactivadas. Consecuentemente, para evitar errores en el kernel, es recomendable que el gestor de arranque configure <code class="docutils literal notranslate"><span class="pre">fs</span> <span class="pre">=</span> <span class="pre">gs</span> <span class="pre">=</span> <span class="pre">ds</span> <span class="pre">=</span> <span class="pre">es</span> <span class="pre">=</span> <span class="pre">ss</span></code>.</p>
+<p>En el ejemplo de arriba, tendría este aspecto:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/* Note: in the case of the &quot;old&quot; kernel protocol, base_ptr must
+     be == 0x90000 at this point; see the previous sample code */
+
+seg = base_ptr &gt;&gt; 4;
+
+cli();  /* Enter with interrupts disabled! */
+
+/* Set up the real-mode kernel stack */
+_SS = seg;
+_SP = heap_end;
+
+_DS = _ES = _FS = _GS = seg;
+jmp_far(seg+0x20, 0);   /* Run the kernel */
+</pre></div>
+</div>
+<p>Si el gestor de arranque tiene acceso a <em>disco flexible</em>, es recomendable apagar el motor al mismo, antes de continuar con el kernel, puesto que el arranque del kernel, dejaría interrupciones apagadas, y el motor no retornaría, especialmente, si el kernel cargado tiene un controlador de disco, configurado como módulo.</p>
+</section>
+<section id="enlaces-avanzados-para-el-gestor-de-arranque">
+<span id="boot-14"></span><h3><a class="toc-backref" href="#id14" role="doc-backlink">Enlaces avanzados, para el gestor de arranque</a><a class="headerlink" href="#enlaces-avanzados-para-el-gestor-de-arranque" title="Link to this heading"></a></h3>
+<p>Si el gestor de arranque funciona en una entorno particularmente hostil -como en LOADLIN, bajo sistemas DOS, podría ser imposible seguir los requisitos <em>estandar de memoria</em>. Éste gestor, podría utilizar los siguientes enlaces -de configurarlos, serán invocados por el kernel en el momento justo. El uso de estos enlaces, probablemente deberían ser considerados como <em>último recurso</em>!</p>
+<p>IMPORTANTE: todos los enlaces requieren preservar <code class="docutils literal notranslate"><span class="pre">%esp,</span> <span class="pre">%ebp,</span> <span class="pre">%esi</span></code> y <code class="docutils literal notranslate"><span class="pre">%edi</span></code>, al invocar.</p>
+<p><code class="docutils literal notranslate"><span class="pre">realmode_swtch</span></code>: Un modo real de 16-bit, lejos de la subrutina invocada inmediatamente antes de entrar en modo protegido. La rutina por defecto desactiva NMI, así que <em>nuestra</em> rutina también debería hacerlo.</p>
+<p><code class="docutils literal notranslate"><span class="pre">code32_start</span></code>: Un modo selectivo* 32-bit con <strong>salto</strong> a la rutina inmediatamente después de la transición al modo protegido, pero antes de la decompresión del kernel. No se garantiza la configuración de ningún segmento, excepto CS -kernels actuales lo hacen, <em>antiguos</em> no; deberían configurarse a <code class="docutils literal notranslate"><span class="pre">BOOT_DS</span> <span class="pre">(0x18)</span></code>, manualmente.</p>
+<p>Tras completar el enlace, es necesario <em>saltar</em> a la dirección que hubo en el campo, antes de que el gestor lo sobreescribiese -recolocar, de ser necesario.</p>
+<p>(*) <strong>flat-mode</strong>, modo piso, modo escalonado, modo nivelado, sírvase de referencia!</p>
+</section>
+<section id="protocolo-de-arranque-de-32-bit">
+<span id="boot-15"></span><h3><a class="toc-backref" href="#id15" role="doc-backlink">Protocolo de arranque de 32-bit</a><a class="headerlink" href="#protocolo-de-arranque-de-32-bit" title="Link to this heading"></a></h3>
+<p>En máquinas con nuevas BIOS -más allá de las BIOS legadas, como las EFI, LinuxBios, etc y, <code class="docutils literal notranslate"><span class="pre">kexec</span></code>, el código de configuración de 16-bit, del modo real, basado en un kernel con BIOS legada; no puede utilizarse, siendo necesario definir un protocolo de arranque de 32-bit.</p>
+<p>En el protocolo de arranque de 32-bit, el primer paso al cargar un kernel Linux, debería configurar los parámetros de arranque -la estructura <code class="docutils literal notranslate"><span class="pre">boot_params</span></code>, tradicionalmente conocida como “página cero”. La memoria de esta <em>estuctura</em>, sebería ser situada e inicializada con <em>todo ceros</em>. Después, la cabecera de configuración desde el <em>offset</em> <code class="docutils literal notranslate"><span class="pre">0x01f1</span></code> de la imagen del kernel, en cuál debería cargarse el <em>struct</em> <code class="docutils literal notranslate"><span class="pre">boot_params</span></code> y ser examinado. El final de la cabecera de configuración, podrá ser calculado como sigue:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mh">0x0202</span> <span class="o">+</span> <span class="n">byte</span> <span class="n">value</span> <span class="n">at</span> <span class="n">offset</span> <span class="mh">0x0201</span>
+</pre></div>
+</div>
+<p>Además para leer/modificar/escribir la cabecera de configuración del <em>struct</em> <code class="docutils literal notranslate"><span class="pre">boot_params</span></code> como protocolo de arranque de 16-bit, el gestor deberá complimentar los campos del mismo, tal y como fue descrito en <code class="docutils literal notranslate"><span class="pre">zero-page.txt</span></code>.</p>
+<p>Después de configurar la estructura <code class="docutils literal notranslate"><span class="pre">boot_params</span></code>, el gestor podrá cargar el kernel de 32/64-bit, de forma similar al protocolo de arranque de 16-bit.</p>
+<p>En el protocolo de arranque de 32-bit, el kernel empiza con un salto al punto de entrada de 32-bit del kernel, el cuál es la dirección de inicio del kernel de 32/64-bit.</p>
+<p>De? entrada, la CPU debe estar en el modo protegido de 32-bit, con el paginado desactivado; un GDT deberá cargarse junto a los <em>descriptores</em> de los <em>selectores</em> <code class="docutils literal notranslate"><span class="pre">__BOOT_CS(0x10)</span> <span class="pre">y</span> <span class="pre">__BOOT_DS(0x18)</span></code>; ambos descriptores deberán ser segmentos de 4G?; <code class="docutils literal notranslate"><span class="pre">__BOOT_CS</span></code> debe tener permisos de lectura y ejecución y, <code class="docutils literal notranslate"><span class="pre">__BOOT_DS</span></code> de lectura y escritura; CS deberá ser <code class="docutils literal notranslate"><span class="pre">__BOOT_CS</span></code> y, DS, ES, SS <code class="docutils literal notranslate"><span class="pre">__BOOT_DS</span></code>; la interrupción debe ser desactivada; <code class="docutils literal notranslate"><span class="pre">%esi</span></code>, contener la dirección <em>base</em> de la estructura <code class="docutils literal notranslate"><span class="pre">boot_params</span></code>; <code class="docutils literal notranslate"><span class="pre">%ebp,</span> <span class="pre">%edi</span> <span class="pre">y</span> <span class="pre">%ebx</span></code>, será cero.</p>
+</section>
+<section id="protocolo-de-arranque-de-64-bito">
+<span id="boot-16"></span><h3><a class="toc-backref" href="#id16" role="doc-backlink">Protocolo de arranque de 64-bitº</a><a class="headerlink" href="#protocolo-de-arranque-de-64-bito" title="Link to this heading"></a></h3>
+<p>En máquinas con CPUsde 64bit e igual kernel, podrán utilizar un gestor de arranque de 64bit y, protocolo de arranque de 64-bit.</p>
+<p>Sobre protocolos de 64-bit, el primer paso en la carga del kernel Linux, deberían configurarse los parámetros de arranque (<code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">boot_params</span></code>, tradicionalmente conocido como; página cero). La memoria para dicha estructura, podrá situarse en <em>cualquier parte</em>, -incluso por encima de los <em>4G</em> y, ser inicializada con ceros. Después, configurar la cabecera de en el <em>offset</em> <code class="docutils literal notranslate"><span class="pre">0x01f1</span></code> de la imagen del kernel, donde debería ser cargada y, examinada, la estructura <code class="docutils literal notranslate"><span class="pre">boot_params</span></code>. El <em>final de configuración</em>, para la cabecera, podrá obtenerse de la siguiente forma:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mh">0x0202</span> <span class="o">+</span> <span class="n">byte</span> <span class="n">value</span> <span class="n">at</span> <span class="n">offset</span> <span class="mh">0x0201</span>
+</pre></div>
+</div>
+<p>Además, para leer/escribir/modificar la configuración de la cabecera de la estructura <code class="docutils literal notranslate"><span class="pre">boot_params</span></code>, como protocolo de arranque de 16-bit, el gestor debería cumplimentar los campos adicionales del mismo <em>struct</em> , tal y como fue descrito en <code class="docutils literal notranslate"><span class="pre">zero-page.txt.</span></code>.</p>
+<p>Después de configurar la estructura <code class="docutils literal notranslate"><span class="pre">boot_params</span></code>, el gestor podrá cargar el kernel de 32/64-bit, de forma similar al protocolo de arranque de 16-bit, pero el kernel podrá ser cargado <em>por encima de los 4G</em>.</p>
+<p>En el protocolo de arranque de 32-bit, el kernel empiza con un salto al punto de entrada de 64-bit del kernel, el cuál es la dirección de inicio del kernel de 64-bit mas <code class="docutils literal notranslate"><span class="pre">0x200</span></code>.</p>
+<p>De? entrada, la CPU debe estar en el modo protegido de 64-bit, con el paginado activado. El rango con <code class="docutils literal notranslate"><span class="pre">setup_header.init_size</span></code> desde el principio de la dirección del kernel cargado, la “página cero” y el <em>bufer</em> de la línea de comandos, tendrán un <em>mapa</em> idéntico. Un GDT deberá cargarse junto a los <em>descriptores</em> de los <em>selectores</em> <code class="docutils literal notranslate"><span class="pre">__BOOT_CS(0x10)</span> <span class="pre">y</span> <span class="pre">__BOOT_DS(0x18)</span></code>; ambos descriptores deberán ser segmentos de 4G?; <code class="docutils literal notranslate"><span class="pre">__BOOT_CS</span></code> debe tener permisos de lectura y ejecución y, <code class="docutils literal notranslate"><span class="pre">__BOOT_DS</span></code> de lectura y escritura; CS deberá ser <code class="docutils literal notranslate"><span class="pre">__BOOT_CS</span></code> y, DS, ES, SS <code class="docutils literal notranslate"><span class="pre">__BOOT_DS</span></code>; la interrupción debe ser desactivada; <code class="docutils literal notranslate"><span class="pre">%rsi</span></code>, contener la dirección <em>base</em> de la estructura <code class="docutils literal notranslate"><span class="pre">boot_params</span></code>.</p>
+</section>
+<section id="automatizacion-del-protocolo-efi">
+<span id="boot-17"></span><h3><a class="toc-backref" href="#id17" role="doc-backlink">Automatización del protocolo EFI</a><a class="headerlink" href="#automatizacion-del-protocolo-efi" title="Link to this heading"></a></h3>
+<p>Este protocolo permite a los gestores de arranque, deferir la instalación EFI en el arranque? (EFI boot stub). Es necesario el gestor para cargar el <em>kernel/initrd(s)</em>, desde el medio de arranque y, saltar al punto de entrada de forma automática? -handover, el cuál es <code class="docutils literal notranslate"><span class="pre">hdr-&gt;handover_offset</span></code> bytes desde el principio de <code class="docutils literal notranslate"><span class="pre">startup_{32,64}</span></code>.</p>
+<p>La función prototipo, para el <em>punto de entrada</em>, es algo similar:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">efi_main</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">handle</span><span class="p">,</span> <span class="n">efi_system_table_t</span> <span class="o">*</span><span class="n">table</span><span class="p">,</span> <span class="n">struct</span> <span class="n">boot_params</span> <span class="o">*</span><span class="n">bp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">handle</span></code> es la imagen EFI negociada por el gestor de arranque, por el <em>firmware</em> EFI, <code class="docutils literal notranslate"><span class="pre">table</span></code> es el sistema de tablas EFI -son los dos primeros argumentos del estado, tal y como fue descrito en la sección 2.3 de la especificación UEFI. <code class="docutils literal notranslate"><span class="pre">bp</span></code> son parámetros de arranque en la <em>asignación del cargador?</em>.</p>
+<p>El gestor deberá completar los siguientes campos en <code class="docutils literal notranslate"><span class="pre">bp</span></code>,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">o</span> <span class="n">hdr</span><span class="o">.</span><span class="n">code32_start</span>
+<span class="n">o</span> <span class="n">hdr</span><span class="o">.</span><span class="n">cmd_line_ptr</span>
+<span class="n">o</span> <span class="n">hdr</span><span class="o">.</span><span class="n">ramdisk_image</span> <span class="p">(</span><span class="k">if</span> <span class="n">applicable</span><span class="p">)</span>
+<span class="n">o</span> <span class="n">hdr</span><span class="o">.</span><span class="n">ramdisk_size</span>  <span class="p">(</span><span class="k">if</span> <span class="n">applicable</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>El resto de campos deberían ser cero.</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<span id="boot-18"></span><h3><a class="toc-backref" href="#id18" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h3>
+<p><strong>formato legible</strong>, (human-readable), claro, no resulta natural pedirle al frutero un <code class="docutils literal notranslate"><span class="pre">0x0011100110</span></code>.</p>
+<p><strong>offset</strong>,</p>
+<p><strong>payload</strong>,</p>
+<p><strong>LIFO</strong>, last in first out</p>
+<p><strong>stack</strong>: pila, se trata de variables locales y estáticas.</p>
+<p><strong>heap</strong>: montón, son varibles globales y dinámicas; grandes variables donde la asignación de memoria se realiza al “vuelo” -o de forma dinámica.</p>
+<p><strong>memoria alta</strong>,</p>
+<p><strong>memoria baja</strong>,</p>
+<p><strong>littlleEndian</strong></p>
+<p><strong>bigEndian</strong></p>
+<p><strong>número mágico</strong></p>
+<p><strong>GDT</strong></p>
+<p><strong>métodos</strong></p>
+<p><strong>stub</strong>, colilla, parte restante del lápiz, la parte del cigarrillo que es presionada contra algo, para apagarlo.</p>
+<div class="firma docutils container">
+<p><strong>Traducción:</strong> Heliogabalo S.J.
+<em>www.raulvilchez.org</em></p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../99_General/Hub/desarrollo/Kernel/index.html" class="btn btn-neutral float-left" title="Documentación del Kernel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../arch/powerpc/booting-without-of.html" class="btn btn-neutral float-right" title="El arranque del núcleo deLinux/ppc sin Open Firmware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

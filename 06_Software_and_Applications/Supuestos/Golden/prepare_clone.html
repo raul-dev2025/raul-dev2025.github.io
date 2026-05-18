@@ -1,0 +1,182 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Script de Personalización: prepare_clone.sh &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Script de Post-Instalación: idm-join.sh" href="idm-join.html" />
+    <link rel="prev" title="Unidad de Servicio: idm-first-boot.service" href="idm-first-boot.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Infraestructura virtual</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#virtualization-management">Virtualization Management</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../IV-management.html">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/sharedFolder-nfs.html">Informe de Configuración: Repositorio de ISOs vía NFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/configSSH.html">Configuración de Acceso Remoto Seguro (SSH)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/resumen.html">Infraestructura y Almacenamiento</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Testing/vmTunning.html">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#gestion-de-identidad-idm">Gestión de Identidad (IdM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/Incidencias/index.html">Registro de Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Infraestructura virtual</a></li>
+          <li class="breadcrumb-item"><a href="indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+      <li class="breadcrumb-item active">Script de Personalización: prepare_clone.sh</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/Golden/prepare_clone.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="script-de-personalizacion-prepare-clone-sh">
+<h1>Script de Personalización: prepare_clone.sh<a class="headerlink" href="#script-de-personalizacion-prepare-clone-sh" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Propósito<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Configuración <em>offline</em> del sistema de archivos del clon</p>
+</dd>
+<dt class="field-even">Herramienta Clave<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">libguestfs</span></code> (guestmount)</p>
+</dd>
+<dt class="field-odd">Seguridad<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Inyección controlada de credenciales volátiles</p>
+</dd>
+</dl>
+<section id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Link to this heading"></a></h2>
+<p>Este script realiza la “cirugía de disco” necesaria sobre el clon recién creado. Su función es modificar el sistema de archivos de la VM mientras esta permanece apagada, asegurando que al arrancar por primera vez, el nodo ya posea la configuración de red y las credenciales de enrolamiento necesarias.</p>
+</section>
+<section id="mecanismo-de-inyeccion-paso-de-datos">
+<h2>Mecanismo de Inyección (Paso de Datos)<a class="headerlink" href="#mecanismo-de-inyeccion-paso-de-datos" title="Link to this heading"></a></h2>
+<p>El script recibe el nombre del nodo y el OTP Token desde el orquestador y los inyecta en el directorio raíz del clon:</p>
+<ul class="simple">
+<li><p><strong>Archivo</strong> <code class="docutils literal notranslate"><span class="pre">/root/.new_name</span></code>: Almacena el hostname deseado.</p></li>
+<li><p><strong>Archivo</strong> <code class="docutils literal notranslate"><span class="pre">/root/.otp_token</span></code>: Almacena la clave temporal de FreeIPA.</p></li>
+<li><p><strong>Seguridad</strong>: Ambos archivos se crean con permisos <code class="docutils literal notranslate"><span class="pre">600</span></code> y propiedad de <code class="docutils literal notranslate"><span class="pre">root:root</span></code> para evitar accesos no autorizados dentro del clon.</p></li>
+</ul>
+</section>
+<section id="procedimiento-tecnico">
+<h2>Procedimiento Técnico<a class="headerlink" href="#procedimiento-tecnico" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Gestión de SELinux</strong>:
+Aplica <code class="docutils literal notranslate"><span class="pre">restorecon</span></code> al archivo de disco y conmuta el host a modo <code class="docutils literal notranslate"><span class="pre">Permissive</span></code> temporalmente para permitir el montaje sin bloqueos de seguridad.</p></li>
+<li><p><strong>Montaje del Sistema de Archivos</strong>:
+Utiliza <code class="docutils literal notranslate"><span class="pre">guestmount</span></code> para mapear el disco de la VM en un directorio temporal del host (<code class="docutils literal notranslate"><span class="pre">/tmp/mount_[NAME]</span></code>).</p></li>
+<li><p><strong>Configuración de Red (NetworkManager)</strong>:
+Localiza el archivo <code class="docutils literal notranslate"><span class="pre">.nmconnection</span></code> original de la <em>Golden Image</em> y fuerza el uso del DNS del IdM (<code class="docutils literal notranslate"><span class="pre">192.168.17.39</span></code>), desactivando el DNS automático de DHCP para asegurar la resolución del Reino.</p></li>
+<li><p><strong>Instalación de Componentes First-Boot</strong>:
+* Copia el script de unión <code class="docutils literal notranslate"><span class="pre">idm-join.sh</span></code> a <code class="docutils literal notranslate"><span class="pre">/usr/local/bin/</span></code>.
+* Instala el archivo de unidad de <code class="docutils literal notranslate"><span class="pre">systemd</span></code> (<code class="docutils literal notranslate"><span class="pre">idm-first-boot.service</span></code>).
+* Crea el enlace simbólico en <code class="docutils literal notranslate"><span class="pre">multi-user.target.wants</span></code> para disparar el proceso en el próximo arranque.</p></li>
+<li><p><strong>Finalización</strong>:
+Desmonta el sistema de archivos de forma segura y restaura las políticas de SELinux en el host.</p></li>
+</ol>
+</section>
+<section id="advertencias-de-seguridad">
+<h2>Advertencias de Seguridad<a class="headerlink" href="#advertencias-de-seguridad" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>El script requiere privilegios de <code class="docutils literal notranslate"><span class="pre">sudo</span></code> para realizar el montaje y modificar archivos protegidos.</p></li>
+<li><p>La integridad del proceso depende de que el disco del clon no esté siendo utilizado por ningún otro proceso durante la ejecución.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="idm-first-boot.html" class="btn btn-neutral float-left" title="Unidad de Servicio: idm-first-boot.service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="idm-join.html" class="btn btn-neutral float-right" title="Script de Post-Instalación: idm-join.sh" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

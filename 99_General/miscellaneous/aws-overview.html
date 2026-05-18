@@ -1,0 +1,180 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWS (Amazon Web Services) &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Saving Draft Emails with the mail Command" href="mailDrafts.html" />
+    <link rel="prev" title="Definitions of Integral and Function" href="mathSymbols.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Unordered Topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gitTrackNoStage.html">Tracking Untracked Files Without Staging Them</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitSplitHunks.html">Splitting Files into Smaller Hunks for Staging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stagedLogs.html">Viewing the Log of Staged Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashedTask.html">Viewing Stashed Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashingFiles.html">Stashing Files Independently in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitIssue.html">How to Open a GitHub Issue for LTP Kernel Headers Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-usage.html">Introduction to GNUPlot for Mathematical Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-intro.html">GNUPlot Example: Plotting Mathematical Functions in Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="newOrigin2.html">Función seno y coseno</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mathSymbols.html">Definitions of Integral and Function</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">AWS (Amazon Web Services)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailDrafts.html">Saving Draft Emails with the <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailCmds.html">Linux Mail Command Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pathTruncator.html">Integrating Path Truncation into Read the Docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regexNotation.html">REGEX notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="a_diffCounter.html">How to Get a Resumed (Counter) Output Using <code class="docutils literal notranslate"><span class="pre">diff</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="verticalS.html">Vertical Space in reStructuredText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeToLog.html">What Happens When You Pipe a Build Process to <code class="docutils literal notranslate"><span class="pre">less</span></code>: Processor Impact</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate-summary.html">Network Debugging Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate.html">Network Connectivity Troubleshooting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="keyboard_debug.html">Debugging Linux Keyboard Ctrl Key Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commitTypes.html">Tipos de Commits Estándar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Unordered Topics</a></li>
+      <li class="breadcrumb-item active">AWS (Amazon Web Services)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/99_General/miscellaneous/aws-overview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="aws-amazon-web-services">
+<h1>AWS (Amazon Web Services)<a class="headerlink" href="#aws-amazon-web-services" title="Link to this heading"></a></h1>
+<p>AWS (Amazon Web Services) es una plataforma de servicios en la nube que ofrece una amplia variedad de herramientas y servicios para computación, almacenamiento, bases de datos, análisis, redes, seguridad y más. A continuación, se presentan algunas de las tecnologías y servicios más importantes de AWS:</p>
+<p><strong>Servicios de Computación:</strong></p>
+<ul class="simple">
+<li><p><em>EC2 (Elastic Compute Cloud)</em>: un servicio de computación en la nube que permite crear y ejecutar instancias de servidores virtuales.</p></li>
+<li><p><em>Lambda</em>: un servicio de computación sin servidor que permite ejecutar código sin necesidad de aprovisionar o gestionar servidores.</p></li>
+</ul>
+<p><strong>Servicios de Almacenamiento:</strong></p>
+<ul class="simple">
+<li><p><em>S3 (Simple Storage Service)</em>: un servicio de almacenamiento de objetos que permite almacenar y servir grandes cantidades de datos.</p></li>
+<li><p><em>EBS (Elastic Block Store)</em>: un servicio de almacenamiento de bloques que proporciona almacenamiento persistente para instancias EC2.</p></li>
+</ul>
+<p><strong>Servicios de Bases de Datos:</strong></p>
+<ul class="simple">
+<li><p><em>RDS (Relational Database Service)</em>: un servicio de bases de datos relacionales que soporta varios motores de bases de datos, como MySQL, PostgreSQL y Oracle.</p></li>
+<li><p><em>DynamoDB</em>: un servicio de bases de datos NoSQL que proporciona un almacenamiento de datos escalable y de alta disponibilidad.</p></li>
+</ul>
+<p><strong>Servicios de Seguridad:</strong></p>
+<ul class="simple">
+<li><p><em>IAM (Identity and Access Management)</em>: un servicio de gestión de identidades y acceso que permite controlar quién tiene acceso a tus recursos de AWS.</p></li>
+<li><p><em>Cognito</em>: un servicio de gestión de identidades y acceso que permite autenticar y autorizar a usuarios en tus aplicaciones.</p></li>
+</ul>
+<p><strong>Servicios de Redes:</strong></p>
+<ul class="simple">
+<li><p><em>VPC (Virtual Private Cloud)</em>: un servicio de redes que permite crear una red virtual privada en la nube.</p></li>
+<li><p><em>Route 53</em>: un servicio de DNS que permite gestionar tus dominios y rutas de tráfico.</p></li>
+</ul>
+<p><strong>Otros Servicios:</strong></p>
+<ul class="simple">
+<li><p><em>CloudWatch</em>: un servicio de monitoreo que permite supervisar y analizar el rendimiento de tus recursos de AWS.</p></li>
+<li><p><em>CloudFormation</em>: un servicio de infraestructura como código que permite crear y gestionar recursos de AWS mediante plantillas.</p></li>
+</ul>
+<p>En resumen, AWS es una plataforma de servicios en la nube que ofrece una amplia variedad de herramientas y servicios para computación, almacenamiento, bases de datos, análisis, redes, seguridad y más. Sus servicios están diseñados para ser escalables, seguros y flexibles, lo que los hace ideales para una amplia variedad de casos de uso.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mathSymbols.html" class="btn btn-neutral float-left" title="Definitions of Integral and Function" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mailDrafts.html" class="btn btn-neutral float-right" title="Saving Draft Emails with the mail Command" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

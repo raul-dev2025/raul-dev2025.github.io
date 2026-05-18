@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PCI Functions Reference &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Why kzalloc() Over kmalloc() in the Linux Kernel" href="../watcherDocs/cleanSlab.html" />
+    <link rel="prev" title="Deadline IO scheduler tunables" href="deadline-iosched.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/driverPlaning.html">Planning a Mechanism to Fetch and Translate PCI Device Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/st_pci_device_id.html">struct pci_device_id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/init.html">device_watcher_init()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/overview.html">Plan-Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/overview-2.html">Plan-overview 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/planingStructures.html">Planing Structures - JSON to C Struct Translation Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/kernelStructures.html">Linux Kernel-Style JSON Struct Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmioVsIOports.html">Briefing: Memory-Mapped I/O vs. I/O Ports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcie-symobls.html">PCIe Symobls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deadline-iosched.html">Deadline IO scheduler tunables</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">PCI Functions Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#structures">Structures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#macros">Macros</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/cleanSlab.html">Why <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> Over <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> in the Linux Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="funcion_p_v.html">Funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Driver Development</a></li>
+      <li class="breadcrumb-item active">PCI Functions Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/01_Hardware/driver_development/drv_refs/quick-ref-pci.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pci-functions-reference">
+<h1>PCI Functions Reference<a class="headerlink" href="#pci-functions-reference" title="Link to this heading"></a></h1>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.pci_bus">
+<span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_bus</span></span></span><a class="headerlink" href="#c.pci_bus" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.u8">
+<span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">u8</span></span></span><a class="headerlink" href="#c.u8" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.u16">
+<span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">u16</span></span></span><a class="headerlink" href="#c.u16" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.u32">
+<span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">u32</span></span></span><a class="headerlink" href="#c.u32" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p id="pci-functions">This document provides a reference for various PCI-related functions and macros in the Linux kernel.</p>
+<section id="structures">
+<h2>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.pci_dev">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_dev</span></span></span><a class="headerlink" href="#c.pci_dev" title="Link to this definition"></a><br /></dt>
+<dd><p>Represents a PCI device within the kernel.</p>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.pci_driver">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_driver</span></span></span><a class="headerlink" href="#c.pci_driver" title="Link to this definition"></a><br /></dt>
+<dd><p>Represents a PCI driver.</p>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.pci_device_id">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_device_id</span></span></span><a class="headerlink" href="#c.pci_device_id" title="Link to this definition"></a><br /></dt>
+<dd><p>Represents a PCI device ID.</p>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h2>Macros<a class="headerlink" href="#macros" title="Link to this heading"></a></h2>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.PCI_DEVICE">
+<span class="sig-name descname"><span class="n"><span class="pre">PCI_DEVICE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">vendor</span></span>, <span class="n"><span class="pre">device</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PCI_DEVICE" title="Link to this definition"></a><br /></dt>
+<dd><p>Creates a <code class="docutils literal notranslate"><span class="pre">pci_device_id</span></code> structure that matches specific vendor and device IDs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vendor</strong> (<code class="docutils literal notranslate"><span class="pre">__u32</span></code>) – Specific vendor ID that supports the driver.</p></li>
+<li><p><strong>device</strong> (<code class="docutils literal notranslate"><span class="pre">__u32</span></code>) – Specific device ID that supports the driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.PCI_DEVICE_CLASS">
+<span class="sig-name descname"><span class="n"><span class="pre">PCI_DEVICE_CLASS</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">device_class</span></span>, <span class="n"><span class="pre">device_class_mask</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PCI_DEVICE_CLASS" title="Link to this definition"></a><br /></dt>
+<dd><p>Creates a <code class="docutils literal notranslate"><span class="pre">pci_device_id</span></code> structure that matches specific PCI class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device_class</strong> (<code class="docutils literal notranslate"><span class="pre">__u32</span></code>) – Specific device class that supports the driver.</p></li>
+<li><p><strong>device_class_mask</strong> (<code class="docutils literal notranslate"><span class="pre">__u32</span></code>) – Specific device mask that supports the driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.MODULE_DEVICE_TABLE">
+<span class="sig-name descname"><span class="n"><span class="pre">MODULE_DEVICE_TABLE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">pci</span></span>, <span class="n"><span class="pre">structListAlias</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MODULE_DEVICE_TABLE" title="Link to this definition"></a><br /></dt>
+<dd><p>Exports the <code class="docutils literal notranslate"><span class="pre">pci_device_id</span></code> structure to user space to allow hotplug and module loading.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pci</strong> – Driver or module.</p></li>
+<li><p><strong>structListAlias</strong> – Hardware device. Specific driver alias definition (e.g., <code class="docutils literal notranslate"><span class="pre">intel_*</span></code>, <code class="docutils literal notranslate"><span class="pre">amd_*</span></code>).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_register_driver">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_register_driver</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_driver" title="pci_driver"><span class="n"><span class="pre">pci_driver</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">drv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_register_driver" title="Link to this definition"></a><br /></dt>
+<dd><p>Registers a PCI driver with the kernel.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_module_init">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_module_init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_driver" title="pci_driver"><span class="n"><span class="pre">pci_driver</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">drv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_module_init" title="Link to this definition"></a><br /></dt>
+<dd><p>Initializes a PCI module.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_unregister_driver">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_unregister_driver</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_driver" title="pci_driver"><span class="n"><span class="pre">pci_driver</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">drv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_unregister_driver" title="Link to this definition"></a><br /></dt>
+<dd><p>Unregisters a PCI driver from the kernel.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_find_device">
+<a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">pci_find_device</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">vendor</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">device</span></span>, <a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">from</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_find_device" title="Link to this definition"></a><br /></dt>
+<dd><p>Searches the device list for a specific device.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_find_device_reverse">
+<a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">pci_find_device_reverse</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">vendor</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">device</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">from</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_find_device_reverse" title="Link to this definition"></a><br /></dt>
+<dd><p>Searches the device list in reverse for a specific device.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_find_subsys">
+<a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">pci_find_subsys</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">vendor</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">device</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">ss_vendor</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">ss_device</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">from</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_find_subsys" title="Link to this definition"></a><br /></dt>
+<dd><p>Searches the device list for a specific subsystem.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_find_class">
+<a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">pci_find_class</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">class</span></span>, <a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">from</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_find_class" title="Link to this definition"></a><br /></dt>
+<dd><p>Searches the device list for a specific class.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_get_device">
+<a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">pci_get_device</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">vendor</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">device</span></span>, <a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">from</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_get_device" title="Link to this definition"></a><br /></dt>
+<dd><p>Searches the device list for a device with a specific signature.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_get_subsys">
+<a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">pci_get_subsys</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">vendor</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">device</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">ss_vendor</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">ss_device</span></span>, <a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">from</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_get_subsys" title="Link to this definition"></a><br /></dt>
+<dd><p>Searches the device list for a subsystem with a specific signature.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_get_slot">
+<a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">pci_get_slot</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_bus" title="pci_bus"><span class="n"><span class="pre">pci_bus</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">bus</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">devfn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_get_slot" title="Link to this definition"></a><br /></dt>
+<dd><p>Retrieves a device from a specific slot.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_user_read_config_byte">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_user_read_config_byte</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dev</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">where</span></span>, <a class="reference internal" href="#c.u8" title="u8"><span class="n"><span class="pre">u8</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_user_read_config_byte" title="Link to this definition"></a><br /></dt>
+<dd><p>Reads a byte from a PCI configuration register.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_user_read_config_word">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_user_read_config_word</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dev</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">where</span></span>, <a class="reference internal" href="#c.u16" title="u16"><span class="n"><span class="pre">u16</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_user_read_config_word" title="Link to this definition"></a><br /></dt>
+<dd><p>Reads a word from a PCI configuration register.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_user_read_config_dword">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_user_read_config_dword</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dev</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">where</span></span>, <a class="reference internal" href="#c.u32" title="u32"><span class="n"><span class="pre">u32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_user_read_config_dword" title="Link to this definition"></a><br /></dt>
+<dd><p>Reads a double word from a PCI configuration register.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_user_write_config_byte">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_user_write_config_byte</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dev</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">where</span></span>, <a class="reference internal" href="#c.u8" title="u8"><span class="n"><span class="pre">u8</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_user_write_config_byte" title="Link to this definition"></a><br /></dt>
+<dd><p>Writes a byte to a PCI configuration register.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_user_write_config_word">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_user_write_config_word</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dev</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">where</span></span>, <a class="reference internal" href="#c.u16" title="u16"><span class="n"><span class="pre">u16</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_user_write_config_word" title="Link to this definition"></a><br /></dt>
+<dd><p>Writes a word to a PCI configuration register.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_user_write_config_dword">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_user_write_config_dword</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dev</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">where</span></span>, <a class="reference internal" href="#c.u32" title="u32"><span class="n"><span class="pre">u32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_user_write_config_dword" title="Link to this definition"></a><br /></dt>
+<dd><p>Writes a double word to a PCI configuration register.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_enable_device">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_enable_device</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dev</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_enable_device" title="Link to this definition"></a><br /></dt>
+<dd><p>Enables a PCI device.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_resource_start">
+<span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_resource_start</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dev</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">bar</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_resource_start" title="Link to this definition"></a><br /></dt>
+<dd><p>Retrieves the start address of a PCI resource.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_resource_end">
+<span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_resource_end</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dev</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">bar</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_resource_end" title="Link to this definition"></a><br /></dt>
+<dd><p>Retrieves the end address of a PCI resource.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.pci_resource_flags">
+<span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pci_resource_flags</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.pci_dev" title="pci_dev"><span class="n"><span class="pre">pci_dev</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dev</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">bar</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.pci_resource_flags" title="Link to this definition"></a><br /></dt>
+<dd><p>Retrieves the flags of a PCI resource.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="deadline-iosched.html" class="btn btn-neutral float-left" title="Deadline IO scheduler tunables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../watcherDocs/cleanSlab.html" class="btn btn-neutral float-right" title="Why kzalloc() Over kmalloc() in the Linux Kernel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

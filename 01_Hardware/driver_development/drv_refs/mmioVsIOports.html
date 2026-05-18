@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Briefing: Memory-Mapped I/O vs. I/O Ports &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="PCIe Symobls" href="pcie-symobls.html" />
+    <link rel="prev" title="Briefing on LTP (Linux Test Project) and Device Driver Test Cases" href="driverBrief.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/driverPlaning.html">Planning a Mechanism to Fetch and Translate PCI Device Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/st_pci_device_id.html">struct pci_device_id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/init.html">device_watcher_init()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/overview.html">Plan-Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/overview-2.html">Plan-overview 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/planingStructures.html">Planing Structures - JSON to C Struct Translation Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/kernelStructures.html">Linux Kernel-Style JSON Struct Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Briefing: Memory-Mapped I/O vs. I/O Ports</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#memory-mapped-i-o-mmio">1. Memory-Mapped I/O (MMIO)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i-o-ports">2. I/O Ports</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#key-differences-between-mmio-and-i-o-ports">Key Differences Between MMIO and I/O Ports</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#practical-applications">Practical Applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">I/O Ports:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pcie-symobls.html">PCIe Symobls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deadline-iosched.html">Deadline IO scheduler tunables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quick-ref-pci.html">PCI Functions Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../watcherDocs/cleanSlab.html">Why <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> Over <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> in the Linux Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="funcion_p_v.html">Funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Driver Development</a></li>
+      <li class="breadcrumb-item active">Briefing: Memory-Mapped I/O vs. I/O Ports</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/01_Hardware/driver_development/drv_refs/mmioVsIOports.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="briefing-memory-mapped-i-o-vs-i-o-ports">
+<h1>Briefing: Memory-Mapped I/O vs. I/O Ports<a class="headerlink" href="#briefing-memory-mapped-i-o-vs-i-o-ports" title="Link to this heading"></a></h1>
+<p>In computer systems, communication between the CPU and peripheral devices (e.g., network cards, storage controllers, GPUs) is achieved through two primary mechanisms: <strong>Memory-Mapped I/O (MMIO)</strong> and <strong>I/O Ports</strong>. Both methods allow the CPU to interact with hardware devices, but they differ in how they are implemented and accessed.</p>
+<hr class="docutils" />
+<section id="memory-mapped-i-o-mmio">
+<h2>1. Memory-Mapped I/O (MMIO)<a class="headerlink" href="#memory-mapped-i-o-mmio" title="Link to this heading"></a></h2>
+<section id="definition">
+<h3>Definition:<a class="headerlink" href="#definition" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Memory-Mapped I/O (MMIO) maps the registers of a hardware device into the system’s <em>physical memory address space</em>.</p></li>
+<li><p>The device’s registers appear as if they are regular memory locations, and the CPU accesses them using standard memory read/write instructions.</p></li>
+</ul>
+<p><strong>How It Works:</strong></p>
+<ul class="simple">
+<li><p>The hardware device is assigned a range of memory addresses in the system’s address space.</p></li>
+<li><p>When the CPU reads from or writes to these addresses, the memory controller routes the operations to the device’s registers instead of RAM.</p></li>
+<li><p>This allows the CPU to interact with the device using the same instructions it uses to access memory (e.g., <code class="docutils literal notranslate"><span class="pre">MOV</span></code> on x86 architectures).</p></li>
+</ul>
+</section>
+<section id="advantages">
+<h3>Advantages:<a class="headerlink" href="#advantages" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Simplified programming</strong>: Uses standard memory access instructions, making it easier to program.</p></li>
+<li><p><strong>Large address space</strong>: Can support a large number of devices and registers.</p></li>
+<li><p><strong>Efficient for high-speed devices</strong>: Suitable for devices that require frequent or high-bandwidth communication (e.g., GPUs, network cards).</p></li>
+</ul>
+</section>
+<section id="disadvantages">
+<h3>Disadvantages:<a class="headerlink" href="#disadvantages" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Address space consumption</strong>: Uses up physical memory address space, which could otherwise be used for RAM.</p></li>
+<li><p><strong>Complexity in address management</strong>: Requires careful management of memory address mappings.</p></li>
+</ul>
+</section>
+<section id="example">
+<h3>Example:<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>A GPU’s frame buffer might be mapped into the system’s memory address space. The CPU can write pixel data directly to this memory region, and the GPU will display it on the screen.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="i-o-ports">
+<h2>2. I/O Ports<a class="headerlink" href="#i-o-ports" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>Definition:<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>I/O Ports (also called <strong>Port-Mapped I/O</strong> or <strong>PMIO</strong>) use a separate address space specifically for device communication.</p></li>
+<li><p>The CPU accesses these ports using special instructions (e.g., <code class="docutils literal notranslate"><span class="pre">IN</span></code> and <code class="docutils literal notranslate"><span class="pre">OUT</span></code> on x86 architectures).</p></li>
+</ul>
+<p><strong>How It Works:</strong>
+* Each hardware device is assigned one or more I/O port numbers.
+* The CPU uses dedicated instructions to read from or write to these ports, which are separate from the memory address space.
+* The I/O ports are typically managed by the system’s I/O controller.</p>
+</section>
+<section id="id2">
+<h3>Advantages:<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Dedicated address space</strong>: Does not consume memory address space, leaving more room for RAM.</p></li>
+<li><p><strong>Simplicity for low-speed devices</strong>: Ideal for devices that require infrequent or low-bandwidth communication (e.g., legacy serial ports, PS/2 keyboards).</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Disadvantages:<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Specialized instructions</strong>: Requires the use of specific I/O instructions, which can complicate programming.</p></li>
+<li><p><strong>Limited address space</strong>: The number of available I/O ports is limited (e.g., 64K ports on x86 systems).</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Example:<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>A legacy serial port might use I/O ports for configuration and data transfer. The CPU sends data to the serial port by writing to a specific I/O port number.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="key-differences-between-mmio-and-i-o-ports">
+<h2>Key Differences Between MMIO and I/O Ports<a class="headerlink" href="#key-differences-between-mmio-and-i-o-ports" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-text">Comparison of MMIO vs PMIO</span><a class="headerlink" href="#id6" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Memory-Mapped I/O (MMIO)</p></th>
+<th class="head"><p>I/O Ports (PMIO)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Address Space</strong></p></td>
+<td><p>Uses memory address space.</p></td>
+<td><p>Uses a separate I/O address space.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Access Instructions</strong></p></td>
+<td><p>Standard memory instructions (<code class="docutils literal notranslate"><span class="pre">LDR</span></code>, <code class="docutils literal notranslate"><span class="pre">STR</span></code>, <code class="docutils literal notranslate"><span class="pre">MOV</span></code>).</p></td>
+<td><p>Special I/O instructions (<code class="docutils literal notranslate"><span class="pre">IN</span></code>, <code class="docutils literal notranslate"><span class="pre">OUT</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Performance</strong></p></td>
+<td><p>Faster (caching and pipelining possible).</p></td>
+<td><p>Slower (I/O instructions are often serializing).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Address Size</strong></p></td>
+<td><p>Large (limited by system RAM address bus).</p></td>
+<td><p>Small (limited, e.g., 65536 ports on x86).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Caching</strong></p></td>
+<td><p>Can be cached (needs <code class="docutils literal notranslate"><span class="pre">ioremap</span></code> / non-cacheable).</p></td>
+<td><p>Generally not cacheable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Protection</strong></p></td>
+<td><p>Handled via MMU (Page Tables).</p></td>
+<td><p>Handled via I/O Permission Bitmap (TSS).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Hardware Visibility</strong></p></td>
+<td><p>Visible to the CPU as standard memory.</p></td>
+<td><p>Requires a separate control bus/signal (IOR/IOW).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Use Cases</strong></p></td>
+<td><p>Modern high-speed devices (PCIe, NVMe, GPUs).</p></td>
+<td><p>Legacy devices, keyboard controllers, PIT, UARTs.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="practical-applications">
+<h2>Practical Applications<a class="headerlink" href="#practical-applications" title="Link to this heading"></a></h2>
+<p><strong>Memory-Mapped I/O:</strong></p>
+<ul class="simple">
+<li><p>Modern GPUs, network interface cards (NICs), and PCIe devices.</p></li>
+<li><p>Devices that require high-speed communication with the CPU.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>I/O Ports:<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Legacy hardware like PS/2 keyboards, serial ports, and older storage controllers.</p></li>
+<li><p>Devices that require simple, low-bandwidth communication.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>Both Memory-Mapped I/O and I/O Ports are essential for CPU-device communication, but they serve different purposes and are suited to different types of hardware. Modern systems increasingly rely on MMIO due to its efficiency and flexibility, while I/O ports remain relevant for compatibility with legacy devices. Understanding these mechanisms is crucial for low-level system programming, driver development, and hardware debugging.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="driverBrief.html" class="btn btn-neutral float-left" title="Briefing on LTP (Linux Test Project) and Device Driver Test Cases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pcie-symobls.html" class="btn btn-neutral float-right" title="PCIe Symobls" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

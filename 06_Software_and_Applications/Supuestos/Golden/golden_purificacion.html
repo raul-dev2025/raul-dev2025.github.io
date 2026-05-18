@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe de Purificación: Imagen Maestra GOLDEN_ROCKY10_IDM &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Preparación del Entorno (Paso 3)" href="../IdM/preparacionEntornoPaso3.html" />
+    <link rel="prev" title="Procedimiento de Sellado: GOLDEN_ROCKY10_IDM" href="Sellado.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Infraestructura virtual</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#virtualization-management">Virtualization Management</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../IV-management.html">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/sharedFolder-nfs.html">Informe de Configuración: Repositorio de ISOs vía NFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/configSSH.html">Configuración de Acceso Remoto Seguro (SSH)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/resumen.html">Infraestructura y Almacenamiento</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Testing/vmTunning.html">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#gestion-de-identidad-idm">Gestión de Identidad (IdM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/Incidencias/index.html">Registro de Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Infraestructura virtual</a></li>
+          <li class="breadcrumb-item"><a href="indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+      <li class="breadcrumb-item active">Informe de Purificación: Imagen Maestra GOLDEN_ROCKY10_IDM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/Golden/golden_purificacion.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-de-purificacion-imagen-maestra-golden-rocky10-idm">
+<h1>Informe de Purificación: Imagen Maestra GOLDEN_ROCKY10_IDM<a class="headerlink" href="#informe-de-purificacion-imagen-maestra-golden-rocky10-idm" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Proyecto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Raúl Vílchez</p>
+</dd>
+<dt class="field-even">Estado<span class="colon">:</span></dt>
+<dd class="field-even"><p>Certificada para Clonación</p>
+</dd>
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>19 de marzo de 2026</p>
+</dd>
+<dt class="field-even">SO de Referencia<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rocky Linux 10</p>
+</dd>
+</dl>
+<section id="descripcion-general">
+<h2>Descripción General<a class="headerlink" href="#descripcion-general" title="Link to this heading"></a></h2>
+<p>Este documento detalla el procedimiento de saneamiento aplicado a la máquina virtual maestra para garantizar que cada instancia clonada genere identidades únicas, evite conflictos de red y mantenga una auditoría limpia desde el primer arranque.</p>
+</section>
+<section id="fases-del-proceso-de-saneamiento">
+<h2>Fases del Proceso de Saneamiento<a class="headerlink" href="#fases-del-proceso-de-saneamiento" title="Link to this heading"></a></h2>
+<section id="gestion-de-identidades-locales">
+<h3>1. Gestión de Identidades Locales<a class="headerlink" href="#gestion-de-identidades-locales" title="Link to this heading"></a></h3>
+<p>Se ha procedido a renombrar el usuario administrador local para evitar colisiones con las cuentas del dominio IdM (IPA).</p>
+<ul class="simple">
+<li><p><strong>Usuario de origen:</strong> <code class="docutils literal notranslate"><span class="pre">admin</span></code> (UID 1000)</p></li>
+<li><p><strong>Usuario de destino:</strong> <code class="docutils literal notranslate"><span class="pre">maint</span></code></p></li>
+<li><dl class="simple">
+<dt><strong>Acciones realizadas:</strong></dt><dd><ul>
+<li><p>Renombrado de login y grupo principal. Renombre del usuario administrador local para evitar colisiones con el usuario <code class="docutils literal notranslate"><span class="pre">admin</span></code> del IdM.</p></li>
+<li><p>Migración del directorio <code class="docutils literal notranslate"><span class="pre">/home/admin</span></code> a <code class="docutils literal notranslate"><span class="pre">/home/maint</span></code>.</p></li>
+<li><p>Verificación de persistencia de UID/GID.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Renombrar login y grupo principal</span>
+usermod<span class="w"> </span>-l<span class="w"> </span>maint<span class="w"> </span>admin
+groupmod<span class="w"> </span>-n<span class="w"> </span>maint<span class="w"> </span>admin
+<span class="c1"># Migrar directorio home y confirmar</span>
+usermod<span class="w"> </span>-d<span class="w"> </span>/home/maint<span class="w"> </span>-m<span class="w"> </span>maint
+cat<span class="w"> </span>/etc/passwd<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>maint
+</pre></div>
+</div>
+</section>
+<section id="reset-de-identidad-de-maquina">
+<h3>2. Reset de Identidad de Máquina<a class="headerlink" href="#reset-de-identidad-de-maquina" title="Link to this heading"></a></h3>
+<p>Para evitar duplicidad de identificadores en el inventario del servidor Maestro (IdM), se han eliminado los IDs únicos del sistema operativo.</p>
+<ul class="simple">
+<li><p><strong>Machine-ID:</strong> Se ha vaciado <code class="docutils literal notranslate"><span class="pre">/etc/machine-id</span></code> (0 bytes) para forzar la regeneración por parte de <em>systemd</em> en el próximo arranque.</p></li>
+<li><p><strong>D-Bus:</strong> Se ha vinculado el ID de D-Bus al archivo maestro de la máquina.</p></li>
+<li><p><strong>SSH:</strong> Eliminación de todas las llaves de host (<code class="docutils literal notranslate"><span class="pre">ssh_host_*</span></code>) para garantizar que cada clon genere su propia huella digital criptográfica.</p></li>
+</ul>
+<p>Eliminación de identificadores únicos para forzar su regeneración en el primer arranque de cada clon.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resetear machine-id del sistema y D-Bus</span>
+truncate<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span><span class="w"> </span>/etc/machine-id
+rm<span class="w"> </span>-f<span class="w"> </span>/var/lib/dbus/machine-id
+ln<span class="w"> </span>-s<span class="w"> </span>/etc/machine-id<span class="w"> </span>/var/lib/dbus/machine-id
+<span class="c1"># Eliminar llaves de host SSH</span>
+rm<span class="w"> </span>-f<span class="w"> </span>/etc/ssh/ssh_host_*
+</pre></div>
+</div>
+</section>
+<section id="limpieza-de-capa-de-red">
+<h3>3. Limpieza de Capa de Red<a class="headerlink" href="#limpieza-de-capa-de-red" title="Link to this heading"></a></h3>
+<p>Se han eliminado los rastros de hardware específicos para asegurar la portabilidad de la imagen entre diferentes nodos del hipervisor.</p>
+<ul class="simple">
+<li><p><strong>NetworkManager:</strong> Eliminación de perfiles de conexión persistentes y archivos <code class="docutils literal notranslate"><span class="pre">.nmconnection</span></code>.</p></li>
+<li><p><strong>Udev:</strong> Borrado de reglas de persistencia de interfaces (<code class="docutils literal notranslate"><span class="pre">70-persistent-net.rules</span></code>).</p></li>
+<li><p><strong>Hostname:</strong> Persistencia del nombre de host <code class="docutils literal notranslate"><span class="pre">golden-idm</span></code> para identificación de origen.</p></li>
+</ul>
+<p>Eliminación de rastros de hardware (MAC) y perfiles de red específicos.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Borrar conexiones persistentes de NetworkManager</span>
+rm<span class="w"> </span>-f<span class="w"> </span>/etc/NetworkManager/system-connections/*.nmconnection
+<span class="c1"># Limpiar reglas udev y timestamps</span>
+rm<span class="w"> </span>-f<span class="w"> </span>/etc/udev/rules.d/70-persistent-net.rules
+rm<span class="w"> </span>-f<span class="w"> </span>/var/lib/NetworkManager/timestamps
+<span class="c1"># Mantener hostname de referencia</span>
+hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>golden-idm
+</pre></div>
+</div>
+</section>
+<section id="higiene-de-datos-y-logs">
+<h3>4. Higiene de Datos y Logs<a class="headerlink" href="#higiene-de-datos-y-logs" title="Link to this heading"></a></h3>
+<p>Saneamiento del sistema de archivos para eliminar el historial de configuración y optimizar el tamaño del disco virtual.</p>
+<ul class="simple">
+<li><p><strong>Logs:</strong> Vaciado de <code class="docutils literal notranslate"><span class="pre">journalctl</span></code> y truncado de archivos en <code class="docutils literal notranslate"><span class="pre">/var/log/</span></code>.</p></li>
+<li><p><strong>DNF:</strong> Limpieza completa de metadatos y caché de paquetes para reducir el espacio en disco.</p></li>
+<li><p><strong>Historial:</strong> Borrado total del historial de comandos de Bash.</p></li>
+</ul>
+<p>Vaciado de registros y limpieza de caché de paquetes.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vaciar Journal de Systemd y archivos de log</span>
+journalctl<span class="w"> </span>--vacuum-time<span class="o">=</span>1s
+find<span class="w"> </span>/var/log<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-exec<span class="w"> </span>truncate<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
+<span class="c1"># Limpiar caché de DNF</span>
+dnf<span class="w"> </span>clean<span class="w"> </span>all
+<span class="c1"># Borrar historial de comandos (último paso)</span>
+<span class="nb">history</span><span class="w"> </span>-c<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">history</span><span class="w"> </span>-w
+</pre></div>
+</div>
+</section>
+<section id="cierre-de-seguridad">
+<h3>5. Cierre de Seguridad<a class="headerlink" href="#cierre-de-seguridad" title="Link to this heading"></a></h3>
+<p>Bloqueo de vectores de acceso directo para forzar el uso de escalada de privilegios controlada.</p>
+<ul class="simple">
+<li><p><strong>Root:</strong> Cuenta bloqueada mediante <code class="docutils literal notranslate"><span class="pre">passwd</span> <span class="pre">-l</span> <span class="pre">root</span></code>. El acceso administrativo queda delegado exclusivamente al usuario <code class="docutils literal notranslate"><span class="pre">maint</span></code> vía <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.</p></li>
+</ul>
+<p>Bloqueo de la cuenta de superusuario tras la configuración.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bloqueo de contraseña de Root</span>
+sudo<span class="w"> </span>passwd<span class="w"> </span>-l<span class="w"> </span>root
+</pre></div>
+</div>
+</section>
+</section>
+<section id="estado-final">
+<h2>Estado Final<a class="headerlink" href="#estado-final" title="Link to this heading"></a></h2>
+<p>La imagen se encuentra en estado <strong>apagado consistente</strong>. Está preparada para ser convertida en <strong>Template</strong> o para la creación de <strong>Snapshots</strong> de despliegue masivo.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cualquier arranque posterior de esta imagen maestra sin el script de “First Boot” regenerará los IDs, requiriendo repetir el proceso de purificación.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Al primer arranque de un clon basado en esta imagen, se recomienda ejecutar el script de integración al reino <code class="docutils literal notranslate"><span class="pre">RAULVILCHEZ.ORG</span></code>.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Sellado.html" class="btn btn-neutral float-left" title="Procedimiento de Sellado: GOLDEN_ROCKY10_IDM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../IdM/preparacionEntornoPaso3.html" class="btn btn-neutral float-right" title="Preparación del Entorno (Paso 3)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

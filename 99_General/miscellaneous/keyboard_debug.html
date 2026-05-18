@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debugging Linux Keyboard Ctrl Key Issues &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tipos de Commits Estándar" href="commitTypes.html" />
+    <link rel="prev" title="Network Connectivity Troubleshooting Guide" href="hardening-timedate.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Unordered Topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gitTrackNoStage.html">Tracking Untracked Files Without Staging Them</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitSplitHunks.html">Splitting Files into Smaller Hunks for Staging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stagedLogs.html">Viewing the Log of Staged Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashedTask.html">Viewing Stashed Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashingFiles.html">Stashing Files Independently in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitIssue.html">How to Open a GitHub Issue for LTP Kernel Headers Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-usage.html">Introduction to GNUPlot for Mathematical Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-intro.html">GNUPlot Example: Plotting Mathematical Functions in Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="newOrigin2.html">Función seno y coseno</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mathSymbols.html">Definitions of Integral and Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws-overview.html">AWS (Amazon Web Services)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailDrafts.html">Saving Draft Emails with the <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailCmds.html">Linux Mail Command Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pathTruncator.html">Integrating Path Truncation into Read the Docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regexNotation.html">REGEX notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="a_diffCounter.html">How to Get a Resumed (Counter) Output Using <code class="docutils literal notranslate"><span class="pre">diff</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="verticalS.html">Vertical Space in reStructuredText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeToLog.html">What Happens When You Pipe a Build Process to <code class="docutils literal notranslate"><span class="pre">less</span></code>: Processor Impact</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate-summary.html">Network Debugging Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate.html">Network Connectivity Troubleshooting Guide</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Debugging Linux Keyboard Ctrl Key Issues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#problem-description">Problem Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diagnosis">Diagnosis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-steps">Debugging Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recommended-resolution-path">Recommended Resolution Path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-notes">Additional Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="commitTypes.html">Tipos de Commits Estándar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Unordered Topics</a></li>
+      <li class="breadcrumb-item active">Debugging Linux Keyboard Ctrl Key Issues</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/99_General/miscellaneous/keyboard_debug.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="debugging-linux-keyboard-ctrl-key-issues">
+<h1>Debugging Linux Keyboard Ctrl Key Issues<a class="headerlink" href="#debugging-linux-keyboard-ctrl-key-issues" title="Link to this heading"></a></h1>
+<section id="problem-description">
+<h2>Problem Description<a class="headerlink" href="#problem-description" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Symptom</strong>: Left Ctrl key combinations (e.g., <code class="docutils literal notranslate"><span class="pre">Ctrl+a</span></code>, <code class="docutils literal notranslate"><span class="pre">Ctrl+d</span></code>) not working in both terminal and editor.</p></li>
+<li><p><strong>Key Observations</strong>:</p>
+<ul>
+<li><p>Affects only current user (works for other users).</p></li>
+<li><p>Persists across applications (terminal + editor).</p></li>
+<li><p>Not a hardware issue (key works for other users).</p></li>
+<li><p>Not application-specific (fails in Bash and editors).</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="diagnosis">
+<h2>Diagnosis<a class="headerlink" href="#diagnosis" title="Link to this heading"></a></h2>
+<p>Likely causes in order of probability:</p>
+<ol class="arabic simple">
+<li><p><strong>Terminal Line Discipline (stty) Misconfiguration</strong></p></li>
+<li><p><strong>Readline Configuration (~/.inputrc) Issues</strong></p></li>
+<li><p><strong>X11/Wayland Key Mapping Problems</strong></p></li>
+<li><p><strong>Bash Shell Keybindings Interference</strong></p></li>
+</ol>
+</section>
+<section id="debugging-steps">
+<h2>Debugging Steps<a class="headerlink" href="#debugging-steps" title="Link to this heading"></a></h2>
+<section id="check-terminal-settings-stty">
+<h3>1. Check Terminal Settings (stty)<a class="headerlink" href="#check-terminal-settings-stty" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>stty<span class="w"> </span>-a<span class="w"> </span><span class="c1"># Check current settings</span>
+stty<span class="w"> </span>sane<span class="w"> </span><span class="c1"># Reset to defaults</span>
+</pre></div>
+</div>
+<p>Key flags to verify:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-ignbrk</span></code> (should be set).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">brkint</span></code> (should be set).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-ixon</span></code> (should be set).</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="test-raw-terminal-input">
+<h3>2. Test Raw Terminal Input<a class="headerlink" href="#test-raw-terminal-input" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>stty<span class="w"> </span>raw<span class="p">;</span><span class="w"> </span>cat
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">Ctrl+d</span></code> (should exit).</p></li>
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">Ctrl+c</span></code> (should abort).</p></li>
+</ul>
+</section>
+<section id="examine-readline-configuration">
+<h3>3. Examine Readline Configuration<a class="headerlink" href="#examine-readline-configuration" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check for problematic bindings</span>
+grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;ctrl&quot;</span><span class="w"> </span>~/.inputrc<span class="w"> </span>/etc/inputrc
+
+<span class="c1"># Temporarily disable config</span>
+mv<span class="w"> </span>~/.inputrc<span class="w"> </span>~/.inputrc.bak
+</pre></div>
+</div>
+</section>
+<section id="verify-x11-key-events">
+<h3>4. Verify X11 Key Events<a class="headerlink" href="#verify-x11-key-events" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xev<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>-A2<span class="w"> </span>KeyPress
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Check if Control modifier appears when pressing <code class="docutils literal notranslate"><span class="pre">Ctrl+a</span></code>.</p></li>
+</ul>
+</section>
+<section id="reset-keyboard-mappings">
+<h3>5. Reset Keyboard Mappings<a class="headerlink" href="#reset-keyboard-mappings" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># X11 keyboard reset</span>
+setxkbmap<span class="w"> </span>-layout<span class="w"> </span>us
+xmodmap<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;clear control&quot;</span>
+xmodmap<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;add control = Control_L Control_R&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="check-bash-bindings">
+<h3>6. Check Bash Bindings<a class="headerlink" href="#check-bash-bindings" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">bind</span><span class="w"> </span>-P<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;\\C-a&quot;</span><span class="w"> </span><span class="c1"># View bindings</span>
+<span class="nb">bind</span><span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;\C-a&quot;</span><span class="w"> </span><span class="c1"># Reset binding</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="recommended-resolution-path">
+<h2>Recommended Resolution Path<a class="headerlink" href="#recommended-resolution-path" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>First try resetting terminal:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>stty<span class="w"> </span>sane
+bash<span class="w"> </span>--norc<span class="w"> </span>--noprofile
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>If persists, check X11 events with <code class="docutils literal notranslate"><span class="pre">xev</span></code>.</p></li>
+<li><p>Finally examine and clean:</p></li>
+</ol>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">~/.inputrc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/.Xmodmap</span></code></p></li>
+<li><p>Desktop environment shortcuts.</p></li>
+</ul>
+</section>
+<section id="additional-notes">
+<h2>Additional Notes<a class="headerlink" href="#additional-notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>For Wayland systems, use <code class="docutils literal notranslate"><span class="pre">libinput</span> <span class="pre">debug-events</span></code> instead of <code class="docutils literal notranslate"><span class="pre">xev</span></code>.</p></li>
+<li><p>Consider testing in virtual console (Ctrl+Alt+F1) to rule out display manager issues.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hardening-timedate.html" class="btn btn-neutral float-left" title="Network Connectivity Troubleshooting Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="commitTypes.html" class="btn btn-neutral float-right" title="Tipos de Commits Estándar" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

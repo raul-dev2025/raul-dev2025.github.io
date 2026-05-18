@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linux Mail Command Guide &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Integrating Path Truncation into Read the Docs" href="pathTruncator.html" />
+    <link rel="prev" title="Saving Draft Emails with the mail Command" href="mailDrafts.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Unordered Topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gitTrackNoStage.html">Tracking Untracked Files Without Staging Them</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitSplitHunks.html">Splitting Files into Smaller Hunks for Staging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stagedLogs.html">Viewing the Log of Staged Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashedTask.html">Viewing Stashed Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashingFiles.html">Stashing Files Independently in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitIssue.html">How to Open a GitHub Issue for LTP Kernel Headers Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-usage.html">Introduction to GNUPlot for Mathematical Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-intro.html">GNUPlot Example: Plotting Mathematical Functions in Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="newOrigin2.html">Función seno y coseno</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mathSymbols.html">Definitions of Integral and Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws-overview.html">AWS (Amazon Web Services)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailDrafts.html">Saving Draft Emails with the <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Linux Mail Command Guide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-mail-command-usage">1. Basic <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reading-emails-with-mail">2. Reading Emails with <code class="docutils literal notranslate"><span class="pre">mail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-mail-command-options">3. Advanced <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scripting-with-mail">4. Scripting with <code class="docutils literal notranslate"><span class="pre">mail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting">5. Troubleshooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#alternative-mail-clients">6. Alternative Mail Clients</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary-cheat-sheet">7. Summary Cheat Sheet</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pathTruncator.html">Integrating Path Truncation into Read the Docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regexNotation.html">REGEX notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="a_diffCounter.html">How to Get a Resumed (Counter) Output Using <code class="docutils literal notranslate"><span class="pre">diff</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="verticalS.html">Vertical Space in reStructuredText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeToLog.html">What Happens When You Pipe a Build Process to <code class="docutils literal notranslate"><span class="pre">less</span></code>: Processor Impact</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate-summary.html">Network Debugging Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate.html">Network Connectivity Troubleshooting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="keyboard_debug.html">Debugging Linux Keyboard Ctrl Key Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commitTypes.html">Tipos de Commits Estándar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Unordered Topics</a></li>
+      <li class="breadcrumb-item active">Linux Mail Command Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/99_General/miscellaneous/mailCmds.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="linux-mail-command-guide">
+<h1>Linux Mail Command Guide<a class="headerlink" href="#linux-mail-command-guide" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#basic-mail-command-usage" id="id1">1. Basic <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command Usage</a></p>
+<ul>
+<li><p><a class="reference internal" href="#send-an-email" id="id2">1.1 Send an Email</a></p></li>
+<li><p><a class="reference internal" href="#send-from-a-file" id="id3">1.2 Send from a File</a></p></li>
+<li><p><a class="reference internal" href="#specify-sender-from-address" id="id4">1.3 Specify Sender (From Address)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#reading-emails-with-mail" id="id5">2. Reading Emails with <code class="docutils literal notranslate"><span class="pre">mail</span></code></a></p>
+<ul>
+<li><p><a class="reference internal" href="#view-your-mailbox" id="id6">2.1 View Your Mailbox</a></p></li>
+<li><p><a class="reference internal" href="#view-another-users-mail-as-root" id="id7">2.2 View Another User’s Mail (as Root)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#advanced-mail-command-options" id="id8">3. Advanced <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command Options</a></p>
+<ul>
+<li><p><a class="reference internal" href="#send-to-multiple-recipients" id="id9">3.1 Send to Multiple Recipients</a></p></li>
+<li><p><a class="reference internal" href="#add-cc-and-bcc" id="id10">3.2 Add CC and BCC</a></p></li>
+<li><p><a class="reference internal" href="#attachments-using-uuencode" id="id11">3.3 Attachments (Using <code class="docutils literal notranslate"><span class="pre">uuencode</span></code>)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#scripting-with-mail" id="id12">4. Scripting with <code class="docutils literal notranslate"><span class="pre">mail</span></code></a></p>
+<ul>
+<li><p><a class="reference internal" href="#automated-email-from-bash-script" id="id13">4.1 Automated Email from Bash Script</a></p></li>
+<li><p><a class="reference internal" href="#send-command-output-via-email" id="id14">4.2 Send Command Output via Email</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#troubleshooting" id="id15">5. Troubleshooting</a></p>
+<ul>
+<li><p><a class="reference internal" href="#check-if-mail-is-installed" id="id16">5.1 Check if <code class="docutils literal notranslate"><span class="pre">mail</span></code> is Installed</a></p></li>
+<li><p><a class="reference internal" href="#check-mail-queue" id="id17">5.2 Check Mail Queue</a></p></li>
+<li><p><a class="reference internal" href="#find-mail-logs" id="id18">5.3 Find Mail Logs</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#alternative-mail-clients" id="id19">6. Alternative Mail Clients</a></p></li>
+<li><p><a class="reference internal" href="#summary-cheat-sheet" id="id20">7. Summary Cheat Sheet</a></p></li>
+</ul>
+</nav>
+<hr class="docutils" />
+<section id="basic-mail-command-usage">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">1. Basic <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command Usage</a><a class="headerlink" href="#basic-mail-command-usage" title="Link to this heading"></a></h2>
+<section id="send-an-email">
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">1.1 Send an Email</a><a class="headerlink" href="#send-an-email" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;Subject&quot;</span><span class="w"> </span>recipient@example.com
+</pre></div>
+</div>
+<ul>
+<li><p>Type the message, then press <code class="docutils literal notranslate"><span class="pre">Ctrl+D</span></code> to send.</p></li>
+<li><p>Example:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="w"> </span>user1@example.com
+This<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span><span class="nb">test</span><span class="w"> </span>email.
+<span class="o">(</span>Press<span class="w"> </span>Ctrl+D<span class="o">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="send-from-a-file">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">1.2 Send from a File</a><a class="headerlink" href="#send-from-a-file" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;Subject&quot;</span><span class="w"> </span>recipient@example.com<span class="w"> </span>&lt;<span class="w"> </span>message.txt
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;This is the email body&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>body.txt
+mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;Test Email&quot;</span><span class="w"> </span>user1@example.com<span class="w"> </span>&lt;<span class="w"> </span>body.txt
+</pre></div>
+</div>
+</section>
+<section id="specify-sender-from-address">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">1.3 Specify Sender (From Address)</a><a class="headerlink" href="#specify-sender-from-address" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;Subject&quot;</span><span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;sender@example.com&quot;</span><span class="w"> </span>recipient@example.com
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;Meeting&quot;</span><span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;admin@company.com&quot;</span><span class="w"> </span>user1@example.com
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="reading-emails-with-mail">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">2. Reading Emails with <code class="docutils literal notranslate"><span class="pre">mail</span></code></a><a class="headerlink" href="#reading-emails-with-mail" title="Link to this heading"></a></h2>
+<section id="view-your-mailbox">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">2.1 View Your Mailbox</a><a class="headerlink" href="#view-your-mailbox" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mail
+</pre></div>
+</div>
+<p>Commands inside <code class="docutils literal notranslate"><span class="pre">mail</span></code>:
+- <code class="docutils literal notranslate"><span class="pre">Enter</span></code> → View next message.
+- <code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">&lt;num&gt;</span></code> → Delete message (e.g., <code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">1</span></code>).
+- <code class="docutils literal notranslate"><span class="pre">u</span> <span class="pre">&lt;num&gt;</span></code> → Undelete message.
+- <code class="docutils literal notranslate"><span class="pre">q</span></code> → Quit (saves changes).
+- <code class="docutils literal notranslate"><span class="pre">x</span></code> → Quit (discards changes).</p>
+</section>
+<section id="view-another-users-mail-as-root">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">2.2 View Another User’s Mail (as Root)</a><a class="headerlink" href="#view-another-users-mail-as-root" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mail<span class="w"> </span>-u<span class="w"> </span>username
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mail<span class="w"> </span>-u<span class="w"> </span>alice
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="advanced-mail-command-options">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">3. Advanced <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command Options</a><a class="headerlink" href="#advanced-mail-command-options" title="Link to this heading"></a></h2>
+<section id="send-to-multiple-recipients">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">3.1 Send to Multiple Recipients</a><a class="headerlink" href="#send-to-multiple-recipients" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;Subject&quot;</span><span class="w"> </span>user1@example.com,user2@example.com
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;Team Update&quot;</span><span class="w"> </span>alice@example.com,bob@example.com
+</pre></div>
+</div>
+</section>
+<section id="add-cc-and-bcc">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">3.2 Add CC and BCC</a><a class="headerlink" href="#add-cc-and-bcc" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;Subject&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;cc@example.com&quot;</span><span class="w"> </span>-b<span class="w"> </span><span class="s2">&quot;bcc@example.com&quot;</span><span class="w"> </span>recipient@example.com
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code> → Carbon Copy.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-b</span></code> → Blind Carbon Copy (hidden from others).</p></li>
+</ul>
+</section>
+<section id="attachments-using-uuencode">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">3.3 Attachments (Using <code class="docutils literal notranslate"><span class="pre">uuencode</span></code>)</a><a class="headerlink" href="#attachments-using-uuencode" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>uuencode<span class="w"> </span>file.txt<span class="w"> </span>file.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;File Attached&quot;</span><span class="w"> </span>user@example.com
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>uuencode<span class="w"> </span>report.pdf<span class="w"> </span>report.pdf<span class="w"> </span><span class="p">|</span><span class="w"> </span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;Report&quot;</span><span class="w"> </span>alice@example.com
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="scripting-with-mail">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">4. Scripting with <code class="docutils literal notranslate"><span class="pre">mail</span></code></a><a class="headerlink" href="#scripting-with-mail" title="Link to this heading"></a></h2>
+<section id="automated-email-from-bash-script">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">4.1 Automated Email from Bash Script</a><a class="headerlink" href="#automated-email-from-bash-script" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nv">SUBJECT</span><span class="o">=</span><span class="s2">&quot;System Alert&quot;</span>
+<span class="nv">TO</span><span class="o">=</span><span class="s2">&quot;admin@example.com&quot;</span>
+<span class="nv">BODY</span><span class="o">=</span><span class="s2">&quot;Disk space is running low!&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BODY</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SUBJECT</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$TO</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="send-command-output-via-email">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">4.2 Send Command Output via Email</a><a class="headerlink" href="#send-command-output-via-email" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>df<span class="w"> </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;Disk Usage Report&quot;</span><span class="w"> </span>admin@example.com
+</pre></div>
+</div>
+<p>Example (send <code class="docutils literal notranslate"><span class="pre">top</span></code> output):</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>top<span class="w"> </span>-b<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>mail<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;Top Processes&quot;</span><span class="w"> </span>admin@example.com
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">5. Troubleshooting</a><a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="check-if-mail-is-installed">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">5.1 Check if <code class="docutils literal notranslate"><span class="pre">mail</span></code> is Installed</a><a class="headerlink" href="#check-if-mail-is-installed" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>which<span class="w"> </span>mail
+</pre></div>
+</div>
+<p>Installation:</p>
+<ul>
+<li><p><strong>Debian/Ubuntu</strong>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>mailutils
+</pre></div>
+</div>
+</li>
+<li><p><strong>RHEL/CentOS</strong>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>mailx
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="check-mail-queue">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">5.2 Check Mail Queue</a><a class="headerlink" href="#check-mail-queue" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mailq<span class="w"> </span><span class="c1"># For Sendmail</span>
+postqueue<span class="w"> </span>-p<span class="w"> </span><span class="c1"># For Postfix</span>
+</pre></div>
+</div>
+</section>
+<section id="find-mail-logs">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">5.3 Find Mail Logs</a><a class="headerlink" href="#find-mail-logs" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/mail.log<span class="w"> </span><span class="c1"># Debian/Ubuntu</span>
+tail<span class="w"> </span>-f<span class="w"> </span>/var/log/maillog<span class="w"> </span><span class="c1"># RHEL/CentOS</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="alternative-mail-clients">
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">6. Alternative Mail Clients</a><a class="headerlink" href="#alternative-mail-clients" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mutt</span></code></p></td>
+<td><p>Advanced CLI email client</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">alpine</span></code></p></td>
+<td><p>User-friendly terminal mail</p></td>
+</tr>
+<tr class="row-even"><td><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">thunder-</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">bird</span></code></p>
+</dd>
+</dl>
+</td>
+<td><p>GUI mail client</p></td>
+</tr>
+</tbody>
+</table>
+<p>Example using <code class="docutils literal notranslate"><span class="pre">mutt</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>mutt<span class="w"> </span><span class="c1"># Install</span>
+mutt<span class="w"> </span>-f<span class="w"> </span>/var/mail/<span class="nv">$USER</span><span class="w"> </span><span class="c1"># Open mailbox</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary-cheat-sheet">
+<h2><a class="toc-backref" href="#id20" role="doc-backlink">7. Summary Cheat Sheet</a><a class="headerlink" href="#summary-cheat-sheet" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mail</span> <span class="pre">-s</span> <span class="pre">&quot;Sub&quot;</span> <span class="pre">user&#64;ex.com</span></code></p></td>
+<td><p>Send email</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mail</span> <span class="pre">-u</span> <span class="pre">username</span></code></p></td>
+<td><p>Read another user’s mail (root)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;Hi&quot;</span> <span class="pre">|</span> <span class="pre">mail</span> <span class="pre">-s</span> <span class="pre">&quot;Test&quot;</span> <span class="pre">user&#64;ex.com</span></code></p></td>
+<td><p>Pipe message</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">uuencode</span> <span class="pre">file.txt</span> <span class="pre">file.txt</span> <span class="pre">|</span> <span class="pre">mail</span> <span class="pre">...</span></code></p></td>
+<td><p>Send attachment</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mailq</span></code></p></td>
+<td><p>Check mail queue</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tail</span> <span class="pre">/var/log/maillog</span></code></p></td>
+<td><p>Debug mail issues</p></td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+<p><strong>Notes</strong>:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">mail</span></code> command is lightweight but lacks modern features (e.g., HTML emails).</p></li>
+<li><p>For scripting, it’s reliable (e.g., <code class="docutils literal notranslate"><span class="pre">cron</span></code> jobs, alerts).</p></li>
+<li><p>For advanced usage, consider <code class="docutils literal notranslate"><span class="pre">mutt</span></code>, <code class="docutils literal notranslate"><span class="pre">sendmail</span></code>, or Postfix.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mailDrafts.html" class="btn btn-neutral float-left" title="Saving Draft Emails with the mail Command" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pathTruncator.html" class="btn btn-neutral float-right" title="Integrating Path Truncation into Read the Docs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

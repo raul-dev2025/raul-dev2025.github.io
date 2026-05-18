@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Procedimiento de Apagado de Infraestructura (IdM) &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Configuración de Control de Acceso" href="../../../04_System_Administration/system_configuration/ACL_configuration/index.html" />
+    <link rel="prev" title="Informe de Configuración Base de la VM: ipa02" href="IdM-replica.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Infraestructura virtual</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#virtualization-management">Virtualization Management</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../IV-management.html">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/sharedFolder-nfs.html">Informe de Configuración: Repositorio de ISOs vía NFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/configSSH.html">Configuración de Acceso Remoto Seguro (SSH)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/resumen.html">Infraestructura y Almacenamiento</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Testing/vmTunning.html">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Golden/indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#gestion-de-identidad-idm">Gestión de Identidad (IdM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/Incidencias/index.html">Registro de Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Infraestructura virtual</a></li>
+      <li class="breadcrumb-item active">Procedimiento de Apagado de Infraestructura (IdM)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/IdM/nasShutDown.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="procedimiento-de-apagado-de-infraestructura-idm">
+<h1>Procedimiento de Apagado de Infraestructura (IdM)<a class="headerlink" href="#procedimiento-de-apagado-de-infraestructura-idm" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Autor<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Raul Vilchez</p>
+</dd>
+<dt class="field-even">Fecha<span class="colon">:</span></dt>
+<dd class="field-even"><p>6 de mayo de 2026</p>
+</dd>
+<dt class="field-odd">Estado<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Activo</p>
+</dd>
+</dl>
+<section id="resumen">
+<h2>Resumen<a class="headerlink" href="#resumen" title="Link to this heading"></a></h2>
+<p>Este documento describe el procedimiento de apagado seguro para el nodo de identidad (<code class="docutils literal notranslate"><span class="pre">ipa02</span></code>) y el hipervisor del NAS Synology DS218+ en el entorno local, utilizando la API de DSM y el puerto HTTPS 5001.</p>
+</section>
+<section id="descripcion-del-problema">
+<h2>Descripción del Problema<a class="headerlink" href="#descripcion-del-problema" title="Link to this heading"></a></h2>
+<p>El uso del comando estándar de Linux <code class="docutils literal notranslate"><span class="pre">shutdown</span></code> dentro del sistema operativo del NAS genera el error:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Failed to talk to shutdownd, proceeding with immediate shutdown: No such file or directory
+</pre></div>
+</div>
+<p>Esto ocurre debido a la ausencia de los componentes nativos de systemd en el entorno del NAS, lo que provoca la desconexión abrupta de los servicios de virtualización.</p>
+<p>El entorno del NAS Synology DS218+ no permite la gestión total de llaves administrativas mediante el shell de comandos, requiriendo el uso de la interfaz DSM. Además, se requiere proteger las credenciales administrativas sin exponerlas en texto plano dentro de los scripts.</p>
+</section>
+<section id="solucion-implementada">
+<h2>Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Link to this heading"></a></h2>
+<p>Se implementa una llamada HTTP POST a la API de DSM (puerto 5001) y se desacopla la contraseña del script ubicándola en el directorio <code class="docutils literal notranslate"><span class="pre">~/.ssh/Nas-ipa/</span></code> con permisos restringidos.</p>
+</section>
+<section id="script-de-ejecucion">
+<h2>Script de Ejecución<a class="headerlink" href="#script-de-ejecucion" title="Link to this heading"></a></h2>
+<p>El script automatiza el apagado mediante una secuencia controlada:</p>
+<ol class="arabic simple">
+<li><p>Apagado de <code class="docutils literal notranslate"><span class="pre">ipa02.raulvilchez.org</span></code> con un minuto de retardo.</p></li>
+<li><p>Espera de validación (65 segundos).</p></li>
+<li><p>Apagado seguro del NAS Synology mediante la API web de Synology.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<span class="nv">IPA_HOST</span><span class="o">=</span><span class="s2">&quot;ipa02.raulvilchez.org&quot;</span>
+<span class="nv">NAS_IP</span><span class="o">=</span><span class="s2">&quot;192.168.1.X&quot;</span>
+<span class="nv">NAS_USER</span><span class="o">=</span><span class="s2">&quot;raulVilchez&quot;</span>
+<span class="nv">PASS_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.ssh/Nas-ipa/dsm_pwd.txt&quot;</span>
+<span class="nv">NAS_PASS</span><span class="o">=</span><span class="k">$(</span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PASS_FILE</span><span class="s2">&quot;</span><span class="k">)</span>
+
+ssh<span class="w"> </span>root@<span class="nv">$IPA_HOST</span><span class="w"> </span><span class="s2">&quot;shutdown -h +1&quot;</span>
+sleep<span class="w"> </span><span class="m">65</span>
+curl<span class="w"> </span>-k<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;https://</span><span class="nv">$NAS_IP</span><span class="s2">:5001/webapi/entry.cgi&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;api=SYNO.Core.System.Shutdown&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>...
+</pre></div>
+</div>
+</section>
+<section id="requisitos">
+<h2>Requisitos<a class="headerlink" href="#requisitos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Archivo de credenciales en <code class="docutils literal notranslate"><span class="pre">~/.ssh/Nas-ipa/dsm_pwd.txt</span></code> con permisos <code class="docutils literal notranslate"><span class="pre">600</span></code>.</p></li>
+<li><p>Acceso SSH sin contraseña o gestionado por agente para la máquina virtual <code class="docutils literal notranslate"><span class="pre">ipa02</span></code>.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="IdM-replica.html" class="btn btn-neutral float-left" title="Informe de Configuración Base de la VM: ipa02" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../04_System_Administration/system_configuration/ACL_configuration/index.html" class="btn btn-neutral float-right" title="Configuración de Control de Acceso" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentación de la Golden Image (Rocky 9) &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Script de Orquestación: clone_golden.sh" href="clone_golden.html" />
+    <link rel="prev" title="Infraestructura RAULVILCHEZ.ORG" href="indice.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Infraestructura virtual</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#virtualization-management">Virtualization Management</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../IV-management.html">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/sharedFolder-nfs.html">Informe de Configuración: Repositorio de ISOs vía NFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/configSSH.html">Configuración de Acceso Remoto Seguro (SSH)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/resumen.html">Infraestructura y Almacenamiento</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Testing/vmTunning.html">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#gestion-de-identidad-idm">Gestión de Identidad (IdM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/Incidencias/index.html">Registro de Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Infraestructura virtual</a></li>
+          <li class="breadcrumb-item"><a href="indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+      <li class="breadcrumb-item active">Documentación de la Golden Image (Rocky 9)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/Golden/goldenImage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="documentacion-de-la-golden-image-rocky-9">
+<h1>Documentación de la Golden Image (Rocky 9)<a class="headerlink" href="#documentacion-de-la-golden-image-rocky-9" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Proyecto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Infraestructura FreeIPA</p>
+</dd>
+<dt class="field-even">Autor<span class="colon">:</span></dt>
+<dd class="field-even"><p>Raúl Vílchez</p>
+</dd>
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-02-28</p>
+</dd>
+<dt class="field-even">Versión<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0 (NFS-Ready)</p>
+</dd>
+</dl>
+<section id="descripcion-general">
+<h2>Descripción General<a class="headerlink" href="#descripcion-general" title="Link to this heading"></a></h2>
+<p>Esta imagen sirve como la función base <span class="math notranslate nohighlight">\(f(x)\)</span> para todos los nodos del dominio <code class="docutils literal notranslate"><span class="pre">raulvilchez.org</span></code>. Se ha diseñado para operar en un entorno aislado, utilizando una Workstation externa como servidor de paquetes vía NFS.</p>
+</section>
+<section id="especificaciones-de-la-vm-base">
+<h2>Especificaciones de la VM Base<a class="headerlink" href="#especificaciones-de-la-vm-base" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Hostname Original:</strong> <code class="docutils literal notranslate"><span class="pre">idm-replica.raulvilchez.org</span></code></p></li>
+<li><p><strong>SO:</strong> Rocky Linux 9.x (x86_64) - Instalación Mínima.</p></li>
+<li><p><strong>Disco:</strong> 20 GB (LVM).</p></li>
+<li><p><strong>Red:</strong> IP estática o reservada en el rango <code class="docutils literal notranslate"><span class="pre">192.168.17.0/24</span></code>.</p></li>
+</ul>
+</section>
+<section id="configuracion-de-repositorios-por-defecto">
+<h2>Configuración de Repositorios “Por Defecto”<a class="headerlink" href="#configuracion-de-repositorios-por-defecto" title="Link to this heading"></a></h2>
+<p>Para evitar la dependencia de internet, la imagen incorpora un sistema de gestión de repositorios locales mediante el montaje de la ISO DVD Full (~9GB).</p>
+<section id="infraestructura-nfs">
+<h3>Infraestructura NFS<a class="headerlink" href="#infraestructura-nfs" title="Link to this heading"></a></h3>
+<p>La Golden Image está configurada para conectar con la Workstation (WS):</p>
+<ul class="simple">
+<li><p><strong>IP de la WS:</strong> <code class="docutils literal notranslate"><span class="pre">192.168.17.26</span></code></p></li>
+<li><p><strong>Punto de montaje remoto:</strong> <code class="docutils literal notranslate"><span class="pre">/var/lib/virt_storage/iso_images</span></code></p></li>
+<li><p><strong>Protocolo:</strong> NFS v3 sobre TCP</p></li>
+</ul>
+</section>
+<section id="scripts-de-gestion">
+<h3>Scripts de Gestión<a class="headerlink" href="#scripts-de-gestion" title="Link to this heading"></a></h3>
+<p>Se han implementado dos scripts fundamentales en el HOME del root:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">activate_repo.sh</span></code>: Realiza el montaje NFS hacia la WS, asocia la ISO a un dispositivo loop y habilita los repositorios <code class="docutils literal notranslate"><span class="pre">dvd-baseos</span></code> y <code class="docutils literal notranslate"><span class="pre">dvd-appstream</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deactivate_repo.sh</span></code>: Desmonta los recursos y limpia la caché de <code class="docutils literal notranslate"><span class="pre">dnf</span></code> para dejar el sistema en estado “aislado”.</p></li>
+</ol>
+</section>
+</section>
+<section id="paquetes-pre-instalados-seed-packages">
+<h2>Paquetes Pre-instalados (Seed Packages)<a class="headerlink" href="#paquetes-pre-instalados-seed-packages" title="Link to this heading"></a></h2>
+<p>Se han integrado los siguientes paquetes esenciales utilizando la ISO DVD Full:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nfs-utils</span></code>: Proporciona el cliente NFS necesario para los scripts de repositorio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">qemu-guest-agent</span></code>: Permite la comunicación avanzada con Synology VMM (IP reporting, quiecesado de FS).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rpcbind</span></code>: Requisito para el bloqueo de archivos NFS.</p></li>
+</ul>
+</section>
+<section id="proceso-de-sellado-sealing">
+<h2>Proceso de Sellado (Sealing)<a class="headerlink" href="#proceso-de-sellado-sealing" title="Link to this heading"></a></h2>
+<p>Antes de convertir la VM en una plantilla (clonación), se han ejecutado las siguientes tareas de limpieza:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Eliminación de identificadores únicos</span>
+truncate<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span><span class="w"> </span>/etc/machine-id
+rm<span class="w"> </span>-f<span class="w"> </span>/etc/ssh/ssh_host_*
+
+<span class="c1"># Limpieza de rastros</span>
+<span class="nb">history</span><span class="w"> </span>-c
+<span class="nb">history</span><span class="w"> </span>-w
+</pre></div>
+</div>
+</section>
+<section id="estado-actual-f-ipa">
+<h2>Estado Actual: f(ipa)<a class="headerlink" href="#estado-actual-f-ipa" title="Link to this heading"></a></h2>
+<p>La VM base se encuentra <strong>apagada</strong> y <strong>desconectada de cualquier ISO</strong> en el panel de Synology VMM. Cualquier nodo nuevo (como <code class="docutils literal notranslate"><span class="pre">ipa02</span></code>) debe ser un <strong>Clon Completo</strong> de esta base.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cada clon generado debe recibir un nuevo Snapshot denominado <code class="docutils literal notranslate"><span class="pre">Pre-Instalacion-Replica</span></code> antes de iniciar la configuración de FreeIPA.</p>
+</div>
+</section>
+<section id="gestion-de-clones-y-derivadas">
+<h2>Gestión de Clones y Derivadas<a class="headerlink" href="#gestion-de-clones-y-derivadas" title="Link to this heading"></a></h2>
+<p>Para cada nuevo nodo de servicio, se sigue el ciclo de vida de “Función Maestra”:</p>
+<ol class="arabic simple">
+<li><p><strong>Instanciación</strong>: Creación de un <em>Full Clone</em> a partir de la Golden Image para garantizar independencia total del almacenamiento.</p></li>
+<li><p><strong>Sincronización de Host</strong>: Antes de iniciar el clon, se debe validar que el hipervisor (Synology DSM) tiene la hora sincronizada vía NTP (actualmente validado a 02/28/2026).</p></li>
+<li><p><strong>Punto de Control</strong>: Una vez creado el clon y antes de la primera configuración lógica (ej. unión a FreeIPA), se realiza un Snapshot preventivo denominado <code class="docutils literal notranslate"><span class="pre">Pre-Instalacion-Replica</span></code>.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Debido a reinicios del NAS, los nombres automáticos de las capturas pueden presentar desajustes cronológicos. La referencia válida siempre será la <strong>Descripción</strong> manual.</p>
+</div>
+</section>
+<section id="gestion-de-acceso-remoto-ssh">
+<h2>Gestión de Acceso Remoto (SSH)<a class="headerlink" href="#gestion-de-acceso-remoto-ssh" title="Link to this heading"></a></h2>
+<p>Debido a que la Golden Image se distribuye sin llaves de host (<code class="docutils literal notranslate"><span class="pre">/etc/ssh/ssh_host_*</span></code>) para garantizar la unicidad de cada clon, el primer acceso desde la Workstation de desarrollo (<code class="docutils literal notranslate"><span class="pre">raul&#64;dev</span></code>) siempre activará una alerta de seguridad.</p>
+<section id="procedimiento-de-conexion-tras-clonacion">
+<h3>Procedimiento de Conexión tras Clonación<a class="headerlink" href="#procedimiento-de-conexion-tras-clonacion" title="Link to this heading"></a></h3>
+<p>Al arrancar un clon por primera vez (ej. <code class="docutils literal notranslate"><span class="pre">ipa02</span></code> con IP <code class="docutils literal notranslate"><span class="pre">192.168.17.40</span></code>), se debe limpiar el registro local de la Workstation para evitar el error <code class="docutils literal notranslate"><span class="pre">REMOTE</span> <span class="pre">HOST</span> <span class="pre">IDENTIFICATION</span> <span class="pre">HAS</span> <span class="pre">CHANGED</span></code>.</p>
+<ol class="arabic">
+<li><p><strong>Limpieza del Host antiguo</strong>:
+Desde la terminal de la Workstation, ejecutar:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen<span class="w"> </span>-R<span class="w"> </span><span class="m">192</span>.168.17.40
+</pre></div>
+</div>
+</li>
+<li><p><strong>Aceptación de nueva Identidad</strong>:
+Al realizar el primer SSH, el sistema regenerará las llaves automáticamente. Se debe confirmar la nueva huella (fingerprint):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>root@192.168.17.40
+<span class="c1"># Responder &#39;yes&#39; cuando solicite confirmar la autenticidad.</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Este paso es obligatorio para cada nuevo clon derivado de <span class="math notranslate nohighlight">\(f(ipa)\)</span>, ya que cada uno genera su propia identidad criptográfica única al primer arranque.</p>
+</div>
+</section>
+<section id="advertencia-de-sincronizacion-temporal">
+<h3>Advertencia de Sincronización Temporal<a class="headerlink" href="#advertencia-de-sincronizacion-temporal" title="Link to this heading"></a></h3>
+<p>Dado que el entorno de virtualización no opera 24/7, es <strong>imperativo</strong> verificar la coherencia del reloj del sistema antes de cualquier operación con FreeIPA/Kerberos.</p>
+<ul class="simple">
+<li><p><strong>Comando de verificación:</strong> <code class="docutils literal notranslate"><span class="pre">date</span></code></p></li>
+<li><p><strong>Margen de error tolerado:</strong> &lt; 5 minutos respecto al Maestro (<code class="docutils literal notranslate"><span class="pre">ipa.raulvilchez.org</span></code>).</p></li>
+<li><p><strong>Acción manual:</strong> Si existe desfase, corregir mediante <code class="docutils literal notranslate"><span class="pre">date</span> <span class="pre">-s</span></code> antes de activar servicios.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="indice.html" class="btn btn-neutral float-left" title="Infraestructura RAULVILCHEZ.ORG" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="clone_golden.html" class="btn btn-neutral float-right" title="Script de Orquestación: clone_golden.sh" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

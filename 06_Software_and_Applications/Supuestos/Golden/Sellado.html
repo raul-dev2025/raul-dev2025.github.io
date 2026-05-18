@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Procedimiento de Sellado: GOLDEN_ROCKY10_IDM &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Informe de Purificación: Imagen Maestra GOLDEN_ROCKY10_IDM" href="golden_purificacion.html" />
+    <link rel="prev" title="Script de Post-Instalación: idm-join.sh" href="idm-join.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Infraestructura virtual</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#virtualization-management">Virtualization Management</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../IV-management.html">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/sharedFolder-nfs.html">Informe de Configuración: Repositorio de ISOs vía NFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/configSSH.html">Configuración de Acceso Remoto Seguro (SSH)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/resumen.html">Infraestructura y Almacenamiento</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Testing/vmTunning.html">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#gestion-de-identidad-idm">Gestión de Identidad (IdM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/Incidencias/index.html">Registro de Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Infraestructura virtual</a></li>
+          <li class="breadcrumb-item"><a href="indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+      <li class="breadcrumb-item active">Procedimiento de Sellado: GOLDEN_ROCKY10_IDM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/Golden/Sellado.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="procedimiento-de-sellado-golden-rocky10-idm">
+<h1>Procedimiento de Sellado: GOLDEN_ROCKY10_IDM<a class="headerlink" href="#procedimiento-de-sellado-golden-rocky10-idm" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-03-22</p>
+</dd>
+<dt class="field-even">Infraestructura<span class="colon">:</span></dt>
+<dd class="field-even"><p>RAULVILCHEZ.ORG</p>
+</dd>
+<dt class="field-odd">Estado<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Validado</p>
+</dd>
+</dl>
+<section id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Link to this heading"></a></h2>
+<p>Este documento detalla los pasos críticos realizados para transformar una instancia de Rocky Linux 10 en una “Golden Image” agnóstica, optimizada para clonado masivo y auto-enrolamiento en FreeIPA.</p>
+</section>
+<section id="configuracion-de-identidad-de-red">
+<h2>Configuración de Identidad de Red<a class="headerlink" href="#configuracion-de-identidad-de-red" title="Link to this heading"></a></h2>
+<p>Se han aplicado políticas de autenticación para permitir el aprovisionamiento dinámico de usuarios:</p>
+<ul class="simple">
+<li><p><strong>Authselect:</strong> Configurado con el perfil <code class="docutils literal notranslate"><span class="pre">sssd</span></code> y el módulo <code class="docutils literal notranslate"><span class="pre">with-mkhomedir</span></code>.</p></li>
+<li><p><strong>Servicios:</strong> <code class="docutils literal notranslate"><span class="pre">oddjobd.service</span></code> habilitado y en ejecución para la creación automática de directorios personales.</p></li>
+</ul>
+</section>
+<section id="pasos-de-limpieza-y-sanitizacion">
+<h2>Pasos de Limpieza y “Sanitización”<a class="headerlink" href="#pasos-de-limpieza-y-sanitizacion" title="Link to this heading"></a></h2>
+<p>Antes del cierre de la imagen, se ejecutaron las siguientes acciones para evitar colisiones de identidad en los clones:</p>
+<ol class="arabic">
+<li><p><strong>Limpieza de Temporales</strong>:
+Eliminación de archivos en <code class="docutils literal notranslate"><span class="pre">/tmp/*</span></code> y <code class="docutils literal notranslate"><span class="pre">/var/tmp/*</span></code>.</p></li>
+<li><p><strong>Identidad del Sistema (Machine-ID)</strong>:
+Se ha truncado el archivo <code class="docutils literal notranslate"><span class="pre">/etc/machine-id</span></code> para forzar a systemd a generar un ID único en el primer arranque de cada clon:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">truncate</span> <span class="o">-</span><span class="n">s</span> <span class="mi">0</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">machine</span><span class="o">-</span><span class="nb">id</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Contextos de Seguridad (SELinux)</strong>:
+Se ha creado el archivo de flag para asegurar que todos los archivos (incluyendo las nuevas configuraciones de authselect) tengan el contexto correcto tras el clonado:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">touch</span> <span class="o">/.</span><span class="n">autorelabel</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="cierre-de-la-imagen">
+<h2>Cierre de la Imagen<a class="headerlink" href="#cierre-de-la-imagen" title="Link to this heading"></a></h2>
+<p>La máquina debe permanecer en estado <code class="docutils literal notranslate"><span class="pre">shut</span> <span class="pre">off</span></code> para servir como fuente de lectura para los scripts de orquestación (<code class="docutils literal notranslate"><span class="pre">clone_golden.sh</span></code>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No arrancar la imagen maestra después de este proceso. Cualquier arranque accidental invalidará el flag de autorelabel y generará un nuevo Machine-ID.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="idm-join.html" class="btn btn-neutral float-left" title="Script de Post-Instalación: idm-join.sh" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="golden_purificacion.html" class="btn btn-neutral float-right" title="Informe de Purificación: Imagen Maestra GOLDEN_ROCKY10_IDM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

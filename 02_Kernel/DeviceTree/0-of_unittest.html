@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unidad de prueba, del árbol de dispositivo Open Firmware &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="conjunto de cambios" href="changesets.html" />
+    <link rel="prev" title="Arrancando un ARM" href="../arm/Booting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Admin-guide/1-boot.html">Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../arch/powerpc/booting-without-of.html">El arranque del núcleo deLinux/ppc sin Open Firmware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../arm/Booting.html">Arrancando un ARM</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#datos-de-ensayo">datos de ensayo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#anadiendo-datos-de-ensayo">Añadiendo datos de ensayo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#retirando-los-datos-de-ensayo">Retirando los datos de ensayo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="changesets.html">conjunto de cambios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../EarlyUserSpace/README.html">Soporte al <em>espacio temprano de usuario</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PCI/host-generic-pci.html">Controlador de <em>host</em> PCI, genérico</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04_System_Administration/system_apps/fdisk.html">Repaso de fdisk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+      <li class="breadcrumb-item active"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/DeviceTree/0-of_unittest.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <nav class="contents local" id="tabla-de-contenidos" role="doc-toc">
+<p class="topic-title">Tabla de contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#unidad-de-prueba-del-arbol-de-dispositivo-open-firmware" id="id1"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></p>
+<ul>
+<li><p><a class="reference internal" href="#introduccion" id="id2">Introducción</a></p></li>
+<li><p><a class="reference internal" href="#datos-de-ensayo" id="id3">datos de ensayo</a></p></li>
+<li><p><a class="reference internal" href="#anadiendo-datos-de-ensayo" id="id4">Añadiendo datos de ensayo</a></p></li>
+<li><p><a class="reference internal" href="#retirando-los-datos-de-ensayo" id="id5">Retirando los datos de ensayo</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id6">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="unidad-de-prueba-del-arbol-de-dispositivo-open-firmware">
+<span id="of-unittest-1"></span><h1><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em><a class="headerlink" href="#unidad-de-prueba-del-arbol-de-dispositivo-open-firmware" title="Link to this heading"></a></h1>
+<section id="introduccion">
+<span id="of-unittest-2"></span><h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>Éste documento explica cómo los datos de ensayo necesarios para ejecutar la Unidad de prueba, son acoplados al árbol en activo, dinámicamente. De forma independiente a la arquitectura de la máquina.</p>
+<p>Es recomendable leer los siguiente documentos, antes de seguir avanzando:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="Documentation/devicetree/usage-model.txt">usageModel</a></p></li>
+<li><p><a class="reference external" href="http://www.devicetree.org/Device_Tree_Usage">[2]</a></p></li>
+</ol>
+<p>Ha sido diseñado un <em>autotest</em> para probar la interfase <code class="docutils literal notranslate"><span class="pre">include/linux/of.h</span></code> proporcio- nada a los desarrolladores de <em>controladores de dispositivo</em>, para recoger la infor- mación de los mismos. Para una estructura de datos, que no está <em>a nivel</em>, del árbol de dispositivo.</p>
+</section>
+<section id="datos-de-ensayo">
+<span id="of-unittest-3"></span><h2>datos de ensayo<a class="headerlink" href="#datos-de-ensayo" title="Link to this heading"></a></h2>
+<p>El archivo fuente, del árbol de dispositivo <code class="docutils literal notranslate"><span class="pre">drivers/of/unittest-data/testcases.dts</span></code> contiene los datos de ensayo requeridos, en <code class="docutils literal notranslate"><span class="pre">drivers/of/unittest.c</span></code> para ejecutar de forma la automatizada <em>Unidad de prueba</em> . Actualmente, los siguientes archivos de fuente de inclusion del árbol de dispositivo(Device Tree Source Include), <code class="docutils literal notranslate"><span class="pre">.dtsi</span></code> son <em>relacionados</em> en <code class="docutils literal notranslate"><span class="pre">testcases.dts</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">drivers</span><span class="o">/</span><span class="n">of</span><span class="o">/</span><span class="n">unittest</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">tests</span><span class="o">-</span><span class="n">interrupts</span><span class="o">.</span><span class="n">dtsi</span> <span class="n">drivers</span><span class="o">/</span><span class="n">of</span><span class="o">/</span><span class="n">unittest</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">tests</span><span class="o">-</span><span class="n">platform</span><span class="o">.</span><span class="n">dtsi</span> <span class="n">drivers</span><span class="o">/</span><span class="n">of</span><span class="o">/</span><span class="n">unittest</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">tests</span><span class="o">-</span><span class="n">phandle</span><span class="o">.</span><span class="n">dtsi</span> <span class="n">drivers</span><span class="o">/</span><span class="n">of</span><span class="o">/</span><span class="n">unittest</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">tests</span><span class="o">-</span><span class="n">match</span><span class="o">.</span><span class="n">dtsi</span>
+</pre></div>
+</div>
+<p>Cuándo el kernel es construido con <code class="docutils literal notranslate"><span class="pre">OF_SELFTEST</span></code> activada, son aplicadas las reglas <code class="docutils literal notranslate"><span class="pre">make</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$(obj)/%.dtb: $(src)/%.dts FORCE $(call if_changed_dep, dtc)
+</pre></div>
+</div>
+<p>… utilizadas para compilar el archivo fuente <code class="docutils literal notranslate"><span class="pre">testcases.dts</span></code>, a un <em>pequeño binario</em> <code class="docutils literal notranslate"><span class="pre">testcases.dtb</span></code>. En ocasiones referido como <em>DT nivelado</em>(… equilibrado, comparado, coincidente).</p>
+<p>Después de esto, utilizando las siguientes reglas del <em>pequeño binario</em> de arriba, serán replegadas, envueltas, como un archivo <code class="docutils literal notranslate"><span class="pre">assembly</span></code>(ensamblador) <code class="docutils literal notranslate"><span class="pre">testcases.dtb.S</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$(obj)/%.dtb.S: $(obj)/%.dtb $(call cmd, dt_S_dtb)
+</pre></div>
+</div>
+<p>El archivo <code class="docutils literal notranslate"><span class="pre">assembly</span></code>, es compilado dentro del archivo <em>objeto</em> <code class="docutils literal notranslate"><span class="pre">testcases.dtb.o</span></code>, que será enlazado a la imagen del kernel.</p>
+</section>
+<section id="anadiendo-datos-de-ensayo">
+<span id="of-unittest-4"></span><h2>Añadiendo datos de ensayo<a class="headerlink" href="#anadiendo-datos-de-ensayo" title="Link to this heading"></a></h2>
+<p>Una estructura desnivelada:</p>
+<p>Consiste en un <code class="docutils literal notranslate"><span class="pre">device_node</span></code>s -nodo de dispositivo, en forma de <em>estructura de árbol</em>, descrita más abajo.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">following</span> <span class="n">struct</span> <span class="n">members</span> <span class="n">are</span> <span class="n">used</span> <span class="n">to</span> <span class="n">construct</span> <span class="n">the</span> <span class="n">tree</span> <span class="n">struct</span> <span class="n">device_node</span> <span class="p">{</span> <span class="o">...</span> <span class="n">struct</span>  <span class="n">device_node</span> <span class="o">*</span><span class="n">parent</span><span class="p">;</span> <span class="n">struct</span>  <span class="n">device_node</span> <span class="o">*</span><span class="n">descendiente</span><span class="p">;</span> <span class="n">struct</span>  <span class="n">device_node</span> <span class="o">*</span><span class="n">parejo</span><span class="p">;</span> <span class="o">...</span> <span class="p">};</span>
+</pre></div>
+</div>
+<p><strong>Figura 1</strong>. Describe una estructura genérica <em>DT</em> desnivelada, en una máquina. Considera, únicamente, punteros <em>descendientes</em> y <em>parejos</em>. Existe otro puntero; <em>ascendiente</em>, utilizado para <em>atravesar</em> el árbol, en dirección opuesta. Así, en un determinado nivel, el <em>nodo descendiente</em> y, todos los nodos parejos, estarán asociados a un puntero ascendente, en un <em>nodo común</em>. Ejemplo, los: descendiente1, parejo2, parejo3, parejo4, del ascendente apuntan a del nodo raíz.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+     <span class="o">|</span>
+<span class="n">descendiente1</span> <span class="o">-&gt;</span> <span class="n">parejo2</span> <span class="o">-&gt;</span> <span class="n">parejo3</span> <span class="o">-&gt;</span> <span class="n">parejo4</span> <span class="o">-&gt;</span> <span class="n">null</span>
+                                                   <span class="o">|</span>
+                                                  <span class="n">null</span>
+                                    <span class="o">|</span>
+                             <span class="n">descendiente31</span> <span class="o">-&gt;</span> <span class="n">parejo32</span> <span class="o">-&gt;</span> <span class="n">null</span>
+                                                        <span class="o">|</span>
+                                 <span class="n">null</span>                    <span class="n">null</span>
+                      <span class="o">|</span>
+          <span class="n">descendiente21</span> <span class="o">-&gt;</span> <span class="n">parejo22</span> <span class="o">-&gt;</span> <span class="n">parejo23</span> <span class="o">-&gt;</span> <span class="n">null</span>
+                                           <span class="o">|</span>
+                     <span class="n">null</span>          <span class="n">null</span>         <span class="n">null</span>
+     <span class="o">|</span>
+<span class="n">descendiente11</span> <span class="o">-&gt;</span> <span class="n">parejo12</span> <span class="o">-&gt;</span> <span class="n">parejo13</span> <span class="o">-&gt;</span> <span class="n">parejo14</span> <span class="o">-&gt;</span> <span class="n">null</span>
+                                                     <span class="o">|</span>
+                                                    <span class="n">null</span>
+                                     <span class="o">|</span>
+    <span class="n">null</span>                 <span class="n">null</span>       <span class="n">descendiente131</span> <span class="o">-&gt;</span> <span class="n">null</span>
+                                           <span class="o">|</span>
+                                        <span class="n">null</span>
+</pre></div>
+</div>
+<p>Figura 1: estructura genérica de un árbol de dispositivo desnivelado.</p>
+<p>Antes de ejecutar <em>Unidad de prueba</em>, es un requisito <em>acoplar</em> los datos de ensayo, al <em>DT</em> de la máquina -si está presente. Así, cuando es llamado <code class="docutils literal notranslate"><span class="pre">selftest_data_add()</span></code>, tan pronto como son leídos los datos del <em>DT</em>, enlazados en la imagen del kernel. Los símbolos del kernel, consiguen esto.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="n">testcase</span><span class="o">-</span><span class="n">data</span> <span class="o">|</span> <span class="n">test</span><span class="o">-</span><span class="n">descendiente0</span> <span class="o">-&gt;</span> <span class="n">test</span><span class="o">-</span><span class="n">parejo1</span> <span class="o">-&gt;</span> <span class="n">test</span><span class="o">-</span><span class="n">parejo2</span> <span class="o">-&gt;</span> <span class="n">test</span><span class="o">-</span><span class="n">parejo3</span> <span class="o">-&gt;</span> <span class="n">null</span> <span class="o">|</span> <span class="n">test</span><span class="o">-</span><span class="n">descendiente01</span>     <span class="n">null</span>             <span class="n">null</span>             <span class="n">null</span>
+</pre></div>
+</div>
+<p><strong>Figura 2</strong>. Ejemplo de los datos de ensayo de un árbol, siendo acoplados a un árbol activo.</p>
+<p>De acuerdo al anterior escenario, el <em>árbol activo</em> está ya presente, por lo que no será necesario acoplar la raíz <code class="docutils literal notranslate"><span class="pre">/</span></code>, al nodo. El resto de nodos, son acoplados mediante la llamada <code class="docutils literal notranslate"><span class="pre">of_attach_node()</span></code> sobre cada nodo.</p>
+<p>En la función <code class="docutils literal notranslate"><span class="pre">of_attach_node()</span></code>, el nuevo nodo será acoplado como <em>descendiente</em> del en el árbol activo. Si el ascendiente, ya tiene un descendiente, el nuevo nodo reemplzará al descendiente activo, convirtiéndolo en su parejo. Por consiguiente, acoplado los datos del nodo al árbol activo -<em>figura 1</em>, la estructura final es como se muestra en la <em>figura 3</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+     <span class="o">|</span>
+<span class="n">testcase</span><span class="o">-</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">descendiente1</span> <span class="o">-&gt;</span> <span class="n">parejo2</span> <span class="o">-&gt;</span> <span class="n">parejo3</span>    <span class="o">-&gt;</span>    <span class="n">parejo4</span> <span class="o">-&gt;</span> <span class="n">null</span>
+                                                                     <span class="o">|</span>
+ <span class="p">(</span><span class="o">...</span><span class="p">)</span>                                                              <span class="n">null</span>
+                                                 <span class="n">descendiente31</span> <span class="o">-&gt;</span> <span class="n">parejo32</span> <span class="o">-&gt;</span> <span class="n">null</span>
+                                                                         <span class="o">|</span>
+                                                  <span class="n">null</span>                    <span class="n">null</span>
+                                         <span class="o">|</span>
+                                       <span class="n">descendiente21</span> <span class="o">-&gt;</span> <span class="n">parejo22</span> <span class="o">-&gt;</span> <span class="n">parejo23</span> <span class="o">-&gt;</span> <span class="n">null</span>
+                                                                                <span class="o">|</span>
+                                        <span class="n">null</span>                 <span class="n">null</span>          <span class="n">null</span>
+                                <span class="o">|</span>
+                    <span class="n">descendiente11</span> <span class="o">-&gt;</span> <span class="n">parejo12</span> <span class="o">-&gt;</span> <span class="n">parejo13</span> <span class="o">-&gt;</span> <span class="n">parejo14</span> <span class="o">-&gt;</span> <span class="n">null</span>
+                                                               <span class="o">|</span>
+                               <span class="n">null</span>       <span class="n">null</span>                    <span class="n">null</span>
+                                                          <span class="o">|</span>
+                                            <span class="n">descendiente131</span> <span class="o">-&gt;</span> <span class="n">null</span>
+                                                         <span class="o">|</span>
+                                                        <span class="n">null</span>
+<span class="o">-----------------------------------------------------------------------</span>
+
+<span class="n">root</span> <span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+     <span class="o">|</span>
+<span class="n">testcase</span><span class="o">-</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">descendiente1</span> <span class="o">-&gt;</span> <span class="n">parejo2</span> <span class="o">-&gt;</span> <span class="n">parejo3</span> <span class="o">-&gt;</span> <span class="n">parejo4</span> <span class="o">-&gt;</span> <span class="n">null</span>
+                                                          <span class="o">|</span>
+                 <span class="p">(</span><span class="o">...</span><span class="p">)</span>                <span class="p">(</span><span class="o">...</span><span class="p">)</span>       <span class="p">(</span><span class="o">...</span><span class="p">)</span>        <span class="n">null</span>
+     <span class="o">|</span>
+<span class="n">test</span><span class="o">-</span><span class="n">parejo3</span> <span class="o">-&gt;</span> <span class="n">test</span><span class="o">-</span><span class="n">parejo2</span> <span class="o">-&gt;</span> <span class="n">test</span><span class="o">-</span><span class="n">parejo1</span> <span class="o">-&gt;</span> <span class="n">test</span><span class="o">-</span><span class="n">descendiente0</span> <span class="o">-&gt;</span> <span class="n">null</span>
+                                                     <span class="o">|</span>
+    <span class="n">null</span>             <span class="n">null</span>                <span class="n">null</span>         <span class="n">test</span><span class="o">-</span><span class="n">descendiente01</span>
+</pre></div>
+</div>
+<p><strong>figura 3:</strong> Estructura de árbol activa, después de acoplar los datos del <em>caso de</em> <em>prueba</em>.</p>
+<p>Astutos lectores, habrán notado que el nodo <code class="docutils literal notranslate"><span class="pre">test-descendiente0</span></code>, se convierte en el último <em>parejo</em>, comparándolo con la estructura anterior en <em>figura 2</em>. Después de acoplar <code class="docutils literal notranslate"><span class="pre">test-descendiente0</span></code>, el <code class="docutils literal notranslate"><span class="pre">test-parejo1</span></code>, es acoplado al que empuja al nodo descendiente, ejem. <code class="docutils literal notranslate"><span class="pre">test-descendiente0</span></code> para convertirse en el parejo y, haccerse a él mismo, nodo descendiente.</p>
+<p>Si es encontrado un nodo duplicado -por ejemplo si un nodo con el mismo nombre de pro- piedad, está ya presente, el nodo será no acoplado, en su lugar la propiedad será actualizada, llamando a la función <code class="docutils literal notranslate"><span class="pre">update_node_properties()</span></code>.</p>
+</section>
+<section id="retirando-los-datos-de-ensayo">
+<span id="of-unittest-6"></span><h2>Retirando los datos de ensayo<a class="headerlink" href="#retirando-los-datos-de-ensayo" title="Link to this heading"></a></h2>
+<p>Tras haber completado el <em>caso de prueba</em>, <code class="docutils literal notranslate"><span class="pre">selftest_data_remove</span></code>, será llamado con objeto de retirar los nodos de dispositivo, acoplados inicialmente. Primero la hoja de nodo es <em>desacoplada</em>, entonces moviendo los nodos ascendientes, retirado; eventualmente el árbol al completo. <code class="docutils literal notranslate"><span class="pre">selftest_data_remove()</span></code> llama a <code class="docutils literal notranslate"><span class="pre">detach_node_and_children()</span></code>, el cuál usa <code class="docutils literal notranslate"><span class="pre">of_detach_node()</span></code>, para liberar el nodo del árbol activo.</p>
+<p>Para liberar el nodo, <code class="docutils literal notranslate"><span class="pre">of_detach_node()</span></code> actualiza el puntero descendiente a un nodo ascendiente concretado o, al anterior <em>parejo</em>.</p>
+<hr class="docutils" />
+</section>
+<section id="referencias-y-agradecimientos">
+<span id="of-unittest-7"></span><h2>Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<p><strong>Author:</strong> Gaurav Minocha <a class="reference external" href="mailto:gaurav&#46;minocha&#46;os&#37;&#52;&#48;gmail&#46;com">gaurav<span>&#46;</span>minocha<span>&#46;</span>os<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
+<p>nota d.t. parent, ascendientes, u organizados de manera ascendente. nota d.t. descendiente, descendientes, u organizados de forma descendiente. nota d.t. sibling, parejos u organizados <em>en la horizontal</em>. Kall 7o Poli23.</p>
+<div class="firma docutils container">
+<p><strong>Traducción:</strong> Heliogabalo S.J.
+<a class="reference external" href="https://www.raulvilchez.org">www.raulvilchez.org</a></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../arm/Booting.html" class="btn btn-neutral float-left" title="Arrancando un ARM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="changesets.html" class="btn btn-neutral float-right" title="conjunto de cambios" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

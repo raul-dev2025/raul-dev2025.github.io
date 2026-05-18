@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Réplica de Alta Disponibilidad FreeIPA &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Informe de Configuración Base de la VM: ipa02" href="IdM-replica.html" />
+    <link rel="prev" title="Preparación del Entorno (Paso 3)" href="preparacionEntornoPaso3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Infraestructura virtual</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#virtualization-management">Virtualization Management</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../IV-management.html">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/sharedFolder-nfs.html">Informe de Configuración: Repositorio de ISOs vía NFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/configSSH.html">Configuración de Acceso Remoto Seguro (SSH)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Config/resumen.html">Infraestructura y Almacenamiento</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Testing/vmTunning.html">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Golden/indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#gestion-de-identidad-idm">Gestión de Identidad (IdM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/Incidencias/index.html">Registro de Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Infraestructura virtual</a></li>
+      <li class="breadcrumb-item active">Réplica de Alta Disponibilidad FreeIPA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/IdM/despliegue-replica.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="replica-de-alta-disponibilidad-freeipa">
+<h1>Réplica de Alta Disponibilidad FreeIPA<a class="headerlink" href="#replica-de-alta-disponibilidad-freeipa" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>01 de marzo de 2026</p>
+</dd>
+<dt class="field-even">Proyecto<span class="colon">:</span></dt>
+<dd class="field-even"><p>Infraestructura de Identidad RAULVILCHEZ.ORG</p>
+</dd>
+<dt class="field-odd">Responsable<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Administrador del Sistema</p>
+</dd>
+<dt class="field-even">Estado<span class="colon">:</span></dt>
+<dd class="field-even"><p>Finalizado con éxito (Nodo en espera tras captura)</p>
+</dd>
+</dl>
+<section id="resumen-ejecutivo">
+<h2>Resumen Ejecutivo<a class="headerlink" href="#resumen-ejecutivo" title="Link to this heading"></a></h2>
+<p>Se ha completado con éxito la instanciación de la réplica <code class="docutils literal notranslate"><span class="pre">ipa02.raulvilchez.org</span></code>. El nodo ahora proporciona redundancia total para el servicio de identidad y la Autoridad de Certificación (CA) del reino. Tras la validación, el nodo ha sido apagado de forma controlada para generar una captura de seguridad (“snapshot”) del estado óptimo final.</p>
+</section>
+<section id="configuracion-de-infraestructura">
+<h2>Configuración de Infraestructura<a class="headerlink" href="#configuracion-de-infraestructura" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Maestro (Authority Node):</strong> ipa.raulvilchez.org (192.168.17.39)</p></li>
+<li><p><strong>Réplica (Replica Node):</strong> ipa02.raulvilchez.org (192.168.17.40)</p></li>
+<li><p><strong>Plataforma:</strong> Synology VMM (Host IP: 192.168.17.38)</p></li>
+<li><p><strong>Recursos Virtuales:</strong> 2 vCPUs, 2 GB RAM, 20 GB Disco LVM</p></li>
+</ul>
+</section>
+<section id="hitos-del-despliegue-y-correcciones-realizadas">
+<h2>Hitos del Despliegue y Correcciones Realizadas<a class="headerlink" href="#hitos-del-despliegue-y-correcciones-realizadas" title="Link to this heading"></a></h2>
+<section id="saneamiento-y-dns">
+<h3>1. Saneamiento y DNS<a class="headerlink" href="#saneamiento-y-dns" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Se eliminaron los objetos de host huérfanos en el Maestro antes de la promoción.</p></li>
+<li><p>Se corrigió la resolución inversa DNS (registros PTR) para ambos nodos, eliminando las alertas de resolución crítica.</p></li>
+</ul>
+</section>
+<section id="instalacion-de-la-replica-e-identidad">
+<h3>2. Instalación de la Réplica e Identidad<a class="headerlink" href="#instalacion-de-la-replica-e-identidad" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Ejecución de <code class="docutils literal notranslate"><span class="pre">ipa-replica-install</span></code> con parámetros de autenticación explícitos, resolviendo el fallo previo de credenciales SASL.</p></li>
+<li><p>Sincronización exitosa de la base de datos LDAP (Incremental update succeeded).</p></li>
+</ul>
+</section>
+<section id="alta-disponibilidad-de-la-ca">
+<h3>3. Alta Disponibilidad de la CA<a class="headerlink" href="#alta-disponibilidad-de-la-ca" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Ejecución completa de <code class="docutils literal notranslate"><span class="pre">ipa-ca-install</span></code> (31 pasos).</p></li>
+<li><p>Configuración de la réplica como autoridad de certificación redundante y despliegue del servicio ACME.</p></li>
+</ul>
+</section>
+</section>
+<section id="verificacion-post-despliegue">
+<h2>Verificación Post-Despliegue<a class="headerlink" href="#verificacion-post-despliegue" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Conectividad:</strong> Validada mediante <code class="docutils literal notranslate"><span class="pre">ipa-replica-conncheck</span></code>. Todos los servicios críticos (LDAP, Kerberos, HTTP) responden correctamente.</p></li>
+<li><p><strong>Replicación:</strong> El estado de replicación se reporta como “Status 0”, confirmando consistencia total de datos entre el Maestro y la Réplica.</p></li>
+<li><p><strong>Rendimiento:</strong> El nodo operó correctamente bajo una carga de RAM del 52% durante los procesos más intensivos de Java/Tomcat.</p></li>
+</ul>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>El reino <strong>RAULVILCHEZ.ORG</strong> dispone ahora de una arquitectura multimaestro funcional. La infraestructura está protegida mediante una captura de seguridad reciente, lista para su puesta en producción definitiva.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="preparacionEntornoPaso3.html" class="btn btn-neutral float-left" title="Preparación del Entorno (Paso 3)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="IdM-replica.html" class="btn btn-neutral float-right" title="Informe de Configuración Base de la VM: ipa02" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

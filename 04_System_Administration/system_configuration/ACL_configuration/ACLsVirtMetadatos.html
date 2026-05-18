@@ -1,0 +1,205 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe de Configuración: ACLs para Nodo Virt-metadatos &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Registro de Incidencias" href="../../Incidencias/index.html" />
+    <link rel="prev" title="Informe de Configuración: Directorios Compartidos de Usuario" href="ACLsMultimediaDescargas.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/index.html">Infraestructura virtual</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Configuración de Control de Acceso</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ACLsText.html">Saneamiento de Directorios de Perfil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ACLsDocuments.html">Saneamiento de Permisos en Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ACLsMultimediaDescargas.html">Informe de Configuración: Directorios Compartidos de Usuario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ACLsMultimediaDescargas.html#informe-de-configuracion-politica-unificada-de-no-ejecucion">Informe de Configuración: Política Unificada de No-Ejecución</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Informe de Configuración: ACLs para Nodo Virt-metadatos</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#objetivos">Objetivos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analisis-de-la-estructura">Análisis de la Estructura</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuracion-aplicada">Configuración Aplicada</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#verificacion-de-seguridad">Verificación de Seguridad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementacion-tecnica">Implementación Técnica</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../Incidencias/index.html">Registro de Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Configuración de Control de Acceso</a></li>
+      <li class="breadcrumb-item active">Informe de Configuración: ACLs para Nodo Virt-metadatos</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/04_System_Administration/system_configuration/ACL_configuration/ACLsVirtMetadatos.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-de-configuracion-acls-para-nodo-virt-metadatos">
+<h1>Informe de Configuración: ACLs para Nodo Virt-metadatos<a class="headerlink" href="#informe-de-configuracion-acls-para-nodo-virt-metadatos" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-03-20</p>
+</dd>
+<dt class="field-even">Responsable<span class="colon">:</span></dt>
+<dd class="field-even"><p>Administrador de Sistemas (Gemini AI Collaboration)</p>
+</dd>
+<dt class="field-odd">Estado<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Implementado</p>
+</dd>
+<dt class="field-even">Referencia<span class="colon">:</span></dt>
+<dd class="field-even"><p>Infraestructura IdM / Almacenamiento NAS</p>
+</dd>
+</dl>
+<section id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>Este documento detalla la configuración de permisos avanzados mediante Listas de Control de Acceso (ACLs) para permitir que el usuario técnico <code class="docutils literal notranslate"><span class="pre">virt-admin</span></code> gestione archivos de configuración y metadatos de virtualización en una ruta específica dentro del almacenamiento persistente.</p>
+</section>
+<section id="objetivos">
+<h2>Objetivos<a class="headerlink" href="#objetivos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Permitir acceso de <strong>lectura y escritura</strong> a <code class="docutils literal notranslate"><span class="pre">virt-admin</span></code> en el directorio de metadatos.</p></li>
+<li><p>Garantizar la <strong>navegabilidad</strong> (traversing) a través de rutas con permisos restrictivos (como el HOME del usuario).</p></li>
+<li><p>Evitar la propagación del bit de <strong>ejecución</strong> en archivos de datos (<code class="docutils literal notranslate"><span class="pre">.xml</span></code>, <code class="docutils literal notranslate"><span class="pre">.rst</span></code>, <code class="docutils literal notranslate"><span class="pre">.sh</span></code>), restringiéndolo exclusivamente a directorios.</p></li>
+<li><p>Mantener la integridad de los permisos originales para el propietario <code class="docutils literal notranslate"><span class="pre">raul-ipa</span></code> y el grupo <code class="docutils literal notranslate"><span class="pre">raul</span></code>.</p></li>
+</ul>
+</section>
+<section id="analisis-de-la-estructura">
+<h2>Análisis de la Estructura<a class="headerlink" href="#analisis-de-la-estructura" title="Link to this heading"></a></h2>
+<p>La ruta de trabajo es un enlace simbólico que apunta a un volumen NFS/NAS montado:</p>
+<ul class="simple">
+<li><p><strong>Ruta Lógica:</strong> <code class="docutils literal notranslate"><span class="pre">/home/raul-ipa/Documents/Virt-metadatos/</span></code></p></li>
+<li><p><strong>Destino Real:</strong> <code class="docutils literal notranslate"><span class="pre">/mnt/datos_raul/home_config/Documents/Virt-metadatos/</span></code></p></li>
+</ul>
+</section>
+<section id="configuracion-aplicada">
+<h2>Configuración Aplicada<a class="headerlink" href="#configuracion-aplicada" title="Link to this heading"></a></h2>
+<section id="acceso-de-transito">
+<h3>Acceso de Tránsito<a class="headerlink" href="#acceso-de-transito" title="Link to this heading"></a></h3>
+<p>Se ha habilitado el bit de ejecución (<code class="docutils literal notranslate"><span class="pre">x</span></code>) para <code class="docutils literal notranslate"><span class="pre">virt-admin</span></code> en el nivel superior (<code class="docutils literal notranslate"><span class="pre">/home/raul-ipa</span></code>). Esto permite al usuario atravesar el directorio sin necesidad de listar su contenido, manteniendo la privacidad de otros archivos del usuario.</p>
+</section>
+<section id="gestion-de-permisos-en-destino">
+<h3>Gestión de Permisos en Destino<a class="headerlink" href="#gestion-de-permisos-en-destino" title="Link to this heading"></a></h3>
+<p>Se ha implementado una configuración asimétrica para garantizar la operatividad:</p>
+<ol class="arabic simple">
+<li><p><strong>Directorios:</strong> Se ha asignado <code class="docutils literal notranslate"><span class="pre">rwx</span></code> (Lectura, Escritura y Ejecución) para permitir la entrada en subcarpetas y la creación/eliminación de objetos.</p></li>
+<li><p><strong>Archivos:</strong> Se ha restringido a <code class="docutils literal notranslate"><span class="pre">rw-</span></code> (Lectura y Escritura). Se ha realizado una limpieza selectiva para asegurar que ningún archivo de texto o script herede accidentalmente permisos de ejecución.</p></li>
+<li><p><strong>Herencia (Default ACLs):</strong> Se han configurado reglas de herencia en el directorio raíz para que cualquier objeto creado en el futuro por cualquier usuario mantenga la accesibilidad para <code class="docutils literal notranslate"><span class="pre">virt-admin</span></code> de forma automática.</p></li>
+</ol>
+</section>
+</section>
+<section id="verificacion-de-seguridad">
+<h2>Verificación de Seguridad<a class="headerlink" href="#verificacion-de-seguridad" title="Link to this heading"></a></h2>
+<p>Tras la aplicación, se han confirmado los siguientes estados:</p>
+<ul class="simple">
+<li><p><strong>Aislamiento:</strong> <code class="docutils literal notranslate"><span class="pre">virt-admin</span></code> puede navegar hasta el destino pero recibe <em>Permission Denied</em> si intenta listar el contenido del Home o escribir fuera del área autorizada.</p></li>
+<li><p><strong>Transparencia:</strong> El propietario original (<code class="docutils literal notranslate"><span class="pre">raul-ipa</span></code>) mantiene su capacidad de gestión total.</p></li>
+<li><p><strong>Coherencia:</strong> La máscara de ACL (<code class="docutils literal notranslate"><span class="pre">mask</span></code>) ha sido ajustada para no bloquear los permisos efectivos necesarios para la navegación.</p></li>
+</ul>
+</section>
+<section id="implementacion-tecnica">
+<h2>Implementación Técnica<a class="headerlink" href="#implementacion-tecnica" title="Link to this heading"></a></h2>
+<p>Los comandos específicos de <code class="docutils literal notranslate"><span class="pre">setfacl</span></code> y la lógica de limpieza mediante <code class="docutils literal notranslate"><span class="pre">find</span></code> utilizados en este proceso están documentados y automatizados en el script de mantenimiento:</p>
+<p><strong>Archivo de referencia:</strong> <code class="docutils literal notranslate"><span class="pre">ACLsVirtMetadatos.sh</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cualquier modificación futura en la estructura de subdirectorios dentro de <code class="docutils literal notranslate"><span class="pre">Virt-metadatos</span></code> debería realizarse preferiblemente a través del script mencionado para asegurar la consistencia de los bits de ejecución.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ACLsMultimediaDescargas.html" class="btn btn-neutral float-left" title="Informe de Configuración: Directorios Compartidos de Usuario" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../Incidencias/index.html" class="btn btn-neutral float-right" title="Registro de Incidencias" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

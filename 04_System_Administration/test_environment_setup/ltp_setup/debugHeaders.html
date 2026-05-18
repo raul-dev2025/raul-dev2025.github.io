@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debuggin Kernel Headers &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="LTP Configuration Debugging Analysis" href="configLog_analysis.html" />
+    <link rel="prev" title="Check Headers" href="checkHeaders.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Testing Environment Setup</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Testing/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Config/queringXML.html">Querying XML File Configuration with libvirt Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/Boot/envsWithGrub.html">Understanding <code class="docutils literal notranslate"><span class="pre">grub2-editenv</span> <span class="pre">list</span></code> Output: Saved Entry Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oldKernels.html">Working with Older Kernel Versions on CentOS 7: Challenges and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="weakness_config.html">LTP build log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Debuggin Kernel Headers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#summary-of-steps">Summary of Steps:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configLog_analysis.html">LTP Configuration Debugging Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="headerResolution.html">How to Fix Missing <cite>linux/module.h</cite> in LTP Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="relevantLinuxSource.html">Understanding /usr/src/linux Symlink Importance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sadButTrue.html">The /usr/src/linux Reality Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../99_General/miscellaneous/diagnosticMissingHeaders.html">Debugging Missing Kernel Headers in LTP Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoConfHd.html">Using text Macros to Check for Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gccSearchPath.html">Check GCC Search Path for Kernel Headers in GNU/Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Autotools_overview.html">Overview of Autotools Primary Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Testing Environment Setup</a></li>
+      <li class="breadcrumb-item active">Debuggin Kernel Headers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/04_System_Administration/test_environment_setup/ltp_setup/debugHeaders.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="debuggin-kernel-headers">
+<h1>Debuggin Kernel Headers<a class="headerlink" href="#debuggin-kernel-headers" title="Link to this heading"></a></h1>
+<p>If the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script is still not finding the four headers (<code class="docutils literal notranslate"><span class="pre">dmapi.h</span></code>, <code class="docutils literal notranslate"><span class="pre">mm.h</span></code>, <code class="docutils literal notranslate"><span class="pre">linux/module.h</span></code>, and <code class="docutils literal notranslate"><span class="pre">sys/jfsdmapi.h</span></code>) even after defining <code class="docutils literal notranslate"><span class="pre">CPPFLAGS=&quot;-I/usr/src/k-ver/include&quot;</span></code>, there could be several reasons for this. Let’s troubleshoot step by step:</p>
+<hr class="docutils" />
+<ol class="arabic">
+<li><p><strong>Verify the Path in</strong> <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code></p>
+<ul>
+<li><p>Ensure that the path specified in <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> is correct and contains the required headers.</p></li>
+<li><p>Run the following command to check if the headers exist in the specified directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/usr/src/k-ver/include/dmapi.h<span class="w"> </span>/usr/src/k-ver/include/mm.h<span class="w"> </span>/usr/src/k-ver/include/linux/module.h<span class="w"> </span>/usr/src/k-ver/include/sys/jfsdmapi.h
+</pre></div>
+</div>
+<p>If any of these files are missing, the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script will not find them.</p>
+</li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="2">
+<li><p><strong>Check Subdirectories</strong></p>
+<ul class="simple">
+<li><p>Some headers might be located in subdirectories. For example:
+- <code class="docutils literal notranslate"><span class="pre">linux/module.h</span></code> is typically located in <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include/linux/module.h</span></code>.
+- <code class="docutils literal notranslate"><span class="pre">sys/jfsdmapi.h</span></code> might be in <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include/sys/jfsdmapi.h</span></code>.</p></li>
+<li><p>Ensure that the <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> path points to the base directory (<code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code>), and the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script is correctly appending the subdirectories.</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="3">
+<li><p><strong>Kernel Version Mismatch</strong></p>
+<ul>
+<li><p>The headers in <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code> must match the version of the running kernel. If there is a mismatch, the headers might not be compatible, and the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script might fail to recognize them.</p></li>
+<li><p>Check the kernel version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uname<span class="w"> </span>-r
+</pre></div>
+</div>
+</li>
+<li><p>Verify that <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver</span></code> corresponds to the same version.</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="4">
+<li><p><strong>Use Groups for Development</strong></p>
+<ul>
+<li><p>To manage access to the <code class="docutils literal notranslate"><span class="pre">include</span></code> directory for multiple users, consider using a dedicated group (e.g., <code class="docutils literal notranslate"><span class="pre">developers</span></code>).</p></li>
+<li><p>Follow these steps:</p>
+<ol class="arabic">
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">developers</span></code> group (if it doesn’t exist):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>groupadd<span class="w"> </span>developers
+</pre></div>
+</div>
+</li>
+<li><p>Change the group ownership of the <code class="docutils literal notranslate"><span class="pre">include</span></code> directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chgrp<span class="w"> </span>-R<span class="w"> </span>developers<span class="w"> </span>/usr/src/k-ver/include
+</pre></div>
+</div>
+</li>
+<li><p>Grant read permissions to the <code class="docutils literal notranslate"><span class="pre">developers</span></code> group:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span>g+r<span class="w"> </span>/usr/src/k-ver/include
+</pre></div>
+</div>
+</li>
+<li><p>Add users (e.g., <code class="docutils literal notranslate"><span class="pre">root</span></code> and your regular user) to the <code class="docutils literal notranslate"><span class="pre">developers</span></code> group:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>developers<span class="w"> </span>root
+sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>developers<span class="w"> </span><span class="nv">$USER</span>
+</pre></div>
+</div>
+</li>
+<li><p>Verify group membership:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>groups<span class="w"> </span><span class="nv">$USER</span>
+groups<span class="w"> </span>root
+</pre></div>
+</div>
+</li>
+<li><p>Log out and log back in for the changes to take effect, or use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>newgrp<span class="w"> </span>developers
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p>This ensures that all members of the <code class="docutils literal notranslate"><span class="pre">developers</span></code> group (including <code class="docutils literal notranslate"><span class="pre">root</span></code> and regular users) have read access to the <code class="docutils literal notranslate"><span class="pre">include</span></code> directory.</p></li>
+</ul>
+</li>
+</ol>
+<p>4.99 <strong>Analyzing the Permission String</strong></p>
+<p>The permission string for the directory <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code> is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>drwxr-xr-x. 28 root developers /usr/src/k-ver/include
+</pre></div>
+</div>
+<p>Here’s what it means:</p>
+<ol class="arabic">
+<li><p><strong>File Type</strong>:
+- <code class="docutils literal notranslate"><span class="pre">d</span></code>: The entry is a directory.</p></li>
+<li><p><strong>Permissions</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rwxr-xr-x</span></code>: The permissions are divided into three groups:</p>
+<ul>
+<li><p><strong>Owner</strong> (<code class="docutils literal notranslate"><span class="pre">root</span></code>): Has read, write, and execute permissions (<code class="docutils literal notranslate"><span class="pre">rwx</span></code>).</p></li>
+<li><p><strong>Group</strong> (<code class="docutils literal notranslate"><span class="pre">developers</span></code>): Has read and execute permissions (<code class="docutils literal notranslate"><span class="pre">r-x</span></code>).</p></li>
+<li><p><strong>Others</strong>: Have read and execute permissions (<code class="docutils literal notranslate"><span class="pre">r-x</span></code>).</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Extended ACL</strong>:</p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">.</span></code> at the end indicates that the directory has an extended ACL. Use <code class="docutils literal notranslate"><span class="pre">getfacl</span></code> to view the additional permissions:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>getfacl<span class="w"> </span>/usr/src/k-ver/include
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Number of Links</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">28</span></code>: The directory has 28 hard links (typically representing subdirectories).</p></li>
+</ul>
+</li>
+<li><p><strong>Owner and Group</strong>:</p>
+<ul class="simple">
+<li><p>The directory is owned by <code class="docutils literal notranslate"><span class="pre">root</span></code> and belongs to the <code class="docutils literal notranslate"><span class="pre">developers</span></code> group.</p></li>
+</ul>
+</li>
+<li><p><strong>Directory Path</strong>:</p>
+<ul class="simple">
+<li><p>The path to the directory is <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code>.</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Is This Configuration Appropriate?</strong></p>
+<ul>
+<li><p><strong>For Development</strong>: If the <code class="docutils literal notranslate"><span class="pre">developers</span></code> group needs read and execute access, this configuration is appropriate.</p></li>
+<li><p><strong>For Write Access</strong>: If the group needs to modify files, grant write permissions:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span>g+w<span class="w"> </span>/usr/src/k-ver/include
+</pre></div>
+</div>
+</li>
+<li><p><strong>For Security</strong>: Restrict access further if the directory contains sensitive files.</p></li>
+</ul>
+<hr class="docutils" />
+<ol class="arabic" start="5">
+<li><p><code class="docutils literal notranslate"><span class="pre">configure</span></code> <strong>Script Behavior</strong></p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">configure</span></code> script might not be using <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> correctly. To verify, add debugging output to the <code class="docutils literal notranslate"><span class="pre">configure.ac</span></code> file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>AC_MSG_CHECKING([for CPPFLAGS])
+AC_MSG_RESULT([$CPPFLAGS])
+</pre></div>
+</div>
+</li>
+<li><p>Rebuild the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>autoreconf<span class="w"> </span>-fvi
+</pre></div>
+</div>
+</li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">./configure</span></code> again and check if the <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> value is correctly printed.</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="6">
+<li><p><strong>Header Dependencies</strong></p>
+<ul>
+<li><p>Some headers might depend on other headers or macros being defined. For example, <code class="docutils literal notranslate"><span class="pre">linux/module.h</span></code> might require <code class="docutils literal notranslate"><span class="pre">LINUX_VERSION_CODE</span></code> or other kernel-specific macros.</p></li>
+<li><p>Modify the <code class="docutils literal notranslate"><span class="pre">AC_CHECK_HEADERS</span></code> macro to include necessary dependencies:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>AC_CHECK_HEADERS([dmapi.h mm.h linux/module.h sys/jfsdmapi.h], [], [], [
+  #include &lt;linux/version.h&gt;
+  #include &lt;sys/types.h&gt;
+])
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="7">
+<li><p><strong>Use</strong> <code class="docutils literal notranslate"><span class="pre">--with-linux-dir</span></code> <strong>Instead of</strong> <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code></p>
+<ul>
+<li><p>If the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script supports the <code class="docutils literal notranslate"><span class="pre">--with-linux-dir</span></code> option, use it instead of manually setting <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--with-linux-dir<span class="o">=</span>/usr/src/k-ver
+</pre></div>
+</div>
+</li>
+<li><p>This option is specifically designed to handle kernel headers and might work better than manually setting <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code>.</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="8">
+<li><p><strong>Check</strong> <code class="docutils literal notranslate"><span class="pre">config.log</span></code> <strong>for Errors</strong></p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">config.log</span></code> file contains detailed information about why the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script failed to find the headers.</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">config.log</span></code> and search for the header names (e.g., <code class="docutils literal notranslate"><span class="pre">dmapi.h</span></code>, <code class="docutils literal notranslate"><span class="pre">mm.h</span></code>, etc.) to see the exact error messages.</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="9">
+<li><p><strong>Manually Verify Header Compilation</strong></p>
+<ul>
+<li><p>Create a small test program to check if the headers can be included:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dmapi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mm.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linux/module.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/jfsdmapi.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Compile the program with <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span><span class="nv">$CPPFLAGS</span><span class="w"> </span>-o<span class="w"> </span><span class="nb">test</span><span class="w"> </span>test.c
+</pre></div>
+</div>
+</li>
+<li><p>If the compilation fails, the issue is likely with the headers themselves or their dependencies.</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic" start="10">
+<li><p><strong>Install Missing Kernel Headers</strong></p>
+<ul>
+<li><p>If the headers are missing from <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code>, you might need to install the appropriate kernel headers package. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>linux-headers-<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Alternatively, manually install the headers from the kernel source.</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<section id="summary-of-steps">
+<h2>Summary of Steps:<a class="headerlink" href="#summary-of-steps" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Verify the headers exist in <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code>.</p></li>
+<li><p>Check for subdirectories and permissions.</p></li>
+<li><p>Ensure the kernel version matches.</p></li>
+<li><p>Debug <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> usage in the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">--with-linux-dir</span></code> if available.</p></li>
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">config.log</span></code> for detailed errors.</p></li>
+<li><p>Manually test header compilation.</p></li>
+</ol>
+<p>If the issue persists after these steps, let me know, and we can dive deeper into the specific errors in <code class="docutils literal notranslate"><span class="pre">config.log</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="checkHeaders.html" class="btn btn-neutral float-left" title="Check Headers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configLog_analysis.html" class="btn btn-neutral float-right" title="LTP Configuration Debugging Analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

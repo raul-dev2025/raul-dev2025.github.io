@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why kzalloc() Over kmalloc() in the Linux Kernel &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Funciones P() y V()" href="../drv_refs/funcion_p_v.html" />
+    <link rel="prev" title="PCI Functions Reference" href="../drv_refs/quick-ref-pci.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="driverPlaning.html">Planning a Mechanism to Fetch and Translate PCI Device Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="st_pci_device_id.html">struct pci_device_id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="init.html">device_watcher_init()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html">Plan-Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview-2.html">Plan-overview 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="planingStructures.html">Planing Structures - JSON to C Struct Translation Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kernelStructures.html">Linux Kernel-Style JSON Struct Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/mmioVsIOports.html">Briefing: Memory-Mapped I/O vs. I/O Ports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/pcie-symobls.html">PCIe Symobls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/deadline-iosched.html">Deadline IO scheduler tunables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/quick-ref-pci.html">PCI Functions Reference</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Why <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> Over <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> in the Linux Kernel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#key-differences">Key Differences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-kzalloc-was-used-in-the-example">Why <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> Was Used in the Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#when-to-use-kmalloc">When to Use <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#performance-consideration">Performance Consideration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-tradeoff">Example Tradeoff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../drv_refs/funcion_p_v.html">Funciones <code class="docutils literal notranslate"><span class="pre">P()</span></code> y <code class="docutils literal notranslate"><span class="pre">V()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Driver Development</a></li>
+      <li class="breadcrumb-item active">Why <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> Over <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> in the Linux Kernel</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/01_Hardware/driver_development/watcherDocs/cleanSlab.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="why-kzalloc-over-kmalloc-in-the-linux-kernel">
+<h1>Why <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> Over <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> in the Linux Kernel<a class="headerlink" href="#why-kzalloc-over-kmalloc-in-the-linux-kernel" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>In the Linux kernel, both <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> and <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> are used for dynamic memory allocation, but they serve slightly different purposes. The choice between them depends on the need for <strong>zero-initialization</strong>.</p>
+</section>
+<section id="key-differences">
+<h2>Key Differences<a class="headerlink" href="#key-differences" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Behavior</p></th>
+<th class="head"><p>Typical Use Case</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code></p></td>
+<td><p>Allocates <em>uninitialized</em>
+memory (garbage values).</p></td>
+<td><p>When you need raw memory and
+will initialize fields anually.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code></p></td>
+<td><p>Allocates <em>zero-initialized</em>
+memory (all bytes set to 0).</p></td>
+<td><p>When you want clean slate
+(e.g., structs, arrays).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="why-kzalloc-was-used-in-the-example">
+<h2>Why <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> Was Used in the Example<a class="headerlink" href="#why-kzalloc-was-used-in-the-example" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Safer Defaults</strong>:</p>
+<ul class="simple">
+<li><p>Zero-initialization ensures:</p>
+<ul>
+<li><p>Pointers → <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p></li>
+<li><p>Booleans → <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p>Integers → <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Prevents uninitialized memory bugs (e.g., leaking kernel data).</p></li>
+</ul>
+</li>
+<li><p><strong>Struct Initialization</strong>:</p>
+<ul>
+<li><p>In the JSON struct example, <code class="docutils literal notranslate"><span class="pre">person_alloc()</span></code> uses <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> to avoid:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">person</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kzalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">person</span><span class="p">),</span><span class="w"> </span><span class="n">GFP_KERNEL</span><span class="p">);</span>
+<span class="c1">// p-&gt;age = 0, p-&gt;name = &quot;&quot;, p-&gt;hobbies_count = 0, etc.</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Idiomatic Kernel Style</strong>:</p>
+<ul class="simple">
+<li><p>The kernel prefers <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> for new data structures unless:</p>
+<ul>
+<li><p>Performance is critical (avoid zeroing overhead).</p></li>
+<li><p>Explicit manual initialization is planned.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="when-to-use-kmalloc">
+<h2>When to Use <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code><a class="headerlink" href="#when-to-use-kmalloc" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Performance-Sensitive Paths</strong>:</p>
+<ul>
+<li><p>If memory will be fully overwritten immediately, <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> avoids redundant zeroing.</p></li>
+<li><p>Example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kmalloc</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">GFP_KERNEL</span><span class="p">);</span>
+<span class="n">memcpy</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">source_data</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span><span class="w"> </span><span class="c1">// No need for prior zeroing.</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Specialized Allocators</strong>:</p>
+<ul class="simple">
+<li><p>Slab caches (<code class="docutils literal notranslate"><span class="pre">kmem_cache</span></code>) often handle initialization separately.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="performance-consideration">
+<h2>Performance Consideration<a class="headerlink" href="#performance-consideration" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> adds a tiny overhead (zeroing memory).</p></li>
+<li><p>Modern kernels optimize this, so prefer <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> unless profiling shows a bottleneck.</p></li>
+</ul>
+</section>
+<section id="example-tradeoff">
+<h2>Example Tradeoff<a class="headerlink" href="#example-tradeoff" title="Link to this heading"></a></h2>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Option 1: kzalloc() + minimal assignment</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">person</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kzalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">),</span><span class="w"> </span><span class="n">GFP_KERNEL</span><span class="p">);</span>
+<span class="n">p</span><span class="o">-&gt;</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w"> </span><span class="c1">// Only set non-zero fields.</span>
+
+<span class="c1">// Option 2: kmalloc() + full initialization</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">person</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kmalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">),</span><span class="w"> </span><span class="n">GFP_KERNEL</span><span class="p">);</span>
+<span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">));</span><span class="w"> </span><span class="c1">// Manual zeroing if needed.</span>
+<span class="n">p</span><span class="o">-&gt;</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+<span class="n">p</span><span class="o">-&gt;</span><span class="n">is_student</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The first option (<code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code>) is <strong>cleaner and less error-prone</strong>.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Default to <code class="docutils literal notranslate"><span class="pre">kzalloc()</span></code> for safety.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">kmalloc()</span></code> only when zeroing is provably redundant.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../drv_refs/quick-ref-pci.html" class="btn btn-neutral float-left" title="PCI Functions Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../drv_refs/funcion_p_v.html" class="btn btn-neutral float-right" title="Funciones P() y V()" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

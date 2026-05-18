@@ -1,0 +1,294 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Determine Boot Mode and Bootloader &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Querying XML File Configuration with libvirt Shell" href="../Config/queringXML.html" />
+    <link rel="prev" title="Understanding Bootloader Directories and Customizing GRUB" href="bootloader-dirs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Testing/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Determine Boot Mode and Bootloader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-determine-the-architecture">Step 1: Determine the Architecture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-determine-the-boot-mode-bios-vs-uefi">Step 2: Determine the Boot Mode (BIOS vs. UEFI)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-verify-the-bootloader-in-use">Step 3: Verify the Bootloader in Use</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-proceed-based-on-bootloader">Step 4: Proceed Based on Bootloader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary-of-steps">Summary of Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Config/queringXML.html">Querying XML File Configuration with libvirt Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="envsWithGrub.html">Understanding <code class="docutils literal notranslate"><span class="pre">grub2-editenv</span> <span class="pre">list</span></code> Output: Saved Entry Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/oldKernels.html">Working with Older Kernel Versions on CentOS 7: Challenges and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/weakness_config.html">LTP build log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/debugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/configLog_analysis.html">LTP Configuration Debugging Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/headerResolution.html">How to Fix Missing <cite>linux/module.h</cite> in LTP Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/relevantLinuxSource.html">Understanding /usr/src/linux Symlink Importance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/sadButTrue.html">The /usr/src/linux Reality Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../99_General/miscellaneous/diagnosticMissingHeaders.html">Debugging Missing Kernel Headers in LTP Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/autoConfHd.html">Using text Macros to Check for Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/gccSearchPath.html">Check GCC Search Path for Kernel Headers in GNU/Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/ltp_setup/Autotools_overview.html">Overview of Autotools Primary Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+      <li class="breadcrumb-item active">Determine Boot Mode and Bootloader</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/Boot/bootloader-mode.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="determine-boot-mode-and-bootloader">
+<h1>Determine Boot Mode and Bootloader<a class="headerlink" href="#determine-boot-mode-and-bootloader" title="Link to this heading"></a></h1>
+<p>Before proceeding with bootloader configuration, it is crucial to determine the architecture and boot mode of the VM. Let’s clarify this step by step.</p>
+<section id="step-1-determine-the-architecture">
+<h2>Step 1: Determine the Architecture<a class="headerlink" href="#step-1-determine-the-architecture" title="Link to this heading"></a></h2>
+<p>The architecture of the VM (x86, x86_64, ARM, etc.) can be determined using the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uname<span class="w"> </span>-m
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If the output is <code class="docutils literal notranslate"><span class="pre">x86_64</span></code>, the VM is running on a 64-bit x86 architecture.</p></li>
+<li><p>If the output is <code class="docutils literal notranslate"><span class="pre">i386</span></code> or <code class="docutils literal notranslate"><span class="pre">i686</span></code>, the VM is running on a 32-bit x86 architecture.</p></li>
+<li><p>Other outputs like <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> indicate ARM architecture.</p></li>
+</ul>
+</section>
+<section id="step-2-determine-the-boot-mode-bios-vs-uefi">
+<h2>Step 2: Determine the Boot Mode (BIOS vs. UEFI)<a class="headerlink" href="#step-2-determine-the-boot-mode-bios-vs-uefi" title="Link to this heading"></a></h2>
+<p>The presence of the <code class="docutils literal notranslate"><span class="pre">/boot/loader</span></code> directory suggests that <strong>systemd-boot</strong> (formerly gummiboot) might be in use, which is typically associated with UEFI booting. However, since the <code class="docutils literal notranslate"><span class="pre">/boot/efi</span></code> directory is empty, this could indicate one of the following scenarios:</p>
+<ol class="arabic simple">
+<li><p><strong>UEFI Boot with systemd-boot</strong>:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">/boot/loader</span></code> directory is used by systemd-boot, which is a UEFI bootloader.</p></li>
+<li><p>Even if <code class="docutils literal notranslate"><span class="pre">/boot/efi</span></code> is empty, the UEFI bootloader might be installed elsewhere (e.g., on the EFI System Partition (ESP) mounted at a different location).</p></li>
+</ul>
+</li>
+<li><p><strong>Legacy BIOS Boot with GRUB</strong>:</p>
+<ul class="simple">
+<li><p>The presence of <code class="docutils literal notranslate"><span class="pre">/boot/grub2</span></code> suggests GRUB is being used, which is common for BIOS booting.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">/boot/loader</span></code> directory might be a leftover or misconfiguration.</p></li>
+</ul>
+</li>
+</ol>
+<p>To confirm the boot mode, you can check the following:</p>
+<section id="check-for-uefi-boot">
+<h3>Check for UEFI Boot<a class="headerlink" href="#check-for-uefi-boot" title="Link to this heading"></a></h3>
+<p>Run the following command to check if the system is booted in UEFI mode:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/sys/firmware/efi
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If the directory exists, the system is booted in UEFI mode.</p></li>
+<li><p>If the directory does not exist, the system is likely booted in BIOS (legacy) mode.</p></li>
+</ul>
+</section>
+<section id="check-for-systemd-boot-configuration">
+<h3>Check for systemd-boot Configuration<a class="headerlink" href="#check-for-systemd-boot-configuration" title="Link to this heading"></a></h3>
+<p>If the system is booted in UEFI mode, check if systemd-boot is the active bootloader:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bootctl<span class="w"> </span>status
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If systemd-boot is installed, this command will display details about the bootloader, including the boot mode (UEFI) and the installed entries.</p></li>
+</ul>
+</section>
+</section>
+<section id="step-3-verify-the-bootloader-in-use">
+<h2>Step 3: Verify the Bootloader in Use<a class="headerlink" href="#step-3-verify-the-bootloader-in-use" title="Link to this heading"></a></h2>
+<p>Based on the above checks, you can determine the bootloader in use:</p>
+<ol class="arabic simple">
+<li><p><strong>If UEFI and systemd-boot are confirmed</strong>:</p>
+<ul class="simple">
+<li><p>The bootloader is systemd-boot, and the configuration files are located in <code class="docutils literal notranslate"><span class="pre">/boot/loader/entries/</span></code>.</p></li>
+<li><p>You should add your custom kernel entry as a new <code class="docutils literal notranslate"><span class="pre">.conf</span></code> file in <code class="docutils literal notranslate"><span class="pre">/boot/loader/entries/</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>If BIOS and GRUB are confirmed</strong>:</p>
+<ul class="simple">
+<li><p>The bootloader is GRUB, and the configuration files are located in <code class="docutils literal notranslate"><span class="pre">/boot/grub2/</span></code>.</p></li>
+<li><p>You should add your custom kernel entry to <code class="docutils literal notranslate"><span class="pre">/etc/grub.d/</span></code> and regenerate <code class="docutils literal notranslate"><span class="pre">grub.cfg</span></code>.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="step-4-proceed-based-on-bootloader">
+<h2>Step 4: Proceed Based on Bootloader<a class="headerlink" href="#step-4-proceed-based-on-bootloader" title="Link to this heading"></a></h2>
+<p>Once you’ve confirmed the bootloader, you can proceed as follows:</p>
+<section id="for-systemd-boot-uefi">
+<h3>For systemd-boot (UEFI)<a class="headerlink" href="#for-systemd-boot-uefi" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Create a new <code class="docutils literal notranslate"><span class="pre">.conf</span></code> file in <code class="docutils literal notranslate"><span class="pre">/boot/loader/entries/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>nano<span class="w"> </span>/boot/loader/entries/copied_kernel.conf
+</pre></div>
+</div>
+</li>
+<li><p>Add the following content (adjust paths as needed):</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">title Copied Kernel</span>
+<span class="na">version Copied Kernel</span>
+<span class="na">linux /boot/copied_kernel/vmlinuz-copied</span>
+<span class="na">initrd /boot/copied_kernel/initrd.img-copied</span>
+<span class="na">options root</span><span class="o">=</span><span class="s">/dev/sda1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Reboot the system, and the new entry should appear in the boot menu.</p></li>
+</ol>
+</section>
+<section id="for-grub-bios">
+<h3>For GRUB (BIOS)<a class="headerlink" href="#for-grub-bios" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Create a custom entry in <code class="docutils literal notranslate"><span class="pre">/etc/grub.d/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/grub.d/40_custom
+</pre></div>
+</div>
+</li>
+<li><p>Add the following content (adjust paths as needed):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>menuentry<span class="w"> </span><span class="s1">&#39;Copied Kernel&#39;</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">set</span><span class="w"> </span><span class="nv">root</span><span class="o">=</span><span class="s1">&#39;hd0,msdos1&#39;</span>
+<span class="w">    </span>linux<span class="w"> </span>/boot/copied_kernel/vmlinuz-copied<span class="w"> </span><span class="nv">root</span><span class="o">=</span>/dev/sda1
+<span class="w">    </span>initrd<span class="w"> </span>/boot/copied_kernel/initrd.img-copied
+<span class="o">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Make the file executable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/etc/grub.d/40_custom
+</pre></div>
+</div>
+</li>
+<li><p>Regenerate the GRUB configuration:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>grub2-mkconfig<span class="w"> </span>-o<span class="w"> </span>/boot/grub2/grub.cfg
+</pre></div>
+</div>
+</li>
+<li><p>Reboot the system, and the new entry should appear in the GRUB menu.</p></li>
+</ol>
+</section>
+</section>
+<section id="summary-of-steps">
+<h2>Summary of Steps<a class="headerlink" href="#summary-of-steps" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Determine the architecture using <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-m</span></code>.</p></li>
+<li><p>Check the boot mode using <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/sys/firmware/efi</span></code> and <code class="docutils literal notranslate"><span class="pre">bootctl</span> <span class="pre">status</span></code>.</p></li>
+<li><p>Verify the bootloader (systemd-boot or GRUB).</p></li>
+<li><p>Add the custom kernel entry based on the bootloader.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bootloader-dirs.html" class="btn btn-neutral float-left" title="Understanding Bootloader Directories and Customizing GRUB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Config/queringXML.html" class="btn btn-neutral float-right" title="Querying XML File Configuration with libvirt Shell" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

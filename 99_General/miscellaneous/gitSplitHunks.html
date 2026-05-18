@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Splitting Files into Smaller Hunks for Staging &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Viewing the Log of Staged Changes in Git" href="stagedLogs.html" />
+    <link rel="prev" title="Tracking Untracked Files Without Staging Them" href="gitTrackNoStage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Unordered Topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gitTrackNoStage.html">Tracking Untracked Files Without Staging Them</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Splitting Files into Smaller Hunks for Staging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#steps-to-split-and-stage-smaller-hunks">Steps to Split and Stage Smaller Hunks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-workflow">Example Workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tips-for-better-granularity">Tips for Better Granularity</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="stagedLogs.html">Viewing the Log of Staged Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashedTask.html">Viewing Stashed Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashingFiles.html">Stashing Files Independently in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitIssue.html">How to Open a GitHub Issue for LTP Kernel Headers Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-usage.html">Introduction to GNUPlot for Mathematical Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-intro.html">GNUPlot Example: Plotting Mathematical Functions in Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="newOrigin2.html">Función seno y coseno</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mathSymbols.html">Definitions of Integral and Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws-overview.html">AWS (Amazon Web Services)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailDrafts.html">Saving Draft Emails with the <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailCmds.html">Linux Mail Command Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pathTruncator.html">Integrating Path Truncation into Read the Docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regexNotation.html">REGEX notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="a_diffCounter.html">How to Get a Resumed (Counter) Output Using <code class="docutils literal notranslate"><span class="pre">diff</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="verticalS.html">Vertical Space in reStructuredText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeToLog.html">What Happens When You Pipe a Build Process to <code class="docutils literal notranslate"><span class="pre">less</span></code>: Processor Impact</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate-summary.html">Network Debugging Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate.html">Network Connectivity Troubleshooting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="keyboard_debug.html">Debugging Linux Keyboard Ctrl Key Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commitTypes.html">Tipos de Commits Estándar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Unordered Topics</a></li>
+      <li class="breadcrumb-item active">Splitting Files into Smaller Hunks for Staging</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/99_General/miscellaneous/gitSplitHunks.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="splitting-files-into-smaller-hunks-for-staging">
+<h1>Splitting Files into Smaller Hunks for Staging<a class="headerlink" href="#splitting-files-into-smaller-hunks-for-staging" title="Link to this heading"></a></h1>
+<p>To split a file into smaller, more granular hunks for staging using Git’s interactive mode, you can use the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-p</span></code> (or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">--patch</span></code>) command. This allows you to interactively select which changes to stage, even within a single file. If the default splitting isn’t fine-grained enough, you can manually edit the hunks to stage specific parts of the file (e.g., a list of headers or individual functions).</p>
+<section id="steps-to-split-and-stage-smaller-hunks">
+<h2>Steps to Split and Stage Smaller Hunks<a class="headerlink" href="#steps-to-split-and-stage-smaller-hunks" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Start Interactive Staging</strong>
+Run the following command to start interactive staging:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>-p<span class="w"> </span>&lt;file&gt;
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;file&gt;</span></code> with the path to your file.</p>
+</li>
+<li><p><strong>Review the Hunks</strong>
+Git will show you the first hunk of changes. It will look something like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>diff --git a/file.txt b/file.txt
+index 1234567..89abcde 100644
+--- a/file.txt
++++ b/file.txt
+@@ -1,5 +1,7 @@
++Header 1
++Header 2
++Header 3
+ Function A() {
+     // Some code
+ }
+</pre></div>
+</div>
+<p>Git will prompt you with options like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Stage this hunk [y,n,q,a,d,e,?]?
+</pre></div>
+</div>
+</li>
+<li><p><strong>Manually Split the Hunk</strong>
+If the hunk is too large and you want to split it further, type <code class="docutils literal notranslate"><span class="pre">s</span></code> (split). Git will attempt to split the hunk into smaller, more manageable parts.</p></li>
+<li><p><strong>Edit the Hunk Manually</strong>
+If splitting (<code class="docutils literal notranslate"><span class="pre">s</span></code>) doesn’t give you the granularity you need, type <code class="docutils literal notranslate"><span class="pre">e</span></code> (edit). This will open the hunk in your default text editor, allowing you to manually edit which lines to stage.</p>
+<ul class="simple">
+<li><p>In the editor, delete the lines you <strong>don’t</strong> want to stage.</p></li>
+<li><p>Keep the lines you <strong>do</strong> want to stage.</p></li>
+<li><p>Save and close the editor.</p></li>
+</ul>
+<p>For example, if you only want to stage the list of headers, you might edit the hunk to look like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Manual hunk edit mode
++Header 1
++Header 2
++Header 3
+</pre></div>
+</div>
+</li>
+<li><p><strong>Stage the Edited Hunk</strong>
+After editing, Git will stage only the lines you kept in the hunk.</p></li>
+<li><p><strong>Repeat for Other Hunks</strong>
+Git will continue showing you the remaining hunks. Repeat the process for each hunk until you’ve staged all the desired changes.</p></li>
+</ol>
+</section>
+<section id="example-workflow">
+<h2>Example Workflow<a class="headerlink" href="#example-workflow" title="Link to this heading"></a></h2>
+<p>Suppose you have a file <code class="docutils literal notranslate"><span class="pre">example.txt</span></code> with the following content:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Header 1
+Header 2
+Header 3
+Function A() {
+    // Code for Function A
+}
+Function B() {
+    // Code for Function B
+}
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p>Start interactive staging:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>-p<span class="w"> </span>example.txt
+</pre></div>
+</div>
+</li>
+<li><p>Git shows the first hunk:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>@@ -1,5 +1,8 @@
++Header 1
++Header 2
++Header 3
+ Function A() {
+     // Code for Function A
+ }
+</pre></div>
+</div>
+</li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">e</span></code> to edit the hunk.</p></li>
+<li><p>In the editor, delete the lines related to <code class="docutils literal notranslate"><span class="pre">Function</span> <span class="pre">A</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Manual hunk edit mode
++Header 1
++Header 2
++Header 3
+</pre></div>
+</div>
+</li>
+<li><p>Save and close the editor. Git will stage only the headers.</p></li>
+<li><p>Git will show the next hunk (if any). Repeat the process for <code class="docutils literal notranslate"><span class="pre">Function</span> <span class="pre">A</span></code> or <code class="docutils literal notranslate"><span class="pre">Function</span> <span class="pre">B</span></code> as needed.</p></li>
+</ol>
+</section>
+<section id="tips-for-better-granularity">
+<h2>Tips for Better Granularity<a class="headerlink" href="#tips-for-better-granularity" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">s</span></code> (split) first to see if Git can automatically split the hunk into smaller parts.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">e</span></code> (edit) for full control over which lines to stage.</p></li>
+<li><p>If you make a mistake, you can always reset the staging area with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">&lt;file&gt;</span></code> and start over.</p></li>
+</ul>
+<p>This approach gives you fine-grained control over staging changes, even within a single file. It’s particularly useful when working with files that contain multiple logical changes (e.g., headers, functions, or configuration blocks).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gitTrackNoStage.html" class="btn btn-neutral float-left" title="Tracking Untracked Files Without Staging Them" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stagedLogs.html" class="btn btn-neutral float-right" title="Viewing the Log of Staged Changes in Git" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

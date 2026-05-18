@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Open a GitHub Issue for LTP Kernel Headers Problem &mdash; TecnicoSistemas  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Introduction to GNUPlot for Mathematical Visualization" href="gnuPlot-usage.html" />
+    <link rel="prev" title="Stashing Files Independently in Git" href="stashingFiles.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../Hub/desarrollo/index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/driver_development/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Unordered Topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gitTrackNoStage.html">Tracking Untracked Files Without Staging Them</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitSplitHunks.html">Splitting Files into Smaller Hunks for Staging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stagedLogs.html">Viewing the Log of Staged Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashedTask.html">Viewing Stashed Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashingFiles.html">Stashing Files Independently in Git</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Open a GitHub Issue for LTP Kernel Headers Problem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#navigate-to-ltp-issues-page">1. Navigate to LTP Issues Page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#issue-title">2. Issue Title</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#issue-body-template">3. Issue Body Template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attach-logs-if-needed">4. Attach Logs (If Needed)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#submit-and-follow-up">5. Submit and Follow Up</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-notes">Additional Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-usage.html">Introduction to GNUPlot for Mathematical Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gnuPlot-intro.html">GNUPlot Example: Plotting Mathematical Functions in Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="newOrigin2.html">Función seno y coseno</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mathSymbols.html">Definitions of Integral and Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws-overview.html">AWS (Amazon Web Services)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailDrafts.html">Saving Draft Emails with the <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailCmds.html">Linux Mail Command Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pathTruncator.html">Integrating Path Truncation into Read the Docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regexNotation.html">REGEX notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="a_diffCounter.html">How to Get a Resumed (Counter) Output Using <code class="docutils literal notranslate"><span class="pre">diff</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="verticalS.html">Vertical Space in reStructuredText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeToLog.html">What Happens When You Pipe a Build Process to <code class="docutils literal notranslate"><span class="pre">less</span></code>: Processor Impact</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate-summary.html">Network Debugging Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate.html">Network Connectivity Troubleshooting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="keyboard_debug.html">Debugging Linux Keyboard Ctrl Key Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commitTypes.html">Tipos de Commits Estándar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../Hub/desarrollo/index.html">Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Unordered Topics</a></li>
+      <li class="breadcrumb-item active">How to Open a GitHub Issue for LTP Kernel Headers Problem</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/99_General/miscellaneous/gitIssue.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-open-a-github-issue-for-ltp-kernel-headers-problem">
+<h1>How to Open a GitHub Issue for LTP Kernel Headers Problem<a class="headerlink" href="#how-to-open-a-github-issue-for-ltp-kernel-headers-problem" title="Link to this heading"></a></h1>
+<section id="navigate-to-ltp-issues-page">
+<h2>1. Navigate to LTP Issues Page<a class="headerlink" href="#navigate-to-ltp-issues-page" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Go to: <a class="reference external" href="https://github.com/linux-test-project/ltp/issues">LTP GitHub Issues</a></p></li>
+<li><p>Click “New Issue”</p></li>
+</ul>
+</section>
+<section id="issue-title">
+<h2>2. Issue Title<a class="headerlink" href="#issue-title" title="Link to this heading"></a></h2>
+<p>Use a specific, descriptive title:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;Kernel headers not found during ./configure on CentOS 7 (kernel 3.10)&quot;
+</pre></div>
+</div>
+</section>
+<section id="issue-body-template">
+<h2>3. Issue Body Template<a class="headerlink" href="#issue-body-template" title="Link to this heading"></a></h2>
+<p>Copy and paste this structured template:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gu">### Description</span>
+When building LTP on <span class="gs">**CentOS 7 (kernel 3.10)**</span>, the <span class="sb">`./configure`</span> script fails to locate kernel headers (<span class="sb">`mm.h`</span>, <span class="sb">`module.h`</span>) even though <span class="sb">`kernel-devel`</span> is installed.
+I tried specifying <span class="sb">`--with-kernel-dir`</span> explicitly, but the headers are still not found.
+
+<span class="gu">### Steps to Reproduce</span>
+<span class="k">1.</span> Clean LTP checkout:
+<span class="sb">   ```sh</span>
+<span class="w">   </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/linux-test-project/ltp.git
+<span class="w">   </span><span class="nb">cd</span><span class="w"> </span>ltp
+<span class="sb">   ```</span>
+<span class="k">2.</span> Run configure:
+<span class="sb">   ```sh</span>
+<span class="w">   </span>./configure<span class="w"> </span>--with-kernel-dir<span class="o">=</span>/usr/src/kernels/<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span>
+<span class="sb">   ```</span>
+   <span class="ge">*(Also tried `/lib/modules/$(uname -r)/build`)*</span>
+
+<span class="gu">### Expected Behavior</span>
+<span class="sb">`./configure`</span> should detect kernel headers and proceed with the build.
+
+<span class="gu">### Actual Behavior</span>
+Error:
+  configure: error: Kernel headers not found in /usr/src/kernels/3.10.0-1160.el7.x86_64
+
+
+<span class="gu">### System Details</span>
+
+<span class="w">      </span><span class="k">-</span><span class="w"> </span><span class="gs">**OS**</span>: CentOS 7
+<span class="w">      </span><span class="k">-</span><span class="w"> </span><span class="gs">**Kernel**</span>: <span class="sb">`3.10.0-1160.el7.x86_64`</span>
+<span class="w">      </span><span class="k">-</span><span class="w"> </span><span class="gs">**Kernel headers installed**</span>:
+<span class="sb">              ```sh</span>
+<span class="w">              </span>rpm<span class="w"> </span>-q<span class="w"> </span>kernel-devel-<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span>
+<span class="w">              </span>kernel-devel-3.10.0-1160.el7.x86_64
+<span class="sb">              ```</span>
+<span class="w">      </span><span class="k">-</span><span class="w"> </span><span class="gs">**LTP Version**</span>: <span class="sb">`20150903`</span> (also tested with latest <span class="sb">`upstream/master`</span>)
+
+<span class="gu">### Additional Checks</span>
+<span class="w">      </span><span class="k">-</span><span class="w"> </span>Headers exist at:
+<span class="sb">              ```sh</span>
+<span class="w">              </span>ls<span class="w"> </span>/usr/src/kernels/<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span>/include/linux/mm.h
+<span class="sb">              ```</span>
+              <span class="ge">*(If not, where should they be?)*</span>
+
+<span class="gu">### Question</span>
+      Is there a known workaround for CentOS 7? Am I missing a required symlink or environment variable?
+</pre></div>
+</div>
+</section>
+<section id="attach-logs-if-needed">
+<h2>4. Attach Logs (If Needed)<a class="headerlink" href="#attach-logs-if-needed" title="Link to this heading"></a></h2>
+<p>To include configuration logs:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--with-kernel-dir<span class="o">=</span>...<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>configure.log
+</pre></div>
+</div>
+<p>Then drag-and-drop <code class="docutils literal notranslate"><span class="pre">configure.log</span></code> into the GitHub issue.</p>
+</section>
+<section id="submit-and-follow-up">
+<h2>5. Submit and Follow Up<a class="headerlink" href="#submit-and-follow-up" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Click “Submit new issue”</p></li>
+<li><p>Monitor email notifications for responses</p></li>
+<li><p>If no reply after 3-5 days, politely bump the thread or ask on the <a class="reference external" href="mailto:ltp&#37;&#52;&#48;lists&#46;linux&#46;it">LTP mailing list</a></p></li>
+</ul>
+</section>
+<section id="additional-notes">
+<h2>Additional Notes<a class="headerlink" href="#additional-notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The LTP team typically responds within a few business days</p></li>
+<li><p>Ensure you’ve:</p></li>
+<li><p>Installed all dependencies (<code class="docutils literal notranslate"><span class="pre">kernel-devel</span></code>, <code class="docutils literal notranslate"><span class="pre">gcc</span></code>, <code class="docutils literal notranslate"><span class="pre">make</span></code>)</p></li>
+<li><p>Verified header paths exist</p></li>
+<li><p>Tested with both:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">/usr/src/kernels/$(uname</span> <span class="pre">-r)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/lib/modules/$(uname</span> <span class="pre">-r)/build</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>Download this file as <code class="docutils literal notranslate"><span class="pre">ltp_issue_template.rst</span></code> for future reference.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="stashingFiles.html" class="btn btn-neutral float-left" title="Stashing Files Independently in Git" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gnuPlot-usage.html" class="btn btn-neutral float-right" title="Introduction to GNUPlot for Mathematical Visualization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
