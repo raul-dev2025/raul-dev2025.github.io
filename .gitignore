@@ -8,3 +8,4 @@ objects.inv
 .venv/
 *workspace
 msg
+directory_tree.rst
