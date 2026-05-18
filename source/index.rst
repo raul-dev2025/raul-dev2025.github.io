@@ -10,9 +10,26 @@
    99_General/Hub/profesional/index
    99_General/Hub/desarrollo/index
 
-.. Glosario técnico: Lista de siglas y acrónimos
+
+Release Notes & Changelog
+-------------------------
+
 .. toctree::
    :maxdepth: 1
-   :caption: Referencias:
 
-   99_General/siglas
+   /99_General/siglas
+   /changelog
+
+.. tip::
+
+   Información complementaria y recursos generales del repositorio. Contiene el historial de cambios y glosarios de siglas técnicas.
+
+-----
+
+Directorio proyecto:
+
+.. toctree::
+   :maxdepth: 1
+
+   /directory_tree
+   
