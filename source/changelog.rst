@@ -2,6 +2,49 @@
 Release Notes & Changelog
 ==========================
 
+.. _release_v2.0.0:
+
+Version 2.0.0
+---------------
+
+*Release Date: 2026-05-18*
+
+This major release marks a massive structural reorganization and content consolidation phase, migrating legacy assets to reStructuredText and refining the overall documentation infrastructure.
+
+New Content & Features
+~~~~~~~~~~~~~~~~~~~~~~
+* **Documentation Consolidation**: Consolidated and reorganized over 200 documentation files into a new unified source structure.
+* **Acronyms and Glossary**: Integrated a comprehensive reviewed acronyms list (``siglas.rst``) into the main indices.
+* **System Administration**: Added new specific documentation sections covering kernel parameters, ACL policies, Identity Management (IdM) service scripts, and technical troubleshooting logs.
+* **Infrastructure Reports**: Included new technical reports detailing network infrastructure and virtual environment case studies.
+* **Academic & Professional Hubs**: Synchronized index structures to expand and properly expose professional and academic content.
+
+Fixes and Improvements
+~~~~~~~~~~~~~~~~~~~~~~
+* **Migration to rST**: Executed a wide-scale migration of legacy Markdown documents to reStructuredText formatting via Pandoc.
+* **Syntax and Style Normalization**: Cleaned up rST syntax errors, corrected literal block indentations, fixed malformed table alignments, and replaced raw HTML with native container directives.
+* **Design Customization**: Introduced a custom CSS stylesheet to streamline layout styling, navigation menus, and content presentation headers.
+* **Index Refactoring**: Streamlined global table of contents (TOC) captions and cleaned up obsolete configuration files across the directory tree.
+
+Internal Changes
+~~~~~~~~~~~~~~~~
+* **Branch Strategy**: Adapted and reconfigured project repositories to match the newly established branch management workflows.
+* **Tooling Documentation**: Documented internal function implementations, task checklists, and the operational core of the ``review-rst`` orchestrator package.
+
+.. _release_v1.2.4:
+
+Version 1.2.4
+---------------
+
+*Release Date: 2025-10-31*
+
+This is a maintenance release focused on deployment infrastructure consistency.
+
+Internal Changes
+~~~~~~~~~~~~~~~~
+* **Deployment Automation**: Generated and deployed a new production build to ensure site stability and configuration alignment on GitHub Pages.
+
+
 .. _release_v1.2.3:
 
 Version 1.2.3
