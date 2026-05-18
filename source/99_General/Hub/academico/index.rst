@@ -35,7 +35,7 @@ Indices y tablas
    /01_Hardware/sistema/UEFI-refs
    /01_Hardware/sistema/Prefetching_en_Procesadores
    /01_Hardware/sistema/Ejercicios
-   /01_Hardware/A5-Hardware/Processador/borrar.rst
+   /01_Hardware/A5-Hardware/Processador/procesador.rst
 
 .. note::
 
@@ -133,6 +133,7 @@ Indices y tablas
 
    **Office, Word, Excel y PowerPoint**
    Manuales de usuario y formación en herramientas de ofimática. Centraliza los apuntes y ejercicios prácticos relacionados con la suite de productividad Microsoft Office.
+
    * **Word**: documentación sobre la herramienta *Word* de *Office*.
    * **Excel**: documentación sobre la herramienta *Excel* de *Office*.
    * **Power Point**: documentación sobre la herramienta *Power Point* de *Office*.
