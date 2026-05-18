@@ -1,35 +1,29 @@
 .. SPDX-License-Identifier: GPL-2.0-or-later
 
-=========
-Supuestos
-=========
-
+=======
+Sistema
+=======
 
 .. toctree::
    :maxdepth: 1
-   :caption: Config
+   :caption: Supuestos
    
-   /06_Software_and_Applications/Supuestos/Config/sharedFolder-nfs.rst
-   /06_Software_and_Applications/Supuestos/Config/configSSH
-   /06_Software_and_Applications/Supuestos/Config/resumen
+   /06_Software_and_Applications/Supuestos/index
 
-Los siguientes documentos detallan las tareas de configuración inicial de los servicios base de red y las directrices de securización para los accesos remotos.
-
+-----
 
 .. toctree::
    :maxdepth: 1
-   :caption: Testing
+   :caption: Acces Control Lists(ACLs)
 
-   /06_Software_and_Applications/Supuestos/Testing/vmTunning.rst
+   /04_System_Administration/system_configuration/ACL_configuration/index
 
-Las siguientes guías recopilan los procedimientos de validación de rendimiento y los ajustes aplicados sobre el hipervisor para optimizar la carga de trabajo de las máquinas virtuales.
-
+-----
 
 .. toctree::
    :maxdepth: 1
-   :caption: Imagen de base(Golden image)
+   :caption: Incidencias
+
+   /04_System_Administration/Incidencias/index.rst
    
-   /06_Software_and_Applications/Supuestos/Golden/indice
-
-.. tip::
-   Esta sección compendia el ciclo de vida completo para la provisión, depuración, despliegue automatizado e integración de imágenes de referencia en el dominio de gestión de identidades.
+   

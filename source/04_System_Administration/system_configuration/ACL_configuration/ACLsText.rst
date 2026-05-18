@@ -1,6 +1,6 @@
-============================================================
-Informe de Configuración: Saneamiento de Directorios de Perfil
-============================================================
+====================================
+Saneamiento de Directorios de Perfil
+====================================
 
 :Fecha: 2026-03-20
 :Responsable: Administrador de Sistemas (Gemini AI Collaboration)

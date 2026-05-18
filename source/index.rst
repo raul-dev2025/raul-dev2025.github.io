@@ -23,13 +23,3 @@ Release Notes & Changelog
 .. tip::
 
    Información complementaria y recursos generales del repositorio. Contiene el historial de cambios y glosarios de siglas técnicas.
-
------
-
-Directorio proyecto:
-
-.. toctree::
-   :maxdepth: 1
-
-   /directory_tree
-   
