@@ -1,0 +1,12 @@
+[Unit]
+Description=First Boot IdM Join Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /usr/local/bin/idm-join.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
