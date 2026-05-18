@@ -139,20 +139,14 @@ Indices y tablas
 
 -----
 
-Release Notes & Changelog
--------------------------
+Perfil profesional
+------------------
 
 .. toctree::
    :maxdepth: 1
-   :caption: General & Recursos:
 
    /99_General/CVs/CV-proyectos-2025   
-   /changelog
-
-.. tip::
-
-   Información complementaria y recursos generales del repositorio. Contiene el historial de cambios, glosarios de siglas técnicas y perfiles profesionales actualizados.
-
+   
 -----
 	
 Downloadable files
