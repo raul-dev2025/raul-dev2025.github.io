@@ -1,16 +1,13 @@
-Test
-====
+===============
+Ready documents
+===============
+
+
 
 .. toctree::
    :maxdepth: 1
 
-   nfsroot
-   Booting
-   fpga-region
-   nfs
-   modules
-
-
+   
 .. usa el siguiente alias:   
    alias htmlBuild='sphinx-build -nW -b html -c source/ new-docs/.ready/ /tmp/sphinx_html'
    para comprobar el estado final del documento.
