@@ -40,7 +40,7 @@ Siglas
 
 -  **LAPIC** — Local component, integrado en el procesador
 
--  **SMI** — Descripción
+-  **SMI** — System Management Interrupt.
 
 -  **PCMCIA** — Personal Computer Memory Card International Association
 
@@ -62,7 +62,7 @@ Siglas
 
 -  **DMI(intel)** — Direct Media Interface(desambiguación)
 
--  **UMI(amd)** — Descripción
+-  **UMI(amd)** — Unified Memory Architecture / Unified Management Interface.
 
 -  **DVI** — Digital Visual Interface
 
@@ -80,7 +80,7 @@ Siglas
 
 -  **PASID** — Process Adress Space Identifiers, Identificadores del espacio de direccionamiento de proceso.
 
--  **EDID** — 
+-  **EDID** — Extended Display Identification Data.
 
 -  **JIT** — Just In Time
 
@@ -92,7 +92,7 @@ Siglas
 
 -  **MIPS** — Millions of instructions per second
 
--  **LUN** — 
+-  **LUN** — Linux User Management.
 
 -  **PMMU** — paged memory management unit
 
@@ -118,7 +118,7 @@ Siglas
 
 -  **AER** — Advanced Error Reporting
 
--  **NFS** — Descripción
+-  **NFS** — Network File System
 
 -  **GPM** — relacionado con una interfase para ratón(controlador de ventos). Una “especie de Clipboard”.
 
@@ -130,7 +130,7 @@ Siglas
 
 -  **ACM** — communication device class *Abstract Control Model* interfase
 
--  **UART** — 
+-  **UART** — Universal Asynchronous Receiver-Transmitter
 
 -  **HPC** — High Performance Computing
 
@@ -235,7 +235,7 @@ Siglas
 
 -  **SRAM** — RAM estatica (común en el procesador como memoria caché)
 
--  **SMRAM** — 
+-  **SMRAM** — System Management RAM
 
 -  **NVRAM** — Non Volatile RAM, llamada *CMOS RAM* en PCs, guarda la *config de la BIOS*
 
@@ -263,7 +263,7 @@ Siglas
 
 -  **MLC** — Multi-Level Cell
 
--  **NAND** — 
+-  **NAND** — Tipo de memoria flash no volátil utilizada habitualmente en unidades de almacenamiento SSD y tarjetas de memoria.
 
 -  **NOR** — Descripción
 
@@ -333,7 +333,7 @@ Siglas
 
 -  **JTAG** — the Join Test Action Group
 
--  **MCU** — 
+-  **MCU** — Microcontroller Unit
 
 -  **GPIO** — General Purpose input/output (port/Ver ACPI). Pin genérico en un circuito integrado.
 
@@ -370,9 +370,9 @@ Siglas
 
 -  **GPT** — Descripción
 
--  **EFI** — Descripción
+-  **EFI** — Extensible Firmware Interface
 
--  **UEFI** — Descripción
+-  **UEFI** — Unified Extensible Firmware Interface
 
 -  **HDD** — Hard Disk Drive
 
@@ -457,7 +457,7 @@ Siglas
 
 - **IOVA** — IO Virtual address.
 
-- **FACP** —
+- **FACP** — Fixed ACPI Description Table
 
 - **FACS** — Firmware ACPI Control Structure
 
@@ -465,23 +465,23 @@ Siglas
 
 - **FPDT** — Tabla para la mejora de datos del firmware.
 
-- **GTDT** —
+- **GTDT** — Generic Timer Description Table
 
 - **HPET** — Hight Precision Event Timer
 
 - **MADT** — Tabla controlador múltiple de interrupción.
 
-- **MCFG** —
+- **MCFG** — PCI Express Memory Mapped Configuration Space base address Description Table (Tabla ACPI que asigna la memoria base para PCIe).
  
-- **RSDP** —
+- **RSDP** — Root System Description Pointer
 
-- **RSDT** —
+- **RSDT** — Root System Description Table
 
 - **SSDT** — System Service Desription Table- Tabla de descripción de servicio de sistema
 
-- **XSDT** —
+- **XSDT** — Extended System Description Table
 
-- **WSMT** —
+- **WSMT** — Windows SMM Security Mitigations Table
 
 --------------
 
@@ -491,7 +491,7 @@ Siglas
 
 - **ASL** — ACPI Source Language
 
-- **ASM** —
+- **ASM** — Assembly Language
 
 .. list-table:: Glosario ACPI
    :widths: 20 80
@@ -525,7 +525,7 @@ Siglas
 
 -  **TRANSMETA** — Descripción
 
--  **SRAT** — tabla…
+-  **SRAT** — System Resource Affinity Table
 
 - **AGP** — Accelerated Graphics Port
 
@@ -552,6 +552,8 @@ Siglas
 
 -  **AMD-V** — Virtualization technology(by AMD side), initialy SVM(“Flag”, Secure Virtual Machine)
 
+- **OCI** — Open Container Initiative
+
 .. _siglas-11:
 
 9. Referencias a criptografia
@@ -561,11 +563,21 @@ Siglas
 
 -  **SELinux** — 
 
--  **TLS** — 
+-  **TLS** — Transport Layer Security
 
 -  **bss** — Basis Service Set. on static libs, the need to init vars before call it(c/c++).
 
 -  **HMAC** — Hash-Based message authentification code
+
+- **CRLs** — Certificate Revocation Lists (Listas de Certificados Revocados de clave pública).
+
+- **OCSP** — Online Certificate Status Protocol (Protocolo para verificar en tiempo real la validez de un certificado
+
+- **CA** — Autoridad de Certificados(Certificate Authority)
+
+- **PKI** — Infraestructura de Clave Pública(Public Key Infrestructure)
+- **CISO** — Chief Information Security Officer
+
 
 .. _siglas-12:
 
