@@ -19,8 +19,7 @@ Solución Aplicada
 Siguiendo las buenas prácticas de administración, se procedió a realizar una intervención en frío:
 
 1. Apagado completo de la máquina virtual para garantizar la integridad de los datos.
-2. Generación de un respaldo preventivo del archivo de configuración XML.
-3. Modificación del dispositivo TPM mediante ``virsh edit``, conmutando el modelo emulado al estándar FIFO compatible:
+2. Modificación del dispositivo TPM mediante ``virsh edit``, conmutando el modelo emulado al estándar FIFO compatible:
 
    .. code-block:: xml
 
@@ -28,6 +27,7 @@ Siguiendo las buenas prácticas de administración, se procedió a realizar una 
         <backend type='emulator' version='2.0'/>
       </tpm>
 
+3. Generación de un respaldo preventivo del archivo de configuración XML.
 4. Arranque de la instancia y verificación del entorno.
 
 Validación
