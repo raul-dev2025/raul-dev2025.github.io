@@ -4,6 +4,13 @@
 Development
 ===========
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Foudry:
+
+   /07_Development/Foundry/index
+
+
 
 .. toctree::
    :maxdepth: 1
