@@ -3,33 +3,33 @@ Cabeceras
 =========
 
 1. Cabeceras del Controlador (Raíz de ``include/``) — *Exclusivas de Espacio de Kernel*
-=====================================================================================
+=======================================================================================
 
 Estas cabeceras forman parte del driver (``.ko``), compilan exclusivamente con el entorno Kbuild del Kernel de Linux y consumen las cabeceras nativas del sistema (``<linux/...>``).
 
 A. ``include/hwbus-io.h``
------------------------
+-------------------------
 
 * **Ámbito:** Kernel.
 * **Propósito:** Cabecera principal del módulo del controlador.
 * **Contenido:**
-   
+
    * Definición del nombre del módulo, versión y macros globales del driver.
    * Estructuras de estado interno del módulo (por ejemplo, el contexto principal del driver ``struct hwbus_dev``).
    * Declaración de las funciones del ciclo de vida del controlador (``init``/``exit``) y punteros de inicialización.
 
 B. ``include/sysfs_driver.h``
----------------------------
+-----------------------------
 
 * **Ámbito:** Kernel.
 * **Propósito:** Interfaz de comunicación con la infraestructura ``sysfs`` del Kernel.
 * **Contenido:**
 
    * Prototypes de las funciones de creación/destrucción de grupos de atributos (``sysfs_create_group``, ``sysfs_remove_group``).
-   * Declaración externa de las estructuras ``struct kobject``, ``struct attribute_group`` y callbacks ``show``/``store`` que el driver utilizará para publicar métricas hacia ``/sys``.
+   * Declaración externa de las estructuras ``struct kobject``, ``struct attribute_group`` y callbacks ``show``/ ``store`` que el driver utilizará para publicar métricas hacia ``/sys``.
 
 C. ``include/sysfs_pci.h``
-------------------------
+--------------------------
 
 * **Ámbito:** Kernel.
 * **Propósito:** Abstracciones para la inspección y manejo del bus PCI/PCIe.
@@ -41,12 +41,12 @@ C. ``include/sysfs_pci.h``
 
 
 2. Cabeceras de Espacio de Usuario (``include/user/``) — *Exclusivas de Userland / Tests (LTP)*
-=============================================================================================
+===============================================================================================
 
 Estas cabeceras son consumidas por las aplicaciones CLI, utilidades de diagnóstico y el harness de pruebas LTP. Compilan con la cadena de herramientas C estándar de ``glibc`` y bibliotecas POSIX.
 
 A. ``include/user/hwbus_error.h``
--------------------------------
+---------------------------------
 
 * **Ámbito:** Usuario.
 * **Propósito:** Gestión y traducción de errores en espacio de usuario.
@@ -57,7 +57,7 @@ A. ``include/user/hwbus_error.h``
    * Inclusión de cabeceras POSIX estándar (``<errno.h>``, ``<stddef.h>``).
 
 B. ``include/user/sysfs_paths.h``
--------------------------------
+---------------------------------
 
 * **Ámbito:** Usuario.
 * **Propósito:** Catálogo estático de rutas relativas y nombres de atributos dentro del sistema de archivos ``/sys``.
@@ -66,7 +66,7 @@ B. ``include/user/sysfs_paths.h``
    * Definición de cadenas de texto puras para que las herramientas de usuario sepan dónde buscar en el sistema de archivos (ej. ``/sys/bus/pci/devices``, ``/sys/class/nvme``, ``/sys/class/net``).
 
 C. ``include/user/sysfs_utils.h``
--------------------------------
+---------------------------------
 
 * **Ámbito:** Usuario.
 * **Propósito:** Prototipos de funciones de asistencia para interactuar con ``/sys`` mediante llamadas de sistema POSIX.

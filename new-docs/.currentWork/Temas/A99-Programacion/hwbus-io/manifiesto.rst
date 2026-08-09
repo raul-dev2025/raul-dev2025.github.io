@@ -2,6 +2,7 @@
 Manifiesto de Arquitectura hwbus-io
 ===================================
 
+
 Este documento define la estructura de directorios, la organización de las cabeceras y las responsabilidades del código dentro del proyecto **hwbus-io**.
 
 Visión General de la Arquitectura
