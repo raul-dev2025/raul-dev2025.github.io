@@ -4,7 +4,7 @@
    :depth: 2
 
 
-.. _fpga-region_1:
+.. _fpga-region_2:
 
 ===============================
 FPGA Enlaces de zona para el DT
@@ -389,8 +389,7 @@ La secuencia sucedida cuando es *sobrepuesta*, es similar a lo anterior; las ún
 
 Restricciones
 -------------
-
-Queda fuera del ámbito de éste documento, la descripción completa de todas las restricciones en el diseño FPGA, requeridas para llevar a cabo reconfiguraciones parciales; referencias *1, 2 y 3*. Aunque merece la  pena, una rápida mención.
+Queda fuera del ámbito de éste documento, la descripción completa de todas las restricciones en el diseño FPGA, requeridas para llevar a cabo reconfiguraciones parciales; referencias [ref_altera]_, [ref_byma]_ y [ref_amd]_. Aunque merece la pena, una rápida mención.
 
 Una persona, deberá tener un “límite de conexiones”, alineado con tales *particiones* o regiones para las que fueron diseñadas.
 
@@ -402,13 +401,13 @@ Consiguiéndose esto, con los puentes FPGA que existen en la estructura FPGA, an
 Referencias y agradecimientos
 -----------------------------
 
-.. [f1] soft logic
+.. [#f1] soft logic
 
-.. [f2] aguas arriba, upstream. Ejemplo, en electricidad esto es la corriente energizadora que parte desde un *elemento* situado *antes* del dispositivo en cuestión; el *telerruptor no funciona* porque al “magneto” no le llega tensión…
+.. [#f2] aguas arriba, upstream. Ejemplo, en electricidad esto es la corriente energizadora que parte desde un *elemento* situado *antes* del dispositivo en cuestión; el *telerruptor no funciona* porque al “magneto” no le llega tensión…
 
-.. [1] http://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/ug/ug_partrecon.pdf 
-.. [2] http://tspace.library.utoronto.ca/bitstream/1807/67932/1/Byma_Stuart_A_201411_MAS_thesis.pdf 
-.. [3] https://docs.amd.com/v/u/en-US/ug872_largefpga
+.. [ref_altera] `Altera Partial Reconfiguration Manual <http://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/ug/ug_partrecon.pdf>`_
+.. [ref_byma] `Stuart A. Byma Thesis <http://tspace.library.utoronto.ca/bitstream/1807/67932/1/Byma_Stuart_A_201411_MAS_thesis.pdf>`_
+.. [ref_amd] `AMD Vivado Design Suite Reference <https://docs.amd.com/v/u/en-US/ug872_largefpga>`_
 
 **Autor**: Allan Tull 2016
 

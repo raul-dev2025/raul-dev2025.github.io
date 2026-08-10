@@ -137,13 +137,13 @@ Gestión de Direcciones y Estructuras de VFS
 Mapeo de Memoria y Espacios de Direcciones
 ------------------------------------------
 
-.. figure:: /_static/memory_mapping.jpg
+.. figure:: /descargas/memory_mapping.jpg
    :align: center
    :alt: Mapeo de Direcciones y Memoria Física
 
    Esquema de Mapeo de Direcciones: Relación entre espacios de usuario/kernel y la RAM.
 
-   * :download:`Linux Kernel Memory Management </_static/kmm.txt>` (ASCII art).
+   * :download:`Linux Kernel Memory Management </descargas/kmm.txt>` (ASCII art).
 
 El kernel de Linux gestiona distintos tipos de direcciones para coordinar la CPU, la RAM y los buses:
 
@@ -156,13 +156,13 @@ El kernel de Linux gestiona distintos tipos de direcciones para coordinar la CPU
 Estructuras Internas de VFS (``file_operations``, ``file`` e ``inode``)
 -----------------------------------------------------------------------
 
-.. figure:: /_static/vfs_structures.jpg
+.. figure:: /descargas/vfs_structures.jpg
    :align: center
    :alt: Estructuras file_operations, file e inode
 
    Relación de estructuras internas en el VFS del Kernel de Linux.
 
-   * :download:`Virtual File System </_static/kernel_fs_structures.txt>` (ASCII art).
+   * :download:`Virtual File System </descargas/kernel_fs_structures.txt>` (ASCII art).
 
 Cuando una syscall como ``mmap()`` o ``ioctl()`` se invoca, el kernel navega a través de tres estructuras fundamentales:
 

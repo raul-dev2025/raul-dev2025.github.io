@@ -12,7 +12,7 @@ Ciclo de Vida del Proceso y Espacio de Direcciones
 La creación de procesos en Linux se basa en la duplicación y reemplazo de espacios de direcciones virtuales mediante llamadas al sistema del VFS y la gestión de tareas del kernel.
 
 1. Duplicación y Ejecución (``fork``, ``vfork``, ``execve``)
------------------------------------------------------------
+------------------------------------------------------------
 
 * ``fork()`` **y Copy-On-Write (COW)**:
   La llamada ``fork()`` crea un proceso hijo duplicando la estructura ``task_struct`` y la tabla de páginas del proceso padre. Las páginas de memoria física no se copian inmediatamente; se marcan como de solo lectura para ambos procesos. La copia real ocurre solo cuando alguno de los dos intenta escribir en la página (COW).

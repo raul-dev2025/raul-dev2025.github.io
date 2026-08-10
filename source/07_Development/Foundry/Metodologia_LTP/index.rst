@@ -6,26 +6,32 @@ Metodología para el estudio de "The Linux Test Project(LTP)"
    :maxdepth: 1
    :caption: General
 
-   /Metodologia_LTP/introduccion
-   /Metodologia_LTP/hoja_de_ruta   
+   /07_Development/Foundry/Metodologia_LTP/introduccion
 
 .. toctree::
    :maxdepth: 1
    :caption: Procesos (PROC)
 
-   /Metodologia_LTP/PROC_teorica
-   /Metodologia_LTP/PROC_tests
+   /07_Development/Foundry/Metodologia_LTP/PROC_teorica
+   /07_Development/Foundry/Metodologia_LTP/PROC_tests
 
 .. toctree::
    :maxdepth: 1
    :caption: Entrada / Salida (I/O)
 
-   /Metodologia_LTP/IO_teorica
-   /Metodologia_LTP/IO_tests
+   /07_Development/Foundry/Metodologia_LTP/IO_teorica
+   /07_Development/Foundry/Metodologia_LTP/IO_tests
 
 .. toctree::
    :maxdepth: 1
    :caption: Buses de Sistema (BUS)
 
-   /Metodologia_LTP/BUS_teorica
-   /Metodologia_LTP/BUS_tests
+   /07_Development/Foundry/Metodologia_LTP/BUS_teorica
+   /07_Development/Foundry/Metodologia_LTP/BUS_tests
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Referrencias
+
+   /07_Development/Foundry/Metodologia_LTP/macros_y_constantes
+   /07_Development/Foundry/Metodologia_LTP/prototipos

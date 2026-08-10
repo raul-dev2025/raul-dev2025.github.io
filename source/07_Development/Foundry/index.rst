@@ -8,35 +8,27 @@ Bienvenido a la documentación técnica del entorno de laboratorio **Foundry**.
    :maxdepth: 2
    :caption: Contenidos Principales:
 
-   /EntornoLTP/foundry
-   /EntornoLTP/fase00_base_os
+   /07_Development/Foundry/EntornoLTP/foundry
+   /07_Development/Foundry/EntornoLTP/fase00_base_os
 
 .. toctree::
    :maxdepth: 1
    :caption: Implementación del entorno LTP:
 
-   /EntornoLTP/fase01_toolchain
-   /EntornoLTP/fase02_userEnvironment
-   /EntornoLTP/fase03_debugging
-   /EntornoLTP/fase04_ltp
-   /EntornoLTP/fase05_ci
+   /07_Development/Foundry/EntornoLTP/fase01_toolchain
+   /07_Development/Foundry/EntornoLTP/fase02_userEnvironment
+   /07_Development/Foundry/EntornoLTP/fase03_debugging
+   /07_Development/Foundry/EntornoLTP/fase04_ltp
+   /07_Development/Foundry/EntornoLTP/fase05_ci
 
 .. toctree::
    :maxdepth: 1
    :caption: Metodología LTP:
 
-   /Metodologia_LTP/index
+   /07_Development/Foundry/Metodologia_LTP/index
 
 .. toctree::
    :maxdepth: 1
    :caption: Logs de estudio:
 
-   /EntornoLTP/info_syscalls_log.rst
-
------
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Tipos de commits:
-
-   commitTypes.rst
+   /07_Development/Foundry/EntornoLTP/info_syscalls_log.rst

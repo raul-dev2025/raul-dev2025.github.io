@@ -61,7 +61,7 @@ El flujo de trabajo se automatiza desde la WS mediante un script de control sin 
 * **Ejecución de Pruebas:** Si compila, se ejecuta el binario de LTP en el Lab y su salida se guarda en `logs/test_latest.log`.
 * **Modo de Interacción:** Silencioso (*Quiet Mode*). La inspección detallada se realiza abriendo o recargando los logs estáticos directamente en el editor.
 
-* :download:`script de integración de flujo de trabajo <scripts/ci-runner.sh>`
+* :download:`script de integración de flujo de trabajo <Scripts/ci-runner.sh>`
 
 4. Arquitectura y Flujo de Ejecución
 ====================================

@@ -24,7 +24,7 @@ Procedimiento Ejecutado
 
    En el Guest:
 
-   * :download:`activate_repo <scripts/activate_repo.sh>`   
+   * :download:`activate_repo <Scripts/activate_repo.sh>`   
 
 3. **Instalación de la Pila de Desarrollo:**
    Despliegue del grupo principal de desarrollo e inclusión del repositorio CodeReady Builder (CRB) local:
@@ -40,7 +40,7 @@ Procedimiento Ejecutado
 
    En el Guest:
 
-   * :download:`deactivate_repo <scripts/deactivate_repo.sh>`
+   * :download:`deactivate_repo <Scripts/deactivate_repo.sh>`
 
    .. code-block:: bash
 

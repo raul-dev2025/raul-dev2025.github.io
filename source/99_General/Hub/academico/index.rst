@@ -44,6 +44,13 @@ Indices y tablas
    
 -----
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Kernel:
+
+   /02_Kernel/index
+
+-----
 
 .. toctree::
    :maxdepth: 1
