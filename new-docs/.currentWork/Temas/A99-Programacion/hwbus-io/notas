@@ -1,0 +1,170 @@
+ROOT_DIR="/mnt/build-output/Repos/hwbus-io.git"
+LOG_DIR="/var/log/Sandbox/hwbus-io"
+KO_LOG="${LOG_DIR}/ko_runner_latest.log"
+LTP_LOG="${LOG_DIR}/ltp_runner_latest.log"
+
+-----
+El "tee"; estamos en la WS lanzando un script que se ejecuta remotamente en la vm. Este a su vez llama al binario que hemos construido en el lab. Me parece a mí, que la conexión ssh no va comportarse como nosotros creemos con el "tee". Tío, yo creo que si podemos abrir el log en el local, es más que suficiente.
+1. REMOTE_TARGET no la hemos configurado como tal, hemos configurado MODULE_NAME y MODULE_KO_PATH; ${MODULE_KO_PATH}/${MODULE_NAME}
+2. REMOTE_LOG_DIR es perfectamente escribible por el usuario builder, tiene permisos y el disco está montado rw(por eso lo de apagar/encender vms, que ya discutiremos...) 
+3. Buena idea, hagamos un recopilatorio de las variable necesarias y, determinemos aquellas que no lo son. Identificar, proponer cambio, implementar!
+4. REMOTE_ROOT, porsupuesto. Para insertar el módulo necesitamos permisos de escritura? Para lanzar el test en espacio de usuario necesitamos permisos de escritura? Montamos el disco RO, por motivos de deguridad, discutamos esto puntos con detalle.
+
+
+- REMOTE_HOST="builder@sandbox" --- mismo usuario diferente máquina
+- REMOTE_ROOT="/mnt/build-output/Repos/hwbus-io.git" -- RO
+- MODULE_LTP="tests" --- este es el directorio de tests LTP
+- MODULE_SRC="src" --- este es el directorio del controlador
+- REMOTE_TARGET="elBinarioDelTestLTP" --- esta variable permite configurar el test
+- REMOTE_LOG_DIR="/var/log/Sandbox/hwbus-io"
+
+-----
+src/
+├── core
+│   ├── hello.c
+│   └── user
+└── driver
+    └── sysfs_driver.c
+tests/
+├── IO_tests
+│   ├── direct_io_test.c
+│   ├── Makefile
+│   └── mmap01.c
+└── Makefile
+── Makefile (en la raíz)
+
+
+ci-builder.sh
+ci-signer.sh
+ci-runner.sh
+
+-----
+3. Etiquetado y Firma en Git:
+El etiquetado de commits y la firma digital de los mismos, esta configurado [hecho]:
+ $ git tag 
+refactor/ci-scripts-pre-redesign
+hwbus-io.git (feature/env-testing)
+ $ git log --show-signature -1
+commit baa2d460568008b3cce90fd4df37da55fd762476 (HEAD -> feature/env-testing, tag: refactor/ci-scripts-pre-redesign, origin/feature/env-testing, nas-backup/feature/env-testing)
+Good "git" signature for raulmicrosistemas@gmail.com with ED25519 key SHA256:yoHuxIoxl4JWZfYgGWK7R1bqwj3CE9+MuanEEPzXlOc
+Author: Raul Vilchez <raulmicrosistemas@gmail.com>
+Date:   Sun Aug 9 17:20:43 2026 +0200
+
+    build(headers): include sysfs_driver module interface
+    
+    - Expose hwbus_init and hwbus_exit function prototypes within the main driver header file.
+hwbus-io.git
+
+1 Revisión de Inventario Existente:
+
+Cuando ejecutabamos los tests LTP en el propio laboratorio utilizabamos "ci-foundry.sh", la mayor parte del script está implementado ya, hay que tener en cuenta que los tests se ejecutarán en acme-sandmbox 
+- REMOTE_HOST="builder@sandbox" --- mismo usuario diferente máquina
+- REMOTE_ROOT="/mnt/build-output/Repos/hwbus-io.git" -- RO
+- MODULE_LTP="tests" --- este es el directorio de tests LTP
+- MODULE_SRC="src" --- este es el directorio del controlador
+- REMOTE_TARGET="elBinarioDelTestLTP" --- esta variable permite configurar el test
+- REMOTE_LOG_DIR="/var/log/Sandbox/hwbus-io"
+
+Estas variables ajustarán el script del sandbox. Si no me equivoco el ci-builder.sh podrá reutilizar la actual implementación sustituyendo las variables que detallo. Como tenemos dos ámbitos de prueba kern/ltp, extraeremos esa parte(sección 3 del script), en un nuevo escript el ci-runner.sh que se encargará de decidir que tipo de test hacer! De momento concretemos este, y discutamos su correción.
+
+
+-----
+1. Punto número uno, DESCARGA/ACTUALIZACIÓN del repositorio. Esto SIEMPRE ES MANUAL. Ningún script va a hacer esto. Es tarea de git y, por tanto, NO AUTOMATIZABLE! esto es tarea del desarrollador. Por que te da la opción de estructurar los commits y decidir que validar y que no!
+2. ci-signer.sh ---- Ok.
+3. Me parece una idea lujosa! Pero:
+  a) En caso de que sea un módulo .ko, en principio se probará siempre un sólo módulo!
+  b) En caso de un test LTP, la cosa cambia, podría tratarse de una batería de pruebas o suite.
+  c) En mi opinión son excluyentes; si se prueba una cosa, no se prueba la otra.
+  d) Eso nos lleva a que querremos comprobar, la variable escrita: si es MODULE_KO haz esto, si es TEST_BINARY haz lo otro! Los datos que has propuesto no tienen desperdicio. el BUILD_STATUS nos servirá para determinar si apagar o el laboratorio! TARGET_TYPE y MODULE_NAME para configurar el test-runner en el sandbox. Una idea excelente el  build_state.env.
+4. En un alarde de original, -como te tengo habituado, propongo llamar al sandbox runner "ci-runner.sh".
+Si con lo de la rama, sugieres crear ramas independientes en la repo:
+     "git checkout -b feature-LTP/function_name" o
+     "git checkout -b feature-ko/function_name"
+podría incluso simplificar aún más la cosa ya que dependiendo de donde estemos el ci-runner.sh estará implementado de distinta manera. Discutamos este punto, es muy interesante. Pero tambíen abre la posibilidad de mantener la funte orientada al tipo de test...
+
+Plan de Acción Propuesto
+me gusta, el plan propuesto, pero aún hay que hacer unos ajustes.
+- Habrá que decidir lo de las ramas (habiéndolo discutido antes)
+- Propongo etiquetar la fuente desde ya! y comprobar como firmar los commits!
+- después podemos aplicar el plan de acción que sugieres.
+- Te recuerdo que antes de tocar el código revisaremos el que ya tenemos implementado, por que tengo la sospecha de que la mayor parte ya está implementada en los scripts.
+
+
+# Generado automáticamente por ci-signer.sh en buildlab
+TARGET_TYPE="kernel_module" # Opciones: "kernel_module" | "ltp_binary"
+MODULE_NAME="hwbus_io"
+MODULE_KO_PATH="/mnt/build-output/Repos/hwbus-io.git/hwbus_io.ko"
+TEST_BINARY_PATH="/mnt/build-output/Repos/hwbus-io.git/test_hwbus"
+BUILD_STATUS="SUCCESS"
+TIMESTAMP="2026-08-09_16:15:00"
+
+-----
+* Devuelve un código de salida (exit code) explícito al Host. El (exit code) quería utilizarlo par saber cuando encender el sandbox, pero ahora que lo pienso mejor, quizás no se buena idea automatizar su encendido, ya siempre querremos leer y anlizar el log de compilación, indistíntamente del resultado! 
+En otras palabras, lanzaremos el encendido del sandbox de forma manual. Podemos utilizar el (exit code), para determinar si debemos apagar el laboratorio, en caso de que la compilación haya resultado exitosamente, discutamos esto!
+
+* Retorno de estado y cortocircuito: esto lo sabemos leyendo el log y no es necesario articular ningún mecanismo extra, ya que de todas formas tendremos que leer el log. Tenemos el ci-runner que hace todo esto. Creo que no habrá que tocar nada; si será buena idea renombrarlo, para que se ajuste a su rol. Qué tal ci-builder.sh ?
+Por otro lado, lo que si tendremos que ajustar es archivo que invoca el "test-runner.sh" que ahora formará parte de la inegraciónen en el sandbox. Renombraremos "test-runner.sh", para que también se ajuste a su rol, ya que ahora solo tendrá que firmar el módulo y hacer alguna comprobación que decidamos que deba hacer, podemo renombrarlo como "ci-singner.sh".
+
+* Podríamos configurar un archivo de estado, que ayude a determinar que tipo de test deberá llevar a cabo el script que ponga en marcha el test. En función del proceso de compilación o el binario resultante (*.ko), se podrá decidir si será un lsmod, insmod, dmesg, rmmod, etc; 
+como hace el script test-runner.sh en sus fases 3, 4, 5 y, 6:
+
+# 3. Comprobar si ya está cargado y removerlo limpiamente si es necesario
+if lsmod | grep -q "^${MODULE_NAME} "; then
+    echo "🧹 El módulo ${MODULE_NAME} ya estaba cargado. Removiendo..."
+    sudo rmmod "${MODULE_NAME}"
+fi
+
+# 4. Cargar el módulo
+echo "🚀 Cargando el módulo ${MODULE_KO}..."
+sudo insmod "${MODULE_KO}"
+
+# 5. Verificar y extraer logs recientes de dmesg
+echo "📋 Últimas entradas de dmesg asociadas:"
+sudo dmesg | tail -n 15
+
+# 6. Descargar el módulo tras la comprobación
+echo "🛑 Descargando módulo ${MODULE_NAME}..."
+sudo rmmod "${MODULE_NAME}"
+
+
+o por el contrario invocará al binario resultante en el contexto LTP, capturando su log; tal y como hace el escript "ci-foundry.sh" en su última fase tres:
+
+# 3. Ejecución del binario resultante: guarda en Lab y transmite a la WS
+# Corrección en la línea 48
+if ssh "${REMOTE_HOST}" "${REMOTE_BIN} > ${REMOTE_TEST_LOG} 2>&1; cat ${REMOTE_TEST_LOG}" > "${LOCAL_TEST_LOG}" 2>&1; then
+    echo "✅ TEST FINISHED -> Ver: ${LOCAL_TEST_LOG}"
+else
+    echo "⚠️ TEST FAILED / BROKEN -> Ver: ${LOCAL_TEST_LOG}"
+    exit 2
+fi
+
+
+
+
+
+
+
+-----
+Primero vamos a hacer inventario de  los scripts que tenemos, por que habrá que ajustarlos. 
+1. Primero discutiremos, luego planificaremos y en última instncia, haremos los ajustes en el código.
+2. tenemos que dividir la tarea en dos contextos de ejecución; por un lado tenemos el script de integración en el laboratorio y, por otro el del sandbox. Te recuerdo que el flujo de trabajo entre el laboratorio y el sandbox SIEMPRE ES secuencial! primero uno, luego otro.
+3. Vamos a enumerar el flujo de trabajo en ambos contextos, por separado:
+  
+  - cxt lab:
+            - compilamos
+            - capturamos logs
+            - firmamos modulo si no está firmado
+    Una vez terminadas estas tareas, opino que deberíamos devolver estado ok/fail y, en otro script dependiendo del estado apagar laboratorio y encender snadbox.
+  
+  - cxt sandbox:
+            - Determinar si se trata de una prueba en user spc(LTP) o prueba de modulo .ko
+            - situamos el WD en contexto de prueva (/mnt/build-output/Repos/hwbus-io.git) y hacemos la verificaciones oportunas.
+            - (LTP):
+              - verificamos que el binario está en su sitio.
+              - invocamos el test. Igual que en el script anterior, esto ocurre en el lado del laboratorio, el script se ejecuta allí.
+              - captura de logs.
+            - (.ko):
+              - habrá que insertar el módulo(ya firmado)
+              - recoger el log; dmesg, o el método que vayamos a determinar dependiendo de la tarea. Quizás tengamos que tener esto en cuenta, porque si para obtener el log hay que consultar el dispositivo(/dev), podríamos mantener la modularidad de los scripts, escribiendo en cada caso un script lanzado desde el principal, que se encargará de recoger el log... Esto imagino que tendremos que discutirlo más adelante.
+
+Es el momento de discutir y planificar. Estoy abierto a sugerencias!
