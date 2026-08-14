@@ -30,8 +30,8 @@ Sistemas de Archivos NFS
 .. toctree::
    :maxdepth: 1
 
-   02_Kernel/filesystems/nfs/nfs
-   02_Kernel/filesystems/nfs/nfsroot
+   /02_Kernel/filesystems/nfs/nfs   
+   /02_Kernel/filesystems/nfs/nfsroot
 
 Documentación técnica y guías de configuración para el sistema de archivos de red NFS en el kernel de Linux.
 

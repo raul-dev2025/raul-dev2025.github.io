@@ -32,3 +32,13 @@ Bienvenido a la documentación técnica del entorno de laboratorio **Foundry**.
    :caption: Logs de estudio:
 
    /07_Development/Foundry/EntornoLTP/info_syscalls_log.rst
+
+
+
+Directorio de scripts
+=====================
+
+.. toctree::
+   :maxdepth: 1
+
+   /07_Development/Foundry/ci-cd 
