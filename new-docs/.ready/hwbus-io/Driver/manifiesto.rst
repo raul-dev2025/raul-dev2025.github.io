@@ -28,25 +28,17 @@ Estructura del Árbol de Directorios
    │       ├── hwbus_error.h     # Cabecera de errores exclusiva para espacio de usuario
    │       └── sysfs_utils.h     # Helpers POSIX para herramientas de usuario y tests
    │
-   ├── src/
-   │   ├── core/                 # Lógica genérica y utilidades
-   │   │   ├── source.c          # Abstracciones auxiliares genéricas
-   │   │   └── user/             # Implementación C para espacio de usuario (LTP, CLI)
-   │   │       ├── hwbus_error.c
-   │   │       └── sysfs_utils.c
-   │   │
-   │   └── driver/               # CÓDIGO DEL CONTROLADOR (Infraestructura de estudio)
-   │       └── sysfs_driver.c    # Implementación de callbacks y nodos sysfs
-   │
-   ├── Scripts/                  # Automatización de CI, firma de módulos y runners
-   │   ├── ci-runner.sh
-   │   ├── herramientas.sh
-   │   └── test-runner.sh
-   │
-   └── tests/                    # Módulos de prueba y harness de ejecución
-       ├── hello.c
-       └── Makefile
-
+   └── src/
+       ├── core/                 # Lógica genérica y utilidades
+       │   ├── source.c          # Abstracciones auxiliares genéricas
+       │   └── user/             # Implementación C para espacio de usuario (LTP, CLI)
+       │       ├── hwbus_error.c
+       │       └── sysfs_utils.c
+       │
+       └── driver/               # CÓDIGO DEL CONTROLADOR (Infraestructura de estudio)
+           └── sysfs_driver.c    # Implementación de callbacks y nodos sysfs
+    
+   
 Definición de Directorios y Componentes
 =======================================
 

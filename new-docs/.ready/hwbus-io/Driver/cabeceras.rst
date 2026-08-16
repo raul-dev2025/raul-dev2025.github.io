@@ -82,31 +82,25 @@ Resumen de la Separación de Roles
 .. list-table::
    :widths: 30 30 40
    :header-rows: 1
-   
-   * * Fichero de Cabecera
-   * Ámbito de Ejecución
-   * Entorno / Headers Base
-   
-   * * ``include/hwbus-io.h``
-   * **Kernel (Driver)**
-   * Kernel C (``<linux/module.h>``, ``<linux/init.h>``)
-  
-   * * ``include/sysfs_driver.h``
-   * **Kernel (Driver)**
-   * Kernel C (``<linux/sysfs.h>``, ``<linux/kobject.h>``)
-   
-   * * ``include/sysfs_pci.h``
-   * **Kernel (Driver)**
-   * Kernel C (``<linux/pci.h>``)
-   
-   * * ``include/user/hwbus_error.h``
-   * **Usuario (Tests/LTP)**
-   * User C (``<errno.h>``, ``<stddef.h>``)
-   
-   * * ``include/user/sysfs_paths.h``
-   * **Usuario (Tests/LTP)**
-   * User C (Literales ``#define``)
-   
-   * * ``include/user/sysfs_utils.h``
-   * **Usuario (Tests/LTP)**
-   * User C (``<sys/types.h>``, ``<stddef.h>``)
+
+   * - Fichero de Cabecera
+     - Ámbito de Ejecución
+     - Entorno / Headers Base
+   * - ``include/hwbus-io.h``
+     - **Kernel (Driver)**
+     - Kernel C (``<linux/module.h>``, ``<linux/init.h>``)
+   * - ``include/sysfs_driver.h``
+     - **Kernel (Driver)**
+     - Kernel C (``<linux/sysfs.h>``, ``<linux/kobject.h>``)
+   * - ``include/sysfs_pci.h``
+     - **Kernel (Driver)**
+     - Kernel C (``<linux/pci.h>``)
+   * - ``include/user/hwbus_error.h``
+     - **Usuario (Tests/LTP)**
+     - User C (``<errno.h>``, ``<stddef.h>``)
+   * - ``include/user/sysfs_paths.h``
+     - **Usuario (Tests/LTP)**
+     - User C (Literales ``#define``)
+   * - ``include/user/sysfs_utils.h``
+     - **Usuario (Tests/LTP)**
+     - User C (``<sys/types.h>``, ``<stddef.h>``)

@@ -7,6 +7,8 @@ Metodología para el estudio de "The Linux Test Project(LTP)"
    :caption: General
 
    /07_Development/Foundry/Metodologia_LTP/introduccion
+   /07_Development/Foundry/Metodologia_LTP/estrategia_LTP
+   /07_Development/Foundry/Metodologia_LTP/guion   
 
 .. toctree::
    :maxdepth: 1
