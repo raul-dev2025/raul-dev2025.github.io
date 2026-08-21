@@ -54,7 +54,7 @@ Terminología
 **Puente FPGA**
 
 - Puentes FPGA para señales de *buses de puerta*, entre el *host* y el FPGA. 
-- Los Puentes FPGA, deberían ser desabilitados mientras el FPGA es programado, para prevenir señales espúrias sobre el *bus* de la CPU y, el *soft logic* [f1]_.
+- Los Puentes FPGA, deberían ser desabilitados mientras el FPGA es programado, para prevenir señales espúrias sobre el *bus* de la CPU y, el *soft logic* [#f1]_.
 - Los puentes FPGA, podrán ser *hardware* en activo, o *soft logic* en un FPGA. 
 - Durante la reconfiguración completa, los puentes de *hardware*, entre el *host* y el FPGA, serán desactivados. 
 - Durante la reconfiguración parcial de una región específica, el *puente* de la misma, será utilizado como *puerta* a los *buses*. El tráfico a otras regiones no se verá afectado. 
@@ -132,7 +132,9 @@ Para la reconfiguración parcial *PR*, cada *Región PR*, constará con una *Reg
 
 Si una *región FPGA* no especifica un gestor FPGA, *asumirá* la región FPGA, del gestor especificado por su predecesor. Ésto soporta ambos casos; allí donde el mismo gestor FPGA es utlizado para todo, así como *diferentes* gestores para cada región.
 
-Las regiónes FPGA no heredan los *puentes(bridges)* de región FPGA, de sus predecesores. Previene el apagado de un puente “aguas arriba” [f2]_ mientras una *región* está siendo reconfigurada -ver **figura 1**.
+
+
+Las regiónes FPGA no heredan los *puentes(bridges)* de región FPGA, de sus predecesores. Previene el apagado de un puente “aguas arriba” [#f2]_ mientras una *región* está siendo reconfigurada -ver **figura 1**.
 
 Durante un *PR*, los puentes FPGA permanecen activos. Los puentes de *región PR* serán puentes FPGA dentro de la imagen estática del FPGA.
 

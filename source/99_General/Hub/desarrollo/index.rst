@@ -4,28 +4,12 @@
 Development
 ===========
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Foudry:
-
-   /07_Development/Foundry/index
-
-
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Testing Environment Setup:
-
-   /04_System_Administration/test_environment_setup/index
-
-The folowing documents cover the configuration of virtual machine for testing purposes.
-
 
 .. toctree::
    :maxdepth: 1
    :caption: Driver Development:
 
-   /01_Hardware/driver_development/index
+   /07_Development/driver_development/index
 
 Available documents for driver development, including planning, PCI device identification, and quick references for PCI and MMIO.
 
