@@ -8,7 +8,10 @@ Ready documents
    :maxdepth: 1
 
 
-   /hwbus-io/index
+   listRCU
+   manInitrd
+   netconsole
+   pci
 
 .. usa el siguiente alias:   
    alias htmlBuild='sphinx-build -nW -b html -c source/ new-docs/.ready/ /tmp/sphinx_html'

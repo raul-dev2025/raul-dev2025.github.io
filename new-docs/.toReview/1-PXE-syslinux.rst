@@ -1,303 +1,211 @@
-`Descripción <#i1>`__ `Direcotorio de trabajo <#i2>`__
-`Configuración <#i3>`__ `Opciones <#i4>`__ `Prioridad de
-opciones <#i5>`__ `Opciones en bruto <#i6>`__ `HTTP y FTP <#i7>`__
-`Sintaxis del nombre de archivo <#i8>`__ `Keeppxe <#i9>`__
-`Configuración DHCP - Simple <#i10>`__ `Configuración DHCP -
-Encapsulado <#i11>`__ `Configuración DHCP - opciones ISC dhcpd <#i12>`__
-`Opciones de fabricante <#i13>`__ `Problemas conocidos <#i14>`__
+==============
+PXE - syslinux 
+==============
 
-`Referencias y agradecimientos <#i99>`__
-----------------------------------------
+.. toctree::
+   :maxdepth: 2
+   :caption: Contenido:
 
-`Descripción <i1>`__
-~~~~~~~~~~~~~~~~~~~~
+   
 
-PXELINUX es un derivado de Syslinux, para el arranque desde un servidor
-en red, mediante *una ROM*\ `f1 <#f1>`__ de red, conforme a la
-especificación Intel PXE. PXELINUX, no es un programa destinado a ser
-*flaseado* o *quemado*, en una PROM\ `f1 <#f1>`__ de una tarjeta de red.
+Descripción
+===========
+
+PXELINUX es un derivado de Syslinux, para el arranque desde un servidor en red, mediante *una ROM*\ `f1 <#f1>`__ de red, conforme a la especificación Intel PXE. PXELINUX, no es un programa destinado a ser *flaseado* o *quemado*, en una PROM `f1 <#f1>`__ de una tarjeta de red.
 En tal caso, revisar `iPXE <https://ipxe.org/>`__.
 
-Si fuese necesario *crear* una PROM; compatible con PXE, para la tarjeta
-de red -con objeto de utilizarla con PXELINUX, por qjemplo, revisar
-`NetBoot <http://netboot.sourceforge.net/>`__.
+Si fuese necesario *crear* una PROM; compatible con PXE, para la tarjeta de red -con objeto de utilizarla con PXELINUX, por qjemplo, revisar `NetBoot <http://netboot.sourceforge.net/>`__.
 
-`Direcotorio de trabajo <i2>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Direcotorio de trabajo
+======================
 
-El Directorio de Trabajo Activo inicial, es aportado tanto por DHCP,
-opción 210(pxelinux.pathprefix), prefijo de ruta *en bruto*, o el
-directorio ascendente del archivo PXELINUX, indicado por el campo
-``sname`` y el archivo (sname=“192.168.2.3” y file=“boot/pxelinux.0”
-resuelto en “tftp://192.168.2.3/boot/”, o en “192.168.2.3::boot/” en un
-formato PXELINUX anterior), con precedencia, tal y como es especificado
-en la sección *#Options* de este documento.
+El Directorio de Trabajo Activo inicial, es aportado tanto por DHCP, opción 210(pxelinux.pathprefix), prefijo de ruta *en bruto*, o el directorio ascendente del archivo PXELINUX, indicado por el campo ``sname`` y el archivo (sname=“192.168.2.3” y file=“boot/pxelinux.0” resuelto en “tftp://192.168.2.3/boot/”, o en “192.168.2.3::boot/” en un
+formato PXELINUX anterior), con precedencia, tal y como es especificado en la sección *#Options* de este documento.
 
-Todos los nombre de archivo *no cualificados*, son relativos al
-Directorio de Trabajo Activo.
+Todos los nombre de archivo *no cualificados*, son relativos al Directorio de Trabajo Activo.
 
-`Configuración <i3>`__
-~~~~~~~~~~~~~~~~~~~~~~
+Configuración
+=============
 
 La configuración básica, es la misma en todas la variantes Syslinux.
-Este documento explica algunas de las diferencias, especialmente
-aplicables a PXELINUX.
+Este documento explica algunas de las diferencias, especialmente aplicables a PXELINUX.
 
-En el servidor TFTP, crear el directorio ``/tftpboot`` y, copiar
-``pxelinux.0`` -desde la distribución de Syslinux y, cualquier imagen
-del kernel o initrd, desde la que arrancar.
+En el servidor TFTP, crear el directorio ``/tftpboot`` y, copiar ``pxelinux.0`` -desde la distribución de Syslinux y, cualquier imagen del kernel o initrd, desde la que arrancar.
 
-``[5.00+]`` Copiar ``ldlinux.c32`` desde la distribución de Syslinux, al
-directorio ``/tftpboot`` en el servidor TFTP.
+``[5.00+]`` Copiar ``ldlinux.c32`` desde la distribución de Syslinux, al directorio ``/tftpboot`` en el servidor TFTP.
 
-Finalmente, crear el directorio ``/tftpboot/pxelinux.cfg``. El archivo
-de configuración -equivalente a syslinux.cfg -ver SYSLINUX FAQ para más
-opciones, situado en este mismo directorio.
+Finalmente, crear el directorio ``/tftpboot/pxelinux.cfg``. El archivo de configuración -equivalente a syslinux.cfg -ver SYSLINUX FAQ para más opciones, situado en este mismo directorio.
 
-Dado que podría arrancarse más de un sistema, desde el mismo servidor,
-el nombre del archivo de configuración, dependrá de la dirección IP de
-la *máquina de arranque*.
+Dado que podría arrancarse más de un sistema, desde el mismo servidor, el nombre del archivo de configuración, dependrá de la dirección IP de la *máquina de arranque*.
 
 Antes dar una explicación gnérica, presentaremos un ejemplo:
 
-::
-
-   el nombre del archivo del gestor de arranque es `/mybootdir/pxelinux.0`; y,
-   el UUID de cliente es `b8945908-d6a6-41a9-611d-74a6ab80b83d`; y,
-   la dirección MAC Ethernet `88:99:AA:BB:CC:DD`; y,
-   la direcció IP es `192.168.2.91`, el letras hexadecimales mayúsculas `C0A8025B`.
+   * el nombre del archivo del gestor de arranque es ``/mybootdir/pxelinux.0``; y,
+   * el UUID de cliente es ``b8945908-d6a6-41a9-611d-74a6ab80b83d``; y,
+   * la dirección MAC Ethernet ``88:99:AA:BB:CC:DD``; y,
+   * la direcció IP es ``192.168.2.91``, el letras hexadecimales mayúsculas ``C0A8025B``.
 
 PXELINUX *buscará* los siguientes archivos de configuración -en éste
 orden:
 
-::
+.. code-block:: bash
 
-       /mybootdir/pxelinux.cfg/b8945908-d6a6-41a9-611d-74a6ab80b83d
-       /mybootdir/pxelinux.cfg/01-88-99-aa-bb-cc-dd
-       /mybootdir/pxelinux.cfg/C0A8025B
-       /mybootdir/pxelinux.cfg/C0A8025
-       /mybootdir/pxelinux.cfg/C0A802
-       /mybootdir/pxelinux.cfg/C0A80
-       /mybootdir/pxelinux.cfg/C0A8
-       /mybootdir/pxelinux.cfg/C0A
-       /mybootdir/pxelinux.cfg/C0
-       /mybootdir/pxelinux.cfg/C
-       /mybootdir/pxelinux.cfg/default
+   /mybootdir/pxelinux.cfg/b8945908-d6a6-41a9-611d-74a6ab80b83d
+   /mybootdir/pxelinux.cfg/01-88-99-aa-bb-cc-dd
+   /mybootdir/pxelinux.cfg/C0A8025B
+   /mybootdir/pxelinux.cfg/C0A8025
+   /mybootdir/pxelinux.cfg/C0A802
+   /mybootdir/pxelinux.cfg/C0A80
+   /mybootdir/pxelinux.cfg/C0A8
+   /mybootdir/pxelinux.cfg/C0A
+   /mybootdir/pxelinux.cfg/C0
+   /mybootdir/pxelinux.cfg/C
+   /mybootdir/pxelinux.cfg/default
 
 *Veamos* qué representa exactamente, el ejemplo de arriba.
 
-Después de *intentar* los archivos especificados en el DHCP, u opciones
-en bruto, pxelinux probará las siguientes rutas, con prefijo
-``pxelinux.cfg``, bajo el Directorio de Trabajo inicial.
+Después de *intentar* los archivos especificados en el DHCP, u opciones en bruto, pxelinux probará las siguientes rutas, con prefijo ``pxelinux.cfg``, bajo el Directorio de Trabajo inicial.
 
 El UUID de cliente, de ser provisto por la *pila* PXE.
 
-   **Nota**: algunas BIOS, carecen de una UUID válida y, podrían
+.. admonition:: Nota
+   
+   Algunas BIOS, carecen de una UUID válida y, podrían
    terminar por *devolver* algo parecido a ``1`` -unos.
 
-El valor es representado en el formato estandar UUID, mediante dígitos
-hexadecimales en minúscula. Ejemplo,
-``b8945908-d6a6-41a9-611d-74a6ab80b83d``.
+El valor es representado en el formato estandar UUID, mediante dígitos hexadecimales en minúscula. Ejemplo, ``b8945908-d6a6-41a9-611d-74a6ab80b83d``.
 
-El tipo de *hardware* -modelo de código ARP, y dirección; todo, en
-hexadecimal y en minúscula, con giones por separador.
+El tipo de *hardware* -modelo de código ARP, y dirección; todo, en hexadecimal y en minúscula, con giones por separador.
 
-Por ejemplo, la tabla ARP ethernet *tipo 1*, con la dirección
-``88:99:AA:BB:CC:DD``, buscaría el nombre de archivo
-``01-88-99-aa-bb-cc-dd``.
+Por ejemplo, la tabla ARP ethernet *tipo 1*, con la dirección ``88:99:AA:BB:CC:DD``, buscaría el nombre de archivo ``01-88-99-aa-bb-cc-dd``.
 
-La própia dirección de cliente IPv4, en *hexadecimal mayúscula*, seguido
-de los carácteres hexadecimales retirados, uno cada vez, hasta el final.
+La própia dirección de cliente IPv4, en *hexadecimal mayúscula*, seguido de los carácteres hexadecimales retirados, uno cada vez, hasta el final.
 Por ejemplo, ``192.168.2.91 → C0A8025B``.
 
-El programa incluido gethostip, podrá ser utilizado para computar la
-dirección IP en hexadecimal, para cualquier anfitrión -host.
+El programa incluido gethostip, podrá ser utilizado para computar la dirección IP en hexadecimal, para cualquier anfitrión -host.
 
-- En minúscula “default”.
+- default.
 
-..
-
-   **Nota**: todas las referencias a nombres de archivo, son relativas
+.. admonition:: Título
+   
+   Todas las referencias a nombres de archivo, son relativas
    al directorio en él situado: ``pxelinux.0``.
 
-PXELINUX, requiere generalmente para el nombre de archivo -incluida
-cualquier ruta relativa, constar de un tamaño de 127 carácteres.
+PXELINUX, requiere generalmente para el nombre de archivo -incluida cualquier ruta relativa, constar de un tamaño de 127 carácteres.
 
-``[3.20+]`` Si PXELINUX no pudiese encontrar un archivo de
-configuración, dispararía el *reinicio*, tras haber expirado, el
-intérvalo de espera. Esto evitaría paralizar indefinídamente la máquina,
-debido a una falla en el arranque.
+``[3.20+]`` Si PXELINUX no pudiese encontrar un archivo de configuración, dispararía el *reinicio*, tras haber expirado, el intérvalo de espera. Esto evitaría paralizar indefinídamente la máquina, debido a una falla en el arranque.
 
-`Opciones <i4>`__
-~~~~~~~~~~~~~~~~~
+Opciones
+========
 
-``[1.62+]`` Dependiendo del servidor específico DHCP, las siguientes
-opciones no específicas, podrían estar disponibles, para así, *adecuar*
-el comportamiento PXELINUX. Ver RFC 5071 para información adicional
-sobre estas opciones. Dichas alternativas pxelinux, podrán ser
-especificadas con opciones DHCP, o escritas en bruto, en *binario*.
+``[1.62+]`` Dependiendo del servidor específico DHCP, las siguientes opciones no específicas, podrían estar disponibles, para así, *adecuar* el comportamiento PXELINUX. Ver RFC 5071 para información adicional sobre estas opciones. Dichas alternativas pxelinux, podrán ser especificadas con opciones DHCP, o escritas en bruto, en *binario*.
 
-`Prioridad de opciones <i5>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Prioridad de opciones
+=====================
 
-En bruto ``after-options``, es aplicado tras las opciones DHCP
--sobreescribiéndolas, mientras ``before-options`` -también en bruto, son
-préviamente aplicadas a las opciones DHCP. El comportamiento por defecto
-toma una \_ menor prioridad\_.
+En bruto ``after-options``, es aplicado tras las opciones DHCP -sobreescribiéndolas, mientras ``before-options`` -también en bruto, son préviamente aplicadas a las opciones DHCP. El comportamiento por defecto toma una menor prioridad.
 
-- Opción 208 pxelinux.magic Versiones de PXELINUX anteriores, requireron
-  la configuración de esta opción a ``F1:00:74:7E`` (241.0.116.126) con
-  objeto de reconocer cualquier opción DHCP especial. A partir de
-  PXELINUX v3.55, la opción es depreciada y, nunca más necesaria.
+- Opción 208 pxelinux.magic Versiones de PXELINUX anteriores, requireron la configuración de esta opción a ``F1:00:74:7E`` (241.0.116.126) con objeto de reconocer cualquier opción DHCP especial. A partir de PXELINUX v3.55, la opción es depreciada y, nunca más necesaria.
 
-- Opción 209 pxelinux.configfile Especifica el nombre de archivo de
-  configuración inicial PXELINUX, el cuál podría ser calificado, o
-  descalificado.
+- Opción 209 pxelinux.configfile Especifica el nombre de archivo de configuración inicial PXELINUX, el cuál podría ser calificado, o descalificado.
 
-- Opción 210 pxelinux.pathprefix Especifica el prefijo de ruta común, de
-  PXELINUX. En lugar de derivarlo del nombre de archivo de arranque.
-  Esto es -casi, necesario de hecho, para terminar en culaquier
-  caracter, utilizado por el servidor TFTP del OS, utilizado como
-  *nombre de ruta separador*, ejemplo ``/``, en Unix.
+- Opción 210 pxelinux.pathprefix Especifica el prefijo de ruta común, de PXELINUX. En lugar de derivarlo del nombre de archivo de arranque.
+Esto es -casi, necesario de hecho, para terminar en culaquier caracter, utilizado por el servidor TFTP del OS, utilizado como *nombre de ruta separador*, ejemplo ``/``, en Unix.
 
-- Option 211 pxelinux.reboottime Especifica, en segundos, el tiempo de
-  espera antes del reinicio, en el evento de falla de TFTP. ``0`` -cero,
-  significa esperar indefinidamente -en realidad, esperará 136 años,
-  aproximádamente.
+- Option 211 pxelinux.reboottime Especifica, en segundos, el tiempo de espera antes del reinicio, en el evento de falla de TFTP. ``0`` -cero, significa esperar indefinidamente -en realidad, esperará 136 años, aproximádamente.
 
-`Opciones en bruto <i6>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Opciones en bruto
+=================
 
-``[3.83+]`` El programa pxelinux-options podría utilizarse para escribir
-en bruto las opciones DHCP, dentro de la imagen ``pxelinux.0``. Es en
-ocasiones útil, cuando el sevidor DHCP, aparezca bajo un control
-administrativo diferente.
+``[3.83+]`` El programa pxelinux-options podría utilizarse para escribir en bruto las opciones DHCP, dentro de la imagen ``pxelinux.0``. Es en ocasiones útil, cuando el sevidor DHCP, aparezca bajo un control administrativo diferente.
 
-::
+.. code-block:: text
 
-       6 => 'domain-name-servers',
-       15 => 'domain-name',
-       54 => 'next-server',
-       209 => 'config-file',
-       210 => 'path-prefix',
-       211 => 'reboottime'
+   6 => 'domain-name-servers',
+   15 => 'domain-name',
+   54 => 'next-server',
+   209 => 'config-file',
+   210 => 'path-prefix',
+   211 => 'reboottime'
 
-`HTTP y FTP <i7>`__
-~~~~~~~~~~~~~~~~~~~
+HTTP y FTP
+----------
 
-Anteriores versiones de PXELINUX, soportaron HTTP, mediante un gestor de
-arranque híbrido, también conteniendo gPXE/iPXE; con éste tipo de
-imágenes, llamadas tanto ``gpxelinux.0`` como ``ipxelinux.0``.
+Anteriores versiones de PXELINUX, soportaron HTTP, mediante un gestor de arranque híbrido, también conteniendo gPXE/iPXE; con éste tipo de imágenes, llamadas tanto ``gpxelinux.0`` como ``ipxelinux.0``.
 
-Desde la versión 5.10, un binario PXELINUX especial, ``lpxelinux.0``,
-soportó natívamente, transferencias HTTP y FTP, incrementando
-satisfactoriamente, la velocidad de *carga*, y permitiendo a escritos
--scripts, HTTP estandar, presentar archivos de configuración PXELINUX.
-El empleo de HTTP o FTP, utliza un nombre de archivo con una sintaxis
-standar, para el URL; opciones DHCP, para transmitir prefijos URL
-adecuados, al cliente. Incluso la utilización de la herramienta
-``pxelinux-options``, provista desde el directorio *utils*, para
-programar directamente, sobre el archivo ``lpxelinux.0``. Aunque es
-utilizada la sintaxis HTTP/FTP, al tratar de emplear ``pxelinux.0`` -sin
-el prefijo ``l``, de no estar iPXE/gPXE *corriendo* debajo, resultará en
-una advertencia archivo no encontrado, sin dar explicación acerca de la
-causa.
+Desde la versión 5.10, un binario PXELINUX especial, ``lpxelinux.0``, soportó natívamente, transferencias HTTP y FTP, incrementando satisfactoriamente, la velocidad de *carga*, y permitiendo a escritos -scripts, HTTP estandar, presentar archivos de configuración PXELINUX.
+El empleo de HTTP o FTP, utliza un nombre de archivo con una sintaxis standar, para el URL; opciones DHCP, para transmitir prefijos URL adecuados, al cliente. Incluso la utilización de la herramienta ``pxelinux-options``, provista desde el directorio *utils*, para programar directamente, sobre el archivo ``lpxelinux.0``. Aunque es utilizada la sintaxis HTTP/FTP, al tratar de emplear ``pxelinux.0`` -sin el prefijo ``l``, de no estar iPXE/gPXE *corriendo* debajo, resultará en una advertencia archivo no encontrado, sin dar explicación acerca de la causa.
 
 Ejemplo:
 
-::
+.. code-block:: text
 
-       LABEL linux-http
-       LINUX http://boot-server/boot/mykernel
-       APPEND initrd=http://boot-server/boot/myinitrd
+   LABEL linux-http
+   LINUX http://boot-server/boot/mykernel
+   APPEND initrd=http://boot-server/boot/myinitrd
 
-`Sintaxis del nombre de archivo <i8>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-PXELINUX, soporta las siguientes conversiones, en cuanto al nombre de
-ruta:
+Sintaxis del nombre de archivo
+------------------------------
 
-``::filename`` Surpime el prefijo del nombre de archivo común, ejemplo,
-pasará la cadena ``filename`` sin modificar al servidor.
+PXELINUX, soporta las siguientes conversiones, en cuanto al nombre de ruta:
 
-- IP ``address::filename`` Ejemplo, ``192.168.2.3::filename`` Surpime el
-  prefijo del nombre de archivo común y, envía una petición a un
-  servidor TFTP alternativo. Podrá ser utilizado un nombre DNS, en lugar
-  de una dirección IP. Asumiendo que es completamente cualificado, si
-  contiene puntos; de otra forma,añadirá el dominio local, tal y como es
-  reportado por el servidor DHCP(opción 15).
+``::filename`` Surpime el prefijo del nombre de archivo común, ejemplo, pasará la cadena ``filename`` sin modificar al servidor.
 
-El símbolo de doble punto ``::``, fué escogido, aunque es,
-desafortunadamente, conflictivo con el sistema operativo. Sin embargo,
-si encontramos un entorno, donde el tratamiento especial de ``::``
-signifique un problema, por favor, contactar la de Syslinux.
+- IP ``address::filename`` Ejemplo, ``192.168.2.3::filename`` Surpime el prefijo del nombre de archivo común y, envía una petición a un servidor TFTP alternativo. Podrá ser utilizado un nombre DNS, en lugar de una dirección IP. Asumiendo que es completamente cualificado, si contiene puntos; de otra forma,añadirá el dominio local, tal y como es reportado por el servidor DHCP(opción 15).
+
+El símbolo de doble punto ``::``, fué escogido, aunque es, desafortunadamente, conflictivo con el sistema operativo. Sin embargo, si encontramos un entorno, donde el tratamiento especial de ``::`` signifique un problema, por favor, contactar la de Syslinux.
 
 ``[4.00+]``, PXELINUX también soporta una sintaxis URL estandar.
 
-`Keeppxe <i9>`__
-~~~~~~~~~~~~~~~~
+Keeppxe
+-------
 
-Normalmente, PXELINUX descargará la *pila* de PXE y UNDI, antes de
-invocar al kernel. En circunstancias especiales -por ejemplo, al
-utilizar MEMDISK para arrancar un sistema operativo con un controlador
-de red UNDI, podría ser deseado, el guardar la pila PXE en memoria. Si
-la opción ``keepxe`` es pasada como argumento desde la línea de órdenes,
-PXELINUX, guardará la pila respectiva, en memoria. Si no se comprende
-que significa ésto, probablemente no sea necesario.
+Normalmente, PXELINUX descargará la *pila* de PXE y UNDI, antes de invocar al kernel. En circunstancias especiales -por ejemplo, al utilizar MEMDISK para arrancar un sistema operativo con un controlador de red UNDI, podría ser deseado, el guardar la pila PXE en memoria. Si la opción ``keepxe`` es pasada como argumento desde la línea de órdenes, PXELINUX, guardará la pila respectiva, en memoria. Si no se comprende que significa ésto, probablemente no sea necesario.
 
 Ejemplos
 
 Nombre de archivo de configuración
 
-Para el DHCP siaddr ``192.168.2.3``, archivo ``mybootdir/pxelinux.0``,
-UUID de cliente ``b8945908-d6a6-41a9-611d-74a6ab80b83d``, dirección MAC
-Ethernet ``88:99:AA:BB:CC:DD`` y dirección IPv4 ``192.168.2.91``, serán
-considerados los archivos, en el orden que sigue -tras las opciones
-“config-file”:
+Para el DHCP siaddr ``192.168.2.3``, archivo ``mybootdir/pxelinux.0``, UUID de cliente ``b8945908-d6a6-41a9-611d-74a6ab80b83d``, dirección MAC Ethernet ``88:99:AA:BB:CC:DD`` y dirección IPv4 ``192.168.2.91``, serán considerados los archivos, en el orden que sigue -tras las opciones “config-file”:
 
-::
+.. code-block:: text
 
-       mybootdir/pxelinux.cfg/b8945908-d6a6-41a9-611d-74a6ab80b83d
-       mybootdir/pxelinux.cfg/01-88-99-aa-bb-cc-dd
-       mybootdir/pxelinux.cfg/C0A8025B
-       mybootdir/pxelinux.cfg/C0A8025
-       mybootdir/pxelinux.cfg/C0A802
-       mybootdir/pxelinux.cfg/C0A80
-       mybootdir/pxelinux.cfg/C0A8
-       mybootdir/pxelinux.cfg/C0A
-       mybootdir/pxelinux.cfg/C0
-       mybootdir/pxelinux.cfg/C
-       mybootdir/pxelinux.cfg/default
+   mybootdir/pxelinux.cfg/b8945908-d6a6-41a9-611d-74a6ab80b83d
+   mybootdir/pxelinux.cfg/01-88-99-aa-bb-cc-dd
+   mybootdir/pxelinux.cfg/C0A8025B
+   mybootdir/pxelinux.cfg/C0A8025
+   mybootdir/pxelinux.cfg/C0A802
+   mybootdir/pxelinux.cfg/C0A80
+   mybootdir/pxelinux.cfg/C0A8
+   mybootdir/pxelinux.cfg/C0A
+   mybootdir/pxelinux.cfg/C0
+   mybootdir/pxelinux.cfg/C
+   mybootdir/pxelinux.cfg/default
 
 Servidores TFTP
+---------------
 
-Para mejores resultados, utilizar el servidor TFTP con soporte a
-``tsize`` *RFC 1784/RFC 2349*.
+Para mejores resultados, utilizar el servidor TFTP con soporte a ``tsize`` *RFC 1784/RFC 2349*.
 
-Por favor, comprobar la página de referencias a la compatibilidad de
-hardware, para ver si PXE, necesita algún tipo de *atención* especial.
+Por favor, comprobar la página de referencias a la compatibilidad de hardware, para ver si PXE, necesita algún tipo de *atención* especial.
 
 Algunos servidores TFTP, que mejor resultado han dado con PXELINUX, son:
 
-El servidor TFTP “tftp-hpa” -áltamente *portable*\ `f2 <#f2>`__ y, un
-“puerto” de un servidor TFTP de un sistema operativo BSD. Soporta
-opciones y está disponible en:
+El servidor TFTP “tftp-hpa” -áltamente *portable*\ `f2 <#f2>`__ y, un “puerto” de un servidor TFTP de un sistema operativo BSD. Soporta opciones y está disponible en:
 
 `http://www.kernel.org/pub/software/network/tftp/ or
 ftp://ftp.kernel.org/pub/software/network/tftp/ <http://www.kernel.org/pub/software/network/tftp/%20or%20ftp://ftp.kernel.org/pub/software/network/tftp/>`__
 
-y en cualquier servidor espejo -mirror, <kernel.org>
-http://www.kernel.org/mirrors/
+y en cualquier servidor espejo -mirror, :doc:`kernel.org <http://www.kernel.org/mirrors/>`_
 
-Otro servidor TFTP, con soporte de opciones es “atftp” por *Jean-Pierre
-Lefebvre*:
+Otro servidor TFTP, con soporte de opciones es “atftp” por *Jean-Pierre Lefebvre*:
 
-::
+.. code-block:: text
 
    [ftp://ftp.mamalinux.com/pub/atftp/](ftp://ftp.mamalinux.com/pub/atftp/)
 
-*atftp* da mejores resultados que *tftp-hpa* en grandes servidores de
-arranque, aunque con menor portabilidad.
+*atftp* da mejores resultados que *tftp-hpa* en grandes servidores de arranque, aunque con menor portabilidad.
 
 Si el servidor de arranque, corre bajo Windows -y no puede cambiarse
 esto, intentar *tftpd32*, escrito por *Philippe Jounin* -necesaria

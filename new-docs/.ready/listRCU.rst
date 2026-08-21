@@ -1,11 +1,18 @@
-`Empleo de RCU, para proteger listas enlazadas <#i1>`__
-`Sumario <#i2>`__ `Referencias y agradecimientos <#i99>`__ —
+===
+RCU
+===
 
-`Empleo de RCU, para proteger listas enlazadas <i1>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. toctree::
+   :maxdepth: 2
+   :caption: Contenido:
 
-`f1 <#f1>`__ Una de las mejores aplicaciones de RCU, consiste en la
-protección de la mayoría de listas enlazadas -``struct`` ``list_head``
+
+
+Empleo de RCU, para proteger listas enlazadas
+=============================================
+
+Una de las mejores aplicaciones de RCU, consiste en la
+protección de la mayoría de listas enlazadas - ``struct list_head`` 
 en ``list.h``. La ventaja de esta aproximación, es que todas las
 barreras de memoria, son incluidas de forma automática, en la lista de
 macros. Este documento describe distintas aplicaciones RCU, empezando
@@ -33,24 +40,24 @@ soporte de auditoría a la *llamada de sistema*. Por ejemplo, la
 implementación de un bloqueo *lectura-escritura* de
 ``audit_filter_task()``, podría ser como sigue:
 
-::
+.. code-block:: c
 
-       static enum audit_state audit_filter_task(struct task_struct *tsk)
-       {
-           struct audit_entry *e;
-           enum audit_state   state;
+   static enum audit_state audit_filter_task(struct task_struct *tsk)
+   {
+       struct audit_entry *e;
+       enum audit_state   state;
 
-           read_lock(&auditsc_lock);
-           /* Note: audit_netlink_sem held by caller. */
-           list_for_each_entry(e, &audit_tsklist, list) {
-               if (audit_filter_rules(tsk, &e->rule, NULL, &state)) {
-                   read_unlock(&auditsc_lock);
-                   return state;
-               }
+       read_lock(&auditsc_lock);
+       /* Note: audit_netlink_sem held by caller. */
+       list_for_each_entry(e, &audit_tsklist, list) {
+           if (audit_filter_rules(tsk, &e->rule, NULL, &state)) {
+               read_unlock(&auditsc_lock);
+               return state;
            }
-           read_unlock(&auditsc_lock);
-           return AUDIT_BUILD_CONTEXT;
        }
+       read_unlock(&auditsc_lock);
+       return AUDIT_BUILD_CONTEXT;
+   }
 
 La lista aquí, es buscada através del bloqueo, pero el bloqueo es
 desestimado antes del correspondiente valor de retorno. En el tiempo en
@@ -61,7 +68,7 @@ tiene sentido, al apagar la *auditoría*; es correcto auditar ciertas
 Significa que RCU, puede ser aplicado en el ciclo de lectura, como
 sigue:
 
-::
+.. code-block:: c
 
        static enum audit_state audit_filter_task(struct task_struct *tsk)
        {
@@ -91,7 +98,7 @@ Los cambios en el ciclo de actualización son esclarecedores. Un bloqueo
 *lectura-escritura*, podría utilizarse como sigue, para el borrado de
 una inserción:
 
-::
+.. code-block:: c
 
        static inline int audit_del_rule(struct audit_rule *rule,
                         struct list_head *list)
@@ -126,7 +133,7 @@ una inserción:
 
 A continuación, las equivalencias RCU para estas dos funciones:
 
-::
+.. code-block:: c
 
        static inline int audit_del_rule(struct audit_rule *rule,
                         struct list_head *list)
@@ -185,7 +192,7 @@ de bloqueo de *lector-escritor* podría ser parecido a lo siguiente. Al
 campo ``field_count`` únicamente le está permitido decrecer, de
 cualquier otra forma, los campos añadidos deberá ser definidos:
 
-::
+.. code-block:: c
 
        static inline int audit_upd_rule(struct audit_rule *rule,
                         struct list_head *list,
@@ -215,7 +222,7 @@ permite lecturas concurrentes, mientras se lleva a cabo una
 actualización efectiva. Es lo que da nombre a RCU; *read-copy update*.
 El código RCU, es como sigue:
 
-::
+.. code-block:: c
 
        static inline int audit_upd_rule(struct audit_rule *rule,
                         struct list_head *list,
@@ -271,7 +278,7 @@ de rechazar los datos excedidos, para conseguirlo, debería añadir la
 opción *borrado* y un acelerador de bloqueo, bloqueado, a la estructura
 ``audit_entry`` y, modificar ``audit_filter_task()``, como sigue:
 
-::
+.. code-block:: c
 
        static enum audit_state audit_filter_task(struct task_struct *tsk)
        {
@@ -295,9 +302,9 @@ opción *borrado* y un acelerador de bloqueo, bloqueado, a la estructura
            return AUDIT_BUILD_CONTEXT;
        }
 
-..
-
-   **Nota**: este ejemplo asume que la entradas, son añadidas y
+.. admonition:: Nota
+   
+   este ejemplo asume que la entradas, son añadidas y
    borradas, únicamente. Es necesario un mecanismo adicional, capaz de
    trabajar correctamente con acciones de actualización, llevadas a cabo
    por ``audit_upd_rule()``. Por éste motivo?, ``audit_upd_rule()``
@@ -308,7 +315,7 @@ opción *borrado* y un acelerador de bloqueo, bloqueado, a la estructura
 La función ``audit_del_rule()`` tendría que establecer la opción
 *borrado*, bajo el *acelerador de bloqueo*, como sigue:
 
-::
+.. code-block:: c
 
        static inline int audit_del_rule(struct audit_rule *rule,
                         struct list_head *list)
@@ -330,8 +337,8 @@ La función ``audit_del_rule()`` tendría que establecer la opción
            return -EFAULT;     /* No matching rule */
        }
 
-`Sumario <i2>`__
-~~~~~~~~~~~~~~~~
+Sumario
+=======
 
 La mayoría de lecturas basadas en listas de estructura de datos, que
 toleran el exceso de datos excedidos, transigen con el uso de RCU. El
@@ -355,10 +362,12 @@ hay necesidad de la opción *borrado*. Si representa un problema su
 procesado, será necesario mantener un bloqueo por entrada, en todo el
 código que utilize los valores de retorno.
 
-`Referencias y agradecimientos <i99>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Referencias y agradecimientos
+=============================
 
-   `f1 <f1>`__ **n. de t.**: el presente documento es objeto de estudio,
+.. admonition:: n. de t.
+   
+   el presente documento es objeto de estudio,
    cualquier daño o perjudicio derivado de la **mala interpretación**
    del mismo, eximirá al autor de consecuencias adversas. Peligro.
    Seguir leyendo bajo su própia responsabilidad.
