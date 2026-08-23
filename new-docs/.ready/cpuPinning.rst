@@ -59,4 +59,3 @@ La reserva de los procesadores ``0-1, 6-7`` para el hipervisor responde a objeti
 
 * **Hipervisor**: Requiere aislamiento y tolerancia a fallos para atender interrupciones E/S del sistema host, tareas de kernel y demonios de gestión independientes.
 * **Máquina Virtual (*Guest*)**: Ejecuta cargas intensivas paralelas (compilaciones con ``make -j4``, pipelines de CI/CD, etc.) que dependen críticamente de un acceso rápido, coherente y localizado a las memorias caché de la CPU.
-"""

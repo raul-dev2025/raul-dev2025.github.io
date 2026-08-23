@@ -1,9 +1,15 @@
-.. _i1:
+===
+RCU
+===
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contenido:
 
 Conceptos RCU
 =============
 
-La idea principal, detrás de RCU -leer-copiar actualizar (read-copy update), es separar operaciones destructivas, en dos partes; una previniendo que cualquiera pudiese ver los datos siendo destruidos y otra, la cuál acarrea dicha destrucción.
+La idea principal, detrás de RCU -leer-copiar actualizar (read-copy update), es separar  operaciones destructivas, en dos partes; una previniendo que cualquiera pudiese ver los datos siendo destruidos y otra, la cuál acarrea dicha destrucción.
 Un *período de gracia*, supone un *lapso* entre dos partes y, dicho período de gracia, debe ser el suficiente, para que cualquier *lector*, accediendo al *objeto* siendo destruido, mantenga sus referencias, hasta ser desestimado. Por ejemplo, un borrado *RCU-protected* desde una lista enlazada, primero retiraría el objeto de la lista, esperaría un período de gracia antes del *lapso de tiempo*, liberando entonces, el elemento. Ver el archivo ``listRCU.txt``, para más información, sobre el uso de RCU, con listas enlazadas.
 
 .. _i2:
@@ -24,7 +30,7 @@ Variante preventivas RCU(CONFIG_PREEMPT_RCU) consiguen el mismo efecto, pero req
 
 **Si estoy sobre un kernel *uni-procesador*, el cuál sólo puede hacer una cosa a la vez, ¿Por qué debería esperar al período de gracia?**
 
-Ver ``Documentation/RCU/UP.txt``
+* Ver ``Documentation/RCU/UP.txt``
 
 **¿Cómo puedo ver dónde es utilizado RCU, en el kernel de Linux?**
 
@@ -37,7 +43,7 @@ Ver ``Documentation/RCU/UP.txt``
     de RCU. O tomar uno de los cscope databases -ámbito de la 
     base de datos, desde:
 
-    http://www.rdrop.com/users/paulmck/RCU/linuxusage/rculocktab.html
+`rculocktab <http://www.rdrop.com/users/paulmck/RCU/linuxusage/rculocktab.html>`__
 
 **¿Qué directrices debería seguir, cuando escriba código que utilice RCU?**
 
@@ -49,8 +55,7 @@ RCU, significa "read-copy update" -leer-copiar actualizar. El archivo ``listRCU.
 
 **He oído que RCU está patentado ¿Qué pasa con eso?**
 
-Si, lo está. Hay varias patentes conocidas, relacionadas con RCU. Buscar con la cadena "Patent" en el archivo ``RTFP.txt`` para encontrarlas. De estos, uno está permitido por quién hizo la cesión, los otros, son contribuciones al kernel de Linux, con licencia GPL.
-Hay también, implementaciones LGPL, disponibles a nivel de usuario. (http://liburcu.org/).
+Si, lo está. Hay varias patentes conocidas, relacionadas con RCU. Buscar con la cadena "Patent" en el archivo ``RTFP.txt`` para encontrarlas. De estos, uno está permitido por quién hizo la cesión, los otros, son contribuciones al kernel de Linux, con licencia GPL. Hay también, implementaciones LGPL, disponibles a nivel de usuario. (http://liburcu.org/).
 
 **He oído que RCU necesita *trabajo*, para dar soporte al kernel en tiempo real -realtime.**
 
@@ -58,17 +63,6 @@ RCU en tiempo real, puede ser activado vía parámetro de configuración del ker
 
 **¿Dónde puedo encontrar más información sobre RCU?**
 
-Ver el archivo ``RTFP.txt`` en éste directorio.
-O apuntar el explorador a http://www.rdrop.com/users/paulmck/RCU/
+Ver el archivo ``RTFP.txt`` en éste directorio. O apuntar el explorador a `paulmck RCU <http://www.rdrop.com/users/paulmck/RCU/>`__
 
 **¿Qué son todos estos archivos en éste directorio?**
-
-Ver ``00-INDEX`` para una lista
-
-.. _i99:
-
-Referencias y agradecimientos
-=============================
-
-readers, lectores,  EXPLICAR ESTO 
-spinlocks, acelerador de cierres

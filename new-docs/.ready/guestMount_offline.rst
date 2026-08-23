@@ -32,7 +32,7 @@ Procedimiento de Diagnóstico
 ============================
 
 1. Apagado Forzado o Controlado del Nodo
----------------------------------------
+----------------------------------------
 
 Asegurar el estado inactivo del dominio virtual mediante ``virsh``:
 
@@ -50,7 +50,7 @@ Crear un directorio temporal en el hipervisor para albergar el sistema de archiv
    mkdir -p /mnt/mnt_buildlab
 
 3. Montaje del Disco en Modo Solo Lectura
-----------------------------------------
+-----------------------------------------
 
 Inspeccionar el disco inyectando el controlador FUSE en modo seguro (``--ro``):
 
@@ -62,7 +62,7 @@ Inspeccionar el disco inyectando el controlador FUSE en modo seguro (``--ro``):
    El parámetro ``-i`` (inspect) detecta automáticamente las particiones, el volumen LVM y la raíz (``/``) del sistema operativo huésped.
 
 4. Inspección del Log de Enrolamiento
-------------------------------------
+-------------------------------------
 
 Consultar el archivo de log inyectado para determinar el motivo exacto de la falla en el script ``idm-join.sh``:
 

@@ -1,7 +1,14 @@
-Los campos adicionanes en el _struct_ ``boot_params``, como parte del protocolo de arranque del kernel. Debería ser completado por el gestor, o el código de configuración de 16-bit en _modo real_. Referencias/configuraciones al mismo, en:
+=========
+Zero page
+=========
+
+
+Los campos adicionanes en el *struct* ``boot_params``, como parte del protocolo de arranque del kernel. Debería ser completado por el gestor, o el código de configuración de 16-bit en *modo real*. Referencias/configuraciones al mismo, en:
 
 ``arch/x86/include/uapi/asm/bootparam.h``.
-		
+
+.. code-block:: text
+
 		Offset	Proto	Name		Meaning
 		/Size
 

@@ -109,8 +109,7 @@ En bruto ``after-options``, es aplicado tras las opciones DHCP -sobreescribiénd
 
 - Opción 209 pxelinux.configfile Especifica el nombre de archivo de configuración inicial PXELINUX, el cuál podría ser calificado, o descalificado.
 
-- Opción 210 pxelinux.pathprefix Especifica el prefijo de ruta común, de PXELINUX. En lugar de derivarlo del nombre de archivo de arranque.
-Esto es -casi, necesario de hecho, para terminar en culaquier caracter, utilizado por el servidor TFTP del OS, utilizado como *nombre de ruta separador*, ejemplo ``/``, en Unix.
+- Opción 210 pxelinux.pathprefix Especifica el prefijo de ruta común, de PXELINUX. En lugar de derivarlo del nombre de archivo de arranque. Esto es -casi, necesario de hecho, para terminar en culaquier caracter, utilizado por el servidor TFTP del OS, utilizado como *nombre de ruta separador*, ejemplo ``/``, en Unix.
 
 - Option 211 pxelinux.reboottime Especifica, en segundos, el tiempo de espera antes del reinicio, en el evento de falla de TFTP. ``0`` -cero, significa esperar indefinidamente -en realidad, esperará 136 años, aproximádamente.
 
@@ -192,106 +191,67 @@ Por favor, comprobar la página de referencias a la compatibilidad de hardware, 
 
 Algunos servidores TFTP, que mejor resultado han dado con PXELINUX, son:
 
-El servidor TFTP “tftp-hpa” -áltamente *portable*\ `f2 <#f2>`__ y, un “puerto” de un servidor TFTP de un sistema operativo BSD. Soporta opciones y está disponible en:
-
-`http://www.kernel.org/pub/software/network/tftp/ or
-ftp://ftp.kernel.org/pub/software/network/tftp/ <http://www.kernel.org/pub/software/network/tftp/%20or%20ftp://ftp.kernel.org/pub/software/network/tftp/>`__
-
-y en cualquier servidor espejo -mirror, :doc:`kernel.org <http://www.kernel.org/mirrors/>`_
-
+El servidor TFTP “tftp-hpa” -áltamente *portable* `f2 <#f2>`__ y, un “puerto” de un servidor TFTP de un sistema operativo BSD. Soporta opciones y está disponible en: `TFTP <http://www.kernel.org/pub/software/network/tftp/%20or%20ftp://ftp.kernel.org/pub/software/network/tftp/>`__ y en cualquier servidor espejo -mirror, `kernel.org <http://www.kernel.org/mirrors/>`__
 Otro servidor TFTP, con soporte de opciones es “atftp” por *Jean-Pierre Lefebvre*:
 
-.. code-block:: text
-
-   [ftp://ftp.mamalinux.com/pub/atftp/](ftp://ftp.mamalinux.com/pub/atftp/)
+* `RTD TFTP <https://it-at-dtu-physics.readthedocs.io/en/stable/pxelinux.doc.html>`__
 
 *atftp* da mejores resultados que *tftp-hpa* en grandes servidores de arranque, aunque con menor portabilidad.
 
-Si el servidor de arranque, corre bajo Windows -y no puede cambiarse
-esto, intentar *tftpd32*, escrito por *Philippe Jounin* -necesaria
-versión 2.11 o posterior; versiones anteriores contenían errores
-haciéndolo incompatible con PXELINUX.
+Si el servidor de arranque, corre bajo Windows -y no puede cambiarse esto, intentar *tftpd32*, escrito por *Philippe Jounin* -necesaria versión 2.11 o posterior; versiones anteriores contenían errores haciéndolo incompatible con PXELINUX.
 
-::
+* `tftpd32 <http://tftpd32.jounin.net/>`__
 
-   <http://tftpd32.jounin.net/>
+*Eric Cook* de Intel, advierte el uso de TFTPD, desde el servidor Win2000 RIS:
 
-*Eric Cook* de Intel, advierte el uso de TFTPD, desde el servidor
-Win2000 RIS:
+- El *truco* está en instalar RIS, sin configurar la interfase gráfica de usuario -GUI. En su lugar, hacer lo siguiente:
 
-El *truco* está en instalar RIS, sin configurar la interfase gráfica de
-usuario -GUI. En su lugar, hacer lo siguiente:
+En el registro, añadir la carpeta ``\HKLM\System\CurrentControlSet\Services\TFTPD\Parameters``. En la carpeta ``Parameters``, añadir la llave llamada ``Directory``, como valor, escribir la ruta hacia el directorio raíz de TFTP. En servicios GUI, configurar el servicio TFTPD, para un inicio automático, e iniciarlo. Si ha sido configurado el RIS en Win2k, se terminará por tener un MS PXE -algo no demasiado adecuado.
+En cualquier caso, Christian -*Dr. Disk* Hechelmann, anotó un satisfactoria experiencia, en el uso de Windows RIS, *tal y como es*. Ha escrito un *ensayo*, acerca de como configurarlo. Ver *Windows Remote Install System*.
 
-En el registro, añadir la carpeta
-``\HKLM\System\CurrentControlSet\Services\TFTPD\Parameters``. En la
-carpeta ``Parameters``, añadir la llave llamada ``Directory``, como
-valor, escribir la ruta hacia el directorio raíz de TFTP. En servicios
-GUI, configurar el servicio TFTPD, para un inicio automático, e
-iniciarlo. Si ha sido configurado el RIS en Win2k, se terminará por
-tener un MS PXE -algo no demasiado adecuado.
+Configuración DHCP - Simple
+---------------------------
 
-En cualquier caso, Christian -*Dr. Disk* Hechelmann, anotó un
-satisfactoria experiencia, en el uso de Windows RIS, *tal y como es*. Ha
-escrito un *ensayo*, acerca de como configurarlo. Ver *Windows Remote
-Install System*.
+El protocolo PXE, usa un conjunto de extensiones complejas al DHCP o BOOTP. Aunque la mayor parte de las implementaciones PXE -esto incluye todas las versiones Intel v0.99 y posteriores, parecen ser capaces de arrancar con una configuración DHCP/TFTP “convencional”. Asumiendo que deba dar soprte a *clientes* demasiado antiguos -o incluso *sevéramente rotos*, es probáblemente la mejor configuración; a menos que ya se disponga de un seervidor de arranque PXE, en la red.
 
-`Configuración DHCP - Simple <i10>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Una muestra de la configuración DHCP, haciendo uso de una configuración TFTP *convencional*, mantendría cierto parecido a lo siguiente -utiliza ISC dhcp (2.0 o posterior) sintaxis “dhcpd.conf” :
 
-El protocolo PXE, usa un conjunto de extensiones complejas al DHCP o
-BOOTP. Aunque la mayor parte de las implementaciones PXE -esto incluye
-todas las versiones Intel v0.99 y posteriores, parecen ser capaces de
-arrancar con una configuración DHCP/TFTP “convencional”. Asumiendo que
-deba dar soprte a *clientes* demasiado antiguos -o incluso *sevéramente
-rotos*, es probáblemente la mejor configuración; a menos que ya se
-disponga de un seervidor de arranque PXE, en la red.
+.. code-block:: bash
 
-Una muestra de la configuración DHCP, haciendo uso de una configuración
-TFTP *convencional*, mantendría cierto parecido a lo siguiente -utiliza
-ISC dhcp (2.0 o posterior) sintaxis “dhcpd.conf” :
+   allow booting;
+   allow bootp;
+   
+   # Standard configuration directives...
+   
+   option domain-name "domain_name";
+   option subnet-mask subnet_mask;
+   option broadcast-address broadcast_address;
+   option domain-name-servers dns_servers;
+   option routers default_router;
+   
+   # Group the PXE bootable hosts together
+   group {
+      # PXE-specific configuration directives...
+      next-server TFTP_server_address;
+      filename "/tftpboot/pxelinux.0";
+          
+      # You need an entry like this for every host
+      # unless you're using dynamic addresses
+      host hostname {
+         hardware ethernet ethernet_address;
+         fixed-address hostname;
+      }
+   }
 
-::
+Nótese, que si un demonio TFTP en particular, corre bajo *chroot* -tftp-hpa lo hace, si fue especificada la opcion ``-s`` (secure), lo que resulta áltamente recomendable. Casi con total seguridad, no debería incluirse el prefijo ``/tftpboot`` en el nombre de archvo.
 
-       allow booting;
-       allow bootp;
+Si la *configuración simple*, no funciona en un entorno, debería configurarse un *servidor de arranque PXE*, sobre el puerto ``4011`` del servidor tftp; Un servidor para el arranque PXE, está disponible en `kano.org <http://www.kano.org.uk/projects/pxe/>`__.
 
-       # Standard configuration directives...
+Con este tipo de servidor definido, la configuración DHCP, debería ser similar, exceptuando la opción “dhcp-class-identifier” (ISC dhcp 2) u “opción vendor-class-identifier” (ISC dhcp 3):
 
-       option domain-name "domain_name";
-       option subnet-mask subnet_mask;
-       option broadcast-address broadcast_address;
-       option domain-name-servers dns_servers;
-       option routers default_router;
+.. code-block:: bash
 
-       # Group the PXE bootable hosts together
-       group {
-           # PXE-specific configuration directives...
-           next-server TFTP_server_address;
-           filename "/tftpboot/pxelinux.0";
-       
-           # You need an entry like this for every host
-           # unless you're using dynamic addresses
-           host hostname {
-               hardware ethernet ethernet_address;
-               fixed-address hostname;
-           }
-       }
-
-Nótese, que si un demonio TFTP en particular, corre bajo *chroot*
--tftp-hpa lo hace, si fue especificada la opcion ``-s`` (secure), lo que
-resulta áltamente recomendable. Casi con total seguridad, no debería
-incluirse el prefijo ``/tftpboot`` en el nombre de archvo.
-
-Si la *configuración simple*, no funciona en un entorno, debería
-configurarse un *servidor de arranque PXE*, sobre el puerto ``4011`` del
-servidor tftp; Un servidor para el arranque PXE, está disponible en
-http://www.kano.org.uk/projects/pxe/.
-
-Con este tipo de servidor definido, la configuración DHCP, debería ser
-similar, exceptuando la opción “dhcp-class-identifier” (ISC dhcp 2) u
-“opción vendor-class-identifier” (ISC dhcp 3):
-
-::
+   # Tu código aquí
 
        allow booting;
        allow bootp;
@@ -318,20 +278,14 @@ similar, exceptuando la opción “dhcp-class-identifier” (ISC dhcp 2) u
            }
        }
 
-Aquí, el nombre del archivo de arranque, será obtenido desde el servidor
-PXE.
+Aquí, el nombre del archivo de arranque, será obtenido desde el servidor PXE.
 
 Configuración DHCP - Encapsulado
+================================
 
-`Configuración DHCP - Encapsulado <i11>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Si la configuración convenciona de TFTP, no funciona en los clientes y, configurar un servidor de arranque PXE, no es una opción, podría intentarse la siguiente configuración. Es sabido que ha funcionado en determinadas circunstancias; aunque no hay garantias:
 
-Si la configuración convenciona de TFTP, no funciona en los clientes y,
-configurar un servidor de arranque PXE, no es una opción, podría
-intentarse la siguiente configuración. Es sabido que ha funcionado en
-determinadas circunstancias; aunque no hay garantias:
-
-::
+.. code-block:: bash
 
        allow booting;
        allow bootp;
@@ -360,20 +314,16 @@ determinadas circunstancias; aunque no hay garantias:
            }
        }
 
-..
+.. admonition:: Nota
 
-   **Nota**: en algunos clientes no funcionará con la configuración TFTP
-   convencional; Client 3.0 de Intel y posteriores, caen en esta
-   categoria.
+   En algunos clientes no funcionará con la configuración TFTP convencional; Client 3.0 de Intel y posteriores, caen en esta categoria.
 
-`Configuración DHCP - opciones ISC dhcpd <i12>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Configuración DHCP - opciones ISC dhcpd
+---------------------------------------
 
-ISC dhcp 3.0, soporta un sintaxis más elegante, a la hora de establecer
-opciones personalizables. la siguiente sintaxis, podría ser utilizada en
-``dhcpd.conf``, de estar utilizándose dicha versión dhcpd:
+ISC dhcp 3.0, soporta un sintaxis más elegante, a la hora de establecer opciones personalizables. la siguiente sintaxis, podría ser utilizada en ``dhcpd.conf``, de estar utilizándose dicha versión dhcpd:
 
-::
+.. code-block:: bash
 
        option space pxelinux;
        option pxelinux.magic      code 208 = string;
@@ -381,21 +331,16 @@ opciones personalizables. la siguiente sintaxis, podría ser utilizada en
        option pxelinux.pathprefix code 210 = text;
        option pxelinux.reboottime code 211 = unsigned integer 32;
 
-..
+.. admonition:: Nota
+   
 
-   **Nota**: en versiones anteriores a PXELINUX, esto funcionará como
-   *site-option-space*. Desde la versión PXELINUX 2.07, funciona como
-   *site-option-space*\ (encapsulado) y, como *vendor-option-space*
-   (tipo encapsulado 43). Esto podría evitar interferir con el
-   *dhcp-parameter-request-list*, detallado más abajo.
+   En versiones anteriores a PXELINUX, esto funcionará como *site-option-space*. Desde la versión PXELINUX 2.07, funciona como *site-option-space*\ (encapsulado) y, como *vendor-option-space* (tipo encapsulado 43). Esto podría evitar interferir con el *dhcp-parameter-request-list*, detallado más abajo.
 
-[PXELINUX 2.07+] Este soporta ámbas el *site-option-space* y
-*vendor-option-space*.
+**[PXELINUX 2.07+]** Este soporta ámbas el *site-option-space* y *vendor-option-space*.
 
-Dentro del grupo -o clase, de arranque PXELINUX; donde están la opciones
-PXELINUX relacionadas, podría ser añadido:
+Dentro del grupo -o clase, de arranque PXELINUX; donde están la opciones PXELINUX relacionadas, podría ser añadido:
 
-::
+.. code-block:: bash
 
        # Always include the following lines for all PXELINUX clients
        site-option-space "pxelinux";
@@ -410,34 +355,24 @@ PXELINUX relacionadas, podría ser añadido:
        option pxelinux.reboottime 30;
        filename "/tftpboot/pxelinux/pxelinux.bin";
 
-..
+.. admonition:: Nota
 
-   **Nota**: el archivo de configuraciónm es relativo al prefijo de
-   ruta; buscará un archivo de configuración llamado
-   ``/tftpboot/pxelinux/files/configs/common`` en el servidor TFTP.
+   El archivo de configuraciónm es relativo al prefijo de ruta; buscará un archivo de configuración llamado ``/tftpboot/pxelinux/files/configs/common`` en el servidor TFTP.
 
-El estamento *option dhcp-parameter-request-list*, fuerza al servidor
-DHCP, a enviar opciones específicas PXELINUX, incluso sin ser
-explícitamente solicitadas. Puesto que las solicitudes DHCP, son
-enviadas anter de la carga PXELINUX, el cliente PXE no sabrá pedirlas.
+El estamento *option dhcp-parameter-request-list*, fuerza al servidor DHCP, a enviar opciones específicas PXELINUX, incluso sin ser explícitamente solicitadas. Puesto que las solicitudes DHCP, son enviadas anter de la carga PXELINUX, el cliente PXE no sabrá pedirlas.
 
-En versiones posteriores a 3.0 de ISC, *site-local option spaces*
-empiezanen ``224``, no en ``128`` -para ser compatible con la RFC 3942,
-así que deberían definirse las opciones ``208-211``\ como opciones DHCP
-normales, en lugar de *site local*. Por ejemplo:
+En versiones posteriores a 3.0 de ISC, *site-local option spaces* empiezanen ``224``, no en ``128`` -para ser compatible con la RFC 3942, así que deberían definirse las opciones ``208-211``\ como opciones DHCP normales, en lugar de *site local*. Por ejemplo:
 
-::
+.. code-block:: bash
 
            option magic      code 208 = string;
            option configfile code 209 = text;
            option pathprefix code 210 = text;
            option reboottime code 211 = unsigned integer 32;
 
-Dentro del grupo -o clase, de arranque PXELINUX; donde están la opciones
-PXELINUX relacionadas (como las opciones para el nombre de archivo),
-podría ser añadido:
+Dentro del grupo -o clase, de arranque PXELINUX; donde están la opciones PXELINUX relacionadas (como las opciones para el nombre de archivo), podría ser añadido:
 
-::
+.. code-block:: bash
 
        # Always include the following lines for all PXELINUX clients
        option magic f1:00:74:7e;
@@ -451,23 +386,16 @@ podría ser añadido:
        option reboottime 30;
        filename "/tftpboot/pxelinux/pxelinux.bin";
 
-..
+.. admonition:: Nota
 
-   **Nota**: El archivo de configuración, es relativo al prefijo de
-   ruta; esto buscará un archivo de configuración llamado
-   ``/tftpboot/pxelinux/files/configs/common`` en el servidor TFTP.
+   El archivo de configuración, es relativo al prefijo de ruta; esto buscará un archivo de configuración llamado ``/tftpboot/pxelinux/files/configs/common`` en el servidor TFTP.
 
-El estamento *option dhcp-parameter-request-list* fuerza la servidor
-DHCP, el enviar opciones específica PXELINUX, incluso sin haver sido
-explícitamente solicitadas. Puesto que las solicitudes DHCP, son
-enviadas anter de la carga PXELINUX, el cliente PXE no sabrá pedirlas.
+El estamento *option dhcp-parameter-request-list* fuerza la servidor DHCP, el enviar opciones específica PXELINUX, incluso sin haver sido explícitamente solicitadas. Puesto que las solicitudes DHCP, son enviadas anter de la carga PXELINUX, el cliente PXE no sabrá pedirlas.
 
-Por medio de dhcp 3.0, es posible crear un gran número de estas
-*cadenas*. Por ejemplo, para utilizar la forma hexadecimal de la
-dirección del *hardware*, como nombre de archivo de configuración,
-podría hacerse algo parecido:
+Por medio de dhcp 3.0, es posible crear un gran número de estas *cadenas*. Por ejemplo, para utilizar la forma hexadecimal de la dirección del *hardware*, como nombre de archivo de configuración, podría hacerse algo parecido:
 
-::
+.. code-block:: bash
+
 
        site-option-space "pxelinux";
        option pxelinux.magic f1:00:74:7e;
@@ -479,14 +407,12 @@ podría hacerse algo parecido:
            concat("pxelinux.cfg/", binary-to-ascii(16, 8, ":", hardware));
        filename "/tftpboot/pxelinux.bin";
 
-Al utilizar un cliente cuya dirección *Ethenet* es
-``58:FA:84:CF:55:0E``, buscaría un archivo de configuración llamado
-``/tftpboot/pxelinux.cfg/1:58:fa:84:cf:55:e``.
+Al utilizar un cliente cuya dirección *Ethenet* es ``58:FA:84:CF:55:0E``, buscaría un archivo de configuración llamado ``/tftpboot/pxelinux.cfg/1:58:fa:84:cf:55:e``.
 
-`Opciones de fabricante <i13>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Opciones de fabricante
+----------------------
 
-::
+.. code-block:: bash
 
        host trantor-sky2 {
            hardware ethernet 00:00:5a:70:c2:71;
@@ -497,11 +423,11 @@ Al utilizar un cliente cuya dirección *Ethenet* es
            filename "/pxelinux.0";
        }
 
-Evita la necesidad de \_trastear_con el *dhcp-parameter-request-list*.
+Evita la necesidad de trastear_con el *dhcp-parameter-request-list*.
 
 **Opciones de fabricante - elavoradas manualmente**
 
-::
+.. code-block:: bash
 
        host trantor-sky2 {
            hardware ethernet 00:00:5a:70:c2:71;
@@ -514,121 +440,88 @@ Evita la necesidad de \_trastear_con el *dhcp-parameter-request-list*.
            filename "/pxelinux.0";
        }
 
-`Problemas conocidos <i14>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Problemas conocidos
+-------------------
 
-[-3.63] Requiere un servidor TFPT con soporte a la opción *tsize*.
+Requiere un servidor TFPT con soporte a la opción *tsize*.
 
-La rutina para la *recuperación de errores*, no funcionará
-completamente. Por ahora, sólo hace un *reinicio completo* -parece
-suficientemente bueno.
+La rutina para la *recuperación de errores*, no funcionará completamente. Por ahora, sólo hace un *reinicio completo* -parece suficientemente bueno.
 
-Podría llamarse a la función *UDP receive*, con un bucle de entrada,
-desde el teclado, y poder responder a peticiones ARP.
+Podría llamarse a la función *UDP receive*, con un bucle de entrada, desde el teclado, y poder responder a peticiones ARP.
 
-Imágenes de arranque en sector/disco, no están soportadas aún… Podrían
-necesitar información auxiliar adicional -como el dispositivo, para
-funcionar.
+Imágenes de arranque en sector/disco, no están soportadas aún… Podrían necesitar información auxiliar adicional -como el dispositivo, para funcionar.
 
-Si aparecen problemas adicionalesm por favor, contactar con la lista de
-correo de Syslinux. Antes de publicar algo, comprobar que los archivos
-del kernel, no han sido nombrados con una de las extensiones de especial
-significado:
+Si aparecen problemas adicionalesm por favor, contactar con la lista de correo de Syslinux. Antes de publicar algo, comprobar que los archivos del kernel, no han sido nombrados con una de las extensiones de especial significado:
 
-``.0`` PXE programa *trampa de arranque*\ (NBP) [sólo PXELINUX].
-``.bin`` “CD sector de arranque” [sólo ISOLINUX]. ``.bs`` Sector de
-arranque [sólo SYSLINUX]. ``.bss`` Sector de arranque, superbloque de
-DOS será parcheado en [sólo SYSLINUX]. ``c32`` imagen COM32 (32-bit
-COMBOOT). ``cbt`` imagen COMBOOT (usable en DOS). ``.com`` imagen
-COMBOOT (usable en DOS). ``.img`` Disco imagen [sólo ISOLINUX].
+``.0`` PXE programa *trampa de arranque*\ (NBP) [sólo PXELINUX]. ``.bin`` “CD sector de arranque” [sólo ISOLINUX]. ``.bs`` Sector de arranque [sólo SYSLINUX]. ``.bss`` Sector de arranque, superbloque de DOS será parcheado en [sólo SYSLINUX]. ``c32`` imagen COM32 (32-bit COMBOOT). ``cbt`` imagen COMBOOT (usable en DOS). ``.com`` imagen COMBOOT (usable en DOS). ``.img`` Disco imagen [sólo ISOLINUX].
 
 **Broken PXE stacks**
 
-Muchas de ésteas -especialmente las muy antiguas, contienen diversos
-problemas con distinto grado de severidad. Comprobar la página de
-referencia para la compatibilidad de *hardware*.
+Muchas de ésteas -especialmente las muy antiguas, contienen diversos problemas con distinto grado de severidad. Comprobar la página de referencia para la compatibilidad de *hardware*.
 
 **PXE stack on a floppy**
 
-Si la tarjeta de red, no dispone de ROM, para el arranque PXE, aún
-existen un par de alternativas PXE, disponibles.
+Si la tarjeta de red, no dispone de ROM, para el arranque PXE, aún existen un par de alternativas PXE, disponibles.
 
-*Etherboot*, es un *kit* ROM, que permitirá crear un *ROM
-personalizado*, para arranque PXE y, pobablemente ser lanzado desde un
-disco flexible(floppy). Está disponible en:
+*Etherboot*, es un *kit* ROM, que permitirá crear un *ROM personalizado*, para arranque PXE y, pobablemente ser lanzado desde un disco flexible(floppy). Está disponible en:
 http://netboot.sourceforge.net/.
 
-Un disco flexible *multi-hardware*, es incluido junto a Windows Server
-2000 y 2003. La compañía Argon Technology, ofrecía una versión gratis,
-actualizada. Aunque es ahora una versión comercial -en cualquier caso la
-alternativa existe. El disco flexible -el cuál puede ser quemado en un
-CD, mediante la aplicación *El Torito*, es sabido que trabaja únicamente
-sobre versiones PXELINUX 2.03 y posteriores.
+Un disco flexible *multi-hardware*, es incluido junto a Windows Server 2000 y 2003. La compañía Argon Technology, ofrecía una versión gratis, actualizada. Aunque es ahora una versión comercial -en cualquier caso la alternativa existe. El disco flexible -el cuál puede ser quemado en un CD, mediante la aplicación *El Torito*, es sabido que trabaja únicamente sobre versiones PXELINUX 2.03 y posteriores.
 
-   **Nota**: en este ejemplo, será utilizado un *sistema simple de
-   menú*, aunque es fácil modificar el siguiente procedimiento y,
-   utilizar un *menú vesa* o ninguno.
+.. admonition:: Nota
+   
+   En este ejemplo, será utilizado un *sistema simple de menú*, aunque es fácil modificar el siguiente procedimiento y, utilizar un *menú vesa* o ninguno.
 
-..
-
-   **Nota**: para WDS, es mejor lanzarlo en modo *Mixed*.
+   Para WDS, es mejor lanzarlo en modo *Mixed*.
    Alternativamente, ver WDSLINUX para configurarlo en sólo WDS.
 
-::
+.. code-block:: bash
 
        Setup\English\Images\PXELinux\i386\templates\pxelinux.cfg\
        Setup\English\Images\PXELinux\i386\templates\conf
        Setup\English\Images\PXELinux\i386\templates\knl
        Setup\English\Images\PXELinux\i386\templates\img
 
-..
+.. admonition:: Nota
 
-   **Nota**: ``Setup\English\Images`` es la localización de otras
-   imágenes RIS. Puede también cambiar el nombre PXELinux, por cualquier
-   otra cosa; por ejemplo, una opción por separado en RIS, para cada
-   distribución.
+   ``Setup\English\Images`` es la localización de otras imágenes RIS. Puede también cambiar el nombre PXELinux, por cualquier otra cosa; por ejemplo, una opción por separado en RIS, para cada distribución.
 
-Descargar la última versión de Syslinux desde:
-``http://www.kernel.org/pub/linux/utils/boot/syslinux/``
+**Descargar la última versión de Syslinux desde**:
 
-Desde Redhat *AS4u3 CD1* -o el cd de la distribución deseada, en el
-directorio ``images\pxeboot`` copiar los siguientes archivos dentro de
-``Setup\English\Images\PXELinux\i386\templates`` en el servidor RIS.
+`boot syslinux <http://www.kernel.org/pub/linux/utils/boot/syslinux/>`__
 
-::
+Desde Redhat *AS4u3 CD1* -o el cd de la distribución deseada, en el directorio ``images\pxeboot`` copiar los siguientes archivos dentro de ``Setup\English\Images\PXELinux\i386\templates`` en el servidor RIS.
+
+.. code-block:: bash
 
        vmlinuz
        initrd.img
 
 Renombrar los archivos a:
 
-::
+.. code-block:: bash
 
        vmlinuz-<distro>-<arch>
        initrd-<distro>-<arch>.img
 
 Ejemplo:
 
-::
+.. code-block:: bash
 
        vmlinuz-rhas43-x86
        initrd-rhas43-x86.img
 
-Renombrar el archivo ``vmlinuz`` en el directorio ``\knl``. Colocar el
-archivo renombrado ``iitrd.img`` en la carpeta ``\img``.
+Renombrar el archivo ``vmlinuz`` en el directorio ``\knl``. Colocar el archivo renombrado ``iitrd.img`` en la carpeta ``\img``.
 
-   **Nota**: pueden utilizarse los archivos ``vmlinuz`` y ``initrd.img``
-   desde la versión de la distro, a entregar.
+.. admonition:: Nota
+   
+   Pueden utilizarse los archivos ``vmlinuz`` y ``initrd.img`` desde la versión de la distro, a entregar.
 
-Desde la descarga de archivos de Syslinux, extraer el archivo
-``pxelinux.0`` -desde versiones 5.0 y posteriores, extraer el
-correspondiente archivo ``ldlinux.32``
-``Setup\English\Images\PXELinux\i386\templates`` en el servidor RIS.
+Desde la descarga de archivos de Syslinux, extraer el archivo ``pxelinux.0`` -desde versiones 5.0 y posteriores, extraer el correspondiente archivo ``ldlinux.32`` ``Setup\English\Images\PXELinux\i386\templates`` en el servidor RIS.
 
-En ``Setup\English\Images\PXELinux\i386\templates`` crear el archivo
-``pxelinux.sif`` dándole el siguiente contenido:
+En ``Setup\English\Images\PXELinux\i386\templates`` crear el archivo ``pxelinux.sif`` dándole el siguiente contenido:
 
-::
+.. code-block:: bash
 
        [OSChooser]
        Description = "Linux"
@@ -637,10 +530,9 @@ En ``Setup\English\Images\PXELinux\i386\templates`` crear el archivo
        ImageType = Flat
        Version="1.01"
 
-En ``Setup\English\Images\PXELinux\i386\templates\pxelinux.cfg\`` crear
-un archivo llamado ``default`` dándole el siguiente contenido:
+En ``Setup\English\Images\PXELinux\i386\templates\pxelinux.cfg\`` crear un archivo llamado ``default`` dándole el siguiente contenido:
 
-::
+.. code-block:: bash
 
        # Default boot option to use
        DEFAULT menu.c32
@@ -669,11 +561,9 @@ un archivo llamado ``default`` dándole el siguiente contenido:
            KERNEL menu.c32
            APPEND conf/x64.conf
 
-En ``Setup\English\Images\PXELinux\i386\templates\conf\`` crear un
-archivo llamado ``x86.conf`` -esto listará la instalación en un OS de
-32bit y, darle el contenido que sigue:
+En ``Setup\English\Images\PXELinux\i386\templates\conf\`` crear un archivo llamado ``x86.conf`` -esto listará la instalación en un OS de 32bit y, darle el contenido que sigue:
 
-::
+.. code-block:: bash
 
        # Default boot option to use
        DEFAULT menu.c32
@@ -703,11 +593,9 @@ archivo llamado ``x86.conf`` -esto listará la instalación en un OS de
            KERNEL knl/vmlinuz-rhas43-x86
            APPEND initrd=initrd=img/initrd-rhes43-x86.img
 
-En ``Setup\English\Images\PXELinux\i386\templates\conf\`` crear un
-archivo llamado ``x64.conf`` -esto listará la instalación en un OS de
-64bit y, darle el contenido que sigue:
+En ``Setup\English\Images\PXELinux\i386\templates\conf\`` crear un archivo llamado ``x64.conf`` -esto listará la instalación en un OS de 64bit y, darle el contenido que sigue:
 
-::
+.. code-block:: bash
 
        # Default boot option to use
        DEFAULT menu.c32
@@ -737,27 +625,20 @@ archivo llamado ``x64.conf`` -esto listará la instalación en un OS de
            KERNEL knl/vmlinuz-rhas43-x64
            APPEND initrd=img/initrd-rhes43-x64.img
 
-Si ahora es arrancado el servidor RIS, en la pantalla con la lista de
-Sistemas operativos, podrá verse uno llamado Linux. Al escogerlo,
-arrancará PXELinux y, dirigiéndo al usuario hacia el menú conde escoger
-el tipo de arquitectura (32/64 bits) de la distribución a instalar.
+Si ahora es arrancado el servidor RIS, en la pantalla con la lista de Sistemas operativos, podrá verse uno llamado Linux. Al escogerlo, arrancará PXELinux y, dirigiéndo al usuario hacia el menú conde escoger el tipo de arquitectura (32/64 bits) de la distribución a instalar.
 
-Utilizando las nuevas características Syslinux para el *menú vesa*, es
-posibe construir una interfase fácil de usar.
+Utilizando las nuevas características Syslinux para el *menú vesa*, es posibe construir una interfase fácil de usar.
 
 Opciones avanzadas. Leer la documentación de Syslinux al completo.
+Las claves protegen, *las modificaciones* durante el arranque PXE, útil para prevenir *incursiones* no deseadas.
 
-Las claves protegen, *las modificaciones* durante el arranque PXE, útil
-para prevenir *incursiones* no deseadas.
+.. admonition:: Nota
+   
+   Este ejemplo, utiliza una forma “anterior”, para generar  los submenús, el cuál es compatible con versiones Syslinux posteriores. Syslinux 3.62, soporta una sintaxis ligeramente distinta, más rápida y, de alguna manera, más flexible.
 
-   **Nota**: este ejemplo, utiliza una forma “anterior”, para generar
-   los submenús, el cuál es compatible con versiones Syslinux
-   posteriores. Syslinux 3.62, soporta una sintaxis ligeramente
-   distinta, más rápida y, de alguna manera, más flexible.
+* **Estructura del directorio:**
 
-Estructura del directorio:
-
-::
+.. code-block:: bash
 
        /tftpboot/
        /tftpboot/memdisk
@@ -784,9 +665,10 @@ Estructura del directorio:
        /tftpboot/Floppy/
        /tftpboot/Floppy/kbfloppy.img
 
-``/tftpboot/pxelinux.cfg/default:``
 
-::
+* ``/tftpboot/pxelinux.cfg/default:``
+
+.. code-block:: bash
 
        DEFAULT menu.c32
        PROMPT 0
@@ -814,7 +696,7 @@ Estructura del directorio:
 
 ``/tftpboot/pxelinux.cfg/graphics.conf:``
 
-::
+.. code-block:: bash
 
        MENU COLOR TABMSG    37;40  #80ffffff #00000000
        MENU COLOR HOTSEL    30;47  #40000000 #20ffffff
@@ -835,14 +717,11 @@ Estructura del directorio:
        NOESCAPE 1
        ALLOWOPTIONS 0
 
-Cambiar ``ALLOWOPTIONS`` a ``1``\ (uno) para poder editar cualquier
-entrada durante el arranque con PXE. También cambiar
-``NOESCAPE a``\ 0`(cero). Tómese en consideración, a efectos de
-prueba/ensayo.
+Cambiar ``ALLOWOPTIONS`` a ``1``\ (uno) para poder editar cualquier entrada durante el arranque con PXE. También cambiar ``NOESCAPE a``\ 0`(cero). Tómese en consideración, a efectos de prueba/ensayo.
 
-::
+.. code-block:: bash
 
-       `/tftpboot/pxelinux.cfg/fixes.menu:`
+       /tftpboot/pxelinux.cfg/fixes.menu:
 
        MENU TITLE Fixes Menu
         
@@ -865,9 +744,9 @@ prueba/ensayo.
            KERNEL TRK/kernel.trk
            APPEND initrd=TRK/initrd.trk ramdisk_size=32768 root=/dev/ram0 vga=0 trknfs=IPADDR:/trk ip=::::::dhcp splash=verbose
 
-``/tftpboot/pxelinux.cfg/setup.menu:``
+* ``/tftpboot/pxelinux.cfg/setup.menu:``
 
-::
+.. code-block:: bash
 
        MENU TITLE Setup Menu
         
@@ -901,33 +780,19 @@ prueba/ensayo.
 
 **Notas** Correción de errores
 
-Si falla el arranque, PXELINUX -exceptuando SYSLINUX, no esparará
-indefinidamente; en su lugar, de no recibir ninguna entrada, en
-aproximádamente cinco minutos, depués de monstrar el mensaje de error,
-la máquina hará un reinicio. Esto permite que una máquina desatendida,
-pueda recuperarse en caso de *falla*, al intentar arrancar al mismo
-tiempo que el apagado del servidor TFTP.
+Si falla el arranque, PXELINUX -exceptuando SYSLINUX, no esparará indefinidamente; en su lugar, de no recibir ninguna entrada, en aproximádamente cinco minutos, depués de monstrar el mensaje de error, la máquina hará un reinicio. Esto permite que una máquina desatendida, pueda recuperarse en caso de *falla*, al intentar arrancar al mismo tiempo que el apagado del servidor TFTP.
 
-Por favor, comprobar la página de *referencias a la compatibilidad de
-hardware*, para ver si la *pila* PXE necesitara cualquier acción
-especial.
+Por favor, comprobar la página de *referencias a la compatibilidad de hardware*, para ver si la *pila* PXE necesitara cualquier acción especial.
 
 **MTFTP**
 
-PXELINUX no soporta MTFTP. Tanpoco hay plan que lo haga en un futuro!
-Aunque es posible utilizar MTFTP en un arranque inicial, de tener éste
-tipo de configuración. La configuración del servidor MTFTP, queda fuera
-de ámbito del presente documento.
+PXELINUX no soporta MTFTP. Tanpoco hay plan que lo haga en un futuro! Aunque es posible utilizar MTFTP en un arranque inicial, de tener éste tipo de configuración. La configuración del servidor MTFTP, queda fuera de ámbito del presente documento.
 
-UEFI Los gestores ``(l)pxelinux.0`` son capaces de *arrancar desde red*
-con clientes basados en BIOS. El *hardware* que utilice UEFI, debe
-utilizar el ``syslinux.efi`` adecuado. Esto es EFI IA32 o EFI X64,
-respectívamente, en lugar de utilizar ``(l)pxelinux.0``.
+UEFI Los gestores ``(l)pxelinux.0`` son capaces de *arrancar desde red* con clientes basados en BIOS. El *hardware* que utilice UEFI, debe utilizar el ``syslinux.efi`` adecuado. Esto es EFI IA32 o EFI X64, respectívamente, en lugar de utilizar ``(l)pxelinux.0``.
 
-Por ejemplo, en el archivo de configuración del DHCP, podrá ser
-utilizado algo similar:
+Por ejemplo, en el archivo de configuración del DHCP, podrá ser utilizado algo similar:
 
-::
+.. code-block:: bash
 
        ; This one line must be outside any bracketed scope
        option architecture-type code 93 = unsigned integer 16;
@@ -946,14 +811,13 @@ utilizado algo similar:
                 }
        }
 
-Acerca del *tipo de arquitectura*:
+* Acerca del *tipo de arquitectura*:
 
-::
+.. code-block:: bash
 
-               06 (EFI IA32) is sometimes (mis)used for legacy (CSM) boot of x64 machines by some vendors.
-               07 (EFI BC) is sometimes (mis)used for EFI x64 boot by some vendors.
-
-               Each bootloader needs its respective "ldlinux.*" module too:
+       06 (EFI IA32) is sometimes (mis)used for legacy (CSM) boot of x64 machines by some vendors.
+       07 (EFI BC) is sometimes (mis)used for EFI x64 boot by some vendors.
+       Each bootloader needs its respective "ldlinux.*" module too:
 
        path/to/BIOS/ldlinux.c32
        path/to/EFIia32/ldlinux.e32
@@ -967,48 +831,40 @@ Acerca del *tipo de arquitectura*:
                filename concat("path/to/PXE-",  binary-to-ascii(16, 16, "", option architecture-type), "/pxelinux.0");
        }
 
-Las respectivas librerías para cada módulo, en relación al software de
-fabricante -de ser necesarias, no podrán compartir el mismo directorio,
-unas con otras; puesto que tienen el mismo nombre de archivo. Utilizar
-una configuración de archivos individual, en cada
-*arquitectura/firmware* y, de ser necesario, añadir también, una
-directiva de ruta en cada una de ellas.
+Las respectivas librerías para cada módulo, en relación al software de fabricante -de ser necesarias, no podrán compartir el mismo directorio, unas con otras; puesto que tienen el mismo nombre de archivo. Utilizar una configuración de archivos individual, en cada *arquitectura/firmware* y, de ser necesario, añadir también, una directiva de ruta en cada una de ellas.
 
-El directorio ascendente, para el gestor de arranque en red, podría ser
-el mismo en todos ellos; si cada gestor el nombrado de forma distinta.
+El directorio ascendente, para el gestor de arranque en red, podría ser el mismo en todos ellos; si cada gestor el nombrado de forma distinta.
 En tal caso, la directiva de ruta podría ser necesaria.
 
-Opcionalmente, usar directivas adicionales, como INCLUDE y/o CONFIG.
-Compartir así, archivos de configuración Syslinux.
+Opcionalmente, usar directivas adicionales, como INCLUDE y/o CONFIG. Compartir así, archivos de configuración Syslinux.
 
-Vev también `PXELINUX-Multi-Arch <URL>`__.
+* Vev también `PXELINUX-Multi-Arch <URL>`__.
 
-Notas:
+.. admonition:: Notas
 
-En lugar de ``pxelinux.0``, la alternativa es ``lpxelinux.0`` -cuya
-letra inicial en minúscula “L”, podrá ser utilizada en clientes BIOS.
+   En lugar de ``pxelinux.0``, la alternativa es ``lpxelinux.0`` -cuya
+   letra inicial en minúscula “L”, podrá ser utilizada en clientes BIOS.
 
-El archivo ``syslinux.efi`` en EFI IA32, es distinto en EFI X64, cada
-*arquitectura/firmware* tiene su própio EFI X64.
+   El archivo ``syslinux.efi`` en EFI IA32, es distinto en EFI X64, cada
+   *arquitectura/firmware* tiene su própio EFI X64.
 
-El archivo ``syslinux.efi`` en EFI X64, es el mimso binario desde el
-arranque de disco en EFI X64, que desde el arranque de red en EFI X64.
+   El archivo ``syslinux.efi`` en EFI X64, es el mimso binario desde el
+   arranque de disco en EFI X64, que desde el arranque de red en EFI X64.
 
-El archivo ``syslinux.efi`` en EFI IA32 es el mimso binario desde el
-arranque de disco en EFI X64, que desde el arranque de red en EFI IA32.
+   El archivo ``syslinux.efi`` en EFI IA32 es el mimso binario desde el
+   arranque de disco en EFI X64, que desde el arranque de red en EFI IA32.
 
-Cada archivo ``syslinux.efi`` puede ser renombrado -ejemplo, a
-``bootx64.efi``; habrá que tener en cuenta la ruta/s adecuada y, el
-nombre/s, en el archivo de configuración del DHCP.
+   Cada archivo ``syslinux.efi`` puede ser renombrado -ejemplo, a
+   ``bootx64.efi``; habrá que tener en cuenta la ruta/s adecuada y, el
+   nombre/s, en el archivo de configuración del DHCP.
 
-.. _referencias-y-agradecimientos-1:
 
-`Referencias y agradecimientos <#i99>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Referencias y agradecimientos
+=============================
 
-Recursos
+**Recursos**
 
-::
+.. code-block:: text
 
    RFC 2132 - March 1997 - DHCP Options and BOOTP Vendor Extensions
    RFC 4578 - November 2006 - DHCP Options for PXE
@@ -1016,68 +872,18 @@ Recursos
    RFC 5494 - April 2009 - IANA Guidelines for ARP
    RFC 5970 - September 2010 - DHCPv6 Options for Network Boot
 
-`f1 <f1>`__ Ver `Siglas </TerritorioLinux/siglas.html>`__
+* `Siglas </TerritorioLinux/siglas.html>`__
 
-`f2 <#f2>`__ Portable, el término se utiliza habitualmente para
-referirse a otros sistemas operativos. Ejemplo, War Hammer 40.000, juego
-de éxito mundial, ha mutado el código haciéndolo portable a plataformas
-tipo Unix. Desambiguación, el término es igualmente utilizado, para
-referirse al tipo de procesador -la “arquitectura del sistema”, sobre la
-que ha sido instalado el sistema operativo. Ejemplo, ``x86``,
-``x86_64``\ …
+`f2 <#f2>`__ Portable, el término se utiliza habitualmente para referirse a otros sistemas operativos. Ejemplo, War Hammer 40.000, juego de éxito mundial, ha mutado el código haciéndolo portable a plataformas tipo Unix. Desambiguación, el término es igualmente utilizado, para referirse al tipo de procesador -la “arquitectura del sistema”, sobre la que ha sido instalado el sistema operativo. Ejemplo, ``x86``,
+``x86_64`` ...
 
-`f3 <f3>`__ Puerto, referido como interfase física de conexionado, dónde
-es acoplada alguna suerte de conector físico, conectando dos piezas
-*hardware*. Ejemplo, El puerto db9 es habitualmente utilizado como
-interfase de conexión entre dos máquinas, con una conexión serial para
-la depuración, o lectura de registros. Desambiguación, leer la entrada
-de arriba, *portable*. El término podría referirse tanto a la
-*arquitectura del procesador*, como al tipo de sistema operativo -Linux,
-Macintosh, etc, como tambień a una versión o distribución de un sistema
-operativo concreto. Ejemplo, la comunidad Linux ha estado tabajando
-intensamente, en un puerto a la dustrubución Fedora 8, de Xen
-hipervisor.
+`f3 <f3>`__ Puerto, referido como interfase física de conexionado, dónde es acoplada alguna suerte de conector físico, conectando dos piezas *hardware*. Ejemplo, El puerto db9 es habitualmente utilizado como interfase de conexión entre dos máquinas, con una conexión serial para la depuración, o lectura de registros. Desambiguación, leer la entrada de arriba, *portable*. El término podría referirse tanto a la *arquitectura del procesador*, como al tipo de sistema operativo -Linux, Macintosh, etc, como tambień a una versión o distribución de un sistema operativo concreto. Ejemplo, la comunidad Linux ha estado tabajando intensamente, en un puerto a la dustrubución Fedora 8, de Xen hipervisor.
 
-flashed – destello?, es algo así como sobreescribir los datos contenidos
-en una memoria.
+flashed – destello?, es algo así como sobreescribir los datos contenidos en una memoria.
 
-PXE – Preboot Execution Environment NBP – network bootstrap program.
-Programa *trampa de red*. TFTP – Trivial File Transfer Protocol
-bootstrapping – referido a un proceso de *autoarranque*, que,
-supuestamente, procedera sin una *entrada externa*. En tecnología de
-computación, el término es referido habitualmente, al proceso de cargar
-*software básico*, en memoria …
-`bootstrapping <https://en.wikipedia.org/wiki/Bootstrapping#Computing>`__
+**PXE** – Preboot Execution Environment NBP – network bootstrap program.
+Programa *trampa de red*. TFTP – Trivial File Transfer Protocol bootstrapping – referido a un proceso de *autoarranque*, que, supuestamente, procedera sin una *entrada externa*. En tecnología de computación, el término es referido habitualmente, al proceso de cargar *software básico*, en memoria …
 
-bootstrap – Trampa de arranque.
+* `bootstrapping <https://en.wikipedia.org/wiki/Bootstrapping#Computing>`__
 
-`PXELinux -
-wiki <https://www.syslinux.org/wiki/index.php?title=PXELINUX>`__
-
-.. raw:: html
-
-   <ul id="firma">
-
-.. raw:: html
-
-   <li>
-
-Traducción: Heliogabalo S.J.
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   <li>
-
-www.territoriolinux.net
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   </ul>
+* `PXELinux - wiki <https://www.syslinux.org/wiki/index.php?title=PXELINUX>`__

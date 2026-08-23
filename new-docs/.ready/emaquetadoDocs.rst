@@ -1,6 +1,6 @@
-=============================================================
+===========================================================
 Guía de Empaquetado y Despliegue de Documentación en Python
-=============================================================
+===========================================================
 
 Esta guía describe el flujo de trabajo estandarizado para compilar documentación estática en un paquete ejecutable redistribuible de Python (``.whl``) y configurar sus correspondientes herramientas de automatización para el despliegue y desinstalación en entornos Windows.
 
@@ -180,7 +180,7 @@ Código del Lanzador Automatizado (`instalar.cmd`)
 
 Este archivo debe guardarse estrictamente con codificación **ANSI** o **UTF-8 sin BOM** para evitar errores de interpretación en la consola de Windows.
 
-.. code-block:: cmd
+.. code-block:: bash
 
    @echo off
    title Instalador - Documentacion Nombre Paquete
@@ -202,7 +202,7 @@ Este archivo debe guardarse estrictamente con codificación **ANSI** o **UTF-8 s
 Código del Desinstalador Automatizado (`desinstalar.cmd`)
 ---------------------------------------------------------
 
-.. code-block:: cmd
+.. code-block:: bash
 
    @echo off
    title Desinstalador - Documentacion Nombre Paquete

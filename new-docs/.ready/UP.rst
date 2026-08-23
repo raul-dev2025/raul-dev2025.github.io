@@ -1,13 +1,15 @@
-.. _i1_up:
+=============================
+RCU en sistemas uniprocesador
+=============================
 
-`RCU en sistemas uniprocesador <#i1>`_
-`Sumario <#i2>`_
 
-`Referencias y agradecimientos <#i99>`_
 
-----
+.. toctree::
+   :maxdepth: 1
+   :caption: Contenido:
 
-.. _i1:
+-----
+
 
 RCU en sistemas uniprocesador
 =============================
@@ -47,7 +49,6 @@ Si ``call_rcu()`` invoca directamente a la llamada, serán necesarias restricion
 
 *Pregunta rápida* #2: ¿Qué restricciones de bloqueo, deben respetar las llamadas RCU?
 
-.. _i2:
 
 Sumario
 =======
@@ -78,8 +79,6 @@ Podría parecer una restricción gratuita, puesto que muy pocas *llamadas* RCU, 
 ¿Por qué ``synchronize_rcu()`` no puede retornar en una sistema activo, corriendo un RCU, *imprimible*?
 
 Por que alguna otra tarea ha sido impresa, en medio de una sección crítica de lectura. Si ``synchronize_rcu()``, retorna, simple e inmediatamente, podría señalar prematuramente, el final de un período de gracia, el cuál estaría asociado a una *desagradable descarga*, de otro hilo, en el momento de iniciar de nuevo.
-
-.. _i99:
 
 Referencias y agradecimientos
 =============================
