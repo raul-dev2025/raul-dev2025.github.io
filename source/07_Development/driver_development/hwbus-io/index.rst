@@ -1,9 +1,8 @@
-===============
-Ready documents
-===============
+========
+HwBus-IO
+========
 
 Documentación técnica y guías del proyecto **hwbus-io**.
-
 
 CI-CD
 =====
@@ -12,11 +11,10 @@ Infraestructura de automatización, pipelines de compilación remota e integraci
 
 .. toctree::
    :maxdepth: 1
-
    
    /07_Development/driver_development/hwbus-io/ci-cd/ci-cd
    /07_Development/driver_development/hwbus-io/ci-cd/ci-integration
-   /07_Development/driver_development/hwbus-io/ci-cd/ci-cd/testsDirigidos.rst
+   /07_Development/driver_development/hwbus-io/ci-cd/testsDirigidos.rst
 
 
 Driver

@@ -14,7 +14,7 @@ Justificación del Cambio de Versión Major
 
 La transición hacia la versión ``v2.0.0-ci-integration`` responde a un rediseño estructural en la forma en que los scripts de integración orquestan el ciclo de vida del módulo ``hwbus_io`` durante las fases de validación.
 
-En la versión anterior, la ejecución de binarios LTP se realizaba de manera genérica e aislada, asumiendo un entorno estático. El nuevo paradigma introduce **matriz de ejecución determinista basada en manifiestos** y un **ejecutor local autónomo (ELA) especializado para módulos de kernel**, garantizando el acoplamiento limpio entre la compilación/firma del módulo y las pruebas funcionales.
+En la versión anterior, la ejecución de binarios LTP se realizaba de manera genérica y aislada, asumiendo un entorno estático. El nuevo paradigma introduce **matriz de ejecución determinista basada en manifiestos** y un **ejecutor local autónomo (ELA) especializado para módulos de kernel**, garantizando el acoplamiento limpio entre la compilación/firma del módulo y las pruebas funcionales.
 
 Matriz de Ejecución Determinista
 ================================
