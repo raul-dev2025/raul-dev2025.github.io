@@ -29,6 +29,8 @@ Especificaciones de arquitectura, manifiesto de diseño y capacidades funcionale
    /07_Development/driver_development/hwbus-io/Driver/modArch
    /07_Development/driver_development/hwbus-io/Driver/capacidades-v1
    /07_Development/driver_development/hwbus-io/Driver/cabeceras
+   /07_Development/driver_development/hwbus-io/Driver/spcConfPCI
+   /07_Development/driver_development/hwbus-io/Driver/pciTopConf.rst
 
 
 Tests
@@ -39,4 +41,16 @@ Planificación, hojas de ruta y baterías de pruebas automatizadas sobre la infr
 .. toctree::
    :maxdepth: 1
 
-   /07_Development/driver_development/hwbus-io/Tests/hojaDeRuta
+   /07_Development/driver_development/hwbus-io/Tests/testList
+
+
+Ejemplos de código
+==================
+
+Extractos de código interesante o como objeto de estudio.
+
+.. toctree::
+   :maxdepth: 1
+
+   /07_Development/driver_development/hwbus-io/Driver/4Breads
+   /07_Development/driver_development/hwbus-io/Driver/scullc_ioctl
