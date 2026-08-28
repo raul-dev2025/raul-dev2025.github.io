@@ -54,3 +54,12 @@ Extractos de código interesante o como objeto de estudio.
 
    /07_Development/driver_development/hwbus-io/Driver/4Breads
    /07_Development/driver_development/hwbus-io/Driver/scullc_ioctl
+   /07_Development/driver_development/hwbus-io/Driver/ioctl
+
+Recursos shellScript
+====================
+
+.. toctree::
+   :maxdepth: 1
+
+   /07_Development/driver_development/hwbus-io/Driver/manInspectSysFs
