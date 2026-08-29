@@ -19,25 +19,21 @@ Lista Consolidada de Pruebas
    * **Cobertura de ancho de datos**: Validar transferencias de 8, 16 y 32 bits mediante ioctls específicas (ej. ``PCI_REVISION_ID`` como ``u8``, ``PCI_COMMAND`` como ``u16`` y ``PCI_BASE_ADDRESS_0`` como ``u32``).
    * **Rechazo de comandos IOCTL no válidos**: Enviar una orden ioctl no definida en la cabecera y confirmar la devolución de error ``-1`` con ``errno == ENOTTY``.
 
+* **3. Auditoría y Rechazo de Operaciones POSIX Tradicionales (lseek, read, write)**
 
-* **3. Validación de Posicionamiento y Lectura Continua (lseek + read)**
+   * **Rechazo de posicionamiento (lseek):** Confirmar que cualquier intento de invocación de lseek() devuelva (off_t)-1 con errno == ESPIPE o EINVAL, certificando que el archivo de dispositivo no soporta despliegue de puntero de archivo.  
 
-   * **Lectura posicionada con SEEK_SET**: Ejecutar ``lseek()`` apuntando al offset de un registro específico (ej. ``PCI_DEVICE_ID`` en ``0x02``) y comprobar que ``read()`` obtenga los bytes exactos correspondientes.
-   * **Rechazo de accesos desalineados/parciales**: Solicitar lecturas parciales o desalineadas respecto a los límites del registro objetivo y verificar que el driver rechace la operación devolviendo error ``-1`` con ``errno == EINVAL``.
-   * **Límites de offset y EOF**: Verificar que intentas de ``lseek()`` o lectura más allá del rango de configuración PCI (``0x00`` - ``0xFF``) retornen error ``-EINVAL`` o fin de archivo (``EOF``).
+   * **Rechazo de lecturas no estructuradas (read):** Intentar invocar read() sobre el descriptor y validar que retorne error -1 con errno == EINVAL o EBADF, garantizando la denegación de accesos en formato stream.  
 
-
-* **4. Validación de Restricción de Escritura**
-
-   * **Rechazo de escrituras**: Intentar invocar ``write()`` sobre ``/dev/hwbusc`` (en modo ``O_WRONLY`` u ``O_RDWR``) y asentar como éxito la devolución de error ``-1`` con ``errno == EBADF`` o ``EINVAL``.
+   * **Rechazo de escrituras (write):** Intentar invocar write() sobre /dev/hwbusc (abierto en cualquier modo) y confirmar la devolución de error -1 con errno == EBADF o EINVAL
 
 
-* **5. Verificación de Parámetros de Módulo**
+* **4. Verificación de Parámetros de Módulo**
 
    * **Atributo** ``hwbus_bdf_param``: Leer la ruta ``/sys/module/hwbus_io/parameters/hwbus_bdf_param`` para comprobar que refleja la dirección PCI objetivo (``"0000:02:00.0"``).
 
+* **5. Concurrencia y Mapeo de Memoria**
 
-* **6. Concurrencia y Mapeo de Memoria**
+   * **Acceso concurrente vía IOCTL**: Abrir múltiples descriptores simultáneos de /dev/hwbusc desde distintos hilos/procesos para asegurar que la ejecución de comandos ``ioctl()`` sea atómica y segura entre descriptores independientes.
 
-   * **Acceso concurrente**: Abrir múltiples descriptores simultáneos de ``/dev/hwbusc`` desde distintos hilos/procesos para asegurar que el callback ``.open`` mantenga de forma independiente la posición de lectura de cada descriptor.
-   * **Mapeo ``mmap()`` (si aplica)**: Ejecutar ``mmap()`` sobre el descriptor de archivo para validar el mapeo de memoria y su posterior liberación con ``munmap()``.
+   * **Rechazo de mapeo mmap()**: Confirmar que invocaciones a mmap() sobre el descriptor fallen devolviendo MAP_FAILED con ``errno == ENODEV`` o ``ENOSYS``.
