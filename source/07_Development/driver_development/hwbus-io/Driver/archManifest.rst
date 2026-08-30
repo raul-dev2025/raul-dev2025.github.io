@@ -45,10 +45,10 @@ Definición de Directorios y Componentes
 1. Directorio ``include/``
 --------------------------
 
-* **Raíz de ``include/``:**
+* **Raíz de** ``include/``:
   Ámbito exclusivo del controlador. Contiene cabeceras que utilizan tipos del kernel de Linux (``<linux/...>``). No deben incluirse cabeceras de la biblioteca C estándar (``glibc``).
   
-* **Subdirectorio ``include/user/``:**
+* **Subdirectorio** ``include/user/``:
   Alojamiento exclusivo para la infraestructura de espacio de usuario.
   
   * ``hwbus_error.h``: Definición de la interfaz de traducción de errores mediante ``hwbus_strerror()`` para espacio de usuario.
@@ -58,13 +58,13 @@ Definición de Directorios y Componentes
 2. Directorio ``src/``
 ----------------------
 
-* **``src/core/``:**
+* ``src/core/``:
   Almacena la lógica genérica y funciones auxiliares transversales (``source.c``).
 
-* **``src/core/user/``:**
+* ``src/core/user/``:
   Contiene la implementación en C de las librerías auxiliares de espacio de usuario (``hwbus_error.c``, ``sysfs_utils.c``). Se compila usando la cadena de herramientas estándar POSIX/glibc.
 
-* **``src/driver/``:**
+* ``src/driver/``:
   Contiene el código fuente del controlador del kernel relativo a la infraestructura de estudio (PCI, NVMe, Net).
   
   * Implementa los callbacks ``show``/``store`` y registra los atributos de ``sysfs`` en el módulo (``sysfs_driver.c``).
@@ -74,10 +74,10 @@ Definición de Directorios y Componentes
 3. Soporte y Pruebas
 ---------------------
 
-* **``Scripts/``:**
+* ``Scripts/``:
   Scripts de shell para la orquestación del flujo de CI/CD remoto, firma con certificados Secure Boot (``kmod-sign-file``) y gestión de logs.
 
-* **``tests/``:**
+* ``tests/``:
   Entorno de pruebas y arnés Makefile para la compilación de módulos de test independientes (ej. ``hello.ko``).
 
 Reglas de Estilo y Compilación

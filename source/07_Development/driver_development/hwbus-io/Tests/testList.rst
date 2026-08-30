@@ -23,9 +23,9 @@ Lista Consolidada de Pruebas
 
    * **Rechazo de posicionamiento (lseek):** Confirmar que cualquier intento de invocación de lseek() devuelva (off_t)-1 con errno == ESPIPE o EINVAL, certificando que el archivo de dispositivo no soporta despliegue de puntero de archivo.  
 
-   * **Rechazo de lecturas no estructuradas (read):** Intentar invocar read() sobre el descriptor y validar que retorne error -1 con errno == EINVAL o EBADF, garantizando la denegación de accesos en formato stream.  
+   * **Rechazo de lecturas no estructuradas (read):** Intentar invocar read() sobre el descriptor y validar que retorne error ``-1`` con ``errno == EINVAL`` o ``EBADF``, garantizando la denegación de accesos en formato stream.  
 
-   * **Rechazo de escrituras (write):** Intentar invocar write() sobre /dev/hwbusc (abierto en cualquier modo) y confirmar la devolución de error -1 con errno == EBADF o EINVAL
+   * **Rechazo de escrituras (write):** Intentar invocar write() sobre /dev/hwbusc (abierto en cualquier modo) y confirmar la devolución de error -1 con ``errno == EBADF o EINVAL``
 
 
 * **4. Verificación de Parámetros de Módulo**
@@ -36,4 +36,4 @@ Lista Consolidada de Pruebas
 
    * **Acceso concurrente vía IOCTL**: Abrir múltiples descriptores simultáneos de /dev/hwbusc desde distintos hilos/procesos para asegurar que la ejecución de comandos ``ioctl()`` sea atómica y segura entre descriptores independientes.
 
-   * **Rechazo de mapeo mmap()**: Confirmar que invocaciones a mmap() sobre el descriptor fallen devolviendo MAP_FAILED con ``errno == ENODEV`` o ``ENOSYS``.
+   * **Rechazo de mapeo mmap()**: Confirmar que invocaciones a mmap() sobre el descriptor fallen devolviendo *MAP_FAILED* con ``errno == ENODEV`` o ``ENOSYS``.
