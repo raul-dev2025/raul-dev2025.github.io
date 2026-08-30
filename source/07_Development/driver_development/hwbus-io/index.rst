@@ -30,8 +30,9 @@ Especificaciones de arquitectura, manifiesto de diseño y capacidades funcionale
    /07_Development/driver_development/hwbus-io/Driver/capacidades-v1
    /07_Development/driver_development/hwbus-io/Driver/cabeceras
    /07_Development/driver_development/hwbus-io/Driver/spcConfPCI
-   /07_Development/driver_development/hwbus-io/Driver/pciTopConf.rst
-   /07_Development/driver_development/hwbus-io/Driver/stateless.rst
+   /07_Development/driver_development/hwbus-io/Driver/pciTopConf
+   /07_Development/driver_development/hwbus-io/Driver/stateless
+   /07_Development/driver_development/hwbus-io/Driver/hwBusParam
 
 
 Tests
