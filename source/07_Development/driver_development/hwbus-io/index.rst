@@ -15,7 +15,8 @@ Infraestructura de automatización, pipelines de compilación remota e integraci
    /07_Development/driver_development/hwbus-io/ci-cd/ci-cd
    /07_Development/driver_development/hwbus-io/ci-cd/ci-integration
    /07_Development/driver_development/hwbus-io/ci-cd/ela
-
+   /07_Development/driver_development/hwbus-io/ci-cd/cadenaInvocacion
+   /07_Development/driver_development/hwbus-io/ci-cd/modoDeEmpleo
 
 Driver
 ======
