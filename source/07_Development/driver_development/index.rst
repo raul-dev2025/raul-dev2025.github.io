@@ -26,6 +26,15 @@ Documentation for the HwBus-IO module, detailing character device integration, s
 
 .. toctree::
    :maxdepth: 1
+   :caption: HwNet-IO:
+
+   /07_Development/driver_development/hwnet-io/index
+
+Comprehensive developer documentation, setup guides, and architectural overview for the HwNet-IO network driver module.
+
+
+.. toctree::
+   :maxdepth: 1
    :caption: Watcher Docs:
 
    /07_Development/driver_development/watcherDocs/index
