@@ -21,20 +21,19 @@ Conceptos fundamentales para abordar un Driver de Red
 
 * **NAPI (poll loop)**: Deshabilita las interrupciones por paquete bajo carga elevada y pasa a un esquema de *polling* eficiente.
 * **Gestión de Memoria y DMA**: Configuración de anillos de transmisión (Tx) y recepción (Rx) en memoria física contigua mediante mapas DMA (``dma_alloc_coherent``).
-* **Integración con ``ethtool**``: La interfaz estándar para consultar y cambiar la configuración del hardware de red (velocidad, dúplex, estadísticas de anillo).
+* **Integración con** ``ethtool``: La interfaz estándar para consultar y cambiar la configuración del hardware de red (velocidad, dúplex, estadísticas de anillo).
 
 Un excelente punto de partida práctico para familiarizarse con ``netdev`` es implementar un driver virtual estilo ``dummy`` o un par ``veth`` simple, o bien crear un driver simulado sobre PCI usando un hipervisor para controlar la asignación de descriptores de red.
 
 Arquitectura de un controlador de red
 =====================================
 
-Para comenzar con la arquitectura de un controlador de red virtual simple (*virtual network driver*) orientado a entender el ciclo de vida de un ``sk_buff`` (``skb``), serán dividodos el análisis teórico y la planificación en **4 bloques conceptuales fundamentales**:
+Para comenzar con la arquitectura de un controlador de red virtual simple (*virtual network driver*) orientado a entender el ciclo de vida de un ``sk_buff`` (``skb``), serán divididos el análisis teórico y la planificación en **4 bloques conceptuales fundamentales**:
 
 1. **Estructura del Controlador de Red Virtual**
 
    * Definición del dispositivo mediante ``struct net_device``.
    * Puntos de entrada principales: callbacks de inicialización (``net_device_ops``), apertura/cierre de la interfaz (``ndo_open``, ``ndo_stop``) y estadísticas (``ndo_get_stats``).
-
 
 2. **Ruta de Transmisión (TX) y Ciclo de Vida del** ``skb``
    
@@ -43,7 +42,6 @@ Para comenzar con la arquitectura de un controlador de red virtual simple (*virt
    * Decisión sobre el ``skb``: consumir/liberar mediante ``dev_kfree_skb()`` vs reinyectar o procesar.
    * Gestión de colas de transmisión (``netif_stop_queue`` / ``netif_wake_queue``).
 
-
 3. **Ruta de Recepción (RX) y Construcción del** ``skb``
 
    * Asignación de memoria con ``netdev_alloc_skb()`` o ``napi_alloc_skb()``.
@@ -51,7 +49,6 @@ Para comenzar con la arquitectura de un controlador de red virtual simple (*virt
    * Configuración de la interfaz receptora (``skb->dev``) y protocolo (``eth_type_trans``).
    * Inyección en la pila del kernel mediante ``netif_rx()`` (o modelo NAPI si aplicara).
 
-
 4. **Gestión de Memoria y Limpieza (Cleanup)**
    
-   * Liberación de estructuras y recursos en la baja del módulo o fallo de inicialización (``free_netdev``, ``unregister_netdev``).
+   * Liberación de estructuras y recursos en el apagado del módulo o fallo de inicialización (``free_netdev``, ``unregister_netdev``).
