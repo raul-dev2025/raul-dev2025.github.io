@@ -62,3 +62,18 @@ Guías de despliegue, configuración de réplicas para alta disponibilidad y est
    /06_Software_and_Applications/Supuestos/IdM/despliegue-replica
    /06_Software_and_Applications/Supuestos/IdM/IdM-replica
    /06_Software_and_Applications/Supuestos/IdM/nasShutDown
+
+.. toctree::
+   :maxdepth: 1
+
+   /06_Software_and_Applications/Supuestos/IdM/SSO/index
+
+Guía y documentación técnica para el diseño e integración de arquitecturas Single Sign-On (SSO) centralizadas con FreeIPA/IdM, incluyendo la planificación por fases, topología de red y las diferentes alternativas de implementación.
+
+
+.. toctree::
+   :maxdepth: 1
+
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/index
+
+Guías de configuración, procedimientos de mantenimiento y planes de despliegue para la gestión integral del servicio de identidades basado en FreeIPA/IdM, abarcando réplicas, servidores KDC y alta disponibilidad.

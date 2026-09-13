@@ -1,10 +1,10 @@
-============================================
+==========================================
 MAPA DE INFRAESTRUCTURA DE RED (BRIDGE L2)
-============================================
+==========================================
 
---------------------------------------------
+------------------------------------------
 HOST: Workstation (Capa de Virtualización)
---------------------------------------------
+------------------------------------------
 
 1. Switch Virtual (Capa Lógica)
 ===============================
@@ -28,26 +28,28 @@ HOST: Workstation (Capa de Virtualización)
 * **Esquema propuesto:** ``TX201-01``, ``TX201-02``...
 * **Función:** Cables virtuales que conectan cada VM al switch virtual (br_lab).
 
---------------------------------------------
-DIAGRAMA DE FLUJO DE DATOS
---------------------------------------------
+.. code-block:: bash
 
-[ MÁQUINA VIRTUAL (IdM) ]
-          |
-          | (Puerto Virtual: vnetN / TX201-N)
-          v
-[ SWITCH VIRTUAL (br_lab) ] <--- Gestionado por Bridge-TX201
-          |
-          | (Puerto Físico: enp4s0) <--- Gestionado por Slave-TX201
-          v
-[ SWITCH/ROUTER FÍSICO ]
-          |
-          v
-    [ INTERNET ]
+   --------------------------------------------
+            DIAGRAMA DE FLUJO DE DATOS
+   --------------------------------------------
 
---------------------------------------------
+   [ MÁQUINA VIRTUAL (IdM) ]
+             |
+             | (Puerto Virtual: vnetN / TX201-N)
+             v
+   [ SWITCH VIRTUAL (br_lab) ] <--- Gestionado por Bridge-TX201
+             |
+             | (Puerto Físico: enp4s0) <--- Gestionado por Slave-TX201
+             v
+   [ SWITCH/ROUTER FÍSICO ]
+             |
+             v
+       [ INTERNET ]
+
+
 NOTAS DE CONFIGURACIÓN
---------------------------------------------
+----------------------
 
 * **Independencia de Gestión:** NetworkManager controla el Bridge y el Uplink,
   mientras que Libvirt controla los puertos de las VMs.

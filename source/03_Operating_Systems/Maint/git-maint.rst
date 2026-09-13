@@ -36,15 +36,22 @@ Sincronización de Repositorios (Git)
 
 Se ha estandarizado la rama principal y el flujo de respaldo en los tres pilares del ecosistema, asegurando que el NAS (192.168.17.38) actúe como espejo de seguridad:
 
-+----------------------+-------------+-------------------------------------------------+
-| Repositorio          | Rama        | Acción Realizada                                |
-+======================+=============+=================================================+
-| web-docs.git         | main        | Renombrado de rama y actualización de HEAD NAS. |
-+----------------------+-------------+-------------------------------------------------+
-| web-helioHub.git     | master      | Inclusión de .code-workspace en .gitignore.     |
-+----------------------+-------------+-------------------------------------------------+
-| web-raul.git         | main        | Migración a SSH y alineación de remotos duales. |
-+----------------------+-------------+-------------------------------------------------+
+.. list-table::
+   :widths: 25 15 60
+   :header-rows: 1
+
+   * - Repositorio
+     - Rama
+     - Acción Realizada
+   * - web-docs.git
+     - main
+     - Renombrado de rama y actualización de HEAD NAS.
+   * - web-helioHub.git
+     - master
+     - Inclusión de .code-workspace en .gitignore.
+   * - web-raul.git
+     - main
+     - Migración a SSH y alineación de remotos duales.
 
 Seguridad y Persistencia
 ========================
@@ -56,4 +63,5 @@ Seguridad y Persistencia
     La configuración ahora permite la coexistencia de múltiples tickets para distintos usuarios de red (``DIR:/tmp/krb5cc_collection_${USER}``).
 
 .. note::
+
    El alias ``git-sync`` es ahora la herramienta estándar para garantizar que todos los cambios se repliquen de forma atómica en GitHub y el NAS tras un rebase limpio.

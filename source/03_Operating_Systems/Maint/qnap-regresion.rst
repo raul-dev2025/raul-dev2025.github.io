@@ -18,12 +18,14 @@ Comandos de Diagnóstico y Mitigación
 Para estabilizar y diagnosticar el sistema, se emplearon los siguientes comandos:
 
 1. **Verificación de Integridad:**
+
    .. code-block:: bash
 
       journalctl --verify
       journalctl -p 3..0 -xb
 
 2. **Gestión de Configuración del Kernel (grubby):**
+
    .. code-block:: bash
 
       # Desactivación de Hugepages y forzado de reasignación PCIe
@@ -33,6 +35,7 @@ Para estabilizar y diagnosticar el sistema, se emplearon los siguientes comandos
       grubby --update-kernel=ALL --args="pcie_acs_override=downstream,multifunction,all"
 
 3. **Análisis de Topología de Bus y Grupos IOMMU:**
+
    .. code-block:: bash
 
       # Identificar en qué dirección (Bus ID) ha quedado

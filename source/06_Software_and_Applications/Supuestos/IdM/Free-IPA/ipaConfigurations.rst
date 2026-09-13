@@ -1,6 +1,6 @@
-================================================
+===================================================
 Informe de Infraestructura: Nodo Admin (RHEL/Rocky)
-================================================
+===================================================
 
 :Fecha: 2026-03-06
 :Estado: Estable / Configuración de Persistencia Completada
@@ -26,9 +26,12 @@ Archivo Maestro
 Ubicado en ``/mnt/datos_raul/home_config/bashrc_master``. Contiene:
 * **Mascara de red:** ``umask 002``[cite: 1, 10].
 * **Protección de Datos:** Función ``rm()`` personalizada que intercepta intentos de borrado en ``/mnt/datos_raul/`` lanzando una alerta roja y confirmación obligatoria.
-* **Prompt Diferenciado:** - Usuario ``raul`` (Local): Símbolo ``$>`` en color Verde.
-    - Usuario ``raul-ipa`` (Red): Símbolo ``$>`` en color Cian.
-* **Integración Git:** Detección de rama activa con ``parse_git_branch``[cite: 4, 12].
+* **Prompt Diferenciado:** 
+
+   - Usuario ``raul`` (Local): Símbolo ``$>`` en color Verde.
+   - Usuario ``raul-ipa`` (Red): Símbolo ``$>`` en color Cian.
+
+* **Integración Git:** Detección de rama activa con ``parse_git_branch``.
 
 Enlaces Simbólicos (Symlinks)
 -----------------------------

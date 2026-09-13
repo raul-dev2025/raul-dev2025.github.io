@@ -21,10 +21,10 @@ La arquitectura utiliza la herramienta ``pasta`` (User-mode Networking) para iny
 * **Puerta de Enlace (Gateway):** ``192.168.17.1``
 
 Registro de Incidencias y Resolución
-=====================================
+====================================
 
 Conflicto de Driver (Error -13)
-------------------------------
+-------------------------------
 Durante el despliegue inicial, la interfaz ``enp9s0`` quedó en estado "huérfano" tras un intento de delegación de hardware. El sistema devolvía el error ``RTNETLINK answers: No such device`` a pesar de ser visible en el bus PCI.
 
 **Síntomas:**

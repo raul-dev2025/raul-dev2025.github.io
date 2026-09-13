@@ -1,6 +1,6 @@
-=====================================================================
+=================================================================
 Informe Técnico: Configuración de Monitorización VDO vía IdM/Sudo
-=====================================================================
+=================================================================
 
 :Proyecto: Infraestructura del Hipervisor Rocky Linux
 :Rol: Ingeniero de Documentación Técnica
@@ -98,7 +98,3 @@ La configuración se validó satisfactoriamente tras recargar el entorno (``relo
    infra_dev-vpool0-vpool  900.0G     29.7G    870.3G   3%           25%
 
 La salida confirma que el usuario **raul-ipa** ha obtenido acceso exitoso al pool de virtualización de **900.0G**, visualizando correctamente el ahorro de espacio del **25%** sin solicitudes de contraseña adicionales.
-
-```
-
-¿Desea que añada una sección de solución de problemas relacionada con la caché de SSSD (`sss_cache`) a este documento?

@@ -8,7 +8,7 @@ Informe de Estado: Recuperación y Sincronización IdM
 :Estado Final: **OPERACIONAL / SINCRONIZADO**
 
 Resumen Ejecutivo
-================
+=================
 
 Tras la restauración de un backup en el servidor maestro (``ipa.raulvilchez.org``), se detectó una desincronización crítica en la base de datos LDAP y en el vector de actualización de réplicas (RUV). El sistema presentaba inconsistencia de credenciales para el usuario ``Directory Manager`` y pérdida de visibilidad de la topología de certificados en el nodo principal.
 
@@ -24,12 +24,14 @@ Se procedió al cambio manual del hash de la contraseña de ``Directory Manager`
 * **SELinux:** Restauración del contexto de seguridad mediante ``restorecon -v`` para asegurar el arranque del servicio ``dirsrv``.
 
 
-  .. nota:: antes de recrear la cadena de texto encriptada o hash, es conveniente asegurarse de que el servicio systemd correspondiente esta parado. Una vez incrustado en el archivo; reactivar el mismo.
+.. note::
+      
+   antes de recrear la cadena de texto encriptada o hash, es conveniente asegurarse de que el servicio systemd correspondiente esta parado. Una vez incrustado en el archivo; reactivar el mismo.
 
 
-  .. block_code::
+.. code-block:: bash
 
-    systemctl stop dirsrv@RAULVILCHEZ-ORG.service
+   systemctl stop dirsrv@RAULVILCHEZ-ORG.service
 
 
 2. Sincronización de Topología y Datos (RUV)
