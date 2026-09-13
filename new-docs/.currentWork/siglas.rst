@@ -1,1 +1,0 @@
-/home/raul-ipa/Repos/web-docs.git/source/99_General/siglas.rst

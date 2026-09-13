@@ -23,9 +23,6 @@ Hardware
 
 .. toctree::
    :maxdepth: 1
--------
-------
-------
    :caption: Hardware:
 
    01_Hardware/index
@@ -59,15 +56,12 @@ Office, Word, Excel y PowerPoint
 
 .. toctree::
    :maxdepth: 2
--------
    :caption: Software y Aplicaciones:
 
    05_Software_and_Applications/index
    
------
-	
-   
-	Esta sección contiene recursos descargables y podría estar sugeta a cambios sin previo aviso.
+ 
+Esta sección contiene recursos descargables y podría estar sugeta a cambios sin previo aviso.
 	
 .. toctree::
    :maxdepth: 1
