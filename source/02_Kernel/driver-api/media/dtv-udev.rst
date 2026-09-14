@@ -12,12 +12,12 @@ Es asumido el correcto funcionamiento de *udev* y, que han sido creados manualme
 
 0. No olvidar
 
-.. _i99:
 
 Referencias y agradecimientos
 =============================
 
 .. note::
+   
    Esta documentación está desactualizada. En distribuciones modernas, Udev autodetecta dispositivos DVB.
 
 **PENDIENTE**: cambiar este documento para explicar como hacer que dispositivos DVB sean persistentes, ejemplo; cuando una máquina tiene múltiples dispositivos, podrían ser detectados en distinto orden, causando que aplicaciones apuntando a números de dispositivo, fallasen.

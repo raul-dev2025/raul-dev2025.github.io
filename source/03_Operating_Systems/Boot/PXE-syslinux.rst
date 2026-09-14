@@ -6,12 +6,10 @@ PXE - syslinux
    :maxdepth: 2
    :caption: Contenido:
 
-   
-
 Descripción
 ===========
 
-PXELINUX es un derivado de Syslinux, para el arranque desde un servidor en red, mediante *una ROM*\ `f1 <#f1>`__ de red, conforme a la especificación Intel PXE. PXELINUX, no es un programa destinado a ser *flaseado* o *quemado*, en una PROM `f1 <#f1>`__ de una tarjeta de red.
+PXELINUX es un derivado de Syslinux, para el arranque desde un servidor en red, mediante *una ROM* [#f1]_ de red, conforme a la especificación Intel PXE. PXELINUX, no es un programa destinado a ser *flaseado* o *quemado*, en una PROM de una tarjeta de red.
 En tal caso, revisar `iPXE <https://ipxe.org/>`__.
 
 Si fuese necesario *crear* una PROM; compatible con PXE, para la tarjeta de red -con objeto de utilizarla con PXELINUX, por qjemplo, revisar `NetBoot <http://netboot.sourceforge.net/>`__.
@@ -191,7 +189,7 @@ Por favor, comprobar la página de referencias a la compatibilidad de hardware, 
 
 Algunos servidores TFTP, que mejor resultado han dado con PXELINUX, son:
 
-El servidor TFTP “tftp-hpa” -áltamente *portable* `f2 <#f2>`__ y, un “puerto” de un servidor TFTP de un sistema operativo BSD. Soporta opciones y está disponible en: `TFTP <http://www.kernel.org/pub/software/network/tftp/%20or%20ftp://ftp.kernel.org/pub/software/network/tftp/>`__ y en cualquier servidor espejo -mirror, `kernel.org <http://www.kernel.org/mirrors/>`__
+El servidor TFTP “tftp-hpa” -áltamente *portable* [#f2]_ y, un “puerto” de un servidor TFTP de un sistema operativo BSD. Soporta opciones y está disponible en: `TFTP <http://www.kernel.org/pub/software/network/tftp/%20or%20ftp://ftp.kernel.org/pub/software/network/tftp/>`__ y en cualquier servidor espejo -mirror, `kernel.org <http://www.kernel.org/mirrors/>`__
 Otro servidor TFTP, con soporte de opciones es “atftp” por *Jean-Pierre Lefebvre*:
 
 * `RTD TFTP <https://it-at-dtu-physics.readthedocs.io/en/stable/pxelinux.doc.html>`__
@@ -872,12 +870,12 @@ Referencias y agradecimientos
    RFC 5494 - April 2009 - IANA Guidelines for ARP
    RFC 5970 - September 2010 - DHCPv6 Options for Network Boot
 
-* `Siglas </TerritorioLinux/siglas.html>`__
+.. [#f1] `Siglas </TerritorioLinux/siglas.html>`__
 
-`f2 <#f2>`__ Portable, el término se utiliza habitualmente para referirse a otros sistemas operativos. Ejemplo, War Hammer 40.000, juego de éxito mundial, ha mutado el código haciéndolo portable a plataformas tipo Unix. Desambiguación, el término es igualmente utilizado, para referirse al tipo de procesador -la “arquitectura del sistema”, sobre la que ha sido instalado el sistema operativo. Ejemplo, ``x86``,
+.. [#f2] Portable, el término se utiliza habitualmente para referirse a otros sistemas operativos. Ejemplo, War Hammer 40.000, juego de éxito mundial, ha mutado el código haciéndolo portable a plataformas tipo Unix. Desambiguación, el término es igualmente utilizado, para referirse al tipo de procesador -la “arquitectura del sistema”, sobre la que ha sido instalado el sistema operativo. Ejemplo, ``x86``,
 ``x86_64`` ...
 
-`f3 <f3>`__ Puerto, referido como interfase física de conexionado, dónde es acoplada alguna suerte de conector físico, conectando dos piezas *hardware*. Ejemplo, El puerto db9 es habitualmente utilizado como interfase de conexión entre dos máquinas, con una conexión serial para la depuración, o lectura de registros. Desambiguación, leer la entrada de arriba, *portable*. El término podría referirse tanto a la *arquitectura del procesador*, como al tipo de sistema operativo -Linux, Macintosh, etc, como tambień a una versión o distribución de un sistema operativo concreto. Ejemplo, la comunidad Linux ha estado tabajando intensamente, en un puerto a la dustrubución Fedora 8, de Xen hipervisor.
+.. [#f3] Puerto, referido como interfase física de conexionado, dónde es acoplada alguna suerte de conector físico, conectando dos piezas *hardware*. Ejemplo, El puerto db9 es habitualmente utilizado como interfase de conexión entre dos máquinas, con una conexión serial para la depuración, o lectura de registros. Desambiguación, leer la entrada de arriba, *portable*. El término podría referirse tanto a la *arquitectura del procesador*, como al tipo de sistema operativo -Linux, Macintosh, etc, como tambień a una versión o distribución de un sistema operativo concreto. Ejemplo, la comunidad Linux ha estado tabajando intensamente, en un puerto a la dustrubución Fedora 8, de Xen hipervisor.
 
 flashed – destello?, es algo así como sobreescribir los datos contenidos en una memoria.
 

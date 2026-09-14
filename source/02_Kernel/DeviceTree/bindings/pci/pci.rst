@@ -11,9 +11,5 @@ Las siguientes, son propiedades adicionales, descritas en los documentos relacio
 Referencias y agradecimientos
 =============================
 
-`PCI Bus Binding to: IEEE Std 1275-1994 <http://www.devicetree.org/open-firmware/bindings/pci/pci2_1.pdf>`_
-
-`Open Firmware Recommended Practice: Interrupt Mapping <http://www.devicetree.org/open-firmware/practice/imap/imap0_9d.pdf>`_
-
-**Traducción:** Heliogabalo S.J.
-*www.territoriolinux.net*
+* `PCI Bus Binding to: IEEE Std 1275-1994 <http://www.devicetree.org/open-firmware/bindings/pci/pci2_1.pdf>`_
+* `Open Firmware Recommended Practice: Interrupt Mapping <http://www.devicetree.org/open-firmware/practice/imap/imap0_9d.pdf>`_

@@ -35,7 +35,7 @@ Indices y tablas
    /01_Hardware/sistema/UEFI-refs
    /01_Hardware/sistema/Prefetching_en_Procesadores
    /01_Hardware/sistema/Ejercicios
-   /01_Hardware/A5-Hardware/Processador/procesador.rst
+   /01_Hardware/Processador/procesador.rst
 
 .. note::
 
@@ -62,7 +62,6 @@ Indices y tablas
 
 .. toctree::
    :maxdepth: 1
-   :caption: 1
 
    /03_Operating_Systems/Maint/index
 

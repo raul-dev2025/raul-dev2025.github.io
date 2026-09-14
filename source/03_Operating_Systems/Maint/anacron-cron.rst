@@ -2,8 +2,6 @@
 Tareas programadas
 ==================
 
-``A1-so/Mantenimiento``
-
 .. contents:: Contenido
    :depth: 2
 
@@ -37,7 +35,3 @@ pathDir:
     ``/etc/crontab``
 
 -----
-
-2. Referencias
-==============
-

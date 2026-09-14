@@ -3,7 +3,6 @@ Man - InitRd
 ============
 
 
-
 Disco Ram de inicio
 ===================
 

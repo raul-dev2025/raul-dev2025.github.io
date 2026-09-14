@@ -12,7 +12,7 @@ Documentación técnica orientada exclusivamente al aprovisionamiento, control d
 .. toctree::
    :maxdepth: 1
 
-   /06_Software_and_Applications/Supuestos/IV-management
+   /06_Software_and_Applications/Supuestos/Maint/IV-management
 
 -----
 

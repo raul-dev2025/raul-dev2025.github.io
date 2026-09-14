@@ -23,7 +23,7 @@ Aquí organizo mi trabajo e investigación sobre el kernel de Linux.
    :maxdepth: 1
    :caption: arm
 
-   /02_Kernel/arm/Booting.rst
+   /02_Kernel/arch/arm/Booting.rst
 
 
 

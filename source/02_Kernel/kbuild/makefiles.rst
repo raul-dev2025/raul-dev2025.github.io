@@ -2,14 +2,8 @@
 Makefiles en el kernel de Linux
 ===============================
 
-.. _i1:
-
 .. contents:: Tabla de contenidos
    :local:
-   :backlinks: none
-   :depth: 2
-
-.. _i2:
 
 Introducción
 ============
@@ -30,7 +24,6 @@ Cada subdirectorio tendrá un *kbuild Makefile*, el cual sucede los comandos de 
 
 ``scripts/Makefile.*`` contiene todas las definiciones/reglas etc. usada en la construcción del kernel, basado en los archivos *kbuild Makefiles*.
 
-.. _i3:
 
 Quién hace qué
 ==============
@@ -51,7 +44,6 @@ Las personas tienen cuatro relaciones distintas con los *Makefiles* del kernel:
 
 El presente documento está dirigido al **Desarrollador regular** y al **Desarrollador de arquitectura**.
 
-.. _i3i1:
 
 Los archivos *kbuild*
 =====================
@@ -61,7 +53,6 @@ El nombre preferido para estos archivos *kbuild*, es *Makefile*, aunque *kbuild*
 
 La Sección `Definición de objetivos`_ es una rápida introducción, otros capítulos proporcionan más detalle, con ejemplos reales.
 
-.. _i3i1i1:
 
 Definición de objetivos
 =======================
@@ -114,7 +105,6 @@ Ejemplo,
     obj-$(CONFIG_ISDN_I4L)         += isdn.o
     obj-$(CONFIG_ISDN_PPP_BSDCOMP) += isdn_bsdcomp.o
 
-.. _i3i1i3:
 
 Propósito de los módulos *cargables* ``obj-m``
 ==============================================
@@ -163,14 +153,12 @@ En este ejemplo, ``xattr.o``, ``xattr_user.o`` y ``xattr_trusted.o`` sólo son p
 .. note::
    Al construir objetos dentro del kernel, la sintaxis de arriba también funcionará. Por tanto, si la opción es ``CONFIG_EXT2_FS=y``, kbuild construirá un archivo ``ext2.o`` al margen de partes individuales, enlazando entonces con ``integrado.a``; tal y como cabría esperar.
 
-.. _i3i1i4:
 
 Objetos que exportan *símbolos*
 ===============================
 
 Las notaciones requeridas en los makefiles, no son necesarias para los módulos que exportan símbolos.
 
-.. _i3i1i5:
 
 Propósito de los archivos *librerías* ``lib-y``
 ===============================================
@@ -191,7 +179,6 @@ Ejemplo,
 
 Esto creará una librería ``lib.a`` basada en ``delay.o``. Para que kbuild reconozca que está siendo construida ``lib.a``, el directorio deberá ser listado en ``libs-y``. El uso de ``lib-y`` está normalmente restringido a ``lib/`` y a ``arch/*/lib``.
 
-.. _i3i1i6:
 
 Descendiendo a los directorios
 ==============================
@@ -211,7 +198,6 @@ Si ``CONFIG_EXT2_FS`` es configurado con ``y`` (integrado) o ``m`` (modular), se
 
 Es una buena práctica utilizar la variable ``CONFIG_`` en la asignación de nombres de directorios. Esto permitirá a kbuild omitir el directorio si la correspondiente opción ``CONFIG_`` no contiene ni ``y`` ni ``m``.
 
-.. _i3i1i7:
 
 Compilación de opciones
 =======================
@@ -251,7 +237,6 @@ Ejemplo,
 
 ``subdir-ccflags-y, subdir-asflags-y``. Las dos opciones listadas arriba, son similares a ``ccflags-y`` y ``asflags-y``. La diferencia es que la variante ``subdir-``, tiene efecto sobre el archivo kbuild, donde estén presentes y, en todos los subdirectorios.
 Las opciones especificadas mediante ``subdir-*`` son añadidas a la *línea de comando*, antes de especificar la opción, por medio de variantes de *non-subdir*.
-.. _i3i1i11:
 
 Soporte a las funciones ``$(CC)``
 =================================
@@ -379,13 +364,13 @@ Ejemplo,
     ccflags-y := $(call cc-ifversion, -lt, 0402, -O1)
 
 .. note::
+
    **n. de t.**: ``ccflags-y := $(call cc-ifversion, -lt, 0402, -O1)``.Ejemplo,
 
 .. code-block:: makefile
-
+   
    subdir-ccflags-y := -Werror
-
-   CFLAGS_$@, AFLAGS_$@
+   CFLAGS_filename.o := -Werror
 
 
 ``CFLAGS_$@`` y ``AFLAGS_$@``, únicamente son aplicables, a comandos en el makefile kbuild activo.
@@ -414,7 +399,6 @@ Ejemplo,
    AFLAGS_crunch-bits.o := -Wa,-mcpu=ep9312
    AFLAGS_iwmmxt.o      := -Wa,-mcpu=iwmmxt
 
-.. _i3i1i9:
 
 Seguimiento de las dependencias
 ===============================
@@ -427,7 +411,6 @@ Kbuild *sigue las dependencias*, así:
 
 Por tanto, de cambiar la opción ``$(CC)``, todos los archivos afectados serán recompilados.
 
-.. _i3i1i10:
 
 Reglas especiales
 =================
@@ -469,19 +452,18 @@ Ejemplo,
    $(BOOT_TARGETS): vmlinux TARGET
        $(Q)$(MAKE) $(build)=$(boot) MACHINE=$(MACHINE) $(obj)/$@
        @$(kecho) '  Kernel: $(obj)/$@ is ready'En este ejemplo, ``ccflags-y`` asignará el valor ``-01`` si la versión ``$(CC)`` es menor a 4.2.
-``cc-ifversion`` toma todos los operadores de *shell*:
-``-eq, -ne, -lt, -le, -gt, and -ge``
-El tercer parámetro podría ser un texto, como lo és, en aquí, aunque podría ser una variable *expandida* o una *macro*.
+
+``cc-ifversion`` toma todos los operadores de *shell*: ``-eq, -ne, -lt, -le, -gt, and -ge``. El tercer parámetro podría ser un texto, como lo és, en aquí, aunque podría ser una variable *expandida* o una *macro*.
 
 Ejemplo,
 
-.. code-block:: makefile
+.. code-block:: text
 
-		#arch/powerpc/Makefile
-		$(Q)if test "$(cc-fullversion)" = "040200" ; then \
-			echo -n '*** GCC-4.2.0 cannot compile the 64-bit powerpc ' ; \
-			false ; \
-		fi
+	#arch/powerpc/Makefile
+	$(Q)if test "$(cc-fullversion)" = "040200" ; then \
+		echo -n '*** GCC-4.2.0 cannot compile the 64-bit powerpc ' ; \
+		false ; \
+	fi
 
 En este ejemplo, una versión específica de GCC, mostrará un error explicando al usuario, por qué se detuvo en la construcción.
 
@@ -504,7 +486,6 @@ Ejemplo,
 			endif
 		endif
 
-.. _i3i1i12:
 
 Soporte a las funciones ``$(LD)``
 =================================
@@ -523,7 +504,6 @@ Ejemplo,
 		#Makefile
 		LDFLAGS_vmlinux += $(call ld-option, -X)
 
-.. _i4:
 
 Soporte a programas *Host*
 ==========================
@@ -535,7 +515,6 @@ El primer paso, es decir a kbuild, que tal programa existe. Con este propósito 
 El segundo paso, consiste en añadir una dependencia explícita, al ejecutable. Hay dos formas de hacerlo; añadiendo la dependencia en una regla, o mediante la variable ``$(always)``.
 Ambas posibilidades, serán descritas a continuación.
 
-.. _i4i1:
 
 Programas *Host* simple
 =======================
@@ -551,7 +530,6 @@ ejemplo,
 
 Kbuild asume que ``bin2hex`` procede de un archivo *fuente C*, llamado ``bin2hex.c``, localizado en el mismo directorio que el Makefile.
 
-.. _i4i2:
 
 Composición de programas *Host*
 ===============================
@@ -574,7 +552,6 @@ Finalmente, los dos archivos ``.o``, serán enlazados al ejecutable ``lxdialog``
 .. note::
    La sintaxis ``<executable>-y`` no está permitida en *host-programs*.
 
-.. _i4i3:
 
 Empleo de ``C++`` en programas *Host*
 ======================================
@@ -602,7 +579,6 @@ Ejemplo,
 		qconf-cxxobjs := qconf.o
 		qconf-objs    := check.o
 
-.. _i4i4:
 
 Control de las opciones del compilador en programas *Host*
 ==========================================================
@@ -636,7 +612,6 @@ Ejemplo,
 
 Al enlazar ``qconf``, será *pasado* como opción *extra* ``-L$(QTDIR)/lib``.
 
-.. _i4i5:
 
 Cuándo son construidos los programas *Host*
 ===========================================
@@ -670,7 +645,6 @@ El objetivo ``$(obj)/devlist.h`` no será construido antes de actualizar ``$(obj
 
 Indica a kbuild, el construir ``lxdialog`` incluso si no hubiese sido referenciado en ninguna regla.
 
-.. _i4i6:
 
 Utilización de ``hostprogs-$(CONFIG_FOO)``
 ==========================================
@@ -685,7 +659,6 @@ Un patrón habitual en archivos kbuild, tienen este aspecto:
 Kbuild entiende ambas asignaciones; ``y``, para *integrados*, ``m``, para módulos.
 Por lo que si un símbolo evalúa ``m``, kbuild seguirá construyendo el binario. En otras palablas; kbuild gestiona ``hostprogs-m`` de igual modo a ``hostprogs-y``. Aunque es recomendable el empleo de ``hostprogs-y``, cuando no hay *símbolos de configuración* involucrados.
 
-.. _i5:
 
 *Kbuild*, limpiar infraestructura
 =================================
@@ -750,11 +723,11 @@ Ejemplo,
 ``make clean`` descenderá en ``arch/x86/boot`` y, hará la limpieza habitual. El Makefile localizado en ``arch/x86/boot/``, podría utilizar el artificio ``subdir-``, para descender *afondo*.
 
 .. note::
+
    **Nota 1**: ``arch/$(ARCH)/Makefile`` no podrá utilizar ``subdir-``, puesto que el archivo es incluido en el nivel más alto de *makefile* y, la infraestructura kbuild no es operativa en ese punto.
    
    **Nota 2**: todos los directorios listados en ``core-y, libs-y, drivers-y`` y ``net-y``, serán visitados durante ``make clean``.
 
-.. _i6:
 
 Arquitectura de archivos *Makefiles*
 ====================================
@@ -777,7 +750,6 @@ En la ejecución de kbuild, los siguientes pasos tomarán efecto -aproximádamen
     - Esto incluye la construcción de registros de arranque.
     - Preparar la imagen *initrd* y similares.
 
-.. _i6i1:
 
 Configuración de variables, para complementar la construcción de la arquitectura
 =================================================================================
@@ -793,6 +765,7 @@ Ejemplo,
     LDFLAGS         := -m elf_s390
 
 .. note::
+
    ``ldflags-y`` puede ser utilizado para personalizar las opciones utilizadas. Ver capítulo `Compilación de opciones`_.
 
 ``LDFLAGS_vmlinux``
@@ -845,10 +818,9 @@ Frecuentemente, la variable ``KBUILD_CFLAGS`` depende de la configuración.Ejemp
 
 Muchos de los *Makefiles* específicos de arquitectura, lanzan el compilador de C, para testar el *soporte a opciones*.
 
-.. code-block:: makefile
+.. code-block:: text
 
 		#arch/x86/Makefile
-
 		...
 		cflags-$(CONFIG_MPENTIUMII)     += $(call cc-option,\
 						-march=pentium2,-march=i686)
@@ -859,34 +831,22 @@ Muchos de los *Makefiles* específicos de arquitectura, lanzan el compilador de 
 
 El primer ejemplo, utiliza el "truco" de expandir la opción de configuración, cuando es seleccionada ``y``.
 
-``KBUILD_AFLAGS_KERNEL $(AS)`` opciones específicas con *integrados*.
-
-``$(KBUILD_AFLAGS_KERNEL)`` contiene *opciones extra* del compilador C, empleadas para compilar el código del kernel residente.
-
-``KBUILD_AFLAGS_MODULE`` Opciones para ``$(AS)`` en la construcción de módulos.
-
-``$( KBUILD_AFLAGS_MODULE)`` empleado para añadir opciones específicas de la arquitectura, utilizadas por ``$(AS)``.
-Desde la línea de comandos, debería ser usado ``AFLAGS_MODULE``. Ver ``kbuild.txt``.
-
-``KBUILD_CFLAGS_KERNEL $(CC)`` opciones específicas con *integrados*.
-
-``$(KBUILD_CFLAGS_KERNEL)`` contiene *opciones extra* del compilador C, empleadas para compilar el código del kernel residente.
-
-``KBUILD_CFLAGS_MODULE`` Opciones para ``$(CC)`` en la construcción de módulos.
-
-``$(KBUILD_CFLAGS_MODULE)`` empleado para añadir opciones específicas de la arquitectura, utilizadas por ``$(CC)``.
-Desde la línea de comandos, debería ser usado ``CFLAGS_MODULE``. Ver ``kbuild.txt``.
-
-``KBUILD_LDFLAGS_MODULE`` Opciones para ``$(LD)`` en el enlazado de módulos.
-
-``$(KBUILD_LDFLAGS_MODULE)`` empleado para añadir opciones específicas de la arquitectura, utilizadas al enlazar módulos. A menudo un escrito del enlazador.
-Desde la línea de comandos, debería ser usado ``LDFLAGS_MODULE``. Ver ``kbuild.txt``.
-
-``KBUILD_ARFLAGS`` Opciones para ``$(AR)`` al crear archivos.
-
-``$(KBUILD_ARFLAGS)`` configurado por la *raíz de Makefile* a D, (modo determinista) -si es que la opción es soportadapor ``$(AR)``.
-
-``ARCH_CPPFLAGS, ARCH_AFLAGS, ARCH_CFLAGS`` sobreesrcribe los valores por defecto de kbuiild.
+* ``KBUILD_AFLAGS_KERNEL $(AS)`` opciones específicas con *integrados*.
+* ``$(KBUILD_AFLAGS_KERNEL)`` contiene *opciones extra* del compilador C, empleadas para compilar el código del kernel residente.
+* ``KBUILD_AFLAGS_MODULE`` Opciones para ``$(AS)`` en la construcción de módulos.
+* ``$( KBUILD_AFLAGS_MODULE)`` empleado para añadir opciones específicas de la arquitectura, utilizadas por ``$(AS)``.
+* Desde la línea de comandos, debería ser usado ``AFLAGS_MODULE``. Ver ``kbuild.txt``.
+* ``KBUILD_CFLAGS_KERNEL $(CC)`` opciones específicas con *integrados*.
+* ``$(KBUILD_CFLAGS_KERNEL)`` contiene *opciones extra* del compilador C, empleadas para compilar el código del kernel residente.
+* ``KBUILD_CFLAGS_MODULE`` Opciones para ``$(CC)`` en la construcción de módulos.
+* ``$(KBUILD_CFLAGS_MODULE)`` empleado para añadir opciones específicas de la arquitectura, utilizadas por ``$(CC)``.
+* Desde la línea de comandos, debería ser usado ``CFLAGS_MODULE``. Ver ``kbuild.txt``.
+* ``KBUILD_LDFLAGS_MODULE`` Opciones para ``$(LD)`` en el enlazado de módulos.
+* ``$(KBUILD_LDFLAGS_MODULE)`` empleado para añadir opciones específicas de la arquitectura, utilizadas al enlazar módulos. A menudo un escrito del enlazador.
+* Desde la línea de comandos, debería ser usado ``LDFLAGS_MODULE``. Ver ``kbuild.txt``.
+* ``KBUILD_ARFLAGS`` Opciones para ``$(AR)`` al crear archivos.
+* ``$(KBUILD_ARFLAGS)`` configurado por la *raíz de Makefile* a D, (modo determinista) -si es que la opción es soportadapor ``$(AR)``.
+* ``ARCH_CPPFLAGS, ARCH_AFLAGS, ARCH_CFLAGS`` sobreesrcribe los valores por defecto de kbuiild.
 
 Estas variables son un apéndice de ``KBUILD_CPPFLAGS``, ``KBUILD_AFLAGS`` y ``KBUILD_CFLAGS``, respectivamente, después de haber sido configuradas otras opciones, por la *raíz Makefile*. Da sentido, a la sobreescritura de los valores por defecto en la arquitectura.
 
@@ -921,9 +881,9 @@ Listar directorios que visitar, al descender
 
 El archivo *Makefile* especíifico de la arquitectura, trabaja en colaboración con el *Makefile* principal, para definir variables utilizadas en la construcción del archivo *vmlinux*. Nótese que no hay una correspondiente sección para módulos, en este mismo sentido; la maquinaria de construcción de modulos es independiente.
 
-.. code-block:: makefile
-    
-		head-y, init-y, core-y, libs-y, drivers-y, net-y
+.. code-block:: text
+
+   head-y, init-y, core-y, libs-y, drivers-y, net-y
 
 ``$(head-y)`` lista objetos a enlazar primero, en vmlinux.
 ``$(libs-y)`` lista directorios donde un fichero ``lib.a`` podrá ser localizado.
@@ -999,8 +959,7 @@ Construcción de objetivos *no-kabuild*
 ``extra-y`` especifica objetivos adicionales, creados en el directorio activo, en adición a cualquier objetivo especificado por ``obj-*``.
 
 Listar todos los objetivos en ``extra-y`` es necesario por dos motivos:
-1. Activar *kbuild* para comprobar cambios en líneas de comando
-  - Cuando es utilizado ``$(call if_changed,xxx)``.
+1. Activar *kbuild* para comprobar cambios en líneas de comando -cuando es utilizado ``$(call if_changed,xxx)``.
 2. Kbuild sabrá que archivos borrar, durante ``make clean``.
 
 Ejemplo,
@@ -1035,32 +994,14 @@ Asignaciones a ``$(targets)`` son escritas sin el prefijo ``$(obj)/``.
 ``if_changed`` podría ser utilizado en conjunción con otros comandos pesonalizados, tal y como está definido en `Comando kbuild personalizados`.
 
 .. note::
-   es un error habitual, olvidar el requisito FORCE ``--f``?
-   Otro error común, es que los espacios en blanco `` ``, son significativos; por ejemplo, lo siguiente fallará(nótese el espacio en blanco después de la coma):
 
-   .. code-block:: makefile
+   es un error habitual, olvidar el requisito FORCE ``--f``. Otro error común, es que los espacios en blanco, son significativos; por ejemplo, lo siguiente fallará(nótese el espacio en blanco después de la coma):
 
-      target: source(s) FORCE
-      #WRONG!#    $(call if_changed, ld/objcopy/gzip/...)
-
-ld
---
-
-Link
-
-.. _i99:
-
-Referencias y agradecimientos
-=============================
-
-**[f1]Makefile**, archivo constructor.
-Objeto, 
-Objetivo,
-to break, romper; "la secuencia normal en un programa, rompe su ejecución debido a un error en el código".
-macros
+.. code-block:: text
+   
+   target: source(s) FORCE
+   #WRONG!#    $(call if_changed, ld/objcopy/gzip/...)
+   ld
+   --
 
 
-<ul id="firma">
-	<li><b>Traducción:</b> Heliogabalo S.J.</li>
-	<li><em>www.territoriolinux.net</em></li>
-</ul>

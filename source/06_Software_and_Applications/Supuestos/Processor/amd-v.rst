@@ -1,44 +1,15 @@
-.. _iI:
-
-===========================
+=============================
 Virtualizar cargas de trabajo
-===========================
+=============================
 
-.. _iI_links:
+.. contents:: Tabla de Contenido
+   :depth: 2
 
-- `Virtualizar cargas de trabajo <#iI>`_
-- `Introducción <#i1>`_
-- `Por qué virtualizar <#i2>`_
-- `Cargas de trabajo adecuadas <#i3>`_
-- `Consideraciones en virtualización de cargas <#i4>`_
-- `Cuellos de botella habituales <#i5>`_
-- `Uso intensivo de la CPU <#i6>`_
-- `Severos requisitos de memoria <#i7>`_
-- `Intenso tráfico de I/O <#i8>`_
-- `Cargas de trabajo típicas <#i9>`_
-- `Carga en una base de datos <#i10>`_
-- `Cargas en servidores Web <#i11>`_
-- `Servidores de archivo e impresión <#i12>`_
-- `Escritorios virtualizados <#i13>`_
-- `Cargas e-mail <#i14>`_
-- `Cargas de trabajo combinadas <#i15>`_
-- `Dirigiendo los desafíos <#i16>`_
-- `Virtualización asistida por hardware <#i17>`_
-- `Procesadores multi núcleo <#i18>`_
-- `Virtualización por hardware de tabla de páginas <#i19>`_
-- `Virtualización I/O <#i20>`_
-- `Herramienta para planificar la capacidad <#i21>`_
-- `Ejemplos en industria <#i22>`_
-- `Conclusión <#i23>`_
-- `Apéndice: ventajas AMD <#i24>`_
-- `Referencias y agradecimientos <#i99>`_
-
-.. _iI_header:
 
 Virtualizar cargas de trabajo
 =============================
 
--- looking beyond current assumption --
+*looking beyond current assumption*
 
 Avances en la tecnología de virtualización del *hardware*, están hacinedo posible virtualizar un ámplio rango de cargas de trabajo, en servidores basados en procesadores tipo *x86*. Esto ha *movido* la virtualización de servidores, fuera del tradicional dominio que era el entorno de prueba y desarrollo, situándolo firmemente, dentro de la esfera de nuevas aplicaciones. Ha sido imperativo por tanto, expandir la definición de *cargas de trabajo*, susceptibles de virtualización.
 
@@ -49,7 +20,6 @@ Avances como la *virtualización asistida*, procesadores multi núcelo, soporte 
 
 En el escrito serán discutidos los potenciales *cuellos de botella*, habitualmente encontrados por las organizaciones; uso extensivo de la memoria, del procesador e intenso tráfico I/O. Serán tratados temas como las características de rendimiento en las cargas de trabajo de servidores, que pudieran ser virtualizadas satisfactoriamente. También será examinado cómo el conocimiento acerca de una característica de rendimiento en particular, pudiese arrojar información sobre una estrategia de *virtualización inteligente*. Serán estudiados los avances en *hardware* de virtualización, que está haciendo posible virtualizar, un creciente y ámplio rango de cargas de trabajo.
 
-.. _i1:
 
 Introducción
 ============
@@ -57,7 +27,6 @@ Introducción
 Las organizaciones enfrentan diariamente el hecho de tener que *hacer más, por menos*: reducir *tiempos de espera*, responder rápidamente a nuevas iniciativas e incrementar el rendimiento; todo, conservando los costes bajo mínimos. 
 Algunas han encontrado la virtualizacación de servidores, como una aproximación efectiva -ofrece una alternativa, de incrementar el empleo del equipo, reduce la gestión y coste administrativo, mejora la disponibilidad de servicios y recurso; que proporciona una infraestructura flexible capaz de ser adapatada rápidamente a la *cambiante necesidad de los negocios*.
 
-.. _i2:
 
 Por qué virtualizar
 ===================
@@ -73,7 +42,6 @@ Virtualizar, proporciona *aislamiento de ejecución y partición de servicios*, 
 
 Reforzar la agilidad en los negocios. La infraestructura de servidor puede ser rápidamente modificada, para hacer coincidir *cambiantes necesidades*, o dirigir nuevas oportunidades de negocio. Podría resultar crítico, cuando cargas de trabajo como aquellas basadas en aplicaciones *Web*, fuesen impredecibles.
 
-.. _i3:
 
 Cargas de trabajo adecuadas
 ===========================
@@ -93,7 +61,6 @@ Muchas de las cargas en servidores, previamente difícil, e incluso imposible, d
 
 Esta sofisticación del *hardware*, ha expandido en gran medida, la funcionalidad de las cargas de trabajo en VMs, quien en último término, es responsable que organizaciones vuelvan a plantear, la estrategia de virtualización. Ser consciente, de *qué está disponible* y, entender el rendimiento de las cargas en servidores, proporciona las herramientas de evaluación adecuadas, a técnicos y administradores IT.
 
-.. _i4:
 
 Consideraciones en virtualización de *cargas*
 =============================================
@@ -108,7 +75,6 @@ Cuando las organizaciones no utilizan la funcionalidad de los servidores al comp
 
 La virtualización puede utilizar la potencia de los servidores actuales; especialmente diseñados para *encauzar* muchos de los problemas a los que se enfrentan.
 
-.. _i5:
 
 Cuellos de botella habituales
 =============================
@@ -116,10 +82,9 @@ Cuellos de botella habituales
 La virtualización utiliza la emulación para crear máquinas virtuales que operan como dispositivos *hardware* separados aunque de hecho, funcionan sobre un mismo sistema; de esta forma, un sólo PC puede correr múltiples sistemas operativos -o múltiples instancias de un mismo sistema operativo a la vez. 
 En algunas configuraciones, esto demanda más recursos del sistema, para los que fue incialmente diseñado y, podría llevar a una degradación del rendimiento: situaciones donde un elementeo constriñe el rendimiento general del sistema.
 
-.. _i6:
 
 Uso intensivo de la CPU
-=======================.. _i6:
+=======================
 
 La principal constricción en *recientes virtualizaciones*, ha sido el rendimiento, o la capacidad de procesamiento de las computadoras. Hacer funcionar máquinas virtuales puede proporcionar ventajas significativas, aunque la problemática asociada, podría consumir una gran porción de ciclos de procesamiento de la CPU, reduciendo el rendimiento en las cargas de trabajo.
 Los servidores, han sido tradicionalmente diseñados, para que la CPU operase con un único sismtema operativo, con un conjunto de aplicaciones y, usuarios. En la virtualización, la misma CPU gestiona múltiples sistemas operativos, múltiples conjuntos de aplicaciones y, múltiples grupos de usuarios.
@@ -131,9 +96,8 @@ En verdad, la *necesidad de CPU* es a menudo fácilmente resoluble. Recientes ge
 Anteriores a la introducción en *virtualización asistida por hardware*, los procesadores *x86* fueron diseñados sobre el modelo "un sistema operativo, un servidor"; asumieron un único sistema operativo trabajando en un servidor físico, con disposición a todos los recursos del mismo.
 Sin embargo, las últimas generaciones de procesadores, han sido diseñadas específicamente para dar soporte al *modelo de virtualización*, haciendo posible cargas de trabajo en servidores con grandes requisitos de rendimiento, fuesen virtualizables. El procesador *asiste a la virtualización*, *dirigiendo el procesado* desde el software, al hardware. Esto mejora la eficiencia de la implementación; un ejemplo, es la tecnología AMD Virtualization™, o AMD-V™.
 
-Procesadores *dual-core* y *quad-core*, están ámpliamente disponibles en AMD y otros fabricantes -[f1](#fi) ya los hay disponibles con mayor densidad de procesadores, como la segunda generación ™Rizen de AMD.
+Procesadores *dual-core* y *quad-core*, están ámpliamente disponibles en AMD y otros fabricantes [#f1]_ ya los hay disponibles con mayor densidad de procesadores, como la segunda generación ™Rizen de AMD.
 
-.. _i7:
 
 Severos requisitos de memoria
 =============================
@@ -146,7 +110,7 @@ Es costrumbre pensar, que la cantidad de espacio de memoria requerida para virtu
 Servidores modernos parten con 2GB de memoria o más -suficiente para cargar la mayor parte de aplicaciones, especialmente en modo "una aplicación, un servidor". En cualquier caso, la virtualización permite que un servidor pueda soportar 10 o más VM -así que añadir
 *1GB* por VM, significa que será necesaria mucha más memoria para adecuar el rendimiento.
 
-Manejar toda esta memoria, podría suponer la demanda de mayores recursos. El sistema operativo debe mantener una *tabla de páginas*; para la traducción de páginas de memoria virtual, a direcciones de memoria física. Recientemente, los *supuestos sistemas operativos* corriendo sobre VMs, sólo podían ver tablas de página ofuscadas(shadow page tables) -tablas de página cargadas sobre una *unidad gestor de memoria* emulada(MMU_) , sin tener acceso a tablas de página real. Las tablas de página real, gestionadas por el gestor de máquinas virtuales(VMM), corren sobre el MMU real. Modificar y ajustar sus tablas de página, es una tarea intensa para los procesadores y, frecuentemente, resulta en un significativo exceso de trabajo. De hecho, la gestión en el uso intensivo de memoria por aplicaciones, es la parte que sufre mayor penalización en una VM.
+Manejar toda esta memoria, podría suponer la demanda de mayores recursos. El sistema operativo debe mantener una *tabla de páginas*; para la traducción de páginas de memoria virtual, a direcciones de memoria física. Recientemente, los *supuestos sistemas operativos* corriendo sobre VMs, sólo podían ver tablas de página ofuscadas(shadow page tables) -tablas de página cargadas sobre una *unidad gestor de memoria* emulada [#f2]_  , sin tener acceso a tablas de página real. Las tablas de página real, gestionadas por el gestor de máquinas virtuales(VMM), corren sobre el MMU real. Modificar y ajustar sus tablas de página, es una tarea intensa para los procesadores y, frecuentemente, resulta en un significativo exceso de trabajo. De hecho, la gestión en el uso intensivo de memoria por aplicaciones, es la parte que sufre mayor penalización en una VM.
 
 En respuesta, AMD integró *Rápido indexado de virtualización(RVI)*, como parte de *AMD-V*, en los procesadores *Opteron*™ *Quad-Core*; esta característica ayuda a eliminar la necesidad de tablas de página ofuscadas y, mejora el rendimiento en muchas de estas aplicaciones.
 
@@ -155,7 +119,6 @@ Técnicas comunes, que soportan cargas de trabajo en VMs, igualmente hacen un in
 Avances en *hardware*, ayudaron a hacer posible la virtualización de cargas, con altos requisitos de memoria. *AMD multi núcleo*, diseñó procesadores con controladores de memoria integrados, para maximizar el rendimiento de estos entornos.
 Extensiones de virtualización, como *AMD traducción del etiquado lateral del bufer(tagged TLB)* y *rápido indexado de virtualización*, ayudaron a mejorar el rendimiento asociado a la gestión de memoria, de los distintos *sistemas operativos supuestos*, corriendo sobre un sólo servidor físico. Esto significa mayor eficiencia a la hora de cambiar entre VMs; manteniendo mapas de memoria, sobre espacios individuales -de memoria, para cada una de ellas.
 
-.. _i8:
 
 Intenso tráfico de I/O
 ======================
@@ -176,7 +139,6 @@ Unidades de gestión de memoria I/O(IOMMUs) ayudan a reducir la problemática, m
 estableciendo así, un ámplio rango de servidores virtualizables, con intensas cargas I/O.
 El *hipervisor* dedica una porción de la memoria del sistema, a un *supuesto* cuando lo inicia. La VM podrá entonces acceder directamente a la memoria sin *pasar* a través del *software* de virtualización. El problema es restringido a la *fase de arranque* del supuesto VM, en lugar tener que lidiar con cada operación de acceso a memoria. Además, la tecnología devirtualización I/O, activa un *particionado seguro* mediante un componente de interconexión del periférico -bus del computador, para el acoplado de dispositivos periféricos en una placa base; esto permite reforzar la pertenencia del dispositivo, sobre los niveles más bajos de la plataforma.
 
-.. _i9:
 
 Cargas de trabajo típicas
 =========================
@@ -185,7 +147,6 @@ El rendimiento característico de una carga en particular, en términos de rendi
 
 Para ayudar a evaluar el rendimiento característico de una carga, es importante considerarlas sobre un caso típico de *cargas de trabajo en unservidor*: *bases de datos, servidores web, servidores de archivo e impresión, servidores de terminal, escritorios y, servidores e-mail*
 
-.. _i10:
 
 Carga en una base de datos
 ==========================
@@ -207,7 +168,6 @@ Brandom Worrell, lidera la solución en *Solution-II*, una organización naciona
 
 - Bases de datos OLTP, son caracterizadas por pequeños bloques de transferencia aleatoria, por lo que la habilidad de proporcionar rápidamente el caché de *fallo en lecturas*, es de importancia principal -medido en IOs/sec o transactions/sec.
 
-.. _i11:
 
 Cargas en servidores Web
 ========================
@@ -223,13 +183,12 @@ La tarjeta de red, debería ser conectada apropiadamente al segmento VLAN. En el
 Servidores de terminal, es considerado un desafio su virtualización, puesto que tienden a realizar un uso intensivo de la memoria y operaciones I/O. La mayor parte de aplicaciones utilizadas en un servidor de terminal, escriben constantemente a disco y, cargan datos en memoria.
 Una estrategia para *rodear* el desafío, consiste en cargar los perfiles de usuario en un servidor físico y, las aplicaciones en volúmener por separado. Eto permite mantener un uso moderado de la memoria y de entradas/salidas a disco, ya que los datos de perfile de usuario emplea la tarjete de interfaz de red(NIC) y, los datos de aplicación usan HBA para almacenar datos.
 
-.. _i12:
 
 Servidores de archivo e impresión
 =================================
 
 Estos seervidores tienden a usar grandes cantidades de espacio en disco, por que muchas aplicaciones no corren localmente en el servidor. El uso de datos de almacenamiento, memoria y CPU, acostumbra a ser bajo. En cualquier caso, si un usuario emplea grandes servidores de archivos, o *software* antivirus, podría incrementar el uso de CPU, memoria e I/O en disco. El coste suele ser una consideración en estos servidores; si el coste es elevado, acostumbran a utilizarse discos SAN, para almacenar datos con poco uso.
-.. _i13:
+
 
 Escritorios Virtuales
 =====================
@@ -242,7 +201,6 @@ Incluso si esos problemas son adecuadamante dirigidos, contar con una experienci
 Podría utilizarse un gestor de conexión, para obtener funcionalidad adicional; conecta el acceso a dispositivo de cliente, en escritorio de usuario con una interfaz posterior, centralizando los recursos de servidor. Acontinuación, el gestor -también llamado *infraestructura de acceso a paquetes*, dispondrá de una variada selección de tareas, dependiendo de la versión escogida. En el nivel más básico, el gestor de conexión, dirige las peticiones de conexión entrantes, a un escritorio disponible. En algunos casos, el gestor de conexión podría estar integrado con *protocolo de acceso a directorio libiano(LDAP)* o *Active Directory*® , con objeto de autencicar usuarios. El gestor puede utilizar una poítica predefinada, o membresía de grupo, para dirigir/asignar usuarios a un escritorio hospedado, controlar una instancia de estado de escritorio -encender y apagarlo, por ejemplo- o seguir el estado de la conexión del escritorio reomoto.
 Algunos gestores también ofrecen *capa de zócalos seguros(SSL)* o la funcionalidad *seguridad IP(IPsec)*, para acceso a red virtual privada(VPN).
 
-.. _i14:
 
 Cargas e-mail
 =============
@@ -251,7 +209,6 @@ Igual que en otras cargas, son consideraciones en rendimiento, limitaciones a de
 
 Por ejemplo, generalmente es una tarea directa, el virtualizar la *interfaz frontal* de servidores corriendo *Microsoft*® *Exchange Server(o servidores de acceso a cliente)* -incluso bajo estrés, una VM con una sóla CPU y, una RAM entre 512MB y 1GB, debería ser suficiente para un servidor que proporcionase *Microsoft*® *Outlook*® *Web Acces(OWA)*. En cualquier caso, es complicado virtualizar la interfaz posterior de un servidor corriendo *Exchange Server* (buzón de correo en Microsoft ® Exchange Server 2007), ya que la cantidad de I/O a disco que genera el servidor. Archivos en discos virtuales, emplean considerable tiempo en su guardado.
 
-.. _i15:
 
 Cargas de trabajo combinadas
 ============================
@@ -266,7 +223,6 @@ Durante los últimos años, desarrolladores cercanos a *Solution-II*, han ganado
 
 Por ejemplo, un entorno de producción con elevados requisitos en I/O y, aplicaciones con intenso uso de la CPU, podrían dividir cada aplicación en múltiples VMs. Una sóla VM correndo bajo *condiciones extremas*(I/O y CPU), trabajarían con mayor eficiencia que dos VM por separado -una con intenso I/O, otra con intenso CPU. En este sentido, es mejor tener un servidor web y una base de datos en la misma VM y, contar con otro servidor web y otra base de datos en una VM distinta. De esta forma, los recursos de cada VM serán *plenamente utilizados*, en lugar de separar las operaciones I/O en una VM y, los ciclos de la CPU en otra.
 
-.. _i16:
 
 Dirigiendo los desafíos
 =======================
@@ -275,7 +231,6 @@ Aunque los *cuellos de botella* en CPU, I/O y, memoria son muy reales, es import
 El uso de la virtualización en producción, ha incrementado dramáticamente, debido a las mejores capacidades y, al menor coste del *hardware*. Hoy en día, procesadores *Quad-core*, están ámpliamente disponibles a menor coeste. Contrariamente a la situación de antiguos procesadores.
 La memoria es mucho más densa -los servidores permiten 64GB, 128GB, o más. La velocidad en operaciones I/O, también ha incrementado. Todos estos avances, han contribuido en la expansión de un sustancioso rango de servidores virtualizables.
 
-.. _i17:
 
 Virtualización asistida por *hardware*
 ======================================
@@ -292,7 +247,6 @@ Cuando un sistema operativo trabaja sobre un procesador con soporte a virtualiza
 Algunos de los primero ejemplos en virtualización asistida por *hardware*, provienen de AMD. AMD, proporciona un conjunto de tecnologías de virtualización asistidas por *hardware*, conocida como *AMD Virtualization technology*™ (AMD-V™). AMD-V simplifica el proceso en el que la capa de virtualización es asociada con el *atrapado y emulación*, de operaciones I/O, e instrucciones de estado, ejecutadas dentro del sistema operativo supuesto.
 Mediante la disminución y, en algunos casos la eliminación, de la problemática asociada a las operaciones del procesador, es mejorado el rendimiento.
 
-.. _i18:
 
 Procesadores multi núcleo
 =========================
@@ -300,7 +254,6 @@ Procesadores multi núcleo
 Las máquinas virtuales requieren que los recursos físicos sean *programados* para ellas -si una VM requiere dos CPUs virtuales, el hipervisor debe esperar a que dos CPUs -o núcleos, estén disponibles para hacer funcionar la VM. Las CPUs multi núcleo y, el tradicional paralelismo que proporcionan, han abierto la puerta como nunca antes lo han hecho, a un ámplio rango de cargas de trabajo sobre CPUs virtuales.
 El servidor VMware ESX 3, proporciona cuatro formas virtuales SMP(vSMP), las cuáles permiten a una VM utilizar hasta cuatro procesadores físicos simultáneamente. Esta capacidad para procesos simultáneos, hace posible que aplicaciones de uso intensivo de la CPU, como bases de datos y servidores de mensajes, sean virtualizables.
 
-.. _i19:
 
 Virtualización por hardware de tabla de páginas
 ================================================
@@ -310,7 +263,6 @@ La virtualización de memoria, incluido el particionado y, disposición de memor
 Para mesurar la mejora en rendimiento de un servidor web con RVI, *AnandTech*, una fuente el línea para el análisis de *hardware*, la industria de noticias; recientemente lanzó una serie de pruebas de referencia. El estandar fue probado en un sistema de doble zócalo, para un procesador AMD Opteron™(ocho núcleos de 2.3GHz). Cuatro VMs fueron encendidas, con dos CPUs virtuales enlazadas a dos núcleos físicos. Dos servidores web -uno corriendo sobre un Oracle OLTP ,y otro corriendo DSS MySQL, que corrieron en paralelo en elservidor. Cada VM tenía 4GB de RAM sobre *Windows Server*® 2003 R2.
 RVI fue activado y desactivado con parámetros del kernel en Xen 3.2.0. RVI mejoró el rendimiento en un 31% para el sitio web PHP y, un 7% en la prueba *Oracle Swingbench OLPT*.
 
-.. _i20:
 
 Virtualización I/O
 ==================
@@ -329,7 +281,6 @@ Tres especificaciones ayudan a activar soluciones de virtualización, bregan con
 * **Multi Raíz IOV(MR-IOV)**
   MR-IOV permite tanto a PCI-express®(PCIe®) como dispositivos SR-IOV I/O, ser accedidos a través de un componente PCIe compartido. El compartir ésto, hace posible a unos pocos dispositivos I/O ser aprovisionados, reduciendo el consumo de energía y, el coste derivado de nuevo *hardware*.
 
-.. _i21:
 
 Herramienta para planificar la capacidad
 ========================================
@@ -338,7 +289,6 @@ Iniciativas de virtualización satisfactorias, no deben desestimarse sin una pro
 
 Aunque la capacidad de planificación de algunas aplicaciones, sólo consideran cargas promedio al determinar donde ser consolidadas, otras, considerarán *puntas de cargas* y, cuando se produgeron. Por ejemplo, La agregada *carga de trabajo promedio* de dos servidores, podría exceder las capacidades del servidor anfitrión, pero su carga, podría ser distintas en determinados momentos. Esto sugiere que, de hecho, sea posible consolidarlar en el mismo anfitrión virtualizado.
 
-.. _i22:
 
 Ejemplos en industria
 =====================
@@ -372,7 +322,6 @@ Cuando fueron necesarios dos grandes servidores *SQL Server*, uno estandar, fue 
 El uso global de la CPU tras la reconstrucción fue redondeado al 10% del total utilizado -fue añadido cierto margen, para futuras actualizaciones. El uso global de memoria, estuvo por debajo del 50%, de nuevo, para permitir un *crecimiento futuro* e imprevistos.
 El uso global I/O, fue alrededor del 40%. Como muestran los ejemplos de St. Clair, aparecen numerosas consideraciones cuando un entorno de producción es virtualizado, *pero es un reto de gran valor correr tras él*.
 
-.. _i23:
 
 Conclusión
 ==========
@@ -382,9 +331,9 @@ El coste de partida de una infraestructura de virtualización, fue muy alto y, l
 Mientras la virtualización ha dado un paso adelante desde su tradicional dominio, a una fuente de producción principal; el razonamiento convencional acerca de las capacidades y limitaciones, continuan evitando que muchas organizaciones *embarquen* en nuevas implementaciones. La idoneidad en cargas de trabajo, sobre entornos virtuales en producción, es a menudo, guiada por la asunción de una *verdad caducada*. Puesto que las *cargas* en servidores, implican características distintivas; entender y tomarlas en consideración, es necesario para determinar su grado de adaptación al medio virtual. Mejoras en el *hadware* de virtualización y, otros avances en tecnología de virtualización, están haciendo posible virtualizar, un creciente ámplio rango de cargas de trabajo.
 
 .. note::
+
    Resumiendo, organizaciones que en el pasado evitaron soluciones virtuales, debido a cuestiones como CPU, memoria, o cuellos de botella I/O, harían bien de *echar otro vistazo*.
 
-.. _i24:
 
 Apéndice: ventajas AMD
 ======================
@@ -399,7 +348,7 @@ Los componentes de arquitectura de conexión directa incluyen:
 
 - **Tecnología AMD64** ofrece direccionado de memoria de 64bit, permitiendo mayor eficiencia en la gestión de múltiples sistemas operativos supuestos y, aplicaciones.
 
-Son compatibles con sistemas operativos y aplicaciones de 32-bit, basados en procesadores x86, permitiendo que entornos legados, sean *nuevamente* virtualizados, en servidores energéticamente más eficientes.
+   Son compatibles con sistemas operativos y aplicaciones de 32-bit, basados en procesadores x86, permitiendo que entornos legados, sean *nuevamente* virtualizados, en servidores energéticamente más eficientes.
 
 - **Procesado multi núcleo** proporciona el procesado de recursos necesarios, para gestionar efectivamente, máquinas virtuales; haciendo posible que múltiples aplicaciones sean consolidadas en un mismo servidor.
 
@@ -408,24 +357,22 @@ Son compatibles con sistemas operativos y aplicaciones de 32-bit, basados en pro
 - El **controlador de memoria integrado** proporciona rápido acceso a memoria, resolviendo la demanda inherente, a entornos de uso intensivo asociados.
 Puesto que la memoria es "propiedad" de la CPU, la gestión avanzada de memoria, ayuda a incrementar la seguridad de la máquinas virtuales. El controlador de memoria integrado, ha sido diseñado para mejorar el rendimiento de entornos virtualizados, bajo condiciones intensivas. Mediante *salidas* con alto ancho de banda, baja latencia y, acceso a memoria escalable.
 
-**AMD-V, Tecnología de virtualización AMD**
+- **AMD-V, Tecnología de virtualización AMD**
 Con el suplemento inherente, a los beneficios proporcionados por la arquitectura de conexión directadirecta, AMD ha desarrollado un procesador que beneficia específicamente a la virtualización. Éstas mejoras, pueden encontrarse en procesadores AMD Opteron y, son conocidas colectivamente como *AMD Virtualization™ (AMD-V™) technology*.
 AMD-V es construido sobre la fundadión *Direct Connect Architecture*, la cuál reduce la *problemática*, permitiendo la comunicación directa entre *supuestas* máquinas virtuales y, el(los) procesadores físicos y, mediante la mejora en la gestión de memoria.
 
 - **Rápido indexado de virtualización** permite a máquinas virtuales gestionar directamente la memoria, mejorando el rendimiento en muchas aplicaciones virtualizadas. Utilizar los recursos, sobre una carcasa de silicona, en lugar de emplear *software*, permite que el RVI pueda minimizar el número de ciclos necesarios por el hipervisor. Así como tambén, la penalización asociada al rendimiento, común en virtualización.
 
-Rápido indexado de virtualización, ha sido diseñado para minimizar "el interruptor de tiempo global" -tiempo empleado en cambiar de una máquina a otra, para una más rápida respuesta de aplicación.
+   Rápido indexado de virtualización, ha sido diseñado para minimizar "el interruptor de tiempo global" -tiempo empleado en cambiar de una máquina a otra, para una más rápida respuesta de aplicación.
 
 - La **traducción del etiquetado lateral del bufer(TLB)** único, en procesadores AMD Opteron, permite un cambio entre máquinas virtuales más rápido, mediante un mapa individual de espacios de memoria, utilizados por las VMs. Distinguie entre espacios de memoria usados por cada VM y, ayuda a reducir problemas en la gestión de memoria, además de mejorar la respuesta durante el intercambio de máquinas virtuales.
 
 - **AMD-V Extended Migration** ha sido diseñado para conseguir que las soluciones *software de virtualización*, sean capaces de *migrar en vivo*, entre un ámplio rango de procesadores AMD Opteron actuales.
 
-.. _i99:
 
 Referencias y agradecimientos
 =============================
 
-Articulo original; `AMD white paper <territoriolinux.net/images/pdfs/amd.pdf>`_ -- virtualizing server workloads, looking beyond current assumption
-http://www.anandtech.com/weblog/show-post.aspx?i=467
+.. [#f1] Articulo original; `AMD white paper <territoriolinux.net/images/pdfs/amd.pdf>`_ -- virtualizing server workloads, looking beyond current assumption http://www.anandtech.com/weblog/show-post.aspx?i=467
 
-.. _MMU: siglas.html
+.. [#f2] - **MMU**: siglas.html

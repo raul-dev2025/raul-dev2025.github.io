@@ -1,11 +1,3 @@
-`Utilizando el disco de RAM inicial(``initrd``) <#i1>`__
-`Funcionamiento <#i2>`__ `Opciones de la línea de comado <#i3>`__
-`Imágenes ``cpio`` comprimidas <#i4>`__ `Instalación <#i5>`__ `Cambiando
-el dispositivo raíz <i6>`__ `Posibles escenarios <#i7>`__ `Mecanismo
-obsoleto para el cambio de raíz <#i8>`__ `Mezcla entre el mecanismo
-``cnage_root`` y ``pivot_root`` <#i9>`__ `Referencias, agradecimientos y
-recursos <#i99>`__
-
 Utilizando el disco de RAM inicial(``initrd``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

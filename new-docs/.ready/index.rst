@@ -34,31 +34,13 @@ Ready documents
    overlayfs
    gvfs
    planificacion_vdo
+   gpmc
+   foreShadow
+   amd-v
+   udevMan7
+   makefiles
 
-Containers y SSO
-================
 
-.. toctree::
-   :maxdepth: 1
-
-   Containers/SSO/index.rst
-   Containers/index.rst
-
-Implementacion IdM
-==================
-
-.. toctree::
-   :maxdepth: 1
-
-   Free-IPA/index
-
-Mantenimiento sistema
-=====================
-
-.. toctree::
-   :maxdepth: 1
-   
-   Maint/index
 
 .. usa el siguiente alias:   
    alias htmlBuild='sphinx-build -nW -b html -c source/ new-docs/.ready/ /tmp/sphinx_html'

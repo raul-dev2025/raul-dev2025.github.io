@@ -2,12 +2,10 @@
 NetConsole
 ==========
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contenido:
+.. contents:: Tabla de Contenido
+   :depth: 2
 
    
-
 Introducción
 ============
 
