@@ -6,39 +6,9 @@ Ready documents
    :maxdepth: 1
    :caption: Contenido:
 
-   listRCU
-   manInitrd
-   netconsole
-   pci
-   PXE-syslinux
-   rcu
-   ring-buffer-design-1
-   UP
-   usage-model
-   zero-page
-   boot-delay
-   cpuPinning
-   emaquetadoDocs
-   generateOTP
-   guestMount_offline
-   incidencia-win10-tpm
-   mantenimientoIV
-   nft_ns2
-   secureBoot
-   dracutMan
-   systemd-unitMan
-   systemdMan
-   udev
-   anacron-cron
-   dracut
-   overlayfs
-   gvfs
-   planificacion_vdo
-   gpmc
-   foreShadow
-   amd-v
-   udevMan7
-   makefiles
+   acpi
+
+   
 
 
 
