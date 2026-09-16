@@ -1,52 +1,24 @@
+===============
 TLSCreateCACert
----------------
+===============
 
-1. `Pasos para crear un archivo Certificado de Autoridad TLS para
-   libvirt <#1>`__
-   1.1 `Lista completa de pasos <#1i1>`__
-   1.2 `Plantilla para el Certificado de Autoridad, usando un editor de
-   textos <#1i2>`__
-   1.3 `Creando un archivo llave: Certificado de Autoridad con
-   ``certtool`` <#1i3>`__
-   1.4 `Combinación de la plantilla con la llave rpivada, para crear el
-   CA <#1i4>`__
-   1.5 `La plantilla no se necesitará mas, puede descartarse <#1i5>`__
-   1.6 `Mover el certificado a su lugar <#1i6>`__
+.. contents:: Contenido
+   :depth: 2
 
-   - 1.6.1 `Pertenecia y permisos <#1i6i1>`__
-   - 1.6.2 `Transferencia y configuración del certificado <#1i6i2>`__
 
-     - 1.6.2.1 `Transfiriendo al host1 <1i6i2i1>`__
-     - 1.6.2.2 `Conexión al host1 <1i6i2i2>`__
-     - 1.6.2.3 `Transfiriendo el certificado al host2 <1i6i2i3>`__
-     - 1.6.2.4 `Conexción al host2 <1i6i2i4>`__
-     - 1.6.2.5 `Transfiriendo los archivos al puesto
-       administrativo <1i6i2i5>`__
-     - 1.6.2.6 `Conexión al puesto administrativo <#1i6i2i6>`__
-     - 1.6.2.7 `La parte del Certificado de Autoridad, ya está
-       completa <#1i6i2i7>`__
-
-1.7 `Lista completa de pasos <#1i7>`__
-
---------------
 
 Pasos para crear un archivo *Certificado de Autoridad* TLS para *libvirt*\ 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-El primer paso en la configuración de ``libvirt`` para su uso con
-**TLS**, es crear el \_Certificado de Autoridad\_\_, usado para firmar
-todos los demás certificados que iremos creando.
+El primer paso en la configuración de ``libvirt`` para su uso con **TLS**, es crear el Certificado de Autoridad, usado para firmar todos los demás certificados que iremos creando.
 
-Sigue estas instrucciones para crear el **certificado** *Certificado de
-Autoridad*, después, continúa navegando a través de las páginas para
-completar la configuración.
+Sigue estas instrucciones para crear el **certificado** *Certificado de Autoridad*, después, continúa navegando a través de las páginas para completar la configuración.
 
 Lista completa de pasos
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 ESTO ES EL ÍNDICE GENERAL // FERENCIAS RELATIVAS:
 
-[textoAlEnlace][text-j1]
 
 Lista completa del proceso 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -62,25 +34,23 @@ Lista completa del proceso
 Plantilla para el *Certificado de Autoridad*, usando un editor de textos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| |editor-template|
-| Esto es un archivo en texto plano, con los siguientes campos:
+Esto es un archivo en texto plano, con los siguientes campos:
 
-| ``cn`` = **Nombre de tu organización**
-| ``ca``
-| ``cert_signing_key``
+- ``cn`` = **Nombre de tu organización**
+- ``ca``
+- ``cert_signing_key``
 
-El valor **Nombre de tu organización**, debería ser ajustado para que
-coincida con el tuyo propio.
+El valor **Nombre de tu organización**, debería ser ajustado para que coincida con el tuyo propio.
 
-| Por ejemplo:
-| # cat certificate_authority_template.info
-| cn = libvirt.org
-| ca cert_signing_key
+Por ejemplo:
 
-| Nótese que por defecto, el certificado *CA* úncimamente es válido por
-  *1* año.
-| Esto puede cambiarse, incluyendo el campo *“expiration_days”* en el
-  archivo plantilla, antes de generar el certificado.
+::
+
+   # cat certificate_authority_template.info
+   cn = libvirt.org
+   ca cert_signing_key
+
+Nótese que por defecto, el certificado *CA* úncimamente es válido por *1* año. Esto puede cambiarse, incluyendo el campo *“expiration_days”* en el archivo plantilla, antes de generar el certificado.
 
 ::
 
@@ -92,11 +62,7 @@ coincida con el tuyo propio.
 Creando un archivo *llave*: *Certificado de Autoridad* con ``certtool``\ 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| Deberá ser creada una llave privada, para después ser usada, junto al
-  *CA*.
-| |crear-caKey-con-certtool|
-| Esta llave, será usada para crear el **Certificado de Autoridad** o
-  *CA* y, parar firmar los certificados **TLS** de cliente y servidor.
+Deberá ser creada una llave privada, para después ser usada, junto al *CA*. Esta llave, será usada para crear el **Certificado de Autoridad** o   *CA* y, parar firmar los certificados **TLS** de cliente y servidor.
 
 ::
 
@@ -106,14 +72,9 @@ Creando un archivo *llave*: *Certificado de Autoridad* con ``certtool``\
    # ls -la certificate_authority_key.pem
    -r--------. 1 root root 1675 Aug 25 04:37 certificate_authority_key.pem
 
-**NOTA: La seguridad de esta llave privada es extremadamente
-importante([1!!][enlace])** [enlace]:https://pariticion.html
+**NOTA:** La seguridad de esta llave privada es extremadamente importante `partición <https://pariticion.html>`_
 
-Si una persona no autorizada obtiene esta llave, podría usarla junto con
-el *CA* para firmar cualquier otro certificado que él genere. Éste tipo
-de certificado *“falso”*, permitiría llevar a cabo, comandos
-administrativos, sobre los supuestos virtualizados; lo que supondría un
-*potencial* peligro.
+Si una persona no autorizada obtiene esta llave, podría usarla junto con el *CA* para firmar cualquier otro certificado que él genere. Éste tipo de certificado *“falso”*, permitiría llevar a cabo, comandos administrativos, sobre los supuestos virtualizados; lo que supondría un *potencial* peligro.
 
 Combinación de la plantilla con la *llave rpivada*, para crear el *CA*\ 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -176,18 +137,9 @@ Combinación de la plantilla con la *llave rpivada*, para crear el *CA*\
    # ls -la certificate_authority_certificate.pem
    -rw-r--r--. 1 root root 1070 Aug 25 04:41 certificate_authority_certificate.pem
 
-El nombre de archivo del Certificado *CA* es
-**certificate_authority_certificate.pem**. La seguridad de este
-certificado no es tan importante como la de la *llave*. Será copiado en
-cada huesped(**host**) y máquina administrativa, durante el proceso de
-configuración del protocolo *TLS*.
+El nombre de archivo del Certificado *CA* es **certificate_authority_certificate.pem**. La seguridad de este certificado no es tan importante como la de la *llave*. Será copiado en cada huesped(**host**) y máquina administrativa, durante el proceso de configuración del protocolo *TLS*.
 
-Resaltar, que el período de validez para certificado, será dispuesto
-mediante los campos **Not Before** y **Not After** -*no antes* y *no
-después*, respectivamente. Para incluir el concepto
-**“expiration_days”** -*días de gracia*, antes de terminar su validez,
-deberá incluirse tal campo en el archivo plantilla. Es aconsejable
-comprobar una segunda vez, que el rango dispuesto, es el adecuado.
+Resaltar, que el período de validez para certificado, será dispuesto mediante los campos **Not Before** y **Not After** -*no antes* y *no después*, respectivamente. Para incluir el concepto **“expiration_days”** -*días de gracia*, antes de terminar su validez, deberá incluirse tal campo en el archivo plantilla. Es aconsejable comprobar una segunda vez, que el rango dispuesto, es el adecuado.
 
 La plantilla no se necesitará mas, puede descartarse
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -204,49 +156,30 @@ La plantilla no se necesitará mas, puede descartarse
 Mover el certificado a su lugar
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Ahora que el certificado ha sido creado, necesita ser copiado sobre las
-computadoras; esto es, los dos huéspedes y la computadora
-administrativa.
+Ahora que el certificado ha sido creado, necesita ser copiado sobre las computadoras; esto es, los dos huéspedes y la computadora administrativa.
 
-| |plantilla-a-la-basura|
-| La localización por defecto, del archivo de certificado es:
-  ``/etc/pki/cacert.pem``.
-| **Nota:** la seguridad del archivo de llave privada, es súmamente
-  importante. **No debe ser copiado** a otras computadors, junto al
-  certificado.
+La localización por defecto, del archivo de certificado es: ``/etc/pki/cacert.pem``.
+
+**Nota:** la seguridad del archivo de llave privada, es súmamente importante. **No debe ser copiado** a otras computadors, junto al certificado.
 
 Pertenecia y permisos
 ^^^^^^^^^^^^^^^^^^^^^
 
-| La *pertenencia* y *permisos* de acceso al certificado, deben ser los
-  siguientes:
-| *pertenencia: (root:root)*, *permisos: (444)*, y la correspondiente
-  etiqueta para *SELinux* *“system_u:object_t:sO”*. Ésto último sólo es
-  relevante si el sistema cuenta con la aplicación(*SELinux*).
+La *pertenencia* y *permisos* de acceso al certificado, deben ser los siguientes: *pertenencia: (root:root)*, *permisos: (444)*, y la correspondiente etiqueta para *SELinux* *“system_u:object_t:sO”*. Ésto último sólo es relevante si el sistema cuenta con la aplicación(*SELinux*).
 
-Tmabién deberán tenerse en cuenta, las prácticas y requisitos de
-seguridad del *sitio*, ya que podría requerir una configuración,
-ligeramente distinta. > En un entorno Debian, esto significa que no hay
-``/etc/pki/...`` por lo que el *directorio* deberá ajustarse
-consecuentemente. Para un entorno Windows, sucedería algo similar.
-Únicamente mencionar, que los archivos ``.pem`` resultan un reemplazo
-simple, para la codificación ``PKCS #12`` de Windows, algo más compleja.
+Tmabién deberán tenerse en cuenta, las prácticas y requisitos de seguridad del *sitio*, ya que podría requerir una configuración, ligeramente distinta. > En un entorno Debian, esto significa que no hay ``/etc/pki/...`` por lo que el *directorio* deberá ajustarse consecuentemente. Para un entorno Windows, sucedería algo similar. Únicamente mencionar, que los archivos ``.pem`` resultan un reemplazo simple, para la codificación ``PKCS #12`` de Windows, algo más compleja.
 
 Transferencia y configuración del certificado
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-En el ejemplo de abajo, se ha utilizado ``scp`` para transferir el
-certificado a cada cliente virtualizado. Después, se ha entrado
-directamente a cada uno de los *supuestos* y movido el certificado, al
-lugar oportuno, dando los permisos tal, y como se explicó en la sección
-anterior.
+En el ejemplo de abajo, se ha utilizado ``scp`` para transferir el certificado a cada cliente virtualizado. Después, se ha entrado directamente a cada uno de los *supuestos* y movido el certificado, al lugar oportuno, dando los permisos tal, y como se explicó en la sección anterior.
 
-Transfiriendo al *host1*\ 
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Transfiriendo al *host1*
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-| |transferencia-al-host1|
-| > … ya no es necesario seguir utilizando nombres de archivo tan
-  largos, por lo que sus nombres, han sido ajustados!!
+|transferencia-al-host1|
+|plantilla-a-la-basura|
+> … ya no es necesario seguir utilizando nombres de archivo tan largos, por lo que sus nombres, han sido ajustados!!
 
 ::
 
@@ -257,18 +190,21 @@ Transfiriendo al *host1*\
 Conexción al host1
 ^^^^^^^^^^^^^^^^^^
 
-Será movico el certificado, configurando sus permisos. # mv cacert.pem
-/etc/pki/CA # chmod 444 /etc/pki/CA/cacert.pem
+Será movico el certificado, configurando sus permisos. 
 
-Si el servidor cuenta con SELinux activado, deberá actualizarse la
-etiqueta: # restore /etc/pki/CA/cacert.pem
+::
+   
+   # mv cacert.pem
+   /etc/pki/CA # chmod 444 /etc/pki/CA/cacert.pem
+
+Si el servidor cuenta con SELinux activado, deberá actualizarse la etiqueta: # restore ``/etc/pki/CA/cacert.pem``.
 
 Transfiriendo el certificado al host2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 | |transferencia-al-host2|
-| > … ya no es necesario seguir utilizando nombres de archivo tan
-  largos, por lo que sus nombres, han sido ajustados!!
+
+> … ya no es necesario seguir utilizando nombres de archivo tan   largos, por lo que sus nombres, han sido ajustados!!
 
 ::
 
@@ -279,18 +215,21 @@ Transfiriendo el certificado al host2
 Conexción al host2
 ^^^^^^^^^^^^^^^^^^
 
-Será movico el certificado, configurando sus permisos. # mv cacert.pem
-/etc/pki/CA # chmod 444 /etc/pki/CA/cacert.pem
+Será movico el certificado, configurando sus permisos. 
 
-Si el servidor cuenta con SELinux activado, deberá actualizarse la
-etiqueta: # restore /etc/pki/CA/cacert.pem
+::
+
+   # mv cacert.pem
+   /etc/pki/CA # chmod 444 /etc/pki/CA/cacert.pem
+
+Si el servidor cuenta con SELinux activado, deberá actualizarse la etiqueta: # restore ``/etc/pki/CA/cacert.pem``.
 
 Transfiriendo los archivos al *puesto administrativo*\ 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| |transferencia-al-Admin1|
-| > … ya no es necesario seguir utilizando nombres de archivo tan
-  largos, por lo que sus nombres, han sido ajustados!!
+|transferencia-al-Admin1|
+> … ya no es necesario seguir utilizando nombres de archivo tan
+largos, por lo que sus nombres, han sido ajustados!!
 
 ::
 
@@ -298,14 +237,17 @@ Transfiriendo los archivos al *puesto administrativo*\
    someuser@admin password:
    certificate_authority_certificate.pem  100% 1164     1.4KB/s   00:00
 
-Conexión al *puesto administrativo*\ 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Conexión al *puesto administrativo*
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Será movico el certificado, configurando sus permisos. # mv cacert.pem
-/etc/pki/CA # chmod 444 /etc/pki/CA/cacert.pem
+Será movico el certificado, configurando sus permisos. 
 
-Si el servidor cuenta con SELinux activado, deberá actualizarse la
-etiqueta: # restore /etc/pki/CA/cacert.pem
+::
+
+   # mv cacert.pem /etc/pki/CA 
+   # chmod 444 /etc/pki/CA/cacert.pem
+
+Si el servidor cuenta con SELinux activado, deberá actualizarse la etiqueta: # restore /etc/pki/CA/cacert.pem
 
 La parte del *Certificado de Autoridad*, ya está completa
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -315,12 +257,8 @@ La parte del *Certificado de Autoridad*, ya está completa
 
    transferencia-completa
 
-.. _lista-completa-de-pasos-1:
-
 Lista completa de pasos
 ^^^^^^^^^^^^^^^^^^^^^^^
-
-.. _lista-completa-del-proceso-1:
 
 Lista completa del proceso 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
