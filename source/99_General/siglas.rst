@@ -372,7 +372,11 @@ Siglas
 
 -  **EFI** — Extensible Firmware Interface
 
+- **ESP** — EFI System Partition
+
 -  **UEFI** — Unified Extensible Firmware Interface
+
+- **GUID** — Globally Unique Identifier
 
 -  **HDD** — Hard Disk Drive
 

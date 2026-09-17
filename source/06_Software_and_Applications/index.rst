@@ -47,7 +47,6 @@ Supuestos
    :maxdepth: 1
 
    /06_Software_and_Applications/Supuestos/guestMount_offline
-   /06_Software_and_Applications/Supuestos/index
 
 Casos prácticos, escenarios de prueba e índice general de supuestos prácticos, incluyendo montaje offline de imágenes de disco de máquinas virtuales.
 
@@ -95,7 +94,6 @@ Supuestos/Containers
    /06_Software_and_Applications/Supuestos/Containers/conectores_B550AorusElitev2
    /06_Software_and_Applications/Supuestos/Containers/guia-container-base
    /06_Software_and_Applications/Supuestos/Containers/GuiaContenedores
-   /06_Software_and_Applications/Supuestos/Containers/index
 
 Documentación sobre arquitectura y gestión de contenedores, guías de despliegue base y especificaciones asociadas al hardware de soporte para virtualización ligera.
 
@@ -117,6 +115,17 @@ Supuestos/Golden
    /06_Software_and_Applications/Supuestos/Golden/Sellado
 
 Procedimientos para la creación, purificación, clonación y sellado de imágenes patrón (*Golden Images*), incluyendo su vinculación e integración con servicios de identidad (IdM).
+
+
+Supuestos/Hipervisor
+====================
+
+.. toctree::
+   :maxdepth: 1
+
+   /06_Software_and_Applications/Supuestos/Hipervisor/hypervisor
+   /06_Software_and_Applications/Supuestos/Hipervisor/Intel-VTd
+   /06_Software_and_Applications/Supuestos/Hipervisor/notasHypervisor
 
 
 Supuestos/IdM
@@ -141,7 +150,6 @@ Supuestos/IdM/Free-IPA
 
    /06_Software_and_Applications/Supuestos/IdM/Free-IPA/generateOTP
    /06_Software_and_Applications/Supuestos/IdM/Free-IPA/IdM-replica
-   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/index
    /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipaConfigurations
    /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipa-maint02
    /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipa-maint-copy
@@ -171,7 +179,6 @@ Supuestos/IdM/SSO
    /06_Software_and_Applications/Supuestos/IdM/SSO/fase0
    /06_Software_and_Applications/Supuestos/IdM/SSO/fase1
    /06_Software_and_Applications/Supuestos/IdM/SSO/hojaDeRuta
-   /06_Software_and_Applications/Supuestos/IdM/SSO/index
    /06_Software_and_Applications/Supuestos/IdM/SSO/opciones-red
 
 Fases de integración, hoja de ruta y despliegue de mecanismos de Inicio de Sesión Único (*Single Sign-On* / SSO) dentro de la arquitectura de red.
@@ -200,6 +207,15 @@ Supuestos/Processor
    /06_Software_and_Applications/Supuestos/Processor/cpuPinning
 
 Ajustes avanzados a nivel de procesador para entornos virtualizados, habilitación de extensiones de virtualización hardware (AMD-V) y asignación fija de vCPUs (*CPU Pinning*).
+
+
+Supuestos/Qemu
+==============
+
+.. toctree::
+   :maxdepth: 1
+
+   /06_Software_and_Applications/Supuestos/Qemu/qemu_notas
 
 
 Supuestos/Testing
