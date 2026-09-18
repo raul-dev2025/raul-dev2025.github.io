@@ -9,7 +9,7 @@
 .. toctree::
    :maxdepth: 1
 
-   /04_System_Administration/emaquetadoDocs
+   /04_System_Administration/empaquetadoDocs
 
 Guías y estándares para la paquetización, maquetación y estructura de la documentación técnica del sistema.
 
@@ -54,17 +54,6 @@ system_apps/Systemd
    /04_System_Administration/system_apps/Systemd/systemd-unitMan
 
 Documentación de referencia y manuales técnicos sobre el sistema de iniciación y gestor de servicios Systemd, abarcando la gestión global del sistema y la configuración detallada de archivos de unidad (*units*).
-
-
-system_configuration
-====================
-
-.. toctree::
-   :maxdepth: 1
-
-   /04_System_Administration/system_configuration/index
-
-Índice global y parámetros generales de configuración del sistema operativo.
 
 
 system_configuration/ACL_configuration

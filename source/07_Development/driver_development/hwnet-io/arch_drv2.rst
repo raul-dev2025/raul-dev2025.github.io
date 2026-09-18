@@ -26,11 +26,10 @@ Esta función es un callback de configuración que utiliza la pila de red al inv
 
 Es el punto de entrada cuando hacemos ``insmod`` o ``modprobe``. Su responsabilidad es:
 
-* **Asignación de memoria** (``alloc_etherdev``):
-Reserva la memoria para la estructura ``struct net_device`` más el tamaño de nuestra estructura privada ``struct hwnet_priv``. *(Internamente llama al setup para dejar el dispositivo en un estado coherente).*
-* **Vinculación de datos privados:**
-Obtenemos el puntero a nuestra estructura privada mediante ``netdev_priv(dev)`` y guardamos la referencia al propio ``net_device`` dentro de ``priv->dev``.
-* **Registro en el Kernel** (``register_netdev``):
-Pasa el dispositivo al subsistema de red del kernel Linux. A partir de que esta llamada devuelve ``0`` (éxito), la interfaz pasa a existir visiblemente en el sistema (por ejemplo, en ``ip link`` o ``/proc/net/dev``).
-* **Gestión de fallos:**
-Si ``register_netdev`` falla, debemos liberar la memoria reservada previamente con ``free_netdev(dev)`` antes de salir con un código de error (como ``-ENOMEM``).
+* **Asignación de memoria** (``alloc_etherdev``): Reserva la memoria para la estructura ``struct net_device`` más el tamaño de nuestra estructura privada ``struct hwnet_priv``. *Internamente llama al setup para dejar el dispositivo en un estado coherente.*
+
+* **Vinculación de datos privados:** Obtenemos el puntero a nuestra estructura privada mediante ``netdev_priv(dev)`` y guardamos la referencia al propio ``net_device`` dentro de ``priv->dev``.
+
+* **Registro en el Kernel** (``register_netdev``): Pasa el dispositivo al subsistema de red del kernel Linux. A partir de que esta llamada devuelve ``0`` (éxito), la interfaz pasa a existir visiblemente en el sistema (por ejemplo, en ``ip link`` o ``/proc/net/dev``).
+
+* **Gestión de fallos:** Si ``register_netdev`` falla, debemos liberar la memoria reservada previamente con ``free_netdev(dev)`` antes de salir con un código de error (como ``-ENOMEM``).

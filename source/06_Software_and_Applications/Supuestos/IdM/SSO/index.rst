@@ -1,35 +1,40 @@
+.. SPDX-License-Identifier: GPL-2.0-or-later
+
 =======================
-Íncide 'Single Sign-On'
+Índice 'Single Sign-On'
 =======================
 
-Índice de Documentación de Red y SSO
+Índice de Documentación de Red y SSO.
 
-.. toctree::
-   :maxdepth: 1
+Planificación y Fases
+=====================
 
-   hojaDeRuta
-   fase0
-   fase1
+Define la visión general, el plan global de trabajo y los pasos cronológicos o preparatorios del proyecto.
 
-**Planificación y Fases** ( ``hojaDeRuta``, ``fase0``, ``fase1``): Define la visión general, el plan global de trabajo y los pasos cronológicos o preparatorios del proyecto.
+* :doc:`hojaDeRuta <hojaDeRuta>`
+* :doc:`fase0 <fase0>`
+* :doc:`fase1 <fase1>`
 
+-----
 
-.. toctree::
-   :maxdepth: 1
+Infraestructura y Red
+=====================
 
-   auth-director
-   opciones-red
+Agrupa la configuración de servicios centrales de autenticación y las alternativas de arquitectura de red.
 
-**Infraestructura y Red** (``auth-director``, ``opciones-red``): Agrupa la configuración de servicios centrales de autenticación y las alternativas de arquitectura de red.
+* :doc:`auth-director <auth-director>`
+* :doc:`opciones-red <opciones-red>`
 
-.. toctree::
-   :maxdepth: 1
+-----
 
-   A_SSO_Integration
-   A_SSO_Integration00
-   B_SSO_Integration
-   B_SSO_Integration00
-   C_SSO_Integration
-   C_SSO_Integration00
+Integración SSO y Borradores
+============================
 
-**Integración SSO y Borradores** (``*_SSO_Integration*``): Contiene los documentos principales de arquitectura Single Sign-On (Planes A, B y C) junto con sus archivos auxiliares o revisiones preliminares (``00``).
+Contiene los documentos principales de arquitectura Single Sign-On (Planes A, B y C) junto con sus archivos auxiliares o revisiones preliminares.
+
+* :doc:`A_SSO_Integration <A_SSO_Integration>`
+* :doc:`A_SSO_Integration00 <A_SSO_Integration00>`
+* :doc:`B_SSO_Integration <B_SSO_Integration>`
+* :doc:`B_SSO_Integration00 <B_SSO_Integration00>`
+* :doc:`C_SSO_Integration <C_SSO_Integration>`
+* :doc:`C_SSO_Integration00 <C_SSO_Integration00>`
