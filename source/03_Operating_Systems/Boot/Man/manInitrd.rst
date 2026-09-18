@@ -136,8 +136,8 @@ Archivos
 
 ``/dev/initrd`` ``/de/ram0`` ``/linuxrc/`` ``/initrd``
 
-Notas
-~~~~~
+
+**Notas**
 
 1. Con actual kernel, cualquier FS que permanezca montado cunado ``/dev/ram0`` sea movido desde ``/`` a ``/initrd``, continuará siendo accesible. A pesar de ello, ``/proc/mounts`` no serán actualizados.
 
@@ -162,10 +162,8 @@ de manual de Linux*. Una descripción del proyecto, información sobre el
 registro de errores y, la última versión de ésta página, podrá
 encontrarse em http://www.kernel.org/doc/man-pages.
 
-.. _notas-1:
 
-notas
-^^^^^
+**Notas**
 
 El gestor de arranque, leerá el núcleo junto a un sistema de ficheros
 inicial llamado raíz(root), -como una imágen en memoria, y después

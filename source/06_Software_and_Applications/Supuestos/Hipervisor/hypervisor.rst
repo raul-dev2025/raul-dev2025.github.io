@@ -18,12 +18,11 @@ El kernel, es la parte de software mínima, capaz de proporcionar los mecanismos
 
 Dentro del apartado de utilidades, requeridas para el correcto funcionamiento del *hipervisor*, se incluirían dependencias tales, como un gestor de arranque operativo, el paquete *iproute* o un gestor de dispositivos(udev), entre otros.
 
-Hay dos tipos de Hipervisores
+Hay dos tipos de Hipervisores:
 
-.. figure:: ../../../source/descargas/hipervisor.jpg
+.. figure:: ../../../descargas/hipervisor.jpg
+   :align: center
    :alt: Hypervisores
-
-   Hypervisores
 
 **Tipo 1**
 Este primer tipo, corre directamente sobre el *hardware*, para controlarlo y administrar los sistemas operativos invitados o *supuestos*. Es habitualmente utilizado el término *bare metal* [#f1]_ -del inglés, para referirse a ellos.

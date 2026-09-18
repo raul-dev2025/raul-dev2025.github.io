@@ -6,7 +6,7 @@ Apuntes sobre Protocolo TLS y Gestión de Certificados
    :depth: 2
 
 Gestión Centralizada de Certificados (Fedora / RHEL)
-===================================================
+====================================================
 
 Fedora utiliza un sistema de gestión de certificados llamado ``SharedSystemCertificates`` para proveer un almacén de certificados centralizado en el sistema.
 

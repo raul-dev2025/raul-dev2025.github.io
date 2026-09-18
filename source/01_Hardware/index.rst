@@ -9,17 +9,14 @@ hardware_resources
 .. toctree::
    :maxdepth: 1   
    
-   hardware_resources/compCPU
    hardware_resources/index
-   hardware_resources/pci-exp-tests-HOWTO
-   hardware_resources/sysTasks
 
 Contiene documentación orientada al análisis, mapeo y pruebas de los recursos físicos del sistema, incluyendo topología de buses y tareas de diagnóstico. Sirve como núcleo de consulta para la caracterización de dispositivos PCIe y la gestión de tareas de bajo nivel.
 
 
 
-hardware_resources/hw_specs
-===========================
+Hardware Specifications
+=======================
 
 .. toctree::
    :maxdepth: 1
@@ -65,7 +62,6 @@ sistema
    sistema/modulosMemActuales
    sistema/perifericos
    sistema/Prefetching_en_Procesadores
-   sistema/resume_modulo_0852
    sistema/UEFI-refs
    sistema/UEFI
    sistema/velocidadModulDDR

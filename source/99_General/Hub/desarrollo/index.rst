@@ -40,12 +40,3 @@ This section covers System configuration.
    /99_General/miscellaneous/index
    
 This section contains miscellaneous topics that do not fit into the other categories, including Git-related topics and path truncation.
-
-
------
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Linux Kernel documents
-
-   /99_General/Hub/desarrollo/Kernel/index

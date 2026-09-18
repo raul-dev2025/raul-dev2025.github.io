@@ -283,7 +283,8 @@ La zona termal *ACPI*, incluye métodos de control para leer el actual systema d
 
 1. Cuando el *OS*, inicialmente encuentra una zona termal en el espacio de nombres, este lee el controlador de zona termal, el cuál evalua la zona termal par obtener su temperatura y puntos de travesía.
 2. Cuando un componente de sistema se calienta lo suficiente como para disparar un punto de travesía, un *GPE* de zona termal ocurre.
-3. El *GPE* causa una interrupción via *SCI*. Cuando el subsistema *ACPI* recibe la interrupción, primero comprueba donde cualquier *evento fijo* ha ocurrido. In este ejemplo, el evento de zona ermal es un *GPE*, así que no hay eventos fijos ocurridos.4. El subsistema *ACPI*, busca entonces en el espacio de nombres, el método de control que coincida con el número de interrupción del *GPE*. Una vez encontrado, el subsistema *ACPI* evalua el método de control, el cuál podría tener acceso al *hardware* y/o notificar el controlador de zona termal.
+3. El *GPE* causa una interrupción via *SCI*. Cuando el subsistema *ACPI* recibe la interrupción, primero comprueba donde cualquier *evento fijo* ha ocurrido. In este ejemplo, el evento de zona ermal es un *GPE*, así que no hay eventos fijos ocurridos.
+4. El subsistema *ACPI*, busca entonces en el espacio de nombres, el método de control que coincida con el número de interrupción del *GPE*. Una vez encontrado, el subsistema *ACPI* evalua el método de control, el cuál podría tener acceso al *hardware* y/o notificar el controlador de zona termal.
 5. El controlador de zona termal del sistema operativo, toma entonces, cuál sea la acción necesaria, para controlar el evento, incluyendo la posibilidad de acceder al *hardware*.
 
 The love of the contemporary Art.

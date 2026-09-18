@@ -21,8 +21,8 @@ Por ejemplo, sobreponer los datos almacenados en un *disco flash USB*, mientras 
 
 
 * **tmpfs:** sistema de archivo temporal(temp file system). 
-* **overlay:**, ver documentación *qemu* en **https://docs.raulvilchez.org/**
-**squashfs:**, sistema de archivo comprimido de sólo lectura
+* **overlay:**, ver documentación *qemu* en **https://docs.raulvilchez.org/**.
+* **squashfs:**, sistema de archivo comprimido de sólo lectura.
 
 Referencias y agradecimientos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

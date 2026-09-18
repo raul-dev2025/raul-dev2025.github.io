@@ -32,7 +32,7 @@ puede intrerpretarse igual que:
 
    log-buf-len=1M print_fatal_signals=1
 
-Las dobles comillas ``"``, son usadas para proteger espacios ```` en *valores*:
+Las dobles comillas ``"``, son usadas para proteger espacios en *valores*:
 
 ::
 

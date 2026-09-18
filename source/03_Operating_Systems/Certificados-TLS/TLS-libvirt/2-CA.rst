@@ -79,11 +79,6 @@ Si una persona no autorizada obtiene esta llave, podría usarla junto con el *CA
 Combinación de la plantilla con la *llave rpivada*, para crear el *CA*\ 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. figure:: /images/Cert-img/certol-createCa.png
-   :alt: cadena-crear-caKey-con-certtool
-
-   cadena-crear-caKey-con-certtool
-
 ::
 
    # certtool --generate-self-signed \
@@ -144,11 +139,6 @@ Resaltar, que el período de validez para certificado, será dispuesto mediante 
 La plantilla no se necesitará mas, puede descartarse
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. figure:: /images/Cert-img/trashTemplate.png
-   :alt: plantilla-a-la-basura
-
-   plantilla-a-la-basura
-
 ::
 
    # rm certificate_authority_template.info
@@ -177,8 +167,6 @@ En el ejemplo de abajo, se ha utilizado ``scp`` para transferir el certificado a
 Transfiriendo al *host1*
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-|transferencia-al-host1|
-|plantilla-a-la-basura|
 > … ya no es necesario seguir utilizando nombres de archivo tan largos, por lo que sus nombres, han sido ajustados!!
 
 ::
@@ -201,8 +189,6 @@ Si el servidor cuenta con SELinux activado, deberá actualizarse la etiqueta: # 
 
 Transfiriendo el certificado al host2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-| |transferencia-al-host2|
 
 > … ya no es necesario seguir utilizando nombres de archivo tan   largos, por lo que sus nombres, han sido ajustados!!
 
@@ -227,7 +213,6 @@ Si el servidor cuenta con SELinux activado, deberá actualizarse la etiqueta: # 
 Transfiriendo los archivos al *puesto administrativo*\ 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-|transferencia-al-Admin1|
 > … ya no es necesario seguir utilizando nombres de archivo tan
 largos, por lo que sus nombres, han sido ajustados!!
 
@@ -252,8 +237,10 @@ Si el servidor cuenta con SELinux activado, deberá actualizarse la etiqueta: # 
 La parte del *Certificado de Autoridad*, ya está completa
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. figure:: /images/Cert-img/transComplete.png
+.. figure:: /descargas/transComplete.jpg
    :alt: transferencia-completa
+   :figwidth: 75px
+   :height: 75px
 
    transferencia-completa
 
@@ -268,10 +255,3 @@ Lista completa del proceso
 3. Crear certificado de cliente.
 4. Configuración de *demonio* **libvirt**.
 5. Otras referencias.
-
-.. |editor-template| image:: /images/Cert-img/editor-template.png
-.. |crear-caKey-con-certtool| image:: /images/Cert-img/certtool-key.png
-.. |plantilla-a-la-basura| image:: /images/Cert-img/trashTemplate.png
-.. |transferencia-al-host1| image:: /images/Cert-img/transHost1.png
-.. |transferencia-al-host2| image:: /images/Cert-img/transHost2.png
-.. |transferencia-al-Admin1| image:: /images/Cert-img/transAdmin.png

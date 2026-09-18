@@ -26,9 +26,6 @@ office
    /06_Software_and_Applications/office/excel-3
    /06_Software_and_Applications/office/excel
    /06_Software_and_Applications/office/PowerPoint
-   /06_Software_and_Applications/office/prueba-1
-   /06_Software_and_Applications/office/prueba-2
-   /06_Software_and_Applications/office/prueba-3
    /06_Software_and_Applications/office/questionario_1
    /06_Software_and_Applications/office/questionario_2
    /06_Software_and_Applications/office/questionario_3

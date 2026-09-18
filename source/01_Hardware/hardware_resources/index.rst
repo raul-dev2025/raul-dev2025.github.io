@@ -11,13 +11,9 @@ System Tasks
 Technical breakdown of the physical architecture, including CPU comparisons, 
 PCI Express line allocations, and system resource investigations.
 
-.. toctree::
-   :maxdepth: 1
-
-   /01_Hardware/hardware_resources/sysTasks.rst
-   /01_Hardware/hardware_resources/bus-map-refact.rst
-   /01_Hardware/hardware_resources/pci-exp-tests-HOWTO.rst
-   /01_Hardware/hardware_resources/compCPU.rst
+* :doc:`System Tasks </01_Hardware/hardware_resources/sysTasks>`
+* :doc:`PCI Express Tests HOWTO </01_Hardware/hardware_resources/pci-exp-tests-HOWTO>`
+* :doc:`CPU Comparison </01_Hardware/hardware_resources/compCPU>`
 
 -----
 
@@ -26,13 +22,10 @@ Hardware Specifications
 Detailed operational guidelines, tracing workflows, and step-by-step procedures 
 for low-level system monitoring, host maintenance, and performance testing.
 
-.. toctree::
-   :maxdepth: 1
-
-   /01_Hardware/hardware_resources/hw_specs/workFlow-strace.rst
-   /01_Hardware/hardware_resources/hw_specs/privateInvestigations.rst
-   /01_Hardware/hardware_resources/hw_specs/longWalkOnSys.rst
-   /01_Hardware/hardware_resources/hw_specs/genericSys.rst
+* :doc:`Workflow - strace </01_Hardware/hardware_resources/hw_specs/workFlow-strace>`
+* :doc:`Private Investigations </01_Hardware/hardware_resources/hw_specs/privateInvestigations>`
+* :doc:`Long Walk on Sys </01_Hardware/hardware_resources/hw_specs/longWalkOnSys>`
+* :doc:`Generic System </01_Hardware/hardware_resources/hw_specs/genericSys>`
 
 -----
 
@@ -41,8 +34,5 @@ Network Infrastructure
 Documentation regarding physical network interface upgrades, PCIe bandwidth 
 validations, and Layer 2 virtual bridge configurations for environment connectivity.
 
-.. toctree::
-   :maxdepth: 1
-
-   /01_Hardware/hardware_resources/hw_specs/QNAP
-   /01_Hardware/hardware_resources/hw_specs/Bridge_Update
+* :doc:`QNAP </01_Hardware/hardware_resources/hw_specs/QNAP>`
+* :doc:`Bridge Update </01_Hardware/hardware_resources/hw_specs/Bridge_Update>`

@@ -50,7 +50,7 @@ Aparecerá el entorno del depurador interactivo, donde podrán ejecutarse los co
 
 Los comandos están documentados en “Resumen ACPICA y Referencias de Programador”, pudiendo ser descargado desde
 
-* :doc:`ACPICA Overview and Programmer Reference, en inglés. <https://acpica.org/documentation>`
+* `ACPICA Overview and Programmer Reference, en inglés. <https://acpica.org/documentation>`_
 
 Las referencias detalladas a lso comandos, se encuentran en el **capítulo 12**, “ACPICA Debugger Reference”. El comando ``help`` es utilizado para una rápida referencia a ellos.
 

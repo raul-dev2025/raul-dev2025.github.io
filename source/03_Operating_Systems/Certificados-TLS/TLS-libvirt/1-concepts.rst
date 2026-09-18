@@ -94,6 +94,3 @@ Certificado de autoridad
 Mediante esta aproximación, contar con un certificado central, capaz de firmar muchos otros, es considerado *como buena práctica de seguridad*. También permite su administración, mediante un, razonablemente, simple certificado, comparado con otras alternativas y, es la aproximación usada por *libvirt*.
 
 Éste certificado central, se refiere al **Certificado de Autoridad**. Será creado uno, al principio de nuestra configuración **TLS**, en la próxima sección. Después, usado para firmar cada certificado *Cliente* y *Servidor*.
-
-.. figure:: /images/image_ca.png
-   :alt: relacion-certificado-autoridad

@@ -27,6 +27,6 @@ Estos comandos se utilizan sobre la línea de comando del nucleo.
 Referencias
 -----------
 
-`Dracut <https://en.wikipedia.org/wiki/Dracut_(software)>`_
-`dracut <https://dracut.wiki.kernel.org>`_
-`fedoraproject <https://fedoraproject.org/wiki/How_to_debug_Dracut_problems>`_
+* `Dracut <https://en.wikipedia.org/wiki/Dracut_(software)>`_
+* `dracut kernel <https://dracut.wiki.kernel.org>`_
+* `fedoraproject <https://fedoraproject.org/wiki/How_to_debug_Dracut_problems>`_

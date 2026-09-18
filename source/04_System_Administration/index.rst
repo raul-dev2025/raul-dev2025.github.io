@@ -23,7 +23,6 @@ Incidencias
    /04_System_Administration/Incidencias/autenticationError
    /04_System_Administration/Incidencias/incidenciaMontajeNFS
    /04_System_Administration/Incidencias/incidencia_Xwayland
-   /04_System_Administration/Incidencias/index
    /04_System_Administration/Incidencias/portAuditIdM
 
 Registro de resolución de fallos y auditorías del sistema. Cubre problemas de autenticación, errores de montaje en redes NFS, fallos en servidores de despliegue gráfico Xwayland y auditorías de puertos e identidad.
@@ -78,7 +77,6 @@ system_configuration/ACL_configuration
    /04_System_Administration/system_configuration/ACL_configuration/ACLsMultimediaDescargas
    /04_System_Administration/system_configuration/ACL_configuration/ACLsText
    /04_System_Administration/system_configuration/ACL_configuration/ACLsVirtMetadatos
-   /04_System_Administration/system_configuration/ACL_configuration/index
 
 Políticas y listas de control de acceso (ACL) aplicadas a la estructura de directorios. Detalla la asignación de permisos para documentos, descargas multimedia, archivos de texto y metadatos de entornos virtualizados.
 

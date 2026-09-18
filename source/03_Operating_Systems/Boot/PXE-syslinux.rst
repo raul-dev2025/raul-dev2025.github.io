@@ -840,21 +840,15 @@ Opcionalmente, usar directivas adicionales, como INCLUDE y/o CONFIG. Compartir a
 
 .. admonition:: Notas
 
-   En lugar de ``pxelinux.0``, la alternativa es ``lpxelinux.0`` -cuya
-   letra inicial en minúscula “L”, podrá ser utilizada en clientes BIOS.
+   En lugar de ``pxelinux.0``, la alternativa es ``lpxelinux.0`` -cuya letra inicial en minúscula “L”, podrá ser utilizada en clientes BIOS.
 
-   El archivo ``syslinux.efi`` en EFI IA32, es distinto en EFI X64, cada
-   *arquitectura/firmware* tiene su própio EFI X64.
+   El archivo ``syslinux.efi`` en EFI IA32, es distinto en EFI X64, cada *arquitectura/firmware* tiene su própio EFI X64.
 
-   El archivo ``syslinux.efi`` en EFI X64, es el mimso binario desde el
-   arranque de disco en EFI X64, que desde el arranque de red en EFI X64.
+   El archivo ``syslinux.efi`` en EFI X64, es el mimso binario desde el arranque de disco en EFI X64, que desde el arranque de red en EFI X64.
 
-   El archivo ``syslinux.efi`` en EFI IA32 es el mimso binario desde el
-   arranque de disco en EFI X64, que desde el arranque de red en EFI IA32.
+   El archivo ``syslinux.efi`` en EFI IA32 es el mimso binario desde el arranque de disco en EFI X64, que desde el arranque de red en EFI IA32.
 
-   Cada archivo ``syslinux.efi`` puede ser renombrado -ejemplo, a
-   ``bootx64.efi``; habrá que tener en cuenta la ruta/s adecuada y, el
-   nombre/s, en el archivo de configuración del DHCP.
+   Cada archivo ``syslinux.efi`` puede ser renombrado -ejemplo, a ``bootx64.efi``; habrá que tener en cuenta la ruta/s adecuada y, el nombre/s, en el archivo de configuración del DHCP.
 
 
 Referencias y agradecimientos
@@ -872,10 +866,9 @@ Referencias y agradecimientos
 
 .. [#f1] `Siglas </TerritorioLinux/siglas.html>`__
 
-.. [#f2] Portable, el término se utiliza habitualmente para referirse a otros sistemas operativos. Ejemplo, War Hammer 40.000, juego de éxito mundial, ha mutado el código haciéndolo portable a plataformas tipo Unix. Desambiguación, el término es igualmente utilizado, para referirse al tipo de procesador -la “arquitectura del sistema”, sobre la que ha sido instalado el sistema operativo. Ejemplo, ``x86``,
-``x86_64`` ...
+.. [#f2] Portable, el término se utiliza habitualmente para referirse a otros sistemas operativos. Ejemplo, War Hammer 40.000, juego de éxito mundial, ha mutado el código haciéndolo portable a plataformas tipo Unix. Desambiguación, el término es igualmente utilizado, para referirse al tipo de procesador -la “arquitectura del sistema”, sobre la que ha sido instalado el sistema operativo. Ejemplo, ``x86``, ``x86_64`` ...
 
-.. [#f3] Puerto, referido como interfase física de conexionado, dónde es acoplada alguna suerte de conector físico, conectando dos piezas *hardware*. Ejemplo, El puerto db9 es habitualmente utilizado como interfase de conexión entre dos máquinas, con una conexión serial para la depuración, o lectura de registros. Desambiguación, leer la entrada de arriba, *portable*. El término podría referirse tanto a la *arquitectura del procesador*, como al tipo de sistema operativo -Linux, Macintosh, etc, como tambień a una versión o distribución de un sistema operativo concreto. Ejemplo, la comunidad Linux ha estado tabajando intensamente, en un puerto a la dustrubución Fedora 8, de Xen hipervisor.
+* **[3]** Puerto, referido como interfase física de conexionado, dónde es acoplada alguna suerte de conector físico, conectando dos piezas *hardware*. Ejemplo, El puerto db9 es habitualmente utilizado como interfase de conexión entre dos máquinas, con una conexión serial para la depuración, o lectura de registros. Desambiguación, leer la entrada de arriba, *portable*. El término podría referirse tanto a la *arquitectura del procesador*, como al tipo de sistema operativo -Linux, Macintosh, etc, como tambień a una versión o distribución de un sistema operativo concreto. Ejemplo, la comunidad Linux ha estado tabajando intensamente, en un puerto a la dustrubución Fedora 8, de Xen hipervisor.
 
 flashed – destello?, es algo así como sobreescribir los datos contenidos en una memoria.
 

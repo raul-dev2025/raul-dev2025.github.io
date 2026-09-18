@@ -41,7 +41,7 @@ Interfaz Gráfica
 En macOS, la gestión y supervisión de certificados se realiza a través de la aplicación **Acceso a Llaveros** (*Keychain Access*), ubicada en ``/System/Applications/Utilities/Keychain Access.app``.
 
 Línea de Comandos (Herramienta ``security``)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Para verificar la validez de un certificado desde la terminal:
 

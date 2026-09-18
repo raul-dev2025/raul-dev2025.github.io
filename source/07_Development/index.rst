@@ -18,9 +18,9 @@ Sección principal dedicada a la arquitectura, diseño y pruebas de controladore
 scripts
 =======
 
-   * :doc:`plot </07_Development/scripts/fig166.gp>`
-   * :doc:`idm-first-boot.service Systemd unit </07_Development/scripts/idm-first-boot.service>`
-   * :doc:`JavaScript - path truncator </07_Development/scripts/pathTruncator.js>`
-   * :doc:`shell -- placer </07_Development/scripts/placer.sh>`
+* :download:`plot </07_Development/scripts/fig166.gp>`
+* :download:`idm-first-boot.service Systemd unit </07_Development/scripts/idm-first-boot.service>`
+* :download:`JavaScript - path truncator </07_Development/scripts/pathTruncator.js>`
+* :download:`shell -- placer </07_Development/scripts/placer.sh>`
    
 Colección de scripts de utilidad general del proyecto. Incluye archivos de trazado para Gnuplot, unidades de servicio para Systemd, scripts de manipulación de rutas en JavaScript y herramientas auxiliares en Shell Script.

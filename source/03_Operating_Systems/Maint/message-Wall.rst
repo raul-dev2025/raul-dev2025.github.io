@@ -78,5 +78,5 @@ Próximos Pasos Sugeridos
 * **Sincronización IdM:** Asegurar que los descriptores de cuenta en el servidor ``ipa.raulvilchez.org`` reflejen la política de uso establecida.
 * **Banner de Pre-Login:** Replicar la lógica en ``/etc/issue`` para cubrir el acceso por consola física.
 
-------------------------------------------------------------
-*Fin del informe - Propiedad de RAULVILCHEZ.ORG*
+
+   *Fin del informe - Propiedad de RAULVILCHEZ.ORG*

@@ -39,7 +39,7 @@ El cliente debe verificar que el nombre de dominio al que intenta conectarse coi
 Si el nombre de dominio solicitado no coincide con los campos SAN o CN del certificado, la aplicación cliente debe abortar inmediatamente la conexión e informar del error de seguridad.
 
 Verificación de la Cadena de Confianza
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 El certificado debe estar firmado por una Autoridad de Certificación (*CA*) reconocida y presente en el almacén de confianza del sistema o de la aplicación.
 

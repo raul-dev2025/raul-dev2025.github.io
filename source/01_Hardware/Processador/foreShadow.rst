@@ -114,9 +114,9 @@ Referencias y agradecimientos
 
 .. [#f7] Ver siglas – `ROB <http://www.territoriolinux.net/TerritorioLinux/siglas.html/#4>`__
 
-.. [#f8] Gadgets, extensión a un programa. Aporta funcionalidad extra.
+* **[1]** Gadgets, extensión a un programa. Aporta funcionalidad extra.
 
-.. [#f9] **memoria de intercambio**, swap, una memoria capaz de emular las características de la memoria principal del sistema, RAM. El sistema opertivo se encarga de asiganar un tamaño adecudo, teniendo en cuenta ciertas consideraciones. Por ejemplo, *la regla es el doble de la memoria principal*, aunque es considerada una regla *obsoleta* debido al notable crecimiento de la misma, en computadoras modernas. Para conseguir un dispositivo de intercambio, el sistema operativo contruye un FS, con unas características particulares, mediante el uso de *espacio físico en disco*.
+* **[2]** **memoria de intercambio**, swap, una memoria capaz de emular las características de la memoria principal del sistema, RAM. El sistema opertivo se encarga de asiganar un tamaño adecudo, teniendo en cuenta ciertas consideraciones. Por ejemplo, *la regla es el doble de la memoria principal*, aunque es considerada una regla *obsoleta* debido al notable crecimiento de la misma, en computadoras modernas. Para conseguir un dispositivo de intercambio, el sistema operativo contruye un FS, con unas características particulares, mediante el uso de *espacio físico en disco*.
 
 -----
 

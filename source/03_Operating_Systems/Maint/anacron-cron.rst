@@ -33,5 +33,3 @@ pathDir:
 pathDir:
 
     ``/etc/crontab``
-
------

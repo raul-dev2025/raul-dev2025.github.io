@@ -259,8 +259,7 @@ La principal motivación para implementar ``initrd`` fue el dotar al *kernel*, d
 5. ``/sbin/init`` invoca a ``pivot_root`` para cambiar el sistema de archivo raíz y, ejecuta -via ``chroot``, un programa que continúa con la instalación.
 6. El gestor de arranque está instalado.
 7. El gestor de arranque está configurado para cargar un ``initrd`` con un conjunto de módulos que fueron usados para *levantar* el sistema (ejem. ``initrd`` puede ser modificado, desmontado después y, finalmente escrito a una imagen desde ``/dev/ram0`` ó ``/dev/rd/0``) a un archivo.
-8. ahora el sistema es *arrancable* y, podrán llevarse a cabo, tareas adicionales en la
-instalación. 
+8. ahora el sistema es *arrancable* y, podrán llevarse a cabo, tareas adicionales en la instalación. 
 
 Aquí, el *rol* principal de ``initrd``, es poder reutilizar los datos de configuración, durante la operación normal del sistema, sin la necesidad de *kernels* “genéricos” diluidos o recompilar, reenlazar el núcleo.
 
@@ -314,21 +313,17 @@ Referencias
 
 .. [#f4] **nota de t.:** initrd, se refiere siempre a *disco de inicio RAM*, algunas veces se habla de él como *archivo*, otras en cambio, habla del *dispositivo de bloque*, otras podrían referirse al *contenido, -esto es el entorno!*. El traductor decide escribirlo siempre entre *líneas de código*, por que también es un comando del *kernel*, y simplica su interpretación, más allá de cualquier traducción.
 
-..
-
-.. [#f5] **nota de t.:** floppy, se trata de un “disco externo”, es un término que hoy en día ha caído en desuso debido a que en realidad se usan muy poco estos discos. En las primeras etapas de la inmformática, los medios donde almacenar información eran limitados, y eran de uso habitual discos físicos tipo 3” 1/2, 5” 1/4(medida en pulgadas).
-Hoy en día seguimos utilizando el término, pero nos referimos a él como *medio externo* de almacenamiento de datos. Podría tratarse tanto de un disco “antiguo”, de un USB, de un CD-ROM, o perfectamente podría tratarse de un dispositivo de bloque, adecuado con su correspondiente FS, y utilizado a tal efecto.
+.. [#f5] **nota de t.:** floppy, se trata de un “disco externo”, es un término que hoy en día ha caído en desuso debido a que en realidad se usan muy poco estos discos. En las primeras etapas de la inmformática, los medios donde almacenar información eran limitados, y eran de uso habitual discos físicos tipo 3” 1/2, 5” 1/4(medida en pulgadas). Hoy en día seguimos utilizando el término, pero nos referimos a él como *medio externo* de almacenamiento de datos. Podría tratarse tanto de un disco “antiguo”, de un USB, de un CD-ROM, o perfectamente podría tratarse de un dispositivo de bloque, adecuado con su correspondiente FS, y utilizado a tal efecto.
 
 
 Recursos
 ^^^^^^^^
 
-* Almesberger, Werner;“ **Booting Linux:** The History and the
-Future”
+* Almesberger, Werner;“ **Booting Linux:** The History and the Future”
 
 .. [#f1] :download:`ols2k-9.ps.gz <http://www.almesberger.net/cv/papers/ols2k-9.ps.gz>`
 
-.. [#f2] `newlib <https://www.sourceware.org/newlib/>`_ package (experimental), with initrd example
+* **[2]** `newlib <https://www.sourceware.org/newlib/>`_ package (experimental), with initrd example
 
-.. [#f3] `util-linux <https://www.kernel.org/pub/linux/utils/util-linux/>`_ Miscellaneous utilities for Linux
+* **[3]** `util-linux <https://www.kernel.org/pub/linux/utils/util-linux/>`_ Miscellaneous utilities for Linux
 
