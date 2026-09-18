@@ -9,13 +9,17 @@ Los siguientes documentos contienen las guías, planes y configuraciones utiliza
 Documentos de Implementación
 ============================
 
-* :doc:`IdM-replica <IdM-replica>`
-* :doc:`ipaConfigurations <ipaConfigurations>`
-* :doc:`ipa-maint02 <ipa-maint02>`
-* :doc:`ipa-maint-copy <ipa-maint-copy>`
-* :doc:`ipa-maint-eng <ipa-maint-eng>`
-* :doc:`ipa-maint <ipa-maint>`
-* :doc:`kdc-maint <kdc-maint>`
-* :doc:`maintNas-2026-04-04 <maintNas-2026-04-04>`
-* :doc:`planingIdM <planingIdM>`
-* :doc:`redundant-IdM <redundant-IdM>`
+.. toctree::
+   :maxdepth: 1
+
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/generateOTP
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/IdM-replica
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipaConfigurations
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipa-maint02
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipa-maint-copy
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipa-maint-eng
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipa-maint
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/kdc-maint
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/maintNas-2026-04-04
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/planingIdM
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/redundant-IdM

@@ -4,12 +4,14 @@
 Development
 ===========
 
+Este documento constituye el índice principal de la sección de Desarrollo. Centraliza la documentación sobre desarrollo de controladores (*drivers*), referencias de hardware, administración de sistemas y guías misceláneas de desarrollo.
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Driver Development:
 
-   /07_Development/driver_development/index
+Drver development
+=================
+
+   :doc:`Development index </07_Development/driver_development/index>`
+
 
 Available documents for driver development, including planning, PCI device identification, and quick references for PCI and MMIO.
 
@@ -33,10 +35,7 @@ This section covers System configuration.
 
 -----
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Unordered:
-   
-   /99_General/miscellaneous/index
+   :doc:`Miscellaneous </99_General/miscellaneous/index>`
+      
    
 This section contains miscellaneous topics that do not fit into the other categories, including Git-related topics and path truncation.

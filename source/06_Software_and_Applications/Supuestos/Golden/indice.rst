@@ -6,19 +6,20 @@ Infraestructura RAULVILCHEZ.ORG
    :description: Documentación central del flujo de automatización de nodos Rocky 10
    :keywords: Sphinx, IdM, Automation, Devops
 
-Bienvenido a la documentación técnica del ecosistema de despliegue desatendido. Este portal centraliza los procedimientos de clonado, inyección de datos y enrolamiento automático en el Reino IdM.
+Bienvenido a la documentación técnica del ecosistema de despliegue desatendido. Este portal centraliza los procedimientos de clonado, inyección de datos y enrolamiento automático en el Dominio.
 
 Flujo de Trabajo
 ================
 
-* :doc:`goldenImage </06_Software_and_Applications/Supuestos/Golden/goldenImage>`
-* :doc:`clone_golden </06_Software_and_Applications/Supuestos/Golden/clone_golden>`
-* :doc:`get_otp </06_Software_and_Applications/Supuestos/Golden/get_otp>`
-* :doc:`idm-first-boot </06_Software_and_Applications/Supuestos/Golden/idm-first-boot>`
-* :doc:`prepare_clone </06_Software_and_Applications/Supuestos/Golden/prepare_clone>`
-* :doc:`idm-join </06_Software_and_Applications/Supuestos/Golden/idm-join>`
-* :doc:`Sellado </06_Software_and_Applications/Supuestos/Golden/Sellado>`
-* :doc:`golden_purificacion </06_Software_and_Applications/Supuestos/Golden/golden_purificacion>`
+   :doc:`Diagnóstico Offline </06_Software_and_Applications/Supuestos/Golden/guestMount_offline>`
+   :doc:`goldenImage </06_Software_and_Applications/Supuestos/Golden/goldenImage>`
+   :doc:`clone_golden </06_Software_and_Applications/Supuestos/Golden/clone_golden>`
+   :doc:`get_otp </06_Software_and_Applications/Supuestos/Golden/get_otp>`
+   :doc:`idm-first-boot </06_Software_and_Applications/Supuestos/Golden/idm-first-boot>`
+   :doc:`prepare_clone </06_Software_and_Applications/Supuestos/Golden/prepare_clone>`
+   :doc:`idm-join </06_Software_and_Applications/Supuestos/Golden/idm-join>`
+   :doc:`Sellado </06_Software_and_Applications/Supuestos/Golden/Sellado>`
+   :doc:`golden_purificacion </06_Software_and_Applications/Supuestos/Golden/golden_purificacion>`
 
 Secciones Detalladas
 ====================

@@ -21,10 +21,7 @@ Contiene guías sobre tareas del sistema, análisis de rendimiento y recursos de
 Supuestos
 =========
 
-.. toctree::
-   :maxdepth: 1
-
-   /06_Software_and_Applications/Supuestos/index
+   :doc:`Índice supuestos </06_Software_and_Applications/Supuestos/index>`
 
 Documentación y guías prácticas basadas en casos de uso reales de aplicaciones y software.
 Incluye procedimientos paso a paso para la integración, despliegue y validación de escenarios concretos.

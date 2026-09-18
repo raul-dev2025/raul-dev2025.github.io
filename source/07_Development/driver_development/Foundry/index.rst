@@ -32,6 +32,7 @@ Pasos de despliegue progresivo: toolchains, espacio de usuario, herramientas de 
    :caption: Metodología LTP:
 
    /07_Development/driver_development/Foundry/Metodologia_LTP/index
+   /99_General/miscellaneous/diagnosticMissingHeaders.rst
 
 Guía metodológica sobre el diseño, ejecución y análisis de casos de prueba utilizando Linux Test Project.
 

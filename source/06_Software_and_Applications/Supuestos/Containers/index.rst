@@ -9,11 +9,16 @@ Documentación orientada a la virtualización ligera, arquitectura de contenedor
 Arquitectura y Guías de Contenedores
 ====================================
 
+Supuestos/Containers
+====================
 
+.. toctree::
+   :maxdepth: 1
 
-* :doc:`ArquitecturaContenedores </06_Software_and_Applications/Supuestos/Containers/ArquitecturaContenedores>`
-* :doc:`GuiaContenedores </06_Software_and_Applications/Supuestos/Containers/GuiaContenedores>`
-* :doc:`guia-container-base </06_Software_and_Applications/Supuestos/Containers/guia-container-base>`
+   /06_Software_and_Applications/Supuestos/Containers/ArquitecturaContenedores
+   /06_Software_and_Applications/Supuestos/Containers/conectores_B550AorusElitev2
+   /06_Software_and_Applications/Supuestos/Containers/guia-container-base
+   /06_Software_and_Applications/Supuestos/Containers/GuiaContenedores
 
 Los archivos *ArquitecturaContenedores*, *GuiaContenedores* y *guia-container-base* cubren los principios de diseño, la gestión operativa y las plantillas base para despliegues.
 

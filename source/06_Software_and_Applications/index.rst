@@ -43,7 +43,7 @@ Supuestos
 .. toctree::
    :maxdepth: 1
 
-   /06_Software_and_Applications/Supuestos/guestMount_offline
+   Supuestos/index
 
 Casos prácticos, escenarios de prueba e índice general de supuestos prácticos, incluyendo montaje offline de imágenes de disco de máquinas virtuales.
 
@@ -87,11 +87,8 @@ Supuestos/Containers
 .. toctree::
    :maxdepth: 1
 
-   /06_Software_and_Applications/Supuestos/Containers/ArquitecturaContenedores
-   /06_Software_and_Applications/Supuestos/Containers/conectores_B550AorusElitev2
-   /06_Software_and_Applications/Supuestos/Containers/guia-container-base
-   /06_Software_and_Applications/Supuestos/Containers/GuiaContenedores
-
+   /06_Software_and_Applications/Supuestos/Containers/index
+   
 Documentación sobre arquitectura y gestión de contenedores, guías de despliegue base y especificaciones asociadas al hardware de soporte para virtualización ligera.
 
 
@@ -101,6 +98,7 @@ Supuestos/Golden
 .. toctree::
    :maxdepth: 1
 
+   /06_Software_and_Applications/Supuestos/Golden/guestMount_offline
    /06_Software_and_Applications/Supuestos/Golden/clone_golden
    /06_Software_and_Applications/Supuestos/Golden/get_otp
    /06_Software_and_Applications/Supuestos/Golden/goldenImage
@@ -145,18 +143,9 @@ Supuestos/IdM/Free-IPA
 .. toctree::
    :maxdepth: 1
 
-   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/generateOTP
-   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/IdM-replica
-   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipaConfigurations
-   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipa-maint02
-   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipa-maint-copy
-   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipa-maint-eng
-   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipa-maint
-   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/kdc-maint
-   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/maintNas-2026-04-04
-   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/planingIdM
-   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/redundant-IdM
+   /06_Software_and_Applications/Supuestos/IdM/Free-IPA/index
 
+   
 Configuración, mantenimiento y planificación de soluciones FreeIPA/Kerberos (KDC), generación de contraseñas de un solo uso (OTP) y redundancia de servicios de autenticación.
 
 
@@ -166,18 +155,8 @@ Supuestos/IdM/SSO
 .. toctree::
    :maxdepth: 1
 
-   /06_Software_and_Applications/Supuestos/IdM/SSO/A_SSO_Integration00
-   /06_Software_and_Applications/Supuestos/IdM/SSO/A_SSO_Integration
-   /06_Software_and_Applications/Supuestos/IdM/SSO/auth-director
-   /06_Software_and_Applications/Supuestos/IdM/SSO/B_SSO_Integration00
-   /06_Software_and_Applications/Supuestos/IdM/SSO/B_SSO_Integration
-   /06_Software_and_Applications/Supuestos/IdM/SSO/C_SSO_Integration00
-   /06_Software_and_Applications/Supuestos/IdM/SSO/C_SSO_Integration
-   /06_Software_and_Applications/Supuestos/IdM/SSO/fase0
-   /06_Software_and_Applications/Supuestos/IdM/SSO/fase1
-   /06_Software_and_Applications/Supuestos/IdM/SSO/hojaDeRuta
-   /06_Software_and_Applications/Supuestos/IdM/SSO/opciones-red
-
+   /06_Software_and_Applications/Supuestos/IdM/SSO/index
+   
 Fases de integración, hoja de ruta y despliegue de mecanismos de Inicio de Sesión Único (*Single Sign-On* / SSO) dentro de la arquitectura de red.
 
 
