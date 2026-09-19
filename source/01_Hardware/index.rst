@@ -33,11 +33,22 @@ Processador
 .. toctree::
    :maxdepth: 2
 
-   Processador/foreShadow
-   Processador/procesador
-
+   Processador/index
 
 Agrupa información centrada en la arquitectura, funcionamiento y vulnerabilidades del procesador central. Incluye análisis específicos sobre seguridad en el microcódigo, como las mitigaciones frente a la vulnerabilidad L1 Terminal Fault (Foreshadow).
+
+
+Placa Base
+==========
+
+.. toctree::
+   :maxdepth: 2
+   
+   PlacaBase-index
+
+La **placa base** (*motherboard* o *mainboard*) es el circuito impreso principal (PCB) sobre el que se estructuran y comunican todos los componentes de un sistema informático. Actúa como el centro de interconexión físico y lógico del equipo, albergando la CPU, la memoria RAM, el chipset, los buses de expansión de alta velocidad y los subsistemas de alimentación, firmware, almacenamiento, red y seguridad.
+
+En esta sección se analiza la arquitectura interna de las placas base, su evolución histórica desde los esquemas de bus compartido hasta las topologías punto a punto, y los circuitos auxiliares que garantizan su estabilidad operativa.
 
 
 sistema
