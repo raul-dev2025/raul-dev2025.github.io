@@ -49,7 +49,7 @@ Especificaciones Técnicas
      - 5V, 3.3V o Zócalo Universal (soporta ambas)
 
 Espacio de Configuración (PCI Configuration Space)
-=================================================
+==================================================
 
 Una de las innovaciones clave de PCI fue la definición de un espacio de memoria dedicado de **256 bytes** por función de dispositivo, denominado *Configuration Space*.
 

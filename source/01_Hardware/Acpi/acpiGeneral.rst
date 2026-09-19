@@ -17,7 +17,7 @@ Debe notarse la diferencia entre el comportamiento físico de un componente o ch
 En el contexto del firmware y la gestión de energía, ACPI define un entorno de diseño estructurado cuya sintaxis en el nivel de fuente guarda similitudes con el lenguaje C.
 
 El Lenguaje Fuente (ASL) y el Lenguaje Máquina (AML)
-===================================================
+====================================================
 
 El lenguaje de código fuente oficial es **ASL** (*ACPI Source Language*), el cual constituye una abstracción legible para el ser humano. La plataforma de hardware o el firmware nunca ejecutan directamente el código ASL.
 

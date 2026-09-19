@@ -1,8 +1,8 @@
 .. SPDX-License-Identifier: GPL-2.0-or-later
 
-===================================
+====================================
 Arquitectura del Procesador y Kernel
-===================================
+====================================
 
 En esta sección se abordan los fundamentos de la Unidad Central de Procesamiento (CPU), las arquitecturas de memoria avanzada, los mecanismos de sincronización sin bloqueos, la gestión de aislamiento de recursos mediante el kernel y las características de seguridad y vulnerabilidades a nivel de hardware.
 

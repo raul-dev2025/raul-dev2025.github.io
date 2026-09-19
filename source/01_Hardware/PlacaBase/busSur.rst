@@ -50,7 +50,7 @@ El Southbridge centraliza el control de la mayoría de periféricos y subsistema
   * Controlador de interrupciones programable (**APIC** / PIC) y controladores **DMA** tradicionales.
 
 Evolución: El Paso hacia el Platform Controller Hub (PCH)
-========================================================
+=========================================================
 
 Al integrarse el controlador de memoria (IMC) y las líneas PCIe principales dentro del propio encapsulado de la CPU, la arquitectura de doble chip (Northbridge + Southbridge) quedó obsoleta.
 

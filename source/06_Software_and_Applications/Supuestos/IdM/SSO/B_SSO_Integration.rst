@@ -13,7 +13,7 @@ Network: API pasta sobre NIC dedicada (enp9s0)
 1. Definición de Recursos y Topología
 -------------------------------------
 
-Implementaremos aislamiento de núcleos para proteger el rendimiento de VDO y la identidad[cite: 21].
+Implementaremos aislamiento de núcleos para proteger el rendimiento de VDO y la identidad.
 
 +---------------+-----------------+------------------+---------------+-------------------------------+
 | Entidad       | SO              | Núcleos (Pinning)| Memoria       | Rol                           |

@@ -8,13 +8,10 @@ Acpi
 .. toctree::
    :maxdepth: 1
 
-   /02_Kernel/Acpi/acpi
-   /02_Kernel/Acpi/acpiSDT
    /02_Kernel/Acpi/aml-debugger
    /02_Kernel/Acpi/debug
-   /02_Kernel/Acpi/Introduction
-   /02_Kernel/Acpi/spec
 
+Documentación técnica sobre las herramientas de depuración del subsistema ACPI en el kernel de Linux. Detalla la configuración y uso del depurador integrado de lenguaje interpretable AML (*ACPI Machine Language*) y los niveles de depuración del subsistema de diagnóstico.
 
 Admin-guide
 -----------
@@ -203,6 +200,8 @@ Process
    /02_Kernel/Process/changes
 
 
+Lista de requisitos mínimos de software, herramientas de compilación, bibliotecas y versiones de utilidades en el espacio de usuario necesarias para compilar y ejecutar versiones específicas del kernel de Linux.
+
 RCU
 ---
 
@@ -234,3 +233,5 @@ x86
    :maxdepth: 1
 
    /02_Kernel/x86/1-IO-APIC
+
+Especificaciones técnicas y enrutamiento de interrupciones mediante el controlador avanzado programable de interrupciones de E/S (*IO-APIC*) en arquitecturas x86/x86-64.

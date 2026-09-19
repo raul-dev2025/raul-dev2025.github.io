@@ -30,7 +30,7 @@ Para reducir la penalización por la brecha de velocidad entre la CPU y la memor
 En sistemas multiprocesador o multinúcleo, la coherencia entre las copias de los datos en las distintas cachés se mantiene mediante protocolos de hardware como **MESI** (*Modified, Exclusive, Shared, Invalid*) o **MOESI**.
 
 Anillos de Protección y Modos de Ejecución
-=========================================
+==========================================
 
 Para garantizar la estabilidad y seguridad del sistema operativo, las arquitecturas x86/x86-64 implementan **anillos de protección** (*Privilege Rings*) gestionados por hardware:
 
@@ -56,5 +56,5 @@ Los procesadores modernos incorporan subconjuntos de instrucciones y caracterís
 
 * **Conjuntos de Instrucciones (ISA)**: Clasificados principalmente en arquitecturas **CISC** (como x86-64, enfocado en instrucciones complejas) y **RISC** (como ARM o RISC-V, basado en un conjunto reducido de instrucciones altamente optimizadas).
 * **Multiprocesamiento Simétrico (SMP) y SMT**: *Simultaneous Multithreading* (ej. *Hyper-Threading* de Intel) permite a un único núcleo físico ejecutar dos hilos de instrucciones de forma concurrente compartiendo las unidades de ejecución.
-* **Protección de Memoria y Seguridad**: Tecnologías como el :doc:`nx-bit` (*No-eXecute Bit*) que impiden la ejecución de código en regiones de datos (pila/heap).
+* **Protección de Memoria y Seguridad**: Tecnologías como el :doc:`nx-Bit` (*No-eXecute Bit*) que impiden la ejecución de código en regiones de datos (pila/heap).
 * **Virtualización Asistida por Hardware**: Extensiones como **Intel VT-x** o **AMD-V** que permiten hipervisores de Tipo 1 (KVM, ESXi) ejecutar sistemas operativos huéspedes con sobrecarga mínima.

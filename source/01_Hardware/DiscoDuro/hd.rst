@@ -1,8 +1,8 @@
 .. SPDX-License-Identifier: GPL-2.0-or-later
 
-========================
+=========================
 Estructura y Discos Duros
-========================
+=========================
 
 Este documento aborda las características físicas y lógicas fundamentales de los dispositivos de almacenamiento, centrándose en la geometría del disco duro, la densidad de sectores (*Advanced Format*), esquemas de particionado (MBR vs. GPT), volúmenes lógicos (LVM) y técnicas de prueba con dispositivos *loop*.
 
@@ -14,7 +14,7 @@ Un disco duro (HDD) o unidad de estado sólido (SSD) organiza la información f�
 Tradicionalmente, los sectores lógicos mantenían un tamaño estándar de **512 bytes**. En unidades modernas de alta densidad, la industria ha adoptado tecnologías de sector más amplias para mejorar la eficiencia y la corrección de errores.
 
 .. warning::
-   Los discos duros modernos que implementan la característica **Advanced Format (AF)** utilizan sectores físicos de **4096 bytes (4 KiB)**[cite: 11], aunque mantengan emulación de 512 bytes (512e) por compatibilidad con sistemas legados. 
+   Los discos duros modernos que implementan la característica **Advanced Format (AF)** utilizan sectores físicos de **4096 bytes (4 KiB)**, aunque mantengan emulación de 512 bytes (512e) por compatibilidad con sistemas legados. 
 
    Es fundamental asegurar una alineación correcta de las particiones al sector de 4 KiB (comenzando habitualmente en el sector 2048) para evitar la degradación del rendimiento en operaciones de lectura y escritura.
 
@@ -26,11 +26,11 @@ La tabla de particiones define la división lógica del espacio del disco duro. 
 MBR (Master Boot Record)
 ------------------------
 
-* **Estructura clásica**: Ubicado en el primer sector del disco (sector 0)[cite: 11].
-* **Límites de direccionamiento**: Soporta un tamaño máximo de disco de 2 TiB y un límite estricto de 4 particiones primarias[cite: 11] (o 3 primarias y 1 extendida para alojar particiones lógicas)[cite: 11].
+* **Estructura clásica**: Ubicado en el primer sector del disco (sector 0).
+* **Límites de direccionamiento**: Soporta un tamaño máximo de disco de 2 TiB y un límite estricto de 4 particiones primarias (o 3 primarias y 1 extendida para alojar particiones lógicas).
 
 GPT (GUID Partition Table)
-------------------------
+--------------------------
 
 * **Estándar moderno**: Diseñado como parte de la especificación UEFI.
 * **Capacidad y redundancia**: Soporta discos superiores a 2 TiB y hasta 128 particiones por defecto. Almacena copias de respaldo de la tabla al final del disco para permitir la recuperación ante fallos.
@@ -75,7 +75,7 @@ Prácticas Experimentales
 ========================
 
 Técnicas de Particionado
------------------------
+------------------------
 
 Herramientas estándar de administración de discos en Linux:
 

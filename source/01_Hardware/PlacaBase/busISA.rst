@@ -30,12 +30,12 @@ Perfil
 
  - **Año creado:** 1981
  - **Creado por:** IBM
- - **Reemplazado por:**PCI(1993)
+ - **Reemplazado por:** PCI(1993)
  - **Ancho en bits:** 8 a 16
  - **nº de dispositivos:** hasta 6
- - **Estilo**: paralelo
- - **Interfase de conexión en caliente**: no
- - **interfase externa**:no
+ - **Estilo:** paralelo
+ - **Interfase de conexión en caliente:** no
+ - **interfase externa:**no
 
 Referencias y agradecimientos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

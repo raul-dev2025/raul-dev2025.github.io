@@ -1,8 +1,8 @@
 .. SPDX-License-Identifier: GPL-2.0-or-later
 
-===================================
+============================
 HID - Human Interface Device
-===================================
+============================
 
 Un **Human Interface Device (HID)** o *Dispositivo de Interfaz Humana* es una especificación de hardware y protocolo diseñada para dispositivos de entrada y salida utilizados directamente por usuarios humanos (teclados, ratones, mandos de juego, pantallas táctiles, paneles de control, etc.).
 
@@ -35,7 +35,7 @@ La piedra angular de la especificación HID es el **Descriptor de Informe** (*Re
    * **Feature Reports**: Datos de configuración bidireccionales que no se envían en tiempo real (ej. calibración, configuración de perfiles o volumen).
 
 Ventajas del Modelo HID
-======================
+=======================
 
 * **Controlador Genérico (*In-Box Driver*)**: Los sistemas operativos modernos (Linux, Windows, macOS) incluyen un controlador HID nativo. Si un periférico cumple con la especificación HID, funcionará de inmediato sin instalar software adicional.
 * **Mapeo Dinámico de Entradas/Salidas**: Las aplicaciones pueden consultar las capacidades del dispositivo y mapear sus controles automáticamente según los usos declarados en el descriptor.

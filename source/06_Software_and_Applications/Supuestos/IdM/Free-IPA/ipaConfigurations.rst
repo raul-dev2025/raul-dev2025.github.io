@@ -15,7 +15,7 @@ Acceso y Seguridad (HBAC)
 -------------------------
 Se han configurado las reglas de acceso basado en host (HBAC) para permitir:
 * Servicios: ``sshd``, ``sudo``, ``cockpit``, ``gdm-password``, ``gdm-launch-environment``, ``systemd-user``.
-* **Actualización Crítica:** Se han añadido los servicios ``su`` y ``su-l`` para permitir el cambio de identidad desde usuarios locales hacia la red sin errores de "Permission Denied"[cite: 12].
+* **Actualización Crítica:** Se han añadido los servicios ``su`` y ``su-l`` para permitir el cambio de identidad desde usuarios locales hacia la red sin errores de "Permission Denied".
 
 Persistencia de Configuración (Bash Maestro)
 ============================================
@@ -24,7 +24,7 @@ Se ha implementado la estrategia de "Persistencia Inmortal" para unificar la exp
 Archivo Maestro
 ---------------
 Ubicado en ``/mnt/datos_raul/home_config/bashrc_master``. Contiene:
-* **Mascara de red:** ``umask 002``[cite: 1, 10].
+* **Mascara de red:** ``umask 002``.
 * **Protección de Datos:** Función ``rm()`` personalizada que intercepta intentos de borrado en ``/mnt/datos_raul/`` lanzando una alerta roja y confirmación obligatoria.
 * **Prompt Diferenciado:** 
 

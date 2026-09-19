@@ -45,6 +45,6 @@ Funciones de Gestión Térmica y Telemetría
 * **Soporte de Periféricos Legados**: Integra el controlador para interfaces tradicionales como puertos serie (RS-232), puerto paralelo (IEEE 1284), conectores PS/2 y el controlador de disquete.
 
 Interacción entre el VRM, Super I/O y Firmware
-=============================================
+==============================================
 
 El firmware (**UEFI/BIOS**) lee los datos recolectados por el chip Super I/O para aplicar las curvas de ventilación definidas por el usuario y supervisar los límites de seguridad térmica. Si la temperatura del VRM o de la CPU supera los umbrales críticos (*TjMax*), el sistema activa mecanismos de protección por hardware como el estrangulamiento térmico (*thermal throttling*) o el apagado de emergencia del sistema.

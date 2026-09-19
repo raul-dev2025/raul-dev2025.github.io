@@ -4,6 +4,62 @@
 Índice de Hardware
 ==================
 
+
+.. SPDX-License-Identifier: GPL-2.0-or-later
+
+
+Gestión de Energía y ACPI
+=========================
+
+Esta sección agrupa la documentación técnica relativa a la interfaz avanzada de configuración y gestión de energía (*Advanced Configuration and Power Interface*). Cubre desde la arquitectura base de tablas ACPI y la estructura de su espacio de nombres en memoria, hasta el desarrollo de controladores en el kernel de Linux, la gestión de líneas GPIO, la arquitectura de referencia ACPICA y tecnologías de E/S relacionadas como Intel VT-d.
+
+.. toctree::
+   :maxdepth: 2
+
+   Acpi/index
+
+
+.. SPDX-License-Identifier: GPL-2.0-or-later
+
+
+Gestión Heredada de Energía (APM)
+=================================
+
+Esta sección cubre la documentación técnica relativa a *Advanced Power Management* (APM), el estándar de gestión de energía controlado a nivel de BIOS/firmware utilizado en sistemas x86 clásicos.
+
+.. toctree::
+   :maxdepth: 2
+
+   Apm/index
+
+.. SPDX-License-Identifier: GPL-2.0-or-later
+
+
+Sistemas de Almacenamiento Masivo
+=================================
+
+Esta sección agrupa la documentación técnica referida a dispositivos de almacenamiento magnéticos y de estado sólido, abarcando parámetros físicos de rendimiento, esquemas tradicionales de particionado (*Master Boot Record*) y estándares modernos de organización de disco (*GUID Partition Table*) con firmware UEFI.
+
+.. toctree::
+   :maxdepth: 2
+
+   DiscoDuro/index
+
+
+.. SPDX-License-Identifier: GPL-2.0-or-later
+
+
+Controladores y Bus USB (Drivers)
+=================================
+
+Esta sección aborda la documentación técnica de los controladores de dispositivos a nivel de kernel, cubriendo las especificaciones de controladores de host USB (*xHCI*) y las capas de soporte para periféricos de interfaz humana (*HID*).
+
+.. toctree::
+   :maxdepth: 2
+
+   Drivers/index
+
+
 hardware_resources
 ==================
 
@@ -44,7 +100,7 @@ Placa Base
 .. toctree::
    :maxdepth: 2
    
-   PlacaBase-index
+   PlacaBase/index
 
 La **placa base** (*motherboard* o *mainboard*) es el circuito impreso principal (PCB) sobre el que se estructuran y comunican todos los componentes de un sistema informático. Actúa como el centro de interconexión físico y lógico del equipo, albergando la CPU, la memoria RAM, el chipset, los buses de expansión de alta velocidad y los subsistemas de alimentación, firmware, almacenamiento, red y seguridad.
 
@@ -59,19 +115,4 @@ Almacena conceptos fundamentales de arquitectura de computadores, historia y com
 .. toctree::
    :maxdepth: 2
 
-   sistema/anchoBusGPU
-   sistema/arquitecturaVonNeuman
-   sistema/Buses
-   sistema/conectoresDelEquipo
-   sistema/Ejercicios
-   sistema/evolucionProcesadores
-   sistema/GeorgeBoole
-   sistema/integratedCards
-   sistema/Memorias
-   sistema/modulosMemActuales
-   sistema/perifericos
-   sistema/Prefetching_en_Procesadores
-   sistema/UEFI-refs
-   sistema/UEFI
-   sistema/velocidadModulDDR
-   sistema/VonNeumann
+   /01_Hardware/sistema/index

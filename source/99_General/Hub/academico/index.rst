@@ -32,7 +32,6 @@ Hardware (Académico)
 * :doc:`UEFI Referencias </01_Hardware/sistema/UEFI-refs>`
 * :doc:`Prefetching en Procesadores </01_Hardware/sistema/Prefetching_en_Procesadores>`
 * :doc:`Ejercicios </01_Hardware/sistema/Ejercicios>`
-* :doc:`Procesador </01_Hardware/Processador/procesador>`
 
 .. note::
 
@@ -41,20 +40,18 @@ Hardware (Académico)
 
 -----
 
-Administración, Kernel y Sistemas
----------------------------------
+.. SPDX-License-Identifier: GPL-2.0-or-later
 
-* **Kernel:** :doc:`Índice Kernel </02_Kernel/index>`
-* **Boot:** :doc:`Índice Arranque </03_Operating_Systems/Boot/index>`
-* **Mantenimiento:** :doc:`Índice Mantenimiento </03_Operating_Systems/Maint/index>`
-* **Configuración SO:** :doc:`Índice Configuración </03_Operating_Systems/configuration/index>`
+===================
+Sistema y Hardware
+===================
 
-.. note::
+* :doc:`Fundamentos de Arquitectura de Sistemas </01_Hardware/sistema/index>`
 
-   **Sistema Operativo (SO)**
-   Guías detalladas sobre la administración de sistemas Windows y Linux. Cubre desde el proceso crítico de arranque hasta la configuración avanzada del registro y usuarios.
+.. tip::
 
------
+   En esta sección se agrupan los bloques conceptuales y de arquitectura que definen la estructura física y lógica de los equipos informáticos. Comprende desde los fundamentos teóricos del procesamiento y la lógica digital hasta los módulos de memoria, buses del sistema, interfaces de interconexión y firmware de inicialización.   
+
 
 Administración de Sistemas
 --------------------------
@@ -65,7 +62,7 @@ Administración de Sistemas
 * :doc:`Cortafuegos </04_System_Administration/system_apps/cortafuegos>`
 * :doc:`OS msconfig </04_System_Administration/system_apps/OS-msconfig>`
 
-.. tip::
+.. note::
 
    **Administración de Sistema**: Enfoque práctico en la gestión de software de sistema y herramientas de administración. Incluye políticas de seguridad, gestión de backups y optimización de aplicaciones.
 

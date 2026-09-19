@@ -1,8 +1,8 @@
 .. SPDX-License-Identifier: GPL-2.0-or-later
 
-==================================================
+==============================================================
 PCI Express (PCIe) - Peripheral Component Interconnect Express
-==================================================
+==============================================================
 
 **PCI Express** (abreviado como **PCIe**) es un estándar de bus de expansión en serie de alta velocidad diseñado para reemplazar las arquitecturas de bus paralelo tradicionales como PCI, PCI-X y AGP.
 
@@ -77,7 +77,7 @@ Cada generación de PCI Express duplica aproximadamente la tasa de transferencia
      - 126.0 GB/s
 
 Factor de Forma y Compatibilidad Física
-======================================
+=======================================
 
 Las ranuras de expansión físicas están clasificadas según su número de carriles (denotados como :math:`x1, x4, x8, x16`). Un dispositivo con menor número de carriles puede instalarse mecánicamente en un zócalo con mayor número de carriles (*up-plugging*) y funcionará al máximo de carriles que compartan.
 

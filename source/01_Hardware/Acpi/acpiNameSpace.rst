@@ -1,8 +1,8 @@
 .. SPDX-License-Identifier: GPL-2.0-or-later
 
-========================================
+=========================================
 Jerarquía para el Espacio de Nombres ACPI
-========================================
+=========================================
 
 El espacio de nombres ACPI (**acpiNS**) debe ofrecer una representación precisa de la topología del hardware, comenzando desde el Bus de sistema del procesador (``\_SB``). En general, todo dispositivo conectado a un bus o controlador aparecerá como nodo hijo de dicho bus o controlador dentro del espacio de nombres.
 

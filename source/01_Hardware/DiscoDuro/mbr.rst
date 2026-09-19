@@ -1,10 +1,10 @@
 .. SPDX-License-Identifier: GPL-2.0-or-later
 
-================================
+==================================
 Registro de Arranque Maestro (MBR)
-================================
+==================================
 
-El **Master Boot Record (MBR)** o *Registro de Arranque Maestro* es el primer sector físico (Sector 0) de un dispositivo de almacenamiento de datos dividido bajo el esquema de particionado tradicional[cite: 10]. Ocupa exactamente 512 bytes al inicio del disco y contiene la información crítica necesaria para inicializar el arranque del sistema operativo y definir la estructura de particiones[cite: 10].
+El **Master Boot Record (MBR)** o *Registro de Arranque Maestro* es el primer sector físico (Sector 0) de un dispositivo de almacenamiento de datos dividido bajo el esquema de particionado tradicional. Ocupa exactamente 512 bytes al inicio del disco y contiene la información crítica necesaria para inicializar el arranque del sistema operativo y definir la estructura de particiones.
 
 Estructura Interna del MBR
 ==========================

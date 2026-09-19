@@ -55,7 +55,7 @@ Comparativa: UMA vs. NUMA
      - Requiere un planificador y gestor de memoria *NUMA-aware*.
 
 Métrica de Distancia (*NUMA Distance / SLIT*)
-============================================
+=============================================
 
 El firmware del sistema (UEFI/BIOS) proporciona al sistema operativo la tabla **SLIT** (*System Locality Information Table*) de ACPI. Esta tabla define una matriz de coste relativo o **distancia NUMA** entre los distintos nodos:
 
