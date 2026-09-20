@@ -4,21 +4,14 @@
 Development
 ===========
 
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Testing Environment Setup:
-
-   /04_System_Administration/test_environment_setup/index
-
-The folowing documents cover the configuration of virtual machine for testing purposes.
+Este documento constituye el índice principal de la sección de Desarrollo. Centraliza la documentación sobre desarrollo de controladores (*drivers*), referencias de hardware, administración de sistemas y guías misceláneas de desarrollo.
 
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Driver Development:
+Drver development
+=================
 
-   /01_Hardware/driver_development/index
+   :doc:`Development index </07_Development/driver_development/index>`
+
 
 Available documents for driver development, including planning, PCI device identification, and quick references for PCI and MMIO.
 
@@ -42,19 +35,7 @@ This section covers System configuration.
 
 -----
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Unordered:
-   
-   /99_General/miscellaneous/index
+   :doc:`Miscellaneous </99_General/miscellaneous/index>`
+      
    
 This section contains miscellaneous topics that do not fit into the other categories, including Git-related topics and path truncation.
-
-
------
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Linux Kernel documents
-
-   /99_General/Hub/desarrollo/Kernel/index

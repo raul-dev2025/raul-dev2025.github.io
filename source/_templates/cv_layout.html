@@ -1,0 +1,13 @@
+{% extends "!layout.html" %}
+
+{% block extrahead %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ pathto('_static/css/it-sys.css', 1) }}" type="text/css" />
+{% endblock %}
+
+{# Envolvemos el bloque central del tema en tu clase del CV #}
+{% block content %}
+    <div class="cv-it-theme">
+        {{ super() }}
+    </div>
+{% endblock %}

@@ -1,5 +1,8 @@
+:orphan:
+
+=======
 Bus Map
-=========
+=======
 
 .. list-table:: PCI Device Map
    :widths: 15 10 10 10 55

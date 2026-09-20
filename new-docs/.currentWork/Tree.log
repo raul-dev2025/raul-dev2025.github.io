@@ -1,0 +1,119 @@
+source/
+├── 01_Hardware
+│   ├── Acpi
+│   │   └── ACPICA
+│   ├── Apm
+│   ├── DiscoDuro
+│   ├── Drivers
+│   ├── hardware_resources
+│   │   └── hw_specs
+│   ├── PlacaBase
+│   ├── Processador
+│   └── sistema
+├── 02_Kernel
+│   ├── Acpi
+│   ├── Admin-guide
+│   ├── arch
+│   │   ├── arm
+│   │   ├── powerpc
+│   │   └── x86
+│   ├── bus-devices
+│   ├── DeviceTree
+│   │   └── bindings
+│   │       └── pci
+│   ├── driver-api
+│   │   └── media
+│   ├── EarlyUserSpace
+│   ├── FileSystem
+│   │   └── Nfs
+│   ├── Fpga
+│   ├── Input
+│   ├── kbuild
+│   ├── networking
+│   ├── PCI
+│   ├── Process
+│   ├── RCU
+│   ├── trace
+│   └── x86
+├── 03_Operating_Systems
+│   ├── Boot
+│   │   ├── GestorDeArranque
+│   │   └── Man
+│   ├── Certificados-TLS
+│   │   ├── OpenSSL
+│   │   └── TLS-libvirt
+│   ├── configuration
+│   ├── FS
+│   ├── Maint
+│   ├── Man
+│   └── Systemd
+├── 04_System_Administration
+│   ├── Incidencias
+│   ├── ISO9660
+│   ├── system_apps
+│   │   └── Systemd
+│   └── system_configuration
+│       ├── ACL_configuration
+│       ├── kernel_conf
+│       └── sys_files
+├── 05_Networking
+│   ├── legacy_lan
+│   └── Servidor
+├── 06_Software_and_Applications
+│   ├── Incidencias
+│   ├── office
+│   └── Supuestos
+│       ├── Boot
+│       ├── Config
+│       ├── Containers
+│       ├── Golden
+│       ├── Hipervisor
+│       ├── IdM
+│       │   ├── Free-IPA
+│       │   └── SSO
+│       ├── Maint
+│       ├── Processor
+│       ├── Qemu
+│       └── Testing
+├── 07_Development
+│   ├── driver_development
+│   │   ├── drv_refs
+│   │   ├── Foundry
+│   │   │   ├── EntornoLTP
+│   │   │   │   └── Scripts
+│   │   │   ├── Metodologia_LTP
+│   │   │   ├── Scripts
+│   │   │   │   ├── distroRepos
+│   │   │   │   ├── Envs
+│   │   │   │   └── Tools
+│   │   │   └── test_environment_setup
+│   │   │       ├── Debugging
+│   │   │       └── ltp_setup
+│   │   ├── hwbus-io
+│   │   │   ├── ci-cd
+│   │   │   │   └── Script_antiguos
+│   │   │   ├── Driver
+│   │   │   └── Tests
+│   │   ├── hwnet-io
+│   │   │   └── ci-cd
+│   │   └── watcherDocs
+│   └── scripts
+├── 99_General
+│   ├── CVs
+│   ├── Hub
+│   │   ├── academico
+│   │   ├── desarrollo
+│   │   └── profesional
+│   └── miscellaneous
+├── descargas
+├── extra
+├── _static
+│   ├── css
+│   │   └── fonts
+│   ├── fonts
+│   │   ├── Lato
+│   │   └── RobotoSlab
+│   └── js
+└── _templates
+
+117 directories

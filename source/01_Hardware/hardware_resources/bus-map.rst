@@ -1,5 +1,8 @@
+:orphan:
+
+=======
 Bus Map
-=========
+=======
 
 
 .. list-table:: PCI Device Map

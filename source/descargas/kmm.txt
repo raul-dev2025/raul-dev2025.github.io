@@ -1,0 +1,39 @@
+========================================================================================
+             LINUX KERNEL MEMORY MAP - (Inspired by Linux Device Drivers)
+========================================================================================
+
+--- NOTES (Extracted) ---
+
+* User virtual addr.              LOW MEMORY : logical addrs exist in kernel space
+* Physical addr.
+* Bus addr.                       HIGH MEMORY: logical addrs do not exist
+* Kernel logical addr.
+* Kernel virtual addr.
+
+========================================================================================
+
+   [ADDRESS SPACE - USER]       [PHYSICAL MEMORY]       [ADDRESS SPACE - KERNEL]
+
+   +----------------+           +---------------+           +----------------+
+   |                |           |   [........]  |           |                |
+   | [User Process] +---------->+---|__high__|--+<----------+ [Kernel Virtual|
+   |                |           |   [........]  |           |  Addresses]    |
+   +----------------+           +---------------+           |                |
+                                        |                   +----------------+
+                                        |
+   +----------------+                   |                   +----------------+
+   |                |                   v                   |                |
+   | [User Process] +---------->+---------------+<----------+ [Kernel Logical|
+   |                |           |               |           |  Addresses]    |
+   |                |           +---|__low___|--+           |                |
+   +----------------+           |               |           |                |
+           |                    +---------------+           |                |
+           |                            ^                   |                |
+           |                            |                   |                |
+           +----------------------------+-------------------+                |
+                                                            +----------------+
+
+========================================================================================
+   [Address Space]              [Physical Memory]           [Address Space]
+
+                                ==> page mapping

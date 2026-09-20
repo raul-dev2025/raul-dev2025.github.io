@@ -6,9 +6,11 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'TecnicoSistemas'
+project = 'TecnicoSistemas (v2.1.99)'
 copyright = '2024, Raul Vilchez'
 author = 'Raul Vilchez'
+version = '2.1'
+release = '2.1.99'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -52,6 +54,7 @@ html_theme_options = {
     'vcs_pageview_mode': '',
     'style_nav_header_background': '#2980B9',
     #"search_bar_text": "Search docs",
+    'version_selector': True,
     # Toc options
     'collapse_navigation': True,
     'sticky_navigation': True,
@@ -70,4 +73,3 @@ html_css_files = [
 html_js_files = [
     'js/theme.js',
 ]
-

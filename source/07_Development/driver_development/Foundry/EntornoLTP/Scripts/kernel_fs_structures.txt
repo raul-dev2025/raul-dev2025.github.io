@@ -1,0 +1,55 @@
++-----------------------------------------------------------------------------------------+
+|                               File operations structure                                 |
++-----------------------------------------------------------------------------------------+
+  #include <linux/fs.h>
+  struct module *owner;
+
+  loff_t (*llseek)              | int (*check_flags)
+  ssize_t (*read)               | ssize_t (*readv)
+  ssize_t (*aio_read)           | ssize_t (*writev)
+  ssize_t (*write)              | ssize_t (*sendfile)
+  ssize_t (*aio_write)          | ssize_t (*sendpage)
+  int (*readdir)                | int (*dir_notify)
+  unsigned int (*poll)          | unsigned long (*get_unmapped_area)
+  int (*ioctl)                  |
+  int (*mmap)                   |
+  int (*open)                   |
+  int (*flush)                  |
+  int (*release)                |
+  int (*fsync)                  |
+  int (*fasync)                 |
+  int (*lock)                   |
++-----------------------------------------------------------------------------------------+
+
++-----------------------------------+-----------------------------------+
+|             file struct           |          inode structure          |
++-----------------------------------+-----------------------------------+
+  mode_t f_mode;                    | dev_t i_rdev;
+  loff_t f_pos;                     | struct cdev *i_cdev;
+  unsigned int f_flags;             |
+  struct file_operations *f_op;     |
+  void *private_data;               |
+  struct dentry *f_dentry;          |
+  struct fown_struct f_owner;       |
++-----------------------------------+-----------------------------------+
+
+
+                       +-----------------------+
+                       |     struct file {     |
+                       |       ...             |
+            +--------->|       f_op ----------+ |
+            |          |       ...             | |
+            |          |     }                 | |
+            |          +-----------------------+ |
+            |                                    |
+  +---------+-------+                  v         v
+  |                 |      +-----------------------+
+  |  struct inode   |<-----| struct file_operations|
+  |                 |<-----+       f_ops           |
+  |                 |      |       ...             |
+  +---------+-------+      +-----------------------+
+            ^                                    ^
+            |          +-----------------------+ |
+            |          |      struct file      | |
+            +----------|                       |-+
+                       +-----------------------+

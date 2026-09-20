@@ -1,5 +1,9 @@
+:orphan:
+
+========================================
 Preparación para el Examen - Módulo 0852
-===========================================
+========================================
+
 **Instalación y actualización de sistemas operativos**
 
 Temas Clave

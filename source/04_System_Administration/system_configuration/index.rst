@@ -3,63 +3,28 @@
 System Configuration
 ====================
 
-This section covers system configuration files, kernel configuration, and handling sensitive files.
+This section covers system configuration files, kernel configuration, ACL definitions, and handling sensitive files.
 
-.. toctree::
-   :maxdepth: 1
-   :caption: System Files:
+System Files
+------------
 
-   /04_System_Administration/system_configuration/sys_files/dummy-build.rst
-   /04_System_Administration/system_configuration/sys_files/save_rmdir.rst
-   /04_System_Administration/system_configuration/sys_files/sensitiveFiles.rst
-   /04_System_Administration/system_configuration/sys_files/doc-ifSysCollector.rst
+* :doc:`Dummy Build <sys_files/dummy-build>`
+* :doc:`Save & Rmdir <sys_files/save_rmdir>`
+* :doc:`Sensitive Files <sys_files/sensitiveFiles>`
+* :doc:`System Collector <sys_files/doc-ifSysCollector>`
 
+OS Installation & User Data
+---------------------------
 
-.. toctree::
-   :maxdepth: 1
-   :caption: OS installation:
+* :doc:`Advanced OS Installation <sys_files/advancedOSinstallation>`
+* :doc:`Preserve User Data <sys_files/preserveUserData>`
 
-   /04_System_Administration/system_configuration/sys_files/advancedOSinstallation.rst
-   /04_System_Administration/system_configuration/sys_files/preserveUserData.rst
+Kernel Configuration
+--------------------
 
-Available documentation relateted to operating system installation. 
+* :doc:`Kernel Environment Configuration <kernel_conf/environ-kconf>`
 
-.. note::
-	
-	You should add here kikstarts documentation !!
-	
-.. warning::
-	
-	You should add here kikstarts documentation !!
-	
-.. caution::
-	
-	You should add here kikstarts documentation !!
-	
-.. danger::
-	
-	You should add here kikstarts documentation !!
+Access Control Lists (ACLs)
+---------------------------
 
-.. important::
-	
-	You should add here kikstarts documentation !!
-
-.. tip::
-	
-	You should add here kikstarts documentation !!
-
-.. hint::
-	
-	You should add here kikstarts documentation !!
-
-
-
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Kernel Configuration:
-
-   /04_System_Administration/system_configuration/kernel_conf/environ-kconf.rst
-   
-   
-
+* :doc:`ACLs Documents <ACL_configuration/index>`
