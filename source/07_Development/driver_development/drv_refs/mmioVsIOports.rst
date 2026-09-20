@@ -41,7 +41,7 @@ Ejemplo
 El búfer de tramas (*framebuffer*) de una tarjeta gráfica se mapea en el espacio de direcciones de memoria del sistema. La CPU escribe directamente los datos de píxeles en esta región de memoria y la GPU los procesa para su salida en pantalla.
 
 2. Puertos de Entrada/Salida (I/O Ports / PMIO)
-==============================================
+===============================================
 
 Definición
 ----------

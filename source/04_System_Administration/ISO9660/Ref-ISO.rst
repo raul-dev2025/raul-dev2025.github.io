@@ -30,7 +30,7 @@ Opciones de Cabecera y Nombres
 * **``-no-cache-inodes``**: Desactiva el almacenamiento en caché de inodos, forzando la reevaluación de archivos duplos o enlaces duros para reflejar con precisión la estructura de origen (usar con precaución).
 
 Opciones de Arranque (*Bootable Images*)
----------------------------------------
+----------------------------------------
 
 * **``-mipsel-boot <imagen>``**: Define la imagen de arranque para arquitecturas MIPS Little Endian.
 * **``-sparc-boot <lista>``**: Lista separada por comas de las imágenes de arranque requeridas para crear un medio ejecutable en arquitecturas SPARC.

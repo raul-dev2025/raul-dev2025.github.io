@@ -21,7 +21,7 @@ Almacenamiento Optimizado (VDO + XFS)
   * ``/var/lib/virt_storage/metadata``: Documentación y bitácoras.
 
 Configuración del Sistema y Rendimiento
-======================================
+=======================================
 
 * **Aislamiento de CPU:** Configurado mediante afinidad/aislamiento para los núcleos ``2-5`` y ``8-11``.
 * **Memoria RAM:** 16GB dedicados para el stack de virtualización.

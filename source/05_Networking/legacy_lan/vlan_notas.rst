@@ -18,7 +18,7 @@ Para implementar la configuración de una VLAN se requieren dos elementos princi
    Los equipos domésticos proporcionados por los proveedores de servicios (ISP) suelen ser equipos locales del cliente (**CPE** - *Customer Premises Equipment*). Estos agrupan módem, enrutador, conmutador y punto de acceso en un único dispositivo híbrido para cubrir las tres capas inferiores del modelo OSI.
 
 Carga del Módulo del Kernel e Instalación de Utilidades
-======================================================
+=======================================================
 
 Compruebe si el módulo ``8021q`` está cargado en el kernel del sistema:
 
@@ -61,7 +61,7 @@ Cree la interfaz de red virtual vinculada a la interfaz física (ej. ``eth0``) e
    Por convención, el nombre de las interfaces de VLAN sigue la nomenclatura ``interfaz_física.ID`` (por ejemplo, ``eth0.10`` para la VLAN ID 10).
 
 Asignación de Dirección IP y Activación
---------------------------------------
+---------------------------------------
 
 Configure la dirección IP y la máscara de red en la interfaz virtual recién creada y active el enlace:
 

@@ -18,11 +18,12 @@ Guías y estándares para la paquetización, maquetación y estructura de la doc
 
 Imágenes ISO 9660 y Medios Ópticos
 ==================================
+
 .. toctree::
    :maxdepth: 1
 
-   gen_iso_joliet
-   Ref-ISO
+   /04_System_Administration/ISO9660/gen_iso_joliet
+   /04_System_Administration/ISO9660/Ref-ISO
 
 En esta sección se abordan los procedimientos de creación, verificación y manipulación de imágenes de disco bajo el estándar **ISO 9660**, sus extensiones de compatibilidad (Joliet y Rock Ridge) y la suite de utilidades de diagnóstico e inspección.
 

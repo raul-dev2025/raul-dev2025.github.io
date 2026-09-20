@@ -37,7 +37,7 @@ Ubicación: ``ltp/testcases/kernel/device-drivers/pci/user_tpci/user_tpci.c``
   Función en el espacio de usuario encargada de interactuar con el módulo de kernel ``tpci`` para ejecutar y controlar las distintas pruebas PCI y PCI-Express definidas en ``tpci.c``.
 
 3. Habilitación del Soporte PCI-Express en el Kernel
-===================================================
+====================================================
 
 Por defecto, es posible que el soporte para PCI-Express no esté habilitado en la configuración del kernel.
 

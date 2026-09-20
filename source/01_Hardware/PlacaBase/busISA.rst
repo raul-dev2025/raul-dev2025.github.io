@@ -35,7 +35,7 @@ Perfil
  - **nº de dispositivos:** hasta 6
  - **Estilo:** paralelo
  - **Interfase de conexión en caliente:** no
- - **interfase externa:**no
+ - **interfase externa:** no
 
 Referencias y agradecimientos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

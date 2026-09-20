@@ -14,12 +14,12 @@ Cuando un mensaje no puede ser entregado, el servidor realiza un seguimiento del
 La plantilla con las cadenas de texto utilizadas para estos mensajes administrativos se configura mediante el archivo ``bounce.cf``, ubicado por defecto en ``/etc/postfix/bounce.cf``.
 
 Configuración de Plantillas Personalizadas de Rebote
-===================================================
+====================================================
 
 Para personalizar los mensajes de notificación del sistema, se sigue el procedimiento estandarizado mediante la utilidad ``postconf``:
 
 1. Generar la plantilla de configuración por defecto
----------------------------------------------------
+----------------------------------------------------
 
 Obtener la plantilla base predeterminada con el comando ``postconf -b`` y guardarla en un archivo de trabajo:
 
@@ -61,12 +61,12 @@ Asimismo, las plantillas permiten la expansión dinámica de variables definidas
 * ``$myhostname``
 
 Diagnóstico y Registro de Errores (Bitácora)
-=============================================
+============================================
 
 Los eventos de entrega y errores de resolución se registran en los archivos de depuración del sistema en ``/var/log/mail.log`` o ``/var/log/maillog``.
 
 Análisis de Error de Resolución DNS
-------------------------------------
+-----------------------------------
 
 En los registros del sistema puede aparecer el siguiente fallo de resolución de nombres de dominio:
 

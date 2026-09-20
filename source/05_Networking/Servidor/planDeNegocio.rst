@@ -154,8 +154,6 @@ Investigar a la competencia
 
 Son parte del mercado, así que resultará necesario reunir el máximo de información  *probable* -aunque no necesariamente, la versión *verídica* nos servirá.
 
-* `estudioDeMercado <https://gananci.com/como-hacer-un-analisis-de-la-competencia>`_
-
 Estudio técnico
 ===============
 
@@ -173,3 +171,4 @@ Referencias y agradecimientosq
 ==============================
 
 * `estudioDeMercado <https://gananci.com/como-hacer-un-estudio-de-mercado>`_
+* `Competencia <https://gananci.com/como-hacer-un-analisis-de-la-competencia>`_

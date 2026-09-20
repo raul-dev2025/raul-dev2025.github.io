@@ -27,6 +27,6 @@ Redes LAN
    /05_Networking/legacy_lan/ProtocoloTCP_IP
    /05_Networking/legacy_lan/redesInalambricas
    /05_Networking/legacy_lan/Redes
-   /05_Networking/vlan_notas
+   /05_Networking/legacy_lan/vlan_notas
 
 Conceptos fundamentales e infraestructura de redes locales (LAN) tradicionales. Cubre la pila de protocolos TCP/IP, dispositivos de red, tecnologías inalámbricas, instalación y configuración de aplicaciones de red y fundamentos de interconexión.

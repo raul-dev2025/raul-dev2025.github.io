@@ -50,7 +50,7 @@ Ejemplo para inspeccionar únicamente operaciones de apertura y lectura de archi
    strace -e trace=openat,read cat /etc/passwd
 
 Intercepción de Procesos en Ejecución
-====================================
+=====================================
 
 Para asociar ``strace`` a un proceso que ya se encuentra activo en el sistema, emplee la opción ``-p`` especificando su PID (*Process ID*):
 
@@ -92,7 +92,7 @@ Para interceptar llamadas realizadas por hilos o procesos derivados creados por 
    strace -f ./script_automatizacion.sh
 
 Resumen Estadístico y Perfilado
-==============================
+===============================
 
 Para obtener un reporte consolidado con el recuento, tiempo total consumido y tasa de errores por cada llamada al sistema, aplique la opción ``-c``:
 
