@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workflow for Using strace to Trap System Calls &mdash; TecnicoSistemas  documentation</title>
+  <title>Workflow for Using strace to Trap System Calls &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
@@ -23,8 +23,8 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Investigating Device 18 (0000:00:18.x)" href="privateInvestigations.html" />
-    <link rel="prev" title="How to Limit CPU Computation Consumption for Builds and Compilation" href="../compCPU.html" /> 
+    <link rel="next" title="Arquitectura del Procesador y Kernel" href="../../Processador/index.html" />
+    <link rel="prev" title="Informe de Actualización de Infraestructura: Adaptador Red" href="QNAP.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,30 +41,52 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
-<ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../driver_development/index.html">Driver Development</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Hardware and System Resources</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../index.html#system-tasks">System Tasks</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Workflow for Using <code class="docutils literal notranslate"><span class="pre">strace</span></code> to Trap System Calls</a></li>
-<li class="toctree-l4"><a class="reference internal" href="privateInvestigations.html">Investigating Device 18 (0000:00:18.x)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="longWalkOnSys.html">Common Files and Directories in <code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices/0000:00:XX.x</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="genericSys.html">Is the List Architecture-Specific or Generic?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#hardware-specifications">Hardware Specifications</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Bridge_Update.html">Informe de Reconfiguración de Red Virtual: Bridge br_lab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="genericSys.html">Is the List Architecture-Specific or Generic?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="longWalkOnSys.html">Common Files and Directories in <code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices/0000:00:XX.x</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="privateInvestigations.html">Investigating Device 18 (0000:00:18.x)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="QNAP.html">Informe de Actualización de Infraestructura: Adaptador Red</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Workflow for Using <code class="docutils literal notranslate"><span class="pre">strace</span></code> to Trap System Calls</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-strace">1. Install <code class="docutils literal notranslate"><span class="pre">strace</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-usage-of-strace">2. Basic Usage of <code class="docutils literal notranslate"><span class="pre">strace</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trap-specific-system-calls">3. Trap Specific System Calls</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attach-to-a-running-process">4. Attach to a Running Process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#save-output-to-a-file">5. Save Output to a File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trace-system-calls-with-timestamps">6. Trace System Calls with Timestamps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trace-child-processes">7. Trace Child Processes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analyze-system-call-statistics">8. Analyze System Call Statistics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-filtering">9. Advanced Filtering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exit-on-first-error">10. Exit on First Error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-workflow">Example Workflow</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html#network-infrastructure">Network Infrastructure</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#processador">Processador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#sistema">sistema</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
@@ -77,7 +99,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">TecnicoSistemas</a>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -85,8 +107,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
-          <li class="breadcrumb-item"><a href="../index.html">Hardware and System Resources</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Hardware</a></li>
       <li class="breadcrumb-item active">Workflow for Using <code class="docutils literal notranslate"><span class="pre">strace</span></code> to Trap System Calls</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/01_Hardware/hardware_resources/hw_specs/workFlow-strace.rst.txt" rel="nofollow"> View page source</a>
@@ -295,8 +316,8 @@ sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> <
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../compCPU.html" class="btn btn-neutral float-left" title="How to Limit CPU Computation Consumption for Builds and Compilation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="privateInvestigations.html" class="btn btn-neutral float-right" title="Investigating Device 18 (0000:00:18.x)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="QNAP.html" class="btn btn-neutral float-left" title="Informe de Actualización de Infraestructura: Adaptador Red" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../Processador/index.html" class="btn btn-neutral float-right" title="Arquitectura del Procesador y Kernel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

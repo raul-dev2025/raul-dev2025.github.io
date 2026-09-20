@@ -6,23 +6,34 @@ Infraestructura RAULVILCHEZ.ORG
    :description: Documentación central del flujo de automatización de nodos Rocky 10
    :keywords: Sphinx, IdM, Automation, Devops
 
-Bienvenido a la documentación técnica del ecosistema de despliegue desatendido. Este portal centraliza los procedimientos de clonado, inyección de datos y enrolamiento automático en el Reino IdM.
+Bienvenido a la documentación técnica del ecosistema de despliegue desatendido. Este portal centraliza los procedimientos de clonado, inyección de datos y enrolamiento automático en el Dominio.
+
+
+Resumen
+=======
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Flujo de Trabajo:
+   :maxdepth: 1
 
-   /06_Software_and_Applications/Supuestos/Golden/goldenImage      
-   /06_Software_and_Applications/Supuestos/Golden/clone_golden
-   /06_Software_and_Applications/Supuestos/Golden/get_otp   
-   /06_Software_and_Applications/Supuestos/Golden/idm-first-boot
-   /06_Software_and_Applications/Supuestos/Golden/prepare_clone
-   /06_Software_and_Applications/Supuestos/Golden/idm-join
-   /06_Software_and_Applications/Supuestos/Golden/Sellado
-   /06_Software_and_Applications/Supuestos/Golden/golden_purificacion
+   /06_Software_and_Applications/Supuestos/Golden/resumen_infra
+
+Descripción general de las especificaciones de hardware, almacenamiento optimizado (VDO + XFS), aislamiento de CPU y seguridad de la infraestructura subyacente.
+
+Flujo de Trabajo
+================
+
+   :doc:`Diagnóstico Offline </06_Software_and_Applications/Supuestos/Golden/guestMount_offline>`
+   :doc:`goldenImage </06_Software_and_Applications/Supuestos/Golden/goldenImage>`
+   :doc:`clone_golden </06_Software_and_Applications/Supuestos/Golden/clone_golden>`
+   :doc:`get_otp </06_Software_and_Applications/Supuestos/Golden/get_otp>`
+   :doc:`idm-first-boot </06_Software_and_Applications/Supuestos/Golden/idm-first-boot>`
+   :doc:`prepare_clone </06_Software_and_Applications/Supuestos/Golden/prepare_clone>`
+   :doc:`idm-join </06_Software_and_Applications/Supuestos/Golden/idm-join>`
+   :doc:`Sellado </06_Software_and_Applications/Supuestos/Golden/Sellado>`
+   :doc:`golden_purificacion </06_Software_and_Applications/Supuestos/Golden/golden_purificacion>`
 
 Secciones Detalladas
---------------------
+====================
 
 1. **La Semilla: Preparación de la Golden Image**
 
@@ -66,8 +77,10 @@ Secciones Detalladas
    * :download:`Descargar idm-join.sh <./idm-join.rst>`
    * :download:`Descargar idm-first-boot.service </07_Development/scripts/idm-first-boot.service>`
 
+
 Métricas de Seguridad
----------------------
+=====================
+
 Todos los scripts listados cumplen con el protocolo de **Zero-Footprint**. 
 El sistema está diseñado bajo el principio de **huella mínima**:
 
@@ -75,7 +88,8 @@ El sistema está diseñado bajo el principio de **huella mínima**:
 * Los archivos temporales dentro del clon son eliminados mediante borrado seguro (``shred``) tras su uso.
 
 Apéndice: Rutas de Interés
---------------------------
+==========================
+
 * **Scripts del Host**: ``/var/lib/virt_storage/scripts/``
 * **Almacenamiento VMS**: ``/var/lib/virt_storage/vms/``
 * **Logs de Enrolamiento**: ``/var/log/idm-setup.log`` (dentro del clon)

@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comprobación y Supervisión de Certificados &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Ataques Man-in-the-Middle (MitM) y TLS" href="MiTm.html" />
+    <link rel="prev" title="Apuntes sobre Protocolo TLS y Gestión de Certificados" href="apuntesTLS.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#boot">Boot</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#certificados-tls">Certificados-TLS</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="apuntesTLS.html">Apuntes sobre Protocolo TLS y Gestión de Certificados</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Comprobación y Supervisión de Certificados</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sistemas-linux">Sistemas Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sistemas-macos-macintosh">Sistemas macOS (Macintosh)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sistemas-windows">Sistemas Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#almacenes-de-certificados-en-windows">Almacenes de Certificados en Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#actualizacion-de-listas-ctl-certificate-trust-list">Actualización de Listas CTL (Certificate Trust List)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="MiTm.html">Ataques Man-in-the-Middle (MitM) y TLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OpenSSL/OpenSSL-saga.html">OpenSSL Certificado de Autoridad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TLS-libvirt/1-concepts.html">certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TLS-libvirt/2-CA.html">TLSCreateCACert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TLS-libvirt/3creSerCer.html">Certificados</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#file-system">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Sistemas Operativos</a></li>
+      <li class="breadcrumb-item active">Comprobación y Supervisión de Certificados</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/03_Operating_Systems/Certificados-TLS/compCA.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="comprobacion-y-supervision-de-certificados">
+<h1><a class="toc-backref" href="#id3" role="doc-backlink">Comprobación y Supervisión de Certificados</a><a class="headerlink" href="#comprobacion-y-supervision-de-certificados" title="Link to this heading"></a></h1>
+<nav class="contents" id="indice-de-contenidos">
+<p class="topic-title">Índice de contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#comprobacion-y-supervision-de-certificados" id="id3">Comprobación y Supervisión de Certificados</a></p>
+<ul>
+<li><p><a class="reference internal" href="#sistemas-linux" id="id4">Sistemas Linux</a></p></li>
+<li><p><a class="reference internal" href="#sistemas-macos-macintosh" id="id5">Sistemas macOS (Macintosh)</a></p></li>
+<li><p><a class="reference internal" href="#sistemas-windows" id="id6">Sistemas Windows</a></p></li>
+<li><p><a class="reference internal" href="#almacenes-de-certificados-en-windows" id="id7">Almacenes de Certificados en Windows</a></p></li>
+<li><p><a class="reference internal" href="#actualizacion-de-listas-ctl-certificate-trust-list" id="id8">Actualización de Listas CTL (Certificate Trust List)</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="sistemas-linux">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Sistemas Linux</a><a class="headerlink" href="#sistemas-linux" title="Link to this heading"></a></h2>
+<section id="verificacion-con-openssl">
+<h3>Verificación con OpenSSL<a class="headerlink" href="#verificacion-con-openssl" title="Link to this heading"></a></h3>
+<p>Con la herramienta <code class="docutils literal notranslate"><span class="pre">openssl</span></code> se puede verificar la procedencia y validez de un determinado certificado respecto a una Entidad de Certificación (<em>CA</em>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openssl</span> <span class="n">verify</span> <span class="o">-</span><span class="n">verbose</span> <span class="o">-</span><span class="n">CAfile</span> <span class="n">cacert</span><span class="o">.</span><span class="n">pem</span> <span class="n">server</span><span class="o">.</span><span class="n">crt</span>
+</pre></div>
+</div>
+<p>Para consultar la información detallada de un certificado en formato PEM:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openssl</span> <span class="n">x509</span> <span class="o">-</span><span class="ow">in</span> <span class="n">server</span><span class="o">.</span><span class="n">crt</span> <span class="o">-</span><span class="n">text</span> <span class="o">-</span><span class="n">noout</span>
+</pre></div>
+</div>
+<p>Verificación mediante el almacén del sistema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">trust</span> <span class="nb">list</span>
+<span class="n">openssl</span> <span class="n">verify</span> <span class="o">-</span><span class="n">CAfile</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">tls</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">ca</span><span class="o">-</span><span class="n">bundle</span><span class="o">.</span><span class="n">crt</span> <span class="n">server</span><span class="o">.</span><span class="n">crt</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sistemas-macos-macintosh">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Sistemas macOS (Macintosh)</a><a class="headerlink" href="#sistemas-macos-macintosh" title="Link to this heading"></a></h2>
+<section id="interfaz-grafica">
+<h3>Interfaz Gráfica<a class="headerlink" href="#interfaz-grafica" title="Link to this heading"></a></h3>
+<p>En macOS, la gestión y supervisión de certificados se realiza a través de la aplicación <strong>Acceso a Llaveros</strong> (<em>Keychain Access</em>), ubicada en <code class="docutils literal notranslate"><span class="pre">/System/Applications/Utilities/Keychain</span> <span class="pre">Access.app</span></code>.</p>
+</section>
+<section id="linea-de-comandos-herramienta-security">
+<h3>Línea de Comandos (Herramienta <code class="docutils literal notranslate"><span class="pre">security</span></code>)<a class="headerlink" href="#linea-de-comandos-herramienta-security" title="Link to this heading"></a></h3>
+<p>Para verificar la validez de un certificado desde la terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">security</span> <span class="n">verify</span><span class="o">-</span><span class="n">cert</span> <span class="o">-</span><span class="n">c</span> <span class="n">server</span><span class="o">.</span><span class="n">crt</span> <span class="o">-</span><span class="n">p</span> <span class="n">ssl</span>
+</pre></div>
+</div>
+<p>Para listar todos los certificados instalados en el llavero del sistema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">security</span> <span class="n">find</span><span class="o">-</span><span class="n">certificate</span> <span class="o">-</span><span class="n">a</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Keychains</span><span class="o">/</span><span class="n">System</span><span class="o">.</span><span class="n">keychain</span>
+</pre></div>
+</div>
+<p>Para añadir un certificado CA de confianza al almacén del sistema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">security</span> <span class="n">add</span><span class="o">-</span><span class="n">trusted</span><span class="o">-</span><span class="n">cert</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">r</span> <span class="n">trustRoot</span> <span class="o">-</span><span class="n">k</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Keychains</span><span class="o">/</span><span class="n">System</span><span class="o">.</span><span class="n">keychain</span> <span class="n">cacert</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sistemas-windows">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Sistemas Windows</a><a class="headerlink" href="#sistemas-windows" title="Link to this heading"></a></h2>
+<section id="herramientas-de-gestion">
+<h3>Herramientas de Gestión<a class="headerlink" href="#herramientas-de-gestion" title="Link to this heading"></a></h3>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Herramientas de administración de certificados en Windows</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">certmgr.msc</span></code></p></td>
+<td><p>Consola de gestión gráfica para los certificados del usuario actual (<code class="docutils literal notranslate"><span class="pre">Current</span> <span class="pre">User</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">certlm.msc</span></code></p></td>
+<td><p>Consola de gestión gráfica para el almacén de la máquina local (<code class="docutils literal notranslate"><span class="pre">Local</span> <span class="pre">Machine</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mmc.exe</span></code></p></td>
+<td><p>Consola MMC donde se puede agregar el complemento (<em>snap-in</em>) de “Certificados” para cualquier ámbito.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">certutil.exe</span></code></p></td>
+<td><p>Herramienta CLI nativa para administración, verificación y diagnóstico profundo del servicio de certificados.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sigcheck.exe</span></code></p></td>
+<td><p>Utilidad de Sysinternals para comprobar la validez de las CAs y detectar certificados no reconocidos.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uso-de-certutil">
+<h3>Uso de <code class="docutils literal notranslate"><span class="pre">certutil</span></code><a class="headerlink" href="#uso-de-certutil" title="Link to this heading"></a></h3>
+<p>Desde una consola de comandos (<code class="docutils literal notranslate"><span class="pre">cmd</span></code>) con privilegios de administrador, se puede comprobar la conectividad y el estado de una CA:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="o">&gt;</span> <span class="n">certutil</span> <span class="o">-</span><span class="n">config</span> <span class="o">-</span> <span class="o">-</span><span class="n">ping</span>
+</pre></div>
+</div>
+<p>Para verificar la cadena de confianza completa de un certificado descargando listas CRL y datos AIA:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="o">&gt;</span> <span class="n">certutil</span> <span class="o">-</span><span class="n">verify</span> <span class="o">-</span><span class="n">urlfetch</span> <span class="n">certificado</span><span class="o">.</span><span class="n">crt</span>
+</pre></div>
+</div>
+<p>Para volcar el contenido del almacén de Entidades de Certificación Raíz de confianza:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="o">&gt;</span> <span class="n">certutil</span> <span class="o">-</span><span class="n">store</span> <span class="n">Root</span>
+</pre></div>
+</div>
+</section>
+<section id="uso-de-sigcheck-sysinternals">
+<h3>Uso de Sigcheck (Sysinternals)<a class="headerlink" href="#uso-de-sigcheck-sysinternals" title="Link to this heading"></a></h3>
+<p>Para comprobar la lista de CAs instaladas frente al programa de certificados raíz de confianza de Microsoft:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="o">&gt;</span> <span class="n">sigcheck</span><span class="o">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">tv</span>
+</pre></div>
+</div>
+</section>
+<section id="gestion-mediante-powershell">
+<h3>Gestión mediante PowerShell<a class="headerlink" href="#gestion-mediante-powershell" title="Link to this heading"></a></h3>
+<p>PowerShell permite inspeccionar el almacén del sistema navegando por la unidad de proveedor <code class="docutils literal notranslate"><span class="pre">Cert:</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Get</span><span class="o">-</span><span class="n">ChildItem</span> <span class="o">-</span><span class="n">Path</span> <span class="n">Cert</span><span class="p">:</span>\<span class="n">LocalMachine</span>\<span class="n">Root</span>
+<span class="n">Get</span><span class="o">-</span><span class="n">ChildItem</span> <span class="o">-</span><span class="n">Path</span> <span class="n">Cert</span><span class="p">:</span>\<span class="n">CurrentUser</span>\<span class="n">My</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="almacenes-de-certificados-en-windows">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Almacenes de Certificados en Windows</a><a class="headerlink" href="#almacenes-de-certificados-en-windows" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Tipos de almacenes de certificados</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Almacén</p></th>
+<th class="head"><p>Ámbito de aplicación</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Local</span> <span class="pre">Machine</span></code></p></td>
+<td><p>Configuración global aplicable a todos los usuarios y servicios del equipo.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Current</span> <span class="pre">User</span></code></p></td>
+<td><p>Específico para el perfil del usuario activo en la sesión.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Enterprise</span></code></p></td>
+<td><p>Centralizado en Active Directory y distribuido a los equipos del dominio mediante directivas de grupo (GPO).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="actualizacion-de-listas-ctl-certificate-trust-list">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Actualización de Listas CTL (Certificate Trust List)</a><a class="headerlink" href="#actualizacion-de-listas-ctl-certificate-trust-list" title="Link to this heading"></a></h2>
+<p>Windows actualiza dinámicamente las listas de certificados raíz de confianza (<em>Trust List</em>) y de certificados revocados realizando peticiones HTTP (puerto 80) a los servidores de Microsoft:</p>
+<ul class="simple">
+<li><p>Punto de conexión CTL: <code class="docutils literal notranslate"><span class="pre">http://ctldl.windowsupdate.com</span></code></p></li>
+</ul>
+<p>Este mecanismo automático descarga las listas CTL firmadas periódicamente para actualizar las CA de confianza bajo demanda sin requerir la instalación manual de parches del sistema.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="apuntesTLS.html" class="btn btn-neutral float-left" title="Apuntes sobre Protocolo TLS y Gestión de Certificados" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="MiTm.html" class="btn btn-neutral float-right" title="Ataques Man-in-the-Middle (MitM) y TLS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

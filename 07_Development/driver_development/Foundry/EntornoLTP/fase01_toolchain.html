@@ -1,0 +1,218 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fase 1: Despliegue de Cadena de Herramientas Local &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Fase 2: Entorno de Usuario y Metodología de Trabajo" href="fase02_userEnvironment.html" />
+    <link rel="prev" title="Fase 0: Preparación e Hito Base (GOLDEN-00)" href="fase00_base_os.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwbus-io/index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+      <li class="breadcrumb-item active">Fase 1: Despliegue de Cadena de Herramientas Local</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/Foundry/EntornoLTP/fase01_toolchain.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fase-1-despliegue-de-cadena-de-herramientas-local">
+<h1>Fase 1: Despliegue de Cadena de Herramientas Local<a class="headerlink" href="#fase-1-despliegue-de-cadena-de-herramientas-local" title="Link to this heading"></a></h1>
+<section id="resumen-de-la-fase">
+<h2>Resumen de la Fase<a class="headerlink" href="#resumen-de-la-fase" title="Link to this heading"></a></h2>
+<p>Se ha completado la configuración e instalación offline del entorno de compilación dentro de la máquina virtual <code class="docutils literal notranslate"><span class="pre">buildlab</span></code>. Toda la paquetería necesaria para la compilación de código C en espacio de usuario y módulos de núcleo (<em>kernel drivers</em>) fue provista localmente mediante el automontaje y enganche en caliente (<em>hotplug</em>) del medio USB con Rocky Linux 10.</p>
+</section>
+<section id="procedimiento-ejecutado">
+<h2>Procedimiento Ejecutado<a class="headerlink" href="#procedimiento-ejecutado" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Hotplug del Almacenamiento Local (WS Host):</strong>
+Conexión dinámica de la etiqueta del medio sin interrupción del ciclo de vida de la máquina:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virsh<span class="w"> </span>attach-disk<span class="w"> </span>buildlab<span class="w"> </span>/dev/disk/by-label/Rocky-10-1-x86_64-dvd<span class="w"> </span>vdb<span class="w"> </span>--type<span class="w"> </span>disk<span class="w"> </span>--mode<span class="w"> </span><span class="nb">readonly</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Montaje y Activación de Repositorios (Guest VM):</strong>
+Ejecución del script de activación para el mapeo del dispositivo <code class="docutils literal notranslate"><span class="pre">/dev/vdb</span></code> e inhabilitación de espejos remotos:</p>
+<p>En el Guest:</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../../../../_downloads/1749ec14fbea365f906df0d1cdaa17eb/activate_repo.sh"><code class="xref download docutils literal notranslate"><span class="pre">activate_repo</span></code></a></p></li>
+</ul>
+</li>
+<li><p><strong>Instalación de la Pila de Desarrollo:</strong>
+Despliegue del grupo principal de desarrollo e inclusión del repositorio CodeReady Builder (CRB) local:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dnf<span class="w"> </span>config-manager<span class="w"> </span>--set-enabled<span class="w"> </span>crb
+dnf<span class="w"> </span>groupinstall<span class="w"> </span>-y<span class="w"> </span><span class="s2">&quot;Development Tools&quot;</span>
+dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>bc<span class="w"> </span>cmake
+</pre></div>
+</div>
+</li>
+<li><p><strong>Desacoplamiento de Medios:</strong>
+Una vez completada la instalación de dependencias, se procedió al desmontaje del punto local y retiro del disco virtualizado:</p>
+<p>En el Guest:</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../../../../_downloads/58c8c9bd18098da40b13f07553c30fd6/deactivate_repo.sh"><code class="xref download docutils literal notranslate"><span class="pre">deactivate_repo</span></code></a></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># En el Host (WS)</span>
+virsh<span class="w"> </span>detach-disk<span class="w"> </span>buildlab<span class="w"> </span>vdb
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="inventario-de-herramientas-instaladas">
+<h2>Inventario de Herramientas Instaladas<a class="headerlink" href="#inventario-de-herramientas-instaladas" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Componente</p></th>
+<th class="head"><p>Versión Identificada</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Compiler (GCC)</p></td>
+<td><p>14.3.1 (Red Hat 14.3.1-2)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Build Automation</p></td>
+<td><p>GNU Make 4.4.1 / CMake 3.30.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Kernel Headers</p></td>
+<td><p>kernel-devel-6.12.0-124.8.1.el10_1.x86</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kernel Utilities</p></td>
+<td><p>bc 1.07.1 / elfutils-libelf-devel 0.193</p></td>
+</tr>
+<tr class="row-even"><td><p>Lexer/Parser</p></td>
+<td><p>flex 2.6.4 / bison 3.8.2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Security / Analysis</p></td>
+<td><p>openssl-devel 3.5.1 / GDB 16.3</p></td>
+</tr>
+<tr class="row-even"><td><p>VCS</p></td>
+<td><p>Git 2.47.3</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="estado-del-entorno">
+<h2>Estado del Entorno<a class="headerlink" href="#estado-del-entorno" title="Link to this heading"></a></h2>
+<p>El entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code> se encuentra totalmente aislado, operativo y provisto de la cadena de compilación adecuada para continuar hacia la <strong>Fase 2: Compilación y Carga de Controladores del Núcleo</strong>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fase00_base_os.html" class="btn btn-neutral float-left" title="Fase 0: Preparación e Hito Base (GOLDEN-00)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fase02_userEnvironment.html" class="btn btn-neutral float-right" title="Fase 2: Entorno de Usuario y Metodología de Trabajo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

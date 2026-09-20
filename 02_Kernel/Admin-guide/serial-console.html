@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cónsola en serie Linux &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Parámetros de Ajuste del Planificador de E/S Deadline" href="deadline-iosched.html" />
+    <link rel="prev" title="Unidad de prueba, del árbol de dispositivo Open Firmware" href="of_unittest.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="1-boot.html">Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="initrd.html">InitRD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kernParam.html">Parámetros para la línea de comandos del <em>kernel</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Cónsola en serie Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deadline-iosched.html">Parámetros de Ajuste del Planificador de E/S Deadline</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Cónsola en serie Linux</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/Admin-guide/serial-console.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="consola-en-serie-linux">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Cónsola en serie Linux</a><a class="headerlink" href="#consola-en-serie-linux" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#consola-en-serie-linux" id="id1">Cónsola en serie Linux</a></p>
+<ul>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id2">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>Para utilizar la cónsola en serie, es necesario compilar dicho soporte, al kernel. Por defecto, no está compilado. Dentro del menú de configuración:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>menuselection: `Character devices --&gt; Serial drivers --&gt;`
+8250/16550 and compatible serial support --&gt;
+Console on 8250/16550 and compatible serial port
+</pre></div>
+</div>
+<p>Debe compilarse la funcionalidad como parte del kernel, <strong>no por separado</strong>.</p>
+<p>Es posible especificar múltiples dispositivos para la salida de cónsola. Pueden definirse nuevos comando de línea, para seleccionar qué dispositivo/s será usado en la salida de cónsola. El formato de esta opción es:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">console</span><span class="o">=</span><span class="n">device</span><span class="p">,</span><span class="n">options</span>
+
+<span class="n">__device</span><span class="p">:</span><span class="n">__</span>     <span class="n">tty0</span> <span class="k">for</span> <span class="n">the</span> <span class="n">foreground</span> <span class="n">virtual</span> <span class="n">console</span>
+        <span class="n">ttyX</span> <span class="k">for</span> <span class="nb">any</span> <span class="n">other</span> <span class="n">virtual</span> <span class="n">console</span>
+        <span class="n">ttySx</span> <span class="k">for</span> <span class="n">a</span> <span class="n">serial</span> <span class="n">port</span>
+        <span class="n">lp0</span> <span class="k">for</span> <span class="n">the</span> <span class="n">first</span> <span class="n">parallel</span> <span class="n">port</span>
+        <span class="n">ttyUSB0</span> <span class="k">for</span> <span class="n">the</span> <span class="n">first</span> <span class="n">USB</span> <span class="n">serial</span> <span class="n">device</span>
+
+<span class="n">__options</span><span class="p">:</span><span class="n">__</span>    <span class="n">depend</span> <span class="n">on</span> <span class="n">the</span> <span class="n">driver</span><span class="o">.</span> <span class="n">For</span> <span class="n">the</span> <span class="n">serial</span> <span class="n">port</span> <span class="n">this</span>
+        <span class="n">defines</span> <span class="n">the</span> <span class="n">baudrate</span><span class="o">/</span><span class="n">parity</span><span class="o">/</span><span class="n">bits</span><span class="o">/</span><span class="n">flow</span> <span class="n">control</span> <span class="n">of</span>
+        <span class="n">the</span> <span class="n">port</span><span class="p">,</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">format</span> <span class="n">BBBBPNF</span><span class="p">,</span> <span class="n">where</span> <span class="n">BBBB</span> <span class="ow">is</span> <span class="n">the</span>
+        <span class="n">speed</span><span class="p">,</span> <span class="n">P</span> <span class="ow">is</span> <span class="n">parity</span> <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">o</span><span class="o">/</span><span class="n">e</span><span class="p">),</span> <span class="n">N</span> <span class="ow">is</span> <span class="n">number</span> <span class="n">of</span> <span class="n">bits</span><span class="p">,</span>
+        <span class="ow">and</span> <span class="n">F</span> <span class="ow">is</span> <span class="n">flow</span> <span class="n">control</span> <span class="p">(</span><span class="s1">&#39;r&#39;</span> <span class="k">for</span> <span class="n">RTS</span><span class="p">)</span><span class="o">.</span> <span class="n">Default</span> <span class="ow">is</span>
+        <span class="mi">9600</span><span class="n">n8</span><span class="o">.</span> <span class="n">The</span> <span class="n">maximum</span> <span class="n">baudrate</span> <span class="ow">is</span> <span class="mf">115200.</span>
+</pre></div>
+</div>
+<p>Puede especificarse múltiples opciones <code class="docutils literal notranslate"><span class="pre">console=</span></code>, sobre la línea de órdenes. La salida aparecerá en todas ellas. Será utilizado el último dispositivo, cuando sea abierto <code class="docutils literal notranslate"><span class="pre">/dev/</span> <span class="pre">console</span></code>, ejemplo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">console</span><span class="o">=</span><span class="n">ttyS1</span><span class="p">,</span><span class="mi">9600</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">console</span><span class="o">=</span><span class="n">tty0</span><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>… define que abriendo <code class="docutils literal notranslate"><span class="pre">/dev/console</span></code> tomará la actual cónsola virtual, corriendo en segundo plano. Los mensajes del <em>kernel</em> aparecerán en ambas; el segundo puerto en serie (ttyS1 ó COM2) <em>a 9600 baudios</em>, y la cónsola VGA.</p>
+<blockquote>
+<div><p><em>Nótese que sólo puede definirse una cónsola por tipo de
+dispositivo</em>.</p>
+</div></blockquote>
+<p>Si no hay <em>dispositivo de cónsola</em> especificado, será utilizado el primer dispositivo encontrado, capaz de actuar como cónsola de sistema.
+En este punto, el sistema primero buscará la <em>tarjeta VGA</em> y después, el puerto en serie. Así que, si no hay <em>tarjeta VGA</em> en el sistema, será utilizado el primer puerto en serie como cónsola.</p>
+<p>Será necesario crear un nuevo dispositivo para usar <code class="docutils literal notranslate"><span class="pre">/dev/console</span></code>. El <code class="docutils literal notranslate"><span class="pre">/dev/console</span></code> <em>habitual</em>, es un <em>dispositivo de carácteres 5,1</em> (<code class="docutils literal notranslate"><span class="pre">ll</span> <span class="pre">-s</span> <span class="pre">/dev/console</span></code>).</p>
+<p>Es posible usar, incluso un <em>dispositivo de red</em> como cónsola. Ver <code class="docutils literal notranslate"><span class="pre">Documentation/networking/netconsole.txt</span></code>, para más información.</p>
+<p>Aquí hay un ejemplo de uso <code class="docutils literal notranslate"><span class="pre">/dev/ttyS1</span></code> (COM2) como cónsola. Reemplazar los valores de ejemplo, de ser necesario:</p>
+<ol class="arabic simple">
+<li><p>Crear <code class="docutils literal notranslate"><span class="pre">/dev/console</span></code> (cónsola real) y <code class="docutils literal notranslate"><span class="pre">/dev/tty0</span></code> (cónsola
+virtual <em>maestra</em>)</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">dev</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">f</span> <span class="n">console</span> <span class="n">tty0</span>
+<span class="n">mknod</span> <span class="o">-</span><span class="n">m</span> <span class="mi">622</span> <span class="n">console</span> <span class="n">c</span> <span class="mi">5</span> <span class="mi">1</span>
+<span class="n">mknod</span> <span class="o">-</span><span class="n">m</span> <span class="mi">622</span> <span class="n">tty0</span> <span class="n">c</span> <span class="mi">4</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">LILO</span></code> puede también tomar entradas desde un dispositivo en serie. Se trata de una <em>característica</em> de gran utilidad. Uso del puerto en serie; en el archivo <code class="docutils literal notranslate"><span class="pre">lilo.conf</span></code>, sección <code class="docutils literal notranslate"><span class="pre">[global]</span></code>:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">serial</span><span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">9600</span><span class="n">n8</span> <span class="p">(</span><span class="n">ttyS1</span><span class="p">,</span> <span class="mi">9600</span> <span class="n">bd</span><span class="p">,</span> <span class="n">no</span> <span class="n">parity</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Ajustar las <em>opciones del kernel</em>, en el archivo <code class="docutils literal notranslate"><span class="pre">lilo.conf</span></code>, sección <em>[kernel]</em>:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">append</span> <span class="o">=</span> <span class="s2">&quot;console=ttyS1,9600&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Confirmar que un <code class="docutils literal notranslate"><span class="pre">getty</span></code> corre en el puerto en serie, y poder así, <em>entrar</em> una vez el sistema termine de arrancar. Ésto se realiza añadiendo una línea como ésta a <code class="docutils literal notranslate"><span class="pre">/etc/</span> <span class="pre">inittab/</span> <span class="pre">``.</span> <span class="pre">La</span> <span class="pre">sintaxis</span> <span class="pre">depende</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">aplicación</span> <span class="pre">``getty</span></code> instalada en el sistema.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">S1</span><span class="p">:</span><span class="mi">23</span><span class="p">:</span><span class="n">respawn</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">getty</span> <span class="o">-</span><span class="n">L</span> <span class="n">ttyS1</span> <span class="mi">9600</span> <span class="n">vt100</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p><em>Init</em> y <code class="docutils literal notranslate"><span class="pre">/etc/ioctl.save</span></code></p></li>
+</ol>
+<p><em>Sysvinit</em> recuerda la configuración <em>stty</em> en un archivo colocado en <code class="docutils literal notranslate"><span class="pre">/etc</span></code>, llamado <code class="docutils literal notranslate"><span class="pre">/etc/ioctl.save</span></code>. BORRA ÉSTE ARCHIVO, antes de usar la cónsola en serie por primera vez, por que de otra manera, <code class="docutils literal notranslate"><span class="pre">init</span></code>, probablemente ajustaria el <em>baud rate</em> a <code class="docutils literal notranslate"><span class="pre">38400</span></code>.</p>
+<blockquote>
+<div><p><strong>baud rate:</strong> ratio de baudios, rango de baudios, señal en baudios, o velocidad de transmisión de una señal, estimada en baudios(unidad).</p>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p><code class="docutils literal notranslate"><span class="pre">/dev/console</span></code> y programas <em>X(Xorg)</em>, que necesiten trabajar en cónsolas virtuales, abrirán <code class="docutils literal notranslate"><span class="pre">/dev/console</span></code>. Si después de haber creado un dispositivo <code class="docutils literal notranslate"><span class="pre">/dev/console</span></code>, la cónsola <em>no es</em> la <em>cónsola virtual</em>, algunos programas fallarán. Son esos programas que necesitan <em>acceso</em> a la interfase VT(virtual terminal), y usan <code class="docutils literal notranslate"><span class="pre">/dev/console</span></code> en lugar de <code class="docutils literal notranslate"><span class="pre">/dev/tty0</span></code>. Algunos son:</p></li>
+</ol>
+<ul class="simple">
+<li><p><em>Xfree86, svgalib, gpm, SVGATextMode</em></p></li>
+</ul>
+<p>Debería ser arreglado en versiones mas modernas de esos programas.</p>
+<p>Nótese que al <em>arrancar</em> sin la opción <code class="docutils literal notranslate"><span class="pre">console=</span></code> -o <code class="docutils literal notranslate"><span class="pre">console=/dev/tty0</span></code>, <code class="docutils literal notranslate"><span class="pre">/dev/console</span></code> es lo mismo que <code class="docutils literal notranslate"><span class="pre">/dev/tty0</span></code>.
+En ese caso, todo seguirá funcionando.</p>
+<section id="referencias-y-agradecimientos">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<div class="admonition-maestro-esclavo admonition">
+<p class="admonition-title">maestro/esclavo</p>
+<p>Términos habitualmente usados, para referirse a procesos, servicios, máquinas, entidades dependientes unas de otras. Podría decirse que la entidad maestro regula la entidad <em>esclavo</em>, dando lugar a una relación de dependencia.</p>
+</div>
+<p><em>Thanks to Geert Uytterhoeven geert&#64;linux-m68k.org for porting the patches from 2.1.4x to 2.1.6x for taking care of the integration of these patches into m68k, ppc and alpha.</em></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="of_unittest.html" class="btn btn-neutral float-left" title="Unidad de prueba, del árbol de dispositivo Open Firmware" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="deadline-iosched.html" class="btn btn-neutral float-right" title="Parámetros de Ajuste del Planificador de E/S Deadline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

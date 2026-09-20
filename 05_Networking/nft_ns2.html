@@ -1,0 +1,195 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Network Namespaces (netns) &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../_static/simulation.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Servidor de Correo Postfix: Notificaciones RCU" href="Servidor/postfix.html" />
+    <link rel="prev" title="Índice de Redes" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Índice de Redes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#networking">Networking</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Network Namespaces (netns)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#la-maquina-virtual-de-nftables-nivel-de-reglas">1. La “Máquina Virtual” de <em>nftables</em> (Nivel de Reglas)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instanciar-la-pila-de-red-completa-network-namespaces-netns">2. Instanciar la <em>Pila de Red Completa</em>: <em>Network Namespaces</em> (<code class="docutils literal notranslate"><span class="pre">netns</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#en-resumen-como-se-combina-esto-en-el-laboratorio">En Resumen: ¿Cómo se combina esto en el laboratorio?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Servidor/postfix.html">Servidor de Correo Postfix: Notificaciones RCU</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#redes-lan">Redes LAN</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Índice de Redes</a></li>
+      <li class="breadcrumb-item active">Network Namespaces (netns)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/05_Networking/nft_ns2.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="network-namespaces-netns">
+<h1>Network Namespaces (netns)<a class="headerlink" href="#network-namespaces-netns" title="Link to this heading"></a></h1>
+<div class="admonition-red-virtual admonition">
+<p class="admonition-title">red virtual</p>
+<p>“…basada en una máquina virtual en espacio de kernel”… lo que en teoría, significa que es posible de alguna manera, duplicar/clonar/instanciar, la propia estructura de red?</p>
+</div>
+<p>La respuesta corta es <strong>sí, es absolutamente posible</strong>, pero con un matiz importante sobre qué hace la “máquina virtual” de <em>nftables</em> y qué componentes del kernel se encargan de duplicar la red.</p>
+<hr class="docutils" />
+<section id="la-maquina-virtual-de-nftables-nivel-de-reglas">
+<h2>1. La “Máquina Virtual” de <em>nftables</em> (Nivel de Reglas)<a class="headerlink" href="#la-maquina-virtual-de-nftables-nivel-de-reglas" title="Link to this heading"></a></h2>
+<p>Cuando se dice que <cite>nftables</cite> funciona con una <strong>máquina virtual de bytecode en el espacio del kernel</strong>, no significa que cree una VM tipo QEMU/KVM que ejecute un sistema operativo. Significa que:</p>
+<ul class="simple">
+<li><p>Tu herramienta en espacio de usuario (<cite>nft</cite>) traduce las reglas que escribes a un <strong>bytecode de bajo nivel</strong> (instrucciones muy simples como <cite>load</cite>, <cite>cmp</cite>, <cite>set</cite>).</p></li>
+<li><p>El módulo <cite>nft_tables</cite> del kernel contiene un <strong>mando de ejecución (intérprete) súper rápido</strong> que procesa ese bytecode para evaluar los paquetes.</p></li>
+</ul>
+<section id="se-puede-clonar-instanciar-este-motor">
+<h3>¿Se puede clonar/instanciar este motor?<a class="headerlink" href="#se-puede-clonar-instanciar-este-motor" title="Link to this heading"></a></h3>
+<p><strong>Sí.</strong> Gracias a esta arquitectura, la lógica de filtrado es totalmente declarativa y está aislada de la pila de red global. Puedes:</p>
+<ul class="simple">
+<li><p><strong>Exportar e importar el estado completo</strong>: Con un simple <code class="docutils literal notranslate"><span class="pre">nft</span> <span class="pre">list</span> <span class="pre">ruleset</span> <span class="pre">&gt;</span> <span class="pre">ruleset.nft</span></code> puedes volcar el estado bytecode completo y replicarlo/clonarlo instantáneamente en otra máquina o espacio aislado.</p></li>
+<li><p><strong>Múltiples tablas/cadenas aisladas</strong>: Puedes instanciar múltiples tablas independientes dentro del mismo kernel sin que interfieran entre sí.</p></li>
+</ul>
+</section>
+</section>
+<section id="instanciar-la-pila-de-red-completa-network-namespaces-netns">
+<h2>2. Instanciar la <em>Pila de Red Completa</em>: <em>Network Namespaces</em> (<code class="docutils literal notranslate"><span class="pre">netns</span></code>)<a class="headerlink" href="#instanciar-la-pila-de-red-completa-network-namespaces-netns" title="Link to this heading"></a></h2>
+<p>Si lo que buscas es <strong>duplicar o clonar la propia estructura física y lógica de la red</strong> (tablas de rutas, interfaces, sockets, reglas de firewall, vecinos ARP), la tecnología del kernel de Linux encargada de esto son los <strong>Network Namespaces</strong> (<code class="docutils literal notranslate"><span class="pre">netns</span></code>).</p>
+<p>Aquí es donde <cite>nftables</cite> y la virtualización de red se unen a la perfección:</p>
+<ul class="simple">
+<li><p><strong>Pila de red independiente</strong>: Un <em>Network Namespace</em> crea una copia/instancia completamente aislada de la pila de red. Un proceso asignado a ese namespace tiene sus propias interfaces (ej. <code class="docutils literal notranslate"><span class="pre">eth0</span></code>, <code class="docutils literal notranslate"><span class="pre">lo</span></code>), su propia tabla de rutas y <strong>su propia instancia del motor nftables</strong>.</p></li>
+<li><p><strong>Infraestructura de contenedores</strong>: Esta es la base sobre la que funcionan Docker, Podman o Kubernetes. Cuando lanzas un contenedor, el kernel le asigna un <cite>netns</cite> propio.</p></li>
+</ul>
+</section>
+<section id="en-resumen-como-se-combina-esto-en-el-laboratorio">
+<h2>En Resumen: ¿Cómo se combina esto en el laboratorio?<a class="headerlink" href="#en-resumen-como-se-combina-esto-en-el-laboratorio" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 25.0%" />
+<col style="width: 55.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Capa</p></th>
+<th class="head"><p>Tecnología</p></th>
+<th class="head"><p>¿Qué permite instanciar/duplicar?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Aislamiento de Red</strong></p></td>
+<td><p><strong>Network Namespaces</strong> (<code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">netns</span></code>)</p></td>
+<td><p>Clona/duplica la <strong>pila de red completa</strong> (interfaces, sockets, routing, loopback) en el mismo kernel sin overhead de hardware.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Aislamiento de Firewall</strong></p></td>
+<td><p><strong>``nftables`` Bytecode VM</strong></p></td>
+<td><p>Instancia un <strong>mecanismo de filtrado de paquetes programable</strong> por cada namespace de red de forma ligera y de alta velocidad.</p></td>
+</tr>
+</tbody>
+</table>
+<p>En tu entorno de laboratorio en <em>buildlab</em>, podrías crear en cuestión de milisegundos 50 estructuras de red idénticas mediante <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">netns</span> <span class="pre">add</span> <span class="pre">test1</span></code>, y cargar en cada una de ellas una instancia independiente de <em>nftables</em> con sus propias reglas para ejecutar pruebas de carga o simulación de topologías de red complejas sin salir de la misma VM.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Índice de Redes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Servidor/postfix.html" class="btn btn-neutral float-right" title="Servidor de Correo Postfix: Notificaciones RCU" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

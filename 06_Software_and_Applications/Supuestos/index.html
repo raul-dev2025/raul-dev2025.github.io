@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Infraestructura virtual &mdash; TecnicoSistemas  documentation</title>
+  <title>Infraestructura virtual &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
@@ -23,8 +23,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt" href="IV-management.html" />
-    <link rel="prev" title="Sistema" href="../../99_General/Hub/profesional/index.html" /> 
+    <link rel="next" title="Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM" href="Boot/bootloaderDebug.html" />
+    <link rel="prev" title="Tercera parte" href="../office/Word-apuntes-parte3.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,28 +41,50 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
-<ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Infraestructura virtual</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#virtualization-management">Virtualization Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="IV-management.html">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Config/sharedFolder-nfs.html">Informe de Configuración: Repositorio de ISOs vía NFS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Config/configSSH.html">Configuración de Acceso Remoto Seguro (SSH)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Config/resumen.html">Infraestructura y Almacenamiento</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Testing/vmTunning.html">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Golden/indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gestion-de-identidad-idm">Gestión de Identidad (IdM)</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/Incidencias/index.html">Registro de Incidencias</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#office">office</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#supuestos">Supuestos</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Infraestructura virtual</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#virtualization-management">Virtualization Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#config">Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#imagen-de-base-golden-image">Imagen de base (Golden image)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gestion-de-identidad-idm">Gestión de Identidad (IdM)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sso">SSO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#freeipa">FreeIPA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recursos-de-soporte-adicionales">Recursos de Soporte Adicionales</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#idm-configuracion">IdM - Configuracion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
@@ -75,7 +97,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">TecnicoSistemas</a>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -83,7 +105,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
       <li class="breadcrumb-item active">Infraestructura virtual</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/06_Software_and_Applications/Supuestos/index.rst.txt" rel="nofollow"> View page source</a>
@@ -99,53 +121,66 @@
 <section id="virtualization-management">
 <h2>Virtualization Management<a class="headerlink" href="#virtualization-management" title="Link to this heading"></a></h2>
 <p>Documentación técnica orientada exclusivamente al aprovisionamiento, control del ciclo de vida y orquestación operativa de los recursos de la infraestructura virtual.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="IV-management.html">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a></li>
+<ul class="simple">
+<li><p><a class="reference internal" href="Maint/IV-management.html"><span class="doc">IV-management</span></a></p></li>
 </ul>
-</div>
-<hr class="docutils" />
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Config</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Config/sharedFolder-nfs.html">Informe de Configuración: Repositorio de ISOs vía NFS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Config/configSSH.html">Configuración de Acceso Remoto Seguro (SSH)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Config/resumen.html">Infraestructura y Almacenamiento</a></li>
-</ul>
-</div>
+</section>
+<section id="config">
+<h2>Config<a class="headerlink" href="#config" title="Link to this heading"></a></h2>
 <p>Los siguientes documentos detallan las tareas de configuración inicial de los servicios base de red y las directrices de securización para los accesos remotos.</p>
-<hr class="docutils" />
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Testing</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Testing/vmTunning.html">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</a></li>
+<ul class="simple">
+<li><p><a class="reference internal" href="Config/sharedFolder-nfs.html"><span class="doc">sharedFolder-nfs</span></a></p></li>
+<li><p><a class="reference internal" href="Config/configSSH.html"><span class="doc">configSSH</span></a></p></li>
+<li><p><a class="reference internal" href="Config/resumen.html"><span class="doc">resumen</span></a></p></li>
 </ul>
-</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>Las siguientes guías recopilan los procedimientos de validación de rendimiento y los ajustes aplicados sobre el hipervisor para optimizar la carga de trabajo de las máquinas virtuales.</p>
-<hr class="docutils" />
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Imagen de base(Golden image)</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Golden/indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+<ul class="simple">
+<li><p><a class="reference internal" href="Testing/vmTunning.html"><span class="doc">vmTunning</span></a></p></li>
 </ul>
-</div>
+</section>
+<section id="imagen-de-base-golden-image">
+<h2>Imagen de base (Golden image)<a class="headerlink" href="#imagen-de-base-golden-image" title="Link to this heading"></a></h2>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Esta sección compendia el ciclo de vida completo para la provisión, depuración, despliegue automatizado e integración de imágenes de referencia en el dominio de gestión de identidades.</p>
 </div>
-<hr class="docutils" />
-<section id="gestion-de-identidad-idm">
-<h3>Gestión de Identidad (IdM)<a class="headerlink" href="#gestion-de-identidad-idm" title="Link to this heading"></a></h3>
-<p>Guías de despliegue, configuración de réplicas para alta disponibilidad y estrategias de contingencia para la sincronización y apagado coordinado del reino de identidades.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="IdM/preparacionEntornoPaso3.html">Preparación del Entorno (Paso 3)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="IdM/despliegue-replica.html">Réplica de Alta Disponibilidad FreeIPA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="IdM/IdM-replica.html">Informe de Configuración Base de la VM: ipa02</a></li>
-<li class="toctree-l1"><a class="reference internal" href="IdM/nasShutDown.html">Procedimiento de Apagado de Infraestructura (IdM)</a></li>
+<ul class="simple">
+<li><p><a class="reference internal" href="Golden/indice.html"><span class="doc">indice</span></a></p></li>
 </ul>
-</div>
 </section>
+<section id="gestion-de-identidad-idm">
+<h2>Gestión de Identidad (IdM)<a class="headerlink" href="#gestion-de-identidad-idm" title="Link to this heading"></a></h2>
+<p>Guías de despliegue, configuración de réplicas para alta disponibilidad y estrategias de contingencia para la sincronización y apagado coordinado del reino de identidades.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="IdM/preparacionEntornoPaso3.html"><span class="doc">preparacionEntornoPaso3</span></a></p></li>
+<li><p><a class="reference internal" href="IdM/despliegue-replica.html"><span class="doc">despliegue-replica</span></a></p></li>
+<li><p><a class="reference internal" href="IdM/IdM-replica.html"><span class="doc">IdM-replica</span></a></p></li>
+<li><p><a class="reference internal" href="IdM/nasShutDown.html"><span class="doc">nasShutDown</span></a></p></li>
+</ul>
+</section>
+<section id="sso">
+<h2>SSO<a class="headerlink" href="#sso" title="Link to this heading"></a></h2>
+<p>Guía y documentación técnica para el diseño e integración de arquitecturas Single Sign-On (SSO) centralizadas con FreeIPA/IdM, incluyendo la planificación por fases, topología de red y las diferentes alternativas de implementación.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="IdM/SSO/index.html"><span class="doc">SSO Index</span></a></p></li>
+</ul>
+</section>
+<section id="freeipa">
+<h2>FreeIPA<a class="headerlink" href="#freeipa" title="Link to this heading"></a></h2>
+<p>Guías de configuración, procedimientos de mantenimiento y planes de despliegue para la gestión integral del servicio de identidades basado en FreeIPA/IdM, abarcando réplicas, servidores KDC y alta disponibilidad.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="IdM/Free-IPA/index.html"><span class="doc">FreeIPA Index</span></a></p></li>
+</ul>
+</section>
+<section id="recursos-de-soporte-adicionales">
+<h2>Recursos de Soporte Adicionales<a class="headerlink" href="#recursos-de-soporte-adicionales" title="Link to this heading"></a></h2>
+<p>Documentación complementaria sobre configuraciones avanzadas, enlaces a guías de despliegue externo y recursos de infraestructura.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="Containers/index.html"><span class="doc">Configuración adicional de contenedores</span></a></p></li>
+</ul>
 </section>
 </section>
 
@@ -153,8 +188,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../../99_General/Hub/profesional/index.html" class="btn btn-neutral float-left" title="Sistema" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="IV-management.html" class="btn btn-neutral float-right" title="Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../office/Word-apuntes-parte3.html" class="btn btn-neutral float-left" title="Tercera parte" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Boot/bootloaderDebug.html" class="btn btn-neutral float-right" title="Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

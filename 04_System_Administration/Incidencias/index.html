@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registro de Incidencias &mdash; TecnicoSistemas  documentation</title>
+  <title>Registro de Incidencias &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
@@ -23,8 +23,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Informe de Incidencia: Error de Autenticación en Réplica IPA" href="autenticationError.html" />
-    <link rel="prev" title="Informe de Configuración: ACLs para Nodo Virt-metadatos" href="../system_configuration/ACL_configuration/ACLsVirtMetadatos.html" /> 
+    <link rel="next" title="Development" href="../../99_General/Hub/desarrollo/index.html" />
+    <link rel="prev" title="Configuración de Control de Acceso" href="../system_configuration/ACL_configuration/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,22 +41,32 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
-<ul class="current">
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../06_Software_and_Applications/Supuestos/index.html">Infraestructura virtual</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Registro de Incidencias</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="autenticationError.html">Informe de Incidencia: Error de Autenticación en Réplica IPA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="incidenciaMontajeNFS.html">Paso 1: Montaje de Repositorio Externo vía NFS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="incidencia_Xwayland.html">Incident Report: GNOME/Xwayland Session Freeze on Rocky Linux 10 Start</a></li>
-<li class="toctree-l3"><a class="reference internal" href="portAuditIdM.html">Informe de Auditoría: Preparación de Réplica FreeIPA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../99_General/Hub/profesional/index.html#mantenimiento">Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../99_General/Hub/profesional/index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../99_General/Hub/profesional/index.html#acces-control-lists-acls">Acces Control Lists(ACLs)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../99_General/Hub/profesional/index.html#incidencias">Incidencias</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Registro de Incidencias</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logs-de-resolucion-de-problemas">Logs de Resolución de Problemas</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
@@ -69,7 +79,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">TecnicoSistemas</a>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -91,23 +101,23 @@
   <section id="registro-de-incidencias">
 <h1>Registro de Incidencias<a class="headerlink" href="#registro-de-incidencias" title="Link to this heading"></a></h1>
 <p>Esta sección contiene informes post-mortem, diagnósticos y procedimientos detallados paso a paso para la resolución de incidencias administrativas detectadas en la infraestructura.</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Logs de Resolución de Problemas:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="autenticationError.html">Informe de Incidencia: Error de Autenticación en Réplica IPA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="incidenciaMontajeNFS.html">Paso 1: Montaje de Repositorio Externo vía NFS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="incidencia_Xwayland.html">Incident Report: GNOME/Xwayland Session Freeze on Rocky Linux 10 Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="portAuditIdM.html">Informe de Auditoría: Preparación de Réplica FreeIPA</a></li>
+<section id="logs-de-resolucion-de-problemas">
+<h2>Logs de Resolución de Problemas<a class="headerlink" href="#logs-de-resolucion-de-problemas" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="autenticationError.html"><span class="doc">Error de Autenticación</span></a></p></li>
+<li><p><a class="reference internal" href="incidenciaMontajeNFS.html"><span class="doc">Incidencia de Montaje NFS</span></a></p></li>
+<li><p><a class="reference internal" href="incidencia_Xwayland.html"><span class="doc">Incidencia Xwayland</span></a></p></li>
+<li><p><a class="reference internal" href="portAuditIdM.html"><span class="doc">Auditoría de Puertos e IdM</span></a></p></li>
 </ul>
-</div>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../system_configuration/ACL_configuration/ACLsVirtMetadatos.html" class="btn btn-neutral float-left" title="Informe de Configuración: ACLs para Nodo Virt-metadatos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="autenticationError.html" class="btn btn-neutral float-right" title="Informe de Incidencia: Error de Autenticación en Réplica IPA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../system_configuration/ACL_configuration/index.html" class="btn btn-neutral float-left" title="Configuración de Control de Acceso" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../99_General/Hub/desarrollo/index.html" class="btn btn-neutral float-right" title="Development" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Procesos y Recursos (Sched &amp; Proc) - Tests &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Teoría" href="IO_teorica.html" />
+    <link rel="prev" title="Gestión de Procesos y Recursos (Sched &amp; Proc) - Teoría" href="PROC_teorica.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwbus-io/index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Metodología para el estudio de “The Linux Test Project(LTP)”</a></li>
+      <li class="breadcrumb-item active">Gestión de Procesos y Recursos (Sched &amp; Proc) - Tests</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/Foundry/Metodologia_LTP/PROC_tests.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gestion-de-procesos-y-recursos-sched-proc-tests">
+<h1>Gestión de Procesos y Recursos (Sched &amp; Proc) - Tests<a class="headerlink" href="#gestion-de-procesos-y-recursos-sched-proc-tests" title="Link to this heading"></a></h1>
+<nav class="contents local" id="pruebas-evaluadas">
+<p class="topic-title">Pruebas Evaluadas</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#analisis-del-caso-de-prueba-sysconf01" id="id3">Análisis del Caso de Prueba: <code class="docutils literal notranslate"><span class="pre">sysconf01</span></code></a></p>
+<ul>
+<li><p><a class="reference internal" href="#analisis-de-ejecucion" id="id4">Análisis de Ejecución</a></p></li>
+<li><p><a class="reference internal" href="#resultados-en-entorno-buildlab" id="id5">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#analisis-del-caso-de-prueba-fork01" id="id6">Análisis del Caso de Prueba: <code class="docutils literal notranslate"><span class="pre">fork01</span></code></a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id7">Análisis de Ejecución</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id8">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="analisis-del-caso-de-prueba-sysconf01">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Análisis del Caso de Prueba: <code class="docutils literal notranslate"><span class="pre">sysconf01</span></code></a><a class="headerlink" href="#analisis-del-caso-de-prueba-sysconf01" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Subsistema</strong>: <code class="docutils literal notranslate"><span class="pre">syscalls/sysconf</span></code> / <code class="docutils literal notranslate"><span class="pre">kernel/sched</span></code></p></li>
+<li><p><strong>Objetivo</strong>: Verificar la correcta consulta de parámetros de configuración del sistema y límites de recursos en tiempo de ejecución mediante <code class="docutils literal notranslate"><span class="pre">sysconf()</span></code>.</p></li>
+<li><p><strong>Fundamento Teórico</strong>: Consulte <a class="reference internal" href="PROC_teorica.html"><span class="doc">Gestión de Procesos y Recursos (Sched &amp; Proc) - Teoría</span></a> para revisar la inspección de recursos, frecuencias de reloj (<code class="docutils literal notranslate"><span class="pre">_SC_CLK_TCK</span></code>), procesadores en línea (<code class="docutils literal notranslate"><span class="pre">_SC_NPROCESSORS_ONLN</span></code>) y tamaño de página del sistema.</p></li>
+</ul>
+<section id="analisis-de-ejecucion">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Análisis de Ejecución</a><a class="headerlink" href="#analisis-de-ejecucion" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Configuración del Entorno</strong> (<code class="docutils literal notranslate"><span class="pre">setup</span></code>):
+Comprobación de acceso a la llamada de sistema e inicialización de las variables de almacenamiento de métricas del kernel.</p></li>
+<li><p><strong>Invocación de Syscall</strong> (<code class="docutils literal notranslate"><span class="pre">run</span></code>):
+Invocación secuencial de <code class="docutils literal notranslate"><span class="pre">sysconf()</span></code> pasando los nombres de configuración POSIX predefinidos (<code class="docutils literal notranslate"><span class="pre">_SC_PAGESIZE</span></code>, <code class="docutils literal notranslate"><span class="pre">_SC_NPROCESSORS_ONLN</span></code>, <code class="docutils literal notranslate"><span class="pre">_SC_OPEN_MAX</span></code>, etc.).</p></li>
+<li><p><strong>Verificación</strong>:
+Validación de que los valores retornados sean mayores a cero y coherentes con las constantes del entorno reportadas por el sistema operativo.</p></li>
+</ol>
+</section>
+<section id="resultados-en-entorno-buildlab">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a><a class="headerlink" href="#resultados-en-entorno-buildlab" title="Link to this heading"></a></h3>
+<div class="admonition-test-sysconf01 admonition">
+<p class="admonition-title">Test sysconf01</p>
+<p>Sección reservada para documentar las salidas de ejecución y registros en <code class="docutils literal notranslate"><span class="pre">buildlab</span></code>
+clasificando los resultados según la metodología LTP (<code class="docutils literal notranslate"><span class="pre">TPASS</span></code>, <code class="docutils literal notranslate"><span class="pre">TFAIL</span></code>, <code class="docutils literal notranslate"><span class="pre">TCONF</span></code>).</p>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tst_test.c:1900: TINFO: LTP version: 20250130
+tst_test.c:1904: TINFO: Tested kernel: 6.12.0-124.8.1.el10_1.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Nov 11 22:54:28 UTC 2025 x86_64
+tst_kconfig.c:88: TINFO: Parsing kernel config &#39;/lib/modules/6.12.0-124.8.1.el10_1.x86_64/build/.config&#39;
+tst_test.c:1722: TINFO: Overall timeout per run is 0h 00m 30s
+sysconf_test.c:26: TINFO: Querying system parameters via sysconf()...
+sysconf_test.c:41: TINFO: Page size (bytes): 4096
+sysconf_test.c:41: TINFO: Processors online: 4
+sysconf_test.c:41: TINFO: Maximum open files per process: 1024
+sysconf_test.c:41: TINFO: Clock ticks per second (CLK_TCK): 100
+sysconf_test.c:41: TINFO: Total physical memory pages: 2989962
+sysconf_test.c:41: TINFO: Available physical memory pages: 2842003
+sysconf_test.c:50: TPASS: All sysconf() queries succeeded with valid values
+
+Summary:
+passed   1
+failed   0
+broken   0
+skipped  0
+warnings 0
+</pre></div>
+</div>
+</section>
+</section>
+<section id="analisis-del-caso-de-prueba-fork01">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Análisis del Caso de Prueba: <code class="docutils literal notranslate"><span class="pre">fork01</span></code></a><a class="headerlink" href="#analisis-del-caso-de-prueba-fork01" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Subsistema</strong>: <code class="docutils literal notranslate"><span class="pre">syscalls/fork</span></code> / <code class="docutils literal notranslate"><span class="pre">mm</span></code> / <code class="docutils literal notranslate"><span class="pre">kernel/sched</span></code></p></li>
+<li><p><strong>Objetivo</strong>: Verificar el ciclo de vida de creación de un proceso hijo mediante <code class="docutils literal notranslate"><span class="pre">fork()</span></code>, confirmando la duplicación del espacio de direcciones virtuales, el comportamiento Copy-On-Write (COW) y la sincronización con <code class="docutils literal notranslate"><span class="pre">waitpid()</span></code>.</p></li>
+<li><p><strong>Fundamento Teórico</strong>: Consulte <a class="reference internal" href="PROC_teorica.html"><span class="doc">Gestión de Procesos y Recursos (Sched &amp; Proc) - Teoría</span></a> para revisar la duplicación de la estructura <code class="docutils literal notranslate"><span class="pre">task_struct</span></code>, la jerarquía de procesos (PID/PPID) y la eliminación de procesos <em>Zombie</em>.</p></li>
+</ul>
+<section id="id1">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Análisis de Ejecución</a><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Configuración del Entorno</strong> (<code class="docutils literal notranslate"><span class="pre">setup</span></code>):
+Preparación de variables de prueba en el espacio de memoria del proceso padre antes de la bifurcación.</p></li>
+<li><p><strong>Invocación de Syscall</strong> (<code class="docutils literal notranslate"><span class="pre">run</span></code>):
+Invocación de <code class="docutils literal notranslate"><span class="pre">fork()</span></code>. El proceso hijo modifica una variable local para comprobar el aislamiento COW y finaliza con un código de salida controlado. El proceso padre espera la finalización usando <code class="docutils literal notranslate"><span class="pre">waitpid()</span></code>.</p></li>
+<li><p><strong>Verificación</strong>:
+Confirmación de que la variable en el proceso padre permanece inalterada tras la modificación en el hijo (aislamiento de memoria) y comprobación del estado de salida recuperado por <code class="docutils literal notranslate"><span class="pre">waitpid()</span></code>.</p></li>
+</ol>
+</section>
+<section id="id2">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a><a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<div class="admonition-test-fork01 admonition">
+<p class="admonition-title">Test fork01</p>
+<p>Sección reservada para documentar las salidas de ejecución y registros en <code class="docutils literal notranslate"><span class="pre">buildlab</span></code>
+clasificando los resultados según la metodología LTP (<code class="docutils literal notranslate"><span class="pre">TPASS</span></code>, <code class="docutils literal notranslate"><span class="pre">TFAIL</span></code>, <code class="docutils literal notranslate"><span class="pre">TCONF</span></code>).</p>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tst_test.c:1900: TINFO: LTP version: 20250130
+tst_test.c:1904: TINFO: Tested kernel: 6.12.0-124.8.1.el10_1.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Nov 11 22:54:28 UTC 2025 x86_64
+tst_kconfig.c:88: TINFO: Parsing kernel config &#39;/lib/modules/6.12.0-124.8.1.el10_1.x86_64/build/.config&#39;
+tst_test.c:1722: TINFO: Overall timeout per run is 0h 00m 30s
+fork_test.c:28: TINFO: Iniciando prueba de fork() con aislamiento de memoria...
+fork_test.c:51: TINFO: Proceso padre esperando al hijo (PID: 3340)...
+fork_test.c:39: TINFO: Proceso hijo en ejecucion (PID: 3340, PPID: 3339)
+fork_test.c:44: TINFO: Proceso hijo modifico shared_var a 200
+fork_test.c:62: TINFO: Proceso hijo finalizo correctamente con codigo de salida 42
+fork_test.c:74: TPASS: Memoria aislada correctamente (COW): shared_var permanece en 100 en el proceso padre
+
+Summary:
+passed   1
+failed   0
+broken   0
+skipped  0
+warnings 0
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="PROC_teorica.html" class="btn btn-neutral float-left" title="Gestión de Procesos y Recursos (Sched &amp; Proc) - Teoría" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="IO_teorica.html" class="btn btn-neutral float-right" title="Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Teoría" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de fichero Overlay &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tareas programadas" href="../Maint/anacron-cron.html" />
+    <link rel="prev" title="Gvfs" href="gvfs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#boot">Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#certificados-tls">Certificados-TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuration">configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#file-system">File System</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gvfs.html">Gvfs</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Sistema de fichero <code class="docutils literal notranslate"><span class="pre">Overlay</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">1. Sistema de fichero <code class="docutils literal notranslate"><span class="pre">Overlay</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#el-mas-alto-el-mas-bajo">2. El más alto, el más bajo.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#directorios">3. Directorios</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">4. Referencias y agradecimientos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Sistemas Operativos</a></li>
+      <li class="breadcrumb-item active">Sistema de fichero <code class="docutils literal notranslate"><span class="pre">Overlay</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/03_Operating_Systems/FS/overlayfs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sistema-de-fichero-overlay">
+<h1>Sistema de fichero <code class="docutils literal notranslate"><span class="pre">Overlay</span></code><a class="headerlink" href="#sistema-de-fichero-overlay" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">A1-so/sistemaficheros</span></code></p>
+<section id="id1">
+<h2>1. Sistema de fichero <code class="docutils literal notranslate"><span class="pre">Overlay</span></code><a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>Éste documento, describe un prototipo para la nueva aproximación a la funcionalidad de los sistemas de ficheros <code class="docutils literal notranslate"><span class="pre">overlays</span></code>. Un sistema de ficheros <code class="docutils literal notranslate"><span class="pre">overlay</span></code>, intenta presentar un sistema de ficheros el cuál, es el resultado de sobreponer un sistema de ficheros sobre otro.</p>
+<p>El resultado, falla en el sentido de que no se parece a un sistema de ficheros tradicional, por varias razones técnicas. Se espera que en muchos casos prácticos, puedan ser ignorados estas diferencias.</p>
+<p>Ésta aproximación es <em>hibrida</em>, por que los <em>objetos</em> que aparecen en el sistema de ficheros, no parecen pertenecer todos, al sistema de ficheros. En muchos casos, un objeto accedido en la unión, será indistinguible el acceder a él, desde el sistema de fichero original. Ésto resulta obvio, en el campo <code class="docutils literal notranslate"><span class="pre">st_dev</span></code>, retornado con <code class="docutils literal notranslate"><span class="pre">stat(2)</span></code>.</p>
+<p>Mientras que los directorios, reportarán un <code class="docutils literal notranslate"><span class="pre">st_dev</span></code> desde el <em>FS-overlay</em>, objetos que no sean del directorio, podrían reportar un <code class="docutils literal notranslate"><span class="pre">st_dev</span></code>, desde el <em>FS inferior</em> o, <em>FS superior</em>, el cuál está proporcionando el objeto.
+Similarmente <code class="docutils literal notranslate"><span class="pre">st_into</span></code> será único, cuando sea combinado con <code class="docutils literal notranslate"><span class="pre">st_dev</span></code> y, ambos puedan cambiar sobre un objeto <em>no directory</em>. Muchas aplicaciones y herramientas ignorarán estos valores y no serán afectados.</p>
+<p>En el caso especial de todas las capas de <code class="docutils literal notranslate"><span class="pre">overlays</span></code>, en el mismo <em>FS</em>, todos los objetos reportarán un <code class="docutils literal notranslate"><span class="pre">st_dev</span></code> desde la capa subyacente. Esto hará al montaje <code class="docutils literal notranslate"><span class="pre">overlay</span></code> más compatible con <em>escaneadores</em> de sistemas de archivos y, los objetos <code class="docutils literal notranslate"><span class="pre">overlay</span></code>, resultarán indistinguibles desde el correspondiente objeto del <em>FS</em> original.</p>
+</section>
+<section id="el-mas-alto-el-mas-bajo">
+<h2>2. El más alto, el más bajo.<a class="headerlink" href="#el-mas-alto-el-mas-bajo" title="Link to this heading"></a></h2>
+<p>Un <em>FS overlay</em> combina dos sistemas de archivo, uno por encima y, otro por debajo. Cuando un nombre existe en ambos <em>FS</em>, el objeto en el <em>FS más alto</em>, es visible, mientras que el objeto en el <em>FS más bajo</em>, es escondido -o en caso de directorio, mezclado con el <em>objeto más alto</em>.</p>
+<p>Sería más adecuado referirse a un <em>más alto</em> o <em>más bajo</em> “árbol de directorio” que “sistema de archivo”; por que es muy posible para ambos “árbol de directorio” el estar en el mismo <em>sistema de archivo</em> y, no hay la necesidad de que el <em>sistema de archivo raíz</em>, sea dado al <em>más alto</em> o <em>más bajo</em>.</p>
+<p>El <em>sistema de archivo</em> <em>más bajo</em>, puede ser un <em>sistema de archivo</em> soportado por Lynux, y no necesita ser escribible. Incluso puede ser otro <code class="docutils literal notranslate"><span class="pre">overlay</span></code>. El <em>sistema de archivo más alto</em> será normalmente escribible, pero si lo és, debe soportar los <em>atributos extendidos</em> de <code class="docutils literal notranslate"><span class="pre">trusted.*</span></code> y, debe proporcionar un <code class="docutils literal notranslate"><span class="pre">d_type</span></code> válido en respuestas de lectuara de directorio, así que NFS, no se ajusta.</p>
+<p>Un <code class="docutils literal notranslate"><span class="pre">overlay</span></code> de <em>sólo lectura</em>, de dos sistemas de archivo de <em>sólo lectura</em>, puede utilizar cualquier(FS) tipo.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>n. de t.:</strong> la traducción <code class="docutils literal notranslate"><span class="pre">overlay</span></code> de ser exacta, sería algo como “sobreyacente”.</p>
+</div>
+</section>
+<section id="directorios">
+<h2>3. Directorios<a class="headerlink" href="#directorios" title="Link to this heading"></a></h2>
+<p>Mayormente los <code class="docutils literal notranslate"><span class="pre">overlay</span></code> involucran a directorios. Si un nombre dado, aparece en ambos; el <em>más alto</em> y el <em>más bajo</em> y, se refiere a un <em>no directorio</em> en los dos, entonces el objeto <em>más bajo</em> es escondido; el nombre es referido sólo al objeto <em>más alto</em>.</p>
+<p>Cuando son directorios, se forma un <em>directorio mezclado</em>. Durante el tiempo de montaje, los dos directorios referidos, aportan la opción al montaje <code class="docutils literal notranslate"><span class="pre">lowerdir</span></code> y <code class="docutils literal notranslate"><span class="pre">upperdir</span></code>, son entonces combinados en un directorio <em>mezclado</em>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mount<span class="w"> </span>-t<span class="w"> </span>overlay<span class="w"> </span>overlay<span class="w"> </span>-olowerdir<span class="o">=</span>/lower,upperdir<span class="o">=</span>/upper,<span class="se">\</span>
+<span class="nv">workdir</span><span class="o">=</span>/work<span class="w"> </span>/merged
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>argumentos separados por comas</em> <code class="docutils literal notranslate"><span class="pre">,</span></code> <em>y sin espacios.</em></p>
+</div>
+<p>El <code class="docutils literal notranslate"><span class="pre">workdir``(directorio</span> <span class="pre">de</span> <span class="pre">trabajo),</span> <span class="pre">necesita</span> <span class="pre">ser</span> <span class="pre">un</span> <span class="pre">directorio</span> <span class="pre">vacío</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">mismo</span> <span class="pre">*sistema</span> <span class="pre">de</span> <span class="pre">archivo*</span> <span class="pre">que</span> <span class="pre">``upperdir</span></code> Cuando es solicitado un <code class="docutils literal notranslate"><span class="pre">loockup</span></code>, en un determinado directorio, se lleva a cabo y el resultado, de la combinación de ambos, es almacenado en <em>caché</em> en la <em>entrada</em> que pertenece al <em>sistema de archivo</em> <code class="docutils literal notranslate"><span class="pre">overlay</span></code>.
+Si los dos <code class="docutils literal notranslate"><span class="pre">loockup</span></code> encuentran directorios, ambos son almacenados y se crea un directorio con la <em>mezcla</em>. De cualquier otra forma, sólo uno es almacenado; el <code class="docutils literal notranslate"><span class="pre">upper</span></code> si es que existe, de lo contrario el <code class="docutils literal notranslate"><span class="pre">lower</span></code>.</p>
+<p>Únicamente se mezcla, la lista de nombres desde un directorio. Otro contenido como <code class="docutils literal notranslate"><span class="pre">metadata</span></code>, y <em>atributos extendidos</em>, son reportados sólo para el directorio <code class="docutils literal notranslate"><span class="pre">uppper</span></code>. Estos atributos se ocultan, para el directorio <code class="docutils literal notranslate"><span class="pre">lower</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>n. de t.</strong> <code class="docutils literal notranslate"><span class="pre">loockup</span></code>, echar un vistazo. Normalmente se referiere a comparar objetos. Hay muchas aplicaciones con una funcionalidad similar, <code class="docutils literal notranslate"><span class="pre">host</span></code> es una de ellas, encargado del <em>DNS lookup</em>.
+<strong>metadata</strong> referido a datos identificativos de distinto tipo.</p>
+</div>
+<section id="whiteouts-y-directorio-opacos">
+<h3>Whiteouts y directorio opacos.<a class="headerlink" href="#whiteouts-y-directorio-opacos" title="Link to this heading"></a></h3>
+<p>Para dar soporte a <code class="docutils literal notranslate"><span class="pre">rm</span></code> y <code class="docutils literal notranslate"><span class="pre">rmdir</span></code> sin cambiar el <em>FS lower</em>, el <em>FS</em> <code class="docutils literal notranslate"><span class="pre">overlay</span></code> necesita recordar qué ficheros han sido borrados del <em>FS upper</em>. Se consigue hacer esto, usando <code class="docutils literal notranslate"><span class="pre">whiteouts</span></code> y directorios opacos(<code class="docutils literal notranslate"><span class="pre">non-directory</span></code> son siempre opacos).</p>
+<p>Se crea un <code class="docutils literal notranslate"><span class="pre">whiteouts</span></code> como un dispositivo <code class="docutils literal notranslate"><span class="pre">character</span></code> con número <code class="docutils literal notranslate"><span class="pre">0/0</span></code>. Cuando es encontrado un <code class="docutils literal notranslate"><span class="pre">whiteout</span></code> en el <em>nivel más alto</em> de un directorio mezclado, cualquier nombre coincidente en el <em>nivel más bajo</em> es ignorado, y el mismo <code class="docutils literal notranslate"><span class="pre">whiteout</span></code> es también escondido.</p>
+<p>Un directorio <em>opaco</em> se constituye, al configurar el <code class="docutils literal notranslate"><span class="pre">xatrr</span></code> atributo <code class="docutils literal notranslate"><span class="pre">trusted.overlay.opaque</span></code> a <code class="docutils literal notranslate"><span class="pre">y``(yes).</span> <span class="pre">Donde</span> <span class="pre">el</span> <span class="pre">sistema</span> <span class="pre">de</span> <span class="pre">archivos</span> <span class="pre">``upper</span></code> contiene un directorio <code class="docutils literal notranslate"><span class="pre">opaque</span></code>, cualquier directorio en el FS <code class="docutils literal notranslate"><span class="pre">lower</span></code> con el mismo nombre es ignorado.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Whiteouts</strong> blancos fuera.</p>
+</div>
+</section>
+<section id="readdir">
+<h3>readdir<a class="headerlink" href="#readdir" title="Link to this heading"></a></h3>
+<p>Cuando se hace una petición de <code class="docutils literal notranslate"><span class="pre">readdir</span></code> sobre un directorio mezclado, los directorios <code class="docutils literal notranslate"><span class="pre">upper</span></code> y <code class="docutils literal notranslate"><span class="pre">lower</span></code>, son leídos ambos y, la lista de nombres es mezclada de la misma forma - el directorio <code class="docutils literal notranslate"><span class="pre">upper</span></code> es leído primero, después el <code class="docutils literal notranslate"><span class="pre">lower</span></code>; las entradas que ya existen no son re-añadidas. Ésta <em>lista mezclada</em> de nombres, se guarda en <em>caché</em> en el archivo <code class="docutils literal notranslate"><span class="pre">struct</span></code>, y permanecerá, mientras el archivo se mantenga abierto.
+Si es abierto el ldirectorio, y leído por dos procesos a la vez, deberá tener dos <em>cachés</em> por separado.</p>
+</section>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2>4. Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<p>kernel &lt;Documentation&gt;/filesistems</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gvfs.html" class="btn btn-neutral float-left" title="Gvfs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Maint/anacron-cron.html" class="btn btn-neutral float-right" title="Tareas programadas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

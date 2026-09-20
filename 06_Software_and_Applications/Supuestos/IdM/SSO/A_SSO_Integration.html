@@ -1,0 +1,218 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAULVILCHEZ.ORG SSO Integration - Plan A &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="RAULVILCHEZ.ORG SSO Integration - Plan B" href="B_SSO_Integration00.html" />
+    <link rel="prev" title="RAULVILCHEZ.ORG SSO Integration - Plan A" href="A_SSO_Integration00.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#idm-configuracion">IdM - Configuracion</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Índice ‘Single Sign-On’</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="index.html#planificacion-y-fases">Planificación y Fases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#infraestructura-y-red">Infraestructura y Red</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#integracion-sso-y-borradores">Integración SSO y Borradores</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Índice ‘Single Sign-On’</a></li>
+      <li class="breadcrumb-item active">RAULVILCHEZ.ORG SSO Integration - Plan A</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/06_Software_and_Applications/Supuestos/IdM/SSO/A_SSO_Integration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="raulvilchez-org-sso-integration-plan-a">
+<h1>RAULVILCHEZ.ORG SSO Integration - Plan A<a class="headerlink" href="#raulvilchez-org-sso-integration-plan-a" title="Link to this heading"></a></h1>
+<p>Mantener todo el ecosistema bajo Rocky Linux es una decisión brillante desde el punto de vista operativo. Este documento servirá como la “Biblia” técnica para la fase de implementación bajo la nueva arquitectura de contenedores.</p>
+<section id="arquitectura-del-sistema">
+<h2>1. Arquitectura del Sistema<a class="headerlink" href="#arquitectura-del-sistema" title="Link to this heading"></a></h2>
+<p>El flujo de autenticación delegará la identidad al servidor IdM, actuando el contenedor SSO como puente OIDC para el Synology NAS.</p>
+<ul class="simple">
+<li><p><strong>Motor de Ejecución:</strong> Podman en modo rootless para garantizar el aislamiento del sistema de archivos VDO/XFS.</p></li>
+<li><p><strong>Gestión de Red:</strong> Delegación mediante la <strong>API pasta</strong>, permitiendo conectividad rootless de alto rendimiento.</p></li>
+<li><p><strong>Interfaz Dedicada:</strong> Uso exclusivo de la NIC <strong>enp9s0</strong> para el tráfico de contenedores, eliminando la dependencia de br_lab (reservada para VMs).</p></li>
+</ul>
+</section>
+<section id="especificaciones-tecnicas-baseline">
+<h2>2. Especificaciones Técnicas (Baseline)<a class="headerlink" href="#especificaciones-tecnicas-baseline" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Componente</p></th>
+<th class="head"><p>Plataforma</p></th>
+<th class="head"><p>CPU Pinning (Núcleos)</p></th>
+<th class="head"><p>RAM Asignada</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dom0 (Host)</p></td>
+<td><p>Rocky Linux</p></td>
+<td><p>0, 1, 6, 7</p></td>
+<td><p>Reservado</p></td>
+</tr>
+<tr class="row-odd"><td><p>IdM (FreeIPA)</p></td>
+<td><p>Rocky Linux (VM)</p></td>
+<td><p>2, 8</p></td>
+<td><p>4 GB</p></td>
+</tr>
+<tr class="row-even"><td><p>SSO Bridge (Authelia/KC)</p></td>
+<td><p>Podman (Rootless)</p></td>
+<td><p>3, 9</p></td>
+<td><p>512 MB - 2 GB</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="estandar-de-documentacion-english-standard">
+<h2>3. Estándar de Documentación (English Standard)<a class="headerlink" href="#estandar-de-documentacion-english-standard" title="Link to this heading"></a></h2>
+<p>Conforme al estándar de documentación, todas las descripciones se configurarán en inglés:</p>
+<blockquote>
+<div><p>Service Name: sso-oidc-bridge
+Description: OIDC Provider bridge for Synology NAS infrastructure integration.
+Access Policy: Allow access to Synology management interface for authenticated IdM users.</p>
+</div></blockquote>
+</section>
+<section id="estrategia-de-implementacion-fases">
+<h2>4. Estrategia de Implementación (Fases)<a class="headerlink" href="#estrategia-de-implementacion-fases" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Fase I: Ligera (Authelia):</dt><dd><ul class="simple">
+<li><p>Despliegue de imagen basada en Rocky Linux vía Podman.</p></li>
+<li><p>Configuración del backend LDAP apuntando a ipa.raulvilchez.org.</p></li>
+<li><p>Validación de OIDC contra el Synology NAS utilizando la interfaz enp9s0.</p></li>
+</ul>
+</dd>
+<dt>Fase II: Enterprise (Keycloak):</dt><dd><ul class="simple">
+<li><p>Migración del servicio al contenedor Keycloak (reutilizando el volumen VDO).</p></li>
+<li><p>Implementación de base de datos externa y roles complejos.</p></li>
+</ul>
+</dd>
+<dt>Fase III: Consolidación:</dt><dd><ul class="simple">
+<li><p>Documentación final y validación de seguridad (CA interna de FreeIPA).</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="A_SSO_Integration00.html" class="btn btn-neutral float-left" title="RAULVILCHEZ.ORG SSO Integration - Plan A" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="B_SSO_Integration00.html" class="btn btn-neutral float-right" title="RAULVILCHEZ.ORG SSO Integration - Plan B" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

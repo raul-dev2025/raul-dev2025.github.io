@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACPI - Advanced Configuration Power Interface &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Generalidades" href="acpiGeneral.html" />
+    <link rel="prev" title="ACPI (Advanced Configuration and Power Interface)" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">ACPI (Advanced Configuration and Power Interface)</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">ACPI (Advanced Configuration and Power Interface)</a></li>
+      <li class="breadcrumb-item active">ACPI - Advanced Configuration Power Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/Acpi/acpi.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="acpi-advanced-configuration-power-interface">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">ACPI - Advanced Configuration Power Interface</a><a class="headerlink" href="#acpi-advanced-configuration-power-interface" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#acpi-advanced-configuration-power-interface" id="id1">ACPI - Advanced Configuration Power Interface</a></p>
+<ul>
+<li><p><a class="reference internal" href="#acpi-component-architecture-acpica" id="id2">ACPI Component Architecture(ACPICA)</a></p></li>
+<li><p><a class="reference internal" href="#comportamiento-del-estado" id="id3">Comportamiento del estado</a></p></li>
+<li><p><a class="reference internal" href="#interfase-de-hardware" id="id4">Interfase de Hardware</a></p></li>
+<li><p><a class="reference internal" href="#interfase-firmware" id="id5">Interfase Firmware</a></p></li>
+<li><p><a class="reference internal" href="#riesgos-de-seguridad" id="id6">Riesgos de seguridad</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p><strong>Interfase de Configuración avanzada para la energía</strong></p>
+<p>A nivel de <em>firmware(software de fabricante)</em>, <strong>ACPI</strong> consta de tres componentes: las tablas ACPI, la BIOS ACPI y los registros ACPI. Al contrio que sus predecesores, como el <strong>APM</strong> o <strong>PnP BIOS</strong>, ACPI implementa una pequeña parte de su funcionalidad en el código <strong>ACPI BIOS</strong>, cuyo principal rol, es cargar las tablas <strong>ACPI</strong> en la memoria del sistema. De hecho, la mayor parte de <em>funciones</em> en el software de fabricante <strong>ACPI</strong>, son provistas mediante código de bit <strong>ACPI Machine Language(AML)</strong>, almacenado en las tablas <strong>ACPI</strong>. Para hacer uso de estas tablas, el sistema operativo debe tener un intérprete para el código de bit <strong>AML</strong>.
+Una referencia a la implementación del intérprete <strong>AML</strong>, es prevista por el ACPI Component Architecture(Arquitectura de componente ACPI o ACPICA). Durante el proceso de desarrollo de la <strong>BIOS</strong>, el código <strong>AML</strong> es compilado por medio del código <strong>ASL</strong> o <em>ACPI Source Language(Lenguaje fuente ACPI)</em>.</p>
+<p>Como ACPI reemplaza <strong>PnP BIOS</strong>, también provée un enumerador de hardware, mayormente implementado en el Differentiated System Description Table(DSDT o Sistema de descripción de tabla diferenciado). La ventaja con la aproximación <em>código de bit</em>, es que a diferencia de <em>PnP BIOS</em> era de <em>16-bit</em>, ACPI por el contrario, puede ser utilizado en cualquier sistema operativo; incluso en modo <em>64-bit</em>.</p>
+<p>Han sido muchas las críticas, en cuanto a las decisionas tomadas en su diseño; en Noviembre de 2003, <em>Linus Torbalds</em> -autor del núcleo de <em>Linux</em>, describió ACPI como un diseño completamente desastroso, en toda su amplitud. En 2001, otros desarrolladores de software como <em>Alan Cox</em>, expusieron que el código de bit, desde una fuente externa, debe ser usado por el núcleo, con todos los privilegios, así como también la intrínsica complegidad del propio ACPI. En 2014, <em>Mark Shuttleworth</em>, fundador de la distribucición Ubuntu Linux, comparó ACPI con el caballo de Troya, del afamado(o infame) <em>Ulises</em>.</p>
+<section id="acpi-component-architecture-acpica">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">ACPI Component Architecture(ACPICA)</a><a class="headerlink" href="#acpi-component-architecture-acpica" title="Link to this heading"></a></h2>
+<p>Mayoritariamente escrito por los ingenieros de Intel&amp;r, provee una referencia a la plataforma de código abierto e independiente, sobre el código ACPI relacionado con el sistema operativo. El código ACPICA es usado por Linux, Haiku y FreeBSD, el cuál es suplementado con código específico.</p>
+<section id="sistema-operativo">
+<h3>Sistema Operativo<a class="headerlink" href="#sistema-operativo" title="Link to this heading"></a></h3>
+<p>El Windows 98 de Microsoft, fue el primer sistema operativo en implementar ACPI; aunque se encontraron algunos problemas y errores. Varias de estas inconsistencias, fueron adscritas a su primera generación de Hardware ACPI.</p>
+<p>La primera edición de Windows 98, desactivó ACPI por defecto; exceptuando algunos sistemas en la <em>lista blanca</em>.</p>
+<p>La serie 2.4 del núcleo de Linux, constaba con un soporte mínimo para ACPI, con una mejor implementación al soporte -y activado por defecto, desde la versión 2.6 en adelante.
+Implementaciones antiguas de ACPI BIOS tienden a estar repletas de problemas.</p>
+</section>
+<section id="responsabilidad-ospm">
+<h3>Responsabilidad OSPM<a class="headerlink" href="#responsabilidad-ospm" title="Link to this heading"></a></h3>
+<p>Una vez el OSPM, activa ACPI, éste toma el control en exclusividad, de todos los aspectos relativos a la administraión de la energía y configuración de dispositivos. La implementación del OSPM, debe exponer un entorno ACPI-compatible, para los controladores de dispositivo, los cuáles advierten ciertos estados de los dispositivos y procesadores.</p>
+</section>
+<section id="estado-de-energia">
+<h3>Estado de Energía<a class="headerlink" href="#estado-de-energia" title="Link to this heading"></a></h3>
+</section>
+<section id="estados-globales">
+<h3>Estados globales<a class="headerlink" href="#estados-globales" title="Link to this heading"></a></h3>
+<p>La especificación ACPI, define los siguientes cuatro estados globales <em>Gx</em> y, seis estados <em>durmientes</em>, para un sistema de computación complaciente. - G0 (S0), Trabajando: La computadora se encuentra en condición de carrera y la CPU ejecuta instrucciones. el modo  <em>Alejado</em>, está supeditado a <em>S0</em>, donde el monitor se encuentra apagado, pero hay aún trabajos en segundo plano.</p>
+<ul>
+<li><p>G1, Durmiendo: Dividido en cuatro estados; S1 a S4:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>S1, Energía en suspensión(POS): Las cachés del procesador son vaciadas y, la CPU/s deja de ejecutar instruciones. La energía en la CPU y la RAM se mantiene. Dispositivos sin indicar que deban permanecer encendidos, pueden ser apagados.</p></li>
+<li><p>S2, Apagado de energía de la CPU. La Caché sucia es vaciada a la RAM.</p></li>
+<li><p>S3, comunmente referida como <em>en espera, durmiente o suspendido a RAM(STR)</em>: RAM permanece con energía.</p></li>
+<li><p>S4, <em>Hibernación</em> o <em>suspensión a disco</em>: Todo el contenido de la memoria principal es guardado a una memoria no volátil, como el disco duro y, el sistema privado de energía.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>G2 (S5), apagado suave: G2/G5 son casi lo mismo que <em>Apagado mecánico</em> G3, excepto que la fuente de enrgía(PSU) mantiene el suministro al mínimo, para que el botón de encendido permita retornar a S0. Es necesario un reinicio completo. El contenido previo queda descartado. Otros componentes podrían permanecer energizados, así que la computadora puede “despertar” desde el teclado, el reloj, el modem, LAN o dispositivo USB.</p></li>
+<li><p>G3, apagado mecánico: La energía de la computadora ha sido completamente apagada, por medio de un interruptor -como el de la parte posterior de la fuente de alimentación(PSU). El cable puede ser extraido y seguro su desensamblado. Típicamente, el reloj real continua actio, haciendo uso de su pequeña batería.</p></li>
+</ul>
+<p>La especificación también define un legado estado: el estado en un sistema operativo que no soporta ACPI. En tal estado, el <em>hardware</em> y la energía, no son mantenidos via ACPI, desactivado efectivo de ACPI.</p>
+</section>
+<section id="estados-de-dispositivo">
+<h3>Estados de dispositivo<a class="headerlink" href="#estados-de-dispositivo" title="Link to this heading"></a></h3>
+<p>Los estados de dispositivo D0-D3 son dependientes del dispositivo:</p>
+<ul class="simple">
+<li><p>D0 o <em>Encendido completo</em> es el estado operativo.</p></li>
+<li><p>D1 y D2 son estados de energía intermedios, cuya definición varía por dispositivo.</p></li>
+<li><p>D3: El estado D3 es a su vez dividido en <em>D3 en caliente</em> (tiene energía auxiliar), y <em>D3 en frío</em> (sin provisión de energía).</p></li>
+<li><p>En caliente: un dispositivo puede aseverar peticiones de energía, para transitar a estados de mayor requerimiento.</p></li>
+<li><p>En frío o apagado, el dispositivo es desenergizado y no responde a su <em>bus</em>.</p></li>
+</ul>
+</section>
+<section id="estados-del-procesador">
+<h3>Estados del procesador<a class="headerlink" href="#estados-del-procesador" title="Link to this heading"></a></h3>
+<p>Los estados de energía de la CPU C0-C3 son definidos de la siguiente forma:</p>
+<ul class="simple">
+<li><p>C0 es el estado operativo o condición de carrera.</p></li>
+<li><p>C1 (conocido habitualmente como <em>Halt</em>), es un estado donde el procesador no está ejecutando instruciones, pero puede volver a un estado de ejecución, instantáneamente. Todo procesador compatible, debe soportar dicho estado de energía. Algunos procesadores como los <em>Pentium 4</em>, también soportan el C1, un estado mejorado (C1 o estado atorado mejorado), para un menor consumo de energía.</p></li>
+<li><p>C2 Habitualmente conocido como reloj en pausa. es un estado donde el procesador mantiene el software visible, aunque puede llevar mas tiempo su reactivación. Es opcional que el procesador incorpore tal estado.</p></li>
+<li><p>C3 A menudo conocido como <em>durmiente</em>, es un estado donde el procesador no necesita guardar un caché coherente, pero retiene otros estados. Algunos procesadores tienen variaciones con respecto al mismo(C3). Es una diferencia en cuánto al tiempo de duración que toma en reactivarse el procesador. Es opcional igualmente.</p></li>
+<li><p>Estados adicionales, son definidos por los fabricantes para algunos procesadores. Por ejemplo los <em>Haswell de Intel</em>, tienen estados por encima de C10, definiendo estados del núcleo o estados de paquetes.</p></li>
+</ul>
+</section>
+</section>
+<section id="comportamiento-del-estado">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Comportamiento del estado</a><a class="headerlink" href="#comportamiento-del-estado" title="Link to this heading"></a></h2>
+<p>Mientras un dispositivo o procesador opera (D0 y C0 respectivamente), podría estar en uno de los distintos estados de energía. Dichos estados mantienen una implementacaión dependiente. Así, P0 es siempre el estado con mayor desarrollo; De P1 a Pn es implementado un menor desarrolo sucesivo, hasta alcanzar <em>n</em> un número no mayor a <em>16</em>.</p>
+<p>Los estados <em>P…</em> han sido conocidos como <em>SpeedStep(paso rápido)</em> en los procesadores Intel, como <em>PowerNow!</em> o <em>Cool’n’Quiet</em> en procesadores Amd y, <em>PowerSaver</em> en procesadores Via.</p>
+<ul class="simple">
+<li><p>P0 máxima energia y frecuencia.</p></li>
+<li><p>P1 menos que P0, voltage y frequencia escalonada.</p></li>
+<li><p>P2 menos que P1, voltage y frecuencia escalonada.</p></li>
+<li><p>…</p></li>
+<li><p>Pn menos que p(n-1), voltage y frecuencia escalonada.</p></li>
+</ul>
+</section>
+<section id="interfase-de-hardware">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Interfase de Hardware</a><a class="headerlink" href="#interfase-de-hardware" title="Link to this heading"></a></h2>
+<p>Systemas compatibles con ACPI, interactuan con el hardware a través de <em>Function Fixed Hardware(hardware de función fija) o FFH</em>, o mediante una plataforma independiente para el modelo de programación, el cuál recae sobre un lenguage específico llamado <em>AML</em> ACPI Machine Language, provisto por el <em>OEM</em>; fabricante de equipamiento original.</p>
+<p>Las interfases de Hardware de función fija(FFH) son características específicas, provistas por el fabricante de la plataforma, en cuanto al comportamiento y la recuperación por falla. Los habituales PCs basados en Intel, tienen una interfase de función fija, definida por Intel, la cuál provee un conjunto de funcionalidades para el núcleo, que reduce la necesidad de sistemas compatibles, de un controlador de pila para proporcionar funcionalidad básica, durante el tiempo de arranque o en caso de falla mayor de sistema.</p>
+<p>Interfase de error para Plataformas ACPI(APEI) es una especificación para el seguimiento de errores de máquinaria(hardware), desde el conjunto de <em>chips(o chipset)</em> al sistema operativo.</p>
+</section>
+<section id="interfase-firmware">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Interfase Firmware</a><a class="headerlink" href="#interfase-firmware" title="Link to this heading"></a></h2>
+<p>ACPI define muchas tablas que provisionan la interfase entre sistemas operativos compatibles con ACPI, y sistemas firmware(equipo privativo). Esto incluye sistemas de tabla de descripción diferencial(DSDT), Sistemas de Descripción de tabla secundarios(SSDT) y Tablas estáticas de resolución de afinidad(SRAT), por ejemplo.</p>
+<p>Las tablas permiten la descripción de hardware de sistema, de forma independiente para cada plataforma y, son presentadas de forma similar a la estructura de datos o en AML.
+La tabla principal de AML es DSDT(Sistema de descripción de Tabla diferencial).</p>
+<p>El puntero raíz de descripción de sistema, está localizado de forma dependiente a la plataforma y, describe el resto de tablas.</p>
+</section>
+<section id="riesgos-de-seguridad">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Riesgos de seguridad</a><a class="headerlink" href="#riesgos-de-seguridad" title="Link to this heading"></a></h2>
+<p>Esta seción puede extraerse del tema del artículo y, trasladarse a otro por favor no sigas leyendo, esto es una prueba: probando, probando 1, 2…</p>
+<p>El fundador de <strong>Ubuntu</strong> <strong>Mark Shuttleworth</strong> ha comparado ACPI a <em>un caballo de Troya</em>. Él describió firmware de propietario(ACPI relacionado cualquier otro firmware) como un
+riesgo en la seguridad:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>El firmware de tu dispositivo, es el mejor amigo de la NSA(National Security Agency). llegando a llamar al firmware (ACPI o no ACPI):</p>
+<p>Caballo de Troya de monumentales proporciones. Señalado igualmente -por fuentes cercanas, que a baja calidad del <em>frimware</em> es el mayor de los problemas en cuanto a seguridad de sistema.
+El mayor error es asumir que la NSA es la única institución que abusa de su posición de confianza; de hecho, es razonable asumir, que todo el firmware es un sumidro de de inseguridad, por cortesía de la incompetencia al más alto grado por parte de fabricantes, al mas alto nivel y en un ámplio rango de agencias variadas.</p>
+</div>
+<p>Como solución a este problema, reclama que el firmware (ACPI o no ACPI) debería ser código abierto, y así poder ser verificado y comprobado. El firmware debería ser declarativo, significando esto último que debería describir el sistema de dependencias con respecto al hardware, y no debería incluir código ejecutable.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="ACPI (Advanced Configuration and Power Interface)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="acpiGeneral.html" class="btn btn-neutral float-right" title="Generalidades" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

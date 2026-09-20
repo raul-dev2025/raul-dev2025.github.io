@@ -1,0 +1,235 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estructura y Discos Duros &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Registro de Arranque Maestro (MBR)" href="mbr.html" />
+    <link rel="prev" title="Almacenamiento y Discos Duros" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Almacenamiento y Discos Duros</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Almacenamiento y Discos Duros</a></li>
+      <li class="breadcrumb-item active">Estructura y Discos Duros</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/DiscoDuro/hd.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="estructura-y-discos-duros">
+<h1>Estructura y Discos Duros<a class="headerlink" href="#estructura-y-discos-duros" title="Link to this heading"></a></h1>
+<p>Este documento aborda las características físicas y lógicas fundamentales de los dispositivos de almacenamiento, centrándose en la geometría del disco duro, la densidad de sectores (<em>Advanced Format</em>), esquemas de particionado (MBR vs. GPT), volúmenes lógicos (LVM) y técnicas de prueba con dispositivos <em>loop</em>.</p>
+<section id="el-disco-duro-y-su-geometria">
+<h2>El Disco Duro y su Geometría<a class="headerlink" href="#el-disco-duro-y-su-geometria" title="Link to this heading"></a></h2>
+<p>Un disco duro (HDD) o unidad de estado sólido (SSD) organiza la información física o lógica en sectores, pistas y cilindros.</p>
+<p>Tradicionalmente, los sectores lógicos mantenían un tamaño estándar de <strong>512 bytes</strong>. En unidades modernas de alta densidad, la industria ha adoptado tecnologías de sector más amplias para mejorar la eficiencia y la corrección de errores.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Los discos duros modernos que implementan la característica <strong>Advanced Format (AF)</strong> utilizan sectores físicos de <strong>4096 bytes (4 KiB)</strong>, aunque mantengan emulación de 512 bytes (512e) por compatibilidad con sistemas legados.</p>
+<p>Es fundamental asegurar una alineación correcta de las particiones al sector de 4 KiB (comenzando habitualmente en el sector 2048) para evitar la degradación del rendimiento en operaciones de lectura y escritura.</p>
+</div>
+</section>
+<section id="esquemas-de-particionado">
+<h2>Esquemas de Particionado<a class="headerlink" href="#esquemas-de-particionado" title="Link to this heading"></a></h2>
+<p>La tabla de particiones define la división lógica del espacio del disco duro. Existen dos estándares principales:</p>
+<section id="mbr-master-boot-record">
+<h3>MBR (Master Boot Record)<a class="headerlink" href="#mbr-master-boot-record" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Estructura clásica</strong>: Ubicado en el primer sector del disco (sector 0).</p></li>
+<li><p><strong>Límites de direccionamiento</strong>: Soporta un tamaño máximo de disco de 2 TiB y un límite estricto de 4 particiones primarias (o 3 primarias y 1 extendida para alojar particiones lógicas).</p></li>
+</ul>
+</section>
+<section id="gpt-guid-partition-table">
+<h3>GPT (GUID Partition Table)<a class="headerlink" href="#gpt-guid-partition-table" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Estándar moderno</strong>: Diseñado como parte de la especificación UEFI.</p></li>
+<li><p><strong>Capacidad y redundancia</strong>: Soporta discos superiores a 2 TiB y hasta 128 particiones por defecto. Almacena copias de respaldo de la tabla al final del disco para permitir la recuperación ante fallos.</p></li>
+</ul>
+</section>
+</section>
+<section id="espacio-no-asignado-y-alineacion">
+<h2>Espacio No Asignado y Alineación<a class="headerlink" href="#espacio-no-asignado-y-alineacion" title="Link to this heading"></a></h2>
+<p>El espacio vacío no asignado entre particiones suele deberse a ajustes de alineación de sectores. Para maximizar el rendimiento de las operaciones de Entrada/Salida (E/S) en unidades con <em>Advanced Format</em> o SSDs, el inicio de las particiones debe estar alineado con límites exactos de 1 MiB (múltiplos de 2048 sectores).</p>
+</section>
+<section id="particionado-de-disco-lvm-vs-tradicional">
+<h2>Particionado de Disco: LVM vs. Tradicional<a class="headerlink" href="#particionado-de-disco-lvm-vs-tradicional" title="Link to this heading"></a></h2>
+<section id="particionado-tradicional-estatico">
+<h3>Particionado Tradicional (Estático)<a class="headerlink" href="#particionado-tradicional-estatico" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Asigna bloques contiguos rígidos en la estructura del disco (p. ej. <code class="docutils literal notranslate"><span class="pre">/dev/sda1</span></code>, <code class="docutils literal notranslate"><span class="pre">/dev/sda2</span></code>).</p></li>
+<li><p>Las modificaciones de tamaño requieren desmontar la estructura y alterar la tabla de particiones directamente.</p></li>
+</ul>
+</section>
+<section id="lvm-logical-volume-manager">
+<h3>LVM (Logical Volume Manager)<a class="headerlink" href="#lvm-logical-volume-manager" title="Link to this heading"></a></h3>
+<p>Introduce una capa de abstracción sobre el almacenamiento físico, ofreciendo gestión flexible de volúmenes:</p>
+<ul class="simple">
+<li><p><strong>Physical Volumes (PV)</strong>: Capa base correspondiente a particiones físicas o discos enteros (p. ej. <code class="docutils literal notranslate"><span class="pre">/dev/sda2</span></code>).</p></li>
+<li><p><strong>Volume Groups (VG)</strong>: Agrupación de uno o más PVs creando un fondo común de almacenamiento.</p></li>
+<li><p><strong>Logical Volumes (LV)</strong>: Volúmenes lógicos creados desde el VG que funcionan como particiones dinámicas redimensionables.</p></li>
+</ul>
+</section>
+</section>
+<section id="formateo-de-sistemas-de-archivos">
+<h2>Formateo de Sistemas de Archivos<a class="headerlink" href="#formateo-de-sistemas-de-archivos" title="Link to this heading"></a></h2>
+<p>El formateo crea la estructura del sistema de archivos sobre la partición o volumen lógico designado:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Formateo en ext4 (sistema de archivos estándar en Linux)</span>
+$<span class="w"> </span>mkfs.ext4<span class="w"> </span>/dev/sda1
+
+<span class="c1"># Formateo en XFS (alto rendimiento)</span>
+$<span class="w"> </span>mkfs.xfs<span class="w"> </span>/dev/vg_system/lv_data
+</pre></div>
+</div>
+</section>
+<section id="practicas-experimentales">
+<h2>Prácticas Experimentales<a class="headerlink" href="#practicas-experimentales" title="Link to this heading"></a></h2>
+<section id="tecnicas-de-particionado">
+<h3>Técnicas de Particionado<a class="headerlink" href="#tecnicas-de-particionado" title="Link to this heading"></a></h3>
+<p>Herramientas estándar de administración de discos en Linux:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fdisk</span></code>: Gestión interactiva para tablas MBR y GPT.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gdisk</span></code>: Específico para el esquema de partición GPT.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parted</span></code>: Orientado a scripts y automatización de tablas de partición.</p></li>
+</ul>
+</section>
+<section id="trabajo-sobre-una-imagen-creada-como-archivo">
+<h3>Trabajo sobre una Imagen Creada como Archivo<a class="headerlink" href="#trabajo-sobre-una-imagen-creada-como-archivo" title="Link to this heading"></a></h3>
+<p>Es posible simular la creación, particionado y formateo de discos creando un archivo de imagen y asociándolo a un dispositivo en bucle (<em>loopback device</em>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Crear un archivo de imagen de 1 GB</span>
+$<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/zero<span class="w"> </span><span class="nv">of</span><span class="o">=</span>disk_image.img<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">1024</span>
+
+<span class="c1"># 2. Asociar el archivo de imagen a un dispositivo loop detectando particiones</span>
+$<span class="w"> </span>losetup<span class="w"> </span>-fP<span class="w"> </span>disk_image.img
+
+<span class="c1"># 3. Listar los dispositivos loop asociados</span>
+$<span class="w"> </span>losetup<span class="w"> </span>-a
+
+<span class="c1"># 4. Crear la tabla de particiones y formatear el dispositivo virtual</span>
+<span class="nv">$fdisk</span><span class="w"> </span>/dev/loop0$<span class="w"> </span>mkfs.ext4<span class="w"> </span>/dev/loop0p1
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Almacenamiento y Discos Duros" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mbr.html" class="btn btn-neutral float-right" title="Registro de Arranque Maestro (MBR)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

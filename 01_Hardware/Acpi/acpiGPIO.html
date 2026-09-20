@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrada/Salida de Propósito general &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Configuración Avanzada e Interfase de Energía (ACPI)" href="ACPICA/Introduction.html" />
+    <link rel="prev" title="El controlador ACPI de Windows" href="acpiDriver.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">ACPI (Advanced Configuration and Power Interface)</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">ACPI (Advanced Configuration and Power Interface)</a></li>
+      <li class="breadcrumb-item active">Entrada/Salida de Propósito general</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/Acpi/acpiGPIO.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="entrada-salida-de-proposito-general">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Entrada/Salida de Propósito general</a><a class="headerlink" href="#entrada-salida-de-proposito-general" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#entrada-salida-de-proposito-general" id="id1">Entrada/Salida de Propósito general</a></p>
+<ul>
+<li><p><a class="reference internal" href="#controlador-de-dispositivo-gpio" id="id2">Controlador de dispositivo GPIO</a></p></li>
+<li><p><a class="reference internal" href="#controladores-gpio-e-interrupciones-sendoactiva-activeboth" id="id3">Controladores GPIO e interrupciones SendoActiva (ActiveBoth).</a></p></li>
+<li><p><a class="reference internal" href="#espacio-de-nombres-de-objeto-gpio" id="id4">Espacio de nombres de objeto GPIO</a></p></li>
+<li><p><a class="reference internal" href="#identificacion-de-dispositivos-y-configuracion-de-objetos" id="id5">Identificación de dispositivos y configuración de objetos</a></p></li>
+<li><p><a class="reference internal" href="#descriptor-de-recursos-de-conexion-gpio" id="id6">Descriptor de recursos de conexión GPIO</a></p></li>
+<li><p><a class="reference internal" href="#eventos-acpi-senalizados-como-gpio" id="id7">Eventos ACPI, Señalizados como GPIO.</a></p></li>
+<li><p><a class="reference internal" href="#objeto-de-evento-de-informacion-acpi" id="id8">Objeto de Evento de Información ACPI</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>Chip en sistema (SoC) son circuitos integrados, que hacen uso ampliado de la propuesta general de I/O <em>GPIO</em> (entrada/salida standar). En plataformas basadas en <em>SoC</em>, Windows define una abstracción general desde el <em>A-en</em>, espacio de nombres ACPI, para la Interfase de Configuración avanzada de Energía.</p>
+<p>La abstracción GPIO, es soportada por la definición de ACPI 5.0, que es listada en este artículo.</p>
+<p>Para verificar que sus controladores GPIO, aceptan los requisitos de la plataforma Windows, ver <a class="reference external" href="https://learn.microsoft.com/es-es/windows-hardware/drivers/gpio/gpio-driver-design-guide-requirements-checklist">GPIO lista de comprobación de requisitos del Controlador</a>.</p>
+<section id="controlador-de-dispositivo-gpio">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Controlador de dispositivo GPIO</a><a class="headerlink" href="#controlador-de-dispositivo-gpio" title="Link to this heading"></a></h2>
+<p>Windows soporta controladores GPIO. Los controladores GPIO proporcionan variedad de funciones para dispositivos periféricos, incluidas interrupciones, señal de entrada y señal de salida. Las capacidades GPIO, son modeladas como control de dispositivo en <em>A-en</em>. La extensión <em>GpioClx</em> para marco de trabajo GPIO (GPIO framework), moldea el controlador de dispositivo para ser particionados dentro de algunos <em>bancos de enlance</em>. Cada <em>banco de enlace</em> tiene tiene 64 <em>enlaces</em> configurables, o menos. Los <em>bancos</em> en un controlador GPIO están ordenados por la posición relativa de sus enlaces, dentro del espacio de enlaces,  relativo al controlador GPIO. Por ejemplo, el banco 0(<em>o bufer/almacén</em>), contiene <em>0-31</em> enlaces en el controlador(de 0 a 31), el banco 1 contiene 32-63 enlaces, y así sucesivamente. Todos los bancos tienen el mismo número de enlaces, excepto para el último banco, el cuál podría tener menos. Estos bancos son importantes para firmware de ACPI, por que debe relacionar el mapeado de interrupciones de sistema a los bancos; tal y como se describe en <a class="reference external" href="https://learn.microsoft.com/es-es/windows-hardware/drivers/gpio/acpi-namespace-for-a-gpio-controller">Espacio de nombres ACPI para GPIO</a>.</p>
+<p>Cada enlace al <em>banco</em>, contiene un conjunto de parámetros -por ejemplo, salida, nivel de sensibilidad de la interrupción, desvinculación de entrada, etc. Esto, describe como el enlace será configurado.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Escribe aquí el contenido de la nota. pin significa algo así como <em>alfiler</em>, podría haberlo traducido como <em>conector</em> pero pienso que resulta confuso, puesto que un conector podría tener multitud de <em>alfileres!!</em>.</p>
+</div>
+</section>
+<section id="controladores-gpio-e-interrupciones-sendoactiva-activeboth">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Controladores GPIO e interrupciones SendoActiva (ActiveBoth).</a><a class="headerlink" href="#controladores-gpio-e-interrupciones-sendoactiva-activeboth" title="Link to this heading"></a></h2>
+<p>Una característica de un determinado controlador GPIO, es la habilidad de generar interrupciones en ambos extremos de una señal(rising, ActiveHigh edges, and falling, o ActiveLow edges). Esto resulta útil en multitud de aplicaciones, incluida la interfase de botón, donde ambos eventos son controlados; <em>pulsar de botón</em> y, <em>dejar de pulsar botón</em> -en el extremo opuesto. Esta característica es denominada <em>ActiveBoth</em>.</p>
+<p>Lógicamente, ambas señales <em>ActiveBoth</em> definen un estado de asertación o no, donde están momentáneamente activas -por ejemplo, las pulsacioes de botón. O indefinidamente definidas como asertación larga -por ejemplo, la inserción del conector de unos auriculares. La detección de extremo de interrupción para <em>ActiveBoth, podría ser implementada en el controlador de pieza(hardware ActiveBoth)</em>, o emulada en el controlador de software GPIO (ActiveBoth emulado). Windows requiere que los controladores GPIO que implementan <em>ActiveBoth</em>, deban usar <em>ActiveBoth emulado</em>. Esto es requerido para asegurar la robustez en el manejo de las interrupciones de doble extremo, en cualquier <em>escenario</em>. Como soporte a la <em>emulación ActiveBoth</em>, son aplicados los siguientes requisitos de hardware:</p>
+<ol class="arabic simple">
+<li><p>Los controladores GPIO, que soportan interrupciones <em>ActiveBoth</em> deben soportar <em>modo nivel</em> de interrupciones y, deben soportar la reprogramación de polaridad de interrupción dinámica en <em>tiempo de ejecución</em>.</p></li>
+<li><p>Para minimizar el riesgo de errores <em>I/O</em>, Windows prefiere el uso de controladores GPIO de <em>memoria mapeada</em>, en lugar de controladores GPIO tipo <em>SPB-connected</em>. De hecho para el arreglo de <em>dispositivo Botón(PNP0C40)</em>, es requerido que las interrupciones, para este dispositivo, <em>ActiveBoth</em> de GPIO, se conecten a un controlador de <em>memoria mapeada</em>, en lugar de contectarse a otro tipo <em>SPB-connected</em>. Para dterminar que interrupciones de botón, deben ser <em>ActiveBoth</em>, ver <a class="reference external" href="https://learn.microsoft.com/es-es/windows-hardware/drivers/bringup/button-devices">Dispositivo de Boton</a>.</p></li>
+<li><p>Para establecer un estado inicial determinista para las interrupciones de señal de <em>ActiveBoth</em>, la pila del dispositivo GPIO de Windows, garantiza que la primera interrupción generada después de la conexión de interupción por el controlador, será siempre para la señal de estado de aserción. La pila asume completamente que el estado de aserción de todas las líneas deinterrupción, de <em>ActiveBoth</em>, son de bájo nivel lógico (el extremo ActiveLow) por defecto. Si en su plataforma este no es el caso, puede sobreescribirse por defecto, incluyendo un método de controlador GPIO de dispositivo específico, ver <a class="reference external" href="https://learn.microsoft.com/es-es/windows-hardware/drivers/gpio/gpio-controller-device-specific-method---dsm-">método de controlador GPIO específico(DSM)</a>.</p></li>
+</ol>
+<p><strong>Nota:</strong> El tercer requisito en la lista precedente, implica que el controlador del dispositivo usado por <em>ActiveBoth</em>, pueda recivir una interrupción inmediatamente después de inicializar (conectar a) la interrupción, si la señal en el enlace GPIO se encuentra en estado de aserción en ese momento. Esto es posible, e incluso posible, para
+algunos dispositivos(por ejemplo, auriculares), y debe ser soportado por el controlador.</p>
+<p>Par el soporte <em>ActiveBoth</em> emulado, el controlador GPIO debe activar <code class="docutils literal notranslate"><span class="pre">opt-in</span> <span class="pre">to</span></code> emulación ActiveBoth, implementando una llamada a la funcion <code class="docutils literal notranslate"><span class="pre">CLIENT_ReconfigureInterrupt</span></code> (reconfiguracion de interrupción de cliente) y, configurar la bandera(flag) <code class="docutils literal notranslate"><span class="pre">EmulateActiveBoth</span></code> en la estructura de información básica que la llamada a la función <code class="docutils literal notranslate"><span class="pre">CLIENT_QueryControllerBasicInformation</span></code> del controlador, suministra a <code class="docutils literal notranslate"><span class="pre">GpioClx</span></code>. Para mas información, ver <a class="reference external" href="https://learn.microsoft.com/es-es/windows-hardware/drivers/gpio/general-purpose-i-o--gpio--driver-support">Controladores de I/O de propósito general *GPIO</a>.</p>
+</section>
+<section id="espacio-de-nombres-de-objeto-gpio">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Espacio de nombres de objeto GPIO</a><a class="headerlink" href="#espacio-de-nombres-de-objeto-gpio" title="Link to this heading"></a></h2>
+<p>Los controladores GPIO, y los periféricos que conectan a él, son enumerados por ACPI. La conexión entre ellos es descrita por medio de <em>Descriptor de conexción de recursos GPIO</em>. Para más información, ver sección <a class="reference external" href="https://uefi.org/specs/ACPI/5.0/06_Buffer_Resources/Buffer_Resources.html#gpio-connection-descriptors">Descriptores de conexión</a> de la especificación ACPI 5.0.</p>
+</section>
+<section id="identificacion-de-dispositivos-y-configuracion-de-objetos">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Identificación de dispositivos y configuración de objetos</a><a class="headerlink" href="#identificacion-de-dispositivos-y-configuracion-de-objetos" title="Link to this heading"></a></h2>
+<p>Un espacio de nombres para el controlador GPIO de dispositivo ACPI, incluye lo siguiente:</p>
+<ul class="simple">
+<li><p>Un objeto asignado por el fabricante de hardware compatible con ACPI.</p></li>
+<li><p>Un conjunto de recursos objeto <code class="docutils literal notranslate"><span class="pre">_CSR</span></code>.</p></li>
+<li><p>Un objeto ID único <code class="docutils literal notranslate"><span class="pre">_UID</span></code>, si hay mas de una instancia para el controlador GPIO en el espacio de nombres -esto es, dos o más nodos de espaciios de nombres que tienen la misma identificación de objeto de dispositivo.</p></li>
+</ul>
+<p>Los controladores GPIO de <code class="docutils literal notranslate"><span class="pre">_CRS</span></code>, contienen todos los recursos (espacio de dirección para los registros, sistemas de interrupción, y demás) ocupados por todos los <em>bancos</em> en el controlador. El mapeado de interrupción de <em>recurso a banco</em>, es representado en el orden en el cuál la interrupción de recursos es listada en el <code class="docutils literal notranslate"><span class="pre">_CSR</span></code>; la primera interrupción listada es asignada al <em>banco</em> 0, la siguiente en la lista, es asignada al <em>banco</em> 1, y así sucesivamente. Los bancos pueden compartir recursos de interrupcion, en cuyo caso la interrupción es listada una vez, por cada banco a esta, en orden de <em>banco</em> y, configuración compartida.</p>
+</section>
+<section id="descriptor-de-recursos-de-conexion-gpio">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Descriptor de recursos de conexión GPIO</a><a class="headerlink" href="#descriptor-de-recursos-de-conexion-gpio" title="Link to this heading"></a></h2>
+<p>La relación entre los periféricos y los <em>enlaces</em> GPIO al cuál están conectados es descrita al sistema operativo, por el <em>Descriptor de recursos de conexión GPIO</em>. Estos descriptores de recurso, pueden definir dos tipos de Conexiones GPIO: conexiones GPIO y conexiones I/O GPIO. Los periféricos incluyen descriptores de conexión en sus <code class="docutils literal notranslate"><span class="pre">_CSR</span></code>, para todas las interrupciones I/O de enlace de conexión. Si una interrupción de conexión, es <em>wake-capable</em> -capaz de despertar al sistema, desde un estado en espera de baja energía, entonces debe ser configurado como <code class="docutils literal notranslate"><span class="pre">ExclusiveAndWake</span></code> o <code class="docutils literal notranslate"><span class="pre">SharedAndWake</span></code>; para más información ver <a class="reference external" href="https://learn.microsoft.com/es-es/windows-hardware/drivers/bringup/device-power-management">Dispositivo de administración de energía</a>.</p>
+<p>Los descriptores se definen en la sección <a class="reference external" href="https://uefi.org/specs/ACPI/5.0/">Descriptor de conexión GPIO</a> de la especificación ACPI 5.0. Las plantillas de macros ASL para estos descriptores se encuentran en la sección <a class="reference external" href="https://uefi.org/specs/ACPI/5.0/">GpioInt recurso de descriptor de conexión de interrupción</a> de la misma especificación.</p>
+</section>
+<section id="eventos-acpi-senalizados-como-gpio">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Eventos ACPI, Señalizados como GPIO.</a><a class="headerlink" href="#eventos-acpi-senalizados-como-gpio" title="Link to this heading"></a></h2>
+<p>ACPI define un modelo de plataforma de eventos, que activa eventos de hardware, en la plataforma a ser señalizada y comunicada con el controlador ACPI. Windows proporciona un servicio de notificación para comunicarse con la plataforma de eventos del controlador de dispositivos. Un número de controladores <em>dentro de la caja</em>, recae sobre este servicio, para proporcionar soporte a los dispositivos ACPI definidos; como el <em>Metodo de control del Botón de Encendido</em>, el <em>dispositivo LID</em>, <em>Método de control de Batería</em>, <em>Zona Termal</em>, y otros. Para más información sobre notificaciones, ver sección <a class="reference external" href="https://learn.microsoft.com/es-es/windows-hardware/drivers/gpio/gpio-events-in-acpi">Eventos ACPI de señal GPIO</a>, de la especificación ACPI.</p>
+<p>En plataformas <em>SoC</em>, las interrupciones GPIO, son usadas para señaliza eventos de plataforma. Cualquier dispositivo de espacio de nombres (dispositivo ACPI de fuente de eventos, <em>ACPI Event Source</em>) que señalice eventos a sus controladores, usando el operador de notificación ASL, requiere lo siguiente:</p>
+<ul class="simple">
+<li><p>El nodo de espacio de nombres del controlador GPIO, al cuál el evento de señal ACPI está conectado, debe incluir un recurso <code class="docutils literal notranslate"><span class="pre">GpioInt</span></code> para el enlace, en su objeto de Evento de Informacion <code class="docutils literal notranslate"><span class="pre">_AEI</span></code>. Ver sección <a class="reference external" href="https://uefi.org/specs/ACPI/5.0/">Objeto de evento de información ACPI _AEI</a> , más abajo. El recurso <code class="docutils literal notranslate"><span class="pre">GpioInt</span></code> debe ser configurado como <em>no compartido</em> (Exclusivamente).</p></li>
+<li><p>El nodo del controlador debe también contener un método de control <em>Extremo</em> <code class="docutils literal notranslate"><span class="pre">_Exx</span></code> <em>Nivel</em> <code class="docutils literal notranslate"><span class="pre">_Lxx</span></code> o <em>Evento</em> <code class="docutils literal notranslate"><span class="pre">EVT</span></code>, para cada enlace en el objeto <code class="docutils literal notranslate"><span class="pre">_AEI</span></code>.</p></li>
+</ul>
+<p>El controlador ACPI, gestiona la lista de interrupciones GPIO y, evalua el <em>Extremo</em>, el <em>Nivel</em>, o el método de control de <em>Evento</em> para él. El método de control desactiva el evento de hardware, si es necesario y, ejecuta el operador de notificación requerido en la fuente de evento del nodo en el espacio de nombres. Después, Windows envía la notificación al controlador de dispositivo. Pueden ser señalizados múltiples eventos, sobre el mismo recurso <code class="docutils literal notranslate"><span class="pre">GpioInt</span></code>, si el método de control de evento puede consultar el hardware, para determinar el evento ocurrido. El método, debe entonces notificas al dispositivo correcto con el código de notificación apropiado.</p>
+</section>
+<section id="objeto-de-evento-de-informacion-acpi">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Objeto de Evento de Información ACPI</a><a class="headerlink" href="#objeto-de-evento-de-informacion-acpi" title="Link to this heading"></a></h2>
+<p>Tal y como se ha mencionado previamente, el espacio de nompres para el controlador GPIO debe contener el objeto <code class="docutils literal notranslate"><span class="pre">_AEI</span></code> para poder soportar los eventos ACPI. El objeto <code class="docutils literal notranslate"><span class="pre">_AEI</span></code> ver sección 5.6.5.2 en la especificación ACPI 5.0,</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="acpiDriver.html" class="btn btn-neutral float-left" title="El controlador ACPI de Windows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ACPICA/Introduction.html" class="btn btn-neutral float-right" title="Configuración Avanzada e Interfase de Energía (ACPI)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuración Avanzada e Interfase de Energía (ACPI) &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="4.8 Modelo de registro ACPI" href="spec.html" />
+    <link rel="prev" title="Entrada/Salida de Propósito general" href="../acpiGPIO.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">ACPI (Advanced Configuration and Power Interface)</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#processador">Processador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">ACPI (Advanced Configuration and Power Interface)</a></li>
+      <li class="breadcrumb-item active">Configuración Avanzada e Interfase de Energía (ACPI)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/01_Hardware/Acpi/ACPICA/Introduction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuracion-avanzada-e-interfase-de-energia-acpi">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Configuración Avanzada e Interfase de Energía (ACPI)</a><a class="headerlink" href="#configuracion-avanzada-e-interfase-de-energia-acpi" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#configuracion-avanzada-e-interfase-de-energia-acpi" id="id1">Configuración Avanzada e Interfase de Energía (ACPI)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#advanced-configuration-an-power-interface-acpi" id="id2">Advanced Configuration an Power Interface (ACPI)</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="advanced-configuration-an-power-interface-acpi">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Advanced Configuration an Power Interface (ACPI)</a><a class="headerlink" href="#advanced-configuration-an-power-interface-acpi" title="Link to this heading"></a></h2>
+<section id="introduccion">
+<h3>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading"></a></h3>
+<p>Éste capítulo proporciona un resumen a <em>alto nivel</em> de <strong>ACPI</strong>. Para facilitar la comprensión de <strong>ACPI</strong>, esta sección se centra en su conjunto y conceptos generales sobre <strong>ACPI</strong>, en lugar de centrar la discusión en otros aspectos excepcionales o detalles concretos.</p>
+<p>El resto de documentación específica, proporciona un mayor grado en detalle sobre cuestiones particulares y, es por tanto lectura recomendada para desarrolladores que pretendan su uso.</p>
+</section>
+<section id="historia-de-acpi">
+<h3>Historia de ACPI<a class="headerlink" href="#historia-de-acpi" title="Link to this heading"></a></h3>
+<p><strong>ACPI</strong> fué desarrollado en colaboración con <em>Intel, Microsoft, Toshiba, HP, y Phoenix</em>, a medidados de 1990. Antes de su desarrollo, el sistema operativo(OS) usaba principalmente la interfase BIOS(Basic Input/Output System) para la gestión de la energía y el reconocimiento de dispositivos y su configuración. Ésta aproximación a la gestión de energía, usó la habilidad del <em>OS</em>, para llamar al sistema BIOS de forma <em>nativa</em>, en cuanto a dicha gestión de energía.</p>
+<p>LA BIOS también fue usada para el reconocimiento de dispositivos de sistema y la carga de sus controladores, basándose en pruebas de entrada/salida(I/O) y tratando de establecer una correlación entre el dispositivo y el controlador adecuado(Plug &amp; Play). La localización de los dispositivos podía ser <em>harcodeada</em> dentro de la <strong>BIOS</strong> por que la plataforma en si misma era <strong>no-enumerable</strong>.</p>
+<p>Ésta solución era problemática en tres puntos clave. Primero, el comportamiento de aplicaciones del <em>OS</em>, podía afectar negativamente por la configuración de la gestion de energía de la <strong>BIOS</strong> provocando que el sistema activase el estado durmiente u otros estados inconvenientes, durante presentaciones.</p>
+<p>Segundo, las interfases de gestión de energía eran particulares(propietarias) para cada sistema individual. Finalmente, la configuración ,por defecto, para varios dispositivos, podía hacer que entrasen en conflicto entre ellos, causando que los dispositivos dejasen de funcionar, que se comportasen de forma errática o que no fuesen reconocibles.</p>
+<p><strong>ACPI</strong>, fue desarrollado para solventar dichos problemas.</p>
+</section>
+<section id="que-es-acpi">
+<h3>Qué es ACPI?<a class="headerlink" href="#que-es-acpi" title="Link to this heading"></a></h3>
+<p>En primer lugar, <strong>ACPI</strong> puede ser entendido como una <em>arquitectura independiente</em>, para la gestión de la energía y, un marco de configuración que compone un subsistema dentro del <em>OS</em> huesped. Éste <em>marco</em>, establece un conjunto de registros de hardware para definir distintos estados de energía(durmiente, hibernación, activo, etc). El conjunto de registros de hardware, puden acondicionar operaciones sobre hardware dedicado o de propuesta general.</p>
+<p>La intención primaria, del marco normalizado <strong>ACPI(standard ACPI framework)</strong> y, el conjunto de registros de hardware, es activar la gestión de la energía y configuración de sistema, sin tener que llamar nativamente al software de fabricate desde el <em>OS</em>.
+<strong>ACPI</strong> actua como una interfase de capa, entre el software de fabricante de sistema (firmware) <em>BIOS</em> y, el <em>OS</em>. Tal y como se muestra en las figuras 1 y 2, con ciertas
+restricciones y reglas.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>**********************
+** Sistema Operativo**
+**********************
+^
+
+
+********************
+** ACPI subsistem **
+********************
+^
+
+****************************
+** software de fabricante **
+****************************
+</pre></div>
+</div>
+<p>El subsistema ACPI es una interfase de capa, entre el software de  fabricante y el sistema operativo. Las flechas indican el flujo de datos.</p>
+<p>Fundamentalmente, ACPI define dos tipos de estructura de datos, los cuáles son compartidos en el software de fabricante y el <em>OS</em>: tablas de datos y definición de bloques. Estas estructuras de datos constituyen el mecanismo de comunicación principal entre el <em>firmware</em> y el <em>OS</em>. Las tablas de datos, almacenan datos en crudo y son utilizados por los controladores de dispositivo. Las definiciones de bloque, consisten en código de <em>byte</em> que es ejecutable por el intérprete.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>+-------------------------------------------------------+
+|                 Sistema Operativo (OS)                |
++-------------------------------------------------------+
+                           |
+                           v
++-------------------------------------------------------+
+|                    Subsistema ACPI                    |
+|                                                       |
+|  +--------------------+       +--------------------+  |
+|  |  Tablas de Datos   |       | Definicion de      |  |
+|  |     (Estaticas)    |       | Bloques (AML)      |  |
+|  +--------------------+       +--------------------+  |
+|                                         |             |
+|                                         v             |
+|                               +--------------------+  |
+|                               |   Interpreter AML  |  |
+|                               +--------------------+  |
+|                                         |             |
+|                                         v             |
+|  +-------------------------------------------------+  |
+|  |              Espacio de Nombres ACPI            |  |
+|  |  +-------------------------------------------+  |  |
+|  |  |                  Objetos                  |  |  |
+|  |  +-------------------------------------------+  |  |
+|  +-------------------------------------------------+  |
++-------------------------------------------------------+
+                           |
+                           v
++-------------------------------------------------------+
+|                  Hardware del Sistema                 |
++-------------------------------------------------------+
+</pre></div>
+</div>
+<p>EL subsistema ACPI consiste en dos tipos de estructuras de datos:</p>
+<ol class="arabic simple">
+<li><p>tabla de datos,</p></li>
+<li><p>bloques de definición.</p></li>
+</ol>
+<p>Durante la inizialización, el intérprete AML extrae el código de <em>byte</em> en el bloque de definición, como objetos enumerables.</p>
+<p>Esta colleción de objetos enumerables, forman una contruccion del <em>OS</em>, llamada <strong>Espacio de nombres ACPI</strong>.</p>
+<p>Los objetos, pueden tener valores directamente definidos o, deberán ser evaluados e interpretados por el intérprete <em>AML</em>.</p>
+<p>El intérprete <em>AML</em>, dirigido por el <em>OS</em>, evalua los objetos e  interfases con el <em>hardware</em> de sistema, para llevar a cabo las operaciones necesarias.</p>
+<p>Éste código de <em>byte</em> de los bloques de definición, es compilado desde el código <em>ASL (ACPI Source Language)</em>. <em>ASL</em> es el lenguaje usado para definir objetos <em>ACPI</em> y para escribir métodos de control. Un compilador <em>ASL</em>, traduce <em>ASL</em> a código de <em>byte</em> <em>AML</em> -o <em>ACPI machine Language</em>. <em>AML</em>, es el lenguaje procesado por el intérprete <em>ACPI AML</em>, como indica la figura 3.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>+-------------------------------------------------------+
+|                       Código ASL                      |
+|             (ACPI Source Language - Texto)            |
++-------------------------------------------------------+
+                           |
+                           v
++-------------------------------------------------------+
+|                     Compilador ASL                    |
+|                      (Ej: iASL)                       |
++-------------------------------------------------------+
+                           |
+                           v
++-------------------------------------------------------+
+|                 Bloque de Definición                  |
+|  +-------------------------------------------------+  |
+|  |                Código de Byte AML               |  |
+|  |           (ACPI Machine Language)               |  |
+|  +-------------------------------------------------+  |
++-------------------------------------------------------+
+                           |
+                           v
++-------------------------------------------------------+
+|                    Intérprete AML                     |
+|            (Módulo interno del Kernel/OS)             |
++-------------------------------------------------------+
+</pre></div>
+</div>
+<p>El interprete AML ejecuta el código de byte y los objetos en los bloques de definición, para dejar que el código de <em>byte</em> lleve a cabo bucles de construcción, evaluaciones condicionales acceso a espacios de direcciones definidos y, otras operaciones que requieran las aplicaciones.
+El intérprete <em>AML</em> tiene acceso de lecutra/escritura al espacio de direcciones definido, incluyendo la memoria de sistema, <em>I/O</em>, configuración <em>PCI</em> y más. Accede a estos espacios de direcciones, mediante la definición de puntos de entrada llamados objetos.
+Los objetos también pueden tener directamente definido un valor o en su lugar, deben  ser evaluados e interpretados por el interprete <em>AML</em>.</p>
+<p>Ésta coleción de objetos enumerables, es una construcción del <em>OS</em> llamada <strong>espacio de nombres ACPI</strong>. El espacio de nombres es una representación jerarquica de dispositivos <em>ACPI</em> en el sistema. El <em>bus</em> de sistema, es la ríz de enumeración para dichos dispositivos <em>ACPI</em>. Los dispositivos que son enumerables por otros <em>buses</em>, como los <em>PCI</em> o dispositivos USB_no están normalmente enumerados en el espacio de nombres. En su lugar, sus própios <em>buses</em> enumeran los dispositivos y cargan sus controladores.
+Aunque, todos los <em>buses</em> enumerables tienen una técnica de codificación que permite a <em>ACPI</em>
+codificar direcciones específicas de <em>bus</em>, para el dispositivo. Así que pueden ser encontrados en <em>ACPI</em>, incluso cuando <em>ACPI</em> no carga el controlador para tales dispositivos.</p>
+<p>Generalmente, dispositivos que tienen un objeto <code class="docutils literal notranslate"><span class="pre">_HID</span></code> (hardware identification object -o identificador de objeto de hardware), son enumerados y tienen sus controladores cargados por <em>ACPI</em>. Dispositivos con objeto <code class="docutils literal notranslate"><span class="pre">_ADR</span></code> (physical addres object)son normalmente <em>no enumerados</em> por <em>ACPI</em> y, generalmente no carga su respectivo controlador mediante <em>ACPI</em>. Dispositivos <code class="docutils literal notranslate"><span class="pre">_ADR</span></code>, pueden llevar a cabo, habitualmente, todas la funciones necesarias sin involucrar a <em>ACPI</em>, pero en casos en los que el dispositivo no puede efectuar una determinada función o si el dispositivo necesita comunicarse con el <em>firmware</em>, <em>ACPI</em> puede evaluar dichos
+objetos para concluir la determinada función.</p>
+<p>Como ejemplo de ésto, <em>PCI</em> no soporta nativamente la conexión en caliente(hotplug). Aunque <em>PCI</em> puede hacer uso de <em>ACPI</em> para evaluar tales objetos y definir métodos que permitan a <em>ACPI</em> implementar dicha función para completar la conexión en caliente en un <em>PCI</em>.</p>
+<p>Un aspecto adicional de <em>ACPI</em> es un modelo en tiempo de ejecución, capaz de controlar
+cualquier evento de interrupción <em>ACPI</em> que ocurra durante la operación del sistema.
+<em>ACPI</em> continúa para evaluar los objetos, cuando sea necesario controlar estos eventos.
+Este modelo de interrupción basado en tiempo de ejecución, es discutido en gran detalle en el <em>Modelo de tiempo de ejecución</em>, mas abajo.</p>
+</section>
+<section id="inicializacion-acpi">
+<h3>Inicialización ACPI<a class="headerlink" href="#inicializacion-acpi" title="Link to this heading"></a></h3>
+<p>La mejor manera de entender como funciona <em>ACP</em> es cronológicamente. En el momento en el que el usuario enciande el sistema, el firmware de sistema completa su configuración, inicialización y <em>autoprueba</em>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>+-------------------------------------------------------+
+|                 Firmware del Sistema                  |
+|                      (BIOS/UEFI)                      |
+|                                                       |
+|  +-------------------------------------------------+  |
+|  |                      XSDT                       |  |
+|  |       (Extended System Description Table)       |  |
+|  +-------------------------------------------------+  |
+|         |                                   |         |
+|         v                                   v         |
+|  +--------------+                  +---------------+  |
+|  |     FADT     |                  |     SSDT      |  |
+|  | (Fixed ACPI  |                  | (Secondary    |  |
+|  | Description  |                  |  System Desc. |  |
+|  |    Table)    |                  |    Table)     |  |
+|  +--------------+                  +---------------+  |
+|         |                                   |         |
+|         v                                   |         |
+|  +--------------+                           |         |
+|  |     DSDT     |                           |         |
+|  | (Differentiated                          |         |
+|  | System Desc.)|                           |         |
+|  +--------------+                           |         |
+|         |                                   |         |
+|         +-----------------+-----------------+         |
+|                           |                           |
++---------------------------|---------------------------+
+                            |
+                            v
++-------------------------------------------------------+
+|               Espacio de Nombres ACPI                 |
+|                   (ACPI Namespace)                    |
++-------------------------------------------------------+
+</pre></div>
+</div>
+<p>El firmware de sistema actualiza las tablas <em>ACPI</em> cuando sea necesario, con información sólo disponible en tiempo de ejecución, antes de <em>pasar el control</em> al cargador de arranque.</p>
+<p>La <em>XSDT</em>, es la primera tabla usada por el subsistema <em>ACPI</em> de los sistemas  operativos y, contiene las direcciones de la <em>mayoria</em> de tablas <em>ACPI</em> en el sistema.
+La <em>XSDT</em> apunta a la <em>FADT</em> a <em>SSDT</em>, y otras tablas <em>ACPI</em> principales.
+La <em>FADT</em> dirige el subsistema <em>ACPI</em> a <em>DSDT</em>, la cuál es el principio del espacio de nombres por virtud de ser la primera tabla que contiene un bloque de definición.
+Entonces, el subsistema <em>ACPI</em>, consuma la <em>DSDT</em> y, empieza a contruir el
+espacio de nombres <em>ACPI</em> desde los bloques de definición. El <em>XSDT</em> también apunta a <em>SSDT</em>, y le añade, el espacio de nombres.</p>
+<p>El firmware de sistema entonces, usa la información obtenida durante la inizialización del firmware para actualizar las tablas <em>ACPI</em>, cuando es necesario, mediante diversas  configuraciones de plataforma y los datos de la interfase de energía, pasando después el control al cargador de arranque. La tabla de descripción del sistema raíz extendido (extended root system description table) <em>XSDT</em>, es la primera tabla usada por el subsistema <em>ACPI</em> y, contiene las direcciones de la mayoría de otras tablas <em>ACPI</em> en el sistema. El <em>XSDT</em> apunta a la tabla de dscripción fija <em>FADT(Fixed ACPI Description Table)</em>, así como también a otras tablas principales que el <em>OS</em> procesa durante la inicialización. Después de la inicialización del <em>OS</em> el <em>FADT</em> dirige el subsistema <em>ACPI</em> a <em>DSDT</em> -o tabla diferenciada de descripción de sistema(differentiated system description table), la cuál es el principio del espacio de nombres por que es la primera tabla que contiene un bloque de definición.</p>
+<p>El subsistema <em>ACPI</em>, procesa entonces la <em>DSDT</em> y empieza a construir el espacio de nombres desde el bloque de definición <em>ACPI</em>. La <em>XSDT</em> también apunta al sistema secundario de tablas  de descripción <em>SSDT -o Secondary Sistem Data Table</em>, y les añade el espacio de nombres. Las tablas de datos <em>ACPI</em> entregan datos en crudo al <em>OS</em>, relativos al <em>hardware</em> de sistema.</p>
+<p>Después de que el <em>OS</em> haya construido el espacio de nombres desde las tablas <em>ACPI</em>, éste empieza a recorrer el espacio de nombres y a cargar los controladores de dispositivo para todos los dispositivos <code class="docutils literal notranslate"><span class="pre">_HID</span></code> que encuentra en el mismo.</p>
+</section>
+<section id="modelo-de-tiempo-de-ejecucion">
+<h3>Modelo de tiempo de ejecución<a class="headerlink" href="#modelo-de-tiempo-de-ejecucion" title="Link to this heading"></a></h3>
+<p>Despúes de que el sitema encienda; una vez en condición de carrera, <em>ACPI</em> trabaja con el <em>OS</em> para controlar cualquier evento de interrupción, que ocurra via el controlador de <em>sistema de control de interrupción SCI</em> -o <em>system control interrupt</em>. Esta interrupción, invoca a eventos <em>ACPI</em>, en uno de dos formas generales: <em>eventos fijos</em> y <em>eventos de propuesta general(GPEs)</em>. El <em>SCI</em> es multiplexado a través del sistema, para actuar sobre los eventos de interrupción <em>ACPI</em>.</p>
+<p>Eventos fijos, son eventos <em>ACPI</em> que tienen un significado predefinido en la especificación <em>ACPI</em>. Éstos eventos fijos incluyen acciones como, apretar el botón de encendido o la  extensión de un cronómetro o reloj <em>ACPI</em> (timer overflow) RPC????.</p>
+<p><em>GPEs</em> son eventos <em>ACPI</em> que no son predefinidos por la especificación <em>ACPI</em>. Éstos eventos son normalmente controlados por métodos de control de evaluación. los cuales son objetos en el espacio de nombres y pueden acceder al hardware de sistema. Cuando el subsistema <em>ACPI</em> evalúa el método de control mediante el intérprete <em>AML</em>, el objeto <em>GPE</em> controla el evento, en concordancia con la implementación del <em>OS</em>.</p>
+<p>Típicamente, esto podría involucrar la resolución de notificaciones al dispositivo, para invocar al controlador de dispositivo y llevar a cabo determinada función.</p>
+<p>Discutiremos un ejemplo genérico de éste <em>modelo de tiempo de ejecución</em>, en la siguiente sección.</p>
+</section>
+<section id="ejemplo-de-evento-termal">
+<h3>Ejemplo de evento termal.<a class="headerlink" href="#ejemplo-de-evento-termal" title="Link to this heading"></a></h3>
+<p><em>ACPI</em> incluye un modelo termal para permitir al sistema, controlar la temperatura; tanto activamente (mediante la realización de acciones como el encendido de un ventilador) o pasivamente, reduciendo la cantidad de energía que usa el sistema (mediante la realización de acciones como estrangulamiento??(throttling) del procesador). Podemos usar un ejemplo de un evento termal genérico, mostrado el la figura 5, para demostrar como trabaja el modelo de tiempo de ejecución <em>ACPI</em>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>+-----------------------------------------------------------------------------+
+|                               Zona Térmica [1]                              |
+|                                                                             |
+|  +----------------------------+   +--------------------------------------+  |
+|  |  Ejemplo punto de travesía |   | Temperatura y varios puntos          |  |
+|  |       (Trip Points)        |   | de travesía                          |  |
+|  +----------------------------+   +--------------------------------------+  |
+|                 |                                  |                        |
++-----------------|----------------------------------|------------------------+
+                  |                                  |
+                  v                                  v
++-----------------------------------------------------------------------------+
+|                           Zona termal de GPE [2]                            |
+|                          [4]                 [5]                            |
++-----------------------------------------------------------------------------+
+                                      |
+                                      v
++-----------------------------------------------------------------------------+
+|                                   SCI [3]                                   |
+|                         (System Control Interrupt)                          |
++-----------------------------------------------------------------------------+
+                                      |
+                                      v
++-----------------------------------------------------------------------------+
+|                           Espacio de Nombres ACPI                           |
+|                                                                             |
+|  +----------------------------+            +-----------------------------+  |
+|  |     Método de Control      | &lt;--------&gt; |       Varios Objetos        |  |
+|  |         (ACPI)             |            |           ACPI              |  |
+|  +----------------------------+            +-----------------------------+  |
++-----------------------------------------------------------------------------+
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Figura 5: Evento termal de tiempo de ejecución.</p>
+</div>
+<p>Cuando el sistema inicialmente encuentra la zona termal[1] en el espacio de nombres, éste carga el controlador -referido aquí como  método/función(el handler!), para evaluar la zona termal y determinar  la temperatura y puntos de travesía.</p>
+<p>Cuando la temperatura alcanza un punto de travesía durante el tiempo de ejecución, ocurre un evento de propuesta general(<em>GPE</em>).</p>
+<p>El evento de zona termal causa una interrupción via <em>sistema de control de interrupción ACPI -o SCI[3]</em>.</p>
+<p>Cuando el <em>OS</em> recibe la interrupción, el controlador busca en el espacio de nombres, el método de control de objeto[4] correspondiente  a la interrupción <em>GPE</em>. Una vez encontrado, el controlador evalua el  objeto.</p>
+<p>El controlador de la zona termal entonces, toma la una acción cualquiera que sea, para manejar el evento.</p>
+<p>La zona termal <em>ACPI</em>, incluye métodos de control para leer el actual systema de temperatura y sus puntos de travesía.</p>
+<ol class="arabic simple">
+<li><p>Cuando el <em>OS</em>, inicialmente encuentra una zona termal en el espacio de nombres, este lee el controlador de zona termal, el cuál evalua la zona termal par obtener su temperatura y puntos de travesía.</p></li>
+<li><p>Cuando un componente de sistema se calienta lo suficiente como para disparar un punto de travesía, un <em>GPE</em> de zona termal ocurre.</p></li>
+<li><p>El <em>GPE</em> causa una interrupción via <em>SCI</em>. Cuando el subsistema <em>ACPI</em> recibe la interrupción, primero comprueba donde cualquier <em>evento fijo</em> ha ocurrido. In este ejemplo, el evento de zona ermal es un <em>GPE</em>, así que no hay eventos fijos ocurridos.</p></li>
+<li><p>El subsistema <em>ACPI</em>, busca entonces en el espacio de nombres, el método de control que coincida con el número de interrupción del <em>GPE</em>. Una vez encontrado, el subsistema <em>ACPI</em> evalua el método de control, el cuál podría tener acceso al <em>hardware</em> y/o notificar el controlador de zona termal.</p></li>
+<li><p>El controlador de zona termal del sistema operativo, toma entonces, cuál sea la acción necesaria, para controlar el evento, incluyendo la posibilidad de acceder al <em>hardware</em>.</p></li>
+</ol>
+</section>
+<section id="the-love-of-the-contemporary-art">
+<h3>The love of the contemporary Art.<a class="headerlink" href="#the-love-of-the-contemporary-art" title="Link to this heading"></a></h3>
+<p><em>ACPI</em> es una implementación de una interfase muy robusta. El punto de travesía de zona termal puede notificar al sistema cuando encender un ventilador, reducir el desarrollo efectivo del dispositivo, apagar el sistema, o cualquier combinación de estos y, otras acciones dependientes
+de la necesidad.</p>
+<p>Éste modelo de tiempo de ejecución, es usado a través del sistema, par manejar todos los eventos <em>ACPI</em> ocurridos durante el funcionamiento del systema.</p>
+</section>
+<section id="sumario">
+<h3>Sumario<a class="headerlink" href="#sumario" title="Link to this heading"></a></h3>
+<p><em>ACPI</em>, puede ser mejor descrito, como un marco de conceptos e interfases que son implenentadas para formar un subsistema dentro de un <em>OS</em> huesped. Las tablas <em>ACPI</em>, los controladores(función), el intérprete, el espacio de nombres, eventos y el modelo de interrupción, forman juntos la implementación de <em>ACPI</em>, creando el subsistema <em>ACPI</em> dentro del <em>OS</em> huesped. En este sentido, <em>ACPI</em> es la interfase entre el <em>hardware/firmware</em> de sistema y el <em>OS</em> y, las aplicaciones para la configuración y gestión de energía. Ésto proporciona diversas formas de estandarizar el soporte para la gestión de la energía y configuración, vía el espacio de nombres <em>ACPI</em>.</p>
+<p>El espacio de nombres <em>ACPI</em> es enumerable, la representación gerárquica de todos los dispositivos <em>ACPI</em> en el sistema y, es usado en amboscasos; buscar y cargar los controladores -programa, para los dispositivos <em>ACPI</em> del sistema. El espacio de nombres puede ser dinámico, mediante la evaluación de objetos y el envío de señales de interrupción en tiempo real. Todo, mientras se restringe la llamada del <em>OS</em> al código nativo(firmware). Esto permite a los fabricante de componentes, poder diseñar su própio código, instruciones y eventos para el dispositivo. También reduce incompatibilidades e inestabilidad, por medio de la implementación de una interfase estandarizada para la gestión de energía.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../acpiGPIO.html" class="btn btn-neutral float-left" title="Entrada/Salida de Propósito general" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="spec.html" class="btn btn-neutral float-right" title="4.8 Modelo de registro ACPI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

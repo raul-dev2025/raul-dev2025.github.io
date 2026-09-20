@@ -1,0 +1,504 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificados &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Sistemas Operativos" href="../../configuration/index.html" />
+    <link rel="prev" title="TLSCreateCACert" href="2-CA.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#boot">Boot</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#certificados-tls">Certificados-TLS</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../apuntesTLS.html">Apuntes sobre Protocolo TLS y Gestión de Certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../compCA.html">Comprobación y Supervisión de Certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MiTm.html">Ataques Man-in-the-Middle (MitM) y TLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OpenSSL/OpenSSL-saga.html">OpenSSL Certificado de Autoridad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-concepts.html">certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-CA.html">TLSCreateCACert</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Certificados</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lista-completa-de-pasos">Lista completa de pasos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#file-system">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Sistemas Operativos</a></li>
+      <li class="breadcrumb-item active">Certificados</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/03_Operating_Systems/Certificados-TLS/TLS-libvirt/3creSerCer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="certificados">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Certificados</a><a class="headerlink" href="#certificados" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#certificados" id="id1">Certificados</a></p>
+<ul>
+<li><p><a class="reference internal" href="#lista-completa-de-pasos" id="id2">Lista completa de pasos</a></p>
+<ul>
+<li><p><a class="reference internal" href="#creando-certificados-de-servidor-sobre-la-capa-de-transporte-seguro-para-libvirt" id="id3">Creando certificados de servidor, sobre la <em>Capa de Transporte Seguro</em>, para libvirt</a></p></li>
+<li><p><a class="reference internal" href="#crear-los-certificados-de-servidor" id="id4">Crear los certificados de servidor</a></p></li>
+<li><p><a class="reference internal" href="#crear-un-archivo-plantila-para-el-ertificado-de-servidor-utilizando-un-editor-de-textos" id="id5">Crear un archivo plantila, para el ertificado de servidor, utilizando un editor de textos</a></p></li>
+<li><p><a class="reference internal" href="#crear-el-archivo-de-llave-privada-para-el-certificado-de-servidor-usando-certtool" id="id6">Crear el archivo de llave privada, para el certificado de servidor, usando <code class="docutils literal notranslate"><span class="pre">certtool</span></code></a></p></li>
+<li><p><a class="reference internal" href="#combinar-el-archivo-plantilla-con-el-archivo-llave-privada-para-crear-el-certificado-de-servidor" id="id7">Combinar el archivo plantilla, con el archivo llave privada, para crear el certificado de servidor</a></p></li>
+<li><p><a class="reference internal" href="#la-plantillas-pueden-ser-descartadas" id="id8">La plantillas pueden ser descartadas</a></p></li>
+<li><p><a class="reference internal" href="#moviendo-los-certificados-a-su-lugar" id="id9">Moviendo los Certificados a su lugar</a></p></li>
+<li><p><a class="reference internal" href="#propietario-permisos-y-etiquetas-selinux" id="id10">Propietario, Permisos, y etiquetas SELinux</a></p></li>
+<li><p><a class="reference internal" href="#transfiriendo-los-archivos-y-congirurandolos" id="id11">Transfiriendo los archivos y, congirurándolos</a></p></li>
+<li><p><a class="reference internal" href="#transfiriendo-los-archivos-al-host1" id="id12">Transfiriendo los archivos al host1</a></p></li>
+<li><p><a class="reference internal" href="#conexion-al-host1" id="id13">Conexión al host1</a></p></li>
+<li><p><a class="reference internal" href="#transfiriendo-los-archivos-al-host2" id="id14">Transfiriendo los archivos al host2</a></p></li>
+<li><p><a class="reference internal" href="#conexcion-al-host2" id="id15">Conexción al host2</a></p></li>
+<li><p><a class="reference internal" href="#la-configurarion-del-certificado-de-servidor-esta-ahora-completa" id="id16">La configurarión del certificado de servidor, está ahora completa</a></p></li>
+<li><p><a class="reference internal" href="#sobreescribiendo-la-ruta-por-defecto" id="id17">Sobreescribiendo la ruta por defecto</a></p></li>
+<li><p><a class="reference internal" href="#lista-completa-del-proceso" id="id18">Lista completa del proceso</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="lista-completa-de-pasos">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Lista completa de pasos</a><a class="headerlink" href="#lista-completa-de-pasos" title="Link to this heading"></a></h2>
+<section id="creando-certificados-de-servidor-sobre-la-capa-de-transporte-seguro-para-libvirt">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Creando certificados de servidor, sobre la <em>Capa de Transporte Seguro</em>, para libvirt</a><a class="headerlink" href="#creando-certificados-de-servidor-sobre-la-capa-de-transporte-seguro-para-libvirt" title="Link to this heading"></a></h3>
+<p>En nuestro <em>escenario</em> de ejemplo, están siendo configurados, dos servidores virtualizados, para una comunicación <strong>TLS</strong>. La Autoridad de Certificado, y su llave privada, fueron configurados en el paso anterior.</p>
+<p>En éste paso, se creará el certificado <strong>TLS</strong> de servidor, que necesitan los huéspedes. Una vez hecho esto, se moverán al mismo. Cuando los certificados de servidor estén en su lugar, y <em>libvirt</em> apropiadamente configurado, los clientes <strong>TLS</strong> podrán establecer la comunicación con ellos.</p>
+</section>
+<section id="crear-los-certificados-de-servidor">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Crear los certificados de servidor</a><a class="headerlink" href="#crear-los-certificados-de-servidor" title="Link to this heading"></a></h3>
+<p>Podrá llevarse a cabo la tarea, combinando el Certificado de Servidor(<strong>CA</strong>) y, su llave privada. Será utilizada la herramienta <code class="docutils literal notranslate"><span class="pre">certtool</span></code>, procedente del paquete <code class="docutils literal notranslate"><span class="pre">gnutls-utils</span></code>.</p>
+</section>
+<section id="crear-un-archivo-plantila-para-el-ertificado-de-servidor-utilizando-un-editor-de-textos">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Crear un archivo plantila, para el ertificado de servidor, utilizando un editor de textos</a><a class="headerlink" href="#crear-un-archivo-plantila-para-el-ertificado-de-servidor-utilizando-un-editor-de-textos" title="Link to this heading"></a></h3>
+<p>Son archivos en formato <em>texto plano</em>, uno para cada huesped virtualizado; contienen los siguientes campos:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">organization</span> <span class="o">=</span> <span class="n">Nombre</span> <span class="n">de</span> <span class="n">tu</span> <span class="n">organización</span>
+<span class="n">cn</span> <span class="o">=</span> <span class="n">Nombre</span> <span class="n">de</span> <span class="n">huesped</span>
+<span class="n">tls_www_server</span>
+<span class="n">encryption_key</span>
+<span class="n">signing_key</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Es conveniente no traducir el campo identificativo, pués probablemente la variable se llame de la misma forma, en el momento de la compilación, es decir, todo lo que está delante de <code class="docutils literal notranslate"><span class="pre">=</span></code>.</p>
+</div>
+<p>El campo <code class="docutils literal notranslate"><span class="pre">Nombre</span> <span class="pre">de</span> <span class="pre">tu</span> <span class="pre">organización</span></code> debe ser ajustado, para hacerlo coincidir con el nombre de la organización, a la pertenecerá el certificado. El <em>nombre de huesped</em>, deberá ser ajustado de igual manera, haciéndolo coincidir nuevamente, con el nombre escrito en la <em>plantilla</em>.</p>
+<p>Siguiendo con el ejemplo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># cat host1_server_template.info</span>
+<span class="n">organization</span> <span class="o">=</span> <span class="n">libvirt</span><span class="o">.</span><span class="n">org</span>
+<span class="n">cn</span> <span class="o">=</span> <span class="n">host1</span>
+<span class="n">tls_www_server</span>
+<span class="n">encryption_key</span>
+<span class="n">signing_key</span>
+
+<span class="c1"># cat host2_server_template.info</span>
+<span class="n">organization</span> <span class="o">=</span> <span class="n">libvirt</span><span class="o">.</span><span class="n">org</span>
+<span class="n">cn</span> <span class="o">=</span> <span class="n">host2</span>
+<span class="n">tls_www_server</span>
+<span class="n">encryption_key</span>
+<span class="n">signing_key</span>
+
+<span class="c1"># ls -al *server_template.info</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">82</span> <span class="n">Aug</span> <span class="mi">25</span> <span class="mi">13</span><span class="p">:</span><span class="mi">26</span> <span class="n">host1ServerTemplate</span><span class="o">.</span><span class="n">info</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">82</span> <span class="n">Aug</span> <span class="mi">25</span> <span class="mi">13</span><span class="p">:</span><span class="mi">26</span> <span class="n">host2ServerTemplate</span><span class="o">.</span><span class="n">info</span>
+<span class="o">*******************************</span> <span class="o">&lt;--</span> <span class="n">just</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">md</span> <span class="n">confilcts</span><span class="p">(</span><span class="n">deprecated</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="crear-el-archivo-de-llave-privada-para-el-certificado-de-servidor-usando-certtool">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Crear el archivo de llave privada, para el certificado de servidor, usando <code class="docutils literal notranslate"><span class="pre">certtool</span></code></a><a class="headerlink" href="#crear-el-archivo-de-llave-privada-para-el-certificado-de-servidor-usando-certtool" title="Link to this heading"></a></h3>
+<p>Son generados los archivos de <em>llave</em>, para ser después usados con los <em>Certificados de Servidor</em>.
+Estas <em>llaves</em> son usadas para crear los <em>Certificados de Servidor</em> <strong>TLS</strong> y, por cada <em>supuesto</em>, una vez el sistema virtualizado arranque.</p>
+<p>Será creada una <em>única llave privada</em>, por cada <em>supuesto</em>, comprobando que los permisos, sólo dan acceso restringido a estos archivos.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># (umask 277 &amp;&amp; certtool --generate-privkey &gt; host1_server_key.pem)</span>
+<span class="n">Generating</span> <span class="n">a</span> <span class="mi">2048</span> <span class="n">bit</span> <span class="n">RSA</span> <span class="n">private</span> <span class="n">key</span><span class="o">...</span>
+
+<span class="c1"># (umask 277 &amp;&amp; certtool --generate-privkey &gt; host2_server_key.pem)</span>
+<span class="n">Generating</span> <span class="n">a</span> <span class="mi">2048</span> <span class="n">bit</span> <span class="n">RSA</span> <span class="n">private</span> <span class="n">key</span><span class="o">...</span>
+
+<span class="c1"># ls -al *_server_key.pem</span>
+<span class="o">-</span><span class="n">r</span><span class="o">--------.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">1675</span> <span class="n">Aug</span> <span class="mi">25</span> <span class="mi">13</span><span class="p">:</span><span class="mi">33</span> <span class="n">host1_server_key</span><span class="o">.</span><span class="n">pem</span>
+<span class="o">-</span><span class="n">r</span><span class="o">--------.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">1675</span> <span class="n">Aug</span> <span class="mi">25</span> <span class="mi">13</span><span class="p">:</span><span class="mi">33</span> <span class="n">host2_server_key</span><span class="o">.</span><span class="n">pem</span>
+<span class="o">*******************************</span> <span class="o">&lt;--</span> <span class="n">just</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">md</span> <span class="n">confilcts</span><span class="p">(</span><span class="n">deprecated</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La seguridad de los archivos de llaves privadas, es muy
+importante. Si una persona no autorizada obtiene la llave privada
+de servidor, puede usarla junto a un Certificado de Servidor, para
+suplantar a la máquina virtualizada. Usar una buena seguridad
+<strong>Unix</strong>, para restringir el acceso a estas llaves.</p>
+</div>
+</section>
+<section id="combinar-el-archivo-plantilla-con-el-archivo-llave-privada-para-crear-el-certificado-de-servidor">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Combinar el archivo plantilla, con el archivo llave privada, para crear el certificado de servidor</a><a class="headerlink" href="#combinar-el-archivo-plantilla-con-el-archivo-llave-privada-para-crear-el-certificado-de-servidor" title="Link to this heading"></a></h3>
+<p>Son generados los <em>Certificados de Servidor</em>, usando las plantillas
+junto a la correspondiente llave privada. El archivo de la <em>CA</em>,
+igualmente es añadido con su llave privada, para asegurar que cada nuevo
+certificado de servidor, es firmado apropiadamente.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># certtool --generate-certificate \</span>
+          <span class="o">--</span><span class="n">template</span> <span class="n">host1_server_template</span><span class="o">.</span><span class="n">info</span> \
+          <span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">privkey</span> <span class="n">host1_server_key</span><span class="o">.</span><span class="n">pem</span> \
+          <span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">ca</span><span class="o">-</span><span class="n">certificate</span> <span class="n">certificate_authority_certificate</span><span class="o">.</span><span class="n">pem</span> \
+          <span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">ca</span><span class="o">-</span><span class="n">privkey</span> <span class="n">certificate_authority_key</span><span class="o">.</span><span class="n">pem</span> \
+          <span class="o">--</span><span class="n">outfile</span> <span class="n">host1_server_certificate</span><span class="o">.</span><span class="n">pem</span>
+<span class="n">Generating</span> <span class="n">a</span> <span class="n">signed</span> <span class="n">certificate</span><span class="o">...</span>
+<span class="n">X</span><span class="mf">.509</span> <span class="n">Certificate</span> <span class="n">Information</span><span class="p">:</span>
+<span class="n">Version</span><span class="p">:</span> <span class="mi">3</span>
+<span class="n">Serial</span> <span class="n">Number</span> <span class="p">(</span><span class="nb">hex</span><span class="p">):</span> <span class="mi">4</span><span class="n">c749699</span>
+<span class="n">Validity</span><span class="p">:</span>
+      <span class="n">Not</span> <span class="n">Before</span><span class="p">:</span> <span class="n">Wed</span> <span class="n">Aug</span> <span class="mi">25</span> <span class="mi">04</span><span class="p">:</span><span class="mi">05</span><span class="p">:</span><span class="mi">45</span> <span class="n">UTC</span> <span class="mi">2010</span>
+      <span class="n">Not</span> <span class="n">After</span><span class="p">:</span> <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">25</span> <span class="mi">04</span><span class="p">:</span><span class="mi">05</span><span class="p">:</span><span class="mi">45</span> <span class="n">UTC</span> <span class="mi">2011</span>
+      <span class="n">Subject</span><span class="p">:</span> <span class="n">O</span><span class="o">=</span><span class="n">libvirt</span><span class="o">.</span><span class="n">org</span><span class="p">,</span><span class="n">CN</span><span class="o">=</span><span class="n">host1</span>
+      <span class="n">Subject</span> <span class="n">Public</span> <span class="n">Key</span> <span class="n">Algorithm</span><span class="p">:</span> <span class="n">RSA</span>
+      <span class="n">Modulus</span> <span class="p">(</span><span class="n">bits</span> <span class="mi">2048</span><span class="p">):</span>
+              <span class="n">da</span><span class="p">:</span><span class="mi">75</span><span class="p">:</span><span class="n">bd</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="n">ac</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">4</span><span class="n">a</span><span class="p">:</span><span class="mi">6</span><span class="n">c</span><span class="p">:</span><span class="n">fe</span><span class="p">:</span><span class="mi">8</span><span class="n">c</span><span class="p">:</span><span class="mi">8</span><span class="n">b</span><span class="p">:</span><span class="n">d9</span><span class="p">:</span><span class="n">d8</span><span class="p">:</span><span class="n">f4</span><span class="p">:</span><span class="mi">94</span><span class="p">:</span><span class="mi">80</span>
+              <span class="mi">5</span><span class="n">e</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mi">68</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="n">e7</span><span class="p">:</span><span class="n">de</span><span class="p">:</span><span class="mi">85</span><span class="p">:</span><span class="n">d3</span><span class="p">:</span><span class="n">d7</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="n">da</span><span class="p">:</span><span class="mi">8</span><span class="n">d</span><span class="p">:</span><span class="n">d1</span><span class="p">:</span><span class="n">f1</span><span class="p">:</span><span class="mi">21</span>
+              <span class="mi">3</span><span class="n">b</span><span class="p">:</span><span class="n">d9</span><span class="p">:</span><span class="n">f1</span><span class="p">:</span><span class="n">eb</span><span class="p">:</span><span class="mi">86</span><span class="p">:</span><span class="mi">0</span><span class="n">a</span><span class="p">:</span><span class="mi">4</span><span class="n">e</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">2</span><span class="n">c</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="n">ee</span><span class="p">:</span><span class="mi">3</span><span class="n">e</span><span class="p">:</span><span class="mi">81</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">7</span><span class="n">d</span>
+              <span class="n">e5</span><span class="p">:</span><span class="mi">83</span><span class="p">:</span><span class="mi">6</span><span class="n">b</span><span class="p">:</span><span class="n">bd</span><span class="p">:</span><span class="n">e9</span><span class="p">:</span><span class="mi">86</span><span class="p">:</span><span class="mi">93</span><span class="p">:</span><span class="mi">7</span><span class="n">c</span><span class="p">:</span><span class="n">ce</span><span class="p">:</span><span class="n">a4</span><span class="p">:</span><span class="mi">5</span><span class="n">b</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="n">b3</span><span class="p">:</span><span class="n">b6</span><span class="p">:</span><span class="mi">6</span><span class="n">d</span><span class="p">:</span><span class="mi">7</span><span class="n">a</span>
+              <span class="mi">7</span><span class="n">e</span><span class="p">:</span><span class="mi">60</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">99</span><span class="p">:</span><span class="mi">4</span><span class="n">a</span><span class="p">:</span><span class="mi">23</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="n">e3</span><span class="p">:</span><span class="mi">0</span><span class="n">f</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">68</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">08</span><span class="p">:</span><span class="n">f3</span><span class="p">:</span><span class="mi">0</span><span class="n">f</span>
+              <span class="n">ca</span><span class="p">:</span><span class="mi">76</span><span class="p">:</span><span class="mi">0</span><span class="n">d</span><span class="p">:</span><span class="n">bc</span><span class="p">:</span><span class="mi">76</span><span class="p">:</span><span class="n">e0</span><span class="p">:</span><span class="mi">8</span><span class="n">b</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">93</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="n">f6</span><span class="p">:</span><span class="mi">8</span><span class="n">f</span><span class="p">:</span><span class="n">b9</span><span class="p">:</span><span class="n">d6</span><span class="p">:</span><span class="mi">4</span><span class="n">c</span><span class="p">:</span><span class="mi">21</span>
+              <span class="mi">2</span><span class="n">a</span><span class="p">:</span><span class="mi">0</span><span class="n">e</span><span class="p">:</span><span class="n">d9</span><span class="p">:</span><span class="n">cd</span><span class="p">:</span><span class="mi">1</span><span class="n">c</span><span class="p">:</span><span class="mi">33</span><span class="p">:</span><span class="mi">04</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="n">a3</span><span class="p">:</span><span class="n">eb</span><span class="p">:</span><span class="mi">97</span><span class="p">:</span><span class="mi">6</span><span class="n">b</span><span class="p">:</span><span class="mi">84</span><span class="p">:</span><span class="n">bc</span><span class="p">:</span><span class="mi">88</span><span class="p">:</span><span class="mi">16</span>
+              <span class="mi">8</span><span class="n">e</span><span class="p">:</span><span class="mi">0</span><span class="n">b</span><span class="p">:</span><span class="mi">80</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="n">ed</span><span class="p">:</span><span class="n">ce</span><span class="p">:</span><span class="n">c5</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="n">fe</span><span class="p">:</span><span class="mi">3</span><span class="n">b</span><span class="p">:</span><span class="n">f7</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="n">a7</span><span class="p">:</span><span class="mi">91</span><span class="p">:</span><span class="n">c3</span><span class="p">:</span><span class="mi">1</span><span class="n">f</span>
+              <span class="mi">86</span><span class="p">:</span><span class="n">b7</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mi">77</span><span class="p">:</span><span class="mi">7</span><span class="n">b</span><span class="p">:</span><span class="mi">35</span><span class="p">:</span><span class="n">e7</span><span class="p">:</span><span class="n">f4</span><span class="p">:</span><span class="n">a6</span><span class="p">:</span><span class="mi">7</span><span class="n">a</span><span class="p">:</span><span class="mi">3</span><span class="n">c</span><span class="p">:</span><span class="n">c9</span><span class="p">:</span><span class="mi">0</span><span class="n">d</span><span class="p">:</span><span class="mi">60</span><span class="p">:</span><span class="n">fd</span><span class="p">:</span><span class="n">b2</span>
+              <span class="n">b7</span><span class="p">:</span><span class="n">e7</span><span class="p">:</span><span class="n">d9</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="n">a5</span><span class="p">:</span><span class="n">ef</span><span class="p">:</span><span class="n">e9</span><span class="p">:</span><span class="mi">0</span><span class="n">c</span><span class="p">:</span><span class="mi">43</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">3</span><span class="n">b</span><span class="p">:</span><span class="n">ef</span><span class="p">:</span><span class="mi">96</span><span class="p">:</span><span class="mi">52</span>
+              <span class="n">a6</span><span class="p">:</span><span class="n">f9</span><span class="p">:</span><span class="n">ca</span><span class="p">:</span><span class="n">d5</span><span class="p">:</span><span class="n">fc</span><span class="p">:</span><span class="n">c0</span><span class="p">:</span><span class="n">fb</span><span class="p">:</span><span class="n">a0</span><span class="p">:</span><span class="mi">5</span><span class="n">a</span><span class="p">:</span><span class="mi">1</span><span class="n">f</span><span class="p">:</span><span class="mi">69</span><span class="p">:</span><span class="mi">6</span><span class="n">f</span><span class="p">:</span><span class="n">ce</span><span class="p">:</span><span class="mi">66</span><span class="p">:</span><span class="mi">0</span><span class="n">c</span><span class="p">:</span><span class="n">fc</span>
+              <span class="n">d5</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">86</span><span class="p">:</span><span class="mi">85</span><span class="p">:</span><span class="mi">7</span><span class="n">e</span><span class="p">:</span><span class="n">ab</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">3</span><span class="n">e</span><span class="p">:</span><span class="mi">5</span><span class="n">b</span><span class="p">:</span><span class="n">a3</span><span class="p">:</span><span class="mi">85</span><span class="p">:</span><span class="n">a1</span><span class="p">:</span><span class="mi">3</span><span class="n">b</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="n">ec</span>
+              <span class="mi">11</span><span class="p">:</span><span class="mi">7</span><span class="n">c</span><span class="p">:</span><span class="mi">6</span><span class="n">c</span><span class="p">:</span><span class="mi">3</span><span class="n">d</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">8</span><span class="n">b</span><span class="p">:</span><span class="n">a5</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">7</span><span class="n">a</span><span class="p">:</span><span class="mi">7</span><span class="n">b</span><span class="p">:</span><span class="mi">79</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="n">a0</span><span class="p">:</span><span class="n">f6</span><span class="p">:</span><span class="mi">79</span><span class="p">:</span><span class="mi">2</span><span class="n">f</span>
+              <span class="mi">30</span><span class="p">:</span><span class="n">a9</span><span class="p">:</span><span class="n">a1</span><span class="p">:</span><span class="mi">6</span><span class="n">e</span><span class="p">:</span><span class="mi">8</span><span class="n">c</span><span class="p">:</span><span class="mi">5</span><span class="n">e</span><span class="p">:</span><span class="mi">3</span><span class="n">a</span><span class="p">:</span><span class="mi">97</span><span class="p">:</span><span class="n">af</span><span class="p">:</span><span class="mi">8</span><span class="n">e</span><span class="p">:</span><span class="mi">7</span><span class="n">c</span><span class="p">:</span><span class="n">c0</span><span class="p">:</span><span class="n">a4</span><span class="p">:</span><span class="mi">1</span><span class="n">f</span><span class="p">:</span><span class="mi">2</span><span class="n">a</span><span class="p">:</span><span class="mi">32</span>
+              <span class="mi">8</span><span class="n">b</span><span class="p">:</span><span class="mi">4</span><span class="n">f</span><span class="p">:</span><span class="mi">6</span><span class="n">b</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="n">e4</span><span class="p">:</span><span class="n">f0</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="n">db</span><span class="p">:</span><span class="mi">2</span><span class="n">b</span><span class="p">:</span><span class="mi">4</span><span class="n">c</span><span class="p">:</span><span class="mi">0</span><span class="n">d</span><span class="p">:</span><span class="mi">94</span><span class="p">:</span><span class="mi">95</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="n">f0</span>
+              <span class="mi">53</span><span class="p">:</span><span class="n">e8</span><span class="p">:</span><span class="mi">0</span><span class="n">f</span><span class="p">:</span><span class="n">ad</span><span class="p">:</span><span class="mi">1</span><span class="n">a</span><span class="p">:</span><span class="n">a5</span><span class="p">:</span><span class="n">cf</span><span class="p">:</span><span class="mi">35</span><span class="p">:</span><span class="n">e4</span><span class="p">:</span><span class="n">e3</span><span class="p">:</span><span class="mi">0</span><span class="n">c</span><span class="p">:</span><span class="n">a6</span><span class="p">:</span><span class="n">ba</span><span class="p">:</span><span class="mi">85</span><span class="p">:</span><span class="mi">8</span><span class="n">a</span><span class="p">:</span><span class="mi">33</span>
+              <span class="n">Exponent</span> <span class="p">(</span><span class="n">bits</span> <span class="mi">24</span><span class="p">):</span>
+              <span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">01</span>
+              <span class="n">Extensions</span><span class="p">:</span>
+              <span class="n">Basic</span> <span class="n">Constraints</span> <span class="p">(</span><span class="n">critical</span><span class="p">):</span>
+              <span class="n">Certificate</span> <span class="n">Authority</span> <span class="p">(</span><span class="n">CA</span><span class="p">):</span> <span class="n">FALSE</span>
+              <span class="n">Key</span> <span class="n">Purpose</span> <span class="p">(</span><span class="ow">not</span> <span class="n">critical</span><span class="p">):</span>
+              <span class="n">TLS</span> <span class="n">WWW</span> <span class="n">Server</span><span class="o">.</span>
+              <span class="n">Key</span> <span class="n">Usage</span> <span class="p">(</span><span class="n">critical</span><span class="p">):</span>
+              <span class="n">Digital</span> <span class="n">signature</span><span class="o">.</span>
+              <span class="n">Key</span> <span class="n">encipherment</span><span class="o">.</span>
+              <span class="n">Subject</span> <span class="n">Key</span> <span class="n">Identifier</span> <span class="p">(</span><span class="ow">not</span> <span class="n">critical</span><span class="p">):</span>
+              <span class="mi">6</span><span class="n">ddcfcc00a5ffe064a756d2623ea90fa20ff782c</span>
+              <span class="n">Authority</span> <span class="n">Key</span> <span class="n">Identifier</span> <span class="p">(</span><span class="ow">not</span> <span class="n">critical</span><span class="p">):</span>
+              <span class="mi">9512006</span><span class="n">c97dbdedbb3232a22cfea6b1341d72d76</span>
+<span class="n">Other</span> <span class="n">Information</span><span class="p">:</span>
+    <span class="n">Public</span> <span class="n">Key</span> <span class="n">Id</span><span class="p">:</span>
+              <span class="mi">6</span><span class="n">ddcfcc00a5ffe064a756d2623ea90fa20ff782c</span>
+
+
+
+<span class="n">Signing</span> <span class="n">certificate</span><span class="o">...</span>
+</pre></div>
+</div>
+<p>Esto creará el archivo <em>TLS</em> Certificado de Servidor
+<code class="docutils literal notranslate"><span class="pre">host2_server_certificate.pem</span></code> para el segundo huesped.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ls -la *server_certificate.pem</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">1164</span> <span class="n">Aug</span> <span class="mi">25</span> <span class="mi">14</span><span class="p">:</span><span class="mi">05</span> <span class="n">host1_server_certificate</span><span class="o">.</span><span class="n">pem</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">1164</span> <span class="n">Aug</span> <span class="mi">25</span> <span class="mi">14</span><span class="p">:</span><span class="mi">06</span> <span class="n">host2_server_certificate</span><span class="o">.</span><span class="n">pem</span>
+<span class="o">*******************************</span> <span class="o">&lt;--</span> <span class="n">just</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">md</span> <span class="n">confilcts</span><span class="p">(</span><span class="n">deprecated</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="la-plantillas-pueden-ser-descartadas">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">La plantillas pueden ser descartadas</a><a class="headerlink" href="#la-plantillas-pueden-ser-descartadas" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># rm host1_server_template.info host2_server_template.info</span>
+</pre></div>
+</div>
+</section>
+<section id="moviendo-los-certificados-a-su-lugar">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Moviendo los Certificados a su lugar</a><a class="headerlink" href="#moviendo-los-certificados-a-su-lugar" title="Link to this heading"></a></h3>
+<p>Ahora que el cirtificado ha sido creado, es el momente de moverlo a su
+lugar.</p>
+<p>La localización -por defecto, donde el demonio <em>libvirt</em> busca el archivo <code class="docutils literal notranslate"><span class="pre">servercert.pem</span></code>, es en <code class="docutils literal notranslate"><span class="pre">/etc/pki/libvirt/</span></code>. Para la la <em>llave</em>, la ruta será <code class="docutils literal notranslate"><span class="pre">/etc/pki/libvirt/private/</span></code>. Así que moveremos los archivos a su lugar respectivo.</p>
+<p>El archivo de <em>llave privada</em>, debe mantenerse en lugar seguro, donde sólo pueda ser accedido por el usuario <code class="docutils literal notranslate"><span class="pre">root</span></code>. El archivo <em>Certificado de Servidos</em>, es algo menos sensible.</p>
+</section>
+<section id="propietario-permisos-y-etiquetas-selinux">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Propietario, Permisos, y etiquetas SELinux</a><a class="headerlink" href="#propietario-permisos-y-etiquetas-selinux" title="Link to this heading"></a></h3>
+<p>La pertenencia y permisos de ambos archivos, será ajustada consecuentemente. Los directorios son los siguientes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Directory</span><span class="p">:</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span>
+<span class="n">Ownership</span><span class="p">:</span> <span class="n">root</span><span class="p">:</span><span class="n">qemu</span>
+<span class="n">Permissions</span><span class="p">:</span> <span class="n">u</span><span class="o">=</span><span class="n">rwx</span><span class="p">,</span><span class="n">g</span><span class="o">=</span><span class="n">rx</span><span class="p">,</span><span class="n">o</span><span class="o">=</span><span class="n">rx</span> <span class="p">(</span><span class="mi">755</span><span class="p">)</span>
+<span class="n">SELinux</span> <span class="n">label</span><span class="p">:</span> <span class="n">system_u</span><span class="p">:</span><span class="n">object_r</span><span class="p">:</span><span class="n">cert_t</span><span class="p">:</span><span class="n">s0</span>
+
+<span class="n">Server</span> <span class="n">Certificate</span> <span class="n">path</span><span class="p">:</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">servercert</span><span class="o">.</span><span class="n">pem</span>
+<span class="n">Ownership</span><span class="p">:</span> <span class="n">root</span><span class="p">:</span><span class="n">qemu</span>
+<span class="n">Permissions</span><span class="p">:</span> <span class="n">u</span><span class="o">=</span><span class="n">r</span><span class="p">,</span><span class="n">g</span><span class="o">=</span><span class="n">r</span><span class="p">,</span><span class="n">o</span><span class="o">=</span> <span class="p">(</span><span class="mi">440</span><span class="p">)</span>
+<span class="n">SELinux</span> <span class="n">label</span><span class="p">:</span> <span class="n">system_u</span><span class="p">:</span><span class="n">object_r</span><span class="p">:</span><span class="n">cert_t</span><span class="p">:</span><span class="n">s0</span>
+
+<span class="n">Directory</span><span class="p">:</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">private</span><span class="o">/</span>
+<span class="n">Ownership</span><span class="p">:</span> <span class="n">root</span><span class="p">:</span><span class="n">qemu</span>
+<span class="n">Permissions</span><span class="p">:</span> <span class="n">u</span><span class="o">=</span><span class="n">rwx</span><span class="p">,</span><span class="n">g</span><span class="o">=</span><span class="n">rx</span><span class="p">,</span><span class="n">o</span><span class="o">=</span> <span class="p">(</span><span class="mi">750</span><span class="p">)</span>
+<span class="n">SELinux</span> <span class="n">label</span><span class="p">:</span> <span class="n">system_u</span><span class="p">:</span><span class="n">object_r</span><span class="p">:</span><span class="n">cert_t</span><span class="p">:</span><span class="n">s0</span>
+
+<span class="n">Private</span> <span class="n">Key</span> <span class="k">for</span> <span class="n">Server</span> <span class="n">Certificate</span><span class="p">:</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">serverkey</span><span class="o">.</span><span class="n">pem</span>
+<span class="n">Ownership</span><span class="p">:</span> <span class="n">root</span><span class="p">:</span><span class="n">qemu</span>
+<span class="n">Permissions</span><span class="p">:</span> <span class="n">u</span><span class="o">=</span><span class="n">r</span><span class="p">,</span><span class="n">g</span><span class="o">=</span><span class="n">r</span><span class="p">,</span><span class="n">o</span><span class="o">=</span> <span class="p">(</span><span class="mi">440</span><span class="p">)</span>
+<span class="n">SELinux</span> <span class="n">label</span><span class="p">:</span> <span class="n">system_u</span><span class="p">:</span><span class="n">object_r</span><span class="p">:</span><span class="n">cert_t</span><span class="p">:</span><span class="n">s0</span>
+</pre></div>
+</div>
+<p>Las etiquetas <em>SELinux</em>, únicamente son relevantes si el servidor tiene activado <em>SELinux</em>. De qualquier otra forma, pueden ser ignoradas.</p>
+<p>Otras consideraciones como prácticas de seguridad y requisitos específicos para el servidor, deberán ser atendidas igualmente.</p>
+</section>
+<section id="transfiriendo-los-archivos-y-congirurandolos">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Transfiriendo los archivos y, congirurándolos</a><a class="headerlink" href="#transfiriendo-los-archivos-y-congirurandolos" title="Link to this heading"></a></h3>
+<p>En el ejemplo de abajo, se utiliza la <code class="docutils literal notranslate"><span class="pre">scp</span></code> para transferir el par de <em>llaves</em>, a cada huestped. Después, se conecta a cada uno de ellos, para colocarlos en su lugar correcto.</p>
+</section>
+<section id="transfiriendo-los-archivos-al-host1">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Transfiriendo los archivos al host1</a><a class="headerlink" href="#transfiriendo-los-archivos-al-host1" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>&gt; El nombre de los archivos es cambiado al transferirlos.</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># scp -p host1_server_certificate.pem someuser@host1:servercert.pem</span>
+<span class="n">someuser</span><span class="nd">@host1</span><span class="s1">&#39;s password:</span>
+<span class="n">host1_server_certificate</span><span class="o">.</span><span class="n">pem</span>           <span class="mi">100</span><span class="o">%</span> <span class="mi">1164</span>     <span class="mf">1.1</span><span class="n">KB</span><span class="o">/</span><span class="n">s</span>   <span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+
+<span class="c1"># scp -p host1_server_key.pem someuser@host1:serverkey.pem</span>
+<span class="n">someuser</span><span class="nd">@host1</span><span class="s1">&#39;s password:</span>
+<span class="n">host1_server_key</span><span class="o">.</span><span class="n">pem</span>                   <span class="mi">100</span><span class="o">%</span> <span class="mi">1675</span>     <span class="mf">1.6</span><span class="n">KB</span><span class="o">/</span><span class="n">s</span>   <span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+</pre></div>
+</div>
+</section>
+<section id="conexion-al-host1">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Conexión al host1</a><a class="headerlink" href="#conexion-al-host1" title="Link to this heading"></a></h3>
+<p>Primero son creados los directorios y asignados los permisos(del directorio):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mkdir -p /etc/pki/libvirt/private</span>
+<span class="c1"># chmod 755 /etc/pki/libvirt</span>
+<span class="c1"># chmod 750 /etc/pki/libvirt/private</span>
+</pre></div>
+</div>
+<p>Después son movidos los archivos y ajustados sus permisos:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mv servercert.pem /etc/pki/libvirt</span>
+<span class="c1"># mv serverkey.pem /etc/pki/libvirt/private</span>
+
+<span class="c1"># chgrp qemu /etc/pki/libvirt \</span>
+              <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">servercert</span><span class="o">.</span><span class="n">pem</span> \
+              <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">private</span> \
+              <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">serverkey</span><span class="o">.</span><span class="n">pem</span>
+
+<span class="c1"># chmod 440 /etc/pki/libvirt/servercert.pem \</span>
+            <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">serverkey</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+<p>Si el servidor tiene SELinux activado, se actualizan las etiquetas:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># restorecon -R /etc/pki/libvirt \
+                /etc/pki/libvirt/private
+
+$ ls -laZ /etc/pki/libvirt
+/etc/pki/libvirt:
+total 20
+drwxr-xr-x  3 root qemu system_u:object_r:cert_t:s0 .
+drwxr-xr-x. 8 root root system_u:object_r:cert_t:s0 ..
+drwxr-x---  2 root qemu system_u:object_r:cert_t:s0 private
+-r--r-----. 1 root qemu system_u:object_r:cert_t:s0 servercert.pem
+
+$ ls -laZ /etc/pki/libvirt/private/
+/etc/pki/libvirt/private/:
+total 16
+drwxr-x---  2 root qemu system_u:object_r:cert_t:s0
+drwxr-xr-x  3 root qemu system_u:object_r:cert_t:s0 ..
+-r--r-----. 1 root qemu system_u:object_r:cert_t:s0 serverkey.pem
+</pre></div>
+</div>
+</section>
+<section id="transfiriendo-los-archivos-al-host2">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">Transfiriendo los archivos al host2</a><a class="headerlink" href="#transfiriendo-los-archivos-al-host2" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>&gt; El nombre de los archivos es cambiado al transferirlos.</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># scp -p host2_server_certificate.pem someuser@host2:servercert.pem</span>
+<span class="n">someuser</span><span class="nd">@host2</span><span class="s1">&#39;s password:</span>
+<span class="n">host2_server_certificate</span><span class="o">.</span><span class="n">pem</span>           <span class="mi">100</span><span class="o">%</span> <span class="mi">1164</span>     <span class="mf">1.2</span><span class="n">KB</span><span class="o">/</span><span class="n">s</span>   <span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+
+<span class="c1"># scp -p host2_server_key.pem someuser@host2:serverkey.pem</span>
+<span class="n">someuser</span><span class="nd">@host2</span><span class="s1">&#39;s password:</span>
+<span class="n">host2_server_key</span><span class="o">.</span><span class="n">pem</span>                   <span class="mi">100</span><span class="o">%</span> <span class="mi">1675</span>     <span class="mf">1.8</span><span class="n">KB</span><span class="o">/</span><span class="n">s</span>   <span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+</pre></div>
+</div>
+</section>
+<section id="conexcion-al-host2">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">Conexción al host2</a><a class="headerlink" href="#conexcion-al-host2" title="Link to this heading"></a></h3>
+<p>Primero son creados los directorios y asignados los permisos(del directorio):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo mkdir -p /etc/pki/libvirt/private
+$ sudo chmod 755 /etc/pki/libvirt
+$ sudo chmod 750 /etc/pki/libvirt/private
+</pre></div>
+</div>
+<p>Después son movidos los archivos y ajustados sus permisos:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mv servercert.pem /etc/pki/libvirt</span>
+<span class="c1"># mv serverkey.pem /etc/pki/libvirt/private</span>
+
+<span class="c1"># chgrp qemu /etc/pki/libvirt \</span>
+              <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">servercert</span><span class="o">.</span><span class="n">pem</span> \
+              <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">private</span> \
+              <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">serverkey</span><span class="o">.</span><span class="n">pem</span>
+
+<span class="c1"># chmod 440 /etc/pki/libvirt/servercert.pem \</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">serverkey</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+<p>Si el servidor tiene SELinux activado, se actualizan las etiquetas:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># restorecon -R /etc/pki/libvirt \
+                /etc/pki/libvirt/private
+
+$ ls -laZ /etc/pki/libvirt
+/etc/pki/libvirt:
+total 20
+drwxr-xr-x  3 root qemu system_u:object_r:cert_t:s0 .
+drwxr-xr-x. 8 root root system_u:object_r:cert_t:s0 ..
+drwxr-x---  2 root qemu system_u:object_r:cert_t:s0 private
+-r--r-----. 1 root qemu system_u:object_r:cert_t:s0 servercert.pem
+
+$ ls -laZ /etc/pki/libvirt/private/
+/etc/pki/libvirt/private/:
+total 16
+drwxr-x---  2 root qemu system_u:object_r:cert_t:s0
+drwxr-xr-x  3 root qemu system_u:object_r:cert_t:s0 ..
+-r--r-----. 1 root qemu system_u:object_r:cert_t:s0 serverkey.pem
+</pre></div>
+</div>
+</section>
+<section id="la-configurarion-del-certificado-de-servidor-esta-ahora-completa">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">La configurarión del certificado de servidor, está ahora completa</a><a class="headerlink" href="#la-configurarion-del-certificado-de-servidor-esta-ahora-completa" title="Link to this heading"></a></h3>
+</section>
+<section id="sobreescribiendo-la-ruta-por-defecto">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Sobreescribiendo la ruta por defecto</a><a class="headerlink" href="#sobreescribiendo-la-ruta-por-defecto" title="Link to this heading"></a></h3>
+<p>Si es necesario que el archivo de <em>Certificado</em> y la <em>llave</em>, estén en otro lugar del servidor, deberá ajustarse mediante el archivo de configuaración <code class="docutils literal notranslate"><span class="pre">/etc/libvirt/libvirtd.conf</span></code>.</p>
+<p>Las dos variables son:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cert_file</span> <span class="o">=</span> <span class="s2">&quot;Full path to new Server Certificate location&quot;</span>
+<span class="n">key_file</span> <span class="o">=</span> <span class="s2">&quot;Full path to new Server Certificate Private Key location&quot;</span>
+</pre></div>
+</div>
+<p>La ruta debe ser encerrada entre comillas dobles <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>. Por ejemplo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cert_file</span> <span class="o">=</span> <span class="s2">&quot;/opt/libvirt/etc/pki/libvirt/servercert.pem&quot;</span>
+<span class="n">key_file</span> <span class="o">=</span> <span class="s2">&quot;/opt/libvirt/etc/pki/libvirt/private/serverkey.pem&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="lista-completa-del-proceso">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">Lista completa del proceso</a><a class="headerlink" href="#lista-completa-del-proceso" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Crear certificado de <strong>Autiridad de certificados(CA)</strong>.</p></li>
+<li><p>Crear certificado de servidor.</p></li>
+<li><p>Crear certificado de cliente.</p></li>
+<li><p>Configuración de <em>demonio</em> <strong>libvirt</strong>.</p></li>
+<li><p>Otras referencias.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2-CA.html" class="btn btn-neutral float-left" title="TLSCreateCACert" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../configuration/index.html" class="btn btn-neutral float-right" title="Sistemas Operativos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

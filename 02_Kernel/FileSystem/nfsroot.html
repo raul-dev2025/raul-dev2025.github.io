@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Montando el sistema de ficheros raíz, vía NFS(nfsroot) &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Qué es ramfs?" href="rams-rootfs-initramfs.html" />
+    <link rel="prev" title="El cliente NFS" href="Nfs/nfs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#filesystem">FileSystem</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Nfs/nfs.html">El cliente NFS</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Montando el sistema de ficheros raíz, vía NFS(nfsroot)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#activando-las-capacidades-de-nfs">Activando las capacidades de NFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linea-de-comando-del-kernel">Línea de comando del kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gestor-de-aranque">Gestor de aranque</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arranque-desde-un-disco-flexible-utilizando-syslinux">Arranque desde un disco flexible, utilizando syslinux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arranque-desde-un-cdrom-utilizando-isolinux">Arranque desde un cdrom, utilizando isolinux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#empleo-de-lilo">Empleo de LILO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uso-de-grub">Uso de GRUB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uso-de-lodlin">Uso de LODLIN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uso-de-una-rom-en-el-arranque">Uso de una ROM en el arranque</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uso-de-pxelinux">Uso de pxelinux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rams-rootfs-initramfs.html">Qué es ramfs?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tmpfs.html">Tmpfs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Montando el sistema de ficheros raíz, vía NFS(nfsroot)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/FileSystem/nfsroot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <nav class="contents local" id="tabla-de-contenidos" role="doc-toc">
+<p class="topic-title">Tabla de contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#montando-el-sistema-de-ficheros-raiz-via-nfs-nfsroot" id="id1">Montando el sistema de ficheros raíz, vía NFS(nfsroot)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#activando-las-capacidades-de-nfs" id="id2">Activando las capacidades de NFS</a></p></li>
+<li><p><a class="reference internal" href="#linea-de-comando-del-kernel" id="id3">Línea de comando del kernel</a></p></li>
+<li><p><a class="reference internal" href="#gestor-de-aranque" id="id4">Gestor de aranque</a></p></li>
+<li><p><a class="reference internal" href="#arranque-desde-un-disco-flexible-utilizando-syslinux" id="id5">Arranque desde un disco flexible, utilizando syslinux</a></p></li>
+<li><p><a class="reference internal" href="#arranque-desde-un-cdrom-utilizando-isolinux" id="id6">Arranque desde un cdrom, utilizando isolinux</a></p></li>
+<li><p><a class="reference internal" href="#empleo-de-lilo" id="id7">Empleo de LILO</a></p></li>
+<li><p><a class="reference internal" href="#uso-de-grub" id="id8">Uso de GRUB</a></p></li>
+<li><p><a class="reference internal" href="#uso-de-lodlin" id="id9">Uso de LODLIN</a></p></li>
+<li><p><a class="reference internal" href="#uso-de-una-rom-en-el-arranque" id="id10">Uso de una ROM en el arranque</a></p></li>
+<li><p><a class="reference internal" href="#uso-de-pxelinux" id="id11">Uso de pxelinux</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id12">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="montando-el-sistema-de-ficheros-raiz-via-nfs-nfsroot">
+<span id="nfsroot-1"></span><h1>Montando el sistema de ficheros raíz, vía NFS(nfsroot)<a class="headerlink" href="#montando-el-sistema-de-ficheros-raiz-via-nfs-nfsroot" title="Link to this heading"></a></h1>
+<p>Con objeto de utilizar un sistema sin disco de arranque -diskless system, como una <em>terminal para las X</em>, o un servidor de impresoras -por ejemplo, es necesario que el sistema de ficheros raíz, esté presente en un dispositivo “zero-disco”. Podría tratarse de <em>initramfs</em> -ver <code class="docutils literal notranslate"><span class="pre">rams-rootfs-initramfs.html</span></code>, un disco ram <code class="docutils literal notranslate"><span class="pre">initrd.html</span></code>, o un FS montado vía NFS. El siguiente texto, describe cómo usar NFS en un FS raíz. En adelante, el término “cliente” significa: <em>sistema sin disco de arranque</em> y, “server” significa: <em>NFS server</em>.</p>
+<section id="activando-las-capacidades-de-nfs">
+<span id="nfsroot-2"></span><h2>Activando las capacidades de NFS<a class="headerlink" href="#activando-las-capacidades-de-nfs" title="Link to this heading"></a></h2>
+<p>Para utilizar <em>nfsroot</em>, debe ser activada la característica NFS client support durante la configuración del kernel. Una vez hecho esto, la opción nfsroot aparecerá disponible, para ser selecionada después.</p>
+<p>Dentro de las opciones de red, podrá selecionarse el nivel de <em>autoconfiguración</em> del kernel, junto al tipo de soporte para la <em>autoconfiguración</em>. Es seguro activar todo en DHCP, BOOTP y RARP.</p>
+</section>
+<section id="linea-de-comando-del-kernel">
+<span id="nfsroot-3"></span><h2>Línea de comando del kernel<a class="headerlink" href="#linea-de-comando-del-kernel" title="Link to this heading"></a></h2>
+<p>Una vez el kernel haya sido cargado por el gestor de arranque -ver abajo, <em>debe decirse</em>, qué FS raíz usar. En el caso de <em>nfsroot</em>, dónde encontrar al <em>servidor</em> y el nombre del directorio utilizado para el montaje del raíz (<code class="docutils literal notranslate"><span class="pre">/</span></code>). Esto puede concretarse mediante el siguiente parámetro para la línea de comandos:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>root=/dev/nfs
+</pre></div>
+</div>
+<p>Es esto necesario para activar el <em>pseudo-dispositivo</em> NFS. Nótese que no se trata de un dispositivo real, sino de un sinónimo para <em>decir al kernel</em> el usar NFS, en lugar de dispositivo real.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>nfsroot=[&lt;server-ip&gt;:]&lt;root-dir&gt;[,&lt;nfs-options&gt;]
+</pre></div>
+</div>
+<p>Si el parámetro <code class="docutils literal notranslate"><span class="pre">nfsroot</span></code> NO es dado desde la línea de órdenes, será utilizado por defecto <code class="docutils literal notranslate"><span class="pre">/tftpboot/%s</span></code>.</p>
+<p>Especifica la dirección IP del servidor NFS. La dirección por defecto, es determinada por el parámetro <code class="docutils literal notranslate"><span class="pre">ip</span></code>, ver más abajo. Este parámetro permite utilizar distintos servidores, para la autoconfiguración IP y NFS.</p>
+<p>En el servidor, nombre del directorio para el montaje como raíz. Si existe un <em>objeto</em><code class="docutils literal notranslate"><span class="pre">%s</span></code> en la cadena, será reemplazado por una representacion ASCII, de la dirección IP del cliente.</p>
+<p>opciones nfs estandar. Todas las opciones son separadas por comas. Serán utilizados los siguiente valores por defecto: port = as given by server portmap daemon rsize = 4096 wsize = 4096 timeo = 7 retrans = 3 acregmin = 3 acregmax = 60 acdirmin = 30 acdirmax = 60 flags = hard, nointr, noposix, cto, ac</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ip=&lt;client-ip&gt;:&lt;server-ip&gt;:&lt;gw-ip&gt;:&lt;netmask&gt;:&lt;hostname&gt;:&lt;device&gt;:&lt;autoconf&gt;:
+     &lt;dns0-ip&gt;:&lt;dns1-ip&gt;:&lt;ntp0-ip&gt;
+</pre></div>
+</div>
+<p>El parámetro, indica al kernel cómo configurar la dirección IP del dispositivo. También cómo configurar la IP de la_tabla de ruta_. Fué originalmente llamada <em>nfsaddrs</em>, pero ahora, la configuración de la IP durante el arranque, funciona de manera independiente a NFS, por lo que cambió su nombre por “ip” y, el anterior nombre permanece como alias por razones de compatibilidad.</p>
+<p>Si es omitido este parámetro, desde la línea de comandos del kernel, todos los campos serán asumidos como vacíos y serán aplicados los valores por defecto, más abajo. En general, significa que el kernel intentará configurar todo, utilizando la autoconfiguración.</p>
+<p>El parámetro <code class="docutils literal notranslate"><span class="pre">&lt;autoconf&gt;</span></code>, puede aparecer sólo, como valor del parámetro <code class="docutils literal notranslate"><span class="pre">ip</span></code> -sin los carácteres <code class="docutils literal notranslate"><span class="pre">:</span></code> antes. Si el valor es <code class="docutils literal notranslate"><span class="pre">ip=off</span></code> o <code class="docutils literal notranslate"><span class="pre">ip=none</span></code>, la autoconfiguración no tomará lugar, al contrario, si lo hará. La forma habitual de utilizarlo es <code class="docutils literal notranslate"><span class="pre">ip=dhcp</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;client-ip&gt;</span></code> IP address of the client.</p>
+<blockquote>
+<div><p>Por defecto: determinado utilizando la autoconfiguración.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;server-ip&gt;</span></code> Dirección IP del servidor NFS. Si es utilizado RARP para determinar la dirección del cliente y, este parámetro <strong>no</strong> está vacío, sólo las respuestas desde el servidor especificado, serán aceptadas.</p>
+<p>Únicamente es requerido por <em>la raíz NFS</em> . Ésta autoconfiguración no será disparada si está omitida y, <em>la raíz NFS</em> no estuviese operando.</p>
+<p>El valor es exportado a <code class="docutils literal notranslate"><span class="pre">/proc/net/pnp</span></code> con el prefijo “bootserver”.
+Ver más abajo.</p>
+<p>Por defecto(Default): determinado mediante la autoconfiguración. Será utilizada la dirección de la autoconfiguración del servidor.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;gw-ip&gt;</span></code> Dirección IP de la puerta de enlace -gatewawy, si el servidor se encuentra en una <em>subnet</em> distinta.</p>
+<blockquote>
+<div><p>Por defecto: determinado utilizando la autoconfiguración.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;netmask&gt;</span></code> máscara de red, para la interfase de red local. Si no está especificada, la máscara será derivada desde la dirección IP del <em>cliente</em>, asumiendo el direccionamiento de clase? -classfull addressing.</p>
+<blockquote>
+<div><p>Por defecto: determinado utilizando la autoconfiguración.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;hostname&gt;</span></code> Nombre del cliente. Estando presente un <code class="docutils literal notranslate"><span class="pre">.</span></code> -punto, cualquier cosa delante del mismo, será utilizado como el nombre de máquina del cliente y, la <em>cadena</em> tras el punto, utilizado como su nombre de dominio NIS. Podría ser proporcionado mediante la autoconfiguración, pero su ausencia no <em>disparará</em> la autoconfiguración.
+De estar especificado y el DHCP en uso, el nombre de máquina provisto por el usuario -y nombre de dominio, será <em>enlazado</em> a una solicitud DHCP; acarreando la creación o actualización de un registro DNS, para el cliente.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ejemplo(fqdn/full qualified domain name): https fedoraproject . org
+\| \| \| protocolo maquina dominio
+
+
+Por defecto: determinado utilizando la autoconfiguración.
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;device&gt;</span></code> Nombre del dispositivo de red a utilizar.</p>
+<p>Por defecto: si el <em>host</em> sólo consta de un dispositivo, éste será utilizado. De cualquier otro modo, el dispositivo será determinado mediante la autoconfiguración. Realizado mediante el envío de la petición de autoconfiguración de todos los dipositivos y, utilizando aquel que primero reciba la respuesta.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;autoconf&gt;</span></code> Método de uso, para la autoconfiguración. En caso de opciones que especifiquen múltiples protocolos de autoconfiguración, las peticiones serán enviadas utilizando todos los protocolos y, usado el primero en responder.</p>
+<p>Serán utilizados aquellos protocolos que hayan sido compilados junto al kernel, independientemente del valor de la opción.</p>
+<p><code class="docutils literal notranslate"><span class="pre">off</span></code> o <code class="docutils literal notranslate"><span class="pre">none</span></code> apagado/ninguno. No utilizar la autoconfiguración -en su lugar determina una asignación estática de la IP.</p>
+<p><code class="docutils literal notranslate"><span class="pre">on</span></code> o <code class="docutils literal notranslate"><span class="pre">any</span></code> encendido/cualquiera. Utilizar cualquier protocolo disponible en el kernel.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>            (default)
+dhcp:       usa DHCP
+bootp:      usa BOOTP
+rarp:       usa RARP
+both:       usa ambos, BOOT y RARP, pero no DHCP
+            (opición obsoleta, mantenida por compatibilidad)
+</pre></div>
+</div>
+<p>Si es utilizado el DHCP, podrá emplearse el identificador de cliente con el siguiente formato: <code class="docutils literal notranslate"><span class="pre">ip=dhcp,client-id-type,client-id-value</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Default: any
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;dns0-ip&gt;</span></code> Dirección IP del servidor de nombres primario. Su valor será exportado a <code class="docutils literal notranslate"><span class="pre">/proc/net/pnp</span></code> con prefijo <code class="docutils literal notranslate"><span class="pre">nameserver</span></code> Ver más abajo.</p>
+<p>Por defecto: Ninguno, si no es utilizada la autoconfiguración; determinado automáticamente si es utilizada.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;dns1-ip&gt;</span></code> Dirección IP del servidor de nombres secundario. Ver <code class="docutils literal notranslate"><span class="pre">&lt;dns0-ip&gt;</span></code></p>
+<p>dirección IP para servidor del protocolo de red de tiempo -NTP Network Time Protocol. Su valor es exportado a <code class="docutils literal notranslate"><span class="pre">/proc/net/ipconfig/ntp_servers</span></code>, de otra forma no será usado. Ver abajo.</p>
+<p>Por defecto: Ninguno, si no es utilizada la autoconfiguración; determinado automáticamente si es utilizada.</p>
+<p>Después de que la configuración -tanto manual como guiada, sea completada, serán creados dos archivos con el siguiente formato; serán omitidas las líneas, de aquellos valores vacios:</p>
+<p><code class="docutils literal notranslate"><span class="pre">/proc/net/pnp</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#PROTO: &lt;DHCP|BOOTP|RARP|MANUAL&gt;    (depending on configuration method)
+domain &lt;dns-domain&gt;         (if autoconfigured, the DNS domain)
+nameserver &lt;dns0-ip&gt;            (primary name server IP)
+nameserver &lt;dns1-ip&gt;            (secondary name server IP)
+nameserver &lt;dns2-ip&gt;            (tertiary name server IP)
+bootserver &lt;server-ip&gt;          (NFS server IP)
+
+- /proc/net/ipconfig/ntp_servers:
+
+&lt;ntp0-ip&gt;               (NTP server IP)
+&lt;ntp1-ip&gt;               (NTP server IP)
+&lt;ntp2-ip&gt;               (NTP server IP)
+</pre></div>
+</div>
+<p>y (en <code class="docutils literal notranslate"><span class="pre">/proc/net/pnp</span></code>) y y (<code class="docutils literal notranslate"><span class="pre">en</span> <span class="pre">/proc/net/ipconfig/ntp_servers</span></code>) serán solicitados durante la autoconfiguración; no podrán ser especificados como parte del parámetro de la línea de órdenes <code class="docutils literal notranslate"><span class="pre">ip=</span></code>.</p>
+<p>Puesto que las opciones <em>domain</em> y <em>nameserver</em> son reconocidas por el <em>servidor</em> DNS, <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> es a menudo enlazado con <code class="docutils literal notranslate"><span class="pre">/proc/net/pnp</span></code> sobre sistemas que usen un NFS raíz.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>el kernel no sincronizará la <em>hora</em> del sistema con ningún servidor NTP descubierto; ya que es responsabilidad de un proceso en el <em>espacio de usuario</em> -ejemplo, un escrito -script <code class="docutils literal notranslate"><span class="pre">initrd/initramfs</span></code>, que pase la dirección IP listada en <code class="docutils literal notranslate"><span class="pre">/proc/net/ipconfig/ntp_servers</span></code> a un cliente NTP, antes de montar el FS raíz real sobre NFS.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">nfsrootdebug</span></code> Este parámetro activa la aparición de los mensajes de depuración en el <em>registro</em> kernel, durante el arranque, así, los administradores podrán verificar que las opciones correctas de montaje; dirección de servidor y, la ruta raíz, son pasadas al cliente NFS.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rdinit=&lt;executable</span> <span class="pre">file&gt;</span></code> Para especificar qué archivo contiene el programa que lanza la inicialización del sistema, los administradores pueden usar este parámetro de línea de órdenes. El volor por defecto, es <code class="docutils literal notranslate"><span class="pre">/init</span></code>. Si el archivo especificado existe y, el kernel puede ejecutarlo, los parámetros de la línea de comandos relacionados con FS raíz, incluido <code class="docutils literal notranslate"><span class="pre">nfsroot=</span></code>, son ignorados.</p>
+<p>Una descripción del proceso de montaje del FS raíz, puede encontrarse en:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Documentation/early-userspace/README
+</pre></div>
+</div>
+</section>
+<section id="gestor-de-aranque">
+<span id="nfsroot-4"></span><h2>Gestor de aranque<a class="headerlink" href="#gestor-de-aranque" title="Link to this heading"></a></h2>
+<p>Es posible utilizar distintas aproximaciones, para <em>cargar</em> el kernel en memoria. Dependiendo de los <em>recursos</em>, estarán disponibles los siguientes:</p>
+</section>
+<section id="arranque-desde-un-disco-flexible-utilizando-syslinux">
+<span id="nfsroot-5"></span><h2>Arranque desde un disco flexible, utilizando syslinux<a class="headerlink" href="#arranque-desde-un-disco-flexible-utilizando-syslinux" title="Link to this heading"></a></h2>
+<p>En la construcción de un kernel, una forma sencilla de crear un disco de arranque, que utilice syslinux, es emplear objetivos <code class="docutils literal notranslate"><span class="pre">make</span></code> con <code class="docutils literal notranslate"><span class="pre">zdisk</span></code> o <code class="docutils literal notranslate"><span class="pre">bzdisk</span></code>, los cuales usan <em>zmiage</em> y <em>bzimage</em>, respectivamente. Ambos objetivos, aceptan el parámetro <code class="docutils literal notranslate"><span class="pre">FDARGS</span></code>, utilizado también, para configurar la línea de órdenes.</p>
+<p>Ejemplo, make bzdisk FDARGS=“root=/dev/nfs”</p>
+<p><strong>Nota</strong>: el usuario, necesitará tener acceso al dispositivo de disco, <code class="docutils literal notranslate"><span class="pre">/dev/fd0</span></code> &gt; fd, file descriptor, descriptor de archivo.</p>
+<p>Para más información sobre <em>syslinux</em>, incluido cómo crear discos de arranque, con kernel <em>pre-fabricados</em>, ver <a class="reference external" href="http://syslinux.zytor.com/">http://syslinux.zytor.com/</a></p>
+<p><strong>n.d.t</strong>: anteriormente, fue posible escribir un kernel directamente sobre un disco flexible, utilizando <code class="docutils literal notranslate"><span class="pre">dd</span></code>, configurar el dispositivo de arranque con <code class="docutils literal notranslate"><span class="pre">rdev</span></code> y, arrancar por medio del disco resultante. Linux, ya no da soporte a este método.</p>
+</section>
+<section id="arranque-desde-un-cdrom-utilizando-isolinux">
+<span id="nfsroot-6"></span><h2>Arranque desde un cdrom, utilizando isolinux<a class="headerlink" href="#arranque-desde-un-cdrom-utilizando-isolinux" title="Link to this heading"></a></h2>
+<p>Durante la construcción de un kernel, una forma simple de crear un cdrom <em>arrancable</em>, que utilize isolinux, será el empleo del <em>objetivo isoimage</em>, el cuál parte de una imagen <code class="docutils literal notranslate"><span class="pre">bzimage</span></code>. Igual que zdisk y bzimage, este objetivo acepta el parámetro <code class="docutils literal notranslate"><span class="pre">FDARGS</span></code>, útil a la hora de configurar la línea de comandos del kernel.</p>
+<p>Ejemplo,</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>make isoimage FDARGS=&quot;root=/dev/nfs&quot;
+</pre></div>
+</div>
+<p>La imagen iso resultante, será <code class="docutils literal notranslate"><span class="pre">arch/&lt;ARCH&gt;/boot/image.iso</span></code>. Pudiéndo ser escrito a un cdrom, mediante diversas herramientas, incluida <code class="docutils literal notranslate"><span class="pre">cdrecord</span></code>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cdrecord dev=ATAPI:1,0,0 arch/x86/boot/image.iso
+</pre></div>
+</div>
+<p>Para más información sobre <em>isolinux</em>, incluido cómo crear discos de arranque, con kernel <em>pre-fabricados</em>, ver <a class="reference external" href="http://syslinux.zytor.com/">http://syslinux.zytor.com/</a></p>
+</section>
+<section id="empleo-de-lilo">
+<span id="nfsroot-7"></span><h2>Empleo de LILO<a class="headerlink" href="#empleo-de-lilo" title="Link to this heading"></a></h2>
+<p>Al utilizar LILO, todos los parámetros de línea necesários, serán especificados en el archivo de configuración, mediante la directiva <code class="docutils literal notranslate"><span class="pre">append=</span></code>.</p>
+<p>Sin embargo, la directiva <code class="docutils literal notranslate"><span class="pre">root=</span></code>, necesita crear un dispositivo <em>auxiliar</em> -dummy, el cuál podrá ser retirado, tras lanzar LILO.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mknod /dev/boot255 c 0 255
+</pre></div>
+</div>
+<p>Para más información sobre la configuración de LILO, por favor, referir su documentación.</p>
+</section>
+<section id="uso-de-grub">
+<span id="nfsroot-8"></span><h2>Uso de GRUB<a class="headerlink" href="#uso-de-grub" title="Link to this heading"></a></h2>
+<p>Con GRUB, los parámetros del kernel son simplemente <em>apendizados</em> tras las especificación del kernel: kernel</p>
+</section>
+<section id="uso-de-lodlin">
+<span id="nfsroot-9"></span><h2>Uso de LODLIN<a class="headerlink" href="#uso-de-lodlin" title="Link to this heading"></a></h2>
+<p>Loadlin puede ser utilizado para arrancar Linux desde el <em>prompt</em> de DOS, sin requerir un disco duro local, para el montaje del raíz. Esto no ha sido complétamente probado por los autores del documento, aunque en general, debería ser posible configurar la línea de comandos, similarmente a la configuración de LILO.</p>
+<p>Por favor, referir la documentación de loadlin, para más información.</p>
+</section>
+<section id="uso-de-una-rom-en-el-arranque">
+<span id="nfsroot-10"></span><h2>Uso de una ROM en el arranque<a class="headerlink" href="#uso-de-una-rom-en-el-arranque" title="Link to this heading"></a></h2>
+<p>Probablemente sea, la <em>forma elegante</em> de arrancar el sistema, sin disco. Desde una ROM, el kernel carga utilizando el protocolo TFTP. Los autores del documento, no han advertido ningún arranque <strong>no comercial</strong> de ROMs, que soporte el arranque de Linux sobre red. A pesar de esto, existen dos implementaciones libres, para una arranque ROM; netboot-nfs y etherboot, ambos disponibles en &lt;sunsite.unc.edu&gt;, igualmente, conteniendo todo lo necesario para el arranque de un cliente Linux, sin disco.</p>
+</section>
+<section id="uso-de-pxelinux">
+<span id="nfsroot-11"></span><h2>Uso de pxelinux<a class="headerlink" href="#uso-de-pxelinux" title="Link to this heading"></a></h2>
+<p>Pxelinux podría ser usado para arrancar linux mediante un gestor PXE, presente en la mayoría de tarjetas de red modernas.</p>
+<p>Al emplear pxelinux, la imagen del kernel es especificada con <code class="docutils literal notranslate"><span class="pre">kernel</span> <span class="pre">&lt;relative-path-below</span> <span class="pre">/tftpboot&gt;</span></code>. Los parámetros <em>nfsroot</em>, son pasados al kernel, añadiéndolos al final de la línea. Es habitual el uso de una cónsola en serie, junto a pxelinux, ver &lt;TerritorioLinux/kernel/Admin-guide/serialConsole.html&gt;</p>
+<p>Para más información sobre isolinux, incluido cómo crear discos de arranque, en un kernel pre-construido, ver <a class="reference external" href="http://syslinux.zytor.com/">http://syslinux.zytor.com/</a>.</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<span id="nfsroot-12"></span><h2>Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<p>El código <em>nfsroot</em> para el kernel y el soporte RARP, ha sido escrito por Gero Kuhlmann <a class="reference external" href="mailto:gero&#37;&#52;&#48;gkminix&#46;han&#46;de">gero<span>&#64;</span>gkminix<span>&#46;</span>han<span>&#46;</span>de</a>.</p>
+<p>El resto de código, para la capa de autoconficuración, ha sido escrito por Martin Mares <a class="reference external" href="mailto:mj&#37;&#52;&#48;atrey&#46;karlin&#46;mff&#46;cuni&#46;cz">mj<span>&#64;</span>atrey<span>&#46;</span>karlin<span>&#46;</span>mff<span>&#46;</span>cuni<span>&#46;</span>cz</a>.</p>
+<p>Con objeto de escribir la versión inicial nfsroot, me gustaría agradecer la ayuda a Jens-Uwe Mager <a class="reference external" href="mailto:jum&#37;&#52;&#48;anubis&#46;han&#46;de">jum<span>&#64;</span>anubis<span>&#46;</span>han<span>&#46;</span>de</a>.</p>
+<p>Written 1996 by Gero Kuhlmann <a class="reference external" href="mailto:gero&#37;&#52;&#48;gkminix&#46;han&#46;de">gero<span>&#64;</span>gkminix<span>&#46;</span>han<span>&#46;</span>de</a> Updated 1997 by Martin Mares <a class="reference external" href="mailto:mj&#37;&#52;&#48;atrey&#46;karlin&#46;mff&#46;cuni&#46;cz">mj<span>&#64;</span>atrey<span>&#46;</span>karlin<span>&#46;</span>mff<span>&#46;</span>cuni<span>&#46;</span>cz</a> Updated 2006 by Nico Schottelius <a class="reference external" href="mailto:nico-kernel-nfsroot&#37;&#52;&#48;schottelius&#46;org">nico-kernel-nfsroot<span>&#64;</span>schottelius<span>&#46;</span>org</a> Updated 2006 by Horms <a class="reference external" href="mailto:horms&#37;&#52;&#48;verge&#46;net&#46;au">horms<span>&#64;</span>verge<span>&#46;</span>net<span>&#46;</span>au</a> Updated 2018 by Chris Novakovic <a class="reference external" href="mailto:chris&#37;&#52;&#48;chrisn&#46;me&#46;uk">chris<span>&#64;</span>chrisn<span>&#46;</span>me<span>&#46;</span>uk</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Nfs/nfs.html" class="btn btn-neutral float-left" title="El cliente NFS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rams-rootfs-initramfs.html" class="btn btn-neutral float-right" title="Qué es ramfs?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

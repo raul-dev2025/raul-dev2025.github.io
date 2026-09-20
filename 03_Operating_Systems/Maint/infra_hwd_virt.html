@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe Técnico: Infraestructura de Hardware y Virtualización &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="04/11/2018" href="logGA-AX370.html" />
+    <link rel="prev" title="Informe de Consolidación: Entorno de Desarrollo" href="git-maint.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#boot">Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#certificados-tls">Certificados-TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#file-system">File System</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#maint">Maint</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="anacron-cron.html">Tareas programadas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootFail-CorruptLog.html">Informe de Incidencia: Error de Arranque y Corrupción de Log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cortaFuegos.html">Informe de Configuración de Firewall: Topología FreeIPA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cortaFuegos.html#informe-actualizado-de-firewall-topologia-freeipa">Informe Actualizado de Firewall: Topología FreeIPA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expiredTickets.html">Troubleshooting Report: IdM Authentication Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git-maint.html">Informe de Consolidación: Entorno de Desarrollo</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Informe Técnico: Infraestructura de Hardware y Virtualización</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#objetivo-tecnico">Objetivo Técnico</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuracion-de-hardware-y-arquitectura-de-datos">Configuración de Hardware y Arquitectura de Datos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#seguridad-y-gestion-del-firmware">Seguridad y Gestión del Firmware</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuracion-de-la-bios-amd-b550-series">Configuración de la BIOS (AMD B550 Series)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optimizacion-del-kernel-para-libvirt">Optimización del Kernel para Libvirt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#verificacion-de-la-configuracion">Verificación de la Configuración</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notas-adicionales">Notas Adicionales</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="logGA-AX370.html">04/11/2018</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logGA-AX370.html#erp-descripcion">ErP, descripción</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logGA-AX370.html#usb-hub">USB hub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintWS.html">Informe de Persistencia de Tiempo y Redundancia DNS en la WS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="message-Wall.html">Informe Técnico: Configuración de Avisos y Diagnóstico</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netVirtElem.html">MAPA DE INFRAESTRUCTURA DE RED (BRIDGE L2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qnap-regresion.html">Informe Técnico: Conflicto de Direccionamiento PCIe e IOMMU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEnvironment.html">Informe Técnico: Configuración de Monitorización VDO vía IdM/Sudo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Sistemas Operativos</a></li>
+      <li class="breadcrumb-item active">Informe Técnico: Infraestructura de Hardware y Virtualización</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/03_Operating_Systems/Maint/infra_hwd_virt.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-tecnico-infraestructura-de-hardware-y-virtualizacion">
+<h1>Informe Técnico: Infraestructura de Hardware y Virtualización<a class="headerlink" href="#informe-tecnico-infraestructura-de-hardware-y-virtualizacion" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Proyecto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Infraestructura del Hipervisor (RaulVilches.org)</p>
+</dd>
+<dt class="field-even">Hardware<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gigabyte B550 AORUS Elite V2 / Ryzen 5 5600</p>
+</dd>
+<dt class="field-odd">Estado<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Fase de Validación de Hardware y Seguridad del Firmware</p>
+</dd>
+</dl>
+<section id="objetivo-tecnico">
+<h2>Objetivo Técnico<a class="headerlink" href="#objetivo-tecnico" title="Link to this heading"></a></h2>
+<p>El objetivo de esta sesión ha sido la validación técnica y documentación de la infraestructura base para un entorno de <strong>virtualización (libvirt/KVM)</strong> que operará bajo una arquitectura híbrida de Workstation y Servidor. Se ha priorizado el aislamiento de recursos, la redundancia del firmware y la seguridad criptográfica mediante el análisis de líneas PCIe y la integración del módulo de plataforma segura (TPM).</p>
+</section>
+<section id="configuracion-de-hardware-y-arquitectura-de-datos">
+<h2>Configuración de Hardware y Arquitectura de Datos<a class="headerlink" href="#configuracion-de-hardware-y-arquitectura-de-datos" title="Link to this heading"></a></h2>
+<p>Se ha documentado la topología de buses para optimizar el rendimiento de las máquinas virtuales y evitar cuellos de botella en el acceso a almacenamiento y red:</p>
+<ul>
+<li><p><strong>Almacenamiento NVMe:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>M2A_CPU (Superior):</strong> Conectado directamente a la CPU (<strong>PCIe 4.0 x4</strong>). Destinado al SO anfitrión y VMs críticas.</p></li>
+<li><p><strong>M2B_SB (Inferior):</strong> Conectado al Chipset B550 (<strong>PCIe 3.0 x4</strong>).</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Conectividad de Red (Dual 2.5GbE):</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Interfaz integrada <strong>Realtek 2.5GbE</strong>.</p></li>
+<li><p>Tarjeta de red externa <strong>TP-Link TX201</strong> (PCIe) para segmentación de tráfico en <code class="docutils literal notranslate"><span class="pre">libvirt</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="seguridad-y-gestion-del-firmware">
+<h2>Seguridad y Gestión del Firmware<a class="headerlink" href="#seguridad-y-gestion-del-firmware" title="Link to this heading"></a></h2>
+<section id="justificacion-del-ftpm">
+<h3>Justificación del fTPM<a class="headerlink" href="#justificacion-del-ftpm" title="Link to this heading"></a></h3>
+<p>Se ha optado por el uso de <strong>AMD CPU fTPM</strong> integrado en el procesador <strong>Ryzen 5 5600</strong> en lugar de un módulo físico (dTPM). La justificación técnica radica en:</p>
+<ol class="arabic simple">
+<li><p><strong>Seguridad de Bus:</strong> El fTPM opera dentro del silicio, eliminando la vulnerabilidad de interceptación de claves (<em>sniffing</em>) en el bus SPI/LPC.</p></li>
+<li><p><strong>Escalabilidad:</strong> Capacidad para gestionar miles de rotaciones de claves OS, con opción de purga mediante <strong>Clear TPM</strong>.</p></li>
+</ol>
+</section>
+<section id="redundancia-y-recuperacion">
+<h3>Redundancia y Recuperación<a class="headerlink" href="#redundancia-y-recuperacion" title="Link to this heading"></a></h3>
+<p>A diferencia de la arquitectura DualBIOS física (GA-AX370), se documenta el sistema <strong>Q-Flash Plus</strong> para la recuperación ante desastres:</p>
+<ul class="simple">
+<li><p><strong>Controlador dedicado:</strong> Permite el flasheo del firmware sin presencia de CPU o RAM.</p></li>
+<li><p><strong>Indicador:</strong> Uso del LED de diagnóstico adyacente al botón BIOS en el panel trasero para monitoreo de escritura.</p></li>
+</ul>
+</section>
+</section>
+<section id="configuracion-de-la-bios-amd-b550-series">
+<h2>Configuración de la BIOS (AMD B550 Series)<a class="headerlink" href="#configuracion-de-la-bios-amd-b550-series" title="Link to this heading"></a></h2>
+<p>Para garantizar la funcionalidad del hipervisor, se deben aplicar los siguientes parámetros críticos:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parámetros críticos para habilitar la virtualización y el aislamiento</span>
+Tweaker<span class="w"> </span>&gt;<span class="w"> </span>Advanced<span class="w"> </span>CPU<span class="w"> </span>Settings<span class="w"> </span>&gt;<span class="w"> </span>SVM<span class="w"> </span><span class="nv">Mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>Enabled<span class="o">]</span>
+Settings<span class="w"> </span>&gt;<span class="w"> </span>Miscellaneous<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">IOMMU</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>Enabled<span class="o">]</span>
+Settings<span class="w"> </span>&gt;<span class="w"> </span>Miscellaneous<span class="w"> </span>&gt;<span class="w"> </span>AMD<span class="w"> </span>CPU<span class="w"> </span><span class="nv">fTPM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>Enabled<span class="o">]</span>
+Settings<span class="w"> </span>&gt;<span class="w"> </span>Platform<span class="w"> </span>Power<span class="w"> </span>&gt;<span class="w"> </span>AC<span class="w"> </span><span class="nv">BACK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>Always<span class="w"> </span>On<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="optimizacion-del-kernel-para-libvirt">
+<h2>Optimización del Kernel para Libvirt<a class="headerlink" href="#optimizacion-del-kernel-para-libvirt" title="Link to this heading"></a></h2>
+<p>Para el correcto funcionamiento de los grupos <strong>IOMMU</strong> y el passthrough de la NIC TP-Link, se requiere la modificación de los parámetros del grub en el anfitrión:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modificación del archivo /etc/default/grub</span>
+<span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;quiet splash amd_iommu=on iommu=pt&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Actualización de la configuración</span>
+sudo<span class="w"> </span>update-grub
+</pre></div>
+</div>
+</section>
+<section id="verificacion-de-la-configuracion">
+<h2>Verificación de la Configuración<a class="headerlink" href="#verificacion-de-la-configuracion" title="Link to this heading"></a></h2>
+<p>La comprobación de la integridad del sistema se basa en los siguientes puntos validados:</p>
+<ol class="arabic simple">
+<li><p><strong>Identificación de Pines:</strong> El <strong>Pin 1 (Positivo)</strong> de los conectores LED se ha identificado mediante la marca del <strong>triángulo</strong> grabado, asegurando la polaridad correcta en el cabezal <strong>12VGRB</strong> (Pin de 12V).</p></li>
+<li><p><strong>Post-Arranque:</strong> Verificación mediante el sistema de 4 LEDs de diagnóstico integrados en la placa (<strong>CPU, DRAM, VGA, BOOT</strong>).</p></li>
+<li><p><strong>Firmware:</strong> El LED del botón <strong>Q-Flash Plus</strong> debe cesar su parpadeo para confirmar una escritura exitosa antes de la primera inicialización del SO.</p></li>
+</ol>
+</section>
+<section id="notas-adicionales">
+<h2>Notas Adicionales<a class="headerlink" href="#notas-adicionales" title="Link to this heading"></a></h2>
+<p>Se ha descartado el uso de un módulo físico TPM de 14-1 pines por incompatibilidad dimensional con el nuevo cabezal de 12 pines de la serie B550, validándose que la funcionalidad de seguridad es idéntica en versión lógica (2.0) a través del firmware del procesador.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="git-maint.html" class="btn btn-neutral float-left" title="Informe de Consolidación: Entorno de Desarrollo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="logGA-AX370.html" class="btn btn-neutral float-right" title="04/11/2018" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

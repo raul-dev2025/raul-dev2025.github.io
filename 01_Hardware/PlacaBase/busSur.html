@@ -1,0 +1,220 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Southbridge &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Puentes de Bus PCI - PCI Bus Bridges" href="pciBusBridges.html" />
+    <link rel="prev" title="Northbridge" href="busNorte.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#placa-base">Placa Base</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Arquitectura de la Placa Base</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Arquitectura de la Placa Base</a></li>
+      <li class="breadcrumb-item active">Southbridge</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/PlacaBase/busSur.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="southbridge">
+<h1>Southbridge<a class="headerlink" href="#southbridge" title="Link to this heading"></a></h1>
+<p>El <strong>Southbridge</strong> (o <em>puente sur</em>) es el circuito integrado del conjunto de chips (<strong>chipset</strong>) que gestiona las funciones de entrada y salida (E/S) y los periféricos de menor velocidad en las arquitecturas de placas base tradicionales (como x86).</p>
+<p>También se conoce en las arquitecturas de Intel como <strong>ICH</strong> (<em>I/O Controller Hub</em>) o <strong>FCH</strong> (<em>Fusion Controller Hub</em>) en plataformas de AMD.</p>
+<section id="ubicacion-y-arquitectura">
+<h2>Ubicación y Arquitectura<a class="headerlink" href="#ubicacion-y-arquitectura" title="Link to this heading"></a></h2>
+<p>A diferencia del <strong>Northbridge</strong>, el Southbridge no está directamente conectado a la CPU. Todas las comunicaciones entre el Southbridge y el procesador deben atravesar obligatoriamente el Northbridge a través de un bus de interconexión dedicado de alta velocidad (como <em>Intel Hub Link</em>, <em>Direct Media Interface - DMI</em>, o <em>AMD A-Link</em>).</p>
+<p>Físicamente, se ubica en la parte inferior de la placa base, cerca de las ranuras de expansión PCI y los conectores de almacenamiento.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>+-------------------------------------------------+
+|                   CPU                           |
++-------------------------------------------------+
+                         |
+                Bus Frontal (FSB)
+                         |
++-------------------------------------------------+
+|               NORTHBRIDGE                       |
++-------------------------------------------------+
+                         |
+        Bus Inter-Chipset (DMI / Hub Link)
+                         |
++-------------------------------------------------+
+|               SOUTHBRIDGE (ICH)                 |
+|  - USB, SATA / IDE, Audio, Red                  |
+|  - LPC / SPI Bus (BIOS, Super I/O)              |
+|  - Reloj RTC / Memoria CMOS                     |
++-------------------------------------------------+
+</pre></div>
+</div>
+</section>
+<section id="funciones-integradas">
+<h2>Funciones Integradas<a class="headerlink" href="#funciones-integradas" title="Link to this heading"></a></h2>
+<p>El Southbridge centraliza el control de la mayoría de periféricos y subsistemas del equipo:</p>
+<ul class="simple">
+<li><p><strong>Controladores de Almacenamiento</strong>: Interfaces para discos duros y unidades ópticas (<strong>IDE / PATA</strong> y <strong>SATA</strong>), incluyendo soporte para arreglos <strong>RAID</strong> por hardware/firmware.</p></li>
+<li><p><strong>Buses de Periféricos de Alta y Media Velocidad</strong>: Controladores nativos para <strong>USB</strong> (UHCI, OHCI, EHCI y xHCI), tarjetas de red Ethernet (<strong>LAN</strong>) y audio de alta definición (<strong>HD Audio</strong> / AC’97).</p></li>
+<li><p><strong>Buses Legados y de Expansión</strong>: Gestión del bus <strong>PCI</strong> convencional, bus <strong>ISA</strong> (en arquitecturas antiguas) y la interfaz <strong>LPC</strong> (<em>Low Pin Count</em>) / <strong>SPI</strong> para comunicar con la memoria Flash de la <strong>BIOS/UEFI</strong> y el chip <strong>Super I/O</strong>.</p></li>
+<li><p><strong>Gestión de Energía y Reloj del Sistema</strong>:
+* Control de estados de energía ACPI (modos de suspensión <span class="math notranslate nohighlight">\(S_3, S_4, etc.\)</span>).
+* Reloj en tiempo real (<strong>RTC</strong>) y memoria sustentada por batería (<strong>CMOS</strong>).
+* Controlador de interrupciones programable (<strong>APIC</strong> / PIC) y controladores <strong>DMA</strong> tradicionales.</p></li>
+</ul>
+</section>
+<section id="evolucion-el-paso-hacia-el-platform-controller-hub-pch">
+<h2>Evolución: El Paso hacia el Platform Controller Hub (PCH)<a class="headerlink" href="#evolucion-el-paso-hacia-el-platform-controller-hub-pch" title="Link to this heading"></a></h2>
+<p>Al integrarse el controlador de memoria (IMC) y las líneas PCIe principales dentro del propio encapsulado de la CPU, la arquitectura de doble chip (Northbridge + Southbridge) quedó obsoleta.</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Evolución de la Arquitectura del Chipset</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 35.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Era</p></th>
+<th class="head"><p>Arquitectura</p></th>
+<th class="head"><p>Distribución de Funciones</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Tradicional</strong></p></td>
+<td><p>Northbridge + Southbridge</p></td>
+<td><p>Northbridge (Memoria y Gráficos) + Southbridge (E/S lentas).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Moderna</strong></p></td>
+<td><p>CPU + <strong>PCH / FCH</strong></p></td>
+<td><p>CPU (Memoria, PCIe x16) + PCH (Resto de E/S, SATA, USB, Red).</p></td>
+</tr>
+</tbody>
+</table>
+<p>En las plataformas modernas, el Southbridge ha absorbido las pocas funciones restantes del antiguo Northbridge para convertirse en un único chip denominado <strong>PCH</strong> (<em>Platform Controller Hub</em>) en Intel o <strong>FCH</strong> en AMD.</p>
+</section>
+<section id="referencias">
+<h2>Referencias<a class="headerlink" href="#referencias" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Southbridge_(computing)">Southbridge en Wikipedia</a></p></li>
+<li><p>Documentación técnica sobre la arquitectura de chipsets I/O Controller Hub (ICH) de Intel.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="busNorte.html" class="btn btn-neutral float-left" title="Northbridge" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pciBusBridges.html" class="btn btn-neutral float-right" title="Puentes de Bus PCI - PCI Bus Bridges" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

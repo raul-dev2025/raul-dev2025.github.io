@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PCI Express (PCIe) - Peripheral Component Interconnect Express &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Arquitectura de Bus ISA" href="busISA.html" />
+    <link rel="prev" title="Conventional PCI - Peripheral Component Interconnect" href="busPCI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#placa-base">Placa Base</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Arquitectura de la Placa Base</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Arquitectura de la Placa Base</a></li>
+      <li class="breadcrumb-item active">PCI Express (PCIe) - Peripheral Component Interconnect Express</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/PlacaBase/busPCIexpress.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pci-express-pcie-peripheral-component-interconnect-express">
+<h1>PCI Express (PCIe) - Peripheral Component Interconnect Express<a class="headerlink" href="#pci-express-pcie-peripheral-component-interconnect-express" title="Link to this heading"></a></h1>
+<p><strong>PCI Express</strong> (abreviado como <strong>PCIe</strong>) es un estándar de bus de expansión en serie de alta velocidad diseñado para reemplazar las arquitecturas de bus paralelo tradicionales como PCI, PCI-X y AGP.</p>
+<p>Mantiene la compatibilidad a nivel de software con el estándar PCI convencional, pero introduce una arquitectura física y de enlace radicalmente distinta basada en conexiones en serie punto a punto.</p>
+<section id="definicion-e-historia">
+<h2>Definición e Historia<a class="headerlink" href="#definicion-e-historia" title="Link to this heading"></a></h2>
+<p>Introducido originalmente en 2004 por el consorcio PCI-SIG (con contribuciones iniciales clave de Intel, Dell, HP e IBM bajo el nombre en clave <em>3GIO</em>), PCIe se convirtió en el estándar dominante para la interconexión de tarjetas gráficas, unidades de almacenamiento NVMe, tarjetas de red y otros periféricos de alto rendimiento.</p>
+<section id="diferencias-fundamentales-con-pci-tradicional">
+<h3>Diferencias Fundamentales con PCI Tradicional<a class="headerlink" href="#diferencias-fundamentales-con-pci-tradicional" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Topología Punto a Punto</strong>: Mientras que el bus PCI convencional comparte un conjunto de líneas de direcciones, datos y control entre todos los dispositivos (requiriendo arbitraje y limitando el tráfico a un único dispositivo a la vez), PCIe conecta cada dispositivo de forma directa e independiente con el <em>Root Complex</em> (nodo raíz).</p></li>
+<li><p><strong>Comunicación en Serie y Full-Duplex</strong>: PCI Express opera enviando paquetes de datos estructurados a través de pares diferenciales de transmisión y recepción independientes, lo que permite la transferencia simultánea de datos en ambas direcciones (<em>Full-Duplex</em>).</p></li>
+<li><p><strong>Capas del Protocolo</strong>: Las comunicaciones PCIe se dividen estrictamente en tres capas funcionales:
+* <strong>Capa de Transacción (*Transaction Layer*)</strong>: Construye y procesa los paquetes de solicitud y respuesta (<em>TLP - Transaction Layer Packets</em>).
+* <strong>Capa de Enlace de Datos (*Data Link Layer*)</strong>: Garantiza la integridad de los datos mediante códigos de comprobación de redundancia cíclica (<em>LCRC</em>) y emite acuses de recibo (<em>ACK/NAK</em>).
+* <strong>Capa Física (*Physical Layer*)</strong>: Se encarga del codificado eléctrico, la sincronización de reloj y la conversión paralelo/serie.</p></li>
+</ul>
+</section>
+</section>
+<section id="caracteristicas-principales">
+<h2>Características Principales<a class="headerlink" href="#caracteristicas-principales" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Ancho de Banda Escalar por Carriles (*Lanes*)</strong>: Los enlaces PCIe se componen de uno o varios carriles de datos duplex (denotados como <span class="math notranslate nohighlight">\(x1, x2, x4, x8, x16\)</span>).</p></li>
+<li><p><strong>Conexión en Caliente (*Hot-Plug*) Nativa</strong>: Soporta la inserción y extracción de dispositivos en tiempo de ejecución sin necesidad de reiniciar el sistema.</p></li>
+<li><p><strong>Gestión Avanzada de Errores (AER)</strong>: Integra la especificación <em>Advanced Error Reporting</em>, permitiendo detectar, clasificar e informar de errores de bus de forma granular al sistema operativo.</p></li>
+<li><p><strong>Virtualización de E/S (SR-IOV)</strong>: Permite que un único dispositivo físico se presente como múltiples entidades virtuales independientes (<em>Virtual Functions</em>) ante el hipervisor.</p></li>
+</ul>
+</section>
+<section id="evolucion-de-versiones-y-rendimiento">
+<h2>Evolución de Versiones y Rendimiento<a class="headerlink" href="#evolucion-de-versiones-y-rendimiento" title="Link to this heading"></a></h2>
+<p>Cada generación de PCI Express duplica aproximadamente la tasa de transferencia de la versión anterior mediante el incremento en la frecuencia de reloj y la optimización de los codificados de línea (transición del esquema 8b/10b al 128b/130b o PAM4):</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Comparativa de Generaciones PCI Express</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 22.0%" />
+<col style="width: 23.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Generación</p></th>
+<th class="head"><p>Año de Lanzamiento</p></th>
+<th class="head"><p>Frecuencia (<em>Transfer Rate</em>)</p></th>
+<th class="head"><p>Rendimiento x1 (Por dirección)</p></th>
+<th class="head"><p>Rendimiento x16 (Por dirección)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>PCIe 1.0</strong></p></td>
+<td><p>2004</p></td>
+<td><p>2.5 GT/s</p></td>
+<td><p>250 MB/s</p></td>
+<td><p>4.0 GB/s</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>PCIe 2.0</strong></p></td>
+<td><p>2007</p></td>
+<td><p>5.0 GT/s</p></td>
+<td><p>500 MB/s</p></td>
+<td><p>8.0 GB/s</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>PCIe 3.0</strong></p></td>
+<td><p>2010</p></td>
+<td><p>8.0 GT/s</p></td>
+<td><p>985 MB/s</p></td>
+<td><p>15.75 GB/s</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>PCIe 4.0</strong></p></td>
+<td><p>2017</p></td>
+<td><p>16.0 GT/s</p></td>
+<td><p>1.969 GB/s</p></td>
+<td><p>31.51 GB/s</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>PCIe 5.0</strong></p></td>
+<td><p>2019</p></td>
+<td><p>32.0 GT/s</p></td>
+<td><p>3.938 GB/s</p></td>
+<td><p>63.03 GB/s</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>PCIe 6.0</strong></p></td>
+<td><p>2022</p></td>
+<td><p>64.0 GT/s</p></td>
+<td><p>7.875 GB/s</p></td>
+<td><p>126.0 GB/s</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="factor-de-forma-y-compatibilidad-fisica">
+<h2>Factor de Forma y Compatibilidad Física<a class="headerlink" href="#factor-de-forma-y-compatibilidad-fisica" title="Link to this heading"></a></h2>
+<p>Las ranuras de expansión físicas están clasificadas según su número de carriles (denotados como <span class="math notranslate nohighlight">\(x1, x4, x8, x16\)</span>). Un dispositivo con menor número de carriles puede instalarse mecánicamente en un zócalo con mayor número de carriles (<em>up-plugging</em>) y funcionará al máximo de carriles que compartan.</p>
+<p>Además del formato de tarjeta de expansión clásico de escritorio, la tecnología PCIe actúa como bus físico subyacente en diversos factores de forma modernos:</p>
+<ul class="simple">
+<li><p><strong>M.2 (NGFF)</strong>: Para unidades SSD de alto rendimiento (<em>NVMe</em>).</p></li>
+<li><p><strong>U.2 / U.3 / EDSFF</strong>: Estándares de almacenamiento conectables en caliente para servidores.</p></li>
+<li><p><strong>ExpressCard, XQD y Thunderbolt</strong>: Interfaces externas portátiles de alta velocidad.</p></li>
+</ul>
+<section id="paralelismo-con-los-protocolos-de-red-modelo-por-capas">
+<h3>Paralelismo con los Protocolos de Red (Modelo por Capas)<a class="headerlink" href="#paralelismo-con-los-protocolos-de-red-modelo-por-capas" title="Link to this heading"></a></h3>
+<p>El diseño de PCI Express se inspira directamente en las redes de conmutación de paquetes (como Ethernet o TCP/IP). En lugar de gestionar señales eléctricas continuas en un bus compartido, PCIe fragmenta la información en paquetes (<em>Transaction Layer Packets - TLP</em>) y la transmite a través de una pila de tres capas:</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Analogía entre la Pila PCIe y el Modelo de Redes (OSI/TCP-IP)</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 35.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Capa PCIe</p></th>
+<th class="head"><p>Función en PCIe</p></th>
+<th class="head"><p>Equivalente en Redes (OSI/TCP-IP)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Transaction Layer</strong></p></td>
+<td><p>Construye peticiones de lectura/escritura (TLPs), direcciona la memoria y gestiona el flujo de crédito (<em>Flow Control</em>).</p></td>
+<td><p><strong>Capa de Aplicación / Transporte</strong> (gestión de mensajes y control de flujo).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Data Link Layer</strong></p></td>
+<td><p>Garantiza la entrega punto a punto mediante secuencias, cálculo de <strong>LCRC</strong> y retransmisión mediante acuses de recibo (<strong>ACK/NAK</strong>).</p></td>
+<td><p><strong>Capa de Enlace de Datos</strong> (ej. tramas Ethernet, cálculo de FCS, control de errores).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Physical Layer</strong></p></td>
+<td><p>Convierte los datos paralelos en serie, codifica la línea (ej. 128b/130b), sincroniza el reloj y transmite por pares diferenciales.</p></td>
+<td><p><strong>Capa Física</strong> (señalización eléctrica/óptica, codificación de línea y conectores).</p></td>
+</tr>
+</tbody>
+</table>
+<p>Esta estructura basada en paquetes le otorga a PCIe las mismas ventajas de fiabilidad que a las redes modernas: si un paquete se corrompe por ruido térmico o interferencia electromagnética en el enlace físico, la <strong>Capa de Enlace de Datos</strong> detecta el fallo mediante el chequeo LCRC y solicita automáticamente la retransmisión del paquete sin que la CPU ni la aplicación tengan que intervenir.</p>
+</section>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2>Referencias y Agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/PCI_Express">PCI Express en Wikipedia</a></p></li>
+<li><p>Especificaciones oficiales publicadas por el <a class="reference external" href="https://pcisig.com/">PCI-SIG</a>.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="busPCI.html" class="btn btn-neutral float-left" title="Conventional PCI - Peripheral Component Interconnect" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="busISA.html" class="btn btn-neutral float-right" title="Arquitectura de Bus ISA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

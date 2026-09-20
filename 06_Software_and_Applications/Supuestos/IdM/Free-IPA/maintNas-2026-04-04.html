@@ -1,0 +1,225 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe de Actualización de Infraestructura: Nodo NAS (DSM) &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Diseño de Infraestructura IdM" href="planingIdM.html" />
+    <link rel="prev" title="Informe de Incidencia: Fallo de Autenticación Kerberos (KDC)" href="kdc-maint.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#idm-configuracion">IdM - Configuracion</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Implementación de IdM Privado</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#documentos-de-implementacion">Documentos de Implementación</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Implementación de IdM Privado</a></li>
+      <li class="breadcrumb-item active">Informe de Actualización de Infraestructura: Nodo NAS (DSM)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/06_Software_and_Applications/Supuestos/IdM/Free-IPA/maintNas-2026-04-04.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-de-actualizacion-de-infraestructura-nodo-nas-dsm">
+<h1>Informe de Actualización de Infraestructura: Nodo NAS (DSM)<a class="headerlink" href="#informe-de-actualizacion-de-infraestructura-nodo-nas-dsm" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>04 de abril de 2026</p>
+</dd>
+<dt class="field-even">Proyecto<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mantenimiento y Redundancia IdM (FreeIPA)</p>
+</dd>
+<dt class="field-odd">Responsable<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Administrador de Sistemas</p>
+</dd>
+<dt class="field-even">Estado<span class="colon">:</span></dt>
+<dd class="field-even"><p>Completado con éxito</p>
+</dd>
+</dl>
+<section id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>Este informe detalla el proceso de actualización del sistema operativo del host Synology DS218+ y la posterior validación de la réplica de identidad (IdM) alojada en el mismo. El objetivo principal era realizar el salto de versión de DSM garantizando la persistencia de la hora del sistema (afectada por fallo físico de pila CMOS) y la integridad de los datos de réplica.</p>
+</section>
+<section id="configuracion-del-host-nas">
+<h2>Configuración del Host (NAS)<a class="headerlink" href="#configuracion-del-host-nas" title="Link to this heading"></a></h2>
+<section id="actualizacion-de-software">
+<h3>Actualización de Software<a class="headerlink" href="#actualizacion-de-software" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Versión Origen:</strong> DSM 7.0.1-42218 Update 7</p></li>
+<li><p><strong>Versión Destino:</strong> DSM 7.1.1-42962 Update 9</p></li>
+<li><p><strong>Paquetes Reparados:</strong> Virtual Machine Manager (VMM) migrado a la nueva arquitectura.</p></li>
+</ul>
+</section>
+<section id="mitigacion-de-errores-de-tiempo-pila-cmos">
+<h3>Mitigación de Errores de Tiempo (Pila CMOS)<a class="headerlink" href="#mitigacion-de-errores-de-tiempo-pila-cmos" title="Link to this heading"></a></h3>
+<p>Para evitar desincronizaciones de Kerberos en el arranque, se ha validado la siguiente configuración de red en el NAS:</p>
+<ul class="simple">
+<li><p><strong>DNS Preferido:</strong> 192.168.17.39 (Maestro IdM)</p></li>
+<li><p><strong>DNS Alternativo:</strong> 1.1.1.1 (Cloudflare) - <em>Garantiza sincronización NTP externa si las VMs están apagadas.</em></p></li>
+</ul>
+</section>
+</section>
+<section id="gestion-de-maquina-virtual-ipa02">
+<h2>Gestión de Máquina Virtual (ipa02)<a class="headerlink" href="#gestion-de-maquina-virtual-ipa02" title="Link to this heading"></a></h2>
+<section id="proceso-de-snapshot-e-integridad">
+<h3>Proceso de Snapshot e Integridad<a class="headerlink" href="#proceso-de-snapshot-e-integridad" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Se realizó una <strong>Snapshot en frío</strong> denominada <code class="docutils literal notranslate"><span class="pre">Pre-DSM_7.1.1_Update9_Sync_OK</span></code>.</p></li>
+<li><p>Tras la actualización del host, se procedió al borrado de snapshots antiguas para consolidar el rendimiento del disco virtual.</p></li>
+<li><p>Validación del servicio IdM mediante comandos internos:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ipactl</span> <span class="pre">status</span></code>: Todos los servicios en estado <strong>RUNNING</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ipa-replica-manage</span> <span class="pre">list-ruv</span></code>: Sincronización de vectores confirmada entre Maestro y Réplica.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="seguridad-y-backup">
+<h2>Seguridad y Backup<a class="headerlink" href="#seguridad-y-backup" title="Link to this heading"></a></h2>
+<section id="mantenimiento-de-credenciales">
+<h3>Mantenimiento de Credenciales<a class="headerlink" href="#mantenimiento-de-credenciales" title="Link to this heading"></a></h3>
+<p>Se ha realizado un reset manual de la contraseña del <strong>Directory Manager (DM)</strong> mediante la edición directa del archivo <code class="docutils literal notranslate"><span class="pre">dse.ldif</span></code> (hash SSHA512) y reinicio del servicio <code class="docutils literal notranslate"><span class="pre">dirsrv</span></code>, recuperando el acceso total al motor LDAP.</p>
+</section>
+<section id="exportacion-de-respaldo-drp">
+<h3>Exportación de Respaldo (DRP)<a class="headerlink" href="#exportacion-de-respaldo-drp" title="Link to this heading"></a></h3>
+<p>Se ha generado una exportación completa de la VM en formato <strong>OVA</strong>:</p>
+<ul class="simple">
+<li><p><strong>Archivo:</strong> <code class="docutils literal notranslate"><span class="pre">ipa02.raulvilchez.org.ova</span></code></p></li>
+<li><p><strong>Tamaño:</strong> 1.68 GB</p></li>
+<li><p><strong>Ubicación:</strong> Almacenamiento optimizado <strong>VDO</strong> en la Estación de Trabajo (WS).</p></li>
+</ul>
+</section>
+</section>
+<section id="conclusiones">
+<h2>Conclusiones<a class="headerlink" href="#conclusiones" title="Link to this heading"></a></h2>
+<p>La infraestructura se encuentra actualmente en un estado óptimo de producción. Se ha logrado la redundancia total del servicio de DNS/Identidad y se dispone de un plan de recuperación ante desastres (DRP) verificado y almacenado externamente.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Se recomienda mantener el DNS 1.1.1.1 como alternativo en el NAS para mitigar permanentemente el fallo de la pila física en los reinicios programados.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="kdc-maint.html" class="btn btn-neutral float-left" title="Informe de Incidencia: Fallo de Autenticación Kerberos (KDC)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="planingIdM.html" class="btn btn-neutral float-right" title="Diseño de Infraestructura IdM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

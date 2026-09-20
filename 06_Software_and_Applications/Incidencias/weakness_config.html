@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Puntos Débles Detectados en la Configuración de Autotools &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tercera Parte" href="../office/apuntesRaulV-v3.html" />
+    <link rel="prev" title="Incidencia de Infraestructura KVM: Error TPM-WMI 1801" href="incidencia-win10-tpm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#incidencias">Incidencias</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="incidencia-win10-tpm.html">Incidencia de Infraestructura KVM: Error TPM-WMI 1801</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Puntos Débles Detectados en la Configuración de Autotools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cabeceras-faltantes-missing-headers">Cabeceras Faltantes (<em>Missing Headers</em>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#estructuras-de-datos-ausentes-missing-structs">Estructuras de Datos Ausentes (<em>Missing Structs</em>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#soporte-para-cuotas-xfs">Soporte para Cuotas XFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#caracteristicas-del-kernel">Características del Kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#librerias-de-sistema">Librerías de Sistema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuracion-de-selinux-y-capacidades">Configuración de SELinux y Capacidades</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ajustes-en-subdirectorios-utils-ffsb-6-0-rc2">Ajustes en Subdirectorios (<code class="docutils literal notranslate"><span class="pre">utils/ffsb-6.0-rc2</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recomendaciones-y-resumen-de-acciones">Recomendaciones y Resumen de Acciones</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#idm-configuracion">IdM - Configuracion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+      <li class="breadcrumb-item active">Puntos Débles Detectados en la Configuración de Autotools</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/06_Software_and_Applications/Incidencias/weakness_config.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="puntos-debles-detectados-en-la-configuracion-de-autotools">
+<h1>Puntos Débles Detectados en la Configuración de Autotools<a class="headerlink" href="#puntos-debles-detectados-en-la-configuracion-de-autotools" title="Link to this heading"></a></h1>
+<p>Aunque los registros de ejecución del script <code class="docutils literal notranslate"><span class="pre">configure</span></code> indican una fase de preparación exitosa, existen diversos puntos débiles y áreas de atención que podrían generar advertencias o fallos durante la fase de compilación o ejecución.</p>
+<section id="cabeceras-faltantes-missing-headers">
+<h2>Cabeceras Faltantes (<em>Missing Headers</em>)<a class="headerlink" href="#cabeceras-faltantes-missing-headers" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>``dmapi.h``</strong>: No encontrada. Cabecera asociada a la API de gestión de datos (<em>Data Management API</em>), utilizada para gestión de almacenamiento jerárquico (HSM) en sistemas de archivos como XFS.</p>
+<ul>
+<li><p><em>Acción</em>: Si se requiere soporte DMAPI, instale el paquete de desarrollo correspondiente (por ejemplo, <code class="docutils literal notranslate"><span class="pre">libdmapi-devel</span></code>).</p></li>
+</ul>
+</li>
+<li><p><strong>``mm.h``</strong>: No encontrada. Relacionada con operaciones de gestión de memoria a bajo nivel.</p>
+<ul>
+<li><p><em>Acción</em>: Verificar si la funcionalidad solicitada requiere cabeceras internas del kernel instaladas.</p></li>
+</ul>
+</li>
+<li><p><strong>``linux/module.h``</strong>: No encontrada. Indica la ausencia de soporte o cabeceras para la compilación de módulos del kernel.</p>
+<ul>
+<li><p><em>Acción</em>: Instalar las cabeceras del kernel (paquete <code class="docutils literal notranslate"><span class="pre">kernel-devel</span></code> o <code class="docutils literal notranslate"><span class="pre">kernel-headers</span></code>).</p></li>
+</ul>
+</li>
+<li><p><strong>``sys/jfsdmapi.h``</strong>: No encontrada. Asociada al sistema de archivos JFS.</p>
+<ul>
+<li><p><em>Acción</em>: Instalar los paquetes de desarrollo para JFS en caso de requerir dicho soporte.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="estructuras-de-datos-ausentes-missing-structs">
+<h2>Estructuras de Datos Ausentes (<em>Missing Structs</em>)<a class="headerlink" href="#estructuras-de-datos-ausentes-missing-structs" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>``struct user_regs_struct``</strong>: No encontrada. Se utiliza para depuración e inspección de procesos a bajo nivel mediante <code class="docutils literal notranslate"><span class="pre">ptrace</span></code>.</p>
+<ul>
+<li><p><em>Acción</em>: Instalar los paquetes de cabeceras del sistema (habitualmente definidos en <code class="docutils literal notranslate"><span class="pre">&lt;sys/user.h&gt;</span></code> o <code class="docutils literal notranslate"><span class="pre">&lt;sys/reg.h&gt;</span></code>).</p></li>
+</ul>
+</li>
+<li><p><strong>``struct ptrace_peeksiginfo_args``</strong>: No encontrada. Requerida para inspección avanzada de señales con <code class="docutils literal notranslate"><span class="pre">ptrace</span></code>.</p>
+<ul>
+<li><p><em>Acción</em>: Asegurar la presencia de cabeceras de kernel actualizadas.</p></li>
+</ul>
+</li>
+<li><p><strong>``struct signalfd_siginfo.signo``</strong>: No encontrada. El script ha detectado el campo alternativo <code class="docutils literal notranslate"><span class="pre">ssi_signo</span></code>, lo que podría generar incompatibilidades si el código fuente exige expresamente el nombre del campo <code class="docutils literal notranslate"><span class="pre">signo</span></code>.</p></li>
+</ul>
+</section>
+<section id="soporte-para-cuotas-xfs">
+<h2>Soporte para Cuotas XFS<a class="headerlink" href="#soporte-para-cuotas-xfs" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>``xfs/xqm.h``</strong>: No encontrada. Cabecera necesaria para la gestión de cuotas de disco en sistemas de archivos XFS.</p>
+<ul>
+<li><p><em>Acción</em>: Instalar el paquete de desarrollo de XFS (por ejemplo, <code class="docutils literal notranslate"><span class="pre">xfsprogs-devel</span></code>).</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="caracteristicas-del-kernel">
+<h2>Características del Kernel<a class="headerlink" href="#caracteristicas-del-kernel" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Llamada a sistema ``clone()`` (7 argumentos)</strong>: Soportada. Sin embargo, la firma y comportamiento pueden fluctuar en función de la versión del kernel.</p></li>
+<li><p><strong>Mecanismo ``MREMAP_FIXED``</strong>: Presente. Permite el remapeo de rangos de memoria fija, sujeto al nivel de soporte del kernel en tiempo de ejecución.</p></li>
+</ul>
+</section>
+<section id="librerias-de-sistema">
+<h2>Librerías de Sistema<a class="headerlink" href="#librerias-de-sistema" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>``libaio``</strong>: Se han detectado <code class="docutils literal notranslate"><span class="pre">libaio.h</span></code> e <code class="docutils literal notranslate"><span class="pre">io_setup</span></code>, junto con la función <code class="docutils literal notranslate"><span class="pre">io_set_eventfd</span></code>. Es relevante comprobar que la versión instalada sea reciente para evitar fallos de enlace.</p></li>
+<li><p><strong>``libnuma``</strong>: Se han localizado los símbolos <code class="docutils literal notranslate"><span class="pre">numa_alloc_onnode</span></code>, <code class="docutils literal notranslate"><span class="pre">numa_move_pages</span></code> y <code class="docutils literal notranslate"><span class="pre">numa_available</span></code>. La efectividad de estas llamadas depende del soporte NUMA en el hardware y kernel subyacentes.</p></li>
+</ul>
+</section>
+<section id="configuracion-de-selinux-y-capacidades">
+<h2>Configuración de SELinux y Capacidades<a class="headerlink" href="#configuracion-de-selinux-y-capacidades" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>SELinux</strong>: Se detectó <code class="docutils literal notranslate"><span class="pre">is_selinux_enabled</span></code> en la librería <code class="docutils literal notranslate"><span class="pre">libselinux</span></code>. Si la política del sistema no está correctamente configurada, se pueden producir denegaciones en tiempo de ejecución.</p></li>
+<li><p><strong>Capacidades (Capabilities)</strong>: Se confirmaron las macros <code class="docutils literal notranslate"><span class="pre">PR_CAPBSET_DROP</span></code> y <code class="docutils literal notranslate"><span class="pre">PR_CAPBSET_READ</span></code>. Modelos de seguridad restrictivos a nivel de kernel podrían limitar estas operaciones.</p></li>
+</ul>
+</section>
+<section id="ajustes-en-subdirectorios-utils-ffsb-6-0-rc2">
+<h2>Ajustes en Subdirectorios (<code class="docutils literal notranslate"><span class="pre">utils/ffsb-6.0-rc2</span></code>)<a class="headerlink" href="#ajustes-en-subdirectorios-utils-ffsb-6-0-rc2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>``sys/limits.h``</strong>: No encontrada.</p></li>
+<li><p><strong>Funciones ``lrand48_r`` y ``srand48_r``</strong>: Detectadas. Tenga en cuenta que la seguridad en entornos multihilo de estas funciones varía entre implementaciones de la <code class="docutils literal notranslate"><span class="pre">glibc</span></code>.</p></li>
+</ul>
+</section>
+<section id="recomendaciones-y-resumen-de-acciones">
+<h2>Recomendaciones y Resumen de Acciones<a class="headerlink" href="#recomendaciones-y-resumen-de-acciones" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Instalación de Cabeceras</strong>: Proveer los paquetes conteniendo <code class="docutils literal notranslate"><span class="pre">dmapi.h</span></code>, <code class="docutils literal notranslate"><span class="pre">linux/module.h</span></code> y <code class="docutils literal notranslate"><span class="pre">xfs/xqm.h</span></code>.</p></li>
+<li><p><strong>Validación del Kernel</strong>: Verificar la compatibilidad de llamadas como <code class="docutils literal notranslate"><span class="pre">clone()</span></code> y las estructuras de seguimiento de <code class="docutils literal notranslate"><span class="pre">ptrace</span></code>.</p></li>
+<li><p><strong>Actualización de Librerías</strong>: Mantener actualizados los paquetes <code class="docutils literal notranslate"><span class="pre">libaio-devel</span></code>, <code class="docutils literal notranslate"><span class="pre">numactl-devel</span></code> y <code class="docutils literal notranslate"><span class="pre">libselinux-devel</span></code>.</p></li>
+<li><p><strong>Verificación de Entorno</strong>: Confirmar la correcta activación de SELinux y las cuotas XFS en el sistema operativo host.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="incidencia-win10-tpm.html" class="btn btn-neutral float-left" title="Incidencia de Infraestructura KVM: Error TPM-WMI 1801" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../office/apuntesRaulV-v3.html" class="btn btn-neutral float-right" title="Tercera Parte" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

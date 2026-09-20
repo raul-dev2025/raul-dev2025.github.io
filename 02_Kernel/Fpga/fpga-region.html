@@ -1,0 +1,479 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FPGA Enlaces de zona para el DT &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Inpunt" href="../Input/input.html" />
+    <link rel="prev" title="Gestor FPGA" href="fpga-mgr.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#fpga">Fpga</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="fpga-mgr.html">Gestor FPGA</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">FPGA Enlaces de <em>zona</em> para el DT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#terminologia">Terminología</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#secuencia">Secuencia</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zona-fpga">Zona FPGA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modelos-de-uso-soportados">Modelos de uso soportados</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ejemplo-de-arbol-de-dispositivo">Ejemplo de <em>árbol de dispositivo</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#restricciones">Restricciones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">FPGA Enlaces de <em>zona</em> para el DT</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/Fpga/fpga-region.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fpga-enlaces-de-zona-para-el-dt">
+<h1><a class="toc-backref" href="#id3" role="doc-backlink">FPGA Enlaces de <em>zona</em> para el DT</a><a class="headerlink" href="#fpga-enlaces-de-zona-para-el-dt" title="Link to this heading"></a></h1>
+<p><strong>(Region Device Tree Bindings)</strong></p>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#fpga-enlaces-de-zona-para-el-dt" id="id3">FPGA Enlaces de <em>zona</em> para el DT</a></p>
+<ul>
+<li><p><a class="reference internal" href="#introduccion" id="id4">Introducción</a></p></li>
+<li><p><a class="reference internal" href="#terminologia" id="id5">Terminología</a></p></li>
+<li><p><a class="reference internal" href="#secuencia" id="id6">Secuencia</a></p></li>
+<li><p><a class="reference internal" href="#zona-fpga" id="id7">Zona FPGA</a></p></li>
+<li><p><a class="reference internal" href="#modelos-de-uso-soportados" id="id8">Modelos de uso soportados</a></p></li>
+<li><p><a class="reference internal" href="#ejemplo-de-arbol-de-dispositivo" id="id9">Ejemplo de <em>árbol de dispositivo</em></a></p></li>
+<li><p><a class="reference internal" href="#restricciones" id="id10">Restricciones</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id11">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="introduccion">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Introducción</a><a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>Las <em>regiones</em> FPGA, representan a FPGAs y a zonas de reconfiguración parcial del FPGA, en el árbol de dispositivo. Las regiones FPGA, proporcionan una manera de programar FPGAs <em>bajo el control del DT</em>.</p>
+<p>Este documento de <em>vinculaciones</em> al <em>DT</em>, señala algunos de los puntos más importantes sobre el uso del FPGA y, trata de incluir la terminología utilizada por los fabricantes de tales dispositivos FPGA. No es un reemplazo a las especificaciones de fabricante, en cuanto al uso del FPGA.</p>
+</section>
+<section id="terminologia">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Terminología</a><a class="headerlink" href="#terminologia" title="Link to this heading"></a></h2>
+<p><strong>Reconfiguración completa</strong> - Es programado el fpga, énteramente.</p>
+<p><strong>Remconfiguración parcial</strong> <code class="docutils literal notranslate"><span class="pre">PR</span></code> - Es reprogramada una sección FPGA, mientra el resto, no se ve afectada. - No todas las FPGAs soportan <code class="docutils literal notranslate"><span class="pre">PR</span></code>.</p>
+<p><strong>Región de Reconfiguración Parcial</strong> <code class="docutils literal notranslate"><span class="pre">PRR</span></code> También llamada “partición reconfigurable”. Un <code class="docutils literal notranslate"><span class="pre">PRR</span></code> es una sección específica de una FPGA, reservada para ser reconfigurada. Una <em>imagen</em> base -o estática, podrá crear un conjunto de <code class="docutils literal notranslate"><span class="pre">PRR</span></code>, para más tarde poder ser, independientemente reprogramados muchas veces. El tamaño y, localización específica de cada <code class="docutils literal notranslate"><span class="pre">PRR</span></code> es <em>fija</em>. Las <em>conexiones</em> y <em>extremos</em>, de cada <code class="docutils literal notranslate"><span class="pre">PRR</span></code> son fijos. La imagen que es cargada en un <code class="docutils literal notranslate"><span class="pre">PRR</span></code>, <strong>debe</strong> ajustar y utilizar, un subconjunto de conexiones de la región.  Los <em>buses</em> dentro del FPGA, son separados de tal forma que, cada región obtiene su propia rama, donde poder crear más tarde una puerta, de forma independiente.</p>
+<p><strong>Persona</strong>  También llamada: <em>torrente de bit parcial</em>. Una imagen FPGA designada para ser cargada en el <code class="docutils literal notranslate"><span class="pre">PRR</span></code>. Puede haber cualquier número de <em>personas</em> designadas para ajustarse al <code class="docutils literal notranslate"><span class="pre">PRR</span></code>, Pero sólo una a la vez, poodrá ser cargada.  Una <em>persona</em> podrá crear <em>otras</em> regiones.</p>
+<p><strong>Puente FPGA</strong>  Puentes FPGA para señales de <em>buses de puerta</em>, entre el <em>host</em> y el FPGA.  Los Puentes FPGA, deberían ser desabilitados mientras el FPGA es programado, para prevenir señales espúrias sobre el <em>bus</em> de la CPU y, el <em>soft logic</em> <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. Los puentes FPGA, podran ser <em>hardware</em> en activo, o <em>soft logic</em> en un FPGA.  Durante la reconfiguración completa, los puentes de <em>hardware</em>, entre el <em>host</em> y el FPGA, serán desactivados.  Durante la reconfiguración parcial de una región específica, el <em>puente</em> de la misma, será utilizado como <em>puerta</em> a los <em>buses</em>. El tráfico a otras regiones no se verá afectado.  En algunas implementaciones, el gestor FPGA controla el <em>enrutado(gating)</em> a los buses de manera transparente, evitando la necesidad de mostrar los puentes FPGA de <em>hardware</em>, en el árbol de dispositivo.  Una imagen FPGA, podrá crear un conjunto de regiones reprogramables, cada una, con su própio puente y separación de buses en el FPGA.</p>
+<p><strong>Gestor FPGA</strong>  Un gestor FPGA es un bloque de <em>hardware</em> que programa un FPGA, bajo el control de un procesador anfitrión.</p>
+<p><strong>Imagen base</strong>  También llamada “imagen estática”. Una imagen FPGA, diseñada para reconfigurar al completo el FPGA.  Una imagen base, podría configurar un conjunto parcial de <em>regiones de reconfiguración</em>, para más tarde ser reprogramadas.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">----------------</span>       <span class="o">----------------------------------</span>
+<span class="o">|</span>  <span class="n">Host</span> <span class="n">CPU</span>    <span class="o">|</span>       <span class="o">|</span>             <span class="n">FPGA</span>               <span class="o">|</span>
+<span class="o">|</span>              <span class="o">|</span>       <span class="o">|</span>                                <span class="o">|</span>
+<span class="o">|</span>          <span class="o">----|</span>       <span class="o">|</span>       <span class="o">-----------</span>    <span class="o">--------</span>  <span class="o">|</span>
+<span class="o">|</span>          <span class="o">|</span> <span class="n">H</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">|==&gt;|</span> <span class="n">Bridge0</span> <span class="o">|&lt;==&gt;|</span> <span class="n">PRR0</span> <span class="o">|</span>  <span class="o">|</span>
+<span class="o">|</span>          <span class="o">|</span> <span class="n">W</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">|</span>   <span class="o">-----------</span>    <span class="o">--------</span>  <span class="o">|</span>
+<span class="o">|</span>          <span class="o">|</span>   <span class="o">|</span>       <span class="o">|</span>   <span class="o">|</span>                            <span class="o">|</span>
+<span class="o">|</span>          <span class="o">|</span> <span class="n">B</span> <span class="o">|&lt;=====&gt;|&lt;==|</span>   <span class="o">-----------</span>    <span class="o">--------</span>  <span class="o">|</span>
+<span class="o">|</span>          <span class="o">|</span> <span class="n">R</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">|==&gt;|</span> <span class="n">Bridge1</span> <span class="o">|&lt;==&gt;|</span> <span class="n">PRR1</span> <span class="o">|</span>  <span class="o">|</span>
+<span class="o">|</span>          <span class="o">|</span> <span class="n">I</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">|</span>   <span class="o">-----------</span>    <span class="o">--------</span>  <span class="o">|</span>
+<span class="o">|</span>          <span class="o">|</span> <span class="n">D</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">|</span>                            <span class="o">|</span>
+<span class="o">|</span>          <span class="o">|</span> <span class="n">G</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">|</span>   <span class="o">-----------</span>    <span class="o">--------</span>  <span class="o">|</span>
+<span class="o">|</span>          <span class="o">|</span> <span class="n">E</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">|==&gt;|</span> <span class="n">Bridge2</span> <span class="o">|&lt;==&gt;|</span> <span class="n">PRR2</span> <span class="o">|</span>  <span class="o">|</span>
+<span class="o">|</span>          <span class="o">----|</span>       <span class="o">|</span>       <span class="o">-----------</span>    <span class="o">--------</span>  <span class="o">|</span>
+<span class="o">|</span>              <span class="o">|</span>       <span class="o">|</span>                                <span class="o">|</span>
+<span class="o">----------------</span>       <span class="o">----------------------------------</span>
+</pre></div>
+</div>
+<div class="admonition-figura-1 admonition">
+<p class="admonition-title">figura 1</p>
+<p>Una configuración FPGA, con una imagen <em>base</em> creando tres regiones. Cada región <code class="docutils literal notranslate"><span class="pre">PRR0-2</span></code>, con buses separados, que son enrutados de forma independiente, por un <em>puente lógico(soft logic bridge)</em> en el FPGA. El contenido de cada <code class="docutils literal notranslate"><span class="pre">PRR</span></code>, podrá ser
+reprogramado independientemente, mientra el resto del sistema continúa funcionando.</p>
+</div>
+</section>
+<section id="secuencia">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Secuencia</a><a class="headerlink" href="#secuencia" title="Link to this heading"></a></h2>
+<p>Cuando es aplicada una <em>sobrecarga</em> que apunta a una región FPGA, la <em>región FPGA</em>, hará lo siguiente:</p>
+<ol class="arabic simple">
+<li><p>Desactivar los puentes FPGA apropiados.</p></li>
+<li><p>Programar el FPGA utilizando el gestor FPGA.</p></li>
+<li><p>Activar los puentes FPGA.</p></li>
+<li><p>La sobrecarga es aceptada dentro del árbol de dispositivo.</p></li>
+<li><p>Los dispositivos descendentes son definidos.</p></li>
+</ol>
+<p>Al ritirar al sobreposición -o sobregarga, los nodos descendentes seerán retirados y la región FPGA desactivará los puentes.</p>
+</section>
+<section id="zona-fpga">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Zona FPGA</a><a class="headerlink" href="#zona-fpga" title="Link to this heading"></a></h2>
+<p>La <em>región FPGA</em> represeenta al fpga -matriz de puertas reconfigurble, y a regiones FPGA PR en el DT. Una <em>región FPGA</em> une a los elementos necesarios de un programa, en un sistema en carrera y, añade los dispositivos descendentes.</p>
+<ul class="simple">
+<li><p>Gestor FPGA.</p></li>
+<li><p>Puentes FPGA.</p></li>
+<li><p>Información específica de la imagen, necesaria para la programación.</p></li>
+<li><p>Nodos descendentes.</p></li>
+</ul>
+<p>El objetivo del <em>DTO</em> es ser utilizado para reprogramar un FPGA, mientras el sistema operativo está en funcionamiento.</p>
+<p>Una <em>Región FPGA</em> existente en un <em>DT</em> en activo, refleja su estado. Si el árbol activo, muestra una propiedada <code class="docutils literal notranslate"><span class="pre">firmware-name</span></code>, o nodos descendentes bajo la <em>Región FPGA</em>, indicará que el FPGA ya está programado. Un <em>DTO</em> que apunte a una <em>Región FPGA</em>, y añada la propiedad <code class="docutils literal notranslate"><span class="pre">firmware-name</span></code>, será tomada como petición para reprogramar el FPGA. Después de la reprogramación tenga éxito, la <em>sobrecarga</em>, será aceptada en el <em>DT</em>.</p>
+<p>La <em>Región FPGA base</em> dentro del DT, representa al FPGA y soportará una reconfiguración completa. Debe incluir un <code class="docutils literal notranslate"><span class="pre">phandle</span></code> a un gestor FPGA. La <em>Región FPGA base</em>, será el descendente de uno de los puentes de <em>hardware</em> -el puente que permite el acceso a registros, entre la CPU y el FPGA. Si hubiese más de un puente que controlar, durante la programación del FPGA, la <em>región</em> también contendría una lista de <code class="docutils literal notranslate"><span class="pre">phandles</span></code> a los puentes de <em>hardware</em> FPGA, adicionales.</p>
+<p>Para la reconfiguración parcial <em>PR</em>, cada <em>Región PR</em>, constará con una <em>Región FPGA</em>. Estas <em>Regiónes FPGA</em>, son descendentes de puentes FPGA, los cuales son descendentes de la <em>Región FPGA base</em>. La “reconfiguración completa” de los ejmeplos <em>PRR</em> mostrados más abajo, explica esto.</p>
+<p>Si una <em>región FPGA</em> no especifica un gestor FPGAm, <em>asumirá</em> la región fpga, del gestor especificado por su predecesor. Ésto soporta ambos casos; allí donde el mismo gestor FPGA es utlizado para todo, así como <em>diferentes</em> gestores para cada región.</p>
+<p>Las regiónes FPGA no heredan los <em>puentes(bridges)</em> de región FPGA, de sus predecesores. Previene el apagado de un puente “aguas arriba” <a class="footnote-reference brackets" href="#f2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> mientras una <em>región</em> está siendo reconfigurada -ver <strong>figura 1</strong>. Durante un <em>PR</em>, los puentes FPGA permanecen activos. Los puentes de <em>región PR</em> serán puentes FPGA dentro de la imagen estática del FPGA.</p>
+<p>Propiedades requeridas:  <code class="docutils literal notranslate"><span class="pre">compatible</span></code>: podría contener una <em>región FPGA</em>.  <code class="docutils literal notranslate"><span class="pre">fpga-mgr</span></code>: podría contener un <code class="docutils literal notranslate"><span class="pre">phandle</span></code> al gestor FPGA. Regiones FPGA descendentes reciben esta propiedad desde regiones <em>ascendentes</em>. Una propiedad <code class="docutils literal notranslate"><span class="pre">fpga'mgr</span></code> en una región, <em>sobreescribirá</em> cualquier gestor FPGA heredado.  <code class="docutils literal notranslate"><span class="pre">#address'cell</span></code>, <code class="docutils literal notranslate"><span class="pre">#size'cells</span></code>, <code class="docutils literal notranslate"><span class="pre">ranges</span></code>: deberá estar presente para comandar los espacios de dirección mapeados en nodos descendentes.</p>
+<p>Propiedades opcionales:  <code class="docutils literal notranslate"><span class="pre">firmaware-name</span></code>: debería contener el nombre de un archivo imagen FPGA, localizado en la ruta de búsqueda del <em>firmware</em>. Si esta propiedad es mostrada en un <em>DT</em> en activo, indicará que el FPGA ya ha sido programado con esta imagen. Si la propiedad está en un objetivo de región FPGA <em>sobrepuesto(overlay)</em>, será necesario programar el FPGA con dicha imagen.  <code class="docutils literal notranslate"><span class="pre">fpga'bridges</span></code>: debería contener una lista de phandles a puentes FPGA, que deberá ser controlados durante la programación FPGA, junto al puente FPGA ascendente. Es una propiedad opcional si el gestor FPGA controla los puentes. Si la <code class="docutils literal notranslate"><span class="pre">fpga'region</span></code> es descendente de <code class="docutils literal notranslate"><span class="pre">fpga'bridge</span></code>, la lista no debería contener el puente ascendente.
+<code class="docutils literal notranslate"><span class="pre">partial-fpga-config</span></code>: boleano, establecido si la reconfiguración parcial tomase efecto, o reconficguración completa, en cualquier otro caso.  <code class="docutils literal notranslate"><span class="pre">external-fpga-config</span></code>: boleano, establecido si el FPGA ha sido configurado, con anterioridad al arranque del OS. <code class="docutils literal notranslate"><span class="pre">encrypted-fpga-config</span></code>: boleano, establecido si el <em>bitstream</em> está encriptado.  <code class="docutils literal notranslate"><span class="pre">region-unfreeze-timeout-us</span></code>: tiempo máximo enmicrosegundos, a la espera de que sean  ctivados satisfactoriamente los puentes, tras la programación de región.
+<code class="docutils literal notranslate"><span class="pre">region-freeze-timeout-us</span></code>: tiempo máximo en microsegundos, a la espera de que sean desactivados satisfactoriamente los puentes, antes de ser programada la región.  <code class="docutils literal notranslate"><span class="pre">config-complete-timeout-us</span></code>: tiempo máximo en microsegundos, para que el FPGA, cambie al <em>modo operación</em>, tras haber sido programada la región.  <em>nodos descendentes(child nodes)</em>: dispositivos fpga, tras la programación.</p>
+<p>En el ejemplo de abajo, cuando es aplicada una <em>sobreposición</em> apuntando a <code class="docutils literal notranslate"><span class="pre">fpga'region0</span></code>, <code class="docutils literal notranslate"><span class="pre">fpga'mgr</span></code> será utilizado para programar el FPGA. Son controlados dos puentes durante la programación: el <code class="docutils literal notranslate"><span class="pre">fpga_bridge0</span></code> ascendente y <code class="docutils literal notranslate"><span class="pre">fpga_bridge1</span></code>. Puesto que la <em>región</em> es descendente de <code class="docutils literal notranslate"><span class="pre">fpga_bridge0</span></code>, sólo <code class="docutils literal notranslate"><span class="pre">fpga_bridge1</span></code> necesitará ser especificado en la propiedad <code class="docutils literal notranslate"><span class="pre">fpga-bridges</span></code>. Durante la programación estos puentes son desactivados, el firmware especificado en la <em>sobreposición</em>, es cargado en el FPGA, por medio del gestor FPGA especificado en la <em>región</em>. Si tiene éxito la programación del FPGA, los mpuentes serán reactivados y, la sobreposición tomará efecto en el árbol activo. Los dispositivos descendentes, serán entonces <em>completados</em>. Si la programación FPGA fallase, los puentes permanecerán desactivados y la sobreposición será rechazada. La propiedad <code class="docutils literal notranslate"><span class="pre">ranges</span></code>(rangos) de la sobreposición, <em>sitúa en el mapa</em> la región del puente <code class="docutils literal notranslate"><span class="pre">lwhps</span></code>(<code class="docutils literal notranslate"><span class="pre">0xff200000</span></code>) y, la regón <code class="docutils literal notranslate"><span class="pre">hps</span></code>(<code class="docutils literal notranslate"><span class="pre">0xc0000000</span></code>), para ser utilizados por los dos dispositivos descendentes.</p>
+<p>Ejemplo, la base del árbol contiene:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fpga_mgr</span><span class="p">:</span> <span class="n">fpga</span><span class="o">-</span><span class="n">mgr</span><span class="nd">@ff706000</span> <span class="p">{</span>
+    <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;altr,socfpga-fpga-mgr&quot;</span><span class="p">;</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0xff706000</span> <span class="mh">0x1000</span>
+             <span class="mh">0xffb90000</span> <span class="mh">0x20</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="mi">175</span> <span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">fpga_bridge0</span><span class="p">:</span> <span class="n">fpga</span><span class="o">-</span><span class="n">bridge</span><span class="nd">@ff400000</span> <span class="p">{</span>
+    <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;altr,socfpga-lwhps2fpga-bridge&quot;</span><span class="p">;</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0xff400000</span> <span class="mh">0x100000</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">resets</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">rst</span> <span class="n">LWHPS2FPGA_RESET</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">clocks</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">l4_main_clk</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="c1">#address-cells = &lt;1&gt;;</span>
+    <span class="c1">#size-cells = &lt;1&gt;;</span>
+    <span class="n">ranges</span><span class="p">;</span>
+
+    <span class="n">fpga_region0</span><span class="p">:</span> <span class="n">fpga</span><span class="o">-</span><span class="n">region0</span> <span class="p">{</span>
+        <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;fpga-region&quot;</span><span class="p">;</span>
+        <span class="n">fpga</span><span class="o">-</span><span class="n">mgr</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">fpga_mgr</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="n">fpga_bridge1</span><span class="p">:</span> <span class="n">fpga</span><span class="o">-</span><span class="n">bridge</span><span class="nd">@ff500000</span> <span class="p">{</span>
+    <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;altr,socfpga-hps2fpga-bridge&quot;</span><span class="p">;</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0xff500000</span> <span class="mh">0x10000</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">resets</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">rst</span> <span class="n">HPS2FPGA_RESET</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">clocks</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">l4_main_clk</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>La <em>sobreposición</em> contiene:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span> <span class="o">/</span><span class="n">plugin</span><span class="o">/</span><span class="p">;</span>
+<span class="o">/</span> <span class="p">{</span>
+    <span class="n">fragment</span><span class="o">@</span><span class="mi">0</span> <span class="p">{</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">fpga_region0</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="c1">#address-cells = &lt;1&gt;;</span>
+        <span class="c1">#size-cells = &lt;1&gt;;</span>
+        <span class="n">__overlay__</span> <span class="p">{</span>
+            <span class="c1">#address-cells = &lt;1&gt;;</span>
+            <span class="c1">#size-cells = &lt;1&gt;;</span>
+
+            <span class="n">firmware</span><span class="o">-</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;soc_system.rbf&quot;</span><span class="p">;</span>
+            <span class="n">fpga</span><span class="o">-</span><span class="n">bridges</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">fpga_bridge1</span><span class="o">&gt;</span><span class="p">;</span>
+            <span class="n">ranges</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x20000</span> <span class="mh">0xff200000</span> <span class="mh">0x100000</span><span class="o">&gt;</span><span class="p">,</span>
+                 <span class="o">&lt;</span><span class="mh">0x0</span> <span class="mh">0xc0000000</span> <span class="mh">0x20000000</span><span class="o">&gt;</span><span class="p">;</span>
+
+            <span class="n">gpio</span><span class="o">@</span><span class="mi">10040</span> <span class="p">{</span>
+                <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;altr,pio-1.0&quot;</span><span class="p">;</span>
+                <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x10040</span> <span class="mh">0x20</span><span class="o">&gt;</span><span class="p">;</span>
+                <span class="n">altr</span><span class="p">,</span><span class="n">gpio</span><span class="o">-</span><span class="n">bank</span><span class="o">-</span><span class="n">width</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+                <span class="c1">#gpio-cells = &lt;2&gt;;</span>
+                <span class="n">clocks</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
+                <span class="n">gpio</span><span class="o">-</span><span class="n">controller</span><span class="p">;</span>
+            <span class="p">};</span>
+
+            <span class="n">onchip</span><span class="o">-</span><span class="n">memory</span> <span class="p">{</span>
+                <span class="n">device_type</span> <span class="o">=</span> <span class="s2">&quot;memory&quot;</span><span class="p">;</span>
+                <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;altr,onchipmem-15.1&quot;</span><span class="p">;</span>
+                <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x0</span> <span class="mh">0x10000</span><span class="o">&gt;</span><span class="p">;</span>
+            <span class="p">};</span>
+        <span class="p">};</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="modelos-de-uso-soportados">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Modelos de uso soportados</a><a class="headerlink" href="#modelos-de-uso-soportados" title="Link to this heading"></a></h2>
+<p>En cualquier caso, un DT activo, deberá tener un <em>gestor FPGA</em>, un puente FPGA -si lo hubiese y, una región FPGA. El objetivo de la sobreposición del árbol de dispositivo, es la región FPGA. Algunos <em>usos</em> son específicos del dispositivo FPGA.</p>
+<ul class="simple">
+<li><p><strong>Sin puentes FPGA</strong> En este caso, el <em>gestor FPGA</em>, que programa el   FPGA, también direige los puentes <em>tras la escena</em>. No es necesario ningún dispositivo de puente FPGA, para una reconfiguración completa.</p></li>
+<li><p><em>Reconfiguración completa con puentes hardware.</em> Hay puentes de <em>hardware</em>, entre el procesador y el FPGA, que necesitan ser controlados durante la <em>reconfiguración completa</em>. Antes de ser aplicada la sobreposición, el DT activo debe incluir el gestor FPGA, los puentes FPGA y, una región FPGA. La <em>región FPGA</em> es descendente del puente que permite acceso al registro del FPGA. Puentes adicionales, podrán ser listados en una propiedad <code class="docutils literal notranslate"><span class="pre">fpga-bridges</span></code>, de la región FPGA, o en una sobreposición del árbol de dispositivo.</p></li>
+<li><p><strong>Reconfiguración parcial con puentes, en el FPGA</strong>. El FPGA tendrá uno o más <code class="docutils literal notranslate"><span class="pre">PRR</span></code>, que podrán ser programados por separado, mientras el resto del FPGA permanece activo. Para manejar esto, es necesario que existan los puentes en el FPGA, los cuales dirigen los buses hacia cada región FPGA, al mismo tiempo que los buses son activados para otras secciones. Antes de realizar cualquier <em>reconfiguración parcial</em>, una imagen FPGA base, deberá ser cargada, incluyendo <code class="docutils literal notranslate"><span class="pre">PRR</span></code> con puentes FPGA. El DT debería tener una región FPGA para cada <code class="docutils literal notranslate"><span class="pre">PRR</span></code>.</p></li>
+</ul>
+</section>
+<section id="ejemplo-de-arbol-de-dispositivo">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Ejemplo de <em>árbol de dispositivo</em></a><a class="headerlink" href="#ejemplo-de-arbol-de-dispositivo" title="Link to this heading"></a></h2>
+<p>El objetivo de esta sección, es proporcionar ejemplos simples, centrados en la localización de los elementos detallados arriba, especificamente:</p>
+<ul class="simple">
+<li><p>Gestor FPGA</p></li>
+<li><p>Puentes FPGA</p></li>
+<li><p>Regiones FPGA</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ranges</span></code> Rangos</p></li>
+<li><p>Ruta objetivo u objetivo.</p></li>
+</ul>
+<p>En lo que respecta a esta sección, será dividido el árbol de dispositivo en dos partes, cada una de ellas, con sus própios requisitos. Las dos partes son:  El DT en activo, antes de ser añadida la sobreposición.
+La sobreposición DT.</p>
+<p>El árbol activo deberá contener una región FPGA, un gestor FPGA y, cualquier puente FPGA. La propiedad <code class="docutils literal notranslate"><span class="pre">fpga-mgr</span></code> de las regiones FPGA, especifican el gestor por <em>phandle</em>, para controlar la programación del FPGA. Si la región FPGA, es descendente de otra región FPGA, será utilizado el gestor ascendente FPGA. Si está involucrado el puente FPGA, serán especificados en la región FPGA por la propiedad <code class="docutils literal notranslate"><span class="pre">fpga-bridges</span></code>. Durante la programación FPGA, la región FPGA desactivará los puentes incluidos en la lista <code class="docutils literal notranslate"><span class="pre">fpga-bridges</span></code> y, reactivados después de tener éxito la programación del FPGA.</p>
+<p>La sobreposición del DT contendrá:  <code class="docutils literal notranslate"><span class="pre">target-path</span></code> o <code class="docutils literal notranslate"><span class="pre">target</span></code> El punto de inserción donde el contenido de la sobreposición es situado dentro del árbol activo. <code class="docutils literal notranslate"><span class="pre">target-path</span></code> es una ruta completa, mientras que <code class="docutils literal notranslate"><span class="pre">target</span></code> es un <code class="docutils literal notranslate"><span class="pre">phandle</span></code>.  <code class="docutils literal notranslate"><span class="pre">ranges</span></code> El espacio de dirección, <em>mapeado</em> desde el procesador al bus/es FPGA.  <code class="docutils literal notranslate"><span class="pre">firmware-name</span></code> Especifica el nombre del archivo de la imagen FPGA, en la ruta de búsqueda del <em>firmware</em>. La ruta de búsqueda, es descrita por la <em>clase</em> <code class="docutils literal notranslate"><span class="pre">documentation</span></code> en el <em>firmware</em>.  <code class="docutils literal notranslate"><span class="pre">partial-fpga-config</span></code> Esta vinculación es un boleano y debería estar presente de tomar efecto una reconfiguración parcial.  Nodos descendentes, ligados al <em>hardware</em>, que cargarán en esta región del FPGA.</p>
+<p><strong>Reconfiguración completa sin puentes</strong></p>
+<p>El árbol activo contiene:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">fpga_mgr0</span><span class="p">:</span> <span class="n">fpga</span><span class="o">-</span><span class="n">mgr</span><span class="nd">@f8007000</span> <span class="p">{</span>
+        <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;xlnx,zynq-devcfg-1.0&quot;</span><span class="p">;</span>
+        <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0xf8007000</span> <span class="mh">0x100</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="n">interrupt</span><span class="o">-</span><span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">intc</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="mi">8</span> <span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="n">clocks</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">clkc</span> <span class="mi">12</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="n">clock</span><span class="o">-</span><span class="n">names</span> <span class="o">=</span> <span class="s2">&quot;ref_clk&quot;</span><span class="p">;</span>
+        <span class="n">syscon</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">slcr</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="n">fpga_region0</span><span class="p">:</span> <span class="n">fpga</span><span class="o">-</span><span class="n">region0</span> <span class="p">{</span>
+        <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;fpga-region&quot;</span><span class="p">;</span>
+        <span class="n">fpga</span><span class="o">-</span><span class="n">mgr</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">fpga_mgr0</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="c1">#address-cells = &lt;0x1&gt;;</span>
+        <span class="c1">#size-cells = &lt;0x1&gt;;</span>
+        <span class="n">ranges</span><span class="p">;</span>
+    <span class="p">};</span>
+
+<span class="n">DT</span> <span class="n">Overlay</span> <span class="n">contains</span><span class="p">:</span>
+<span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span> <span class="o">/</span><span class="n">plugin</span><span class="o">/</span><span class="p">;</span>
+<span class="o">/</span> <span class="p">{</span>
+<span class="n">fragment</span><span class="o">@</span><span class="mi">0</span> <span class="p">{</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">fpga_region0</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="c1">#address-cells = &lt;1&gt;;</span>
+    <span class="c1">#size-cells = &lt;1&gt;;</span>
+    <span class="n">__overlay__</span> <span class="p">{</span>
+        <span class="c1">#address-cells = &lt;1&gt;;</span>
+        <span class="c1">#size-cells = &lt;1&gt;;</span>
+
+        <span class="n">firmware</span><span class="o">-</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;zynq-gpio.bin&quot;</span><span class="p">;</span>
+
+        <span class="n">gpio1</span><span class="p">:</span> <span class="n">gpio</span><span class="o">@</span><span class="mi">40000000</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;xlnx,xps-gpio-1.00.a&quot;</span><span class="p">;</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x40000000</span> <span class="mh">0x10000</span><span class="o">&gt;</span><span class="p">;</span>
+            <span class="n">gpio</span><span class="o">-</span><span class="n">controller</span><span class="p">;</span>
+            <span class="c1">#gpio-cells = &lt;0x2&gt;;</span>
+            <span class="n">xlnx</span><span class="p">,</span><span class="n">gpio</span><span class="o">-</span><span class="n">width</span><span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x6</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="p">};</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p><strong>Reconfiguiración completa para añadir</strong> <code class="docutils literal notranslate"><span class="pre">PRR</span></code>s</p>
+<p>La región base FPGA, es especificada e manera similar al primer ejemplo.</p>
+<p>Este ejemplo, programa el FPGA para con dos regiones que, podrán ser configuradas más tarde. Cada una de ellas, tiene su própio puente en su estructura FPGA.</p>
+<p>La sobreposición DT contiene:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span> <span class="o">/</span><span class="n">plugin</span><span class="o">/</span><span class="p">;</span>
+<span class="o">/</span> <span class="p">{</span>
+    <span class="n">fragment</span><span class="o">@</span><span class="mi">0</span> <span class="p">{</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">fpga_region0</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="c1">#address-cells = &lt;1&gt;;</span>
+        <span class="c1">#size-cells = &lt;1&gt;;</span>
+        <span class="n">__overlay__</span> <span class="p">{</span>
+            <span class="c1">#address-cells = &lt;1&gt;;</span>
+            <span class="c1">#size-cells = &lt;1&gt;;</span>
+
+            <span class="n">firmware</span><span class="o">-</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;base.rbf&quot;</span><span class="p">;</span>
+
+            <span class="n">fpga</span><span class="o">-</span><span class="n">bridge</span><span class="o">@</span><span class="mi">4400</span> <span class="p">{</span>
+                <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;altr,freeze-bridge&quot;</span><span class="p">;</span>
+                <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x4400</span> <span class="mh">0x10</span><span class="o">&gt;</span><span class="p">;</span>
+
+                <span class="n">fpga_region1</span><span class="p">:</span> <span class="n">fpga</span><span class="o">-</span><span class="n">region1</span> <span class="p">{</span>
+                    <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;fpga-region&quot;</span><span class="p">;</span>
+                    <span class="c1">#address-cells = &lt;0x1&gt;;</span>
+                    <span class="c1">#size-cells = &lt;0x1&gt;;</span>
+                    <span class="n">ranges</span><span class="p">;</span>
+                <span class="p">};</span>
+            <span class="p">};</span>
+
+            <span class="n">fpga</span><span class="o">-</span><span class="n">bridge</span><span class="o">@</span><span class="mi">4420</span> <span class="p">{</span>
+                <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;altr,freeze-bridge&quot;</span><span class="p">;</span>
+                <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x4420</span> <span class="mh">0x10</span><span class="o">&gt;</span><span class="p">;</span>
+
+                <span class="n">fpga_region2</span><span class="p">:</span> <span class="n">fpga</span><span class="o">-</span><span class="n">region2</span> <span class="p">{</span>
+                    <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;fpga-region&quot;</span><span class="p">;</span>
+                    <span class="c1">#address-cells = &lt;0x1&gt;;</span>
+                    <span class="c1">#size-cells = &lt;0x1&gt;;</span>
+                    <span class="n">ranges</span><span class="p">;</span>
+                <span class="p">};</span>
+            <span class="p">};</span>
+        <span class="p">};</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p><strong>Reconfiguración parcial</strong></p>
+<p>Este ejemplo reprograma una de las <code class="docutils literal notranslate"><span class="pre">PRR</span></code>s, configurada en previos ejemplos.</p>
+<p>La secuencia sucedida cuando es <em>sobrepuesta</em>, es similar a lo anterior; las únicas diferencias residen en que el FPGA, es parcialmente reconfigurado debido al boleano <code class="docutils literal notranslate"><span class="pre">partial-fpga-config</span></code> y, el único puente que es controlado durante la programación, es el puente FPGA basado en <code class="docutils literal notranslate"><span class="pre">fpga_region1</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span> <span class="o">/</span><span class="n">plugin</span><span class="o">/</span><span class="p">;</span>
+<span class="o">/</span> <span class="p">{</span>
+    <span class="n">fragment</span><span class="o">@</span><span class="mi">0</span> <span class="p">{</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">fpga_region1</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="c1">#address-cells = &lt;1&gt;;</span>
+        <span class="c1">#size-cells = &lt;1&gt;;</span>
+        <span class="n">__overlay__</span> <span class="p">{</span>
+            <span class="c1">#address-cells = &lt;1&gt;;</span>
+            <span class="c1">#size-cells = &lt;1&gt;;</span>
+
+            <span class="n">firmware</span><span class="o">-</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;soc_image2.rbf&quot;</span><span class="p">;</span>
+            <span class="n">partial</span><span class="o">-</span><span class="n">fpga</span><span class="o">-</span><span class="n">config</span><span class="p">;</span>
+
+            <span class="n">gpio</span><span class="o">@</span><span class="mi">10040</span> <span class="p">{</span>
+                <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;altr,pio-1.0&quot;</span><span class="p">;</span>
+                <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x10040</span> <span class="mh">0x20</span><span class="o">&gt;</span><span class="p">;</span>
+                <span class="n">clocks</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x2</span><span class="o">&gt;</span><span class="p">;</span>
+                <span class="n">altr</span><span class="p">,</span><span class="n">gpio</span><span class="o">-</span><span class="n">bank</span><span class="o">-</span><span class="n">width</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x4</span><span class="o">&gt;</span><span class="p">;</span>
+                <span class="n">resetvalue</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x0</span><span class="o">&gt;</span><span class="p">;</span>
+                <span class="c1">#gpio-cells = &lt;0x2&gt;;</span>
+                <span class="n">gpio</span><span class="o">-</span><span class="n">controller</span><span class="p">;</span>
+            <span class="p">};</span>
+        <span class="p">};</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="restricciones">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Restricciones</a><a class="headerlink" href="#restricciones" title="Link to this heading"></a></h2>
+<p>Queda fuera del ámbito de éste documente, la descripción completa de todas las restricciones en el diseño FPGA, reqqueridas para llevar a cabo reconfiguraciones parciales; referencias <em>1, 2 y 3</em>. Aunue merece la pena, una rápida mención.</p>
+<p>Una <code class="docutils literal notranslate"><span class="pre">persona</span></code>, deberá tener un “límite de conexiones”, alineado con tales <em>particiones</em> o regiones para las que fueron diseñados.</p>
+<p>Durante la programación, la transmisión a través de dichas conexiones, deberán cesar y, las conexiones retenidas en un nivel lógico fijo. Consiguiéndose esto, con los puentes FPGA que existen en la estructura FPGA, anterior, a la reconfiguración parcial.</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>soft logic</p>
+</aside>
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>aguas arriba, upstream. Ejemplo, en electricidad esto es la corriente energizadora que parte desde un <em>elemento</em> situado <em>antes</em> del dispositivo en cuestión; el <em>telerruptor no funciona</em> porque al “magneto” no le llega tensión…</p>
+</aside>
+</aside>
+<p><strong>[3]</strong>: <a class="reference external" href="https://docs.amd.com/v/u/en-US/ug702">(AMD) User Guide 702.pdf</a></p>
+<p><strong>Autor</strong>: Allan Tull 2016</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fpga-mgr.html" class="btn btn-neutral float-left" title="Gestor FPGA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Input/input.html" class="btn btn-neutral float-right" title="Inpunt" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

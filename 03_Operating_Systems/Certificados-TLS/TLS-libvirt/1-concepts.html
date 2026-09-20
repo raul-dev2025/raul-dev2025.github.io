@@ -1,0 +1,226 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>certificados &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="TLSCreateCACert" href="2-CA.html" />
+    <link rel="prev" title="OpenSSL Certificado de Autoridad" href="../OpenSSL/OpenSSL-saga.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#boot">Boot</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#certificados-tls">Certificados-TLS</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../apuntesTLS.html">Apuntes sobre Protocolo TLS y Gestión de Certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../compCA.html">Comprobación y Supervisión de Certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MiTm.html">Ataques Man-in-the-Middle (MitM) y TLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../OpenSSL/OpenSSL-saga.html">OpenSSL Certificado de Autoridad</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">certificados</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configurando-libvirt-para-tls">Configurando <strong>libvirt</strong> para TLS</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="2-CA.html">TLSCreateCACert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3creSerCer.html">Certificados</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#file-system">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Sistemas Operativos</a></li>
+      <li class="breadcrumb-item active">certificados</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/03_Operating_Systems/Certificados-TLS/TLS-libvirt/1-concepts.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="certificados">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">certificados</a><a class="headerlink" href="#certificados" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#certificados" id="id1">certificados</a></p>
+<ul>
+<li><p><a class="reference internal" href="#configurando-libvirt-para-tls" id="id2">Configurando <strong>libvirt</strong> para TLS</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>Los certificados son una <em>forma</em> segura de comunicarnos entre computadoras. A esta <em>forma</em> de establecer la comunicación la llamamos <em>protocolo</em>. Hoy en día existen dos tipos de protocolos ampliamente utilizados; protocolos SSL y TLS.</p>
+<p>En esta documentación se hablará exclusivamente del protocolo TLS, que es una versión mas moderna o actualizada del protocolo SSL(capa de sockets seguros). Algunos desarrolladores siguen llamándolos: certificado SSL; aunque en realidad se trata igualmente del protocolo TLS(seguridad de la capa de transporte), con opciones ECC,RSA o DSA.</p>
+<blockquote>
+<div><p><em>&gt; Estos últimos son *algoritmos de cifrado</em>.*</p>
+</div></blockquote>
+<section id="configurando-libvirt-para-tls">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Configurando <strong>libvirt</strong> para TLS</a><a class="headerlink" href="#configurando-libvirt-para-tls" title="Link to this heading"></a></h2>
+<p>Establecer la infraestructura de virtualización a través de la <strong>Capa segura de transporte</strong>, es relatívamente sencillo; aunque puede resultar confuso, cuando aún no se está familiarizado con ciertos detalles.</p>
+<p>Mediante este documento, se tratará de explicar los pasos involucrados, en el proceso de configuración de <strong>libvirt</strong> con <strong>TLS</strong>. Se utilizarán conceptos avanzados y ejemplos. Adaptando los ejemplos directamente, sobre la intraestructura de virtualización, se atenderá el caso en particular.</p>
+<section id="lista-completa-del-proceso">
+<h3>Lista completa del proceso<a class="headerlink" href="#lista-completa-del-proceso" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Crear certificado de <strong>Autiridad de certificados</strong>(CA en adelante).</p></li>
+<li><p>Crear certificado de servidor.</p></li>
+<li><p>Crear certificado de cliente.</p></li>
+<li><p>Configuración de <em>demonio</em> <strong>libvirt</strong>.</p></li>
+<li><p>Otras referencias.</p></li>
+</ol>
+</section>
+<section id="concepto-central">
+<h3>Concepto central<a class="headerlink" href="#concepto-central" title="Link to this heading"></a></h3>
+<p>En esencia, <em>la capa segura de transporte</em> es una forma de comunicarnos entre dos máquina, donde será utilizada una aproximación llamada <strong>PKI</strong>; infraestructura de llave pública.Es un concepto bastante simple, el cuál involucra siempre a dos computadoras; un <em>cliente</em> establece conexión con otra máquina llamada <em>servidor</em>.</p>
+<figure class="align-default">
+<img alt="Conexión TLS Cliente-Servidor" src="../../../_images/Conexi%C3%B3nTLSCliente-Servidor.png" />
+</figure>
+<p>Para la comunicación, TLS usa archivos llamados <em>Certificados</em>; el cliente establece la comunicación con un <em>Certificado de cliente</em>. La computadora que recibe la conexión, hace uso del <em>Certificado de servidor</em>.</p>
+<figure class="align-default">
+<img alt="Es éste ejemplo, nuestro escenario." src="../../../_images/Migraci%C3%B3nBidireccional.png" />
+</figure>
+<p>Si la necesidad, es comunicar dos computadoras en ambos sentidos, para poder hacer uso del protocolo TLS, habrá que instalar los dos tipos de certificados en los dos equipos.</p>
+</section>
+<section id="nuestro-escenario">
+<h3>Nuestro escenario<a class="headerlink" href="#nuestro-escenario" title="Link to this heading"></a></h3>
+<p>Aquí subyacen dos servidores virtualizados. El primer servidor; <em>sistema 1</em>, será llamado <strong>host1</strong>. El segundo; recibe el nombre <strong>host2</strong>.</p>
+<figure class="align-default">
+<img alt="Conexiones Salientes" src="../../../_images/conexionesSalientes.png" />
+</figure>
+<p>En éste escenario, los servidores necesitarán comunicarse puntualmente, el uno con el otro. Por ejemplo, cuando movemos un <em>supuesto</em>, desde el <em>host1</em> al <em>host2</em> o <em>vice versa</em>. Para que esto funcione, ambos servidores deben poseer su própio certificado cliente/servidor.</p>
+<blockquote>
+<div><p><em>&gt; … término en inglés, para referirse a una máquina virtualizada(guest).</em></p>
+</div></blockquote>
+<figure class="align-default">
+<img alt="Certificado Identidad" src="../../../_images/CertificadoIdentidad.png" />
+</figure>
+<p>En éste punto, será introducido el concepto <em>servidor administrativo</em>. Desde el <em>servidor administrativo</em>, se llevarán a cabo tareas de administración; como crear nuevos <em>supestos</em>, moverlos entre servidores y reconfigurarlos o borrarlos.</p>
+<p>A partir de ahora, su nombre será <strong>admindesktop</strong>. Únicamente se conectará a los servidores, es decir, no recibirá conexiones desde ellos. Por lo tanto, sólo necesitará el <em>certificado de cliente</em>, o lo que es lo mismo; no contará con el <em>certifidcado de servidor</em>.</p>
+<figure class="align-default">
+<img alt="Certificado Admindesktop" src="../../../_images/CertificadoAdmindesktop.png" />
+</figure>
+</section>
+<section id="llaves-privadas">
+<h3>Llaves privadas<a class="headerlink" href="#llaves-privadas" title="Link to this heading"></a></h3>
+<p>Como parte de la aproximación <strong>PKI</strong>, usada en <strong>TLS</strong> (infraestructura de llave pública), cabe mencionar, que cada certificado debe contar con dos entidades: <em>llave pública</em> y <em>llave privada</em>.</p>
+<figure class="align-default">
+<img alt="Certificado Identidad" src="../../../_images/CertificadoIdentidad.png" />
+</figure>
+<p>Los archivos de llave privada, son de especial importancia y, deben ser guardados en lugar seguro. Estas <em>llaves</em> permiten a cualquier computadora -con el correspondiente certificado; representarse a sí misma, como la descrita <em>en el própio certificado!!</em>.</p>
+<p>Por ejemplo, el servidor <em>host1</em>, tiene ambos certificados: <em>certificado de cliente y servidor</em>. Estos certificados, indican su pertenencia al <em>host1</em>. Por que sólo el <em>host1</em> tiene la llave privada del par de certificados(cliente/servidor); es el único que puede decir: <em>“yo soy el host1”</em>.</p>
+<p>En caso de que una persona no autorizada obtenga el archivo de <em>llave</em>, podría generar su própio certificado y, reclamar la posesión del servidor <em>host1</em> en su lugar, por lo que potencialmente podría darle acceso al servidor virtualizzado. <em>No es lo que queremos!</em>.</p>
+</section>
+<section id="frimando-otros-certificados">
+<h3>Frimando otros certificados<a class="headerlink" href="#frimando-otros-certificados" title="Link to this heading"></a></h3>
+<p>La posesión de los certificados y sus respectivas <em>llaves privadas</em>, también proporciona un beneficio adicional; de esta forma, se podrán firmar otros certificados. Esto añade una pequeña pieza segura de información criptográfica, indicando la autenticidad, del certificado que está siendo firmado.</p>
+<p>Es importante, por que condiciona si una <em>web</em> es de confianza o no. Donde todos los certificados han sido firmados por los otros, o por un certificado central -<strong>admindesktop</strong>, que se sabe es seguro.</p>
+</section>
+<section id="certificado-de-autoridad">
+<h3>Certificado de autoridad<a class="headerlink" href="#certificado-de-autoridad" title="Link to this heading"></a></h3>
+<p>Mediante esta aproximación, contar con un certificado central, capaz de firmar muchos otros, es considerado <em>como buena práctica de seguridad</em>. También permite su administración, mediante un, razonablemente, simple certificado, comparado con otras alternativas y, es la aproximación usada por <em>libvirt</em>.</p>
+<p>Éste certificado central, se refiere al <strong>Certificado de Autoridad</strong>. Será creado uno, al principio de nuestra configuración <strong>TLS</strong>, en la próxima sección. Después, usado para firmar cada certificado <em>Cliente</em> y <em>Servidor</em>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../OpenSSL/OpenSSL-saga.html" class="btn btn-neutral float-left" title="OpenSSL Certificado de Autoridad" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2-CA.html" class="btn btn-neutral float-right" title="TLSCreateCACert" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

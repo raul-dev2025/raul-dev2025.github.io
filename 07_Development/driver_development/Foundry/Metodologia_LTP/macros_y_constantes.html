@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Macros, Constantes y Helpers (LTP y Kernel) &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Prototipos, Estructuras y System Calls (rST)" href="prototipos.html" />
+    <link rel="prev" title="Interrupciones y Comunicación con Bus PCI - Tests" href="BUS_tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwbus-io/index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Metodología para el estudio de “The Linux Test Project(LTP)”</a></li>
+      <li class="breadcrumb-item active">Macros, Constantes y Helpers (LTP y Kernel)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/Foundry/Metodologia_LTP/macros_y_constantes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="macros-constantes-y-helpers-ltp-y-kernel">
+<h1>Macros, Constantes y Helpers (LTP y Kernel)<a class="headerlink" href="#macros-constantes-y-helpers-ltp-y-kernel" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contenidos">
+<p class="topic-title">Contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#categorizacion-general" id="id3">Categorización General</a></p></li>
+<li><p><a class="reference internal" href="#macros-de-seguridad-de-ltp-ltp-safe-macros" id="id4">Macros de Seguridad de LTP (LTP Safe Macros)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#safe-open" id="id5">1. <code class="docutils literal notranslate"><span class="pre">SAFE_OPEN()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#safe-ftruncate" id="id6">2. <code class="docutils literal notranslate"><span class="pre">SAFE_FTRUNCATE()</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#constantes-de-sistema-y-posix" id="id7">Constantes de Sistema y POSIX</a></p>
+<ul>
+<li><p><a class="reference internal" href="#flags-de-apertura-de-archivos-fcntl-h" id="id8">1. Flags de Apertura de Archivos (<code class="docutils literal notranslate"><span class="pre">&lt;fcntl.h&gt;</span></code>)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#glosario-comparativo" id="id9">Glosario Comparativo</a></p></li>
+</ul>
+</nav>
+<section id="categorizacion-general">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Categorización General</a><a class="headerlink" href="#categorizacion-general" title="Link to this heading"></a></h2>
+<p>En el desarrollo de la suite de pruebas del proyecto <strong>foundry</strong>, distinguimos dos categorías principales de macros y definiciones auxiliares:</p>
+<ol class="arabic simple">
+<li><p><strong>Helpers Seguros de LTP (LTP Safe Macros)</strong>: Encapsuladores provistos por la API de LTP (<code class="docutils literal notranslate"><span class="pre">tst_test.h</span></code>) que ejecutan la función/syscall correspondiente y realizan una comprobación automática de errores. Si la llamada falla, la macro invoca internamente <code class="docutils literal notranslate"><span class="pre">tst_brk(TBROK,</span> <span class="pre">...)</span></code> abortando la ejecución con una descripción clara.</p></li>
+<li><p><strong>Flags y Constantes de Sistema (POSIX / Kernel Linux)</strong>: Definiciones mediante directivas <code class="docutils literal notranslate"><span class="pre">#define</span></code> provenientes de las cabeceras del sistema (<code class="docutils literal notranslate"><span class="pre">&lt;fcntl.h&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;unistd.h&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;sys/mman.h&gt;</span></code>) que configuran el comportamiento de las llamadas al sistema.</p></li>
+</ol>
+</section>
+<section id="macros-de-seguridad-de-ltp-ltp-safe-macros">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Macros de Seguridad de LTP (LTP Safe Macros)</a><a class="headerlink" href="#macros-de-seguridad-de-ltp-ltp-safe-macros" title="Link to this heading"></a></h2>
+<section id="safe-open">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">1. <code class="docutils literal notranslate"><span class="pre">SAFE_OPEN()</span></code></a><a class="headerlink" href="#safe-open" title="Link to this heading"></a></h3>
+<p>Encapsula la llamada al sistema <code class="docutils literal notranslate"><span class="pre">open()</span></code> o <code class="docutils literal notranslate"><span class="pre">openat()</span></code>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define SAFE_OPEN(path, flags, ...)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Uso</strong>: Abre el archivo especificado por <code class="docutils literal notranslate"><span class="pre">path</span></code>. Si la operación falla (devuelve <code class="docutils literal notranslate"><span class="pre">-1</span></code>), reporta un fallo de infraestructura en LTP (<code class="docutils literal notranslate"><span class="pre">TBROK</span></code>) y detiene la prueba.</p></li>
+<li><p><strong>Firma equivalente</strong>: <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">safe_open(const</span> <span class="pre">char</span> <span class="pre">*file,</span> <span class="pre">int</span> <span class="pre">lineno,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*path,</span> <span class="pre">int</span> <span class="pre">flags,</span> <span class="pre">...);</span></code></p></li>
+</ul>
+</section>
+<section id="safe-ftruncate">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">2. <code class="docutils literal notranslate"><span class="pre">SAFE_FTRUNCATE()</span></code></a><a class="headerlink" href="#safe-ftruncate" title="Link to this heading"></a></h3>
+<p>Encapsula la llamada al sistema <code class="docutils literal notranslate"><span class="pre">ftruncate()</span></code>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define SAFE_FTRUNCATE(fd, length)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Uso</strong>: Define o modifica el tamaño del archivo referenciado por el descriptor <code class="docutils literal notranslate"><span class="pre">fd</span></code> a la longitud especificada por <code class="docutils literal notranslate"><span class="pre">length</span></code> (en bytes). Si falla, interrumpe la prueba con error <code class="docutils literal notranslate"><span class="pre">TBROK</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="constantes-de-sistema-y-posix">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Constantes de Sistema y POSIX</a><a class="headerlink" href="#constantes-de-sistema-y-posix" title="Link to this heading"></a></h2>
+<section id="flags-de-apertura-de-archivos-fcntl-h">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">1. Flags de Apertura de Archivos (<code class="docutils literal notranslate"><span class="pre">&lt;fcntl.h&gt;</span></code>)</a><a class="headerlink" href="#flags-de-apertura-de-archivos-fcntl-h" title="Link to this heading"></a></h3>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Flags de Apertura de Descriptor</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Constante</p></th>
+<th class="head"><p>Origen</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">O_RDWR</span></code></p></td>
+<td><p>POSIX</p></td>
+<td><p>Solicita acceso de lectura y escritura al archivo.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">O_CREAT</span></code></p></td>
+<td><p>POSIX</p></td>
+<td><p>Si el archivo especificado no existe, el kernel lo creará. Requiere el parámetro de permisos (p. ej. <code class="docutils literal notranslate"><span class="pre">0666</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">O_DIRECT</span></code></p></td>
+<td><p>Linux (Específico)</p></td>
+<td><p>Minimiza el uso de caché de página (Page Cache). La E/S se realiza directamente entre espacio de usuario y dispositivo.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="glosario-comparativo">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Glosario Comparativo</a><a class="headerlink" href="#glosario-comparativo" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Tabla Recapitulativa de Macros e Interfaces</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Elemento</p></th>
+<th class="head"><p>Tipo / Origen</p></th>
+<th class="head"><p>Función Principal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SAFE_OPEN</span></code></p></td>
+<td><p>Macro (LTP)</p></td>
+<td><p>Apertura segura de archivo con verificación implícita de error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SAFE_FTRUNCATE</span></code></p></td>
+<td><p>Macro (LTP)</p></td>
+<td><p>Ajuste seguro de tamaño de archivo mediante FD.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">O_RDWR</span></code></p></td>
+<td><p>Constante (POSIX)</p></td>
+<td><p>Flag de estado: Lectura/Escritura.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">O_CREAT</span></code></p></td>
+<td><p>Constante (POSIX)</p></td>
+<td><p>Flag de creación si el recurso no existe.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">getpagesize()</span></code></p></td>
+<td><p>Función C (POSIX)</p></td>
+<td><p>Consulta del tamaño de página de memoria en bytes (arquitectura/kernel).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="BUS_tests.html" class="btn btn-neutral float-left" title="Interrupciones y Comunicación con Bus PCI - Tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="prototipos.html" class="btn btn-neutral float-right" title="Prototipos, Estructuras y System Calls (rST)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

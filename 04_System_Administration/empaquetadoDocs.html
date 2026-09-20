@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía de Empaquetado y Despliegue de Documentación en Python &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../_static/simulation.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Herramientas de Trazado e Inspección de Procesos" href="track-tools.html" />
+    <link rel="prev" title="Índice de Administración de Sistemas" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Índice de Administración de Sistemas</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#administracion">Administración</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Guía de Empaquetado y Despliegue de Documentación en Python</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fase-1-configuracion-del-archivo-de-construccion">Fase 1: Configuración del Archivo de Construcción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fase-2-secuencia-de-empaquetado-y-validacion-local">Fase 2: Secuencia de Empaquetado y Validación Local</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fase-3-infraestructura-de-despliegue-automatizado">Fase 3: Infraestructura de Despliegue Automatizado</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="track-tools.html">Herramientas de Trazado e Inspección de Procesos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workFlow-strace.html">Flujo de Trabajo para la Captura de Llamadas con strace</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#imagenes-iso-9660-y-medios-opticos">Imágenes ISO 9660 y Medios Ópticos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#aplicaciones-de-sistema">Aplicaciones de sistema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#systemd">Systemd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#listas-de-control-de-acceso-acls">Listas de control de acceso(ACLs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configuracion-del-kernel">Configuración del Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configuracion-de-sistema">Configuración de sistema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#incidencias">Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Índice de Administración de Sistemas</a></li>
+      <li class="breadcrumb-item active">Guía de Empaquetado y Despliegue de Documentación en Python</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/04_System_Administration/empaquetadoDocs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="guia-de-empaquetado-y-despliegue-de-documentacion-en-python">
+<h1>Guía de Empaquetado y Despliegue de Documentación en Python<a class="headerlink" href="#guia-de-empaquetado-y-despliegue-de-documentacion-en-python" title="Link to this heading"></a></h1>
+<p>Esta guía describe el flujo de trabajo estandarizado para compilar documentación estática en un paquete ejecutable redistribuible de Python (<code class="docutils literal notranslate"><span class="pre">.whl</span></code>) y configurar sus correspondientes herramientas de automatización para el despliegue y desinstalación en entornos Windows.</p>
+<section id="fase-1-configuracion-del-archivo-de-construccion">
+<h2>Fase 1: Configuración del Archivo de Construcción<a class="headerlink" href="#fase-1-configuracion-del-archivo-de-construccion" title="Link to this heading"></a></h2>
+<p>El proceso se basa en un archivo <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> dinámico encargado de rastrear recursivamente los artefactos generados (por ejemplo, por Sphinx) e indexarlos como datos internos del paquete.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">setuptools</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">find_build_files</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+    <span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">directories</span><span class="p">,</span> <span class="n">filenames</span><span class="p">)</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+            <span class="n">rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span> <span class="n">directory</span><span class="p">)</span>
+            <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rel_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">paths</span>
+
+<span class="n">build_dir</span> <span class="o">=</span> <span class="s1">&#39;build/NombrePaquete/html&#39;</span>
+<span class="n">html_files</span> <span class="o">=</span> <span class="n">find_build_files</span><span class="p">(</span><span class="n">build_dir</span><span class="p">)</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;nombre_paquete_docs&#39;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Paquete de documentación HTML generada por Sphinx&#39;</span><span class="p">,</span>
+    <span class="n">author</span><span class="o">=</span><span class="s1">&#39;Raúl Vílchez&#39;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nombre_paquete_docs&#39;</span><span class="p">],</span>
+    <span class="n">package_dir</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;nombre_paquete_docs&#39;</span><span class="p">:</span> <span class="n">build_dir</span><span class="p">},</span>
+    <span class="n">package_data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;nombre_paquete_docs&#39;</span><span class="p">:</span> <span class="n">html_files</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="fase-2-secuencia-de-empaquetado-y-validacion-local">
+<h2>Fase 2: Secuencia de Empaquetado y Validación Local<a class="headerlink" href="#fase-2-secuencia-de-empaquetado-y-validacion-local" title="Link to this heading"></a></h2>
+<p>Ejecute la siguiente secuencia de comandos en la consola de comandos dentro del entorno virtual de desarrollo para limpiar residuos previos, compilar el binario y verificar su integridad estructural:</p>
+<ol class="arabic">
+<li><p><strong>Instalar dependencias de construcción:</strong>
+Garantiza que las herramientas de empaquetado se encuentren actualizadas en el entorno.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>build<span class="w"> </span>setuptools
+</pre></div>
+</div>
+</li>
+<li><p><strong>Limpieza de artefactos previos:</strong>
+Elimina directorios residuales y metadatos corruptos antes de una nueva compilación.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>dist/<span class="w"> </span>nombre_paquete_docs.egg-info/
+</pre></div>
+</div>
+</li>
+<li><p><strong>Compilación del paquete Wheel:</strong>
+Construye de forma directa el paquete binario (<code class="docutils literal notranslate"><span class="pre">.whl</span></code>) sin aislamiento de entorno.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>setup.py<span class="w"> </span>bdist_wheel
+</pre></div>
+</div>
+</li>
+<li><p><strong>Instalación de validación:</strong>
+Fuerza la instalación limpia del paquete generado para testearlo localmente.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>dist/nombre_paquete_docs-1.0.0-py3-none-any.whl<span class="w"> </span>--force-reinstall
+</pre></div>
+</div>
+</li>
+<li><p><strong>Auditoría de archivos internos:</strong>
+Inspecciona el árbol detallado de ficheros desplegados en el disco para verificar que no falte ningún recurso HTML o estático.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>show<span class="w"> </span>-f<span class="w"> </span>nombre-paquete-docs
+</pre></div>
+</div>
+</li>
+<li><p><strong>Limpieza del entorno:</strong>
+Remueve el paquete del entorno local tras concluir la verificación.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>uninstall<span class="w"> </span>nombre-paquete-docs<span class="w"> </span>-y
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="fase-3-infraestructura-de-despliegue-automatizado">
+<h2>Fase 3: Infraestructura de Despliegue Automatizado<a class="headerlink" href="#fase-3-infraestructura-de-despliegue-automatizado" title="Link to this heading"></a></h2>
+<p>Para distribuir el paquete a los usuarios finales mediante dispositivos de almacenamiento (como discos virtuales o unidades USB), se utiliza una arquitectura combinada de scripts en lotes (<code class="docutils literal notranslate"><span class="pre">.cmd</span></code>) y PowerShell (<code class="docutils literal notranslate"><span class="pre">.ps1</span></code>).</p>
+<section id="estructura-del-repositorio-de-distribucion">
+<h3>Estructura del Repositorio de Distribución<a class="headerlink" href="#estructura-del-repositorio-de-distribucion" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>📦 Raíz del Dispositivo (D:\)
+ ├── 📄 instalar.cmd                 # Lanzador principal de doble clic (ANSI)
+ ├── 📄 desinstalador.cmd            # Lanzador de desinstalación (ANSI)
+ └── 📁 NombrePaquete
+      ├── 📄 installer.ps1           # Script lógico de instalación
+      ├── 📄 desinstalar.ps1         # Script lógico de desinstalación
+      └── 📦 nombre_paquete_docs-1.0.0-py3-none-any.whl
+</pre></div>
+</div>
+</section>
+<section id="logica-interna-del-instalador-installer-ps1">
+<h3>Lógica Interna del Instalador (<cite>installer.ps1</cite>)<a class="headerlink" href="#logica-interna-del-instalador-installer-ps1" title="Link to this heading"></a></h3>
+<p>Este script es el núcleo del despliegue en la máquina destino. Se encarga de aislar el entorno mediante Python <code class="docutils literal notranslate"><span class="pre">venv</span></code>, interactuar con el intérprete local para extraer la ruta dinámica del directorio <code class="docutils literal notranslate"><span class="pre">site-packages</span></code> una vez montado el paquete, y automatizar la creación del acceso directo multiplataforma en el escritorio del usuario final apuntando al archivo base <code class="docutils literal notranslate"><span class="pre">index.html</span></code>.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># ==============================================================================</span>
+<span class="c"># SCRIPT DEFINITIVO DE DESPLIEGUE AUTOMóTICO DE DOCUMENTACIóN</span>
+<span class="c"># ==============================================================================</span>
+<span class="c"># Destino: Windows 10 (Entorno Limpio)</span>
+<span class="c"># Función: Crear venv, instalar wheel y generar lanzador directo en Escritorio.</span>
+<span class="c"># ==============================================================================</span>
+
+<span class="c"># Parametro que recibe la ruta dinamica del pendrive</span>
+<span class="k">param</span> <span class="p">(</span>
+   <span class="no">[string]</span><span class="nv">$UsbPath</span>
+<span class="p">)</span>
+
+<span class="nv">$ErrorActionPreference</span> <span class="p">=</span> <span class="s2">&quot;Stop&quot;</span>
+
+<span class="c"># Si se ejecuta suelto, toma la ruta del script</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$UsbPath</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$UsbPath</span> <span class="p">=</span> <span class="nb">Split-Path</span> <span class="n">-Parent</span> <span class="nv">$MyInvocation</span><span class="p">.</span><span class="n">MyCommand</span><span class="p">.</span><span class="n">Path</span> <span class="p">}</span>
+
+<span class="c"># 1. Definición de rutas lógicas</span>
+<span class="nv">$BaseDir</span>     <span class="p">=</span> <span class="s2">&quot;C:\NombrePaquete&quot;</span>
+<span class="nv">$VenvName</span>    <span class="p">=</span> <span class="s2">&quot;.env&quot;</span>
+<span class="nv">$VenvPath</span>    <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$BaseDir</span> <span class="nv">$VenvName</span>
+
+<span class="c"># El .whl se busca dinamicamente en la carpeta NombrePaquete del USB</span>
+<span class="nv">$WheelFile</span>   <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$UsbPath</span> <span class="s2">&quot;NombrePaquete\nombre_paquete_docs-1.0.0-py3-none-any.whl&quot;</span>
+<span class="nv">$DesktopPath</span> <span class="p">=</span> <span class="no">[Environment]</span><span class="p">::</span><span class="n">GetFolderPath</span><span class="p">(</span><span class="s2">&quot;Desktop&quot;</span><span class="p">)</span>
+
+<span class="nb">Write-Host</span> <span class="s2">&quot;[+] Iniciando despliegue de infraestructura local...&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Cyan</span>
+
+<span class="c"># 2. Creación del entorno virtual si no existe</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="nv">$VenvPath</span><span class="p">))</span> <span class="p">{</span>
+   <span class="nb">Write-Host</span> <span class="s2">&quot;[+] Creando entorno virtual aislado de Python...&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span>
+   <span class="n">python</span> <span class="n">-m</span> <span class="n">venv</span> <span class="nv">$VenvPath</span>
+<span class="p">}</span>
+
+<span class="c"># 3. Instalación silenciosa del paquete Wheel (.whl)</span>
+<span class="nb">Write-Host</span> <span class="s2">&quot;[+] Instalando paquete de documentación estótica en el bónquer...&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span>
+<span class="c">#$PythonExe = Join-Path $VenvPath &quot;Scripts\python.exe&quot;</span>
+<span class="c">#Start-Process -FilePath $PythonExe -ArgumentList &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;`&quot;$WheelFile`&quot;&quot;, &quot;--quiet&quot;, &quot;--no-warn-script-location&quot; -Wait -NoNewWindow</span>
+
+<span class="c"># 4. Obtener de forma dinómica la ruta absoluta de instalación en site-packages</span>
+<span class="nb">Write-Host</span> <span class="s2">&quot;[+] Extrayendo rutas fósicas del paquete...&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span>
+<span class="nv">$PythonExe</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$VenvPath</span> <span class="s2">&quot;Scripts\python.exe&quot;</span>
+<span class="nv">$PkgPath</span> <span class="p">=</span> <span class="p">&amp;</span> <span class="nv">$PythonExe</span> <span class="n">-c</span> <span class="s2">&quot;import nombre_paquete_docs; print(nombre_paquete_docs.__path__[0])&quot;</span>
+<span class="nv">$IndexHtml</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$PkgPath</span><span class="p">.</span><span class="n">Trim</span><span class="p">()</span> <span class="s2">&quot;index.html&quot;</span>
+
+<span class="c"># 5. Automatización del Lanzador del Escritorio (Acceso directo limpio)</span>
+<span class="nb">Write-Host</span> <span class="s2">&quot;[+] Creando lanzador directo en el Escritorio del usuario...&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span>
+<span class="nv">$WshShell</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">-ComObject</span> <span class="n">WScript</span><span class="p">.</span><span class="n">Shell</span>
+<span class="nv">$ShortcutPath</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="nv">$DesktopPath</span> <span class="s2">&quot;Nombre enlace.lnk&quot;</span>
+<span class="nv">$Shortcut</span> <span class="p">=</span> <span class="nv">$WshShell</span><span class="p">.</span><span class="n">CreateShortcut</span><span class="p">(</span><span class="nv">$ShortcutPath</span><span class="p">)</span>
+
+<span class="c"># Apuntamos directamente a MS Edge pasóndole la ruta del archivo index.html local</span>
+<span class="nv">$Shortcut</span><span class="p">.</span><span class="n">TargetPath</span> <span class="p">=</span> <span class="s2">&quot;cmd.exe&quot;</span>
+<span class="nv">$Shortcut</span><span class="p">.</span><span class="n">Arguments</span>  <span class="p">=</span> <span class="s2">&quot;/c start </span><span class="se">`&quot;`&quot;</span><span class="s2"> </span><span class="se">`&quot;</span><span class="s2">$IndexHtml</span><span class="se">`&quot;</span><span class="s2">&quot;</span>
+<span class="nv">$Shortcut</span><span class="p">.</span><span class="n">Description</span> <span class="p">=</span> <span class="s2">&quot;Abrir la documentación de la Nombre paquete en el navegador&quot;</span>
+<span class="nv">$Shortcut</span><span class="p">.</span><span class="n">IconLocation</span> <span class="p">=</span> <span class="s2">&quot;shell32.dll, 14&quot;</span>
+<span class="nv">$Shortcut</span><span class="p">.</span><span class="n">Save</span><span class="p">()</span>
+
+<span class="c"># Desbloque del archivo generado</span>
+<span class="nb">Unblock-File</span> <span class="n">-Path</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="nv">$DesktopPath</span> <span class="s2">&quot;Nombre enlace.lnk&quot;</span><span class="p">)</span>
+
+<span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">[ok] Despliegue completado con éxito!&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
+<span class="nb">Write-Host</span> <span class="s2">&quot;[i] Ya puedes cerrar la consola y hacer doble clic en &#39;Nombre enlace&#39; en el Escritorio.&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Cyan</span>
+</pre></div>
+</div>
+</section>
+<section id="codigo-del-lanzador-automatizado-instalar-cmd">
+<h3>Código del Lanzador Automatizado (<cite>instalar.cmd</cite>)<a class="headerlink" href="#codigo-del-lanzador-automatizado-instalar-cmd" title="Link to this heading"></a></h3>
+<p>Este archivo debe guardarse estrictamente con codificación <strong>ANSI</strong> o <strong>UTF-8 sin BOM</strong> para evitar errores de interpretación en la consola de Windows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>@echo<span class="w"> </span>off
+title<span class="w"> </span>Instalador<span class="w"> </span>-<span class="w"> </span>Documentacion<span class="w"> </span>Nombre<span class="w"> </span>Paquete
+<span class="nb">echo</span><span class="w"> </span><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Iniciando<span class="w"> </span>el<span class="w"> </span>asistente<span class="w"> </span>de<span class="w"> </span>instalacion...
+
+::<span class="w"> </span><span class="m">1</span>.<span class="w"> </span>Comprobar<span class="w"> </span>si<span class="w"> </span>existe<span class="w"> </span>el<span class="w"> </span>entorno<span class="w"> </span>virtual<span class="p">;</span><span class="w"> </span>si<span class="w"> </span>no,<span class="w"> </span>delegar<span class="w"> </span>en<span class="w"> </span>PowerShell<span class="w"> </span>su<span class="w"> </span>creación
+<span class="k">if</span><span class="w"> </span>not<span class="w"> </span>exist<span class="w"> </span><span class="s2">&quot;C:\NombrePaquete\.env\Scripts\python.exe&quot;</span><span class="w"> </span>PowerShell<span class="w"> </span>-ExecutionPolicy<span class="w"> </span>Bypass<span class="w"> </span>-File<span class="w"> </span><span class="s2">&quot;%~dp0NombrePaquete\installer.ps1&quot;</span><span class="w"> </span>-UsbPath<span class="w"> </span><span class="s2">&quot;%~dp0&quot;</span><span class="w"> </span>&gt;nul<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+
+::<span class="w"> </span><span class="m">2</span>.<span class="w"> </span>Instalar<span class="w"> </span>el<span class="w"> </span>paquete<span class="w"> </span>de<span class="w"> </span>forma<span class="w"> </span>nativa<span class="w"> </span>desde<span class="w"> </span>CMD<span class="w"> </span>para<span class="w"> </span>mitigar<span class="w"> </span>conflictos<span class="w"> </span>de<span class="w"> </span>parseo<span class="w"> </span>de<span class="w"> </span>tokens
+<span class="s2">&quot;C:\NombrePaquete\.env\Scripts\python.exe&quot;</span><span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;%~dp0NombrePaquete\nombre_paquete_docs-1.0.0-py3-none-any.whl&quot;</span><span class="w"> </span>--quiet<span class="w"> </span>--no-warn-script-location
+
+::<span class="w"> </span><span class="m">3</span>.<span class="w"> </span>Invocar<span class="w"> </span>la<span class="w"> </span>fase<span class="w"> </span>final<span class="w"> </span>de<span class="w"> </span>PowerShell<span class="w"> </span>para<span class="w"> </span>la<span class="w"> </span>extracción<span class="w"> </span>de<span class="w"> </span>rutas<span class="w"> </span>y<span class="w"> </span>generación<span class="w"> </span>del<span class="w"> </span>acceso<span class="w"> </span>directo
+PowerShell<span class="w"> </span>-ExecutionPolicy<span class="w"> </span>Bypass<span class="w"> </span>-File<span class="w"> </span><span class="s2">&quot;%~dp0NombrePaquete\installer.ps1&quot;</span><span class="w"> </span>-UsbPath<span class="w"> </span><span class="s2">&quot;%~dp0&quot;</span>
+
+echo.
+<span class="nb">echo</span><span class="w"> </span><span class="o">[=]</span><span class="w"> </span>Proceso<span class="w"> </span>finalizado.<span class="w"> </span>Ya<span class="w"> </span>puede<span class="w"> </span>usar<span class="w"> </span>el<span class="w"> </span>acceso<span class="w"> </span>directo<span class="w"> </span>del<span class="w"> </span>Escritorio.
+pause
+</pre></div>
+</div>
+</section>
+<section id="codigo-del-desinstalador-automatizado-desinstalar-cmd">
+<h3>Código del Desinstalador Automatizado (<cite>desinstalar.cmd</cite>)<a class="headerlink" href="#codigo-del-desinstalador-automatizado-desinstalar-cmd" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>@echo<span class="w"> </span>off
+title<span class="w"> </span>Desinstalador<span class="w"> </span>-<span class="w"> </span>Documentacion<span class="w"> </span>Nombre<span class="w"> </span>Paquete
+<span class="nb">echo</span><span class="w"> </span><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Iniciando<span class="w"> </span>el<span class="w"> </span>proceso<span class="w"> </span>de<span class="w"> </span>desinstalacion...
+
+PowerShell<span class="w"> </span>-ExecutionPolicy<span class="w"> </span>Bypass<span class="w"> </span>-File<span class="w"> </span><span class="s2">&quot;%~dp0NombrePaquete\desinstalar.ps1&quot;</span>
+
+echo.
+<span class="nb">echo</span><span class="w"> </span><span class="o">[</span>✔<span class="o">]</span><span class="w"> </span>Limpieza<span class="w"> </span>realizada<span class="w"> </span>con<span class="w"> </span>exito.
+pause
+</pre></div>
+</div>
+</section>
+<section id="logica-interna-del-desinstalador-desinstalar-ps1">
+<h3>Lógica Interna del Desinstalador (<cite>desinstalar.ps1</cite>)<a class="headerlink" href="#logica-interna-del-desinstalador-desinstalar-ps1" title="Link to this heading"></a></h3>
+<p>Este script elimina de forma segura la infraestructura local creada y remueve el acceso directo generado en el escritorio del usuario.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># Eliminación de infraestructura local y acceso directo del escritorio</span>
+<span class="nb">Remove-Item</span> <span class="n">-Recurse</span> <span class="n">-Force</span> <span class="s2">&quot;C:\NombrePaquete&quot;</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+<span class="nb">Remove-Item</span> <span class="n">-Force</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="p">(</span><span class="no">[Environment]</span><span class="p">::</span><span class="n">GetFolderPath</span><span class="p">(</span><span class="s2">&quot;Desktop&quot;</span><span class="p">))</span> <span class="s2">&quot;Nombre Paquete.lnk&quot;</span><span class="p">)</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Índice de Administración de Sistemas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="track-tools.html" class="btn btn-neutral float-right" title="Herramientas de Trazado e Inspección de Procesos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

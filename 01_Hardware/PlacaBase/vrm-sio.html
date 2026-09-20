@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Alimentación y Control Térmico &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Firmware y Arranque" href="fwr-boot.html" />
+    <link rel="prev" title="Arquitectura de Bus ISA" href="busISA.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#placa-base">Placa Base</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Arquitectura de la Placa Base</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Arquitectura de la Placa Base</a></li>
+      <li class="breadcrumb-item active">Sistema de Alimentación y Control Térmico</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/PlacaBase/vrm-sio.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sistema-de-alimentacion-y-control-termico">
+<h1>Sistema de Alimentación y Control Térmico<a class="headerlink" href="#sistema-de-alimentacion-y-control-termico" title="Link to this heading"></a></h1>
+<p>El sistema de alimentación y el control térmico de una placa base son subsistemas críticos encargados de transformar, regular y distribuir la energía eléctrica proveniente de la fuente de alimentación, así como de monitorizar las condiciones físicas de operación para garantizar la estabilidad del hardware.</p>
+<section id="vrm-voltage-regulator-module">
+<h2>VRM (Voltage Regulator Module)<a class="headerlink" href="#vrm-voltage-regulator-module" title="Link to this heading"></a></h2>
+<p>El <strong>VRM</strong> (<em>Módulo Regulador de Tensión</em>) es un circuito convertidor de corriente continua a corriente continua (<strong>DC-DC</strong>) de tipo reductor (<em>Buck Converter</em>). Su función principal es transformar la tensión de <span class="math notranslate nohighlight">\(+12\text{ V}\)</span> suministrada por la fuente de alimentación (a través de los conectores EPS/ATX12V) en las tensiones de alta precisión y bajo nivel que requieren la CPU, la memoria RAM y los chipsets (típicamente entre <span class="math notranslate nohighlight">\(0.8\text{ V}\)</span> y <span class="math notranslate nohighlight">\(1.4\text{ V}\)</span>).</p>
+<section id="componentes-fundamentales-del-vrm">
+<h3>Componentes Fundamentales del VRM<a class="headerlink" href="#componentes-fundamentales-del-vrm" title="Link to this heading"></a></h3>
+<p>Un VRM se compone de una o varias fases de alimentación asociadas en paralelo para repartir la carga de corriente y reducir la disipación térmica:</p>
+<ol class="arabic simple">
+<li><p><strong>Controlador PWM (*Pulse-Width Modulation*)</strong>: Circuito integrado que supervisa los requerimientos de voltaje de la CPU (mediante señales digitales VID - <em>Voltage Identification</em>) y regula el ciclo de trabajo de los MOSFETs.</p></li>
+<li><p><strong>MOSFETs (*Metal-Oxide-Semiconductor Field-Effect Transistors*)</strong>: Interruptores electrónicos de alta frecuencia divididos en <em>High-Side</em> (conectado a la línea de <span class="math notranslate nohighlight">\(12\text{ V}\)</span>) y <em>Low-Side</em> (conectado a tierra). En diseños modernos se utilizan etapas de potencia integradas (<strong>DrMOS</strong> o <em>Power Stages</em>), que combinan ambos MOSFETs y su controlador (<em>driver</em>) en un único empaquetado.</p></li>
+<li><p><strong>Inductores (*Chokes*)</strong>: Componentes magnéticos que filtran la señal de onda cuadrada generada por la conmutación de los MOSFETs, suavizando la corriente de salida y almacenando energía.</p></li>
+<li><p><strong>Condensadores (*Capacitors*)</strong>: Condensadores sólidos de polímero o tántalo que suavizan los picos de tensión (<em>ripple</em>) y suministran energía inmediata ante fluctuaciones drásticas en la carga de la CPU.</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Entrada +12V DC  --&gt; [ MOSFET High-Side ]
+                            |
+                            +---&gt; [ Inductor / Choke ] ---&gt; [ Condensador ] ---&gt; VCore CPU
+                            |
+                     [ MOSFET Low-Side ]
+                            |
+                          GND
+</pre></div>
+</div>
+</section>
+</section>
+<section id="super-i-o-chip">
+<h2>Super I/O Chip<a class="headerlink" href="#super-i-o-chip" title="Link to this heading"></a></h2>
+<p>El integrado <strong>Super I/O</strong> es un controlador secundario conectado al Southbridge o PCH a través del bus <strong>LPC</strong> (<em>Low Pin Count</em>) o la interfaz moderna <strong>eSPI</strong> (<em>Enhanced Serial Peripheral Interface</em>).</p>
+<section id="funciones-de-gestion-termica-y-telemetria">
+<h3>Funciones de Gestión Térmica y Telemetría<a class="headerlink" href="#funciones-de-gestion-termica-y-telemetria" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Monitorización de Hardware (H/W Monitor)</strong>: Mide mediante convertidores analógico-digitales (ADC) los voltajes de las líneas de la fuente de alimentación (<span class="math notranslate nohighlight">\(+12\text{V}\)</span>, <span class="math notranslate nohighlight">\(+5\text{V}\)</span>, <span class="math notranslate nohighlight">\(+3.3\text{V}\)</span>) y las tensiones del procesador.</p></li>
+<li><p><strong>Sensores de Temperatura</strong>: Lee las señales de termistores NTC o diodos térmicos distribuidos por la placa base (zócalo de CPU, VRM, chipset, ambiente).</p></li>
+<li><p><strong>Control de Ventiladores</strong>: Gestiona las revoluciones por minuto (RPM) de los ventiladores mediante modulación por ancho de pulso (<strong>PWM</strong> de 4 pines) o variación de tensión continua (<strong>DC</strong> de 3 pines), ajustando curvas de ventilación según la temperatura.</p></li>
+<li><p><strong>Soporte de Periféricos Legados</strong>: Integra el controlador para interfaces tradicionales como puertos serie (RS-232), puerto paralelo (IEEE 1284), conectores PS/2 y el controlador de disquete.</p></li>
+</ul>
+</section>
+</section>
+<section id="interaccion-entre-el-vrm-super-i-o-y-firmware">
+<h2>Interacción entre el VRM, Super I/O y Firmware<a class="headerlink" href="#interaccion-entre-el-vrm-super-i-o-y-firmware" title="Link to this heading"></a></h2>
+<p>El firmware (<strong>UEFI/BIOS</strong>) lee los datos recolectados por el chip Super I/O para aplicar las curvas de ventilación definidas por el usuario y supervisar los límites de seguridad térmica. Si la temperatura del VRM o de la CPU supera los umbrales críticos (<em>TjMax</em>), el sistema activa mecanismos de protección por hardware como el estrangulamiento térmico (<em>thermal throttling</em>) o el apagado de emergencia del sistema.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="busISA.html" class="btn btn-neutral float-left" title="Arquitectura de Bus ISA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fwr-boot.html" class="btn btn-neutral float-right" title="Firmware y Arranque" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

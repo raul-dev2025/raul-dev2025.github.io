@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadena de invocación &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Modo de empleo: Scripts de Integración CI" href="modoDeEmpleo.html" />
+    <link rel="prev" title="E.L.A." href="ela.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../Foundry/index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">HwBus-IO</a></li>
+      <li class="breadcrumb-item active">Cadena de invocación</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/hwbus-io/ci-cd/cadenaInvocacion.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cadena-de-invocacion">
+<h1>Cadena de invocación<a class="headerlink" href="#cadena-de-invocacion" title="Link to this heading"></a></h1>
+<p>En Linux, los permisos de ejecución (incluyendo el privilegio de root cuando un programa se lanza con sudo) no se evalúan por binario individual en una cadena de subprocesos, sino por proceso y sus descendientes.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>ci-runLauncher.sh<span class="o">]</span><span class="w"> </span><span class="o">(</span>Host<span class="w"> </span>/<span class="w"> </span>Workstation<span class="o">)</span>
+<span class="w">   </span>│
+<span class="w">   </span>▼<span class="w">  </span>SSH<span class="w"> </span>/<span class="w"> </span>Remote<span class="w"> </span>Execution
+<span class="o">[</span>ci-kmod-runner.sh<span class="o">]</span><span class="w"> </span><span class="o">(</span>Sandbox<span class="w"> </span>-<span class="w"> </span>Usuario<span class="w"> </span><span class="s1">&#39;builder&#39;</span><span class="w"> </span>/<span class="w"> </span>no<span class="w"> </span>root<span class="o">)</span>
+<span class="w">   </span>│
+<span class="w">   </span>├──<span class="w"> </span><span class="m">1</span>.<span class="w"> </span>Evalúa<span class="w"> </span><span class="nv">$TEST_BINARY_NAME</span><span class="w"> </span><span class="o">(</span><span class="s2">&quot;hwbus_io_suite00r&quot;</span><span class="o">)</span>
+<span class="w">   </span>├──<span class="w"> </span><span class="m">2</span>.<span class="w"> </span>Detecta<span class="w"> </span>la<span class="w"> </span><span class="s1">&#39;r&#39;</span><span class="w"> </span>final<span class="w"> </span><span class="o">(</span><span class="sb">``</span>*r<span class="sb">``</span><span class="o">)</span>
+<span class="w">   </span>│
+<span class="w">   </span>▼<span class="w">  </span>Invoca<span class="w"> </span>mediante:<span class="w"> </span>sudo<span class="w"> </span>./hwbus_io_suite00r
+┌──────────────────────────────────────────────────────────┐
+│<span class="w">  </span>Proceso<span class="w"> </span>PID<span class="w"> </span>X:<span class="w"> </span><span class="o">[</span>hwbus_io_suite00r<span class="o">]</span><span class="w">                      </span>│
+│<span class="w">  </span>EUID:<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>EGID:<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">(</span>root<span class="o">)</span><span class="w">                         </span>│
+│<span class="w">                                                          </span>│
+│<span class="w">  </span><span class="m">1</span>.<span class="w"> </span>Inicia<span class="w"> </span>suite,<span class="w"> </span>setup<span class="o">()</span>,<span class="w"> </span>tst_module_load<span class="o">()</span><span class="w">             </span>│
+│<span class="w">  </span><span class="m">2</span>.<span class="w"> </span>Llama<span class="w"> </span>a<span class="w"> </span>SAFE_FORK<span class="o">()</span><span class="w"> </span>-&gt;<span class="w"> </span>Crea<span class="w"> </span>subproceso<span class="w"> </span>hijo<span class="w">          </span>│
+│<span class="w">  </span><span class="m">3</span>.<span class="w"> </span>Llama<span class="w"> </span>a<span class="w"> </span>execv<span class="o">(</span><span class="s2">&quot;./hwbus_io01&quot;</span>,<span class="w"> </span>argv<span class="o">)</span><span class="w">                  </span>│
+│<span class="w">     </span>│<span class="w">                                                    </span>│
+│<span class="w">     </span>▼<span class="w">                                                    </span>│
+│<span class="w">  </span>┌────────────────────────────────────────────────────┐<span class="w">  </span>│
+│<span class="w">  </span>│<span class="w"> </span>Proceso<span class="w"> </span>Hijo<span class="w"> </span><span class="o">(</span>PID<span class="w"> </span>X+1<span class="o">)</span>:<span class="w"> </span><span class="o">[</span>hwbus_io01<span class="o">]</span><span class="w">               </span>│<span class="w">  </span>│
+│<span class="w">  </span>│<span class="w"> </span>EUID:<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>EGID:<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span>&lt;---<span class="w"> </span><span class="o">[</span>HEREDADO<span class="o">]</span><span class="w">    </span>│<span class="w">  </span>│
+│<span class="w">  </span>│<span class="w">                                                    </span>│<span class="w">  </span>│
+│<span class="w">  </span>│<span class="w"> </span>Executa<span class="w"> </span>llamados<span class="w"> </span>ioctl<span class="o">()</span>,<span class="w"> </span>mmap<span class="o">()</span>,<span class="w"> </span>etc.<span class="w"> </span>como<span class="w"> </span>ROOT<span class="w">   </span>│<span class="w">  </span>│
+│<span class="w">  </span>│<span class="w"> </span>Finaliza<span class="w"> </span>con<span class="w"> </span>exit<span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w">                               </span>│<span class="w">  </span>│
+│<span class="w">  </span>└────────────────────────────────────────────────────┘<span class="w">  </span>│
+│<span class="w">                                                          </span>│
+│<span class="w">  </span><span class="m">4</span>.<span class="w"> </span>Parent<span class="w"> </span>recibe<span class="w"> </span>status<span class="w"> </span>vía<span class="w"> </span>waitpid<span class="o">(</span>PID<span class="w"> </span>X+1,<span class="w"> </span>...<span class="o">)</span><span class="w">       </span>│
+│<span class="w">  </span><span class="m">5</span>.<span class="w"> </span>Siguiente<span class="w"> </span>iteración<span class="w"> </span>-&gt;<span class="w"> </span>repite<span class="w"> </span>SAFE_FORK<span class="w"> </span>+<span class="w"> </span>execv<span class="w"> </span>...<span class="w">  </span>│
+└──────────────────────────────────────────────────────────┘
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ela.html" class="btn btn-neutral float-left" title="E.L.A." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modoDeEmpleo.html" class="btn btn-neutral float-right" title="Modo de empleo: Scripts de Integración CI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

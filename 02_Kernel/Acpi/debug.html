@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salida de depuración ACPI &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Boot" href="../Admin-guide/1-boot.html" />
+    <link rel="prev" title="El depurador AML" href="aml-debugger.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#acpi">Acpi</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="aml-debugger.html">El depurador AML</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Salida de depuración ACPI</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuracion-de-tiempo-de-compilacion">Configuración de <em>tiempo de compilación</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuracion-del-arranque-y-tiempo-de-ejecucion">Configuración del <em>arranque</em> y <em>tiempo de ejecución</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#capa-de-depuracion-componente">Capa de depuración(componente)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nivel-de-depuracion">Nivel de depuración</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ejemplos">Ejemplos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Salida de depuración ACPI</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/Acpi/debug.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="salida-de-depuracion-acpi">
+<h1><a class="toc-backref" href="#id3" role="doc-backlink">Salida de depuración ACPI</a><a class="headerlink" href="#salida-de-depuracion-acpi" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#salida-de-depuracion-acpi" id="id3">Salida de depuración ACPI</a></p>
+<ul>
+<li><p><a class="reference internal" href="#configuracion-de-tiempo-de-compilacion" id="id4">Configuración de <em>tiempo de compilación</em></a></p></li>
+<li><p><a class="reference internal" href="#configuracion-del-arranque-y-tiempo-de-ejecucion" id="id5">Configuración del <em>arranque</em> y <em>tiempo de ejecución</em></a></p></li>
+<li><p><a class="reference internal" href="#capa-de-depuracion-componente" id="id6">Capa de depuración(componente)</a></p></li>
+<li><p><a class="reference internal" href="#nivel-de-depuracion" id="id7">Nivel de depuración</a></p></li>
+<li><p><a class="reference internal" href="#ejemplos" id="id8">Ejemplos</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id9">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>ACPI CA, el <em>centro</em> de Linux ACPI y, algunos dispositivos ACPI, pueden pdrían generar generar <em>salidas de depuración</em>.</p>
+<section id="configuracion-de-tiempo-de-compilacion">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Configuración de <em>tiempo de compilación</em></a><a class="headerlink" href="#configuracion-de-tiempo-de-compilacion" title="Link to this heading"></a></h2>
+<p>La salida de depuración ACPI, está globalmente activada con <code class="docutils literal notranslate"><span class="pre">CONFIG_ACPI_DEBUG</span></code>. Si la opción es desactivada, los mensajes de depuración no serán <em>construidos</em> dentro del kernel.</p>
+</section>
+<section id="configuracion-del-arranque-y-tiempo-de-ejecucion">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Configuración del <em>arranque</em> y <em>tiempo de ejecución</em></a><a class="headerlink" href="#configuracion-del-arranque-y-tiempo-de-ejecucion" title="Link to this heading"></a></h2>
+<p>Cuando <code class="docutils literal notranslate"><span class="pre">CONFIG_ACPI_DEBUG=yes</span></code>, podrá seleccionarse el componente y el mensaje en el que estemos interesados. Durante el <em>arranque</em>, podrán utilizarse los <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> comandos de línea <code class="docutils literal notranslate"><span class="pre">acpi.debug_layer</span></code> y <code class="docutils literal notranslate"><span class="pre">acpi.debug_level</span></code>. Después del arranque, los <em>archivos</em> <code class="docutils literal notranslate"><span class="pre">debug_layer</span></code> y <code class="docutils literal notranslate"><span class="pre">debug_level</span></code> localizados en <code class="docutils literal notranslate"><span class="pre">/sys/module/acpi/parameters/</span></code> para el control de los mensajes de depuración.</p>
+</section>
+<section id="capa-de-depuracion-componente">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Capa de depuración(componente)</a><a class="headerlink" href="#capa-de-depuracion-componente" title="Link to this heading"></a></h2>
+<p>La capa de depuración, es una <em>máscara</em> que permite seleccionar componentes de interés, por ejemplo un controlador específico o, parte del <em>intérprete ACPI</em>. Para construir el <code class="docutils literal notranslate"><span class="pre">bitmask</span></code> de <code class="docutils literal notranslate"><span class="pre">debug_layer</span></code>, habrá que buscar <code class="docutils literal notranslate"><span class="pre">#define</span> <span class="pre">_COMPONENT</span></code> en el archivo fuente ACPI.</p>
+<p>Podrá configurarse la <em>máscara</em> <code class="docutils literal notranslate"><span class="pre">debug_layer</span></code> durante el <em>arranque</em> por medio del comando de línea <code class="docutils literal notranslate"><span class="pre">acpi.debug_layer</span></code>, también podrá ser cambiado tras sucederse el arranque,
+escribiendo los <em>valores</em> a <code class="docutils literal notranslate"><span class="pre">/sys/module/acpi/parameters/debug_layer</span></code>.</p>
+<p>Los posibles componentes son definidos en <code class="docutils literal notranslate"><span class="pre">include/acpi/acoutput.h</span></code> e <code class="docutils literal notranslate"><span class="pre">include/acpi/acpi_drivers.h</span></code>. La lectura de <code class="docutils literal notranslate"><span class="pre">/sys/module/acpi/parameters/debug_layer</span></code> mostrará el soporte a éstos valores <em>de máscara</em>, actualmente:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ACPI_UTILITIES0x00000001
+ACPI_HARDWARE 0x00000002
+ACPI_EVENTS 0x00000004
+ACPI_TABLES 0x00000008
+ACPI_NAMESPACE0x00000010
+ACPI_PARSER 0x00000020
+ACPI_DISPATCHER 0x00000040
+ACPI_EXECUTER 0x00000080
+ACPI_RESOURCES0x00000100
+ACPI_CA_DEBUGGER0x00000200
+ACPI_OS_SERVICES0x00000400
+ACPI_CA_DISASSEMBLER0x00000800
+ACPI_COMPILER 0x00001000
+ACPI_TOOLS0x00002000
+ACPI_BUS_COMPONENT0x00010000
+ACPI_AC_COMPONENT 0x00020000
+ACPI_BATTERY_COMPONENT0x00040000
+ACPI_BUTTON_COMPONENT 0x00080000
+ACPI_SBS_COMPONENT0x00100000
+ACPI_FAN_COMPONENT0x00200000
+ACPI_PCI_COMPONENT0x00400000
+ACPI_POWER_COMPONENT0x00800000
+ACPI_CONTAINER_COMPONENT0x01000000
+ACPI_SYSTEM_COMPONENT 0x02000000
+ACPI_THERMAL_COMPONENT0x04000000
+ACPI_MEMORY_DEVICE_COMPONENT0x08000000
+ACPI_VIDEO_COMPONENT0x10000000
+ACPI_PROCESSOR_COMPONENT0x20000000
+</pre></div>
+</div>
+</section>
+<section id="nivel-de-depuracion">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Nivel de depuración</a><a class="headerlink" href="#nivel-de-depuracion" title="Link to this heading"></a></h2>
+<p>El <em>nivel de depuración</em>, es una máscara para seleccionar diferentes tipos de mensajes, por ejemplo, aquellos relacionados con la <em>inicialización</em>, métodos de ejecución, mensajes inmformativos, etc. Para construir <code class="docutils literal notranslate"><span class="pre">debug_level</span></code>, mirar el nivel especificado en el estamento <code class="docutils literal notranslate"><span class="pre">ACPI_DEBUG_PRINT()</span></code>.</p>
+<p>El intérprete ACPI, distintos tipos de <em>niveles</em>, pero el núcleo(core), ACPI y, los controladores ACPI, generalmente utilizan <code class="docutils literal notranslate"><span class="pre">ACPI_LV_INFO</span></code>.</p>
+<p>Podrá configurarse la máscara <code class="docutils literal notranslate"><span class="pre">debug_level</span></code> durante el <em>arranque</em>, con del comando de línea <code class="docutils literal notranslate"><span class="pre">acpi.debug_level</span></code> como argumento y, después del arranque, asignando los valores apropiados en <code class="docutils literal notranslate"><span class="pre">/sys/module/acpi/parameters/debug_level</span></code>.</p>
+<p>Los <em>niveles</em> posibles están definidos en <code class="docutils literal notranslate"><span class="pre">include/acpi/acoutput.h</span></code>. La lectura de <code class="docutils literal notranslate"><span class="pre">/sys/module/acpi/parameters/debug_level</span></code> mostrará el soporte a los valores de máscara, actualmente:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ACPI_LV_INIT0x00000001
+ACPI_LV_DEBUG_OBJECT0x00000002
+ACPI_LV_INFO0x00000004
+ACPI_LV_INIT_NAMES0x00000020
+ACPI_LV_PARSE 0x00000040
+ACPI_LV_LOAD0x00000080
+ACPI_LV_DISPATCH0x00000100
+ACPI_LV_EXEC0x00000200
+ACPI_LV_NAMES 0x00000400
+ACPI_LV_OPREGION0x00000800
+ACPI_LV_BFIELD0x00001000
+ACPI_LV_TABLES0x00002000
+ACPI_LV_VALUES0x00004000
+ACPI_LV_OBJECTS 0x00008000
+ACPI_LV_RESOURCES 0x00010000
+ACPI_LV_USER_REQUESTS 0x00020000
+ACPI_LV_PACKAGE 0x00040000
+ACPI_LV_ALLOCATIONS 0x00100000
+ACPI_LV_FUNCTIONS 0x00200000
+ACPI_LV_OPTIMIZATIONS 0x00400000
+ACPI_LV_MUTEX 0x01000000
+ACPI_LV_THREADS 0x02000000
+ACPI_LV_IO0x04000000
+ACPI_LV_INTERRUPTS0x08000000
+ACPI_LV_AML_DISASSEMBLE 0x10000000
+ACPI_LV_VERBOSE_INFO0x20000000
+ACPI_LV_FULL_TABLES 0x40000000
+ACPI_LV_EVENTS0x80000000
+</pre></div>
+</div>
+</section>
+<section id="ejemplos">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Ejemplos</a><a class="headerlink" href="#ejemplos" title="Link to this heading"></a></h2>
+<p>Por ejemplo, <code class="docutils literal notranslate"><span class="pre">drivers/acpi/bus.c</span></code> contiene esto:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define _COMPONENTACPI_BUS_COMPONENT</span>
+<span class="p">...</span>
+<span class="n">ACPI_DEBUG_PRINT</span><span class="p">((</span><span class="n">ACPI_DB_INFO</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device insertion detected</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Para <em>activar</em> éste mensaje, configurar el <em>bit</em>  <code class="docutils literal notranslate"><span class="pre">ACPI_BUS_COMPONENT</span></code> en <code class="docutils literal notranslate"><span class="pre">acpi.debug_layer</span></code> y el <em>bit</em> <code class="docutils literal notranslate"><span class="pre">ACPI_LV_INFO</span></code> en <code class="docutils literal notranslate"><span class="pre">acpi.debug_level</span></code>. El estamento <code class="docutils literal notranslate"><span class="pre">ACPI_DEBUG_PRINT</span></code> usa <code class="docutils literal notranslate"><span class="pre">ACPI_DB_INFO</span></code>, el cuál es una mmacro basada en la difinición <code class="docutils literal notranslate"><span class="pre">ACPI_LV_INFO</span></code>.</p>
+<p>Activar toda la salida de <em>depuración</em> -almacena el <em>objeto depurado</em> mientras interpreta código AML <a class="footnote-reference brackets" href="#f2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, durante el arranque:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">acpi</span><span class="p">.</span><span class="n">debug_layer</span><span class="o">=</span><span class="mh">0xffffffff</span><span class="w"> </span><span class="n">acpi</span><span class="p">.</span><span class="n">debug_level</span><span class="o">=</span><span class="mh">0x2</span>
+</pre></div>
+</div>
+<p>Activa los mensajes de depuración dde PCI y el <em>enrutado</em> de interrupciones PCI.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">acpi</span><span class="p">.</span><span class="n">debug_layer</span><span class="o">=</span><span class="mh">0x400000</span><span class="w"> </span><span class="n">acpi</span><span class="p">.</span><span class="n">debug_level</span><span class="o">=</span><span class="mh">0x4</span>
+</pre></div>
+</div>
+<p>Activa los mensajes relacionados con el <em>hardware</em> ACPI.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">acpi</span><span class="p">.</span><span class="n">debug_layer</span><span class="o">=</span><span class="mh">0x2</span><span class="w"> </span><span class="n">acpi</span><span class="p">.</span><span class="n">debug_level</span><span class="o">=</span><span class="mh">0xffffffff</span>
+</pre></div>
+</div>
+<p>Activa los mensajes <code class="docutils literal notranslate"><span class="pre">ACPI_DB_INFO</span></code> después del arranque.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp"># echo 0x4 &gt; /sys/module/acpi/parameters/debug_level</span>
+</pre></div>
+</div>
+<p>Muesta todos los valores de <em>componente</em> válido.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp"># cat /sys/module/acpi/parameters/debug_layer</span>
+</pre></div>
+</div>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+</aside>
+</aside>
+<div class="admonition-nota admonition">
+<p class="admonition-title">nota</p>
+<p>Comando de línea, en este caso concreto, son argumentos que podrán ser pasados al kernel, o bien lanzando la cónsola durante el arranque teclas <code class="docutils literal notranslate"><span class="pre">tab</span></code> ó <code class="docutils literal notranslate"><span class="pre">e</span></code>, o bien escribiendólos  en plan <code class="docutils literal notranslate"><span class="pre">hardCode</span></code> en el archivo de configuración oportuno, habitualmente bajo el directorio <code class="docutils literal notranslate"><span class="pre">/boot/grub/</span></code>. Habrá que mirar la configuración específica de la distribución, para mas detalle.</p>
+</div>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>AML, Acpi Machine Language, lenguaje máquina ACPI.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="aml-debugger.html" class="btn btn-neutral float-left" title="El depurador AML" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Admin-guide/1-boot.html" class="btn btn-neutral float-right" title="Boot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

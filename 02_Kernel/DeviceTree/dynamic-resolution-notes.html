@@ -1,0 +1,197 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resolución dinámica, notas &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Sobreposición del árbol de dispositivo, notas" href="overlay-notes.html" />
+    <link rel="prev" title="Uso del árbol de dispositivo" href="device-tree-usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="0-of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="changesets.html">conjunto de cambios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-tree-usage.html">Uso del árbol de dispositivo</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Resolución dinámica, notas</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#como-funciona-el-solucionador">Cómo funciona el <em>solucionador</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="overlay-notes.html"><em>Sobreposición</em> del árbol de dispositivo, notas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage-model.html">Linux y el árbol de dispositivo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Resolución dinámica, notas</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/DeviceTree/dynamic-resolution-notes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="resolucion-dinamica-notas">
+<h1><a class="toc-backref" href="#id3" role="doc-backlink">Resolución dinámica, notas</a><a class="headerlink" href="#resolucion-dinamica-notas" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#resolucion-dinamica-notas" id="id3">Resolución dinámica, notas</a></p>
+<ul>
+<li><p><a class="reference internal" href="#como-funciona-el-solucionador" id="id4">Cómo funciona el <em>solucionador</em></a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id5">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>Éste documento describe la implementación -en el lado del <em>kernel</em>, del <em>Solucionador del árbol de dispositivo</em>. <strong>localización:</strong> <code class="docutils literal notranslate"><span class="pre">drivers/devicetree/resolver.c</span></code> <strong>lectura:</strong> <code class="docutils literal notranslate"><span class="pre">Documentation/devicetree/dt-object-internal.txt</span></code> <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+<section id="como-funciona-el-solucionador">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Cómo funciona el <em>solucionador</em></a><a class="headerlink" href="#como-funciona-el-solucionador" title="Link to this heading"></a></h2>
+<p>El solucionador es dado como <em>entrada</em>, un <em>árbol</em> arbitrario, compilado con la apropiada <em>opción</em> <code class="docutils literal notranslate"><span class="pre">dtc</span></code> y, sosteniendo la <em>etiqueta</em> <code class="docutils literal notranslate"><span class="pre">/plugin/</span></code>. Ésto genera los nodos  <code class="docutils literal notranslate"><span class="pre">__fixups__</span> <span class="pre">&amp;</span> <span class="pre">__local_fixups__</span></code>, tal y como se describe en <a class="footnote-reference brackets" href="#f1" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+<p>La secuencia de funcionamiento del <em>solucionador</em> es como sigue:</p>
+<ol class="arabic simple">
+<li><p>Obtine el valor <em>phandle</em> máximo, del árbol de dispositivo -desde el árbol <em>activo</em> <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">1</span></code>.</p></li>
+<li><p>Ajusta mtodos los <em>phandel</em> locales del árbol de dispositivo, para resolver el <em>montante</em> (cantidad).</p></li>
+<li><p>Usa la información del nodo <code class="docutils literal notranslate"><span class="pre">__local__fixups__</span></code>, para ajustar las referencias locales al mismo montante.</p></li>
+<li><p>Para cada propiedad en el nodo <code class="docutils literal notranslate"><span class="pre">__fixups__</span></code>, localiza el nodo referenciado en el árbol <em>activo</em>. Es la etiqueta usada para marcar el nodo.</p></li>
+<li><p>Recupera el <em>phandle</em> del <em>objetivo</em> de la corrección.</p></li>
+<li><p>Para cada corrección en la propiedad, encuentra la localización del <code class="docutils literal notranslate"><span class="pre">node:property:offset</span></code> y lo reemplaza con el valor <em>phandle</em>.</p></li>
+</ol>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>)</span>
+<p><strong>nota:</strong> El documento no aparece en la documentación,(270218). Hay algunas otras referencias a <code class="docutils literal notranslate"><span class="pre">overlay-notes.txt</span></code>, otras referencias en internet -por comprobar advierte de que tal archivo, aún no ha sido implementado por razones técnicas.</p>
+</aside>
+</aside>
+<div class="admonition-phandle admonition">
+<p class="admonition-title">phandle</p>
+<p>Especie de puntero de un nodo, el cuál apunta a la definición del nodo, pudiéndo ser  guardado en el mismo archivo o, en    otro distinto.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="device-tree-usage.html" class="btn btn-neutral float-left" title="Uso del árbol de dispositivo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="overlay-notes.html" class="btn btn-neutral float-right" title="Sobreposición del árbol de dispositivo, notas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

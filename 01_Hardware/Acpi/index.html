@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACPI (Advanced Configuration and Power Interface) &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ACPI - Advanced Configuration Power Interface" href="acpi.html" />
+    <link rel="prev" title="Índice de Hardware" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ACPI (Advanced Configuration and Power Interface)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+      <li class="breadcrumb-item active">ACPI (Advanced Configuration and Power Interface)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/Acpi/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="acpi-advanced-configuration-and-power-interface">
+<h1>ACPI (Advanced Configuration and Power Interface)<a class="headerlink" href="#acpi-advanced-configuration-and-power-interface" title="Link to this heading"></a></h1>
+<p>En esta sección se aborda la especificación ACPI (<em>Advanced Configuration and Power Interface</em>), la arquitectura de gestión de energía y configuración de hardware en sistemas modernos, el modelo de controladores en el kernel de Linux, las tablas de descripción del sistema, el espacio de nombres (<em>ACPI Namespace</em>) y la arquitectura de referencia ACPICA.</p>
+<section id="contenidos">
+<h2>Contenidos<a class="headerlink" href="#contenidos" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Subsección ACPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="acpi.html">ACPI - Advanced Configuration Power Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="acpi.html#acpi-component-architecture-acpica">ACPI Component Architecture(ACPICA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpi.html#comportamiento-del-estado">Comportamiento del estado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpi.html#interfase-de-hardware">Interfase de Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpi.html#interfase-firmware">Interfase Firmware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpi.html#riesgos-de-seguridad">Riesgos de seguridad</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="acpiGeneral.html">Generalidades</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="acpiGeneral.html#diferencia-entre-hdl-y-controladores">Diferencia entre HDL y Controladores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiGeneral.html#el-lenguaje-fuente-asl-y-el-lenguaje-maquina-aml">El Lenguaje Fuente (ASL) y el Lenguaje Máquina (AML)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="acpiSDT.html">Sistema de Descripción de Tablas Acpi</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="acpiSDT.html#acpi-system-description-tabla">Acpi System Description Tabla</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiSDT.html#root-system-description-pointer-rsdp">Root System Description Pointer(RSDP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiSDT.html#root-system-description-table-rsdt">Root System Description Table (RSDT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiSDT.html#tabla-de-descripcion-fija-acpi-fadt">Tabla de descripción fija ACPI <em>FADT</em>.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="acpiNameSpace.html">Jerarquía para el Espacio de Nombres ACPI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="acpiNameSpace.html#reglas-para-plataformas-basadas-en-soc">Reglas para Plataformas Basadas en SoC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiNameSpace.html#funciones-estandar-del-espacio-de-nombres">Funciones Estándar del Espacio de Nombres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiNameSpace.html#administracion-del-espacio-de-nombres">Administración del Espacio de Nombres</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="acpiDriver.html">El controlador ACPI de Windows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="acpiDriver.html#dispositivos-acpi">Dispositivos ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiDriver.html#metodos-de-control-acpi">Métodos de control ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiDriver.html#especificaciones-acpi">Especificaciones ACPI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="acpiGPIO.html">Entrada/Salida de Propósito general</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="acpiGPIO.html#controlador-de-dispositivo-gpio">Controlador de dispositivo GPIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiGPIO.html#controladores-gpio-e-interrupciones-sendoactiva-activeboth">Controladores GPIO e interrupciones SendoActiva (ActiveBoth).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiGPIO.html#espacio-de-nombres-de-objeto-gpio">Espacio de nombres de objeto GPIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiGPIO.html#identificacion-de-dispositivos-y-configuracion-de-objetos">Identificación de dispositivos y configuración de objetos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiGPIO.html#descriptor-de-recursos-de-conexion-gpio">Descriptor de recursos de conexión GPIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiGPIO.html#eventos-acpi-senalizados-como-gpio">Eventos ACPI, Señalizados como GPIO.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acpiGPIO.html#objeto-de-evento-de-informacion-acpi">Objeto de Evento de Información ACPI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ACPICA/Introduction.html">Configuración Avanzada e Interfase de Energía (ACPI)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ACPICA/Introduction.html#advanced-configuration-an-power-interface-acpi">Advanced Configuration an Power Interface (ACPI)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ACPICA/spec.html">4.8 Modelo de registro ACPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Intel-VTd.html">tecnología de virtualización para direccionado de I/O</a></li>
+</ul>
+</div>
+</section>
+<section id="resumen-de-modulos">
+<h2>Resumen de Módulos<a class="headerlink" href="#resumen-de-modulos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Fundamentos de ACPI</strong>: Introducción general y estados de energía (C-states, P-states, S-states) en <a class="reference internal" href="acpi.html"><span class="doc">ACPI - Advanced Configuration Power Interface</span></a> y <a class="reference internal" href="acpiGeneral.html"><span class="doc">Generalidades</span></a>.</p></li>
+<li><p><strong>Estructuras de Datos y Espacio de Nombres</strong>: Descripción de las tablas de descripción del sistema en <a class="reference internal" href="acpiSDT.html"><span class="doc">Sistema de Descripción de Tablas Acpi</span></a> (<em>System Description Tables</em> como DSDT, SSDT y FADT) y la jerarquía de objetos en <a class="reference internal" href="acpiNameSpace.html"><span class="doc">Jerarquía para el Espacio de Nombres ACPI</span></a>.</p></li>
+<li><p><strong>Controladores y Subsistemas en Linux</strong>: Integración de subsistemas e interfaces de controladores en <a class="reference internal" href="acpiDriver.html"><span class="doc">El controlador ACPI de Windows</span></a> y gestión de líneas de propósito general en <a class="reference internal" href="acpiGPIO.html"><span class="doc">Entrada/Salida de Propósito general</span></a>.</p></li>
+<li><p><strong>Componente de Arquitectura ACPICA</strong>: Documentación de la implementación de referencia de Intel en <a class="reference internal" href="ACPICA/Introduction.html"><span class="doc">Configuración Avanzada e Interfase de Energía (ACPI)</span></a> y sus especificaciones técnicas en <a class="reference internal" href="ACPICA/spec.html"><span class="doc">4.8 Modelo de registro ACPI</span></a>.</p></li>
+<li><p><strong>Tecnologías Complementarias</strong>: Mapeo y reubicación de E/S mediante virtualización de hardware en <a class="reference internal" href="Intel-VTd.html"><span class="doc">tecnología de virtualización para direccionado de I/O</span></a> (<em>Intel Virtualization Technology for Directed I/O</em>).</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Índice de Hardware" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="acpi.html" class="btn btn-neutral float-right" title="ACPI - Advanced Configuration Power Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

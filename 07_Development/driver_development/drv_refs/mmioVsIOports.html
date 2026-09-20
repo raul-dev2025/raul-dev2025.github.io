@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe Técnico: Memory-Mapped I/O vs. Puertos de E/S &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Concepto MMCFG (Memory-Mapped Configuration) en PCI Express" href="pcie-symobls.html" />
+    <link rel="prev" title="Briefing on LTP (Linux Test Project) and Device Driver Test Cases" href="driverBrief.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../Foundry/index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hwbus-io/index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Driver references</a></li>
+      <li class="breadcrumb-item active">Informe Técnico: Memory-Mapped I/O vs. Puertos de E/S</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/07_Development/driver_development/drv_refs/mmioVsIOports.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-tecnico-memory-mapped-i-o-vs-puertos-de-e-s">
+<h1>Informe Técnico: Memory-Mapped I/O vs. Puertos de E/S<a class="headerlink" href="#informe-tecnico-memory-mapped-i-o-vs-puertos-de-e-s" title="Link to this heading"></a></h1>
+<p>En los sistemas informáticos, la comunicación entre la CPU y los dispositivos periféricos (como tarjetas de red, controladores de almacenamiento o GPUs) se realiza a través de dos mecanismos principales: <strong>Memory-Mapped I/O (MMIO)</strong> y <strong>Puertos de Entrada/Salida (PMIO / I/O Ports)</strong>. Ambos métodos permiten al procesador interactuar con el hardware, pero difieren en su implementación y en las instrucciones utilizadas para su acceso.</p>
+<section id="entrada-salida-mapeada-en-memoria-mmio">
+<h2>1. Entrada/Salida Mapeada en Memoria (MMIO)<a class="headerlink" href="#entrada-salida-mapeada-en-memoria-mmio" title="Link to this heading"></a></h2>
+<section id="definicion">
+<h3>Definición<a class="headerlink" href="#definicion" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Memory-Mapped I/O (MMIO)</strong> mapea los registros de un dispositivo de hardware dentro del espacio de direcciones de la memoria física del sistema.</p></li>
+<li><p>Los registros del dispositivo se comportan como posiciones de memoria ordinarias, permitiendo que la CPU acceda a ellos mediante instrucciones estándar de lectura y escritura en memoria.</p></li>
+</ul>
+</section>
+<section id="funcionamiento">
+<h3>Funcionamiento<a class="headerlink" href="#funcionamiento" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Al dispositivo de hardware se le asigna un rango dentro del espacio de direcciones de memoria.</p></li>
+<li><p>Cuando la CPU lee o escribe en estas direcciones, el controlador de memoria encamina las operaciones hacia los registros del dispositivo en lugar de la memoria RAM.</p></li>
+<li><p>Permite al procesador utilizar las mismas instrucciones de acceso a memoria habituales (por ejemplo, <cite>MOV</cite> en arquitecturas x86).</p></li>
+</ul>
+</section>
+<section id="ventajas">
+<h3>Ventajas<a class="headerlink" href="#ventajas" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Programación simplificada</strong>: Emplea instrucciones estándar de acceso a memoria, facilitando el desarrollo.</p></li>
+<li><p><strong>Amplio espacio de direcciones</strong>: Soporta un elevado número de dispositivos y registros.</p></li>
+<li><p><strong>Eficiencia en dispositivos de alta velocidad</strong>: Adecuado para periféricos que requieren un ancho de banda elevado o comunicación frecuente (GPUs, tarjetas de red).</p></li>
+</ul>
+</section>
+<section id="desventajas">
+<h3>Desventajas<a class="headerlink" href="#desventajas" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Consumo de espacio de direcciones</strong>: Ocupa rango de direcciones del mapa de memoria física que de otro modo podría ser asignado a la memoria RAM.</p></li>
+<li><p><strong>Complejidad en la gestión de direcciones</strong>: Requiere una administración rigurosa de las asignaciones de memoria.</p></li>
+</ul>
+</section>
+<section id="ejemplo">
+<h3>Ejemplo<a class="headerlink" href="#ejemplo" title="Link to this heading"></a></h3>
+<p>El búfer de tramas (<em>framebuffer</em>) de una tarjeta gráfica se mapea en el espacio de direcciones de memoria del sistema. La CPU escribe directamente los datos de píxeles en esta región de memoria y la GPU los procesa para su salida en pantalla.</p>
+</section>
+</section>
+<section id="puertos-de-entrada-salida-i-o-ports-pmio">
+<h2>2. Puertos de Entrada/Salida (I/O Ports / PMIO)<a class="headerlink" href="#puertos-de-entrada-salida-i-o-ports-pmio" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>Definición<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Port-Mapped I/O (PMIO)</strong> utiliza un espacio de direcciones dedicado y separado de la memoria principal para la comunicación con los dispositivos.</p></li>
+<li><p>La CPU accede a estos puertos utilizando instrucciones específicas de E/S (por ejemplo, <cite>IN</cite> y <cite>OUT</cite> en arquitecturas x86).</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Funcionamiento<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Cada dispositivo de hardware tiene asignado uno o varios números de puerto de E/S.</p></li>
+<li><p>La CPU utiliza instrucciones dedicadas para transferir datos a través de estos puertos, los cuales son gestionados habitualmente por el controlador de E/S del sistema.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Ventajas<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Espacio de direcciones dedicado</strong>: No consume espacio de direccionamiento de la memoria principal, preservando capacidad para la RAM.</p></li>
+<li><p><strong>Simplicidad para dispositivos de baja velocidad</strong>: Ideal para periféricos con requisitos reducidos de ancho de banda o baja frecuencia de acceso (puertos serie heredados, teclados PS/2).</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Desventajas<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Instrucciones especializadas</strong>: Requiere el uso de instrucciones de ensamblador específicas, lo que puede complicar la abstracción en software.</p></li>
+<li><p><strong>Espacio de direcciones limitado</strong>: El número de puertos de E/S disponibles está restringido por la arquitectura (por ejemplo, 64K puertos en sistemas x86).</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>Ejemplo<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>Un puerto serie heredado utiliza puertos de E/S para la transmisión de datos y configuración. La CPU envía información escribiendo directamente en el número de puerto asignado.</p>
+</section>
+</section>
+<section id="diferencias-principales">
+<h2>Diferencias Principales<a class="headerlink" href="#diferencias-principales" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 35.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Característica</p></th>
+<th class="head"><p>Memory-Mapped I/O (MMIO)</p></th>
+<th class="head"><p>Puertos de E/S (PMIO)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Espacio de Direcciones</strong></p></td>
+<td><p>Compartido con la memoria principal (RAM).</p></td>
+<td><p>Dedicado e independiente de la RAM.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Instrucciones CPU</strong></p></td>
+<td><p>Lectura/Escritura en memoria convencionales (<cite>MOV</cite>).</p></td>
+<td><p>Instrucciones dedicadas de E/S (<cite>IN</cite>, <cite>OUT</cite>).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Capacidad</strong></p></td>
+<td><p>Gran escala (limitada por la arquitectura de bus/64-bit).</p></td>
+<td><p>Restringida (ej. 64K puertos en x86).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Uso Principal</strong></p></td>
+<td><p>Dispositivos de alto rendimiento (GPUs, PCIe, NICs).</p></td>
+<td><p>Dispositivos heredados y de baja velocidad (PS/2, UART).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="aplicaciones-practicas">
+<h2>Aplicaciones Prácticas<a class="headerlink" href="#aplicaciones-practicas" title="Link to this heading"></a></h2>
+<section id="memory-mapped-i-o">
+<h3>Memory-Mapped I/O<a class="headerlink" href="#memory-mapped-i-o" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Tarjetas gráficas modernas (GPUs), controladoras de red (NICs) y dispositivos en el bus PCIe.</p></li>
+<li><p>Periféricos que demandan transferencias continuas a alta velocidad.</p></li>
+</ul>
+</section>
+<section id="puertos-de-entrada-salida">
+<h3>Puertos de Entrada/Salida<a class="headerlink" href="#puertos-de-entrada-salida" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Hardware heredado como teclados PS/2, puertos serie/paralelo y controladoras de disco antiguas.</p></li>
+<li><p>Control de registros de bajo nivel con requisitos sencillos de ancho de banda.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>Conclusión</em>: Tanto MMIO como los Puertos de E/S son mecanismos fundamentales para la interacción procesador-hardware. Los sistemas modernos priorizan el uso de MMIO debido a su flexibilidad y rendimiento, mientras que los puertos de E/S se mantienen principalmente por compatibilidad con arquitecturas heredadas.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="driverBrief.html" class="btn btn-neutral float-left" title="Briefing on LTP (Linux Test Project) and Device Driver Test Cases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pcie-symobls.html" class="btn btn-neutral float-right" title="Concepto MMCFG (Memory-Mapped Configuration) en PCI Express" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ataques Man-in-the-Middle (MitM) y TLS &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="OpenSSL Certificado de Autoridad" href="OpenSSL/OpenSSL-saga.html" />
+    <link rel="prev" title="Comprobación y Supervisión de Certificados" href="compCA.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#boot">Boot</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#certificados-tls">Certificados-TLS</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="apuntesTLS.html">Apuntes sobre Protocolo TLS y Gestión de Certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compCA.html">Comprobación y Supervisión de Certificados</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Ataques Man-in-the-Middle (MitM) y TLS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#concepto-y-funcionamiento-de-mitm">Concepto y Funcionamiento de MitM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#validacion-del-certificado-del-servidor">Validación del Certificado del Servidor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tipos-de-intercepcion-y-ataques-comunes">Tipos de Intercepción y Ataques Comunes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mecanismos-de-proteccion-y-mitigacion">Mecanismos de Protección y Mitigación</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diagnostico-y-simulacion-de-intercepcion">Diagnóstico y Simulación de Intercepción</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="OpenSSL/OpenSSL-saga.html">OpenSSL Certificado de Autoridad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TLS-libvirt/1-concepts.html">certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TLS-libvirt/2-CA.html">TLSCreateCACert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TLS-libvirt/3creSerCer.html">Certificados</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#file-system">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Sistemas Operativos</a></li>
+      <li class="breadcrumb-item active">Ataques Man-in-the-Middle (MitM) y TLS</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/03_Operating_Systems/Certificados-TLS/MiTm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ataques-man-in-the-middle-mitm-y-tls">
+<h1><a class="toc-backref" href="#id2" role="doc-backlink">Ataques Man-in-the-Middle (MitM) y TLS</a><a class="headerlink" href="#ataques-man-in-the-middle-mitm-y-tls" title="Link to this heading"></a></h1>
+<nav class="contents" id="indice-de-contenidos">
+<p class="topic-title">Índice de contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ataques-man-in-the-middle-mitm-y-tls" id="id2">Ataques Man-in-the-Middle (MitM) y TLS</a></p>
+<ul>
+<li><p><a class="reference internal" href="#concepto-y-funcionamiento-de-mitm" id="id3">Concepto y Funcionamiento de MitM</a></p></li>
+<li><p><a class="reference internal" href="#validacion-del-certificado-del-servidor" id="id4">Validación del Certificado del Servidor</a></p></li>
+<li><p><a class="reference internal" href="#tipos-de-intercepcion-y-ataques-comunes" id="id5">Tipos de Intercepción y Ataques Comunes</a></p></li>
+<li><p><a class="reference internal" href="#mecanismos-de-proteccion-y-mitigacion" id="id6">Mecanismos de Protección y Mitigación</a></p></li>
+<li><p><a class="reference internal" href="#diagnostico-y-simulacion-de-intercepcion" id="id7">Diagnóstico y Simulación de Intercepción</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="concepto-y-funcionamiento-de-mitm">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Concepto y Funcionamiento de MitM</a><a class="headerlink" href="#concepto-y-funcionamiento-de-mitm" title="Link to this heading"></a></h2>
+<p>El ataque <em>Man-in-the-Middle</em> (MitM), también conocido como <em>Person-in-the-Middle</em> (PitM) o “hombre en el medio”, ocurre cuando un tercero no autorizado intercepta la comunicación entre dos partes (habitualmente un cliente y un servidor).</p>
+<p>En un entorno cifrado mediante SSL/TLS, el objetivo del atacante es situarse entre el cliente y el servidor legítimo para:</p>
+<ol class="arabic simple">
+<li><p>Interceptar el proceso de negociación TLS (<em>handshake</em>).</p></li>
+<li><p>Sustituir las claves y certificados legítimos presentados por el servidor por claves y certificados propios (<em>falsos</em>).</p></li>
+<li><p>Establecer dos conexiones cifradas independientes y separadas:</p>
+<ul class="simple">
+<li><p>Una sesión entre el cliente y el atacante (donde el atacante suplanta al servidor real).</p></li>
+<li><p>Otra sesión entre el atacante y el servidor real (donde el atacante actúa como si fuera el cliente).</p></li>
+</ul>
+</li>
+</ol>
+<p>De este modo, el tráfico cifrado enviado por el cliente es descifrado por el atacante utilizando sus propias claves, lo que le permite leer, registrar o modificar el contenido de los mensajes antes de volver a cifrarlos y retransmitirlos al servidor de destino.</p>
+</section>
+<section id="validacion-del-certificado-del-servidor">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Validación del Certificado del Servidor</a><a class="headerlink" href="#validacion-del-certificado-del-servidor" title="Link to this heading"></a></h2>
+<p>Para prevenir los ataques MitM, las aplicaciones cliente (navegadores web, clientes HTTP, aplicaciones móviles) deben realizar comprobaciones rigurosas sobre el certificado presentado por el servidor.</p>
+<section id="validacion-del-nombre-de-dominio-san-cn">
+<h3>Validación del Nombre de Dominio (SAN / CN)<a class="headerlink" href="#validacion-del-nombre-de-dominio-san-cn" title="Link to this heading"></a></h3>
+<p>El cliente debe verificar que el nombre de dominio al que intenta conectarse coincida exactamente con el nombre especificado en el certificado digital del servidor:</p>
+<ul class="simple">
+<li><p><strong>Subject Alternative Name (SAN):</strong> Extensión estándar moderna que especifica todos los dominios y subdominios para los que es válido el certificado.</p></li>
+<li><p><strong>Common Name (CN):</strong> Campo histórico (obsoleto en estándares recientes) que contenía el nombre de dominio principal.</p></li>
+</ul>
+<p>Si el nombre de dominio solicitado no coincide con los campos SAN o CN del certificado, la aplicación cliente debe abortar inmediatamente la conexión e informar del error de seguridad.</p>
+</section>
+<section id="verificacion-de-la-cadena-de-confianza">
+<h3>Verificación de la Cadena de Confianza<a class="headerlink" href="#verificacion-de-la-cadena-de-confianza" title="Link to this heading"></a></h3>
+<p>El certificado debe estar firmado por una Autoridad de Certificación (<em>CA</em>) reconocida y presente en el almacén de confianza del sistema o de la aplicación.</p>
+</section>
+</section>
+<section id="tipos-de-intercepcion-y-ataques-comunes">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Tipos de Intercepción y Ataques Comunes</a><a class="headerlink" href="#tipos-de-intercepcion-y-ataques-comunes" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Clasificación de ataques e intercepción MitM</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Técnica</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Suplantación de DNS / ARP</p></td>
+<td><p>Redirección del tráfico IP del cliente hacia un servidor bajo control del atacante mediante envenenamiento de tablas ARP o caché DNS.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Certificados Falsos / Maliciosos</p></td>
+<td><p>Uso de un certificado emitido por una CA no confiable o por una CA raíz maliciosa instalada previamente en el dispositivo cliente.</p></td>
+</tr>
+<tr class="row-even"><td><p>Degradación de Protocolo (<em>Downgrade Attack</em>)</p></td>
+<td><p>Manipulación de la negociación inicial para forzar el uso de versiones obsoletas o débiles de SSL/TLS (p. ej., ataques POODLE o FREAK).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intercepción TLS Corporativa</p></td>
+<td><p>Inspección de tráfico en entornos empresariales mediante la instalación de un certificado CA raíz corporativo en los equipos administrados.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mecanismos-de-proteccion-y-mitigacion">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Mecanismos de Protección y Mitigación</a><a class="headerlink" href="#mecanismos-de-proteccion-y-mitigacion" title="Link to this heading"></a></h2>
+<p>Para evitar o mitigar la efectividad de los ataques MitM se aplican las siguientes medidas:</p>
+<ul class="simple">
+<li><p><strong>HSTS (HTTP Strict Transport Security):</strong> Cabecera HTTP que obliga al navegador a comunicarse exclusivamente mediante HTTPS, previniendo ataques de degradación a HTTP sin cifrar.</p></li>
+<li><p><strong>Certificate Pinning (Vinculación de Certificados):</strong> Técnica en aplicaciones cliente que valida la clave pública o el certificado esperado contra una huella digital (<em>hash</em>) incrustada en el código.</p></li>
+<li><p><strong>Certificate Transparency (CT):</strong> Registro público auditable de todos los certificados emitidos por CAs para detectar emisiones no autorizadas o fraudulentas.</p></li>
+<li><p><strong>Desactivación de Cifrados Obsoletos:</strong> Configurar el servidor para admitir exclusivamente versiones TLS 1.2 y TLS 1.3 con algoritmos de cifrado auténtico (AEAD) y Secreto Perfecto Hacia Adelante (PFS).</p></li>
+</ul>
+</section>
+<section id="diagnostico-y-simulacion-de-intercepcion">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Diagnóstico y Simulación de Intercepción</a><a class="headerlink" href="#diagnostico-y-simulacion-de-intercepcion" title="Link to this heading"></a></h2>
+<section id="verificacion-manual-con-openssl">
+<h3>Verificación manual con OpenSSL<a class="headerlink" href="#verificacion-manual-con-openssl" title="Link to this heading"></a></h3>
+<p>Se puede comprobar la cadena de certificados que entrega un servidor y verificar el campo SAN/CN mediante el comando:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openssl</span> <span class="n">s_client</span> <span class="o">-</span><span class="n">connect</span> <span class="n">dominio</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">443</span> <span class="o">-</span><span class="n">servername</span> <span class="n">dominio</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+</section>
+<section id="herramientas-para-analisis-e-inspeccion">
+<h3>Herramientas para Análisis e Inspección<a class="headerlink" href="#herramientas-para-analisis-e-inspeccion" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>mitmproxy:</strong> Herramienta en consola e interfaz web para interceptar, inspeccionar y modificar tráfico HTTP/HTTPS.</p></li>
+<li><p><strong>Wireshark:</strong> Analizador de paquetes de red para examinar el intercambio de tramas durante la negociación TLS.</p></li>
+<li><p><strong>Burp Suite / Charles Proxy:</strong> Proxies de intercepción utilizados en auditorías de seguridad de aplicaciones web y móviles.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="compCA.html" class="btn btn-neutral float-left" title="Comprobación y Supervisión de Certificados" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="OpenSSL/OpenSSL-saga.html" class="btn btn-neutral float-right" title="OpenSSL Certificado de Autoridad" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estructura general y registro del dispositivo &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Estructura base" href="arch_drv1.html" />
+    <link rel="prev" title="Introducción" href="intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../Foundry/index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hwbus-io/index.html">HwBus-IO</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">HwNet-IO</a></li>
+      <li class="breadcrumb-item active">Estructura general y registro del dispositivo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/07_Development/driver_development/hwnet-io/arch_drv0.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="estructura-general-y-registro-del-dispositivo">
+<h1>Estructura general y registro del dispositivo<a class="headerlink" href="#estructura-general-y-registro-del-dispositivo" title="Link to this heading"></a></h1>
+<p>Para este controlador virtual simple, la arquitectura del dispositivo gira en torno a tres pilares conceptuales:</p>
+<section id="definicion-e-inicializacion-de-la-interfaz">
+<h2>1. Definición e Inicialización de la Interfaz<a class="headerlink" href="#definicion-e-inicializacion-de-la-interfaz" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Usaremos la abstracción de red Ethernet estándar del kernel.</p></li>
+<li><p>El kernel asigna el objeto <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">net_device</span></code> junto con un bloque de memoria privada (<em>private data</em>) contiguo para el controlador mediante la función de soporte <code class="docutils literal notranslate"><span class="pre">alloc_etherdev()</span></code>.</p></li>
+<li><p>En esta memoria privada guardaremos el estado local del controlador (por ejemplo, contadores o cerrojos de sincronización) sin necesidad de asignaciones adicionales.</p></li>
+</ul>
+</section>
+<section id="operaciones-del-dispositivo-struct-net-device-ops">
+<h2>2. Operaciones del Dispositivo (<code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">net_device_ops</span></code>)<a class="headerlink" href="#operaciones-del-dispositivo-struct-net-device-ops" title="Link to this heading"></a></h2>
+<p>Definiremos una tabla de operaciones esenciales que la pila de red del kernel llamará cuando interactúe con la interfaz:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ndo_open</span></code>: Se ejecuta al activar la interfaz (<code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">link</span> <span class="pre">set</span> <span class="pre">&lt;iface&gt;</span> <span class="pre">up</span></code>). Aquí habilitamos la cola de transmisión (<code class="docutils literal notranslate"><span class="pre">netif_start_queue</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ndo_stop</span></code>: Se ejecuta al desactivar la interfaz (<code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">link</span> <span class="pre">set</span> <span class="pre">&lt;iface&gt;</span> <span class="pre">down</span></code>). Aquí detenemos la cola de transmisión (<code class="docutils literal notranslate"><span class="pre">netif_stop_queue</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ndo_start_xmit</span></code>: El punto neurálgico de la transmisión, donde la pila de red nos entrega un <code class="docutils literal notranslate"><span class="pre">sk_buff</span></code>.</p></li>
+</ul>
+</section>
+<section id="registrar-y-apagado">
+<h2>3. Registrar y apagado<a class="headerlink" href="#registrar-y-apagado" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Registro</strong> (<code class="docutils literal notranslate"><span class="pre">register_netdev</span></code>): Se realiza durante el <code class="docutils literal notranslate"><span class="pre">init</span></code> del módulo. A partir de este momento, la interfaz es visible para el sistema operativo.</p></li>
+<li><p><strong>Apagado</strong> (<code class="docutils literal notranslate"><span class="pre">unregister_netdev</span></code> + <code class="docutils literal notranslate"><span class="pre">free_netdev</span></code>): Se ejecuta en el <code class="docutils literal notranslate"><span class="pre">exit</span></code> del módulo o si algo falla durante la carga. Elimina la interfaz del sistema y libera la memoria asignada.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="intro.html" class="btn btn-neutral float-left" title="Introducción" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="arch_drv1.html" class="btn btn-neutral float-right" title="Estructura base" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

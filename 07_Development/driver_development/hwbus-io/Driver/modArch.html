@@ -1,0 +1,173 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arquitectura del Módulo &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Capacidades Actuales del Controlador" href="capacidades-v1.html" />
+    <link rel="prev" title="Manifiesto de Arquitectura hwbus-io" href="archManifest.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../Foundry/index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">HwBus-IO</a></li>
+      <li class="breadcrumb-item active">Arquitectura del Módulo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/hwbus-io/Driver/modArch.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="arquitectura-del-modulo">
+<h1>Arquitectura del Módulo<a class="headerlink" href="#arquitectura-del-modulo" title="Link to this heading"></a></h1>
+<section id="dispositivo-de-caracteres-como-capa-de-inspeccion-y-telemetria">
+<h2>Dispositivo de Caracteres como Capa de Inspección y Telemetría<a class="headerlink" href="#dispositivo-de-caracteres-como-capa-de-inspeccion-y-telemetria" title="Link to this heading"></a></h2>
+<section id="justificacion-del-diseno">
+<h3>1. Justificación del Diseño<a class="headerlink" href="#justificacion-del-diseno" title="Link to this heading"></a></h3>
+<p>En el kernel de Linux, los dispositivos PCI conectados al sistema ya disponen de controladores nativos que gestionan la funcionalidad operativa del hardware (gestión de bus, interrupciones y operaciones de red o bloque). Reimplementar esta lógica no solo sería ineficiente, sino que rompería la abstracción del sistema.</p>
+<p>En lugar de duplicar o reemplazar la abstracción lógica existente, este proyecto propone la creación de un <strong>dispositivo de caracteres propio</strong> (<code class="docutils literal notranslate"><span class="pre">cdev</span></code>) que actúa como un <strong>canal de inspección y monitorización</strong>. El controlador nativo mantiene el control total del dispositivo, mientras que nuestro módulo actúa como una capa superpuesta (“llantas y neumáticos sobre la rueda existente”) que recopila y expone métricas y registros seleccionados hacia el espacio de usuario a través de un nodo <code class="docutils literal notranslate"><span class="pre">/dev</span></code>.</p>
+</section>
+<section id="automatizacion-de-la-interfaz-en-espacio-de-usuario">
+<h3>2. Automatización de la Interfaz en Espacio de Usuario<a class="headerlink" href="#automatizacion-de-la-interfaz-en-espacio-de-usuario" title="Link to this heading"></a></h3>
+<p>Para evitar la creación manual del nodo de dispositivo mediante <code class="docutils literal notranslate"><span class="pre">mknod</span></code>, la definición e instanciación del dispositivo se gestiona directamente en C dentro del ciclo de vida del módulo:</p>
+<ol class="arabic simple">
+<li><p><strong>Asignación Dinámica:</strong> Obtención de los identificadores <em>Major</em> y <em>Minor</em> mediante <code class="docutils literal notranslate"><span class="pre">alloc_chrdev_region()</span></code>.</p></li>
+<li><p><strong>Vinculación de Operaciones:</strong> Registro del dispositivo de caracteres (<code class="docutils literal notranslate"><span class="pre">cdev_init</span></code> y <code class="docutils literal notranslate"><span class="pre">cdev_add</span></code>) asociándolo a una estructura <code class="docutils literal notranslate"><span class="pre">file_operations</span></code> que gestiona las llamadas de lectura/escritura (<code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">open</span></code>, <code class="docutils literal notranslate"><span class="pre">release</span></code>).</p></li>
+<li><p><strong>Notificación al Sistema</strong> (<code class="docutils literal notranslate"><span class="pre">sysfs</span></code> / <code class="docutils literal notranslate"><span class="pre">udev</span></code>): Creación de la clase mediante <code class="docutils literal notranslate"><span class="pre">class_create()</span></code> e instanciación del dispositivo con <code class="docutils literal notranslate"><span class="pre">device_create()</span></code>. Esto dispara un evento <em>uevent</em> en el kernel que el demonio <code class="docutils literal notranslate"><span class="pre">udev</span></code> procesa para generar automáticamente el archivo correspondiente en <code class="docutils literal notranslate"><span class="pre">/dev/</span></code> con los permisos adecuados.</p></li>
+</ol>
+</section>
+<section id="estrategias-de-extraccion-e-inspeccion-de-datos">
+<h3>3. Estrategias de Extracción e Inspección de Datos<a class="headerlink" href="#estrategias-de-extraccion-e-inspeccion-de-datos" title="Link to this heading"></a></h3>
+<p>Para nutrir el dispositivo de caracteres con información del hardware PCI sin interferir con el controlador activo, se contemplan tres aproximaciones técnicas:</p>
+<section id="a-inspeccion-a-traves-de-pci-dev-y-sysfs">
+<h4>A. Inspección a través de <code class="docutils literal notranslate"><span class="pre">pci_dev</span></code> y <code class="docutils literal notranslate"><span class="pre">sysfs</span></code><a class="headerlink" href="#a-inspeccion-a-traves-de-pci-dev-y-sysfs" title="Link to this heading"></a></h4>
+<p>Localización de la estructura <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pci_dev</span></code> del dispositivo objetivo (mediante APIs del subsistema PCI como <code class="docutils literal notranslate"><span class="pre">pci_get_device()</span></code>) para consultar sus espacios de configuración, estados de energía y registros expuestos.</p>
+</section>
+<section id="b-mapeo-de-memoria-de-entrada-salida-mmio">
+<h4>B. Mapeo de Memoria de Entrada/Salida (MMIO)<a class="headerlink" href="#b-mapeo-de-memoria-de-entrada-salida-mmio" title="Link to this heading"></a></h4>
+<p>Acceso directo a las regiones BAR (<em>Base Address Registers</em>) del dispositivo PCI mediante <code class="docutils literal notranslate"><span class="pre">ioremap()</span></code>. Esto permite consultar contadores internos o registros de estado mapeados en memoria en tiempo real de forma no intrusiva.</p>
+</section>
+<section id="c-intercepcion-mediante-kprobes-tracepoints">
+<h4>C. Intercepción mediante <em>Kprobes</em> / <em>Tracepoints</em><a class="headerlink" href="#c-intercepcion-mediante-kprobes-tracepoints" title="Link to this heading"></a></h4>
+<p>Captura dinámica de eventos en tiempo de ejecución enganchando puntos de prueba (<em>kprobes</em>) a las funciones del controlador nativo. Al ejecutarse las rutinas del driver original (por ejemplo, gestión de interrupciones o buffers de procesamiento), los datos se copian a un <em>ring buffer</em> interno administrado por nuestro módulo y se sirven a través del nodo <code class="docutils literal notranslate"><span class="pre">/dev</span></code> cuando una aplicación de espacio de usuario realiza una lectura (<code class="docutils literal notranslate"><span class="pre">read</span></code>).</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="archManifest.html" class="btn btn-neutral float-left" title="Manifiesto de Arquitectura hwbus-io" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="capacidades-v1.html" class="btn btn-neutral float-right" title="Capacidades Actuales del Controlador" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

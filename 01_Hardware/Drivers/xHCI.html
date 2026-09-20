@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extensible Host Controller Interface &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="HID - Human Interface Device" href="hid.html" />
+    <link rel="prev" title="Controladores de Dispositivos (Drivers)" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Controladores de Dispositivos (Drivers)</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Controladores de Dispositivos (Drivers)</a></li>
+      <li class="breadcrumb-item active">Extensible Host Controller Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/Drivers/xHCI.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="extensible-host-controller-interface">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Extensible Host Controller Interface</a><a class="headerlink" href="#extensible-host-controller-interface" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#extensible-host-controller-interface" id="id1">Extensible Host Controller Interface</a></p>
+<ul>
+<li><p><a class="reference internal" href="#objetivos" id="id2">Objetivos</a></p></li>
+<li><p><a class="reference internal" href="#detalles" id="id3">Detalles</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>Es una especificación de interfase de computadora, que define un nivel de registros de descripción del controdalor para el <em>Universal Serial Bus(USB)</em>, el cuál es compatible con dispositivos USB, para las versiones v1.x, v2.0 y v3.x de la misma interfase(USB). La especificación también es referida como <em>USB 3.0 host controller specification</em>.</p>
+<section id="objetivos">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Objetivos</a><a class="headerlink" href="#objetivos" title="Link to this heading"></a></h2>
+<p>El xHCI es una ruptura radical con respecto a previas generaciones del <em>USB host controller</em> En esencia, Open Host Controller Interface(OHCI), Universal Host Controller Interface(UHCI) y Enhanced Host Controller Interface(EHCI) en muchos casos. Los objetivos prinicipales de  <em>xHCI</em>, son los siguientes:</p>
+<ul class="simple">
+<li><p>Operación eficiente: mejor <em>desarrollo</em> y <em>tiempo de espera o reposo</em>, que el controlador de host USB, de anteriores versiones.</p></li>
+<li><p>Un modelo de programación a nivel de dispositivo, consistente con el modelo de software para USB.</p></li>
+<li><p>Aunar la interfase presentada para el <em>controlador de host</em>, para los distintos protocolos USB, ya existentes.</p></li>
+<li><p>Minimizar el acceso a memoria del <em>host</em>; eliminándolos completamente, cuando el USB está en reposo(idle).</p></li>
+<li><p>Eliminar la escritura de registros y, minimizar la lectura de los mismos, para la transferencia normal de datos.</p></li>
+<li><p>Eliminar el modelo “<em>controlador compañero</em> (Companion Controller)”.</p></li>
+<li><p>Activar los modos <em>fail-over</em>, en situaciones de recursos de sistema <em>constringido?</em>, para que los dispositivos aún puedan ser accesibles, quzás con un comportamiento en cuanto a  eficiencia y energía, reducido.</p></li>
+<li><p>Proporcionar la habilidad de distinguir las distintas capacidades del <em>hardware</em>, a diferentes mercados, ejem: coste/eficiencia en distintos mercados.</p></li>
+<li><p>Definición de una arquitectura extensible, capaz de proveer una ruta sencilla, para las nuevas tecnologías y especificaciones USB; tales como un mayor ancho de banda, medio óptico de transmisión, etc., sin necesidad de definir otra <em>interfase</em> para el <em>controlador</em> <em>de host USB</em>.</p></li>
+</ul>
+</section>
+<section id="detalles">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Detalles</a><a class="headerlink" href="#detalles" title="Link to this heading"></a></h2>
+<section id="soporte-para-todas-las-velocidades">
+<h3>Soporte para todas las velocidades<a class="headerlink" href="#soporte-para-todas-las-velocidades" title="Link to this heading"></a></h3>
+<p>Los controladores OHCI y UHCI, soportan únicamente la velocidad del dispositivo <em>USB v1</em>. EHCI la velocidad del dispositivo <em>USB v2</em>. Velocidades  (1.5 Mbit/s y 12 Mbit/s) y (480 Mbit/s) respectivamente.</p>
+<p>La arquitectura xHCI, fué diseñada para soportar todas las velocidades USB, incluída <em>SuperSpeed”</em> (5 Gbit/s) y futuras mejoras, bajo la misma <em>pila(stack)</em> del controlador.</p>
+</section>
+<section id="eficiencia-energetica">
+<h3>Eficiencia energética<a class="headerlink" href="#eficiencia-energetica" title="Link to this heading"></a></h3>
+<p>Originalmente, el USB fue desarrollado en 1995, con el propósito de trabajar en ordenadores de <em>sobre mesa</em>, dando lugar, a la proliferación de los distintos conectores, que aparecerían para <em>PCs</em> ejem. PS/2, puerto en serie, puerto en paralelo, Puerto juegos(GamePad), etc.</p>
+<p>En un principio, el consumo de energía del <em>controlador host</em>, no era una consideración importante. desde entonces, los móbiles se han convertido en la plataforma predilecta, y sus baterías, han hecho del consumo de energía, la consideración másimportante.</p>
+<p>La infraestructura de los <em>controladores de host(OHCI, UHCI y EHCI)</em> fueron muy similares en cuanto al esquema, de la transaccaiones que debían lleverse a cabo en el USB, donde se construyen por software, en la memoria del host.</p>
+<p>El controlador de hardware, tenía que leer constantemente los esquemas, para determinar si las transacciones, debían ser conducidas, a través del USB, incluso sin tener que mover datos. Adicionalmente en el caso de lecturas desde el dispositivo, era consultado, incluso sin haber datos que leer.</p>
+<ul class="simple">
+<li><p>El <em>xHCI</em> elimina de la memoria del host, las transacciones del USB basadas en esquemas, evitando la actividad, en la memoria de host, cuando no hay movimiento de datos.</p></li>
+<li><p>El <em>xHCI</em> reduce la necedidad de consultar periódicamente al dispositivo, permitiendo notificar al <em>controlador host</em>, cuándo tiene datos disponibles para su lectura, y mueve la gestión de consultas en dispositivos USB v2.0 y v1.1, que usan interrupcion de transacciones, desde la CPU al <em>controlador USB host</em>.</p></li>
+</ul>
+<p>Los <em>controladores de host</em> EHCI, OHCI y UHCI, serían controlados automáticamente por la CPU, si no hay cambios que necesiten hacerse y, si ningún dispositivo tiene alguna interrupción que enviar. Pero todos ellos subyacen, en que la cpu, configure los esquemas de los controladores.</p>
+<p>Si algún dispositivo USB, haciendo uso de <em>transacción de interrupciones</em>, tiene datos que enviar, entonces el <em>controlador xHCI</em>, enviará una interrupción, para notificar a la CPU,  que hay una <em>transacción de interrupción</em>, que necesita ser gestionada.</p>
+<p>Como la CPU, ya no tiene que gestionar la consulta del <em>bus USB</em>, podrá gastar más tiempo en <em>estados de baja energía</em>.</p>
+<ul class="simple">
+<li><p>El <em>xHCI</em> no necesita que las implementaciones, proporcionen soporte para <em>todas</em> las características avanzadas de gestión de energía en <em>USB v1 y v2</em>, incluidas <em>los estados</em> <em>USB 2 LPM, USB 3 U1 y U2</em>, HERD, LTM, <em>Function Wake(función levantar)</em>, etc. Pero estas características son necesarias par conseguir todas las ventajas de <em>xHCI</em>.</p></li>
+</ul>
+</section>
+<section id="soporte-para-la-virtualizacion">
+<h3>Soporte para la virtualización<a class="headerlink" href="#soporte-para-la-virtualizacion" title="Link to this heading"></a></h3>
+<p>Anteriores USB HCI, exibieron algunas de las características que más tarde serían incorporadas a implementaciones posteriores. Éstas “primicias”, fueron aplicadas a entornos virtualizados. USB HCI legados, definen una relatívamente <em>simple</em> canalización de datos por <em>hardware</em>; donde el estado crítico relacionado al <em>sobrecoste</em> -en cuanto a la gestión del <em>bus</em> (acomodo del ancho de banda, asignación de direccionamiento, etc.), reside en el <em>software</em> del <em>HCD</em>.</p>
+<p>Intentar aplicar la técnica de virtualización por <em>hardware</em> (el estandar de entrada/salida), replicando la intefase de registros <em>I/O</em>, a USB HCI, es problemático por que los <em>estados críticos</em> que deben ser gestionados entre las máquinas virtuales(VMs) <strong>no están</strong> <em>disponible por hardware</em></p>
+<p>El <em>xHCI</em> mueve el control de estos estados críticos dentro del <em>hardware</em>, activando la gestión de recursos <em>USB</em>, entre las <em>VMs</em>. La virtualización <em>xHCI</em> proporciona las características:</p>
+<ul class="simple">
+<li><p>Asignación directa de dispositivos USB individuales(con independencia de su localización respecto a la topología marcada en el BUS) a cualquier <em>VM</em>.</p></li>
+<li><p>Minimización del tiempo necesario, para la comunicación entre <em>VMs</em>.</p></li>
+<li><p>Soporte de dispositivos compartidos para <em>USB nativo</em>.</p></li>
+<li><p>soporte para <em>PCIe</em> <em>SR-IOV</em>.</p></li>
+</ul>
+<div class="admonition-sr-iov admonition">
+<p class="admonition-title">SR-IOV</p>
+<p>– raíz simple para la virtualización de I/O(single root I/O virtualization) HCI
+– Host Controller Infraestructure HCD
+– Host Controller Driver VM
+– Maquina Virtual(Virtual Machine)</p>
+</div>
+</section>
+<section id="driver-simplificado">
+<h3>Driver simplificado<a class="headerlink" href="#driver-simplificado" title="Link to this heading"></a></h3>
+<p>El <em>EHCI</em> utiliza los controladores <em>OHCI</em> o <em>UHCI</em> como “controlador compañero”, donde los dispositivos <em>USB v2</em> son controlados a través de la pila <em>EHCI</em>, y el puerto lógico de <em>EHCI</em> permite que la velocidad <em>baja/completa</em> en un dispositivo <em>USB</em>, pueda ser dirigida hacia un controlador de puerto -el <em>“compañero”</em>, tipo <em>OHCI</em> o <em>UHCI</em>.</p>
+<p>Por ejemplo, un <em>controlador de host ``de tarjeta`` PCIe</em>, para un <em>USB v2</em>, el cuál presenta 4 conectores <em>USB(estandar tipo A)</em>, es presentado ante el <em>software de sistema</em> como <strong>un</strong> <em>controlador de software de sistema</em> con 4 puertos tipos EHCI y <strong>dos</strong>, con 2 puertos tipo OHCI.</p>
+<p>Cuando un dispositivo USB de <em>alta velocidad</em>, es acoplado a cualquier de los 4 conectores, el dispositivo es gestionado por uno de los 4 puertos <em>hub</em> raíz, del controlador <em>EHCI</em>. Si un <em>dispositivo USB</em> de <em>baja/completa</em> velocidad, es acoplado al conector 1 o 2, será dirigido al puerto <em>hub</em> raíz, de uno de los controladores <em>OHCI</em> para su gestión y, un <em>dispositivo USB</em> de <em>baja/completa</em> velocidad acoplado al conector 3 o 4, será dirigido al  puerto <em>hub</em> raíz, del otro conector <em>OHCI</em>.</p>
+<p>La dependencia <em>EHCI</em>, sobre <em>controladores de host</em> separados, para <em>dispositivo USB</em> de velocidad <em>baja/completa</em>, resulta en complejas <em>dependencias e interacciones</em>, entre
+los controladores EHCI y OHCI/UHCI.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[ Pila Legacy EHCI / OHCI ]
+
++-------------------------------------------------------+
+|                Controlador EHCI (USB 2.0)             |
++-------------------------------------------------------+
+    |             |              |              |
+Puerto 1       Puerto 2       Puerto 3       Puerto 4
+    |             |              |              |
+[Switch]      [Switch]       [Switch]       [Switch]
+    |             |              |              |
++--------------------+        +--------------------+
+| Controlador OHCI 1 |        | Controlador OHCI 2 |
++--------------------+        +--------------------+
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>El xHCI, elimina la necesisdad de <em>controladores compañeros</em> y su controlador de <em>pila</em> separado.</p></li>
+<li><p>La incorporación del <em>“esquema”</em>, la gestión del ancho de banda y, las funciones asignación de direccionamiento, que fueron antes realizadas por el controlador. Con el <em>hardware xHCI</em> se establece una <em>pila simple</em>, por software de baja latencia para el xHCI.</p></li>
+</ul>
+<div class="admonition-hub admonition">
+<p class="admonition-title">hub</p>
+<p>Es una especie de interfase; referido a un nodo con gran cantidad de enlaces. <strong>CRT:</strong> Tubo de Rayos Catódicos, aquí abreviatura de <em>conector</em>.</p>
+</div>
+</section>
+<section id="soporte-para-torrente-stream-de-datos">
+<h3>Soporte para torrente(stream) de datos<a class="headerlink" href="#soporte-para-torrente-stream-de-datos" title="Link to this heading"></a></h3>
+<p>El soporte para los <em>streams</em>, fue añadido en la especificación “SuperSpeed” versión <em>USB v3.0(5 Gbit/s)</em>. Primeramente para permitir una mejor eficiencia en las operaciones de almacenamiento sobre USB.</p>
+<p>Históricamente, ha habido una relación de <em>uno a uno(1:1)</em> entre la <em>terminación(endpoint)</em> de un USB y su <em>almacén(buffer)</em> en memoria de sistema; el <em>controlador de host</em> únicamente es responsable de direccionar la transferencia de datos.</p>
+<p>Los <em>Streams</em> cambiaron éste <em>paradigma</em>, porporcionando una asociación <em>terminación</em> hacia el <em>almacén</em> (endpoint to buffer), y permitiendo al <em>controlador de host</em> de un dispositivo, a qué -o cuál, <em>almacén</em> dirigirse.</p>
+<p>La transferencia de datos de un USB, asociada a una terminación USB, de torrente de datos(USB stream point) y, presentado por el xCHI, de la misma forma que cualquier otra terminación es, en cualquier caso, los datos asociados del almacén, con una transferencia es determinados por el dispositvo.</p>
+<ul class="simple">
+<li><p>El soporte del <em>xHCI USB Stream</em>, permite almacenes de hasta 64K, ser asociados con una sóla terminación.</p></li>
+<li><p>El protocolo <em>xHCI USB Stream</em>, permite a un dispositivo USB, seleccionar el almacén, al  que hacer la transferencia, cuando es presentada la terminación.</p></li>
+</ul>
+</section>
+<section id="escalabilidad">
+<h3>Escalabilidad<a class="headerlink" href="#escalabilidad" title="Link to this heading"></a></h3>
+<p>El xHCI, fué diseñado para ser sólidamente adaptable, capaz de soportar de 1 a 255 dispositivos USB y, de 1 a 255 <em>puertos hub raíz</em>. Como a cada dispositivo USB, le es permitido definir hasta 31 terminaciones, un xHCI que soporte 255 dispositivos, tendrá que dar soporte a a un total de 7906 terminaciones, por separado.</p>
+<p>Consecuentemente, cada almacén de memoria, asociado a una terminación, es descrito por una <em>lista(cola, queue en inglés)</em> de bloques de memoria, donde cada <em>lista</em> requiere un punto de cabecera(head pointer), una longitud de cola de puntos(el extremo, the queue, the tail…) y otros registros que definan su estado.</p>
+<p>Hay muchas formas de definir el <em>estado de lista</em> (queue state), aunque si uno tuviese que asumir 32 bytes de espacio de registros, para cada lista, entonces casi 256KB de espacio de registro, sería necesario par dar soporte a las 7906 listas.</p>
+<p>Únicamente un pequeño numero de dispositivos USB, serán acoplados al mismo tiempo. Como media, un dispositivo USB, da soporte a 3-4 terminaciones, de las cuáles, sólo un subconjunto de ellas, estarán activas a la vez.</p>
+<p>El xHCI, mantiene el <em>estado de lista</em>, en la memoria del sistema como <em>contexto para la</em> <em>extructura de datos de terminaciones</em>. El contexto, está diseñado, para mantener una <em>caché</em> a ser accedida por el xHCI y, <em>paginado</em> como función de entrada y salida, para la actividad de la terminación.</p>
+<p>De esta forma, un <em>fabricate/desarrollador</em>, podrá escalar su própio <em>contexto de caché xHCI</em> y hacer coincidir su uso práctico, en todos sus productos; en lugar de limirlo(xHCI) a la <em>arquitectura</em> del própio producto. Es decir, el fabricante, en lugar de desarrollar nuevo <em>software</em> para cada producto, utilizará el mismo; y lo adaptará a distintos
+dispositivos, con una “maquinaria” similar.</p>
+<p>Idealmente, el <em>espacio interno de caché</em>, es seleccionado de tal forma, que bajo circunstancias de uso normales, no hay <em>contexto de paginación</em> en el xCHI. Iguamlente, la actividad de una <em>terminación USB</em>, tiende a ser reactiva -o a reaccionar.</p>
+<p>Esto significa, que en cualquier momento, un gran número de terminaciones, podrán estar preparadas, para mover datos; aunque únicamente un subconjunto de ellos, mueva datos de manera activa.</p>
+<p>Como ejemplo, la interrupción <code class="docutils literal notranslate"><span class="pre">IN</span></code>, de la terminación de un ratón, podría transferir datos durante horas, si el usuario está lejos de su escritorio. Los algoritmos xHCI, específicos del fabricante, podrán detectar ésta situación y, hacer que la terminación candidata <em>deje de paginar</em>, si otra terminación está ocupada.</p>
+<ul class="simple">
+<li><p>El xHCI, permite grandes <em>valores máximos</em>, para el número de dispositivos soportados; puertos interrupciones, vectores, etc. Aunque una implementación, únicamente necesita definir, aquellos que satisfagan los requisitos de <em>marketing</em>. Por ejemplo, un fabricante podrá limitar el número de dispositivos USB, que soporta la implementación xHCI de una <em>tablet</em>, a 16 dispositivos.</p></li>
+<li><p>Un fabricante aún puede sacar más ventaja de las características xHCI, y escalar sus recursos internos, para hacerlo coincidir, con un <em>modelo</em> de uso. Por ejemplo, si a través  de pruebas de usabilidad, el fabricante determina que el 95% de los usuarios de <em>tablets</em>, nunca conectan más de <em>cuatro (4)</em> dispositivos USB y, cada dispositivo define 4  terminaciones -o menos, entonces el cacheado interno para 16 contextos de terminación,  asegura que bajo circunstancias normales, no habrá actividad en la memoria de sistema, debido al contexto de paginación.</p></li>
+</ul>
+<section id="referencias-y-agradecimientos">
+<h4>Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><strong>Paradigma</strong> La palabra viene del griego paradeigma (“modelo” o “patrón”). En ciencia y computación, un paradigma es el marco de pensamiento o las reglas del juego sobre cómo se debe resolver un problema.</p></li>
+<li><p><strong>Paradigma Orientado a Objetos:</strong> Enfoque de diseño que abstrae entidades o conceptos del mundo real en estructuras denominadas objetos (que combinan estado y comportamiento), facilitando la reutilización, instanciación y encapsulamiento del software.</p></li>
+<li><p><strong>Escalabilidad</strong> Capacidad de un sistema, red o proceso para manejar un incremento en la carga de trabajo (o su capacidad para ser ampliado) adaptando sus recursos de manera eficiente sin degradar el rendimiento.</p></li>
+<li><p><strong>Memoria caché:</strong> Capa de almacenamiento de alta velocidad que conserva una copia temporal de un subconjunto de datos para atender futuras solicitudes con mayor rapidez que accediendo al almacenamiento principal.</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Extensible_Host_Controller_Interface">xHCI</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Controladores de Dispositivos (Drivers)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hid.html" class="btn btn-neutral float-right" title="HID - Human Interface Device" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

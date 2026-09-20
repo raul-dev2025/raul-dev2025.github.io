@@ -1,0 +1,205 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servidor de Correo Postfix: Notificaciones RCU &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Patchpanel" href="../legacy_lan/dispositivosDeRed.html" />
+    <link rel="prev" title="Network Namespaces (netns)" href="../nft_ns2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Redes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#networking">Networking</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../nft_ns2.html">Network Namespaces (netns)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Servidor de Correo Postfix: Notificaciones RCU</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#proceso-de-notificaciones-y-demonio-bounce-8">Proceso de Notificaciones y Demonio <code class="docutils literal notranslate"><span class="pre">bounce(8)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuracion-de-plantillas-personalizadas-de-rebote">Configuración de Plantillas Personalizadas de Rebote</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diagnostico-y-registro-de-errores-bitacora">Diagnóstico y Registro de Errores (Bitácora)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#redes-lan">Redes LAN</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Redes</a></li>
+      <li class="breadcrumb-item active">Servidor de Correo Postfix: Notificaciones RCU</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/05_Networking/Servidor/postfix.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="servidor-de-correo-postfix-notificaciones-rcu">
+<h1>Servidor de Correo Postfix: Notificaciones RCU<a class="headerlink" href="#servidor-de-correo-postfix-notificaciones-rcu" title="Link to this heading"></a></h1>
+<p>El demonio <code class="docutils literal notranslate"><span class="pre">bounce(8)</span></code> de <strong>Postfix</strong> es el componente del agente de transferencia de correo (<em>MTA</em>) encargado de generar informes de estado de entrega de correo (<em>Delivery Status Notifications</em> o DSN). Gestiona avisos de rebote por fallos permanentes, advertencias de retardo (<em>delay warnings</em>) e informes de éxito o verificación de direcciones.</p>
+<section id="proceso-de-notificaciones-y-demonio-bounce-8">
+<h2>Proceso de Notificaciones y Demonio <code class="docutils literal notranslate"><span class="pre">bounce(8)</span></code><a class="headerlink" href="#proceso-de-notificaciones-y-demonio-bounce-8" title="Link to this heading"></a></h2>
+<p>Cuando un mensaje no puede ser entregado, el servidor realiza un seguimiento del proceso y notifica las incidencias. Por defecto, las alertas administrativas y copias de los informes de rebote se dirigen a la cuenta local <code class="docutils literal notranslate"><span class="pre">postmaster</span></code>.</p>
+<p>La plantilla con las cadenas de texto utilizadas para estos mensajes administrativos se configura mediante el archivo <code class="docutils literal notranslate"><span class="pre">bounce.cf</span></code>, ubicado por defecto en <code class="docutils literal notranslate"><span class="pre">/etc/postfix/bounce.cf</span></code>.</p>
+</section>
+<section id="configuracion-de-plantillas-personalizadas-de-rebote">
+<h2>Configuración de Plantillas Personalizadas de Rebote<a class="headerlink" href="#configuracion-de-plantillas-personalizadas-de-rebote" title="Link to this heading"></a></h2>
+<p>Para personalizar los mensajes de notificación del sistema, se sigue el procedimiento estandarizado mediante la utilidad <code class="docutils literal notranslate"><span class="pre">postconf</span></code>:</p>
+<section id="generar-la-plantilla-de-configuracion-por-defecto">
+<h3>1. Generar la plantilla de configuración por defecto<a class="headerlink" href="#generar-la-plantilla-de-configuracion-por-defecto" title="Link to this heading"></a></h3>
+<p>Obtener la plantilla base predeterminada con el comando <code class="docutils literal notranslate"><span class="pre">postconf</span> <span class="pre">-b</span></code> y guardarla en un archivo de trabajo:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>postconf<span class="w"> </span>-b<span class="w"> </span>&gt;<span class="w"> </span>/etc/postfix/bounce.cf.default
+</pre></div>
+</div>
+<p>Esta plantilla contiene las definiciones para cuatro tipos de eventos de entrega:</p>
+<ul class="simple">
+<li><p><strong>Failure</strong> (<code class="docutils literal notranslate"><span class="pre">failure_template</span></code>): Fallo permanente en la entrega de correo.</p></li>
+<li><p><strong>Delay</strong> (<code class="docutils literal notranslate"><span class="pre">delay_template</span></code>): Mensaje pospuesto temporalmente en la cola.</p></li>
+<li><p><strong>Success</strong> (<code class="docutils literal notranslate"><span class="pre">success_template</span></code>): Confirmación de entrega correcta.</p></li>
+<li><p><strong>Verify</strong> (<code class="docutils literal notranslate"><span class="pre">verify_template</span></code>): Petición de informe o verificación de dirección de correo.</p></li>
+</ul>
+</section>
+<section id="vincular-la-plantilla-personalizada-en-main-cf">
+<h3>2. Vincular la plantilla personalizada en <code class="docutils literal notranslate"><span class="pre">main.cf</span></code><a class="headerlink" href="#vincular-la-plantilla-personalizada-en-main-cf" title="Link to this heading"></a></h3>
+<p>Edite el archivo de configuración principal de Postfix (<code class="docutils literal notranslate"><span class="pre">/etc/postfix/main.cf</span></code>) e indique la ruta de la plantilla activa:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">bounce_template_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/etc/postfix/bounce.cf</span>
+</pre></div>
+</div>
+</section>
+<section id="parametros-de-cabecera-y-variables-modificables">
+<h3>3. Parámetros de Cabecera y Variables Modificables<a class="headerlink" href="#parametros-de-cabecera-y-variables-modificables" title="Link to this heading"></a></h3>
+<p>Dentro de la plantilla se pueden redifinir las siguientes cabeceras para adaptar la localización de los mensajes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Charset</span></code>: Juego de caracteres de la notificación (ej. <code class="docutils literal notranslate"><span class="pre">UTF-8</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">From</span></code>: Remitente del mensaje del sistema (ej. <code class="docutils literal notranslate"><span class="pre">Mail</span> <span class="pre">Delivery</span> <span class="pre">System</span> <span class="pre">&lt;postmaster&#64;midominio.com&gt;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Subject</span></code>: Asunto del informe de estado.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Postmaster-Subject</span></code>: Asunto asignado a la copia enviada al administrador.</p></li>
+</ul>
+<p>Asimismo, las plantillas permiten la expansión dinámica de variables definidas en <code class="docutils literal notranslate"><span class="pre">main.cf</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$delay_warning_time</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$maximal_queue_lifetime</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$mydomain</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$myhostname</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="diagnostico-y-registro-de-errores-bitacora">
+<h2>Diagnóstico y Registro de Errores (Bitácora)<a class="headerlink" href="#diagnostico-y-registro-de-errores-bitacora" title="Link to this heading"></a></h2>
+<p>Los eventos de entrega y errores de resolución se registran en los archivos de depuración del sistema en <code class="docutils literal notranslate"><span class="pre">/var/log/mail.log</span></code> o <code class="docutils literal notranslate"><span class="pre">/var/log/maillog</span></code>.</p>
+<section id="analisis-de-error-de-resolucion-dns">
+<h3>Análisis de Error de Resolución DNS<a class="headerlink" href="#analisis-de-error-de-resolucion-dns" title="Link to this heading"></a></h3>
+<p>En los registros del sistema puede aparecer el siguiente fallo de resolución de nombres de dominio:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DNS Error: 9546905 DNS type &#39;mx&#39; lookup of mydomain responded with code NOERROR
+9546905 DNS type &#39;aaaa&#39; lookup of mail.mydomain. responded with code NXDOMAIN
+9546905 DNS type &#39;a&#39; lookup of mail.mydomain. responded with code NXDOMAIN
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Causa</strong>: El servidor de correo de destino especificó un registro <strong>MX</strong> válido (<code class="docutils literal notranslate"><span class="pre">mail.mydomain.</span></code>), pero los registros de dirección <strong>A</strong> (IPv4) y <strong>AAAA</strong> (IPv6) para el nombre de host <code class="docutils literal notranslate"><span class="pre">mail.mydomain.</span></code> no existen en las zonas DNS o devuelven la respuesta <code class="docutils literal notranslate"><span class="pre">NXDOMAIN</span></code> (<em>Non-Existent Domain</em>).</p></li>
+<li><p><strong>Solución</strong>: Verificar la configuración del servidor DNS de destino utilizando utilidades como <code class="docutils literal notranslate"><span class="pre">dig</span></code> o <code class="docutils literal notranslate"><span class="pre">host</span></code> para asegurar que el registro A/AAAA apunte a la IP pública correcta del servidor de correo:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span>dig<span class="w"> </span>A<span class="w"> </span>mail.mydomain.<span class="w"> </span>+short$<span class="w"> </span>dig<span class="w"> </span>AAAA<span class="w"> </span>mail.mydomain.<span class="w"> </span>+short
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../nft_ns2.html" class="btn btn-neutral float-left" title="Network Namespaces (netns)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../legacy_lan/dispositivosDeRed.html" class="btn btn-neutral float-right" title="Patchpanel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

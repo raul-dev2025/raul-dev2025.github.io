@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CI/CD E INFRAESTRUCTURA &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="INFORME DE CIERRE DE HITO Y ESTADO DEL REPOSITORIO" href="ci-integration.html" />
+    <link rel="prev" title="HwBus-IO" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../Foundry/index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">HwBus-IO</a></li>
+      <li class="breadcrumb-item active">CI/CD E INFRAESTRUCTURA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/hwbus-io/ci-cd/ci-cd.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ci-cd-e-infraestructura">
+<h1>CI/CD E INFRAESTRUCTURA<a class="headerlink" href="#ci-cd-e-infraestructura" title="Link to this heading"></a></h1>
+<section id="documentacion-tecnica-entorno-automatizado-de-ci-cd-e-infraestructura">
+<h2>DOCUMENTACIÓN TÉCNICA: ENTORNO AUTOMATIZADO DE CI/CD E INFRAESTRUCTURA<a class="headerlink" href="#documentacion-tecnica-entorno-automatizado-de-ci-cd-e-infraestructura" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Ficha Técnica del Entorno</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parámetro</p></th>
+<th class="head"><p>Detalle</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Proyecto</p></td>
+<td><p>hwbus-io</p></td>
+</tr>
+<tr class="row-odd"><td><p>Arquitectura</p></td>
+<td><p>Orquestación Local / Remota sobre KVM/QEMU</p></td>
+</tr>
+<tr class="row-even"><td><p>Ubicación de Scripts</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Scripts/</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="vision-general-del-sistema">
+<h2>Visión General del Sistema<a class="headerlink" href="#vision-general-del-sistema" title="Link to this heading"></a></h2>
+<p>El entorno automatizado de integración continua y gestión de infraestructura virtualizada del proyecto <code class="docutils literal notranslate"><span class="pre">hwbus-io</span></code> está diseñado bajo una arquitectura modular y distribuida entre la Estación de Trabajo (WS) y el nodo de compilación/ejecución (<code class="docutils literal notranslate"><span class="pre">buildlab</span></code>).</p>
+<p>La jerarquía de directorios del subsistema de scripts se organiza de la siguiente manera:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Scripts/
+├── ci-builder.sh
+├── ci-runLauncher.sh
+├── ci-runner.sh
+├── ci-signer.sh
+├── Envs/
+│   ├── vm-poll.sh
+│   ├── vm-start.sh
+│   ├── vm-status.sh
+│   └── vm-stop.sh
+└── Tools/
+└── herramientas.sh
+</pre></div>
+</div>
+</section>
+<section id="modulos-de-infraestructura-virtual-iv">
+<h2>Módulos de Infraestructura Virtual (IV)<a class="headerlink" href="#modulos-de-infraestructura-virtual-iv" title="Link to this heading"></a></h2>
+<p>Ubicados en el directorio <code class="docutils literal notranslate"><span class="pre">Scripts/Envs/</span></code>, estos scripts gestionan el ciclo de vida de las máquinas virtuales en el hipervisor local garantizando exclusión mutua y verificación de red.</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Scripts de Control de Infraestructura</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Script</p></th>
+<th class="head"><p>Contexto / Permisos</p></th>
+<th class="head"><p>Descripción Operativa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">vm-start.sh</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-u</span> <span class="pre">virt-admin</span></code></p></td>
+<td><p>Inicia la máquina virtual objetivo (ej. <code class="docutils literal notranslate"><span class="pre">buildlab</span></code>) asegurando exclusión mutua frente a otros entornos activos.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">vm-poll.sh</span></code></p></td>
+<td><p>Usuario Estándar</p></td>
+<td><p>Realiza un sondeo activo (polling) sobre un socket TCP (puerto SSH 22) con reintentos y tiempo límite de espera.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">vm-status.sh</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-u</span> <span class="pre">virt-admin</span></code></p></td>
+<td><p>Consulta y reporta el estado actual de las instancias KVM/QEMU gestionadas por <code class="docutils literal notranslate"><span class="pre">virt-admin</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">vm-stop.sh</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-u</span> <span class="pre">virt-admin</span></code></p></td>
+<td><p>Detiene la máquina virtual especificada liberando los recursos de hardware asociados.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pipeline-de-integracion-continua-ci">
+<h2>Pipeline de Integración Continua (CI)<a class="headerlink" href="#pipeline-de-integracion-continua-ci" title="Link to this heading"></a></h2>
+<p>Ubicados en la raíz de <code class="docutils literal notranslate"><span class="pre">Scripts/</span></code>, orquestan el ciclo completo de compilación, ejecución de tests, firmado y empaquetado.</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Scripts del Pipeline de CI</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Script</p></th>
+<th class="head"><p>Función y Flujo de Trabajo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ci-builder.sh</span></code></p></td>
+<td><p>Orquestador principal desde la WS. Enciende la infraestructura mediante <code class="docutils literal notranslate"><span class="pre">vm-start.sh</span></code> y <code class="docutils literal notranslate"><span class="pre">vm-poll.sh</span></code>, purga logs remotos, ejecuta los targets <code class="docutils literal notranslate"><span class="pre">make</span></code> (versión kernel <code class="docutils literal notranslate"><span class="pre">.ko</span></code> o tests <code class="docutils literal notranslate"><span class="pre">LTP</span></code>) vía SSH en <code class="docutils literal notranslate"><span class="pre">buildlab</span></code>, invoca el firmado remoto y libera los recursos mediante <code class="docutils literal notranslate"><span class="pre">vm-stop.sh</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ci-runLauncher.sh</span></code></p></td>
+<td><p>Lanza y prepara el entorno para la ejecución remota de la suite de pruebas.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ci-runner.sh</span></code></p></td>
+<td><p>Ejecuta la batería de pruebas y captura de métricas directamente dentro del entorno objetivo.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ci-signer.sh</span></code></p></td>
+<td><p>Script ejecutado en el nodo remoto (<code class="docutils literal notranslate"><span class="pre">buildlab</span></code>) para la generación de manifiestos, estados de compilación y firmas digitales de los artefactos resultantes.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="herramientas-auxiliares">
+<h2>Herramientas Auxiliares<a class="headerlink" href="#herramientas-auxiliares" title="Link to this heading"></a></h2>
+<p>Ubicadas en <code class="docutils literal notranslate"><span class="pre">Scripts/Tools/</span></code>.</p>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Módulos Auxiliares</span><a class="headerlink" href="#id4" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Script</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">herramientas.sh</span></code></p></td>
+<td><p>Conjunto de funciones comunes y utilidades de soporte compartidas entre los scripts del pipeline.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="HwBus-IO" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ci-integration.html" class="btn btn-neutral float-right" title="INFORME DE CIERRE DE HITO Y ESTADO DEL REPOSITORIO" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,106 +1,90 @@
-.. contents:: Tabla de contenidos
-   :depth: 3
-
-.. _1-buffer-README_1:
-
 ========================================
 Soporte al *espacio temprano de usuario*
 ========================================
 
-.. _1-buffer-README_2:
+   última actualización: 20/12/04
 
-Introducción
-------------
-
-última actualización: 20/12/04
-
-*El espacio temprano de usuario*, son un conjunto de librerías y programas que proporcionan varias piezas de funcionalidad, lo suficientemente importantes, como para estar disponibles durante el arranque del *núcleo*, pero que necesitan estar dentro del mismo.
+*El espacio temprano de usuario*, son un conjunto de librerías y programas que propor-cionan varias piezas de funcionalidad, lo suficientemente importantes, como para estar disponibles durante el arranque del *núcleo*, pero que necesitan estar dentro del mismo.
 
 Consiste en una infraestructura de distintos componentes:
 
-- ``gen_init_cpio``, es un programa que construye un *fichero* ``cpio-format``, conteniendo una imagen de sistema de archivo ráiz. Éste fichero está comprimido y, la imagen comprimida está enlazada dentro de la imagen del *núcleo*. 
-- ``initramfs``,código que desempaqueta la imagen ``cpio`` comprimida, en medio del proceso de arranque. 
+- ``gen_init_cpio``, es un programa que construye un *fichero* ``cpio-format``, conteniendo una imagen de sistema de archivo ráiz. Éste fichero está comprimido y, la imagen comprimida está enlazada dentro de la imagen del *núcleo*.
+- ``initramfs``, código que desempaqueta la imagen ``cpio`` comprimida, en medio del proceso de arranque.
 - ``klibc``, una librería de ``C``, para el *espacio de usuario* -actualmente empaquetado por separado, que es optimizado para mejorar su funcionamiento y minimizar su espacio.
 
-El formato de archivo `cpio`` usado por ``initramfs`` el “newc” -también llamado”cpio -H newc”. Está documentado en el archivo ``buffer-format.txt`` `f1 . Hay dos formas de añadir una imagen al *espacio de usuario*: especificando un *fichero* ``cpio`` para ser usado como imagen, o dejar que el *kernel* contruya la imagen desde las especificaciones.
+El formato de archivo ``cpio`` usado por ``initramfs`` el “newc” -también llamado “cpio -H newc”. Está documentado en el archivo ``buffer-format.txt`` [#f1]_. Hay dos formas de añadir una imagen al *espacio de usuario*: especificando un *fichero* ``cpio`` para ser usado como imagen, o dejar que el *kernel* contruya la imagen desde las especificaciones.
 
 **Método por fichero ``CPIO``.**
 
-Puede crearse un fichero ``cpio`` conteniendo la imagen del *espacio de usuario temprano*. El fichero ``cpio``, debería ser especificado en ``CONFIG_INITRAMFS_SOURCE``, y será usado directamente. Sólo puede ser especificado un archivo ``cpio`` en ``CONFIG_INITRAMFS_SOURCE`` y el nombre del archivo y del directorio, no está permitido combinarlos, con el fichero ``cpio``.
+Puede crearse un fichero ``cpio`` conteniendo la imagen del *espacio de usuario temprano*. El fichero ``cpio``, debería ser especificado en ``CONFIG_INITRAMFS_SOURCE``, y será usado directamente. Sólo puede ser especificado un archivo ``cpio`` en ``CONFIG_INITRAMFS_SOURCE`` y el nombre del archivo y del directorio, no está permitido combinarlo con el fichero ``cpio``.
 
 **Método por construción de imagen**
 
-El proceso de construcción del núcleo, puede también construir una imagen de espacio *temprano de usuario* desde las fuentes, en lugar de suministrar un *fichero* ``cpio``. Éste método proporciona una forma de crear imágenes, con permisos de usuario *root* -o administrador, incluso cuando la imagen fué construida por un usuario no privilegiado.
+El proceso de construcción del núcleo, puede también construir una imagen de *espacio temprano de usuario* desde las fuentes, en lugar de suministrar un fichero ``cpio``. Éste método proporciona una forma de crear imágenes, con permisos de usuario *root* -o administrador, incluso cuando la imagen fué construida por un usuario no privilegiado.
 
-La imagen es especificada como *una*, o más fuentes, en ``CONFIG_INITRAMFS_SOURCE``. Las fuentes, pueden ser también, *directorios* o *archivos*. Los ficheros ``cpio`` no están permitidos, cuando se construye desde la *fuente*.
+La imagen será especificada como *una*, o más fuentes, en ``CONFIG_INITRAMFS_SOURCE``. Las fuentes, pueden ser también, directorios o archivos. Los ficheros ``cpio`` no están permitidos, cuando se construye desde la *fuente*.
 
-Un direcotorio de fuentes, tendrá su/sus contenidos empaquetados. El nombre de directorio especificado será *mapeado* en ``/``. Cuando se empaqueta un directorio, podrán traducirse usuario e *ID*, de grupos no privilegiados. Podrá configurarse *INITRAMFS_ROOT_UID* a un *ID* de grupo que necesite ser *mapeado* como grupo ``root (0)``.
+Un direcotorio de fuentes, tendrá su/sus contenidos empaquetados. El nombre de directorio especificado será *mapeado* en ``/``. Cuando se empaqueta un directorio, podrán traducirse usuarios e *ID* de grupos no privilegiados. Podrá configurarse ``_INITRAMFS_ROOT_UID_`` a un *ID* de grupo que necesite ser *mapeado* como grupo ``root (0)``.
 
-Un archivo de fuente, debe ser *directivas*, en formato requerido por la utilidad ``usr/gen_init_cpio``. -ejecutar ``usr/gen_init_cpio --help`` para obtener el formato de archivo. Las directivas en el archivo, serán pasadas directamente a ``usr/gen_init_cpio``.
+Un archivo de fuentes, debe ser *directivas*, en formato requerido por la utilidad ``usr/gen_init_cpio``. -ejecutar ``usr/gen_init_cpio --help`` para obtener el formato de archivo. Las directivas en el archivo, serán pasadas directamente a ``usr/gen_init_cpio``.
 
 Cuando son especificados una combinación de directorios y archivos, la imagen ``initramfs`` será agregada a todos ellos. De ésta forma, un usuario podrá crear un directorio ``root-image`` -imagen raíz, e instalar todos los archivos dentro. Debido a que archivos de dispositivos especiales, no pueden ser creados por usuarios no privilegiados, archivos especiales podrán ser listados en otro archivo ``root-file``. Ambos; ``root-image`` y ``root-file``, podrán ser listados en ``CONFIG_INITRAMFS_SOURCE`` y, una imagen completa del *espacio temprano de usuario*, podrá ser construida por usuarios no privilegiados.
 
-Como nota técnica, cuando directorios y archvos son especificados, se pasará énteramente ``CONFIG_INITRAMFS_SOURCE`` a ``scripts/gen_initramfs_list.sh``. Ésto significa que ``CONFIG_INITRAMFS_SOURCE`` podrá ser interpretado como cualquier *argumento legal* por ``gen_initramfs_list.sh``. Si es especificado un directorio como argumento, entonces el contenido será escaneado, llevándose a cabo *traducciones* de *uid/gid*, las directivas del archivo ``usr/gen_init_cpio``, será la salida *-se interpreta fd1*. Si es especificado un directorio como argumento a ``scripts/gen_initramfs_list.sh``, entonces el contenido del archivo, será copiado a la *salida*. Todas las directivas desde el escaneado de directorios, al copiado del contenido de un archivo, son procesados por ``usr/gen_init_cpio``.
+Como nota técnica, cuando directorios y archvos son especificados, se pasará énteramente ``CONFIG_INITRAMFS_SOURCE`` a ``scripts/gen_initramfs_list.sh``. Ésto significa que ``CONFIG_INITRAMFS_SOURCE`` podrá ser interpretado como cualquier *argumento legal* por ``gen_initramfs_list.sh``. Si es especificado un directorio como argumento, entonces el contenido será escaneado, llevándose a cabo *traducciones* de *uid/gid*, las directivas del archivo ``usr/gen_init_cpio``, será la salida *-se interpreta fd1*. Si es especificado un directorio como argumento a ``scripts/gen_initramfs_list.sh``, entonces el contenido del archivo, será copiado a la *salida*. Todas las directivas desde el escaneado de directorios, al copiado del contenido de un archivo, es procesado por ``usr/gen_init_cpio``.
 
-Ver también ``scripts/gen_initramfs_list.sh -h``
+* Ver también ``scripts/gen_initramfs_list.sh -h'``.
 
-.. _1-buffer-README_3:
+¿ Dónde nos conduce esto ?
+--------------------------
 
-¿Dónde nos lleva esto?
-----------------------
+La distribución de ``klibc`` contiene *algo* del software necesario para que el *espacio de usuario* sea útil. La distribución de ``klibc`` es actualmente mantenida de forma separada al *kernel*.
 
-La distribución de ``klibc``, contiene algún *software* necesario para que el espacio de usuario temprano sea *útil*. La distribución de ``klibc`` es mantenida desde el kernel, de forma separada.
+Pueden obtenerse algunas -infrecuentes, *capturas* de ``klibc`` desde:
 
-Es posible conseguir algunas *capturas* -poco frecuentes, de ``klibc``, desde: https://www.kernel.org/pub/linux/libs/klibc/.
+* `klibc <https://www.kernel.org/pub/linux/libs/klibc/>`_
 
-Para usuarios activos, es recomendable el uso del repositorio por medio de ``git``, en http://git.kernel.org/?p=libs/klibc/klibc.git.
+Es preferible descargarlo desde *git* si va ha hacerse un uso frecuente del mismo:
 
-La distribución en solitario de ``klibc``, proporciona actualmente tres componentes, además de la librería ``klibc``:
+* `git-klibc <http://git.kernel.org/?p=libs/klibc/klibc.git>`_
 
-- ``ipconfig``, un programa que configura la *interfase de red*. Puede configurarla estáticamente, o utilizando DHCP, para obtener información dinámica -también llamado autoconfiguración IP. 
-- ``nfsmount``, un programa que puede realizar el *montaje* del sistema de ficheros NFS. 
-- ``kinit``, es el “pegamento”, utilizado por ``ipconfig`` y ``nfsmount``, como reemplazo al anterior soporte a *IP autoconfig*. También montar el sistema de ficheros ``NFS`` y, continuar el arranque del sistema por medio del sistema de ficheros como raíz -usuario *root*.
+La distribución *única* de ``klibc``, actualmente proporciona tres componentes, en añadidura a la librería ``klibc``:
 
-``kinit`` es construido y enlazado estáticamente, como un binario único, para ahorrar espacio. De forma alternativa, un grueso número de funcionalidades del kernel, habrán sido movidas, afortunadamente, al espacio de usuario temprano.
+- **ipconfig**, un programa que configura las interfases de red. Puede configurarlas de forma estática, o hacer uso del dhcp, para obtener la información dinámicamente, también llamada *autoconfiguración IP*.
 
-- Prácticamente todos los ``init/do_mounts*`` (el principio de todo esto, está ya en su lugar). 
-- ACPI, tabla del *analizador de sentencias(parsing)*. 
-- Insertados subsistemas *ligeros*, que no necesitan realmente, estar en el kernel.
+- ``nfsmount``, un programa capaz de montar NFS (*ver siglas*).
 
-Si `kinit``, no coincide con sus necesidades y, se dispone de espacio en el disco duro, la distribución de ``klibc``, incluye una cónsola compatible con *Bourne*\ `f2  ``ash``, y un buen número de utilidades; por lo que es posible reemplazar ``kinit`` y, constuir una imagen de ``initramfs`` personalizada, que mejor coincida con necesidades concretas.
+- ``kinit``, el “pegamento” que usa *ipconfig* y *nfsmount*, para reemplazar al anterior soporte para la *autoconfiguración* de IP, montar el sistema de archivo sobre *NFS*, y continuar el *arranque* del sistema usando ese *FS* como raíz.
 
-Para preguntas y ayuda, es posible subscribirse al grupo de noticias para el *espacio de usuario temprano -early user space*, en http://www.zytor.com/mailman/listinfo/klibc.
+``kinit`` está construido como *binario de enlazado estático único* para ahorrar espacio. Eventualmente, algunas de las funcionalidades del *kernel*, se espera sean movidas al *espacio temprano de usuario*.
 
-.. _1-buffer-README_4:
+- Casi todos los ``init/do_mounts*`` (el principio de ésto, está ya en   su lugar).
+- El analizador de sentencia ACPI.
+- *Pesados* subsistemas, que realmente no necesitan estar en el espacio del *núcleo*.
 
-¿Cómo funciona?
----------------
+Si ``kinit`` no coincide con las necesidades *requeridas*, dando como resultado *bytes para quemar*, la distribución de ``klibc``, incluye una pequeña cónsola, ``ash`` compatible tipo *Bourne-shell*, y otras utilidades para que ``kinit`` pueda ser reemplazado, y construido un ``initramfs`` personalizado, que reuna las condiciones requeridas, exactamente.
 
-El kernel tiene, actualmente, tres formas de montar el sistema de ficheros raíz:
+Para ayuda y otras preguntas, podrá subscribirse a la lista de correo:
 
-1. Todos los dispositivos y controladores del sistema de fichero requeridos, compilados en el kernel ``initrd, init/main.c:init()`` no, llamarán a ``prepare_namespace()``, para montar el sistema de ficheros raíz final. Basado en la opción ``root=`` y ``init=``, para correr otro binario ``init``, al listado en ``init/main.c:init()``.
+* `klibc-mail-list <http://www.zytor.com/mailman/listinfo/klibc>`_.
 
-2. Algunos dispositivos y controladores del sistema de fichero, son construidos como módulos, almacenados en ``initrd``. El ``initrd`` debe contener un binario ``/linuxrc``, el cuál *se supone*, cargará éstos controladores como módulos. Es igualmente posible, montar el *sistema de fichero raíz final*, vía ``linuxrc`` y, utilizar la llamada de sistema ``pivot_root``. El ``initrd`` es montado y ejecutado vía ``prepare_namespace()``.
+¿ Cómo funciona ?
+-----------------
 
-3. Al utilizar *initramfs*, la llamada a ``prepare_namespace()``, debe ser omitida. Esto significa que un binario deberá hacer todo el trabajo. Dicho binario puede ser almacenado dentro de ``initramfs``, también vía modificando ``usr/gen_init_cpio.c`` o por medio de un nuevo formato de ``initrd``; un archivo ``cpio``. Deberá ser llamado ``/init``. Este binario es responsable de llevar a cabo las *tareas* efectuadas por ``prepare_namespace()``.
+Actualmente el *núcleo* tiene *3* formas de montar el sistema de archivo:
 
-Para mantener una compativilidad *retroactiva*, el binario ``/init``, únicamente correrá, si proviene através de un archivo ``cpio`` de ``initramfs``. Si no fuese el caso, ``init/main.c:init()``, llamará a ``prepare_namespace()`` para montar el *raíz final* y, ejecutar de los binarios predefinidos.
+1. Los controladores necesarios para el sistema de archivo y los dispositivos, compi - lados dentro del *kernel*, no ``initrd``. ``init/main.c()`` llamará a ``prepare_namespace()`` para montar el FS raíz final, basándose en la opción ``root=`` y opcionalmente en ``init=`` para *correr* otro *binario* ``init``, también listado en ``init/main.c()``.
 
-**Autor**: Bryan O'Sullivan bos@serpentine.com
+2. Algunos controladores de dispositivo y FS, son construidos como módulos y almace- nados en ``initrd``. El ``initrd`` debe contener el binario ``/linuxrc`` el cuál, supuesta - mente cargará estos módulos de dispositivo. Es también posible montar el FS raíz final vía ``linuxrc`` y, usar la *llamada de sistema* ``pivot_root``. El ``initrd`` está montado y ejecutado a través de ``prepare_namespace()``.
 
-.. _1-buffer-README_5:
+3. Uso de ``initramfs``. La llamada para ``prepare_namespace()`` debe ser omitida. Ésto significa que el *binario* debe hacer todo el *trabajo*. Dicho *binario* puede ser almacenado dentro de ``initramfs`` igualmente, vía la modificación de ``usr/gen_init_cpio.c`` o por medio del nuevo formato ``initrd`` y el archivo ``cpio``. Debe ser llamado ``/init``. Éste binario es el responsable de todo lo que antes haría ``prepare_namespace()``.
 
-Referencias y agradecimientos
------------------------------
+Para mantener la compatibilidad, el binario ``/init`` únicamente *correrá*, si proviene desde el archivo ``cpio`` por medio del FS ``initramfs``. Si no fuese el caso, ``init/main.c:init()`` *lanzará* ``prepare_namespace()`` para montar la raíz final y, ejecutará uno delos binarios ``init`` predefinidos.
 
-**Bash**: Bourne Again Shell.
+--------------
 
-.. note:
+**Autor:** Bryan O’Sullivan bos@serpentine.com
 
-   nota d.t.  en este mismo directorio, territoriolinux lo ha guardado con formato ``.html`` para su apropiada lectura con exploradores.
+   **nota d.t.**, bytes para quemar: referido a espacio en bytes, no
+   usados!.
 
-..
-
-**nota d.t.** en la página ``tmpfs``  se definió el significado de las palabras archivo/fichero, desde una perspectiva *más inglesa!*. Pero como vemos en este documento, se toma una dirección opuesta; **archivo**, es la *unidad mínima*, **fichero** es el contenedor.
-
-nota d.t. **mapeado**: referido a registrar, localizar, situar.
+.. [#f1] **nota d.t.** en la página `tmpfs <kernel/SistemaFicheros/tmpfs.html>`_ se definió el significado de las palabras archivo/fichero, desde una perspectiva más inglesa!*. Pero como vemos en este documento, se toma una dirección opuesta; **archivo**, es la *unidad mínima*, **fichero** es el contenedor.

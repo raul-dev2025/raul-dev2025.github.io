@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual de Operación: auth-director.sh &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Opciones de red" href="opciones-red.html" />
+    <link rel="prev" title="Infraestructura IdM: Fase 1 - Despliegue de Proxy-Auth" href="fase1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#idm-configuracion">IdM - Configuracion</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Índice ‘Single Sign-On’</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="index.html#planificacion-y-fases">Planificación y Fases</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#infraestructura-y-red">Infraestructura y Red</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#integracion-sso-y-borradores">Integración SSO y Borradores</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Índice ‘Single Sign-On’</a></li>
+      <li class="breadcrumb-item active">Manual de Operación: auth-director.sh</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/06_Software_and_Applications/Supuestos/IdM/SSO/auth-director.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="manual-de-operacion-auth-director-sh">
+<h1>Manual de Operación: auth-director.sh<a class="headerlink" href="#manual-de-operacion-auth-director-sh" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Proyecto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>SSO RAULVILCHEZ.ORG</p>
+</dd>
+<dt class="field-even">Componente<span class="colon">:</span></dt>
+<dd class="field-even"><p>Orquestador de Servicios (Control de Fase 1)</p>
+</dd>
+<dt class="field-odd">Estado<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Consolidado (Modo Rootless)</p>
+</dd>
+</dl>
+<section id="proposito">
+<h2>Propósito<a class="headerlink" href="#proposito" title="Link to this heading"></a></h2>
+<p>El script <code class="docutils literal notranslate"><span class="pre">auth-director.sh</span></code> actúa como el controlador maestro para la infraestructura de identidad y proxy. Su función principal es garantizar que los contenedores se desplieguen en el orden jerárquico correcto, respetando las dependencias de red (Pasta) y los servicios de backend (IdM).</p>
+<section id="caracteristicas-principales">
+<h3>Características Principales<a class="headerlink" href="#caracteristicas-principales" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Gestión de Dependencias:</strong> Asegura que Authelia esté operativo antes de levantar el Proxy.</p></li>
+<li><p><strong>Aislamiento Rootless:</strong> Ejecuta todas las operaciones bajo el espacio de nombres del usuario actual, integrándose con las políticas de seguridad de Rocky Linux.</p></li>
+<li><p><strong>Persistencia de Configuración:</strong> Vincula los volúmenes de <code class="docutils literal notranslate"><span class="pre">/var/lib/virt_storage/configs/</span></code> con las flags de SELinux correspondientes (:Z).</p></li>
+</ul>
+</section>
+</section>
+<section id="modo-de-uso">
+<h2>Modo de Uso<a class="headerlink" href="#modo-de-uso" title="Link to this heading"></a></h2>
+<p>El script acepta parámetros posicionales para definir el estado deseado de la infraestructura:</p>
+<ol class="arabic">
+<li><p><strong>Arranque de Infraestructura (Default/Start):</strong>
+Levanta la pila completa siguiendo el orden: Authelia -&gt; Proxy.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./auth-director.sh<span class="w"> </span>start
+</pre></div>
+</div>
+</li>
+<li><p><strong>Apagado Controlado (Shutdown/Stop):</strong>
+Detiene y elimina los contenedores en orden inverso para evitar colgados de red o procesos huérfanos.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./auth-director.sh<span class="w"> </span>shutdown
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="notas-de-implementacion">
+<h2>Notas de Implementación<a class="headerlink" href="#notas-de-implementacion" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Interfaz Dedicada:</strong> El orquestador delega en los sub-scripts la gestión de la NIC <code class="docutils literal notranslate"><span class="pre">enp9s0</span></code>.</p></li>
+<li><p><strong>Ajuste de MTU:</strong> En la versión actual (1.3), se ha forzado el MTU a 1500 para garantizar la visibilidad desde el NAS y otros nodos de la red.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fase1.html" class="btn btn-neutral float-left" title="Infraestructura IdM: Fase 1 - Despliegue de Proxy-Auth" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="opciones-red.html" class="btn btn-neutral float-right" title="Opciones de red" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

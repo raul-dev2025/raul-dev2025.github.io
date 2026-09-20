@@ -1,0 +1,215 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arquitectura Stateless e Interacción de Hardware &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Auditoría de Parámetros de Módulo y Gestión con LTP" href="hwBusParam.html" />
+    <link rel="prev" title="Configuración PCI" href="pciTopConf.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../Foundry/index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">HwBus-IO</a></li>
+      <li class="breadcrumb-item active">Arquitectura Stateless e Interacción de Hardware</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/hwbus-io/Driver/stateless.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="arquitectura-stateless-e-interaccion-de-hardware">
+<h1>Arquitectura Stateless e Interacción de Hardware<a class="headerlink" href="#arquitectura-stateless-e-interaccion-de-hardware" title="Link to this heading"></a></h1>
+<p>El controlador de dispositivo de caracteres <code class="docutils literal notranslate"><span class="pre">/dev/hwbusc</span></code> ha sido diseñado
+bajo un paradigma estrictamente <strong>stateless</strong> (sin estado de datos persistente).
+A diferencia de los dispositivos de caracteres virtuales basados en memoria RAM
+(como el patrón clásico <em>scull</em>), <code class="docutils literal notranslate"><span class="pre">/dev/hwbusc</span></code> actúa como un canal de paso
+directo hacia las funciones de acceso al bus PCI del subsistema del kernel de Linux.</p>
+<section id="comparativa-de-diseno-dispositivo-virtual-vs-controlador-de-hardware">
+<h2>Comparativa de Diseño: Dispositivo Virtual vs. Controlador de Hardware<a class="headerlink" href="#comparativa-de-diseno-dispositivo-virtual-vs-controlador-de-hardware" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">:header-rows: 1
+ :widths: 30 35 35</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Criterio</p></td>
+<td><p>Dispositivo de Memoria (Patrón <em>Scull</em>)</p></td>
+<td><p>Controlador PCI (<code class="docutils literal notranslate"><span class="pre">/dev/hwbusc</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>Almacenamiento</p></td>
+<td><p>Búferes en RAM (cuantos/bloques dinámicos).</p></td>
+<td><p><strong>Ninguno</strong>. Sin almacenamiento interno.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mecanismo de Lectura</p></td>
+<td><p>Copia desde memoria interna vía <code class="docutils literal notranslate"><span class="pre">read()</span></code>.</p></td>
+<td><p>Consulta en tiempo real al bus PCI vía <code class="docutils literal notranslate"><span class="pre">ioctl()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Puntero de Archivo (<code class="docutils literal notranslate"><span class="pre">f_pos</span></code>)</p></td>
+<td><p>Requerido para buscar posiciones (<code class="docutils literal notranslate"><span class="pre">lseek()</span></code>).</p></td>
+<td><p><strong>Inexistente</strong>. Acceso por dirección absoluta del registro.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tamaño del Dispositivo</p></td>
+<td><p>Definido explícitamente (ej. <code class="docutils literal notranslate"><span class="pre">SCULLC_QUANTUM</span></code>).</p></td>
+<td><p>No aplica. Acotado por espacio de configuración PCI (<code class="docutils literal notranslate"><span class="pre">0x00</span></code>–<code class="docutils literal notranslate"><span class="pre">0x3C</span></code>).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="fundamentos-arquitectonicos">
+<h2>Fundamentos Arquitectónicos<a class="headerlink" href="#fundamentos-arquitectonicos" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Ausencia de Búferes Internos</p></li>
+</ol>
+<p>El dispositivo no reserva ni mantiene estructuras de datos para almacenar el
+contenido de las lecturas. Cada invocación del comando <code class="docutils literal notranslate"><span class="pre">ioctl()</span></code> desde el
+espacio de usuario desencadena una lectura síncrona en tiempo real sobre el
+hardware mediante las funciones del kernel:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pci_read_config_byte()</span></code> para accesos de 8 bits.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pci_read_config_word()</span></code> para accesos de 16 bits.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pci_read_config_dword()</span></code> para accesos de 32 bits.</p></li>
+</ul>
+<p>Los datos leídos son transferidos inmediatamente al espacio de usuario mediante
+<code class="docutils literal notranslate"><span class="pre">put_user()</span></code> y el resultado no se conserva en la memoria del módulo.</p>
+<ol class="arabic simple" start="2">
+<li><p>Conmutación de Dispositivos PCI (BDF)</p></li>
+</ol>
+<p>La estructura interna del dispositivo (<code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">hwbus_dev</span></code>) únicamente mantiene
+la referencia al puntero del dispositivo objetivo (<code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pci_dev</span> <span class="pre">*pdev</span></code>)
+asociado al parámetro de módulo BDF (Bus:Device:Function).</p>
+<p>Si el parámetro de destino cambia o se selecciona otro dispositivo PCI, la
+siguiente llamada a <code class="docutils literal notranslate"><span class="pre">ioctl()</span></code> evaluará la nueva referencia a <code class="docutils literal notranslate"><span class="pre">pdev</span></code> en tiempo
+real, garantizando la lectura limpia sobre el hardware sin necesidad de
+invalidar o limpiar búferes previos.</p>
+<ol class="arabic simple" start="3">
+<li><p>Justificación de la Interfaz Exclusiva <code class="docutils literal notranslate"><span class="pre">ioctl()</span></code></p></li>
+</ol>
+<p>El espacio de configuración PCI exige garantías estrictas de acceso:</p>
+<ul class="simple">
+<li><p><strong>Atomicidad</strong>: Cada transacción en el bus se realiza en el ancho exacto del registro.</p></li>
+<li><p><strong>Alineación Natural</strong>: La dirección del registro debe ser múltiplo de su tamaño (<code class="docutils literal notranslate"><span class="pre">offset</span> <span class="pre">%</span> <span class="pre">size</span> <span class="pre">==</span> <span class="pre">0</span></code>).</p></li>
+<li><p><strong>Acotamiento estricto</strong>: Las consultas están restringidas a la cabecera estándar (<code class="docutils literal notranslate"><span class="pre">offset</span> <span class="pre">&lt;=</span> <span class="pre">0x3C</span></code>).</p></li>
+</ul>
+<p>La semántica de archivos POSIX tradicionales (<code class="docutils literal notranslate"><span class="pre">read</span></code>/<code class="docutils literal notranslate"><span class="pre">lseek</span></code>) asume un flujo continuo
+de bytes desalineados, lo cual es incompatible con las restricciones del bus PCI.
+Al descartar <code class="docutils literal notranslate"><span class="pre">.read</span></code> y <code class="docutils literal notranslate"><span class="pre">.llseek</span></code> de la estructura <code class="docutils literal notranslate"><span class="pre">file_operations</span></code>, el VFS del
+kernel rechaza automáticamente accesos no estructurados, delegando la totalidad del
+control a la función de validación <code class="docutils literal notranslate"><span class="pre">is_valid_hwbus_cmd()</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pciTopConf.html" class="btn btn-neutral float-left" title="Configuración PCI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hwBusParam.html" class="btn btn-neutral float-right" title="Auditoría de Parámetros de Módulo y Gestión con LTP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

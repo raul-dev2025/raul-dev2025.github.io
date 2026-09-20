@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobreposición del árbol de dispositivo, notas &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Linux y el árbol de dispositivo" href="usage-model.html" />
+    <link rel="prev" title="Resolución dinámica, notas" href="dynamic-resolution-notes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="0-of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="changesets.html">conjunto de cambios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-tree-usage.html">Uso del árbol de dispositivo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic-resolution-notes.html">Resolución dinámica, notas</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><em>Sobreposición</em> del árbol de dispositivo, notas</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#como-funciona-la-obreposicion">Cómo funciona la <em>obreposición</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sobreposicion-en-la-api-del-nucleo">Sobreposición, en la <em>API</em> del núcleo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#formato-de-sobreposicion-dts">Formato de sobreposición <em>DTS</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="usage-model.html">Linux y el árbol de dispositivo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active"><em>Sobreposición</em> del árbol de dispositivo, notas</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/DeviceTree/overlay-notes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sobreposicion-del-arbol-de-dispositivo-notas">
+<h1><em>Sobreposición</em> del árbol de dispositivo, notas<a class="headerlink" href="#sobreposicion-del-arbol-de-dispositivo-notas" title="Link to this heading"></a></h1>
+<p>Éste documento describe la implementación -<em>en el lado del kernel</em>, de la funcionalidad
+de la <em>sobreposición</em> del árbol de dispositivo. <strong>Localización:</strong>   <code class="docutils literal notranslate"><span class="pre">drivers/of/overlay.c</span></code>. <strong>lectura:</strong> <code class="docutils literal notranslate"><span class="pre">Documentation/devicetree/dynamic-resolution-notes.txt</span></code>.</p>
+<section id="como-funciona-la-obreposicion">
+<h2>Cómo funciona la <em>obreposición</em><a class="headerlink" href="#como-funciona-la-obreposicion" title="Link to this heading"></a></h2>
+<p>El principal objetivo del <em>Árbol de Dispositivo</em>, es modificar el <em>árbol del kernel</em> en <em>activo(live)</em> y, proporcionar una <em>manera</em> de que tales cambios, sean reflejados el el núcleo. Puesto que el núcleo, principalmente <em>trabaja</em> con dispositivos, cualquier nuevo <em>nodo</em> de  dispositivo, resultará en que un dispositivo <em>activo</em>, debería ser creado, incluso si el <em>nodo de dispositivo</em> es desactivado, retirado o, ambos. El dispositivo afectado debería ser <em>desregistrado -esto es, quitado de la lista en el registro</em>.</p>
+<p>Tómese el siguiente ejemplo, dónde aparece la <em>placa</em> foo <em>-base del árbol</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">----</span> <span class="n">foo</span><span class="o">.</span><span class="n">dts</span> <span class="o">-----------------------------------------------------------------</span>
+    <span class="o">/*</span> <span class="n">FOO</span> <span class="n">platform</span> <span class="o">*/</span>
+    <span class="o">/</span> <span class="p">{</span>
+        <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;corp,foo&quot;</span><span class="p">;</span>
+        <span class="o">/*</span> <span class="n">shared</span> <span class="n">resources</span> <span class="o">*/</span>
+        <span class="n">res</span><span class="p">:</span> <span class="n">res</span> <span class="p">{</span>
+        <span class="p">};</span>
+        <span class="o">/*</span> <span class="n">On</span> <span class="n">chip</span> <span class="n">peripherals</span> <span class="o">*/</span>
+        <span class="n">ocp</span><span class="p">:</span> <span class="n">ocp</span> <span class="p">{</span>
+            <span class="o">/*</span> <span class="n">peripherals</span> <span class="n">that</span> <span class="n">are</span> <span class="n">always</span> <span class="n">instantiated</span> <span class="o">*/</span>
+            <span class="n">peripheral1</span> <span class="p">{</span> <span class="o">...</span> <span class="p">};</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+<span class="o">----</span> <span class="n">foo</span><span class="o">.</span><span class="n">dts</span> <span class="o">-----------------------------------------------------------------</span>
+</pre></div>
+</div>
+<p>El sobrepuesto <code class="docutils literal notranslate"><span class="pre">bar.dts</span></code>, cuando sea cargado -y resuelto tal y como se describe en .. <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="reference external" href="DeviceTree/dynamicResolutionNotes.html">ResolucionDinamica-Notes.html</a>, debería:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">----</span> <span class="n">bar</span><span class="o">.</span><span class="n">dts</span> <span class="o">-----------------------------------------------------------------</span>
+<span class="o">/</span><span class="n">plugin</span><span class="o">/</span><span class="p">;</span>   <span class="o">/*</span> <span class="n">allow</span> <span class="n">undefined</span> <span class="n">label</span> <span class="n">references</span> <span class="ow">and</span> <span class="n">record</span> <span class="n">them</span> <span class="o">*/</span>
+<span class="o">/</span> <span class="p">{</span>
+    <span class="o">....</span>    <span class="o">/*</span> <span class="n">various</span> <span class="n">properties</span> <span class="k">for</span> <span class="n">loader</span> <span class="n">use</span><span class="p">;</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="n">part</span> <span class="nb">id</span> <span class="n">etc</span><span class="o">.</span> <span class="o">*/</span>
+    <span class="n">fragment</span><span class="o">@</span><span class="mi">0</span> <span class="p">{</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">ocp</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="n">__overlay__</span> <span class="p">{</span>
+            <span class="o">/*</span> <span class="n">bar</span> <span class="n">peripheral</span> <span class="o">*/</span>
+            <span class="n">bar</span> <span class="p">{</span>
+                <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;corp,bar&quot;</span><span class="p">;</span>
+                <span class="o">...</span> <span class="o">/*</span> <span class="n">various</span> <span class="n">properties</span> <span class="ow">and</span> <span class="n">child</span> <span class="n">nodes</span> <span class="o">*/</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+<span class="o">----</span> <span class="n">bar</span><span class="o">.</span><span class="n">dts</span> <span class="o">-----------------------------------------------------------------</span>
+</pre></div>
+</div>
+<p>Resultando en <code class="docutils literal notranslate"><span class="pre">foo+bar.dts</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">----</span> <span class="n">foo</span><span class="o">+</span><span class="n">bar</span><span class="o">.</span><span class="n">dts</span> <span class="o">-------------------------------------------------------------</span>
+    <span class="o">/*</span> <span class="n">FOO</span> <span class="n">platform</span> <span class="o">+</span> <span class="n">bar</span> <span class="n">peripheral</span> <span class="o">*/</span>
+    <span class="o">/</span> <span class="p">{</span>
+        <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;corp,foo&quot;</span><span class="p">;</span>
+        <span class="o">/*</span> <span class="n">shared</span> <span class="n">resources</span> <span class="o">*/</span>
+        <span class="n">res</span><span class="p">:</span> <span class="n">res</span> <span class="p">{</span>
+        <span class="p">};</span>
+        <span class="o">/*</span> <span class="n">On</span> <span class="n">chip</span> <span class="n">peripherals</span> <span class="o">*/</span>
+        <span class="n">ocp</span><span class="p">:</span> <span class="n">ocp</span> <span class="p">{</span>
+            <span class="o">/*</span> <span class="n">peripherals</span> <span class="n">that</span> <span class="n">are</span> <span class="n">always</span> <span class="n">instantiated</span> <span class="o">*/</span>
+            <span class="n">peripheral1</span> <span class="p">{</span> <span class="o">...</span> <span class="p">};</span>
+            <span class="o">/*</span> <span class="n">bar</span> <span class="n">peripheral</span> <span class="o">*/</span>
+            <span class="n">bar</span> <span class="p">{</span>
+                <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;corp,bar&quot;</span><span class="p">;</span>
+                <span class="o">...</span> <span class="o">/*</span> <span class="n">various</span> <span class="n">properties</span> <span class="ow">and</span> <span class="n">child</span> <span class="n">nodes</span> <span class="o">*/</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+<span class="o">----</span> <span class="n">foo</span><span class="o">+</span><span class="n">bar</span><span class="o">.</span><span class="n">dts</span> <span class="o">-------------------------------------------------------------</span>
+</pre></div>
+</div>
+<p>o resultado de la sobreposición, el nuevo nodo de dispositivo (bar), ha sido creado así un dispositivo de plataforma <em>bar</em>, será registrado y si un controlador de dispositivo  coincidente, es cargado, el dispositivo será creado tal y como se espera.</p>
+</section>
+<section id="sobreposicion-en-la-api-del-nucleo">
+<h2>Sobreposición, en la <em>API</em> del núcleo<a class="headerlink" href="#sobreposicion-en-la-api-del-nucleo" title="Link to this heading"></a></h2>
+<p>La <em>API</em>, es bastante fácil de usar:</p>
+<ol class="arabic simple">
+<li><p>Llamada a <code class="docutils literal notranslate"><span class="pre">of_overlay_create()</span></code>, para crear y aplicar la <em>sobreposición</em>. El valor retornado es una galletita(cookie) identificando la <em>sobreposición</em>.</p></li>
+<li><p>Llamada a <code class="docutils literal notranslate"><span class="pre">of_overlay_destroy()</span></code> para retirar y limpiar, la sobreposición previamente creada, por medio de <code class="docutils literal notranslate"><span class="pre">of_overlay_create()</span></code>. La retirada de una <em>sobreposición</em> <em>apilada</em> por otra, no será permitida.</p></li>
+<li><p>Finalmente, si es necesario retirar la <em>sobreposición</em>, de <em>una sóla vez</em>, llamar únicamente a <code class="docutils literal notranslate"><span class="pre">of_overlay_destroy_all()</span></code> para retirar cada una de ellas, en el orden correcto.</p></li>
+</ol>
+</section>
+<section id="formato-de-sobreposicion-dts">
+<h2>Formato de sobreposición <em>DTS</em><a class="headerlink" href="#formato-de-sobreposicion-dts" title="Link to this heading"></a></h2>
+<p>El <em>DTS</em> de una sobreposición, debería tener el siguient formato:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="o">/*</span> <span class="n">ignored</span> <span class="n">properties</span> <span class="n">by</span> <span class="n">the</span> <span class="n">overlay</span> <span class="o">*/</span>
+    <span class="n">fragment</span><span class="o">@</span><span class="mi">0</span> <span class="p">{</span>    <span class="o">/*</span> <span class="n">first</span> <span class="n">child</span> <span class="n">node</span> <span class="o">*/</span>
+        <span class="n">target</span><span class="o">=&lt;</span><span class="n">phandle</span><span class="o">&gt;</span><span class="p">;</span>   <span class="o">/*</span> <span class="n">phandle</span> <span class="n">target</span> <span class="n">of</span> <span class="n">the</span> <span class="n">overlay</span> <span class="o">*/</span>
+    <span class="ow">or</span>
+        <span class="n">target</span><span class="o">-</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/path&quot;</span><span class="p">;</span>    <span class="o">/*</span> <span class="n">target</span> <span class="n">path</span> <span class="n">of</span> <span class="n">the</span> <span class="n">overlay</span> <span class="o">*/</span>
+        <span class="n">__overlay__</span> <span class="p">{</span>
+            <span class="nb">property</span><span class="o">-</span><span class="n">a</span><span class="p">;</span> <span class="o">/*</span> <span class="n">add</span> <span class="nb">property</span><span class="o">-</span><span class="n">a</span> <span class="n">to</span> <span class="n">the</span> <span class="n">target</span> <span class="o">*/</span>
+            <span class="n">node</span><span class="o">-</span><span class="n">a</span> <span class="p">{</span>    <span class="o">/*</span> <span class="n">add</span> <span class="n">to</span> <span class="n">an</span> <span class="n">existing</span><span class="p">,</span> <span class="ow">or</span> <span class="n">create</span> <span class="n">a</span> <span class="n">node</span><span class="o">-</span><span class="n">a</span> <span class="o">*/</span>
+                <span class="o">...</span>
+            <span class="p">};</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+    <span class="n">fragment</span><span class="o">@</span><span class="mi">1</span> <span class="p">{</span>    <span class="o">/*</span> <span class="n">second</span> <span class="n">child</span> <span class="n">node</span> <span class="o">*/</span>
+        <span class="o">...</span>
+    <span class="p">};</span>
+    <span class="o">/*</span> <span class="n">more</span> <span class="n">fragments</span> <span class="n">follow</span> <span class="o">*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Utilizar un método no basado en <em>phandle</em>, permite el uso de un <em>DT</em> de base, no conteniendo ningún nodo <code class="docutils literal notranslate"><span class="pre">__symbols__</span></code>. Por ejemplo, si no fue compilado con la opción <code class="docutils literal notranslate"><span class="pre">-&#64;</span></code>. El nodo  <code class="docutils literal notranslate"><span class="pre">__symbols__</span></code>, es sólo un requisito para el método: <code class="docutils literal notranslate"><span class="pre">target=&lt;phandle&gt;</span></code>, ya que contiene la información para <em>mapear</em> un <em>phandle</em> a una localización del árbol. 7</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2>Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>phandle, ver <a class="reference external" href="dynamicResolutionNotes.html#f1">dynamic Resolution</a></p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dynamic-resolution-notes.html" class="btn btn-neutral float-left" title="Resolución dinámica, notas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage-model.html" class="btn btn-neutral float-right" title="Linux y el árbol de dispositivo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

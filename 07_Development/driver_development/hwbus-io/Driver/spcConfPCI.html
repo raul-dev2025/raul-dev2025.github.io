@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espacio de configuración PCI &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Configuración PCI" href="pciTopConf.html" />
+    <link rel="prev" title="Cabeceras" href="cabeceras.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../Foundry/index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">HwBus-IO</a></li>
+      <li class="breadcrumb-item active">Espacio de configuración PCI</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/hwbus-io/Driver/spcConfPCI.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="espacio-de-configuracion-pci">
+<h1>Espacio de configuración PCI<a class="headerlink" href="#espacio-de-configuracion-pci" title="Link to this heading"></a></h1>
+<p>El mapa estándar del encabezado del espacio de configuración PCI (Type 0 Header), especificando el desplazamiento (offset) y tamaño de los registros principales en los primeros 64 bytes:</p>
+<p>Mapa del Espacio de Configuración PCI (Header Type 0)</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">:widths: 15 15 30 40
+ :header-rows: 1</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Offset (Hex)</p></td>
+<td><p>Tamaño</p></td>
+<td><p>Registro PCI</p></td>
+<td><p>Descripción</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0x00</span></code></p></td>
+<td><p>2 Bytes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_VENDOR_ID</span></code></p></td>
+<td><p>Identificador del fabricante de la tarjeta</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0x02</span></code></p></td>
+<td><p>2 Bytes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_DEVICE_ID</span></code></p></td>
+<td><p>Identificador del dispositivo PCI</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0x04</span></code></p></td>
+<td><p>2 Bytes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_COMMAND</span></code></p></td>
+<td><p>Registro de control de funciones de E/S y MMIO</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0x06</span></code></p></td>
+<td><p>2 Bytes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_STATUS</span></code></p></td>
+<td><p>Registro de estado de eventos del bus PCI</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0x08</span></code></p></td>
+<td><p>1 Byte</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_REVISION_ID</span></code></p></td>
+<td><p>Revisión de silicio del dispositivo</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0x09</span></code></p></td>
+<td><p>3 Bytes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_CLASS_PROG</span></code> / <code class="docutils literal notranslate"><span class="pre">DEVICE_CLASS</span></code></p></td>
+<td><p>Código de clase de dispositivo y programación de interfaz</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0x0C</span></code></p></td>
+<td><p>1 Byte</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_CACHE_LINE_SIZE</span></code></p></td>
+<td><p>Tamaño de la línea de caché del sistema</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0x0D</span></code></p></td>
+<td><p>1 Byte</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_LATENCY_TIMER</span></code></p></td>
+<td><p>Temporizador de latencia del bus en ciclos de reloj</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0x0E</span></code></p></td>
+<td><p>1 Byte</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_HEADER_TYPE</span></code></p></td>
+<td><p>Tipo de cabecera (0x00 para endpoint, 0x01 para puente PCI-to-PCI)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0x0F</span></code></p></td>
+<td><p>1 Byte</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_BIST</span></code></p></td>
+<td><p>Registro de autocomprobación de encendido (<em>Built-In Self Test</em>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0x10</span></code> - <code class="docutils literal notranslate"><span class="pre">0x27</span></code></p></td>
+<td><p>24 Bytes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_BASE_ADDRESS_0..5</span></code></p></td>
+<td><p>Registros BAR (Mapeo de memoria MMIO y direcciones I/O)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0x2C</span></code></p></td>
+<td><p>2 Bytes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_SUBSYSTEM_VENDOR_ID</span></code></p></td>
+<td><p>Identificador del ensamblador de la tarjeta (OEM)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0x2E</span></code></p></td>
+<td><p>2 Bytes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_SUBSYSTEM_ID</span></code></p></td>
+<td><p>Identificador del modelo específico asignado por el ensamblador</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0x30</span></code></p></td>
+<td><p>4 Bytes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_ROM_ADDRESS</span></code></p></td>
+<td><p>Base de la ROM de expansión (<em>Option ROM</em>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0x34</span></code></p></td>
+<td><p>1 Byte</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_CAPABILITY_LIST</span></code></p></td>
+<td><p>Puntero a la lista enlazada de capacidades extendidas (MSI, PCIe, Power Mgmt)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0x3C</span></code></p></td>
+<td><p>1 Byte</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_INTERRUPT_LINE</span></code></p></td>
+<td><p>Línea del controlador de interrupción IRQ asignada</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0x3D</span></code></p></td>
+<td><p>1 Byte</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PCI_INTERRUPT_PIN</span></code></p></td>
+<td><p>Pin de interrupción física (INTA#, INTB#, INTC#, INTD#)</p></td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+<p>Relación con la lógica actual de hwbus_pci_config_read()</p>
+<p>Actualmente, el callback read expone únicamente los primeros 4 bytes del mapa (0x00 a 0x03):</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">En</span><span class="w"> </span><span class="o">*</span><span class="n">f_pos</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="w"> </span><span class="n">Lee</span><span class="w"> </span><span class="n">PCI_VENDOR_ID</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="n">Bytes</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="mh">0x00</span><span class="p">).</span>
+<span class="n">En</span><span class="w"> </span><span class="o">*</span><span class="n">f_pos</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="w"> </span><span class="n">Lee</span><span class="w"> </span><span class="n">PCI_DEVICE_ID</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="n">Bytes</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="mh">0x02</span><span class="p">).</span>
+</pre></div>
+</div>
+<p>Si en el futuro se condsidera ampliar el alcance del driver de inspección para recorrer más registros de la tabla (por ejemplo, leer PCI_COMMAND o los BARs), la estructura de lectura basada en desplazamientos de <code class="docutils literal notranslate"><span class="pre">f_pos</span></code> se podrá mapear directamente contra estos offsets estandarizados del bus PCI.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cabeceras.html" class="btn btn-neutral float-left" title="Cabeceras" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pciTopConf.html" class="btn btn-neutral float-right" title="Configuración PCI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

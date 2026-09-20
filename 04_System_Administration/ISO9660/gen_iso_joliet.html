@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creación y Grabación de Imágenes ISO (Joliet / ISO 9660) &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Referencias y Herramientas ISO" href="Ref-ISO.html" />
+    <link rel="prev" title="Flujo de Trabajo para la Captura de Llamadas con strace" href="../workFlow-strace.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Administración de Sistemas</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#administracion">Administración</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#imagenes-iso-9660-y-medios-opticos">Imágenes ISO 9660 y Medios Ópticos</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Creación y Grabación de Imágenes ISO (Joliet / ISO 9660)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generacion-de-la-imagen-con-genisoimage">Generación de la Imagen con <code class="docutils literal notranslate"><span class="pre">genisoimage</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comprobacion-de-la-imagen">Comprobación de la Imagen</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#grabacion-del-archivo-iso-en-soporte-optico">Grabación del Archivo ISO en Soporte Óptico</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Ref-ISO.html">Referencias y Herramientas ISO</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#aplicaciones-de-sistema">Aplicaciones de sistema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#systemd">Systemd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#listas-de-control-de-acceso-acls">Listas de control de acceso(ACLs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuracion-del-kernel">Configuración del Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuracion-de-sistema">Configuración de sistema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#incidencias">Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Administración de Sistemas</a></li>
+      <li class="breadcrumb-item active">Creación y Grabación de Imágenes ISO (Joliet / ISO 9660)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/04_System_Administration/ISO9660/gen_iso_joliet.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="creacion-y-grabacion-de-imagenes-iso-joliet-iso-9660">
+<h1>Creación y Grabación de Imágenes ISO (Joliet / ISO 9660)<a class="headerlink" href="#creacion-y-grabacion-de-imagenes-iso-joliet-iso-9660" title="Link to this heading"></a></h1>
+<p>En los sistemas operativos Linux y UNIX, la generación de imágenes de disco en formato ISO 9660 con extensiones <strong>Joliet</strong> permite crear medios ópticos o archivos de imagen compatibles con sistemas Windows y POSIX, preservando nombres de archivo largos y conjuntos de caracteres extendidos.</p>
+<section id="generacion-de-la-imagen-con-genisoimage">
+<h2>Generación de la Imagen con <code class="docutils literal notranslate"><span class="pre">genisoimage</span></code><a class="headerlink" href="#generacion-de-la-imagen-con-genisoimage" title="Link to this heading"></a></h2>
+<p>La herramienta <code class="docutils literal notranslate"><span class="pre">genisoimage</span></code> (o su alternativa <code class="docutils literal notranslate"><span class="pre">mkisofs</span></code>) permite empaquetar un directorio del sistema de archivos en una imagen ejecutable o de datos <code class="docutils literal notranslate"><span class="pre">.iso</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>genisoimage<span class="w"> </span>-v<span class="w"> </span>-J<span class="w"> </span>-r<span class="w"> </span>-V<span class="w"> </span><span class="s2">&quot;Etiqueta&quot;</span><span class="w"> </span>-o<span class="w"> </span>archivo.iso<span class="w"> </span>/ruta/del/directorio
+</pre></div>
+</div>
+<section id="opciones-del-comando">
+<h3>Opciones del Comando<a class="headerlink" href="#opciones-del-comando" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>``-J``</strong>: Añade las extensiones <strong>Joliet</strong>, un estándar desarrollado por Microsoft sobre ISO 9660 que permite nombres de archivos de hasta 64 caracteres en formato Unicode (UTF-16BE), garantizando compatibilidad con sistemas Windows.</p></li>
+<li><p><strong>``-r``</strong>: Aplica las extensiones <strong>Rock Ridge</strong> con racionalización de permisos: establece los IDs de usuario (UID) y grupo (GID) a cero (<code class="docutils literal notranslate"><span class="pre">root</span></code>) y asigna permisos de lectura globales (<code class="docutils literal notranslate"><span class="pre">r-xr-xr-x</span></code>), evitando problemas de acceso al montar la imagen en otros sistemas UNIX/Linux.</p></li>
+<li><p><strong>``-V “Etiqueta”``</strong>: Define el nombre del volumen (<em>Volume Label</em>) que identificará al medio óptico al ser montado.</p></li>
+<li><p><strong>``-o archivo.iso``</strong>: Especifica la ruta y el nombre del archivo de imagen ISO de salida.</p></li>
+<li><p><strong>``-v``</strong>: Activa el modo detallado (<em>verbose</em>) durante el proceso de compilación de la imagen.</p></li>
+</ul>
+</section>
+<section id="soporte-de-caracteres-y-codificacion-utf-8">
+<h3>Soporte de Caracteres y Codificación (UTF-8)<a class="headerlink" href="#soporte-de-caracteres-y-codificacion-utf-8" title="Link to this heading"></a></h3>
+<p>El estándar ISO 9660 original limita severamente los nombres de archivos (formato 8.3 y solo mayúsculas). Para soportar caracteres especiales, tildes y diacríticos (como la «ñ» o marcas de acentuación en español) al utilizar fuentes en UTF-8, es posible especificar explícitamente el mapa de caracteres mediante la opción <code class="docutils literal notranslate"><span class="pre">-input-charset</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>genisoimage<span class="w"> </span>-input-charset<span class="w"> </span>utf-8<span class="w"> </span>-v<span class="w"> </span>-J<span class="w"> </span>-r<span class="w"> </span>-V<span class="w"> </span><span class="s2">&quot;MiVolumen&quot;</span><span class="w"> </span>-o<span class="w"> </span>archivo.iso<span class="w"> </span>/ruta/origen
+</pre></div>
+</div>
+</section>
+</section>
+<section id="comprobacion-de-la-imagen">
+<h2>Comprobación de la Imagen<a class="headerlink" href="#comprobacion-de-la-imagen" title="Link to this heading"></a></h2>
+<p>Antes de proceder a la grabación física, se puede verificar la integridad del contenido montando la imagen ISO en un punto de montaje en bucle (<em>loopback</em>):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>mount<span class="w"> </span>-o<span class="w"> </span>loop,ro<span class="w"> </span>archivo.iso<span class="w"> </span>/mnt/iso
+<span class="gp">$ </span>ls<span class="w"> </span>-la<span class="w"> </span>/mnt/iso
+<span class="gp"># </span>umount<span class="w"> </span>/mnt/iso
+</pre></div>
+</div>
+</section>
+<section id="grabacion-del-archivo-iso-en-soporte-optico">
+<h2>Grabación del Archivo ISO en Soporte Óptico<a class="headerlink" href="#grabacion-del-archivo-iso-en-soporte-optico" title="Link to this heading"></a></h2>
+<p>Para grabar la imagen generada directamente en una unidad de disco óptico (CD/DVD/BD), se utiliza la interfaz de compatibilidad <code class="docutils literal notranslate"><span class="pre">cdrecord</span></code> proporcionada por <strong>xorriso</strong>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>xorriso<span class="w"> </span>-as<span class="w"> </span>cdrecord<span class="w"> </span>-v<span class="w"> </span><span class="nv">dev</span><span class="o">=</span>/dev/sr0<span class="w"> </span>-dao<span class="w"> </span>archivo.iso
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>``-as cdrecord``</strong>: Emula la sintaxis de comandos del clásico comando <code class="docutils literal notranslate"><span class="pre">cdrecord</span></code>.</p></li>
+<li><p><strong>``dev=/dev/sr0``</strong>: Especifica el dispositivo de bloques de la grabadora óptica.</p></li>
+<li><p><strong>``-dao``</strong>: Activa el modo de grabación <em>Disk-At-Once</em> (DAO), cerrando la sesión para garantizar la máxima compatibilidad en lectores ROM.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../workFlow-strace.html" class="btn btn-neutral float-left" title="Flujo de Trabajo para la Captura de Llamadas con strace" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Ref-ISO.html" class="btn btn-neutral float-right" title="Referencias y Herramientas ISO" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

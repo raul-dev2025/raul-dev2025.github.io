@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linux y el árbol de dispositivo &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Vinculaciones Pci" href="bindings/pci/pci.html" />
+    <link rel="prev" title="Sobreposición del árbol de dispositivo, notas" href="overlay-notes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="0-of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="changesets.html">conjunto de cambios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-tree-usage.html">Uso del árbol de dispositivo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic-resolution-notes.html">Resolución dinámica, notas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overlay-notes.html"><em>Sobreposición</em> del árbol de dispositivo, notas</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Linux y el árbol de dispositivo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#el-modelo-linux-de-uso-para-el-arbol-de-dispositivo">El modelo Linux de uso, para el árbol de dispositivo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#historia">Historia</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modelo-de-datos">Modelo de datos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vista-de-alto-nivel">Vista de <em>alto nivel</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#identificacion-de-plataforma">Identificación de plataforma</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuracion-del-tiempo-de-ejecucion">Configuración del <em>tiempo de ejecución</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lista-de-dispositivos">Lista de dispositivos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apendice-a-dispoditivos-amba">Apéndice A: dispoditivos AMBA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimeintos">Referencias y agradecimeintos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Linux y el árbol de dispositivo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/DeviceTree/usage-model.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="linux-y-el-arbol-de-dispositivo">
+<h1>Linux y el árbol de dispositivo<a class="headerlink" href="#linux-y-el-arbol-de-dispositivo" title="Link to this heading"></a></h1>
+<section id="el-modelo-linux-de-uso-para-el-arbol-de-dispositivo">
+<h2>El modelo Linux de uso, para el árbol de dispositivo<a class="headerlink" href="#el-modelo-linux-de-uso-para-el-arbol-de-dispositivo" title="Link to this heading"></a></h2>
+<p>El siguiente artículo, describe como <em>Linux</em>, utiliza el árbol de dispositivo. Otra visión maś general sobre el tema, podrá encontrarse en la página usdo del <em>árbol de</em> <em>dispositivos</em>, en <a class="footnote-reference brackets" href="#f2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
+<p>El “Open Firmware Device Tree”, o símplemente árbol de dispositivo (DT), es una estructura de datos y un lenguaje descriptivo de <em>hardware</em>. Más específicamente, es una descripción de <em>hardware</em> comprensible para un sistema operativo, de tal forma, que éste último, no necesite <em>reescribir</em> detalles de la máquina.</p>
+<p>Estructuralmente, el <em>DT</em>, es un árbol o, un gráfico acíclico con nombre de nodos, los cuáles podrían tener un número arbitrario de propiedades <em>enumeradas</em>,  encapsulando datos de manera arbitraria. Existe un mecanismo, para crear enlaces desde un nodo a otro, fuera de la <em>estructura</em> <em>de árbol</em>, natural.</p>
+<p>Conceptualmente, es un conjunto de <em>convenciones</em> comunes, llamadas vinculaciones(bindings). Definidas para determinar cómo los datos, deberían aparecer en el árbol, para decribir características típicas de <em>hardware</em>, incluyendo <em>buses</em> de datos, líneas de interrupción, conexiones GPIO y dispositivos periféricos.</p>
+<p>El <em>hardware</em> es descrito -tanto como es posible, utilizando vinculaciones existentes, para maximizar, el uso de código ya existente. Puesto que las propiedades y los nombres de nodo, son símplemente cadenas de texto, es <em>fácil</em> extender vinculaciones ya exis- tentes o, crear nuevas, definiendo nuevos <em>nodos</em> y <em>propiedades</em>. Se deberá ser cauteloso a la hora de crear nuevas vinculaciones, comprobando antes si ya existen. Actualmente hay dos tipos de incompatibilidades diferentes. Vinculaciones para buses <code class="docutils literal notranslate"><span class="pre">i2c</span></code>, que aparecen, por haber creado otras nuevas, sin primero investigar, cómo los dispositivos <code class="docutils literal notranslate"><span class="pre">i2c</span></code> fueron enumerados, en sistemas existentes.</p>
+</section>
+<section id="historia">
+<h2>Historia<a class="headerlink" href="#historia" title="Link to this heading"></a></h2>
+<p>El <em>DT</em> fué originalmente creado, como <em>código abierto de fabricante(Open Firmware)</em>, parte del método de comunicación, con el que pasar datos entre <em>Open Firmaware</em> y el programa cliente -ejem. un sistema operativo. Un sistema operativo usó el <em>árbol de</em> <em>dispositivo</em>, para descubrir la topología de <em>hardware</em> en <em>tiempo de carrera</em> y, de este modo, dar soporte a la mayoría de hardware disponible, sin tener que <em>reecribir</em> información -asumiendo que los controladores, estuviesen disponibles para todos los dispositivos.</p>
+<p>Puesto que <em>Open firmware</em>, es habitualmente utilizado en plataformas <em>PowerPc</em> y
+<em>SPARC</em>, el soporte <em>Linux</em> para tales arquitecturas, ha usado el <em>árbol de  dispositivo</em> durante un largo príodo de tiempo.</p>
+<p>En 2005, cuando <em>PowerPc Linux</em>, comenzó “las obras” para hacer confluir el soporte en plataformas 32-bit y 64-bit, se tomó la decisión de <em>requerir</em> el soporte <em>DT</em>, en todas ellas, independientemente de si usaban ó no, <em>Open Firmware</em>. Para ésto, una representación <em>DT</em>, llamada <em>ábol de dispositivo reducido</em> .. <a class="footnote-reference brackets" href="#f1" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, fue creado para posder pasar al <em>kernel</em>, como <em>pequeño</em> binario, sin tener que requerir una implementación <em>real</em> del <em>Open Firmware</em>. <code class="docutils literal notranslate"><span class="pre">U-boot</span></code>, <code class="docutils literal notranslate"><span class="pre">kexec</span></code> y otros gestores de arranque, fueron modificados para soportar éste <em>árbol de dispositivo binario(dtb)</em> y, para modificar un <em>dtb</em> durante el arranque del sistema. También fué añadido el <em>DT</em> al arranque de <em>PowerPc</em>( arch/powerpc/boot/* ) así, el <em>dtb</em> pudiera ser <em>envuelto</em>, junto a la imagen del <em>núcleo</em>, y dar soporte a máquinas ya existentes, con <em>firmware</em> <em>no DT(sis esta característica)</em>.</p>
+<p>Tiempo después, la infraestructura <em>FDT</em> se usó de forma generalizada, en todo tipo de arquitecturas. Al momento de éste escrito, 6 <em>líneas de arquitectura</em> principales,
+(arm, microblaze, mips, powerpc, sparc y x86), también otra fuera de la <em>línea</em>
+principal(nios), tienen <em>cierto</em> nivel de soporte a <em>DT</em>.</p>
+</section>
+<section id="modelo-de-datos">
+<h2>Modelo de datos<a class="headerlink" href="#modelo-de-datos" title="Link to this heading"></a></h2>
+<p>Si aún no has leído la página <em>uso del aŕbol de dispositivo</em> <a class="footnote-reference brackets" href="#f2" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, entonces hazlo, es correcto, yo esperaré aquí…</p>
+</section>
+<section id="vista-de-alto-nivel">
+<h2>Vista de <em>alto nivel</em><a class="headerlink" href="#vista-de-alto-nivel" title="Link to this heading"></a></h2>
+<p>Entender lo siguiente, como lo más importante; el árbol de dispositivo, es una estructura que describe el <em>hardware</em>. Nada mágico se esconde detrás, tampoco hace que problemas con el <em>hardware</em> desaparezcan por <em>arte de mágia</em>. Aunque sí proporciona un lenguaje, para “desmenuzar” la configuarción soportada por el <em>hardware</em>, de la <em>placa</em> y del <em>controlador de dispositivo</em>, en el <em>núcleo</em> de Linux -o cualquier otro <em>sistema operativo</em> a éste respecto. Al utilizarlo, permite al soporte de placas y dispositivos, el <em>poder ser conducidos</em>; esto es, tomar decisiones de configuración basadas en los datos expuestos en el <em>kernel</em>, en lugar de <code class="docutils literal notranslate"><span class="pre">codigos</span></code> específicos, para <em>máquinas</em> concretas.</p>
+<p>Es preferible, una configuración de datos <em>por plataforma</em>, que pueda resultar en menos código duplicado y, hacer más fácil, el dar soporte, a un ámplio rango
+de <em>hardware</em> con sólamente una imagen del núcleo.</p>
+<p>Linux utiliza los datos <em>DT</em>, en tres propuestas principales:</p>
+<ol class="arabic simple">
+<li><p>Identificación de plataforma.</p></li>
+<li><p>Configuración en <em>tiempo de carrera</em> y,</p></li>
+<li><p>población de dispositivo.</p></li>
+</ol>
+</section>
+<section id="identificacion-de-plataforma">
+<h2>Identificación de plataforma<a class="headerlink" href="#identificacion-de-plataforma" title="Link to this heading"></a></h2>
+<p>Primero y ante todo , el <em>kernel</em> usará los datos en el <em>DT</em>, para identificar la máquina específica. En un mundo perfecto, la plataforma concreta, no debería importar al <em>núcleo</em>, por que todos los detalles de <em>plataforma</em>, deberían estar perfectamente dscritos, de forma segura y consistente, por el árbol de dispositivo.
+Aunque el <em>hardware</em> no es perfecto, el <em>kernel</em> deberá identificar la máquina durante el <em>arranque</em>, así, tendrá la oportunidad de realizar ajustes
+específicos.</p>
+<p>En la mayoría de casos, la <em>identidad</em> de la máquina es irrelevante, en su lugar el <em>núcleo</em>, seleccionará una configuración de código, basada en la <em>CPU</em> ó <em>SoC</em>, de la máquina. En <em>ARM</em>, por ejemplo, <code class="docutils literal notranslate"><span class="pre">setup_arch()</span></code> en <code class="docutils literal notranslate"><span class="pre">arch/arm/kernel/setup.c</span></code> llamará a <code class="docutils literal notranslate"><span class="pre">setup_machine_fdt()</span></code>, en <code class="docutils literal notranslate"><span class="pre">arch/arm/kernel/devtree.c</span></code> el cuál busca a través de la tabla <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code> y, selecciona <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code> que mejor coincida con los datos del árbol de dispositivo. Determina la mejor coincidencia  mirando en la propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code> en el nodo de la ráiz, del árbol de dispositivo y, comparándolo con la lista <code class="docutils literal notranslate"><span class="pre">dt_compat</span></code> en la estructura <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code> -la cuál está definida en <code class="docutils literal notranslate"><span class="pre">arch/arm/include/asm/mach/arch.h</span></code> -por si alguien es curioso.</p>
+<p>La propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code>, mcontiene una lista ordenada de <em>cadenas</em>, empezando  por el nombre exacto de la máquina, seguido por una lista opcional de <em>placas</em> compatibles, ordenadas de más, a menos compatible. Por ejemplo, las propiedades compatibles con la raíz, para la placa <em>TI BeagleBoard</em> y sus secesoras <em>BeagleBoard xM</em>, podría parecerse a esto, respectivamente:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;ti,omap3-beagleboard&quot;</span><span class="p">,</span> <span class="s2">&quot;ti,omap3450&quot;</span><span class="p">,</span> <span class="s2">&quot;ti,omap3&quot;</span><span class="p">;</span>
+<span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;ti,omap3-beagleboard-xm&quot;</span><span class="p">,</span> <span class="s2">&quot;ti,omap3450&quot;</span><span class="p">,</span> <span class="s2">&quot;ti,omap3&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Donde “ti,omap3-beagleboard” especifíca el modelo exacto, además de establecer, que es compatible con el <em>SoC</em> <code class="docutils literal notranslate"><span class="pre">OMAP</span> <span class="pre">3450</span></code>, y la familia de <em>SoC</em> <code class="docutils literal notranslate"><span class="pre">omap3</span></code> en general. Notará, que la lista, está ordenada desde la más específica (placa exacta) a menos (familia <em>Soc</em>).</p>
+<p>Lectores astutos, podrán imaginar que <em>Beagle xM</em> podría reclamar compatibilidad, con la <em>placa</em> original <em>Beagle</em>. Aunque <em>uno</em> debe ser cauto haciendo ésto, ya que a nivel de placa, es verdad que exista un alto grado de compatibilidad entre ellas, pero será difícil, averiguar exactamente, qué signifíca exactamente que una placa sea <em>compatible</em> con otra. Será preferible pecar de cáuto, en lugar de dar por sentado la <em>compatibilidad entre ellas</em> . Una excepción podría ser si una <em>placa</em> es portadora de otra, como en el caso de un módulo CPU, acoplado a una plac portadora. Una nota más sobre <em>valores compatibles</em>. Cualquier <code class="docutils literal notranslate"><span class="pre">string</span></code> (cadena), en una  propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code>, deberá estar documentada, tal y como se indica. Ver la documentación para <em>cadenas</em> compatibles en <em>Documentation/devicetree/bindings</em>.</p>
+<p>De nuevo, en <em>ARM</em>, para cada <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code>, el <em>kernel</em> buscará cualquier entrada de lista en <code class="docutils literal notranslate"><span class="pre">dt_compat</span></code>, para ver si aparece la propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code>. Si aparece, entonces <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code> será un <em>candidato</em> para la máquina. Después de bustac en toda la tabla, de <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code>s, <code class="docutils literal notranslate"><span class="pre">setup_machine_fdt()</span></code>,  retornará la <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code> más compatible, basándose en qué entrada coincide con la propiedad <em>compatible</em>. Si no hay ninguna coincidencia, retornará <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.
+El razonamiento detrás de éste esquema, es mediante la observación; en la mayoría de casos, <em>una sóla</em> <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code>, podrá soportar una gran cantidad de placas, si  todas ellas utilizan el mismo <code class="docutils literal notranslate"><span class="pre">SoC</span></code>, o la misma famila de <code class="docutils literal notranslate"><span class="pre">Soc</span></code> s. Aunque  invariablemente, habrá algunas excepciones, dónde una placa específica, necesitará de una configuración  especial de código, poco útil en casos más genéricos. Los casos especiales son <em>controlados</em>, comprobando explícitamente el incomodo código genérico de configuración, sin embargo no es la mejor de las soluciones, si hay más de <em>un par</em> de casos.</p>
+<p>En su lugar, la lista <code class="docutils literal notranslate"><span class="pre">compatile</span></code>, permite a una <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code> genérica, proporcionar soporte a un ámplio rango de placas, especificando valores <code class="docutils literal notranslate"><span class="pre">less</span> <span class="pre">compatible</span></code> (menos compatibles), en la lista <code class="docutils literal notranslate"><span class="pre">dt_compat</span></code>. En el ejemplo de arriba, el soporte de la placa genérica, podrá exponer la compatibilidad con <code class="docutils literal notranslate"><span class="pre">ti,omap3</span></code> ó <code class="docutils literal notranslate"><span class="pre">ti,omap3450</span></code>. Si fué descubierto un error(bug) en la placa original <em>beagleboard</em>, necesitando una solución alternativa <em>de código</em>, durante el  arranque, podría ser añadido una nueva <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code>, implementando dicha <em>alternativa</em> para que sólo coincidiese sobre <code class="docutils literal notranslate"><span class="pre">ti,omap3-beagleboard</span></code>.</p>
+<p>PowerPc usa un esquema ligéramente distinto, cuando llama al enlace <code class="docutils literal notranslate"><span class="pre">.probe()</span></code> desde <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code>; será utilizado el primero en retornar <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. Aunque esta aproximación no se toma en cuenta la propiedad de la lista <em>compatible</em>, y probablemente debería ser evitada en el soporte a nuevas arquitecturas.</p>
+</section>
+<section id="configuracion-del-tiempo-de-ejecucion">
+<h2>Configuración del <em>tiempo de ejecución</em><a class="headerlink" href="#configuracion-del-tiempo-de-ejecucion" title="Link to this heading"></a></h2>
+<p>En la mayoría de casos, <em>DT</em> será el único método de comunicación entre el <em>firmware</em> y el núcleo, así pués, también será usado para pasar datos de configuración durante el <em>tiempo de ejecución</em>. Tales como parámetros o la  localización de la imagen <code class="docutils literal notranslate"><span class="pre">initrd</span></code>.</p>
+<p>Muchos de estos datos, están contenidos en el nodo <code class="docutils literal notranslate"><span class="pre">/chosen</span></code> y, cuando Linux es
+<em>arrancado</em>, buscará algo parecido a esto:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chosen</span> <span class="p">{</span>
+   <span class="n">bootargs</span> <span class="o">=</span> <span class="s2">&quot;console=ttyS0,115200 loglevel=8&quot;</span><span class="p">;</span>
+   <span class="n">initrd</span><span class="o">-</span><span class="n">start</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0xc8000000</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="n">initrd</span><span class="o">-</span><span class="n">end</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0xc8200000</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Los <em>argumentos de arranque</em>, conmtienen los argumentos del <em>kernel</em> y, las propiedades de <code class="docutils literal notranslate"><span class="pre">initrd</span></code> define las direcciones y tamaño de un <em>pequeño</em> <code class="docutils literal notranslate"><span class="pre">initrd</span></code>. Nótese que <code class="docutils literal notranslate"><span class="pre">initrd-end</span></code> es la primera dirección después de la imagen <code class="docutils literal notranslate"><span class="pre">initrd</span></code>, por lo que no coincide con la semántica habitual del <code class="docutils literal notranslate"><span class="pre">struct</span></code> <code class="docutils literal notranslate"><span class="pre">resource</span></code>(<em>recurso</em>). El nodo escogido puede contener opcionalmente, un número arbitrario de propiedades adicionales. Para la configuración de datos específica a la plataforma.</p>
+<p>Durante el <em>arranque temprano</em>, las llamadas de código de configuración de la arquitectura <code class="docutils literal notranslate"><span class="pre">of_scan_flat_dt()</span></code>, tendrán jlugar en distintos momentos, mediante el
+<em>ayudante de llamadas</em> para analizar los datos del arból de dispositivo antes de que la <em>paginación</em> sea configurada.</p>
+<p>El código <code class="docutils literal notranslate"><span class="pre">of_scan_flat_dt()</span></code> escanea a través del árbol de dispositivo, y utilizará los <em>ayudantes</em>, para extraer, durante el qrranque, la información necesaria. El ayudante <code class="docutils literal notranslate"><span class="pre">early_init_dt_scan_chosen()</span></code> es utilizado para analizar el nodo escogido, incluyendo parámetros del núcleo. <code class="docutils literal notranslate"><span class="pre">early_init_dt_scan_root()</span></code> para inicializar el model de spacio de direcciones <em>DT</em> y, <code class="docutils literal notranslate"><span class="pre">early_init_dt_scan_memory()</span></code> para determinar el tamaño y localización de la <em>RAM</em> utilizable.</p>
+<p>En <em>ARM</em>, la función <code class="docutils literal notranslate"><span class="pre">setup_machine_fdt()</span></code>, es responsable del <em>pronto escaneado</em>, del árbol de dispositivo, después de seleccionar la <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code> que soporte la placa.</p>
+</section>
+<section id="lista-de-dispositivos">
+<h2>Lista de dispositivos<a class="headerlink" href="#lista-de-dispositivos" title="Link to this heading"></a></h2>
+<p>Una vez identificada la <em>placa</em>, tras haber traspasado los datos de configuración, la inicialización del núcleo procederá con normalidad. En <em>algún</em> punto de este proceso se llamará a <code class="docutils literal notranslate"><span class="pre">unflatten_device_tree()</span></code>, para convertir los datos enuna representación más eficiente del <em>tiempo de ejecución</em>. Igualmente sucederá cuando la configuración de los enlaces <em>específicos de máquina</em>, sean llamados, como <code class="docutils literal notranslate"><span class="pre">machine_desc</span></code>, <code class="docutils literal notranslate"><span class="pre">.init_early()</span></code>, <code class="docutils literal notranslate"><span class="pre">.init_irq()</span></code>, <code class="docutils literal notranslate"><span class="pre">.init_machine(),</span></code> -son enlaces para la plataforma <em>ARM</em>. El resto de la sección, utilizará ejemplos de la implementación <em>ARM</em>, pero todas las arquitecturas, llevarán a cabo algo muy similar, en cuanto a la utilizaación el <em>DT</em>.</p>
+<p>Tal y como se intuye por los nombres, <code class="docutils literal notranslate"><span class="pre">.init_early()</span></code> es utilizado para la configuración específica de máquina, que necesite ser <em>ejecutada</em> en un pronto arranque del sistema, <code class="docutils literal notranslate"><span class="pre">.init_irq()</span></code> es utilizado para gestionar las <em>interrupciones</em>. El uso de <em>DT</em>, no cambia el comportamiento de ninguna de éstas funciones. Al proporcionar un <em>DT</em>, tanto <code class="docutils literal notranslate"><span class="pre">.init_early()</span></code> como <code class="docutils literal notranslate"><span class="pre">.init_irq()</span></code>, serán capaces de <em>llamar</em> a cualquier función de <em>DT</em> -<code class="docutils literal notranslate"><span class="pre">of_*</span></code> in <code class="docutils literal notranslate"><span class="pre">include/linux/of*.h</span></code> para obtener datos adicionales sobre la plataforma.</p>
+<p>El enlace más interesante, en el contexto <em>DT</em> es <code class="docutils literal notranslate"><span class="pre">.init_machine()</span></code>  el cuál es el prin- cipal responsable de <em>poblar</em> el <em>modelo de  dispositivo</em> Linux, con los datos sobre la plataforma. Históricamente, ésto ha sido implementado en plataformas embebidas,  definiendo un conjunto de <em>estructuras de reloj estáticas</em>, <code class="docutils literal notranslate"><span class="pre">platform_devices</span></code> y otros datos para el soporte de <em>placa</em> en archivos <code class="docutils literal notranslate"><span class="pre">.c</span></code>. Registrándolos <em>en masa</em>, en <code class="docutils literal notranslate"><span class="pre">.init_machine()</span></code>, al utilizar <em>DT</em> y, colocando estructuras dinámicas de dispositivo.</p>
+<p>El caso más simple, es cuando <code class="docutils literal notranslate"><span class="pre">.init_machine()</span></code> sólo es responsable de registar un bloque de <code class="docutils literal notranslate"><span class="pre">platform_devices</span></code>. Un  <code class="docutils literal notranslate"><span class="pre">platform_devices</span></code> es un concepto usado por la memoria de Linux o por dispositivos <em>mapeados</em> en memoria <em>I/O</em>, los cuáles no pueden ser detectados por el <em>hardware</em>, o por dispositivos “compuestos” o “virtuales” -ver más adelante. Mientras que no existe la términología “dispositivo de
+plataforma” para el <em>DT</em>, los dispositivos de plataforma, corresponde de forma  aproximada, a nodos de dispositivo, en la <em>ráiz del árbol</em> y, al <em>nodo bus hijo</em>, simplemente asignado a memoria.</p>
+<p>Es un buen momento para poner un ejemplo. Aquí se representa <em>parte</em> de un árbol de dispositivo para la <em>placa</em> de <code class="docutils literal notranslate"><span class="pre">NVIDIA</span> <span class="pre">Tegra</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="p">;</span>
+
+<span class="o">/</span> <span class="p">{</span>
+   <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;nvidia,harmony&quot;</span><span class="p">,</span> <span class="s2">&quot;nvidia,tegra20&quot;</span><span class="p">;</span>
+   <span class="c1">#address-cells = &lt;1&gt;;</span>
+   <span class="c1">#size-cells = &lt;1&gt;;</span>
+   <span class="n">interrupt</span><span class="o">-</span><span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">intc</span><span class="o">&gt;</span><span class="p">;</span>
+
+   <span class="n">chosen</span> <span class="p">{</span> <span class="p">};</span>
+   <span class="n">aliases</span> <span class="p">{</span> <span class="p">};</span>
+
+   <span class="n">memory</span> <span class="p">{</span>
+      <span class="n">device_type</span> <span class="o">=</span> <span class="s2">&quot;memory&quot;</span><span class="p">;</span>
+      <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x00000000</span> <span class="mh">0x40000000</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+
+   <span class="n">soc</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;nvidia,tegra20-soc&quot;</span><span class="p">,</span> <span class="s2">&quot;simple-bus&quot;</span><span class="p">;</span>
+      <span class="c1">#address-cells = &lt;1&gt;;</span>
+      <span class="c1">#size-cells = &lt;1&gt;;</span>
+      <span class="n">ranges</span><span class="p">;</span>
+
+      <span class="n">intc</span><span class="p">:</span> <span class="n">interrupt</span><span class="o">-</span><span class="n">controller</span><span class="o">@</span><span class="mi">50041000</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;nvidia,tegra20-gic&quot;</span><span class="p">;</span>
+            <span class="n">interrupt</span><span class="o">-</span><span class="n">controller</span><span class="p">;</span>
+            <span class="c1">#interrupt-cells = &lt;1&gt;;</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x50041000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">,</span>
+                  <span class="o">&lt;</span><span class="mh">0x50040100</span> <span class="mh">0x0100</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="p">};</span>
+
+      <span class="n">serial</span><span class="o">@</span><span class="mi">70006300</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;nvidia,tegra20-uart&quot;</span><span class="p">;</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x70006300</span> <span class="mh">0x100</span><span class="o">&gt;</span><span class="p">;</span>
+            <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">122</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="p">};</span>
+
+      <span class="n">i2s1</span><span class="p">:</span> <span class="n">i2s</span><span class="o">@</span><span class="mi">70002800</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;nvidia,tegra20-i2s&quot;</span><span class="p">;</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x70002800</span> <span class="mh">0x100</span><span class="o">&gt;</span><span class="p">;</span>
+            <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">77</span><span class="o">&gt;</span><span class="p">;</span>
+            <span class="n">codec</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">wm8903</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="p">};</span>
+
+      <span class="n">i2c</span><span class="o">@</span><span class="mi">7000</span><span class="n">c000</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;nvidia,tegra20-i2c&quot;</span><span class="p">;</span>
+            <span class="c1">#address-cells = &lt;1&gt;;</span>
+            <span class="c1">#size-cells = &lt;0&gt;;</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x7000c000</span> <span class="mh">0x100</span><span class="o">&gt;</span><span class="p">;</span>
+            <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">70</span><span class="o">&gt;</span><span class="p">;</span>
+
+            <span class="n">wm8903</span><span class="p">:</span> <span class="n">codec</span><span class="o">@</span><span class="mi">1</span><span class="n">a</span> <span class="p">{</span>
+               <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;wlf,wm8903&quot;</span><span class="p">;</span>
+               <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x1a</span><span class="o">&gt;</span><span class="p">;</span>
+               <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">347</span><span class="o">&gt;</span><span class="p">;</span>
+            <span class="p">};</span>
+      <span class="p">};</span>
+   <span class="p">};</span>
+
+   <span class="n">sound</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;nvidia,harmony-sound&quot;</span><span class="p">;</span>
+      <span class="n">i2s</span><span class="o">-</span><span class="n">controller</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">i2s1</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="n">i2s</span><span class="o">-</span><span class="n">codec</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">wm8903</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Durante <code class="docutils literal notranslate"><span class="pre">.init_machine()</span></code>, la placa <em>Tegra</em>, soporta el código necesario, para buscar en <em>DT</em> y y decidir en que nodos crear el <code class="docutils literal notranslate"><span class="pre">platform_devices</span></code>. En cualquier caso, mirando en el árbol, no es inmediatamente obvio qué clase de dispositivo representa a cada nodo, e incluso si un dispositivo representa al nodo. Los nodos <code class="docutils literal notranslate"><span class="pre">/chosen</span></code>, <code class="docutils literal notranslate"><span class="pre">/aliases</span></code>, y <code class="docutils literal notranslate"><span class="pre">/mmemory</span></code> son nodos informativos, que no describen dispositivos -aunque podría decirse, que la memoria es considerada un dispositivo. El <em>hijo</em> del nodo <code class="docutils literal notranslate"><span class="pre">/soc</span></code>, es un dispositivo de memoria <em>mapeado</em>, pero el <code class="docutils literal notranslate"><span class="pre">code&#64;1a</span></code> es un dispositivo <code class="docutils literal notranslate"><span class="pre">12c</span></code>, y el nodo de sonido, no representa a un dispositivo. En su lugar es creado el <em>subsistema</em> de audio. Es posible conocer cada dispositivo si <em>uno</em> está familiarizado con el diseño de la placa, pero ¿cómo sabe el núcleo qué hacer en cada nodo?</p>
+<p>El <em>truco</em> radica en que el <em>kernel</em> empieza en la <em>raíz del árbol</em> y, busca los nodos con la propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code>. Primero, es asumido que cualquier nodocon la propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code>, represente a un dispositivo; segundo, es asumido igualmente, que un nodo en la <em>raíz del árbol</em> está directamente acoplado al <em>bus</em> del procesador, o a un sistema <em>misceláneo</em> de dispositivo, que no puede ser descrito de otra manera.</p>
+<p>¿ Por qué un <code class="docutils literal notranslate"><span class="pre">platform_device</span></code> utiliza una <em>asumción fiable</em>, para el nodo? Bien, en la medida en que <em>el modelo de dispositivo</em> Linux, asume , que sus dispositivos son escendientes(children) de un controlador bus, en casi todos los <code class="docutils literal notranslate"><span class="pre">bus_types</span></code> (tipos de  buses). Por ejemplo, cada <code class="docutils literal notranslate"><span class="pre">i2c_client</span></code> es <em>hijo</em> de un <code class="docutils literal notranslate"><span class="pre">i2c_master</span></code>. Cada <code class="docutils literal notranslate"><span class="pre">spi_device</span></code> es <em>hijo</em> de un <em>bus SPI</em>. De forma similar, en <em>USB, PCI, MDIO,</em> etc. La misma jerarquía es encontrada en el <em>DT</em>, donde nodos de dispositivos <code class="docutils literal notranslate"><span class="pre">i2c</span></code> únicamente aparecerán como <em>hijos</em> del bus nodo <code class="docutils literal notranslate"><span class="pre">I2C</span></code>; idem. para _USB, PCI, MDIO, etc. El único dispositivo que no requiere este tipo de parentesco, son los <code class="docutils literal notranslate"><span class="pre">platforme_devices</span></code> -y los <code class="docutils literal notranslate"><span class="pre">amba_devices</span></code>, se hablará de ello más adelante; los cuáles residen <em>alegremente</em> en la <em>base del árbol</em> de Linux <code class="docutils literal notranslate"><span class="pre">/sys/devices</span></code>. Por lo tanto, si un nodo <em>DT</em> está en la <em>raíz del árbol</em>, probáblemente entonces, será más adecuado registrarlo como una <code class="docutils literal notranslate"><span class="pre">platforme_device</span></code>.</p>
+<p>El código para el soporte de placa Linux, <em>llama</em> a <code class="docutils literal notranslate"><span class="pre">of_platform_populate(NULL,</span> <span class="pre">NULL,</span></code> <code class="docutils literal notranslate"><span class="pre">NULL,</span> <span class="pre">NULL)</span></code>, para tratar de descubrir los dispositivos en <em>la raíz del árbol</em>. Los parámetros son todos <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, por que cuando se empiza desde el <code class="docutils literal notranslate"><span class="pre">struct</span></code> <em>base del</em> <em>árbol</em>, no es necesario proporcionar un nodo desde el que comenzar -el primero es <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, otro <code class="docutils literal notranslate"><span class="pre">struct</span></code> relacionado, el último, también es <code class="docutils literal notranslate"><span class="pre">NULL</span></code> y, aún no se está utilizando una tabla de <em>coincidencia</em>. Para una placa que sólo necesita registrar dispositivos, <code class="docutils literal notranslate"><span class="pre">.init_machine()</span></code> podrá estar completamente vacío, excepto la llamada <code class="docutils literal notranslate"><span class="pre">of_platform_populate()</span></code>.</p>
+<p>Con el ejemplo de <em>Tegra</em>, es aplicable a los nodos<code class="docutils literal notranslate"><span class="pre">/soc</span></code> y <code class="docutils literal notranslate"><span class="pre">/sound</span></code>, pero ¿qué pasa con el nodo descendiente <code class="docutils literal notranslate"><span class="pre">SoC</span></code>? ¿ Debería ser registrado también como dispositivo de plataforma ? Para el soporte <em>DT</em> de Linux, el comportamiento genérico, es que los dispositivos relacionados, sean registrados por el controlador del dispositivo ascen- dente, durante <code class="docutils literal notranslate"><span class="pre">.probe()</span></code>(las pruebas del controlador). Así que, un controlador de dispositivo de bus <code class="docutils literal notranslate"><span class="pre">i2c</span></code>, registrará un <code class="docutils literal notranslate"><span class="pre">i2c_client</span></code> para cada nodo relacionado. Un controlador de bus <code class="docutils literal notranslate"><span class="pre">SPI</span></code>, registrará su <code class="docutils literal notranslate"><span class="pre">spi_device</span></code> relacionado y, de mforma similar para otros tipos de <em>buses</em>. De acuerdo con el modelo, un controlador podrá ser escrito, como vínculo al nodo <code class="docutils literal notranslate"><span class="pre">SoC</span></code> y registrar la <code class="docutils literal notranslate"><span class="pre">platform_devices</span></code>, para cada uno de sus <em>descendientes</em>. El código de soporte de placa, colocará y registrará un dispositivo <code class="docutils literal notranslate"><span class="pre">SoC</span></code>,  un controlador de dispo- sitivo <code class="docutils literal notranslate"><span class="pre">SoC</span></code> -teóricamente, podría vincular el diapositivo <code class="docutils literal notranslate"><span class="pre">SoC</span></code> y, registrar <code class="docutils literal notranslate"><span class="pre">platform_devices</span></code> para <code class="docutils literal notranslate"><span class="pre">/soc/iterrupt-mcontroller</span></code>, <code class="docutils literal notranslate"><span class="pre">/soc/serial,</span> <span class="pre">/soc/i2s</span></code> y <code class="docutils literal notranslate"><span class="pre">/soc/i2c</span></code> en su enlace .probe()` ¿Verdad que és fácil? De hecho, registrar descendientes de alguna <code class="docutils literal notranslate"><span class="pre">platform_device</span></code>, es un patrón común, y el código de soporte al <em>árbol de dispositivo</em>, refeja ésto y, que el ejemplo -líneas arriba, sea más simple. El segundo argumento en <code class="docutils literal notranslate"><span class="pre">of_platform_populate()</span></code> es una tabla <code class="docutils literal notranslate"><span class="pre">of_device_id</span></code> y, cualquier nodo que coincida con una <em>entrada</em> en la tabla, también  registrará sus nodos descendientes. En el caso de <em>Tegra</em>, podría arecerse a lo siguiente:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="n">void</span> <span class="n">__init</span> <span class="n">harmony_init_machine</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="o">/*</span> <span class="o">...</span> <span class="o">*/</span>
+   <span class="n">of_platform_populate</span><span class="p">(</span><span class="n">NULL</span><span class="p">,</span> <span class="n">of_default_bus_match_table</span><span class="p">,</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>En la especificación <code class="docutils literal notranslate"><span class="pre">Devicetree</span></code> el <code class="docutils literal notranslate"><span class="pre">simple'bus</span></code> es definido como una propiedad, significando esto, <em>un mapa de memoria simple, para el bus</em>, de esta forma, el código de <code class="docutils literal notranslate"><span class="pre">of_platform_populate()</span></code> podrá ser escrito asumiendo que un nodo <em>simple-bus</em> compatible, siempre será <em>transversal</em>. En cualquier caso, ha sido pasado como argumento, por lo que el código de soporte a la placa, podrá ser sobreescribir el comportamiento normalizado.</p>
+<p>[necesaria nota sobre descendientes <code class="docutils literal notranslate"><span class="pre">i2c/spi/etc</span></code>]</p>
+</section>
+<section id="apendice-a-dispoditivos-amba">
+<h2>Apéndice A: dispoditivos AMBA<a class="headerlink" href="#apendice-a-dispoditivos-amba" title="Link to this heading"></a></h2>
+<p>Las principales céldas -o células, ARM, constan de cierto dispositivo acoplado al bus <em>ARM AMBA</em>, el cuál incluye <em>algo</em> de soporte a la detección de <em>harwdware</em> y gestión de energía. En Linux, el <code class="docutils literal notranslate"><span class="pre">struct</span></code> <code class="docutils literal notranslate"><span class="pre">amba_device</span></code> y <code class="docutils literal notranslate"><span class="pre">amba_bus_type</span></code>, es usado para representar dispositivos de céldas principales. Para el sistema operativo Linux, esto es habitual en ambos casos, en instancias <code class="docutils literal notranslate"><span class="pre">amba_devicce</span></code> y <code class="docutils literal notranslate"><span class="pre">platform_device</span></code>, descendientes segmento de <em>bus</em>.</p>
+<p>Siendo utilizado <em>DT</em>, aparecerán problemas en cuanto a <code class="docutils literal notranslate"><span class="pre">of_platform_populate()</span></code> por que debe decidirse si registrar cada nodo, como <code class="docutils literal notranslate"><span class="pre">platform_device</span></code> o <code class="docutils literal notranslate"><span class="pre">amba_device</span></code>. Esto desafortunadamente complica la creación del modelo, un <em>poquitín</em>; sin embargo la solución <em>no será demasiado invasiva</em>. Si un nodo es compatible con <code class="docutils literal notranslate"><span class="pre">arm,amba-primcell</span></code> entonces <code class="docutils literal notranslate"><span class="pre">of_platform_populate()</span></code> será registrada como <code class="docutils literal notranslate"><span class="pre">amba_device</span></code>  en lugar de <code class="docutils literal notranslate"><span class="pre">platform_device</span></code>.</p>
+</section>
+<section id="referencias-y-agradecimeintos">
+<h2>Referencias y agradecimeintos<a class="headerlink" href="#referencias-y-agradecimeintos" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<p>ábol de dispositivo reducido, Flattened Device Tree(FDT)</p>
+</aside>
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id3">2</a>)</span>
+<p><a class="reference external" href="http://devicetree.org/Device_Tree_Usage">devicetree.org</a></p>
+</aside>
+</aside>
+<p><strong>Autor</strong>: Grant Likely <a class="reference external" href="mailto:grant&#46;likely&#37;&#52;&#48;secretlab&#46;ca">grant<span>&#46;</span>likely<span>&#64;</span>secretlab<span>&#46;</span>ca</a> <strong>Traductor:</strong></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overlay-notes.html" class="btn btn-neutral float-left" title="Sobreposición del árbol de dispositivo, notas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bindings/pci/pci.html" class="btn btn-neutral float-right" title="Vinculaciones Pci" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

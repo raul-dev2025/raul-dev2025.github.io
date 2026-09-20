@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Development &mdash; TecnicoSistemas  documentation</title>
+  <title>Development &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
@@ -23,8 +23,8 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Testing Environment Setup" href="../../../04_System_Administration/test_environment_setup/index.html" />
-    <link rel="prev" title="Informe de Auditoría: Preparación de Réplica FreeIPA" href="../../../04_System_Administration/Incidencias/portAuditIdM.html" /> 
+    <link rel="next" title="Hardware and System Resources" href="../../../01_Hardware/hardware_resources/index.html" />
+    <link rel="prev" title="Registro de Incidencias" href="../../../04_System_Administration/Incidencias/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,19 +41,27 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
-<ul class="current">
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../academico/index.html">Técnico Sistemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../profesional/index.html">Sistema</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../miscellaneous/index.html">Unordered Topics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kernel/index.html">Documentación del Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#drver-development">Drver development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscellaneous/index.html">Unordered Topics</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../siglas.html">Siglas</a></li>
@@ -66,7 +74,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">TecnicoSistemas</a>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -86,19 +94,12 @@
              
   <section id="development">
 <h1>Development<a class="headerlink" href="#development" title="Link to this heading"></a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Testing Environment Setup:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
-</ul>
-</div>
-<p>The folowing documents cover the configuration of virtual machine for testing purposes.</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Driver Development:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
-</ul>
-</div>
+<p>Este documento constituye el índice principal de la sección de Desarrollo. Centraliza la documentación sobre desarrollo de controladores (<em>drivers</em>), referencias de hardware, administración de sistemas y guías misceláneas de desarrollo.</p>
+<section id="drver-development">
+<h2>Drver development<a class="headerlink" href="#drver-development" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../../../07_Development/driver_development/index.html"><span class="doc">Development index</span></a></p>
+</div></blockquote>
 <p>Available documents for driver development, including planning, PCI device identification, and quick references for PCI and MMIO.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Hardware and System Resources:</span></p>
@@ -115,28 +116,19 @@
 </div>
 <p>This section covers System configuration.</p>
 <hr class="docutils" />
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Unordered:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../miscellaneous/index.html">Unordered Topics</a></li>
-</ul>
-</div>
+<blockquote>
+<div><p><a class="reference internal" href="../../miscellaneous/index.html"><span class="doc">Miscellaneous</span></a></p>
+</div></blockquote>
 <p>This section contains miscellaneous topics that do not fit into the other categories, including Git-related topics and path truncation.</p>
-<hr class="docutils" />
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Linux Kernel documents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Kernel/index.html">Documentación del Kernel</a></li>
-</ul>
-</div>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../../../04_System_Administration/Incidencias/portAuditIdM.html" class="btn btn-neutral float-left" title="Informe de Auditoría: Preparación de Réplica FreeIPA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../../04_System_Administration/test_environment_setup/index.html" class="btn btn-neutral float-right" title="Testing Environment Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../../04_System_Administration/Incidencias/index.html" class="btn btn-neutral float-left" title="Registro de Incidencias" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../01_Hardware/hardware_resources/index.html" class="btn btn-neutral float-right" title="Hardware and System Resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

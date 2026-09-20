@@ -1,0 +1,167 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TODO: &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">TODO:</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/07_Development/driver_development/hwbus-io/notas.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>/hwbus_ioctl.c
+hwbus_io_suite00r.c</p>
+<p>Neciseto preparar documentar el “modo de empleo” de los scripts de integración.</p>
+<ol class="arabic">
+<li><p>Te pasaré los scripts agrupados por rol, para que hagas un breve resumen de dos o tres líneas, describiendo su funcionalidad o cometido.</p>
+<ul>
+<li><p>constructores:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ci-builder.sh</p></li>
+<li><p>ci-signer.sh</p></li>
+<li><p>ci-manifest.sh</p></li>
+</ul>
+<p>Estos archivos intervienen en el proceso de construcción del módulo o del test, en función del tipo seleccionado BUILD_TYPE=”” <code class="docutils literal notranslate"><span class="pre">KO</span></code> o <code class="docutils literal notranslate"><span class="pre">LTP</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p>selectores:</p>
+<ul class="simple">
+<li><p>ci-kmod-runner.sh</p></li>
+<li><p>ci-runLauncher.sh</p></li>
+<li><p>ci-runner.sh</p></li>
+</ul>
+</li>
+</ul>
+<p>Estos determinan el tipo de test que debe lanzarse y que recursos son necesarios para su correcta inmvocación y funcionamiento.
+El lanzador ‘ci-runLauncher’, pone en funcionamiento la “máquinaria” y determina el tipo de test.
+Los otros dos, invocan un tipo de test determinado. Por ejemplo, si acabamos de compilar el módulo y únicamente queremos hacer una prueba genérica de funcionalidad del módulo, sin cambiar el target <code class="docutils literal notranslate"><span class="pre">BUILD_TYPE=&quot;KO&quot;</span></code> al invocar al lanzador(ci-runLauncher), éste determinará que solo queremos probar el módulo invocando a ci-signer y ejecutando una prueba básica.
+Si se pretende probar un test(LTP), primero habrá que seleccionar el objetivo <code class="docutils literal notranslate"><span class="pre">BUILD_TYPE=&quot;LTP&quot;</span></code>, volver a compilar, esta vez el test desarrollado y, con el módulo en su sitio y el test preparado, llamar al lanzador.</p>
+<p>Hay “dos tipos” de tests LTP; aquellos que necesitan permisos para operar con módulos y, los que simplemente necesitan hacer la prueba.
+La distinción radica en la carga de algún parámetro que modifica el funcionamiento del módulo, durante la carga del mismo en el sistema; <code class="docutils literal notranslate"><span class="pre">insmod</span></code> y demás. Para poder capturar los mensajes que arroja la operación, se utilizan los métodos que expone la infraestructura LTP. Este tipo de tests con permisos especiales son identificados mediante la <code class="docutils literal notranslate"><span class="pre">r</span></code> en la nomenclatura del archivo; fácilmente distingibles del resto.
+La suite de tests, que no siendo un test própiamente, previsiblemente invocará alguno que lo necesite; puede nombrarse de esta manera. Los procesos recurrentes partirán con la configuración necesaria en cuanto a permisos.</p>
+<p>El otro tipo de test, serán invocados mediante la operativa CI/CD, para lo cuál se desarrollaron las siguiente reglas sudoers:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>/etc/sudoers.d/builder-kernel
+builder<span class="w"> </span><span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>/usr/sbin/insmod,<span class="w"> </span>/usr/sbin/rmmod,<span class="w"> </span>/usr/bin/dmesg,<span class="w"> </span>/usr/sbin/modinfo,<span class="w"> </span>/usr/bin/kmod-sign-file,<span class="w"> </span>/usr/bin/perf,<span class="w"> </span>/usr/bin/trace-cmd,<span class="w"> </span>/usr/sbin/bpftool,<span class="w"> </span>/usr/share/bcc/tools/*
+
+cat<span class="w"> </span>/etc/sudoers.d/hwbus-tests
+builder<span class="w"> </span><span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>/mnt/build-output/Repos/hwbus-io.git/tests/hwbus_io/hwbus_io*r
+
+cat<span class="w"> </span>/etc/sudoers.d/ltp-builder
+builder<span class="w"> </span><span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>/opt/ltp/runltp,<span class="w"> </span>/opt/ltp/testcases/bin/*
+</pre></div>
+</div>
+<p>Hay un tercer grupo de tests, que son aquellos que podemos implementar sin la librería de “Linux Test Project(LTP)”. para ello, solo es necesario situar otra carpeta dentro del directorio <code class="docutils literal notranslate"><span class="pre">tests/</span></code> y conlfigurar adecuadamente los <code class="docutils literal notranslate"><span class="pre">Makefiles</span></code> tanto en la raíz de tests como en la subcarpeta. Se utiliza una metodología de construcción en cascada, delegando el proceso de configuración a los Makefiles situados respectivamente.</p>
+</li>
+</ol>
+<section id="todo">
+<h1>TODO:<a class="headerlink" href="#todo" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>Terminar de implementar la suite de tests.</p></li>
+<li><p>Planificación para la prueba específica del comando iocreset</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

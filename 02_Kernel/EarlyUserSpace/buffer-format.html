@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formato de bufer para initramfs &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Soporte al espacio temprano de usuario" href="README.html" />
+    <link rel="prev" title="Reglas UDEV para DVB" href="../driver-api/media/dtv-udev.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Formato de bufer para <code class="docutils literal notranslate"><span class="pre">initramfs</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#manipulacion-de-enlaces-duros">Manipulación de enlaces duros</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="README.html">Soporte al <em>espacio temprano de usuario</em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Formato de bufer para <code class="docutils literal notranslate"><span class="pre">initramfs</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/EarlyUserSpace/buffer-format.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="formato-de-bufer-para-initramfs">
+<h1>Formato de bufer para <code class="docutils literal notranslate"><span class="pre">initramfs</span></code><a class="headerlink" href="#formato-de-bufer-para-initramfs" title="Link to this heading"></a></h1>
+<p>Empezando por el <em>kernel</em> v2.5.x, el protocolo del antiguo <em>disco ram de inicio</em>, está siendo <em>reemplazado/complementado</em> por el nuevo <em>ramfs</em>, protocolo <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>. El  contenido de <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> es pasado haciendo uso del mismo protocolo de memoria del bufer, usado para el protocolo <em>initrd</em> pero el contenido es distinto. El bufer de <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> contiene un <em>fichero</em> el cuál es expandido dentro de <code class="docutils literal notranslate"><span class="pre">ramfs</span></code>; éste documento detalla el formato del bufer <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>.</p>
+<p>El formato de bufer de <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>, está gira entorno al formato de <code class="docutils literal notranslate"><span class="pre">cpio</span></code> “newc” o “crc”, y podrá ser creado mediante la utilidad <code class="docutils literal notranslate"><span class="pre">cpio(1)</span></code>. Una de las versiones válidas del bufer <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>, es el archivo <code class="docutils literal notranslate"><span class="pre">cpio.gz</span></code>.</p>
+<p>El formato completo del bufer <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> está definido con la siguiente sintaxis:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">*</span></code> – es usado para indicar “0 ó más ocurrencias de”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(|)</span></code> – indica alternativas.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">+</span></code> – indica concatenación.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GZIP()</span></code> – indica el operando de <code class="docutils literal notranslate"><span class="pre">gzip(1)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ALGN(n)</span></code> – significa la separación con <em>bytes nulos</em> de un límite  <em>n-bytes</em>.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpio_gzip_archive</span> <span class="o">:=</span> <span class="n">GZIP</span><span class="p">(</span><span class="n">cpio_archive</span><span class="p">)</span>
+<span class="n">cpio_archive</span> <span class="o">:=</span> <span class="n">cpio_file</span><span class="o">*</span> <span class="o">+</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">nothing</span><span class="o">&gt;</span> <span class="n">cpio_trailer</span><span class="p">)</span>
+<span class="n">cpio_file</span> <span class="o">:=</span> <span class="n">ALGN</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">cpio_header</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">ALGN</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">data</span>
+<span class="n">cpio_trailer</span> <span class="o">:=</span> <span class="n">ALGN</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">cpio_header</span> <span class="o">+</span> <span class="s2">&quot;TRAILER!!!</span><span class="se">\0</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">ALGN</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>En términos humanos, el bufer <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> contiene una colección de <em>ficheros</em> <code class="docutils literal notranslate"><span class="pre">cpio</span></code> comprimidos y/o descomprimidos -en formato “newc” o “crc”; podrán ser añadidos cierta cantidad arbitraria de <em>bytes cero</em>, para la <em>separación</em>.</p>
+<p>La sentencia de <em>entrada</em> <code class="docutils literal notranslate"><span class="pre">cpio</span></code> “<code class="docutils literal notranslate"><span class="pre">cpio</span> <span class="pre">end-or-archive</span></code>” es opcional, pero no es ignorada; <em>ver “manipulación de enlaces duros”</em>, más abajo.</p>
+<p>La estructura de <code class="docutils literal notranslate"><span class="pre">cpio_header</span></code> es como sigue -todos los campos, contienen números <em>hexadecimales</em> en ASCII, separados por <code class="docutils literal notranslate"><span class="pre">0</span></code>s a la izquierda en la amplitud del campo, por ejemplo, el <em>entero</em> <code class="docutils literal notranslate"><span class="pre">4700</span></code> es representado por la cadena <code class="docutils literal notranslate"><span class="pre">000012ac</span></code>:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Nombre Campo</p></th>
+<th class="head"><p>Tamaño Campo</p></th>
+<th class="head"><p>Significado</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>c_magic</p></td>
+<td><p>6 bytes</p></td>
+<td><p>La cadena “070701” ó “070702”</p></td>
+</tr>
+<tr class="row-odd"><td><p>c_ino</p></td>
+<td><p>8 bytes</p></td>
+<td><p>Número de inodo de archivo</p></td>
+</tr>
+<tr class="row-even"><td><p>c_mode</p></td>
+<td><p>8 bytes</p></td>
+<td><p>Modo de archivo y permisos</p></td>
+</tr>
+<tr class="row-odd"><td><p>c_uid</p></td>
+<td><p>8 bytes</p></td>
+<td><p>UID del archivo</p></td>
+</tr>
+<tr class="row-even"><td><p>c_gid</p></td>
+<td><p>8 bytes</p></td>
+<td><p>GID del archivo</p></td>
+</tr>
+<tr class="row-odd"><td><p>c_nlink</p></td>
+<td><p>8 bytes</p></td>
+<td><p>Número de enlaces</p></td>
+</tr>
+<tr class="row-even"><td><p>c_mtime</p></td>
+<td><p>8 bytes</p></td>
+<td><p>Tiempo de la última modificación</p></td>
+</tr>
+<tr class="row-odd"><td><p>c_filesize</p></td>
+<td><p>8 bytes</p></td>
+<td><p>Tamaño del campo de datos</p></td>
+</tr>
+<tr class="row-even"><td><p>c_maj</p></td>
+<td><p>8 bytes</p></td>
+<td><p>Parte “Major” del número de dispositivo</p></td>
+</tr>
+<tr class="row-odd"><td><p>c_min</p></td>
+<td><p>8 bytes</p></td>
+<td><p>Parte “Minor” del número de dispositivo</p></td>
+</tr>
+<tr class="row-even"><td><p>c_rmaj</p></td>
+<td><p>8 bytes</p></td>
+<td><p>Parte “Major” de la referencia al nodo</p></td>
+</tr>
+<tr class="row-odd"><td><p>c_rmin</p></td>
+<td><p>8 bytes</p></td>
+<td><p>Parte “Minor” de la referencia al nodo</p></td>
+</tr>
+<tr class="row-even"><td><p>c_namesize</p></td>
+<td><p>8 bytes</p></td>
+<td><p>Longitud del nombre, incluyendo ‘0’ final</p></td>
+</tr>
+<tr class="row-odd"><td><p>c_chksum</p></td>
+<td><p>8 bytes</p></td>
+<td><p>Suma de comprobación si c_magic es 070702,
+o cero</p></td>
+</tr>
+</tbody>
+</table>
+<p>En <em>Linux,</em> el campo <code class="docutils literal notranslate"><span class="pre">c_mode</span></code> coincide con el contenido de <em>st_mode</em>, retornado por <code class="docutils literal notranslate"><span class="pre">stat(2)</span></code> y codifica el tipo de archivo y permisos.</p>
+<p>El <code class="docutils literal notranslate"><span class="pre">c_filesize</span></code> debería ser cero, para cualquier archivo <em>regular</em> o <em>enlace simbólico</em>.</p>
+<p>El campo <code class="docutils literal notranslate"><span class="pre">c_chksum</span></code> contiene una <em>suma simple</em> sin signo, de <code class="docutils literal notranslate"><span class="pre">32-bit</span></code>, de todos los <code class="docutils literal notranslate"><span class="pre">bytes</span></code>. <code class="docutils literal notranslate"><span class="pre">cpio(1)</span></code> se refiere a esto, como “crc”, que es cláramente incorrecto -una comprobación de redundancia cíclica, es una mejor comprobación de integridad. Aunque es ese el <em>algoritmo</em> utilizado.</p>
+<p>Si el nombre de archivo es una <em>sentencia</em>, es en realidad un “final-de-archivo”; el <code class="docutils literal notranslate"><span class="pre">c_filesize</span></code> para un “end-of-archive” deberá ser cero.</p>
+<section id="manipulacion-de-enlaces-duros">
+<h2>Manipulación de enlaces duros<a class="headerlink" href="#manipulacion-de-enlaces-duros" title="Link to this heading"></a></h2>
+<p>Cuado es visto <code class="docutils literal notranslate"><span class="pre">c_link</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> -no siendo directorio, la tupla <code class="docutils literal notranslate"><span class="pre">c_maj,c_min,c_ino</span></code> es bloqueada otra tupla del bufer. Si no se encuentra, se inserta en la <em>tupla del bufer</em> y la entrada se crea de la forma habitual; si se encuentra se crea un enlace duro, en lugar de una segunda copia del contenido del archivo.
+Si el contenido del archivo no está incluido, el campo <code class="docutils literal notranslate"><span class="pre">c_filesize</span></code>, debería establecerse a <em>cero</em>, para indicar que sigue ninguna sección de datos. Si presenta datos, la instancia anterior del archivo es sobreescrita; esto permite el acarreo de datos, de instancia de archivo, para cualquier lugar de la secuencia. <em>GNU cpio</em> es informado para poder acoplar los datos, sólo a la última instancia del archivo.</p>
+<p><code class="docutils literal notranslate"><span class="pre">c_filesize</span></code> no debe ser <em>cero</em> para ningún <em>enlace simbólico</em>.
+Cuando es vista una <em>sentencia</em> “end-of-archive”, se <em>resetea</em> la tupla del bufer. Ésto permite a los ficheros generados independientementem, ser conectados.</p>
+<p>Para combinar datos de archivo, desde diferentes fuentes -sin tener que regenerar los campos <code class="docutils literal notranslate"><span class="pre">c_maj,c_min,c_ino</span></code>, podrán ser utilizadas una de las técnicas siguiente:</p>
+<ul class="simple">
+<li><p>Separar las fuentes de los archivos de datos con una sentencia “end-of-archive” ó</p></li>
+<li><p>Confirmar <code class="docutils literal notranslate"><span class="pre">c_link</span> <span class="pre">==</span> <span class="pre">1</span></code> en toadas las <em>entradas</em> -no directorios.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Al Viro, H. Peter Anvin
+Last revision: 2002-01-13</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../driver-api/media/dtv-udev.html" class="btn btn-neutral float-left" title="Reglas UDEV para DVB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="README.html" class="btn btn-neutral float-right" title="Soporte al espacio temprano de usuario" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

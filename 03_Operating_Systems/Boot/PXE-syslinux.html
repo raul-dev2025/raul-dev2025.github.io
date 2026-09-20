@@ -1,0 +1,893 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PXE - syslinux &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Información del Sistema relacionada con UEFI usando PowerShell" href="tipoArranquePS.html" />
+    <link rel="prev" title="Windows hardening, EFI" href="EFIpartWindows.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#boot">Boot</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Arranque del Sistema Operativo</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#boot">Boot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#boot-gestordearranque">Boot/GestorDeArranque</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#boot-man">Boot/Man</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#certificados-tls">Certificados-TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#file-system">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Sistemas Operativos</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Arranque del Sistema Operativo</a></li>
+      <li class="breadcrumb-item active">PXE - syslinux</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/03_Operating_Systems/Boot/PXE-syslinux.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pxe-syslinux">
+<h1>PXE - syslinux<a class="headerlink" href="#pxe-syslinux" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Link to this heading"></a></h2>
+<p>PXELINUX es un derivado de Syslinux, para el arranque desde un servidor en red, mediante <em>una ROM</em> <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> de red, conforme a la especificación Intel PXE. PXELINUX, no es un programa destinado a ser <em>flaseado</em> o <em>quemado</em>, en una PROM de una tarjeta de red.
+En tal caso, revisar <a class="reference external" href="https://ipxe.org/">iPXE</a>.</p>
+<p>Si fuese necesario <em>crear</em> una PROM; compatible con PXE, para la tarjeta de red -con objeto de utilizarla con PXELINUX, por qjemplo, revisar <a class="reference external" href="http://netboot.sourceforge.net/">NetBoot</a>.</p>
+</section>
+<section id="direcotorio-de-trabajo">
+<h2>Direcotorio de trabajo<a class="headerlink" href="#direcotorio-de-trabajo" title="Link to this heading"></a></h2>
+<p>El Directorio de Trabajo Activo inicial, es aportado tanto por DHCP, opción 210(pxelinux.pathprefix), prefijo de ruta <em>en bruto</em>, o el directorio ascendente del archivo PXELINUX, indicado por el campo <code class="docutils literal notranslate"><span class="pre">sname</span></code> y el archivo (sname=“192.168.2.3” y file=“boot/pxelinux.0” resuelto en “<a class="reference external" href="tftp://192.168.2.3/boot/">tftp://192.168.2.3/boot/</a>”, o en “192.168.2.3::boot/” en un
+formato PXELINUX anterior), con precedencia, tal y como es especificado en la sección <em>#Options</em> de este documento.</p>
+<p>Todos los nombre de archivo <em>no cualificados</em>, son relativos al Directorio de Trabajo Activo.</p>
+</section>
+<section id="configuracion">
+<h2>Configuración<a class="headerlink" href="#configuracion" title="Link to this heading"></a></h2>
+<p>La configuración básica, es la misma en todas la variantes Syslinux.
+Este documento explica algunas de las diferencias, especialmente aplicables a PXELINUX.</p>
+<p>En el servidor TFTP, crear el directorio <code class="docutils literal notranslate"><span class="pre">/tftpboot</span></code> y, copiar <code class="docutils literal notranslate"><span class="pre">pxelinux.0</span></code> -desde la distribución de Syslinux y, cualquier imagen del kernel o initrd, desde la que arrancar.</p>
+<p><code class="docutils literal notranslate"><span class="pre">[5.00+]</span></code> Copiar <code class="docutils literal notranslate"><span class="pre">ldlinux.c32</span></code> desde la distribución de Syslinux, al directorio <code class="docutils literal notranslate"><span class="pre">/tftpboot</span></code> en el servidor TFTP.</p>
+<p>Finalmente, crear el directorio <code class="docutils literal notranslate"><span class="pre">/tftpboot/pxelinux.cfg</span></code>. El archivo de configuración -equivalente a syslinux.cfg -ver SYSLINUX FAQ para más opciones, situado en este mismo directorio.</p>
+<p>Dado que podría arrancarse más de un sistema, desde el mismo servidor, el nombre del archivo de configuración, dependrá de la dirección IP de la <em>máquina de arranque</em>.</p>
+<p>Antes dar una explicación gnérica, presentaremos un ejemplo:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>el nombre del archivo del gestor de arranque es <code class="docutils literal notranslate"><span class="pre">/mybootdir/pxelinux.0</span></code>; y,</p></li>
+<li><p>el UUID de cliente es <code class="docutils literal notranslate"><span class="pre">b8945908-d6a6-41a9-611d-74a6ab80b83d</span></code>; y,</p></li>
+<li><p>la dirección MAC Ethernet <code class="docutils literal notranslate"><span class="pre">88:99:AA:BB:CC:DD</span></code>; y,</p></li>
+<li><p>la direcció IP es <code class="docutils literal notranslate"><span class="pre">192.168.2.91</span></code>, el letras hexadecimales mayúsculas <code class="docutils literal notranslate"><span class="pre">C0A8025B</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p>PXELINUX <em>buscará</em> los siguientes archivos de configuración -en éste
+orden:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/mybootdir/pxelinux.cfg/b8945908-d6a6-41a9-611d-74a6ab80b83d
+/mybootdir/pxelinux.cfg/01-88-99-aa-bb-cc-dd
+/mybootdir/pxelinux.cfg/C0A8025B
+/mybootdir/pxelinux.cfg/C0A8025
+/mybootdir/pxelinux.cfg/C0A802
+/mybootdir/pxelinux.cfg/C0A80
+/mybootdir/pxelinux.cfg/C0A8
+/mybootdir/pxelinux.cfg/C0A
+/mybootdir/pxelinux.cfg/C0
+/mybootdir/pxelinux.cfg/C
+/mybootdir/pxelinux.cfg/default
+</pre></div>
+</div>
+<p><em>Veamos</em> qué representa exactamente, el ejemplo de arriba.</p>
+<p>Después de <em>intentar</em> los archivos especificados en el DHCP, u opciones en bruto, pxelinux probará las siguientes rutas, con prefijo <code class="docutils literal notranslate"><span class="pre">pxelinux.cfg</span></code>, bajo el Directorio de Trabajo inicial.</p>
+<p>El UUID de cliente, de ser provisto por la <em>pila</em> PXE.</p>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>Algunas BIOS, carecen de una UUID válida y, podrían
+terminar por <em>devolver</em> algo parecido a <code class="docutils literal notranslate"><span class="pre">1</span></code> -unos.</p>
+</div>
+<p>El valor es representado en el formato estandar UUID, mediante dígitos hexadecimales en minúscula. Ejemplo, <code class="docutils literal notranslate"><span class="pre">b8945908-d6a6-41a9-611d-74a6ab80b83d</span></code>.</p>
+<p>El tipo de <em>hardware</em> -modelo de código ARP, y dirección; todo, en hexadecimal y en minúscula, con giones por separador.</p>
+<p>Por ejemplo, la tabla ARP ethernet <em>tipo 1</em>, con la dirección <code class="docutils literal notranslate"><span class="pre">88:99:AA:BB:CC:DD</span></code>, buscaría el nombre de archivo <code class="docutils literal notranslate"><span class="pre">01-88-99-aa-bb-cc-dd</span></code>.</p>
+<p>La própia dirección de cliente IPv4, en <em>hexadecimal mayúscula</em>, seguido de los carácteres hexadecimales retirados, uno cada vez, hasta el final.
+Por ejemplo, <code class="docutils literal notranslate"><span class="pre">192.168.2.91</span> <span class="pre">→</span> <span class="pre">C0A8025B</span></code>.</p>
+<p>El programa incluido gethostip, podrá ser utilizado para computar la dirección IP en hexadecimal, para cualquier anfitrión -host.</p>
+<ul class="simple">
+<li><p>default.</p></li>
+</ul>
+<div class="admonition-titulo admonition">
+<p class="admonition-title">Título</p>
+<p>Todas las referencias a nombres de archivo, son relativas
+al directorio en él situado: <code class="docutils literal notranslate"><span class="pre">pxelinux.0</span></code>.</p>
+</div>
+<p>PXELINUX, requiere generalmente para el nombre de archivo -incluida cualquier ruta relativa, constar de un tamaño de 127 carácteres.</p>
+<p><code class="docutils literal notranslate"><span class="pre">[3.20+]</span></code> Si PXELINUX no pudiese encontrar un archivo de configuración, dispararía el <em>reinicio</em>, tras haber expirado, el intérvalo de espera. Esto evitaría paralizar indefinídamente la máquina, debido a una falla en el arranque.</p>
+</section>
+<section id="opciones">
+<h2>Opciones<a class="headerlink" href="#opciones" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">[1.62+]</span></code> Dependiendo del servidor específico DHCP, las siguientes opciones no específicas, podrían estar disponibles, para así, <em>adecuar</em> el comportamiento PXELINUX. Ver RFC 5071 para información adicional sobre estas opciones. Dichas alternativas pxelinux, podrán ser especificadas con opciones DHCP, o escritas en bruto, en <em>binario</em>.</p>
+</section>
+<section id="prioridad-de-opciones">
+<h2>Prioridad de opciones<a class="headerlink" href="#prioridad-de-opciones" title="Link to this heading"></a></h2>
+<p>En bruto <code class="docutils literal notranslate"><span class="pre">after-options</span></code>, es aplicado tras las opciones DHCP -sobreescribiéndolas, mientras <code class="docutils literal notranslate"><span class="pre">before-options</span></code> -también en bruto, son préviamente aplicadas a las opciones DHCP. El comportamiento por defecto toma una menor prioridad.</p>
+<ul class="simple">
+<li><p>Opción 208 pxelinux.magic Versiones de PXELINUX anteriores, requireron la configuración de esta opción a <code class="docutils literal notranslate"><span class="pre">F1:00:74:7E</span></code> (241.0.116.126) con objeto de reconocer cualquier opción DHCP especial. A partir de PXELINUX v3.55, la opción es depreciada y, nunca más necesaria.</p></li>
+<li><p>Opción 209 pxelinux.configfile Especifica el nombre de archivo de configuración inicial PXELINUX, el cuál podría ser calificado, o descalificado.</p></li>
+<li><p>Opción 210 pxelinux.pathprefix Especifica el prefijo de ruta común, de PXELINUX. En lugar de derivarlo del nombre de archivo de arranque. Esto es -casi, necesario de hecho, para terminar en culaquier caracter, utilizado por el servidor TFTP del OS, utilizado como <em>nombre de ruta separador</em>, ejemplo <code class="docutils literal notranslate"><span class="pre">/</span></code>, en Unix.</p></li>
+<li><p>Option 211 pxelinux.reboottime Especifica, en segundos, el tiempo de espera antes del reinicio, en el evento de falla de TFTP. <code class="docutils literal notranslate"><span class="pre">0</span></code> -cero, significa esperar indefinidamente -en realidad, esperará 136 años, aproximádamente.</p></li>
+</ul>
+</section>
+<section id="opciones-en-bruto">
+<h2>Opciones en bruto<a class="headerlink" href="#opciones-en-bruto" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">[3.83+]</span></code> El programa pxelinux-options podría utilizarse para escribir en bruto las opciones DHCP, dentro de la imagen <code class="docutils literal notranslate"><span class="pre">pxelinux.0</span></code>. Es en ocasiones útil, cuando el sevidor DHCP, aparezca bajo un control administrativo diferente.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>6 =&gt; &#39;domain-name-servers&#39;,
+15 =&gt; &#39;domain-name&#39;,
+54 =&gt; &#39;next-server&#39;,
+209 =&gt; &#39;config-file&#39;,
+210 =&gt; &#39;path-prefix&#39;,
+211 =&gt; &#39;reboottime&#39;
+</pre></div>
+</div>
+<section id="http-y-ftp">
+<h3>HTTP y FTP<a class="headerlink" href="#http-y-ftp" title="Link to this heading"></a></h3>
+<p>Anteriores versiones de PXELINUX, soportaron HTTP, mediante un gestor de arranque híbrido, también conteniendo gPXE/iPXE; con éste tipo de imágenes, llamadas tanto <code class="docutils literal notranslate"><span class="pre">gpxelinux.0</span></code> como <code class="docutils literal notranslate"><span class="pre">ipxelinux.0</span></code>.</p>
+<p>Desde la versión 5.10, un binario PXELINUX especial, <code class="docutils literal notranslate"><span class="pre">lpxelinux.0</span></code>, soportó natívamente, transferencias HTTP y FTP, incrementando satisfactoriamente, la velocidad de <em>carga</em>, y permitiendo a escritos -scripts, HTTP estandar, presentar archivos de configuración PXELINUX.
+El empleo de HTTP o FTP, utliza un nombre de archivo con una sintaxis standar, para el URL; opciones DHCP, para transmitir prefijos URL adecuados, al cliente. Incluso la utilización de la herramienta <code class="docutils literal notranslate"><span class="pre">pxelinux-options</span></code>, provista desde el directorio <em>utils</em>, para programar directamente, sobre el archivo <code class="docutils literal notranslate"><span class="pre">lpxelinux.0</span></code>. Aunque es utilizada la sintaxis HTTP/FTP, al tratar de emplear <code class="docutils literal notranslate"><span class="pre">pxelinux.0</span></code> -sin el prefijo <code class="docutils literal notranslate"><span class="pre">l</span></code>, de no estar iPXE/gPXE <em>corriendo</em> debajo, resultará en una advertencia archivo no encontrado, sin dar explicación acerca de la causa.</p>
+<p>Ejemplo:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>LABEL linux-http
+LINUX http://boot-server/boot/mykernel
+APPEND initrd=http://boot-server/boot/myinitrd
+</pre></div>
+</div>
+</section>
+<section id="sintaxis-del-nombre-de-archivo">
+<h3>Sintaxis del nombre de archivo<a class="headerlink" href="#sintaxis-del-nombre-de-archivo" title="Link to this heading"></a></h3>
+<p>PXELINUX, soporta las siguientes conversiones, en cuanto al nombre de ruta:</p>
+<p><code class="docutils literal notranslate"><span class="pre">::filename</span></code> Surpime el prefijo del nombre de archivo común, ejemplo, pasará la cadena <code class="docutils literal notranslate"><span class="pre">filename</span></code> sin modificar al servidor.</p>
+<ul class="simple">
+<li><p>IP <code class="docutils literal notranslate"><span class="pre">address::filename</span></code> Ejemplo, <code class="docutils literal notranslate"><span class="pre">192.168.2.3::filename</span></code> Surpime el prefijo del nombre de archivo común y, envía una petición a un servidor TFTP alternativo. Podrá ser utilizado un nombre DNS, en lugar de una dirección IP. Asumiendo que es completamente cualificado, si contiene puntos; de otra forma,añadirá el dominio local, tal y como es reportado por el servidor DHCP(opción 15).</p></li>
+</ul>
+<p>El símbolo de doble punto <code class="docutils literal notranslate"><span class="pre">::</span></code>, fué escogido, aunque es, desafortunadamente, conflictivo con el sistema operativo. Sin embargo, si encontramos un entorno, donde el tratamiento especial de <code class="docutils literal notranslate"><span class="pre">::</span></code> signifique un problema, por favor, contactar la de Syslinux.</p>
+<p><code class="docutils literal notranslate"><span class="pre">[4.00+]</span></code>, PXELINUX también soporta una sintaxis URL estandar.</p>
+</section>
+<section id="keeppxe">
+<h3>Keeppxe<a class="headerlink" href="#keeppxe" title="Link to this heading"></a></h3>
+<p>Normalmente, PXELINUX descargará la <em>pila</em> de PXE y UNDI, antes de invocar al kernel. En circunstancias especiales -por ejemplo, al utilizar MEMDISK para arrancar un sistema operativo con un controlador de red UNDI, podría ser deseado, el guardar la pila PXE en memoria. Si la opción <code class="docutils literal notranslate"><span class="pre">keepxe</span></code> es pasada como argumento desde la línea de órdenes, PXELINUX, guardará la pila respectiva, en memoria. Si no se comprende que significa ésto, probablemente no sea necesario.</p>
+<p>Ejemplos</p>
+<p>Nombre de archivo de configuración</p>
+<p>Para el DHCP siaddr <code class="docutils literal notranslate"><span class="pre">192.168.2.3</span></code>, archivo <code class="docutils literal notranslate"><span class="pre">mybootdir/pxelinux.0</span></code>, UUID de cliente <code class="docutils literal notranslate"><span class="pre">b8945908-d6a6-41a9-611d-74a6ab80b83d</span></code>, dirección MAC Ethernet <code class="docutils literal notranslate"><span class="pre">88:99:AA:BB:CC:DD</span></code> y dirección IPv4 <code class="docutils literal notranslate"><span class="pre">192.168.2.91</span></code>, serán considerados los archivos, en el orden que sigue -tras las opciones “config-file”:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mybootdir/pxelinux.cfg/b8945908-d6a6-41a9-611d-74a6ab80b83d
+mybootdir/pxelinux.cfg/01-88-99-aa-bb-cc-dd
+mybootdir/pxelinux.cfg/C0A8025B
+mybootdir/pxelinux.cfg/C0A8025
+mybootdir/pxelinux.cfg/C0A802
+mybootdir/pxelinux.cfg/C0A80
+mybootdir/pxelinux.cfg/C0A8
+mybootdir/pxelinux.cfg/C0A
+mybootdir/pxelinux.cfg/C0
+mybootdir/pxelinux.cfg/C
+mybootdir/pxelinux.cfg/default
+</pre></div>
+</div>
+</section>
+<section id="servidores-tftp">
+<h3>Servidores TFTP<a class="headerlink" href="#servidores-tftp" title="Link to this heading"></a></h3>
+<p>Para mejores resultados, utilizar el servidor TFTP con soporte a <code class="docutils literal notranslate"><span class="pre">tsize</span></code> <em>RFC 1784/RFC 2349</em>.</p>
+<p>Por favor, comprobar la página de referencias a la compatibilidad de hardware, para ver si PXE, necesita algún tipo de <em>atención</em> especial.</p>
+<p>Algunos servidores TFTP, que mejor resultado han dado con PXELINUX, son:</p>
+<p>El servidor TFTP “tftp-hpa” -áltamente <em>portable</em> <a class="footnote-reference brackets" href="#f2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> y, un “puerto” de un servidor TFTP de un sistema operativo BSD. Soporta opciones y está disponible en: <a class="reference external" href="http://www.kernel.org/pub/software/network/tftp/%20or%20ftp://ftp.kernel.org/pub/software/network/tftp/">TFTP</a> y en cualquier servidor espejo -mirror, <a class="reference external" href="http://www.kernel.org/mirrors/">kernel.org</a>
+Otro servidor TFTP, con soporte de opciones es “atftp” por <em>Jean-Pierre Lefebvre</em>:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://it-at-dtu-physics.readthedocs.io/en/stable/pxelinux.doc.html">RTD TFTP</a></p></li>
+</ul>
+<p><em>atftp</em> da mejores resultados que <em>tftp-hpa</em> en grandes servidores de arranque, aunque con menor portabilidad.</p>
+<p>Si el servidor de arranque, corre bajo Windows -y no puede cambiarse esto, intentar <em>tftpd32</em>, escrito por <em>Philippe Jounin</em> -necesaria versión 2.11 o posterior; versiones anteriores contenían errores haciéndolo incompatible con PXELINUX.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://tftpd32.jounin.net/">tftpd32</a></p></li>
+</ul>
+<p><em>Eric Cook</em> de Intel, advierte el uso de TFTPD, desde el servidor Win2000 RIS:</p>
+<ul class="simple">
+<li><p>El <em>truco</em> está en instalar RIS, sin configurar la interfase gráfica de usuario -GUI. En su lugar, hacer lo siguiente:</p></li>
+</ul>
+<p>En el registro, añadir la carpeta <code class="docutils literal notranslate"><span class="pre">\HKLM\System\CurrentControlSet\Services\TFTPD\Parameters</span></code>. En la carpeta <code class="docutils literal notranslate"><span class="pre">Parameters</span></code>, añadir la llave llamada <code class="docutils literal notranslate"><span class="pre">Directory</span></code>, como valor, escribir la ruta hacia el directorio raíz de TFTP. En servicios GUI, configurar el servicio TFTPD, para un inicio automático, e iniciarlo. Si ha sido configurado el RIS en Win2k, se terminará por tener un MS PXE -algo no demasiado adecuado.
+En cualquier caso, Christian -<em>Dr. Disk</em> Hechelmann, anotó un satisfactoria experiencia, en el uso de Windows RIS, <em>tal y como es</em>. Ha escrito un <em>ensayo</em>, acerca de como configurarlo. Ver <em>Windows Remote Install System</em>.</p>
+</section>
+<section id="configuracion-dhcp-simple">
+<h3>Configuración DHCP - Simple<a class="headerlink" href="#configuracion-dhcp-simple" title="Link to this heading"></a></h3>
+<p>El protocolo PXE, usa un conjunto de extensiones complejas al DHCP o BOOTP. Aunque la mayor parte de las implementaciones PXE -esto incluye todas las versiones Intel v0.99 y posteriores, parecen ser capaces de arrancar con una configuración DHCP/TFTP “convencional”. Asumiendo que deba dar soprte a <em>clientes</em> demasiado antiguos -o incluso <em>sevéramente rotos</em>, es probáblemente la mejor configuración; a menos que ya se disponga de un seervidor de arranque PXE, en la red.</p>
+<p>Una muestra de la configuración DHCP, haciendo uso de una configuración TFTP <em>convencional</em>, mantendría cierto parecido a lo siguiente -utiliza ISC dhcp (2.0 o posterior) sintaxis “dhcpd.conf” :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>allow<span class="w"> </span>booting<span class="p">;</span>
+allow<span class="w"> </span>bootp<span class="p">;</span>
+
+<span class="c1"># Standard configuration directives...</span>
+
+option<span class="w"> </span>domain-name<span class="w"> </span><span class="s2">&quot;domain_name&quot;</span><span class="p">;</span>
+option<span class="w"> </span>subnet-mask<span class="w"> </span>subnet_mask<span class="p">;</span>
+option<span class="w"> </span>broadcast-address<span class="w"> </span>broadcast_address<span class="p">;</span>
+option<span class="w"> </span>domain-name-servers<span class="w"> </span>dns_servers<span class="p">;</span>
+option<span class="w"> </span>routers<span class="w"> </span>default_router<span class="p">;</span>
+
+<span class="c1"># Group the PXE bootable hosts together</span>
+group<span class="w"> </span><span class="o">{</span>
+<span class="w">   </span><span class="c1"># PXE-specific configuration directives...</span>
+<span class="w">   </span>next-server<span class="w"> </span>TFTP_server_address<span class="p">;</span>
+<span class="w">   </span>filename<span class="w"> </span><span class="s2">&quot;/tftpboot/pxelinux.0&quot;</span><span class="p">;</span>
+
+<span class="w">   </span><span class="c1"># You need an entry like this for every host</span>
+<span class="w">   </span><span class="c1"># unless you&#39;re using dynamic addresses</span>
+<span class="w">   </span>host<span class="w"> </span>hostname<span class="w"> </span><span class="o">{</span>
+<span class="w">      </span>hardware<span class="w"> </span>ethernet<span class="w"> </span>ethernet_address<span class="p">;</span>
+<span class="w">      </span>fixed-address<span class="w"> </span>hostname<span class="p">;</span>
+<span class="w">   </span><span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Nótese, que si un demonio TFTP en particular, corre bajo <em>chroot</em> -tftp-hpa lo hace, si fue especificada la opcion <code class="docutils literal notranslate"><span class="pre">-s</span></code> (secure), lo que resulta áltamente recomendable. Casi con total seguridad, no debería incluirse el prefijo <code class="docutils literal notranslate"><span class="pre">/tftpboot</span></code> en el nombre de archvo.</p>
+<p>Si la <em>configuración simple</em>, no funciona en un entorno, debería configurarse un <em>servidor de arranque PXE</em>, sobre el puerto <code class="docutils literal notranslate"><span class="pre">4011</span></code> del servidor tftp; Un servidor para el arranque PXE, está disponible en <a class="reference external" href="http://www.kano.org.uk/projects/pxe/">kano.org</a>.</p>
+<p>Con este tipo de servidor definido, la configuración DHCP, debería ser similar, exceptuando la opción “dhcp-class-identifier” (ISC dhcp 2) u “opción vendor-class-identifier” (ISC dhcp 3):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tu código aquí</span>
+
+<span class="w">    </span>allow<span class="w"> </span>booting<span class="p">;</span>
+<span class="w">    </span>allow<span class="w"> </span>bootp<span class="p">;</span>
+
+<span class="w">    </span><span class="c1"># Standard configuration directives...</span>
+
+<span class="w">    </span>option<span class="w"> </span>domain-name<span class="w"> </span><span class="s2">&quot;domain_name&quot;</span><span class="p">;</span>
+<span class="w">    </span>option<span class="w"> </span>subnet-mask<span class="w"> </span>subnet_mask<span class="p">;</span>
+<span class="w">    </span>option<span class="w"> </span>broadcast-address<span class="w"> </span>broadcast_address<span class="p">;</span>
+<span class="w">    </span>option<span class="w"> </span>domain-name-servers<span class="w"> </span>dns_servers<span class="p">;</span>
+<span class="w">    </span>option<span class="w"> </span>routers<span class="w"> </span>default_router<span class="p">;</span>
+
+<span class="w">    </span><span class="c1"># Group the PXE bootable hosts together</span>
+<span class="w">    </span>group<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="c1"># PXE-specific configuration directives...</span>
+<span class="w">        </span>option<span class="w"> </span>dhcp-class-identifier<span class="w"> </span><span class="s2">&quot;PXEClient&quot;</span><span class="p">;</span>
+<span class="w">        </span>next-server<span class="w"> </span>pxe_boot_server_address<span class="p">;</span>
+
+<span class="w">        </span><span class="c1"># You need an entry like this for every host</span>
+<span class="w">        </span><span class="c1"># unless you&#39;re using dynamic addresses</span>
+<span class="w">        </span>host<span class="w"> </span>hostname<span class="w"> </span><span class="o">{</span>
+<span class="w">            </span>hardware<span class="w"> </span>ethernet<span class="w"> </span>ethernet_address<span class="p">;</span>
+<span class="w">            </span>fixed-address<span class="w"> </span>hostname<span class="p">;</span>
+<span class="w">        </span><span class="o">}</span>
+<span class="w">    </span><span class="o">}</span>
+</pre></div>
+</div>
+<p>Aquí, el nombre del archivo de arranque, será obtenido desde el servidor PXE.</p>
+</section>
+</section>
+<section id="configuracion-dhcp-encapsulado">
+<h2>Configuración DHCP - Encapsulado<a class="headerlink" href="#configuracion-dhcp-encapsulado" title="Link to this heading"></a></h2>
+<p>Si la configuración convenciona de TFTP, no funciona en los clientes y, configurar un servidor de arranque PXE, no es una opción, podría intentarse la siguiente configuración. Es sabido que ha funcionado en determinadas circunstancias; aunque no hay garantias:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>allow<span class="w"> </span>booting<span class="p">;</span>
+allow<span class="w"> </span>bootp<span class="p">;</span>
+
+<span class="c1"># Standard configuration directives...</span>
+
+option<span class="w"> </span>domain-name<span class="w"> </span><span class="s2">&quot;domain_name&quot;</span><span class="p">;</span>
+option<span class="w"> </span>subnet-mask<span class="w"> </span>subnet_mask<span class="p">;</span>
+option<span class="w"> </span>broadcast-address<span class="w"> </span>broadcast_address<span class="p">;</span>
+option<span class="w"> </span>domain-name-servers<span class="w"> </span>dns_servers<span class="p">;</span>
+option<span class="w"> </span>routers<span class="w"> </span>default_router<span class="p">;</span>
+
+<span class="c1"># Group the PXE bootable hosts together</span>
+group<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="c1"># PXE-specific configuration directives...</span>
+<span class="w">    </span>option<span class="w"> </span>dhcp-class-identifier<span class="w"> </span><span class="s2">&quot;PXEClient&quot;</span><span class="p">;</span>
+<span class="w">    </span>option<span class="w"> </span>vendor-encapsulated-options<span class="w"> </span><span class="m">09</span>:0f:80:00:0c:4e:65:74:77:6f:72:6b:20:62:6f:6f:74:0a:07:00:50:72:6f:6d:70:74:06:01:02:08:03:80:00:00:47:04:80:00:00:00:ff<span class="p">;</span>
+<span class="w">    </span>next-server<span class="w"> </span>TFTP_server<span class="p">;</span>
+<span class="w">    </span>filename<span class="w"> </span><span class="s2">&quot;/tftpboot/pxelinux.0&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1"># You need an entry like this for every host</span>
+<span class="w">    </span><span class="c1"># unless you&#39;re using dynamic addresses</span>
+<span class="w">    </span>host<span class="w"> </span>hostname<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>hardware<span class="w"> </span>ethernet<span class="w"> </span>ethernet_address<span class="p">;</span>
+<span class="w">        </span>fixed-address<span class="w"> </span>hostname<span class="p">;</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>En algunos clientes no funcionará con la configuración TFTP convencional; Client 3.0 de Intel y posteriores, caen en esta categoria.</p>
+</div>
+<section id="configuracion-dhcp-opciones-isc-dhcpd">
+<h3>Configuración DHCP - opciones ISC dhcpd<a class="headerlink" href="#configuracion-dhcp-opciones-isc-dhcpd" title="Link to this heading"></a></h3>
+<p>ISC dhcp 3.0, soporta un sintaxis más elegante, a la hora de establecer opciones personalizables. la siguiente sintaxis, podría ser utilizada en <code class="docutils literal notranslate"><span class="pre">dhcpd.conf</span></code>, de estar utilizándose dicha versión dhcpd:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>option<span class="w"> </span>space<span class="w"> </span>pxelinux<span class="p">;</span>
+option<span class="w"> </span>pxelinux.magic<span class="w">      </span>code<span class="w"> </span><span class="nv">208</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>string<span class="p">;</span>
+option<span class="w"> </span>pxelinux.configfile<span class="w"> </span>code<span class="w"> </span><span class="nv">209</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>text<span class="p">;</span>
+option<span class="w"> </span>pxelinux.pathprefix<span class="w"> </span>code<span class="w"> </span><span class="nv">210</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>text<span class="p">;</span>
+option<span class="w"> </span>pxelinux.reboottime<span class="w"> </span>code<span class="w"> </span><span class="nv">211</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>unsigned<span class="w"> </span>integer<span class="w"> </span><span class="m">32</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>En versiones anteriores a PXELINUX, esto funcionará como <em>site-option-space</em>. Desde la versión PXELINUX 2.07, funciona como <em>site-option-space</em>(encapsulado) y, como <em>vendor-option-space</em> (tipo encapsulado 43). Esto podría evitar interferir con el <em>dhcp-parameter-request-list</em>, detallado más abajo.</p>
+</div>
+<p><strong>[PXELINUX 2.07+]</strong> Este soporta ámbas el <em>site-option-space</em> y <em>vendor-option-space</em>.</p>
+<p>Dentro del grupo -o clase, de arranque PXELINUX; donde están la opciones PXELINUX relacionadas, podría ser añadido:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Always include the following lines for all PXELINUX clients</span>
+site-option-space<span class="w"> </span><span class="s2">&quot;pxelinux&quot;</span><span class="p">;</span>
+option<span class="w"> </span>pxelinux.magic<span class="w"> </span>f1:00:74:7e<span class="p">;</span>
+<span class="k">if</span><span class="w"> </span>exists<span class="w"> </span>dhcp-parameter-request-list<span class="w"> </span><span class="o">{</span>
+<span class="w"> </span><span class="c1"># Always send the PXELINUX options (specified in hexadecimal)</span>
+<span class="w"> </span>option<span class="w"> </span>dhcp-parameter-request-list<span class="w"> </span><span class="o">=</span><span class="w"> </span>concat<span class="o">(</span>option<span class="w"> </span>dhcp-parameter-request-list,d0,d1,d2,d3<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="c1"># These lines should be customized to your setup</span>
+option<span class="w"> </span>pxelinux.configfile<span class="w"> </span><span class="s2">&quot;configs/common&quot;</span><span class="p">;</span>
+option<span class="w"> </span>pxelinux.pathprefix<span class="w"> </span><span class="s2">&quot;/tftpboot/pxelinux/files/&quot;</span><span class="p">;</span>
+option<span class="w"> </span>pxelinux.reboottime<span class="w"> </span><span class="m">30</span><span class="p">;</span>
+filename<span class="w"> </span><span class="s2">&quot;/tftpboot/pxelinux/pxelinux.bin&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>El archivo de configuraciónm es relativo al prefijo de ruta; buscará un archivo de configuración llamado <code class="docutils literal notranslate"><span class="pre">/tftpboot/pxelinux/files/configs/common</span></code> en el servidor TFTP.</p>
+</div>
+<p>El estamento <em>option dhcp-parameter-request-list</em>, fuerza al servidor DHCP, a enviar opciones específicas PXELINUX, incluso sin ser explícitamente solicitadas. Puesto que las solicitudes DHCP, son enviadas anter de la carga PXELINUX, el cliente PXE no sabrá pedirlas.</p>
+<p>En versiones posteriores a 3.0 de ISC, <em>site-local option spaces</em> empiezanen <code class="docutils literal notranslate"><span class="pre">224</span></code>, no en <code class="docutils literal notranslate"><span class="pre">128</span></code> -para ser compatible con la RFC 3942, así que deberían definirse las opciones <code class="docutils literal notranslate"><span class="pre">208-211</span></code>como opciones DHCP normales, en lugar de <em>site local</em>. Por ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>option<span class="w"> </span>magic<span class="w">      </span>code<span class="w"> </span><span class="nv">208</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>string<span class="p">;</span>
+option<span class="w"> </span>configfile<span class="w"> </span>code<span class="w"> </span><span class="nv">209</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>text<span class="p">;</span>
+option<span class="w"> </span>pathprefix<span class="w"> </span>code<span class="w"> </span><span class="nv">210</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>text<span class="p">;</span>
+option<span class="w"> </span>reboottime<span class="w"> </span>code<span class="w"> </span><span class="nv">211</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>unsigned<span class="w"> </span>integer<span class="w"> </span><span class="m">32</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Dentro del grupo -o clase, de arranque PXELINUX; donde están la opciones PXELINUX relacionadas (como las opciones para el nombre de archivo), podría ser añadido:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Always include the following lines for all PXELINUX clients</span>
+option<span class="w"> </span>magic<span class="w"> </span>f1:00:74:7e<span class="p">;</span>
+<span class="k">if</span><span class="w"> </span>exists<span class="w"> </span>dhcp-parameter-request-list<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="c1"># Always send the PXELINUX options (specified in hexadecimal, ie: 208 = 0xd0, 209 = 0xd1, etc.)</span>
+<span class="w">    </span>option<span class="w"> </span>dhcp-parameter-request-list<span class="w"> </span><span class="o">=</span><span class="w"> </span>concat<span class="o">(</span>option<span class="w"> </span>dhcp-parameter-request-list,d0,d1,d2,d3<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+<span class="c1"># These lines should be customized to your setup</span>
+option<span class="w"> </span>configfile<span class="w"> </span><span class="s2">&quot;configs/common&quot;</span><span class="p">;</span>
+option<span class="w"> </span>pathprefix<span class="w"> </span><span class="s2">&quot;/tftpboot/pxelinux/files/&quot;</span><span class="p">;</span>
+option<span class="w"> </span>reboottime<span class="w"> </span><span class="m">30</span><span class="p">;</span>
+filename<span class="w"> </span><span class="s2">&quot;/tftpboot/pxelinux/pxelinux.bin&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>El archivo de configuración, es relativo al prefijo de ruta; esto buscará un archivo de configuración llamado <code class="docutils literal notranslate"><span class="pre">/tftpboot/pxelinux/files/configs/common</span></code> en el servidor TFTP.</p>
+</div>
+<p>El estamento <em>option dhcp-parameter-request-list</em> fuerza la servidor DHCP, el enviar opciones específica PXELINUX, incluso sin haver sido explícitamente solicitadas. Puesto que las solicitudes DHCP, son enviadas anter de la carga PXELINUX, el cliente PXE no sabrá pedirlas.</p>
+<p>Por medio de dhcp 3.0, es posible crear un gran número de estas <em>cadenas</em>. Por ejemplo, para utilizar la forma hexadecimal de la dirección del <em>hardware</em>, como nombre de archivo de configuración, podría hacerse algo parecido:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>site-option-space<span class="w"> </span><span class="s2">&quot;pxelinux&quot;</span><span class="p">;</span>
+option<span class="w"> </span>pxelinux.magic<span class="w"> </span>f1:00:74:7e<span class="p">;</span>
+<span class="k">if</span><span class="w"> </span>exists<span class="w"> </span>dhcp-parameter-request-list<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="c1"># Always send the PXELINUX options (specified in hexadecimal)</span>
+<span class="w">    </span>option<span class="w"> </span>dhcp-parameter-request-list<span class="w"> </span><span class="o">=</span><span class="w"> </span>concat<span class="o">(</span>option<span class="w"> </span>dhcp-parameter-request-list,d0,d1,d2,d3<span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+option<span class="w"> </span>pxelinux.configfile<span class="w"> </span><span class="o">=</span>
+<span class="w">    </span>concat<span class="o">(</span><span class="s2">&quot;pxelinux.cfg/&quot;</span>,<span class="w"> </span>binary-to-ascii<span class="o">(</span><span class="m">16</span>,<span class="w"> </span><span class="m">8</span>,<span class="w"> </span><span class="s2">&quot;:&quot;</span>,<span class="w"> </span>hardware<span class="o">))</span><span class="p">;</span>
+filename<span class="w"> </span><span class="s2">&quot;/tftpboot/pxelinux.bin&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Al utilizar un cliente cuya dirección <em>Ethenet</em> es <code class="docutils literal notranslate"><span class="pre">58:FA:84:CF:55:0E</span></code>, buscaría un archivo de configuración llamado <code class="docutils literal notranslate"><span class="pre">/tftpboot/pxelinux.cfg/1:58:fa:84:cf:55:e</span></code>.</p>
+</section>
+<section id="opciones-de-fabricante">
+<h3>Opciones de fabricante<a class="headerlink" href="#opciones-de-fabricante" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>host<span class="w"> </span>trantor-sky2<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>hardware<span class="w"> </span>ethernet<span class="w"> </span><span class="m">00</span>:00:5a:70:c2:71<span class="p">;</span>
+<span class="w">    </span>vendor-option-space<span class="w"> </span>pxelinux<span class="p">;</span>
+<span class="w">    </span>option<span class="w"> </span>pxelinux.magic<span class="w"> </span>f1:00:74:7e<span class="p">;</span>
+<span class="w">    </span>option<span class="w"> </span>pxelinux.pathprefix<span class="w"> </span><span class="s2">&quot;http://raidtest.hos.anvin.org/tftpboot/&quot;</span><span class="p">;</span>
+<span class="w">    </span>option<span class="w"> </span>pxelinux.reboottime<span class="w"> </span><span class="m">30</span><span class="p">;</span>
+<span class="w">    </span>filename<span class="w"> </span><span class="s2">&quot;/pxelinux.0&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Evita la necesidad de trastear_con el <em>dhcp-parameter-request-list</em>.</p>
+<p><strong>Opciones de fabricante - elavoradas manualmente</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>host<span class="w"> </span>trantor-sky2<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>hardware<span class="w"> </span>ethernet<span class="w"> </span><span class="m">00</span>:00:5a:70:c2:71<span class="p">;</span>
+<span class="w">    </span>option<span class="w"> </span>vendor-encapsulated-options
+<span class="w">        </span>d0:04:f1:00:74:73:
+<span class="w">        </span>d2:23:68:74:74:70:3a:2f:2f:72:61:69:64:74:65:73:74:2e:
+<span class="w">          </span><span class="m">61</span>:6e:76:69:6e:2e:6f:72:67:2f:74:66:74:70:62:6f:
+<span class="w">          </span>6f:74:2f:
+<span class="w">        </span>d3:04:00:00:00:1e<span class="p">;</span>
+<span class="w">    </span>filename<span class="w"> </span><span class="s2">&quot;/pxelinux.0&quot;</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+<section id="problemas-conocidos">
+<h3>Problemas conocidos<a class="headerlink" href="#problemas-conocidos" title="Link to this heading"></a></h3>
+<p>Requiere un servidor TFPT con soporte a la opción <em>tsize</em>.</p>
+<p>La rutina para la <em>recuperación de errores</em>, no funcionará completamente. Por ahora, sólo hace un <em>reinicio completo</em> -parece suficientemente bueno.</p>
+<p>Podría llamarse a la función <em>UDP receive</em>, con un bucle de entrada, desde el teclado, y poder responder a peticiones ARP.</p>
+<p>Imágenes de arranque en sector/disco, no están soportadas aún… Podrían necesitar información auxiliar adicional -como el dispositivo, para funcionar.</p>
+<p>Si aparecen problemas adicionalesm por favor, contactar con la lista de correo de Syslinux. Antes de publicar algo, comprobar que los archivos del kernel, no han sido nombrados con una de las extensiones de especial significado:</p>
+<p><code class="docutils literal notranslate"><span class="pre">.0</span></code> PXE programa <em>trampa de arranque</em>(NBP) [sólo PXELINUX]. <code class="docutils literal notranslate"><span class="pre">.bin</span></code> “CD sector de arranque” [sólo ISOLINUX]. <code class="docutils literal notranslate"><span class="pre">.bs</span></code> Sector de arranque [sólo SYSLINUX]. <code class="docutils literal notranslate"><span class="pre">.bss</span></code> Sector de arranque, superbloque de DOS será parcheado en [sólo SYSLINUX]. <code class="docutils literal notranslate"><span class="pre">c32</span></code> imagen COM32 (32-bit COMBOOT). <code class="docutils literal notranslate"><span class="pre">cbt</span></code> imagen COMBOOT (usable en DOS). <code class="docutils literal notranslate"><span class="pre">.com</span></code> imagen COMBOOT (usable en DOS). <code class="docutils literal notranslate"><span class="pre">.img</span></code> Disco imagen [sólo ISOLINUX].</p>
+<p><strong>Broken PXE stacks</strong></p>
+<p>Muchas de ésteas -especialmente las muy antiguas, contienen diversos problemas con distinto grado de severidad. Comprobar la página de referencia para la compatibilidad de <em>hardware</em>.</p>
+<p><strong>PXE stack on a floppy</strong></p>
+<p>Si la tarjeta de red, no dispone de ROM, para el arranque PXE, aún existen un par de alternativas PXE, disponibles.</p>
+<p><em>Etherboot</em>, es un <em>kit</em> ROM, que permitirá crear un <em>ROM personalizado</em>, para arranque PXE y, pobablemente ser lanzado desde un disco flexible(floppy). Está disponible en:
+<a class="reference external" href="http://netboot.sourceforge.net/">http://netboot.sourceforge.net/</a>.</p>
+<p>Un disco flexible <em>multi-hardware</em>, es incluido junto a Windows Server 2000 y 2003. La compañía Argon Technology, ofrecía una versión gratis, actualizada. Aunque es ahora una versión comercial -en cualquier caso la alternativa existe. El disco flexible -el cuál puede ser quemado en un CD, mediante la aplicación <em>El Torito</em>, es sabido que trabaja únicamente sobre versiones PXELINUX 2.03 y posteriores.</p>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>En este ejemplo, será utilizado un <em>sistema simple de menú</em>, aunque es fácil modificar el siguiente procedimiento y, utilizar un <em>menú vesa</em> o ninguno.</p>
+<p>Para WDS, es mejor lanzarlo en modo <em>Mixed</em>.
+Alternativamente, ver WDSLINUX para configurarlo en sólo WDS.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Setup<span class="se">\E</span>nglish<span class="se">\I</span>mages<span class="se">\P</span>XELinux<span class="se">\i</span><span class="m">386</span><span class="se">\t</span>emplates<span class="se">\p</span>xelinux.cfg<span class="se">\</span>
+Setup<span class="se">\E</span>nglish<span class="se">\I</span>mages<span class="se">\P</span>XELinux<span class="se">\i</span><span class="m">386</span><span class="se">\t</span>emplates<span class="se">\c</span>onf
+Setup<span class="se">\E</span>nglish<span class="se">\I</span>mages<span class="se">\P</span>XELinux<span class="se">\i</span><span class="m">386</span><span class="se">\t</span>emplates<span class="se">\k</span>nl
+Setup<span class="se">\E</span>nglish<span class="se">\I</span>mages<span class="se">\P</span>XELinux<span class="se">\i</span><span class="m">386</span><span class="se">\t</span>emplates<span class="se">\i</span>mg
+</pre></div>
+</div>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p><code class="docutils literal notranslate"><span class="pre">Setup\English\Images</span></code> es la localización de otras imágenes RIS. Puede también cambiar el nombre PXELinux, por cualquier otra cosa; por ejemplo, una opción por separado en RIS, para cada distribución.</p>
+</div>
+<p><strong>Descargar la última versión de Syslinux desde</strong>:</p>
+<p><a class="reference external" href="http://www.kernel.org/pub/linux/utils/boot/syslinux/">boot syslinux</a></p>
+<p>Desde Redhat <em>AS4u3 CD1</em> -o el cd de la distribución deseada, en el directorio <code class="docutils literal notranslate"><span class="pre">images\pxeboot</span></code> copiar los siguientes archivos dentro de <code class="docutils literal notranslate"><span class="pre">Setup\English\Images\PXELinux\i386\templates</span></code> en el servidor RIS.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmlinuz
+initrd.img
+</pre></div>
+</div>
+<p>Renombrar los archivos a:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmlinuz-&lt;distro&gt;-&lt;arch&gt;
+initrd-&lt;distro&gt;-&lt;arch&gt;.img
+</pre></div>
+</div>
+<p>Ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmlinuz-rhas43-x86
+initrd-rhas43-x86.img
+</pre></div>
+</div>
+<p>Renombrar el archivo <code class="docutils literal notranslate"><span class="pre">vmlinuz</span></code> en el directorio <code class="docutils literal notranslate"><span class="pre">\knl</span></code>. Colocar el archivo renombrado <code class="docutils literal notranslate"><span class="pre">iitrd.img</span></code> en la carpeta <code class="docutils literal notranslate"><span class="pre">\img</span></code>.</p>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>Pueden utilizarse los archivos <code class="docutils literal notranslate"><span class="pre">vmlinuz</span></code> y <code class="docutils literal notranslate"><span class="pre">initrd.img</span></code> desde la versión de la distro, a entregar.</p>
+</div>
+<p>Desde la descarga de archivos de Syslinux, extraer el archivo <code class="docutils literal notranslate"><span class="pre">pxelinux.0</span></code> -desde versiones 5.0 y posteriores, extraer el correspondiente archivo <code class="docutils literal notranslate"><span class="pre">ldlinux.32</span></code> <code class="docutils literal notranslate"><span class="pre">Setup\English\Images\PXELinux\i386\templates</span></code> en el servidor RIS.</p>
+<p>En <code class="docutils literal notranslate"><span class="pre">Setup\English\Images\PXELinux\i386\templates</span></code> crear el archivo <code class="docutils literal notranslate"><span class="pre">pxelinux.sif</span></code> dándole el siguiente contenido:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>OSChooser<span class="o">]</span>
+<span class="nv">Description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Linux&quot;</span>
+<span class="nv">Help</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;This option runs a Linux installer.&quot;</span>
+<span class="nv">LaunchFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Setup\English\Images\PXELinux\i386\templates\pxelinux.0&quot;</span>
+<span class="nv">ImageType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Flat
+<span class="nv">Version</span><span class="o">=</span><span class="s2">&quot;1.01&quot;</span>
+</pre></div>
+</div>
+<p>En <code class="docutils literal notranslate"><span class="pre">Setup\English\Images\PXELinux\i386\templates\pxelinux.cfg\</span></code> crear un archivo llamado <code class="docutils literal notranslate"><span class="pre">default</span></code> dándole el siguiente contenido:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Default boot option to use</span>
+DEFAULT<span class="w"> </span>menu.c32
+<span class="c1"># Prompt user for selection</span>
+PROMPT<span class="w"> </span><span class="m">0</span>
+<span class="c1"># Menu Configuration</span>
+MENU<span class="w"> </span>WIDTH<span class="w"> </span><span class="m">80</span>
+MENU<span class="w"> </span>MARGIN<span class="w"> </span><span class="m">10</span>
+MENU<span class="w"> </span>PASSWORDMARGIN<span class="w"> </span><span class="m">3</span>
+MENU<span class="w"> </span>ROWS<span class="w"> </span><span class="m">12</span>
+MENU<span class="w"> </span>TABMSGROW<span class="w"> </span><span class="m">18</span>
+MENU<span class="w"> </span>CMDLINEROW<span class="w"> </span><span class="m">18</span>
+MENU<span class="w"> </span>ENDROW<span class="w"> </span><span class="m">24</span>
+MENU<span class="w"> </span>PASSWORDROW<span class="w"> </span><span class="m">11</span>
+MENU<span class="w"> </span>TIMEOUTROW<span class="w"> </span><span class="m">20</span>
+MENU<span class="w"> </span>TITLE<span class="w"> </span>Main<span class="w"> </span>Menu
+<span class="c1"># Menus</span>
+<span class="c1"># x86</span>
+LABEL<span class="w"> </span>x86
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>32Bit<span class="w"> </span><span class="o">(</span>x86<span class="o">)</span>
+<span class="w">    </span>KERNEL<span class="w"> </span>menu.c32
+<span class="w">    </span>APPEND<span class="w"> </span>conf/x86.conf
+<span class="c1"># x64</span>
+LABEL<span class="w"> </span>x64
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>64Bit<span class="w"> </span><span class="o">(</span>x64<span class="o">)</span>
+<span class="w">    </span>KERNEL<span class="w"> </span>menu.c32
+<span class="w">    </span>APPEND<span class="w"> </span>conf/x64.conf
+</pre></div>
+</div>
+<p>En <code class="docutils literal notranslate"><span class="pre">Setup\English\Images\PXELinux\i386\templates\conf\</span></code> crear un archivo llamado <code class="docutils literal notranslate"><span class="pre">x86.conf</span></code> -esto listará la instalación en un OS de 32bit y, darle el contenido que sigue:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Default boot option to use</span>
+DEFAULT<span class="w"> </span>menu.c32
+<span class="c1"># Prompt user for selection</span>
+PROMPT<span class="w"> </span><span class="m">0</span>
+<span class="c1"># Menu Configuration</span>
+MENU<span class="w"> </span>WIDTH<span class="w"> </span><span class="m">80</span>
+MENU<span class="w"> </span>MARGIN<span class="w"> </span><span class="m">10</span>
+MENU<span class="w"> </span>PASSWORDMARGIN<span class="w"> </span><span class="m">3</span>
+MENU<span class="w"> </span>ROWS<span class="w"> </span><span class="m">12</span>
+MENU<span class="w"> </span>TABMSGROW<span class="w"> </span><span class="m">18</span>
+MENU<span class="w"> </span>CMDLINEROW<span class="w"> </span><span class="m">18</span>
+MENU<span class="w"> </span>ENDROW<span class="w"> </span><span class="m">24</span>
+MENU<span class="w"> </span>PASSWORDROW<span class="w"> </span><span class="m">11</span>
+MENU<span class="w"> </span>TIMEOUTROW<span class="w"> </span><span class="m">20</span>
+MENU<span class="w"> </span>TITLE<span class="w"> </span>32Bit<span class="w"> </span><span class="o">(</span>x86<span class="o">)</span><span class="w"> </span>OS<span class="w"> </span>Choice
+<span class="c1"># Return to Main Menu</span>
+LABEL<span class="w"> </span>MainMenu
+<span class="w">    </span>MENU<span class="w"> </span>DEFAULT
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^Main<span class="w"> </span>Menu
+<span class="w">    </span>KERNEL<span class="w"> </span>menu.c32
+<span class="c1">#</span>
+<span class="c1"># Blank boots</span>
+<span class="c1">#</span>
+LABEL<span class="w"> </span>linux-43
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^Blank<span class="w"> </span>Boot<span class="w"> </span><span class="m">4</span>.3
+<span class="w">    </span>KERNEL<span class="w"> </span>knl/vmlinuz-rhas43-x86
+<span class="w">    </span>APPEND<span class="w"> </span><span class="nv">initrd</span><span class="o">=</span><span class="nv">initrd</span><span class="o">=</span>img/initrd-rhes43-x86.img
+</pre></div>
+</div>
+<p>En <code class="docutils literal notranslate"><span class="pre">Setup\English\Images\PXELinux\i386\templates\conf\</span></code> crear un archivo llamado <code class="docutils literal notranslate"><span class="pre">x64.conf</span></code> -esto listará la instalación en un OS de 64bit y, darle el contenido que sigue:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Default boot option to use</span>
+DEFAULT<span class="w"> </span>menu.c32
+<span class="c1"># Prompt user for selection</span>
+PROMPT<span class="w"> </span><span class="m">0</span>
+<span class="c1"># Menu Configuration</span>
+MENU<span class="w"> </span>WIDTH<span class="w"> </span><span class="m">80</span>
+MENU<span class="w"> </span>MARGIN<span class="w"> </span><span class="m">10</span>
+MENU<span class="w"> </span>PASSWORDMARGIN<span class="w"> </span><span class="m">3</span>
+MENU<span class="w"> </span>ROWS<span class="w"> </span><span class="m">12</span>
+MENU<span class="w"> </span>TABMSGROW<span class="w"> </span><span class="m">18</span>
+MENU<span class="w"> </span>CMDLINEROW<span class="w"> </span><span class="m">18</span>
+MENU<span class="w"> </span>ENDROW<span class="w"> </span><span class="m">24</span>
+MENU<span class="w"> </span>PASSWORDROW<span class="w"> </span><span class="m">11</span>
+MENU<span class="w"> </span>TIMEOUTROW<span class="w"> </span><span class="m">20</span>
+MENU<span class="w"> </span>TITLE<span class="w"> </span>64Bit<span class="w"> </span><span class="o">(</span>x64<span class="o">)</span><span class="w"> </span>OS<span class="w"> </span>Choice
+<span class="c1"># Return to Main Menu</span>
+LABEL<span class="w"> </span>MainMenu
+<span class="w">    </span>MENU<span class="w"> </span>DEFAULT
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^Main<span class="w"> </span>Menu
+<span class="w">    </span>KERNEL<span class="w"> </span>menu.c32
+<span class="c1">#</span>
+<span class="c1"># Blank boots</span>
+<span class="c1">#</span>
+LABEL<span class="w"> </span>linux-43
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^Blank<span class="w"> </span>Boot<span class="w"> </span><span class="m">4</span>.3
+<span class="w">    </span>KERNEL<span class="w"> </span>knl/vmlinuz-rhas43-x64
+<span class="w">    </span>APPEND<span class="w"> </span><span class="nv">initrd</span><span class="o">=</span>img/initrd-rhes43-x64.img
+</pre></div>
+</div>
+<p>Si ahora es arrancado el servidor RIS, en la pantalla con la lista de Sistemas operativos, podrá verse uno llamado Linux. Al escogerlo, arrancará PXELinux y, dirigiéndo al usuario hacia el menú conde escoger el tipo de arquitectura (32/64 bits) de la distribución a instalar.</p>
+<p>Utilizando las nuevas características Syslinux para el <em>menú vesa</em>, es posibe construir una interfase fácil de usar.</p>
+<p>Opciones avanzadas. Leer la documentación de Syslinux al completo.
+Las claves protegen, <em>las modificaciones</em> durante el arranque PXE, útil para prevenir <em>incursiones</em> no deseadas.</p>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>Este ejemplo, utiliza una forma “anterior”, para generar  los submenús, el cuál es compatible con versiones Syslinux posteriores. Syslinux 3.62, soporta una sintaxis ligeramente distinta, más rápida y, de alguna manera, más flexible.</p>
+</div>
+<ul class="simple">
+<li><p><strong>Estructura del directorio:</strong></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/tftpboot/
+/tftpboot/memdisk
+/tftpboot/pxelinux.0
+/tftpboot/menu.c32
+
+/tftpboot/pxelinux.cfg/
+/tftpboot/pxelinux.cfg/default
+/tftpboot/pxelinux.cfg/graphics.conf
+/tftpboot/pxelinux.cfg/fixes.menu
+/tftpboot/pxelinux.cfg/setup.menu
+
+/tftpboot/TRK/
+/tftpboot/TRK/chkdsk.trk
+/tftpboot/TRK/initrd.trk
+/tftpboot/TRK/kernel.trk
+
+/tftpboot/Memtest/memtest.x86
+
+/tftpboot/Suse/
+/tftpboot/Suse/initrd92
+/tftpboot/Suse/linux92
+
+/tftpboot/Floppy/
+/tftpboot/Floppy/kbfloppy.img
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/tftpboot/pxelinux.cfg/default:</span></code></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>DEFAULT<span class="w"> </span>menu.c32
+PROMPT<span class="w"> </span><span class="m">0</span>
+
+MENU<span class="w"> </span>TITLE<span class="w"> </span>PXE<span class="w"> </span>Special<span class="w"> </span>Boot<span class="w"> </span>Menu
+MENU<span class="w"> </span>INCLUDE<span class="w"> </span>pxelinux.cfg/graphics.conf
+MENU<span class="w"> </span>AUTOBOOT<span class="w"> </span>Starting<span class="w"> </span>Local<span class="w"> </span>System<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="c1"># seconds</span>
+
+LABEL<span class="w"> </span>bootlocal
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^Boot<span class="w"> </span>Point<span class="w"> </span>of<span class="w"> </span>Sale
+<span class="w">    </span>MENU<span class="w"> </span>DEFAULT
+<span class="w">    </span>LOCALBOOT<span class="w"> </span><span class="m">0</span>
+TIMEOUT<span class="w"> </span><span class="m">80</span>
+TOTALTIMEOUT<span class="w"> </span><span class="m">9000</span>
+
+LABEL<span class="w"> </span>FixesMenu
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^Fixes<span class="w"> </span>Menu
+<span class="w">    </span>KERNEL<span class="w"> </span>menu.c32
+<span class="w">    </span>APPEND<span class="w"> </span>pxelinux.cfg/graphics.conf<span class="w"> </span>pxelinux.cfg/fixes.menu
+
+LABEL<span class="w"> </span>SetupMenu
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^Setup<span class="w"> </span>Menu
+<span class="w">    </span>KERNEL<span class="w"> </span>menu.c32
+<span class="w">    </span>APPEND<span class="w"> </span>pxelinux.cfg/graphics.conf<span class="w"> </span>pxelinux.cfg/setup.menu
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">/tftpboot/pxelinux.cfg/graphics.conf:</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>MENU<span class="w"> </span>COLOR<span class="w"> </span>TABMSG<span class="w">    </span><span class="m">37</span><span class="p">;</span><span class="m">40</span><span class="w">  </span><span class="c1">#80ffffff #00000000</span>
+MENU<span class="w"> </span>COLOR<span class="w"> </span>HOTSEL<span class="w">    </span><span class="m">30</span><span class="p">;</span><span class="m">47</span><span class="w">  </span><span class="c1">#40000000 #20ffffff</span>
+MENU<span class="w"> </span>COLOR<span class="w"> </span>SEL<span class="w">       </span><span class="m">30</span><span class="p">;</span><span class="m">47</span><span class="w">  </span><span class="c1">#40000000 #20ffffff</span>
+MENU<span class="w"> </span>COLOR<span class="w"> </span>SCROLLBAR<span class="w"> </span><span class="m">30</span><span class="p">;</span><span class="m">47</span><span class="w">  </span><span class="c1">#40000000 #20ffffff</span>
+MENU<span class="w"> </span>MASTER<span class="w"> </span>PASSWD<span class="w"> </span>yourpassword
+MENU<span class="w"> </span>WIDTH<span class="w"> </span><span class="m">80</span>
+MENU<span class="w"> </span>MARGIN<span class="w"> </span><span class="m">22</span>
+MENU<span class="w"> </span>PASSWORDMARGIN<span class="w"> </span><span class="m">26</span>
+MENU<span class="w"> </span>ROWS<span class="w"> </span><span class="m">6</span>
+MENU<span class="w"> </span>TABMSGROW<span class="w"> </span><span class="m">15</span>
+MENU<span class="w"> </span>CMDLINEROW<span class="w"> </span><span class="m">15</span>
+MENU<span class="w"> </span>ENDROW<span class="w"> </span><span class="m">24</span>
+MENU<span class="w"> </span>PASSWORDROW<span class="w"> </span><span class="m">12</span>
+MENU<span class="w"> </span>TIMEOUTROW<span class="w"> </span><span class="m">13</span>
+MENU<span class="w"> </span>VSHIFT<span class="w"> </span><span class="m">6</span>
+MENU<span class="w"> </span>PASSPROMPT<span class="w"> </span>Enter<span class="w"> </span>Password:
+NOESCAPE<span class="w"> </span><span class="m">1</span>
+ALLOWOPTIONS<span class="w"> </span><span class="m">0</span>
+</pre></div>
+</div>
+<p>Cambiar <code class="docutils literal notranslate"><span class="pre">ALLOWOPTIONS</span></code> a <code class="docutils literal notranslate"><span class="pre">1</span></code>(uno) para poder editar cualquier entrada durante el arranque con PXE. También cambiar <code class="docutils literal notranslate"><span class="pre">NOESCAPE</span> <span class="pre">a</span></code>0`(cero). Tómese en consideración, a efectos de prueba/ensayo.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/tftpboot/pxelinux.cfg/fixes.menu:
+
+MENU<span class="w"> </span>TITLE<span class="w"> </span>Fixes<span class="w"> </span>Menu
+
+LABEL<span class="w"> </span>MainMenu
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^Return<span class="w"> </span>to<span class="w"> </span>Main<span class="w"> </span>Menu
+<span class="w">    </span>KERNEL<span class="w"> </span>menu.c32
+<span class="w">    </span>APPEND<span class="w"> </span>pxelinux.cfg/default
+
+LABEL<span class="w"> </span>fsck
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^File<span class="w"> </span>system<span class="w"> </span>check
+<span class="w">    </span>KERNEL<span class="w"> </span>TRK/kernel.trk
+<span class="w">    </span>APPEND<span class="w"> </span><span class="nv">initrd</span><span class="o">=</span>TRK/chkdsk.trk<span class="w"> </span><span class="nv">ramdisk_size</span><span class="o">=</span><span class="m">32768</span><span class="w"> </span><span class="nv">root</span><span class="o">=</span>/dev/ram0<span class="w"> </span><span class="nv">vga</span><span class="o">=</span><span class="m">0</span>
+
+LABEL<span class="w"> </span>memtest
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^Memory<span class="w"> </span>Test:<span class="w"> </span>Memtest86+<span class="w"> </span>v1.65
+<span class="w">    </span>KERNEL<span class="w"> </span>Memtest/memtest.x86
+
+LABEL<span class="w"> </span>trk3
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^Trinity<span class="w"> </span>Rescue<span class="w"> </span>Kit
+<span class="w">    </span>KERNEL<span class="w"> </span>TRK/kernel.trk
+<span class="w">    </span>APPEND<span class="w"> </span><span class="nv">initrd</span><span class="o">=</span>TRK/initrd.trk<span class="w"> </span><span class="nv">ramdisk_size</span><span class="o">=</span><span class="m">32768</span><span class="w"> </span><span class="nv">root</span><span class="o">=</span>/dev/ram0<span class="w"> </span><span class="nv">vga</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">trknfs</span><span class="o">=</span>IPADDR:/trk<span class="w"> </span><span class="nv">ip</span><span class="o">=</span>::::::dhcp<span class="w"> </span><span class="nv">splash</span><span class="o">=</span>verbose
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/tftpboot/pxelinux.cfg/setup.menu:</span></code></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>MENU<span class="w"> </span>TITLE<span class="w"> </span>Setup<span class="w"> </span>Menu
+
+LABEL<span class="w"> </span>MainMenu
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^Return<span class="w"> </span>to<span class="w"> </span>Main<span class="w"> </span>Menu
+<span class="w">    </span>KERNEL<span class="w"> </span>menu.c32
+<span class="w">    </span>APPEND<span class="w"> </span>pxelinux.cfg/default
+
+LABEL<span class="w"> </span>setupkb
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>^Any<span class="w"> </span>floppy<span class="w"> </span>disk<span class="w"> </span>image
+<span class="w">    </span>KERNEL<span class="w"> </span>memdisk
+<span class="w">    </span>APPEND<span class="w"> </span><span class="nv">initrd</span><span class="o">=</span>Floppy/kbfloppy.img
+
+LABEL<span class="w"> </span>linux
+<span class="w">    </span>MENU<span class="w"> </span>PASSWD<span class="w"> </span>yourpassword
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>Install<span class="w"> </span>-<span class="w"> </span>^Classic
+<span class="w">    </span>KERNEL<span class="w"> </span>Suse/linux92
+<span class="w">    </span>APPEND<span class="w"> </span><span class="nv">initrd</span><span class="o">=</span>Suse/initrd92<span class="w"> </span><span class="nv">ramdisk_size</span><span class="o">=</span><span class="m">65536</span><span class="w"> </span><span class="nv">vga</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">textmode</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">install</span><span class="o">=</span>http://IPADDR<span class="w"> </span><span class="nv">serverdir</span><span class="o">=</span>/9.2/install<span class="w"> </span><span class="nv">autoyast</span><span class="o">=</span>http://IPADDR/9.2/scripts/ay92.xml
+
+LABEL<span class="w"> </span>trkclone
+<span class="w">    </span>MENU<span class="w"> </span>PASSWD<span class="w"> </span>yourpassword
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>Install<span class="w"> </span>-<span class="w"> </span>^Faster
+<span class="w">    </span>KERNEL<span class="w"> </span>TRK/kernel.trk
+<span class="w">    </span>APPEND<span class="w"> </span><span class="nv">initrd</span><span class="o">=</span>TRK/initrd.trk<span class="w"> </span><span class="nv">ramdisk_size</span><span class="o">=</span><span class="m">65536</span><span class="w"> </span><span class="nv">root</span><span class="o">=</span>/dev/ram0<span class="w"> </span><span class="nv">vga</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">install</span><span class="o">=</span>Y<span class="w"> </span><span class="nv">trknfs</span><span class="o">=</span>IPADDR:/trk<span class="w"> </span><span class="nv">ip</span><span class="o">=</span>::::::dhcp<span class="w"> </span><span class="nv">splash</span><span class="o">=</span>verbose
+
+LABEL<span class="w"> </span>linuxfull
+<span class="w">    </span>MENU<span class="w"> </span>PASSWD<span class="w"> </span>yourpassword
+<span class="w">    </span>MENU<span class="w"> </span>LABEL<span class="w"> </span>Install<span class="w"> </span>-<span class="w"> </span>^Developer
+<span class="w">    </span>KERNEL<span class="w"> </span>Suse/linux92
+<span class="w">    </span>APPEND<span class="w"> </span><span class="nv">initrd</span><span class="o">=</span>Suse/initrd92<span class="w"> </span><span class="nv">ramdisk_size</span><span class="o">=</span><span class="m">65536</span><span class="w"> </span><span class="nv">vga</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">textmode</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">install</span><span class="o">=</span>http://IPADDR<span class="w"> </span><span class="nv">serverdir</span><span class="o">=</span>/9.2/install<span class="w"> </span><span class="nv">autoyast</span><span class="o">=</span>http://IPADDR/9.2/scripts/develdesktop.xml
+</pre></div>
+</div>
+<p><strong>Notas</strong> Correción de errores</p>
+<p>Si falla el arranque, PXELINUX -exceptuando SYSLINUX, no esparará indefinidamente; en su lugar, de no recibir ninguna entrada, en aproximádamente cinco minutos, depués de monstrar el mensaje de error, la máquina hará un reinicio. Esto permite que una máquina desatendida, pueda recuperarse en caso de <em>falla</em>, al intentar arrancar al mismo tiempo que el apagado del servidor TFTP.</p>
+<p>Por favor, comprobar la página de <em>referencias a la compatibilidad de hardware</em>, para ver si la <em>pila</em> PXE necesitara cualquier acción especial.</p>
+<p><strong>MTFTP</strong></p>
+<p>PXELINUX no soporta MTFTP. Tanpoco hay plan que lo haga en un futuro! Aunque es posible utilizar MTFTP en un arranque inicial, de tener éste tipo de configuración. La configuración del servidor MTFTP, queda fuera de ámbito del presente documento.</p>
+<p>UEFI Los gestores <code class="docutils literal notranslate"><span class="pre">(l)pxelinux.0</span></code> son capaces de <em>arrancar desde red</em> con clientes basados en BIOS. El <em>hardware</em> que utilice UEFI, debe utilizar el <code class="docutils literal notranslate"><span class="pre">syslinux.efi</span></code> adecuado. Esto es EFI IA32 o EFI X64, respectívamente, en lugar de utilizar <code class="docutils literal notranslate"><span class="pre">(l)pxelinux.0</span></code>.</p>
+<p>Por ejemplo, en el archivo de configuración del DHCP, podrá ser utilizado algo similar:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="p">;</span><span class="w"> </span>This<span class="w"> </span>one<span class="w"> </span>line<span class="w"> </span>must<span class="w"> </span>be<span class="w"> </span>outside<span class="w"> </span>any<span class="w"> </span>bracketed<span class="w"> </span>scope
+option<span class="w"> </span>architecture-type<span class="w"> </span>code<span class="w"> </span><span class="nv">93</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>unsigned<span class="w"> </span>integer<span class="w"> </span><span class="m">16</span><span class="p">;</span>
+
+class<span class="w"> </span><span class="s2">&quot;pxeclients&quot;</span><span class="w"> </span><span class="o">{</span>
+<span class="w">         </span>match<span class="w"> </span><span class="k">if</span><span class="w"> </span>substring<span class="w"> </span><span class="o">(</span>option<span class="w"> </span>vendor-class-identifier,<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="m">9</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;PXEClient&quot;</span><span class="p">;</span>
+
+<span class="w">         </span><span class="k">if</span><span class="w"> </span>option<span class="w"> </span>architecture-type<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">{</span>
+<span class="w">             </span>filename<span class="w"> </span><span class="s2">&quot;path/to/BIOS/pxelinux.0&quot;</span><span class="p">;</span>
+<span class="w">         </span><span class="o">}</span><span class="w"> </span>elsif<span class="w"> </span>option<span class="w"> </span>architecture-type<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="o">{</span>
+<span class="w">             </span>filename<span class="w"> </span><span class="s2">&quot;path/to/EFIx64/syslinux.efi&quot;</span><span class="p">;</span>
+<span class="w">         </span><span class="o">}</span><span class="w"> </span>elsif<span class="w"> </span>option<span class="w"> </span>architecture-type<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="o">{</span>
+<span class="w">             </span>filename<span class="w"> </span><span class="s2">&quot;path/to/EFIx64/syslinux.efi&quot;</span><span class="p">;</span>
+<span class="w">         </span><span class="o">}</span><span class="w"> </span>elsif<span class="w"> </span>option<span class="w"> </span>architecture-type<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="o">{</span>
+<span class="w">             </span>filename<span class="w"> </span><span class="s2">&quot;path/to/EFIia32/syslinux.efi&quot;</span><span class="p">;</span>
+<span class="w">         </span><span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Acerca del <em>tipo de arquitectura</em>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">06</span><span class="w"> </span><span class="o">(</span>EFI<span class="w"> </span>IA32<span class="o">)</span><span class="w"> </span>is<span class="w"> </span>sometimes<span class="w"> </span><span class="o">(</span>mis<span class="o">)</span>used<span class="w"> </span><span class="k">for</span><span class="w"> </span>legacy<span class="w"> </span><span class="o">(</span>CSM<span class="o">)</span><span class="w"> </span>boot<span class="w"> </span>of<span class="w"> </span>x64<span class="w"> </span>machines<span class="w"> </span>by<span class="w"> </span>some<span class="w"> </span>vendors.
+<span class="m">07</span><span class="w"> </span><span class="o">(</span>EFI<span class="w"> </span>BC<span class="o">)</span><span class="w"> </span>is<span class="w"> </span>sometimes<span class="w"> </span><span class="o">(</span>mis<span class="o">)</span>used<span class="w"> </span><span class="k">for</span><span class="w"> </span>EFI<span class="w"> </span>x64<span class="w"> </span>boot<span class="w"> </span>by<span class="w"> </span>some<span class="w"> </span>vendors.
+Each<span class="w"> </span>bootloader<span class="w"> </span>needs<span class="w"> </span>its<span class="w"> </span>respective<span class="w"> </span><span class="s2">&quot;ldlinux.*&quot;</span><span class="w"> </span>module<span class="w"> </span>too:
+
+path/to/BIOS/ldlinux.c32
+path/to/EFIia32/ldlinux.e32
+path/to/EFIx64/ldlinux.e64
+
+Alternatively,<span class="w"> </span>the<span class="w"> </span>PXE<span class="w"> </span>directory<span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span>organized<span class="w"> </span>by<span class="w"> </span>architecture<span class="w"> </span>number.<span class="w"> </span>This<span class="w"> </span>allows<span class="w"> </span>the<span class="w"> </span>namespace<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>managed<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>TFTP<span class="w"> </span>server<span class="w"> </span><span class="o">(</span>usually<span class="w"> </span>with<span class="w"> </span>symlinks<span class="o">)</span>,<span class="w"> </span>rather<span class="w"> </span>than<span class="w"> </span>requiring<span class="w"> </span>changes<span class="w"> </span>to<span class="w"> </span>DHCP:
+
+class<span class="w"> </span><span class="s2">&quot;pxeclients&quot;</span><span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>match<span class="w"> </span><span class="k">if</span><span class="w"> </span>substring<span class="w"> </span><span class="o">(</span>option<span class="w"> </span>vendor-class-identifier,<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="m">9</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;PXEClient&quot;</span><span class="p">;</span>
+
+<span class="w">        </span>filename<span class="w"> </span>concat<span class="o">(</span><span class="s2">&quot;path/to/PXE-&quot;</span>,<span class="w">  </span>binary-to-ascii<span class="o">(</span><span class="m">16</span>,<span class="w"> </span><span class="m">16</span>,<span class="w"> </span><span class="s2">&quot;&quot;</span>,<span class="w"> </span>option<span class="w"> </span>architecture-type<span class="o">)</span>,<span class="w"> </span><span class="s2">&quot;/pxelinux.0&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Las respectivas librerías para cada módulo, en relación al software de fabricante -de ser necesarias, no podrán compartir el mismo directorio, unas con otras; puesto que tienen el mismo nombre de archivo. Utilizar una configuración de archivos individual, en cada <em>arquitectura/firmware</em> y, de ser necesario, añadir también, una directiva de ruta en cada una de ellas.</p>
+<p>El directorio ascendente, para el gestor de arranque en red, podría ser el mismo en todos ellos; si cada gestor el nombrado de forma distinta.
+En tal caso, la directiva de ruta podría ser necesaria.</p>
+<p>Opcionalmente, usar directivas adicionales, como INCLUDE y/o CONFIG. Compartir así, archivos de configuración Syslinux.</p>
+<ul class="simple">
+<li><p>Vev también <a class="reference external" href="URL">PXELINUX-Multi-Arch</a>.</p></li>
+</ul>
+<div class="admonition-notas admonition">
+<p class="admonition-title">Notas</p>
+<p>En lugar de <code class="docutils literal notranslate"><span class="pre">pxelinux.0</span></code>, la alternativa es <code class="docutils literal notranslate"><span class="pre">lpxelinux.0</span></code> -cuya letra inicial en minúscula “L”, podrá ser utilizada en clientes BIOS.</p>
+<p>El archivo <code class="docutils literal notranslate"><span class="pre">syslinux.efi</span></code> en EFI IA32, es distinto en EFI X64, cada <em>arquitectura/firmware</em> tiene su própio EFI X64.</p>
+<p>El archivo <code class="docutils literal notranslate"><span class="pre">syslinux.efi</span></code> en EFI X64, es el mimso binario desde el arranque de disco en EFI X64, que desde el arranque de red en EFI X64.</p>
+<p>El archivo <code class="docutils literal notranslate"><span class="pre">syslinux.efi</span></code> en EFI IA32 es el mimso binario desde el arranque de disco en EFI X64, que desde el arranque de red en EFI IA32.</p>
+<p>Cada archivo <code class="docutils literal notranslate"><span class="pre">syslinux.efi</span></code> puede ser renombrado -ejemplo, a <code class="docutils literal notranslate"><span class="pre">bootx64.efi</span></code>; habrá que tener en cuenta la ruta/s adecuada y, el nombre/s, en el archivo de configuración del DHCP.</p>
+</div>
+</section>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2>Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<p><strong>Recursos</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>RFC 2132 - March 1997 - DHCP Options and BOOTP Vendor Extensions
+RFC 4578 - November 2006 - DHCP Options for PXE
+RFC 5071 - December 2007 - DHCP Options used by PXELINUX
+RFC 5494 - April 2009 - IANA Guidelines for ARP
+RFC 5970 - September 2010 - DHCPv6 Options for Network Boot
+</pre></div>
+</div>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="/TerritorioLinux/siglas.html">Siglas</a></p>
+</aside>
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Portable, el término se utiliza habitualmente para referirse a otros sistemas operativos. Ejemplo, War Hammer 40.000, juego de éxito mundial, ha mutado el código haciéndolo portable a plataformas tipo Unix. Desambiguación, el término es igualmente utilizado, para referirse al tipo de procesador -la “arquitectura del sistema”, sobre la que ha sido instalado el sistema operativo. Ejemplo, <code class="docutils literal notranslate"><span class="pre">x86</span></code>, <code class="docutils literal notranslate"><span class="pre">x86_64</span></code> …</p>
+</aside>
+</aside>
+<ul class="simple">
+<li><p><strong>[3]</strong> Puerto, referido como interfase física de conexionado, dónde es acoplada alguna suerte de conector físico, conectando dos piezas <em>hardware</em>. Ejemplo, El puerto db9 es habitualmente utilizado como interfase de conexión entre dos máquinas, con una conexión serial para la depuración, o lectura de registros. Desambiguación, leer la entrada de arriba, <em>portable</em>. El término podría referirse tanto a la <em>arquitectura del procesador</em>, como al tipo de sistema operativo -Linux, Macintosh, etc, como tambień a una versión o distribución de un sistema operativo concreto. Ejemplo, la comunidad Linux ha estado tabajando intensamente, en un puerto a la dustrubución Fedora 8, de Xen hipervisor.</p></li>
+</ul>
+<p>flashed – destello?, es algo así como sobreescribir los datos contenidos en una memoria.</p>
+<p><strong>PXE</strong> – Preboot Execution Environment NBP – network bootstrap program.
+Programa <em>trampa de red</em>. TFTP – Trivial File Transfer Protocol bootstrapping – referido a un proceso de <em>autoarranque</em>, que, supuestamente, procedera sin una <em>entrada externa</em>. En tecnología de computación, el término es referido habitualmente, al proceso de cargar <em>software básico</em>, en memoria …</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Bootstrapping#Computing">bootstrapping</a></p></li>
+<li><p><a class="reference external" href="https://www.syslinux.org/wiki/index.php?title=PXELINUX">PXELinux - wiki</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="EFIpartWindows.html" class="btn btn-neutral float-left" title="Windows hardening, EFI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tipoArranquePS.html" class="btn btn-neutral float-right" title="Información del Sistema relacionada con UEFI usando PowerShell" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

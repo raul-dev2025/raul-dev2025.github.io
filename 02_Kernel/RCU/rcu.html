@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RCU &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="RCU en sistemas uniprocesador" href="UP.html" />
+    <link rel="prev" title="List RCU" href="listRCU.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#rcu">RCU</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="listRCU.html">List RCU</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RCU</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#conceptos-rcu">Conceptos RCU</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pregunts-frecuentes">Pregunts frecuentes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="UP.html">RCU en sistemas uniprocesador</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">RCU</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/RCU/rcu.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rcu">
+<h1>RCU<a class="headerlink" href="#rcu" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="conceptos-rcu">
+<h2>Conceptos RCU<a class="headerlink" href="#conceptos-rcu" title="Link to this heading"></a></h2>
+<p>La idea principal, detrás de RCU -leer-copiar actualizar (read-copy update), es separar  operaciones destructivas, en dos partes; una previniendo que cualquiera pudiese ver los datos siendo destruidos y otra, la cuál acarrea dicha destrucción.
+Un <em>período de gracia</em>, supone un <em>lapso</em> entre dos partes y, dicho período de gracia, debe ser el suficiente, para que cualquier <em>lector</em>, accediendo al <em>objeto</em> siendo destruido, mantenga sus referencias, hasta ser desestimado. Por ejemplo, un borrado <em>RCU-protected</em> desde una lista enlazada, primero retiraría el objeto de la lista, esperaría un período de gracia antes del <em>lapso de tiempo</em>, liberando entonces, el elemento. Ver el archivo <code class="docutils literal notranslate"><span class="pre">listRCU.txt</span></code>, para más información, sobre el uso de RCU, con listas enlazadas.</p>
+</section>
+<section id="pregunts-frecuentes">
+<span id="i2"></span><h2>Pregunts frecuentes<a class="headerlink" href="#pregunts-frecuentes" title="Link to this heading"></a></h2>
+<p><strong>¿Por qué utilizaría alguien, RCU?</strong></p>
+<p>La ventaja en la aproximación en dos partes, de RCU, es que los <em>lectores</em> no necesitan adquirir nigún <em>cierre</em>, llevar a cabo instrucciones atómicas, escribir en la memoria compartida, o -en otra CPU distinta a <em>Alpha</em>, ejecutar cualquier barrera de memoria. El hecho que estas operaciones conlleven un coste en CPUs modernas, es lo que proporciona a RCU su ventaja en rendimiento, en cuanto a lectura, en la mayoría de situaciones. El que los <em>lectores</em> necesiten no adquirir <em>cierres</em>, podría simplificar ,en gran medida, evitar <em>puntos muertos</em> en el código.</p>
+<p><strong>¿Cómo puede el *actualizador* determinar que haya sido completado un período de gracia, si el *lector* RCU, no da indicaciones cuando termina?</strong></p>
+<p>Igual que al acelerador de cierres -spinlocks, a los <em>lectores</em> RCU, no les está permitido bloquear, cambiar la ejecución en modo usuario, o entrar en un bucle de espera.
+Es más, tan pronto como una CPU, es vista pasar, através de cualquiera de estos tres estados; sabremos que la CPU, ha salido de cualquier RCU previo en una sección crítica, de lectura. Por lo que, de retirar un <em>elemento</em>, de una lista enlazada, esperando a que todas las CPUs hayan cambiado de contexto, ejecutado en modo usuario, o ejecutado en un bucle de espera, podrá liberarse de forma segura el elemento.</p>
+<p>Variante preventivas RCU(CONFIG_PREEMPT_RCU) consiguen el mismo efecto, pero requieren que los <em>lectores</em> manipulen los contadores de las CPU locales. Estos contadores permiten limitar el tipo de <em>bloqueo</em> en una sección crítica, de lectura. SRCU, también utiliza contadores de CPU local y, permiten un <em>bloqueo general</em>, dentre de una sección crítica, de lectura. Estas variantes de RCU, detectan los períodos de gracia, por medio de <em>muestreo</em> de dichos contadores.</p>
+<p><strong>Si estoy sobre un kernel *uni-procesador*, el cuál sólo puede hacer una cosa a la vez, ¿Por qué debería esperar al período de gracia?</strong></p>
+<ul class="simple">
+<li><p>Ver <code class="docutils literal notranslate"><span class="pre">Documentation/RCU/UP.txt</span></code></p></li>
+</ul>
+<p><strong>¿Cómo puedo ver dónde es utilizado RCU, en el kernel de Linux?</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Buscar en &quot;rcu_read_lock&quot;, &quot;rcu_read_unlock&quot;, &quot;call_rcu&quot;,
+&quot;rcu_read_lock_bh&quot;, &quot;rcu_read_unlock_bh&quot;, &quot;call_rcu_bh&quot;,
+&quot;srcu_read_lock&quot;, &quot;srcu_read_unlock&quot;, &quot;synchronize_rcu&quot;,
+&quot;synchronize_net&quot;, &quot;synchronize_srcu&quot;, y en otras primitivas
+de RCU. O tomar uno de los cscope databases -ámbito de la
+base de datos, desde:
+</pre></div>
+</div>
+<p><a class="reference external" href="http://www.rdrop.com/users/paulmck/RCU/linuxusage/rculocktab.html">rculocktab</a></p>
+<p><strong>¿Qué directrices debería seguir, cuando escriba código que utilice RCU?</strong></p>
+<p>Ver el archivo <code class="docutils literal notranslate"><span class="pre">checklist.txt</span></code> en éste directorio.</p>
+<p><strong>¿Por que el nombre “RCU”?</strong></p>
+<p>RCU, significa “read-copy update” -leer-copiar actualizar. El archivo <code class="docutils literal notranslate"><span class="pre">listRCU.txt</span></code> tiene más información, acerca de la procedencia del nombre. Buscar con “read-copy update” para encontrala.</p>
+<p><strong>He oído que RCU está patentado ¿Qué pasa con eso?</strong></p>
+<p>Si, lo está. Hay varias patentes conocidas, relacionadas con RCU. Buscar con la cadena “Patent” en el archivo <code class="docutils literal notranslate"><span class="pre">RTFP.txt</span></code> para encontrarlas. De estos, uno está permitido por quién hizo la cesión, los otros, son contribuciones al kernel de Linux, con licencia GPL. Hay también, implementaciones LGPL, disponibles a nivel de usuario. (<a class="reference external" href="http://liburcu.org/">http://liburcu.org/</a>).</p>
+<p><strong>He oído que RCU necesita *trabajo*, para dar soporte al kernel en tiempo real -realtime.</strong></p>
+<p>RCU en tiempo real, puede ser activado vía parámetro de configuración del kernel <code class="docutils literal notranslate"><span class="pre">CONFIG_PREEMPT_RCU</span></code>.</p>
+<p><strong>¿Dónde puedo encontrar más información sobre RCU?</strong></p>
+<p>Ver el archivo <code class="docutils literal notranslate"><span class="pre">RTFP.txt</span></code> en éste directorio. O apuntar el explorador a <a class="reference external" href="http://www.rdrop.com/users/paulmck/RCU/">paulmck RCU</a></p>
+<p><strong>¿Qué son todos estos archivos en éste directorio?</strong></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="listRCU.html" class="btn btn-neutral float-left" title="List RCU" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="UP.html" class="btn btn-neutral float-right" title="RCU en sistemas uniprocesador" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

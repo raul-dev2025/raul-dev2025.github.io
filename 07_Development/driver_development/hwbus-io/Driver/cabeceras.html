@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cabeceras &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Espacio de configuración PCI" href="spcConfPCI.html" />
+    <link rel="prev" title="Capacidades Actuales del Controlador" href="capacidades-v1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../Foundry/index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">HwBus-IO</a></li>
+      <li class="breadcrumb-item active">Cabeceras</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/hwbus-io/Driver/cabeceras.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cabeceras">
+<h1>Cabeceras<a class="headerlink" href="#cabeceras" title="Link to this heading"></a></h1>
+<section id="cabeceras-del-controlador-raiz-de-include-exclusivas-de-espacio-de-kernel">
+<h2>1. Cabeceras del Controlador (Raíz de <code class="docutils literal notranslate"><span class="pre">include/</span></code>) — <em>Exclusivas de Espacio de Kernel</em><a class="headerlink" href="#cabeceras-del-controlador-raiz-de-include-exclusivas-de-espacio-de-kernel" title="Link to this heading"></a></h2>
+<p>Estas cabeceras forman parte del driver (<code class="docutils literal notranslate"><span class="pre">.ko</span></code>), compilan exclusivamente con el entorno Kbuild del Kernel de Linux y consumen las cabeceras nativas del sistema (<code class="docutils literal notranslate"><span class="pre">&lt;linux/...&gt;</span></code>).</p>
+<section id="a-include-hwbus-io-h">
+<h3>A. <code class="docutils literal notranslate"><span class="pre">include/hwbus-io.h</span></code><a class="headerlink" href="#a-include-hwbus-io-h" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>Ámbito:</strong> Kernel.</p></li>
+<li><p><strong>Propósito:</strong> Cabecera principal del módulo del controlador.</p></li>
+<li><p><strong>Contenido:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Definición del nombre del módulo, versión y macros globales del driver.</p></li>
+<li><p>Estructuras de estado interno del módulo (por ejemplo, el contexto principal del driver <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">hwbus_dev</span></code>).</p></li>
+<li><p>Declaración de las funciones del ciclo de vida del controlador (<code class="docutils literal notranslate"><span class="pre">init</span></code>/<code class="docutils literal notranslate"><span class="pre">exit</span></code>) y punteros de inicialización.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="b-include-sysfs-driver-h">
+<h3>B. <code class="docutils literal notranslate"><span class="pre">include/sysfs_driver.h</span></code><a class="headerlink" href="#b-include-sysfs-driver-h" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>Ámbito:</strong> Kernel.</p></li>
+<li><p><strong>Propósito:</strong> Interfaz de comunicación con la infraestructura <code class="docutils literal notranslate"><span class="pre">sysfs</span></code> del Kernel.</p></li>
+<li><p><strong>Contenido:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Prototypes de las funciones de creación/destrucción de grupos de atributos (<code class="docutils literal notranslate"><span class="pre">sysfs_create_group</span></code>, <code class="docutils literal notranslate"><span class="pre">sysfs_remove_group</span></code>).</p></li>
+<li><p>Declaración externa de las estructuras <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">kobject</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">attribute_group</span></code> y callbacks <code class="docutils literal notranslate"><span class="pre">show</span></code>/ <code class="docutils literal notranslate"><span class="pre">store</span></code> que el driver utilizará para publicar métricas hacia <code class="docutils literal notranslate"><span class="pre">/sys</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="c-include-sysfs-pci-h">
+<h3>C. <code class="docutils literal notranslate"><span class="pre">include/sysfs_pci.h</span></code><a class="headerlink" href="#c-include-sysfs-pci-h" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>Ámbito:</strong> Kernel.</p></li>
+<li><p><strong>Propósito:</strong> Abstracciones para la inspección y manejo del bus PCI/PCIe.</p></li>
+<li><p><strong>Contenido:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Inclusión explícita de <code class="docutils literal notranslate"><span class="pre">&lt;linux/pci.h&gt;</span></code> (siguiendo la regla <strong>DRY</strong>, sin redefinir offsets ni registros estándar PCI).</p></li>
+<li><p>Estructuras propias del driver para mapeo de regiones BAR (Base Address Registers).</p></li>
+<li><p>Prototypes de funciones auxiliares del driver para leer/escribir registros del PCI Configuration Space utilizando las APIs nativas del Kernel (<code class="docutils literal notranslate"><span class="pre">pci_read_config_word</span></code>, <code class="docutils literal notranslate"><span class="pre">pci_read_config_dword</span></code>).</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+<section id="cabeceras-de-espacio-de-usuario-include-user-exclusivas-de-userland-tests-ltp">
+<h2>2. Cabeceras de Espacio de Usuario (<code class="docutils literal notranslate"><span class="pre">include/user/</span></code>) — <em>Exclusivas de Userland / Tests (LTP)</em><a class="headerlink" href="#cabeceras-de-espacio-de-usuario-include-user-exclusivas-de-userland-tests-ltp" title="Link to this heading"></a></h2>
+<p>Estas cabeceras son consumidas por las aplicaciones CLI, utilidades de diagnóstico y el harness de pruebas LTP. Compilan con la cadena de herramientas C estándar de <code class="docutils literal notranslate"><span class="pre">glibc</span></code> y bibliotecas POSIX.</p>
+<section id="a-include-user-hwbus-error-h">
+<h3>A. <code class="docutils literal notranslate"><span class="pre">include/user/hwbus_error.h</span></code><a class="headerlink" href="#a-include-user-hwbus-error-h" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>Ámbito:</strong> Usuario.</p></li>
+<li><p><strong>Propósito:</strong> Gestión y traducción de errores en espacio de usuario.</p></li>
+<li><p><strong>Contenido:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Definición de códigos de error propios de la herramienta de prueba (<code class="docutils literal notranslate"><span class="pre">HWBUS_SUCCESS</span></code>, <code class="docutils literal notranslate"><span class="pre">HWBUS_ERR_BASE</span> <span class="pre">5000</span></code>, etc.).</p></li>
+<li><p>Prototipo de la función de traducción <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*hwbus_strerror(int</span> <span class="pre">errnum);</span></code>.</p></li>
+<li><p>Inclusión de cabeceras POSIX estándar (<code class="docutils literal notranslate"><span class="pre">&lt;errno.h&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;stddef.h&gt;</span></code>).</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="b-include-user-sysfs-paths-h">
+<h3>B. <code class="docutils literal notranslate"><span class="pre">include/user/sysfs_paths.h</span></code><a class="headerlink" href="#b-include-user-sysfs-paths-h" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>Ámbito:</strong> Usuario.</p></li>
+<li><p><strong>Propósito:</strong> Catálogo estático de rutas relativas y nombres de atributos dentro del sistema de archivos <code class="docutils literal notranslate"><span class="pre">/sys</span></code>.</p></li>
+<li><p><strong>Contenido:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Definición de cadenas de texto puras para que las herramientas de usuario sepan dónde buscar en el sistema de archivos (ej. <code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices</span></code>, <code class="docutils literal notranslate"><span class="pre">/sys/class/nvme</span></code>, <code class="docutils literal notranslate"><span class="pre">/sys/class/net</span></code>).</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="c-include-user-sysfs-utils-h">
+<h3>C. <code class="docutils literal notranslate"><span class="pre">include/user/sysfs_utils.h</span></code><a class="headerlink" href="#c-include-user-sysfs-utils-h" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>Ámbito:</strong> Usuario.</p></li>
+<li><p><strong>Propósito:</strong> Prototipos de funciones de asistencia para interactuar con <code class="docutils literal notranslate"><span class="pre">/sys</span></code> mediante llamadas de sistema POSIX.</p></li>
+<li><p><strong>Contenido:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Declaración de utilidades de lectura/escritura de ficheros tipo sysfs (<code class="docutils literal notranslate"><span class="pre">sysfs_read_uint</span></code>, <code class="docutils literal notranslate"><span class="pre">sysfs_read_string</span></code>, <code class="docutils literal notranslate"><span class="pre">sysfs_read_binary</span></code>, <code class="docutils literal notranslate"><span class="pre">sysfs_build_path</span></code>).</p></li>
+<li><p>Inclusión de cabeceras POSIX (<code class="docutils literal notranslate"><span class="pre">&lt;sys/types.h&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;stddef.h&gt;</span></code>).</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+<section id="resumen-de-la-separacion-de-roles">
+<h2>Resumen de la Separación de Roles<a class="headerlink" href="#resumen-de-la-separacion-de-roles" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 30.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Fichero de Cabecera</p></th>
+<th class="head"><p>Ámbito de Ejecución</p></th>
+<th class="head"><p>Entorno / Headers Base</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">include/hwbus-io.h</span></code></p></td>
+<td><p><strong>Kernel (Driver)</strong></p></td>
+<td><p>Kernel C (<code class="docutils literal notranslate"><span class="pre">&lt;linux/module.h&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;linux/init.h&gt;</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">include/sysfs_driver.h</span></code></p></td>
+<td><p><strong>Kernel (Driver)</strong></p></td>
+<td><p>Kernel C (<code class="docutils literal notranslate"><span class="pre">&lt;linux/sysfs.h&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;linux/kobject.h&gt;</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">include/sysfs_pci.h</span></code></p></td>
+<td><p><strong>Kernel (Driver)</strong></p></td>
+<td><p>Kernel C (<code class="docutils literal notranslate"><span class="pre">&lt;linux/pci.h&gt;</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">include/user/hwbus_error.h</span></code></p></td>
+<td><p><strong>Usuario (Tests/LTP)</strong></p></td>
+<td><p>User C (<code class="docutils literal notranslate"><span class="pre">&lt;errno.h&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;stddef.h&gt;</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">include/user/sysfs_paths.h</span></code></p></td>
+<td><p><strong>Usuario (Tests/LTP)</strong></p></td>
+<td><p>User C (Literales <code class="docutils literal notranslate"><span class="pre">#define</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">include/user/sysfs_utils.h</span></code></p></td>
+<td><p><strong>Usuario (Tests/LTP)</strong></p></td>
+<td><p>User C (<code class="docutils literal notranslate"><span class="pre">&lt;sys/types.h&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;stddef.h&gt;</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="capacidades-v1.html" class="btn btn-neutral float-left" title="Capacidades Actuales del Controlador" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="spcConfPCI.html" class="btn btn-neutral float-right" title="Espacio de configuración PCI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

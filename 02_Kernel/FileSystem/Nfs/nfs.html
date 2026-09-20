@@ -1,0 +1,220 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El cliente NFS &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Montando el sistema de ficheros raíz, vía NFS(nfsroot)" href="../nfsroot.html" />
+    <link rel="prev" title="Soporte al espacio temprano de usuario" href="../../EarlyUserSpace/README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#filesystem">FileSystem</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">El cliente NFS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#el-parametro-nfs4-uique-id">El parámetro <code class="docutils literal notranslate"><span class="pre">nfs4_uique_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resolucion-dns">Resolución DNS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../nfsroot.html">Montando el sistema de ficheros raíz, vía NFS(nfsroot)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rams-rootfs-initramfs.html">Qué es ramfs?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tmpfs.html">Tmpfs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">El cliente NFS</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/02_Kernel/FileSystem/Nfs/nfs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="el-cliente-nfs">
+<h1><a class="toc-backref" href="#id3" role="doc-backlink">El cliente NFS</a><a class="headerlink" href="#el-cliente-nfs" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#el-cliente-nfs" id="id3">El cliente NFS</a></p>
+<ul>
+<li><p><a class="reference internal" href="#el-parametro-nfs4-uique-id" id="id4">El parámetro <code class="docutils literal notranslate"><span class="pre">nfs4_uique_id</span></code></a></p></li>
+<li><p><a class="reference internal" href="#resolucion-dns" id="id5">Resolución DNS</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id6">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>La versión 2 del protocolo, fué documentada por primera vez en RFC1094(1989). Desde entonces, otras dos versiones han sido presentadas, NFSv3 en RFC1813(Junio 1995) y NFSv4 en RFC3530(Abril 2003).</p>
+<p>El cliente NFS de Linux, soporta actualmente todas las versiones publicadas, y se sigue trabajando para añadir soporte a versiones menores del protocolo NFSv4.</p>
+<p>Éste documento tratará de proporcionar informació, acerca de algunas características especiales del cliente NFS, que pueden ser configuradas por el administrador de sistema.</p>
+<section id="el-parametro-nfs4-uique-id">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">El parámetro <code class="docutils literal notranslate"><span class="pre">nfs4_uique_id</span></code></a><a class="headerlink" href="#el-parametro-nfs4-uique-id" title="Link to this heading"></a></h2>
+<p>NFSv4 requiere que los clientes se identifiquen ellos mismos, ante el servidor, con una cadena(literal) única. El archivo abierto y el estado bloqueado compartido, entre cliente y servidor, es asociado con esta identidad. Para dar un robusto soporte al estado de recuperación y al estado de migración transparente, esta cadena identificativa, no debe cambiar al reiniciar el sistema.</p>
+<p>Sin ningún otra intervención, el cliente de Linux, usa una cadena que contiene el nombre local del sistema. Los administradores de sistema, a menudo tendrán que tener cuidado de asegurarse que el nombre de nodo_m es un nombre completamente calificado y, no cambiará durante la vida útil de un cliente del sistema. Los nombre de nodo, podrían sin embargo, tener otros requisitos particulares, sobre el comportamiento del cliente, que  interfiriesen con la cadena <code class="docutils literal notranslate"><span class="pre">nfs_client_1d4</span></code>.</p>
+<p>EL parámetro de arranque <code class="docutils literal notranslate"><span class="pre">nfs.nfs4_unique_id</span></code>, especifíca una cadena única que puede ser usada en lugar del nombre de nodo del sistema, cuando un cliente NFS se identrifica a sí mismo ante el servidor. Así, si el nombre de nodo del sistema, no es único -o cambia, su <code class="docutils literal notranslate"><span class="pre">nfs.nfs4_unique_id</span></code>, seguirá siendo el mismo. Previniendo la <em>colisión</em>, con otros clientes o perdida de estado, durante el reinicio NFS de recuperación, o durante una migracuión transparente.</p>
+<p>La cadena <code class="docutils literal notranslate"><span class="pre">nfs.nfs4_unique_id</span></code> es un UUID, pude contener cualquier cosa que permita diferenciarlo como <em>cadena única</em> ante el resto de clientes NFS. Una cadena <code class="docutils literal notranslate"><span class="pre">nfs4_unique_id</span></code> debería ser escogida cuando el cliente es instalado, igual que el sistema de archivo raíz toma su etiqueta UUID, cuando el sistema es intalado.</p>
+<p>Ésta cadena, puede ser almacenada en un archivo de cliente NFS <code class="docutils literal notranslate"><span class="pre">grub.conf</span></code> o, pocría ser proporcionada via <em>arranque de red PXE</em>. También podría ser especificada como un módulo <code class="docutils literal notranslate"><span class="pre">nfs.ko</span></code>. Clientes bajo contenedores en ejecución, no disponen de ésta característica.</p>
+<blockquote>
+<div><p><strong>UUID:</strong> Unique User Identifier, identificación única de usurario.</p>
+<p><strong>string:</strong> cadena literal, es la representación gráfica de carácteres; pueden ser números, letras, o cualquier símbolo que pueda ser representado gráficamente.</p>
+</div></blockquote>
+</section>
+<section id="resolucion-dns">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Resolución DNS</a><a class="headerlink" href="#resolucion-dns" title="Link to this heading"></a></h2>
+<p>El NFSv4m permite a un seervidor referirse a clientes NFS, como migración de datos, a otro servidor, mediante el atributo especial <code class="docutils literal notranslate"><span class="pre">fs_locations</span></code>. ver <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> y <a class="footnote-reference brackets" href="#f2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
+<p>La informaci’on <code class="docutils literal notranslate"><span class="pre">fs_locations</span></code> pude tomar la información tanto de direción IP, como de la ruta o un nombre de <em>host DNS</em> y una ruta. Lo último, requiere que el cliente NFS, realice un <em>DNS loockup</em>, para poder montar el nuevo volumen.</p>
+<p>The fs_locations information can take the form of either an ip address and a path, or a DNS hostname and a path. The latter requires the NFS client to do a DNS lookup in order to mount the new volume, and hence the need for an upcall to allow userland to provide this service.</p>
+<p>Assuming that the user has the ‘rpc_pipefs’ filesystem mounted in the usual /var/lib/nfs/rpc_pipefs, the upcall consists of the following steps:</p>
+<ol class="arabic simple">
+<li><p>The process checks the dns_resolve cache to see if it contains a valid entry. If so, it returns that entry and exits.</p></li>
+<li><p>If no valid entry exists, the helper script <code class="docutils literal notranslate"><span class="pre">/sbin/nfs_cache_getent</span></code> (may be changed using the ‘nfs.cache_getent’ kernel boot parameter) is run, with two arguments:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>the cache name, “dns_resolve”</p></li>
+<li><p>the hostname to resolve</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>After looking up the corresponding ip address, the helper script writes the result into the rpc_pipefs pseudo-file <code class="docutils literal notranslate"><span class="pre">/var/lib/nfs/rpc_pipefs/cache/dns_resolve/channel</span></code> in the following (text) format:</p></li>
+</ol>
+<p>Where is in the usual IPv4 (123.456.78.90) or IPv6 (ffee:ddcc:bbaa:9988:7766:5544:3322:1100, ffee::1100, …) format. is identical to the second argument of the helper script, and is the ‘time to live’ of this cache entry (in units of seconds).</p>
+<p>Note: If is invalid, say the string “0”, then a negative entry is created, which will cause the kernel to treat the hostname as having no valid DNS translation.</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<p>Documentación del núcleo de Linux.</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://tools.ietf.org/html/rfc3530#section-6">rfc3530 sección 6</a></p>
+</aside>
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://tools.ietf.org/html/draft-ietf-nfsv4-referrals-00">IETF NFSv4</a></p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../EarlyUserSpace/README.html" class="btn btn-neutral float-left" title="Soporte al espacio temprano de usuario" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../nfsroot.html" class="btn btn-neutral float-right" title="Montando el sistema de ficheros raíz, vía NFS(nfsroot)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

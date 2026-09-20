@@ -1,0 +1,236 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe Técnico: Conflicto de Direccionamiento PCIe e IOMMU &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Informe Técnico: Configuración de Monitorización VDO vía IdM/Sudo" href="userEnvironment.html" />
+    <link rel="prev" title="MAPA DE INFRAESTRUCTURA DE RED (BRIDGE L2)" href="netVirtElem.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#boot">Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#certificados-tls">Certificados-TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#file-system">File System</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#maint">Maint</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="anacron-cron.html">Tareas programadas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootFail-CorruptLog.html">Informe de Incidencia: Error de Arranque y Corrupción de Log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cortaFuegos.html">Informe de Configuración de Firewall: Topología FreeIPA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cortaFuegos.html#informe-actualizado-de-firewall-topologia-freeipa">Informe Actualizado de Firewall: Topología FreeIPA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expiredTickets.html">Troubleshooting Report: IdM Authentication Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git-maint.html">Informe de Consolidación: Entorno de Desarrollo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="infra_hwd_virt.html">Informe Técnico: Infraestructura de Hardware y Virtualización</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logGA-AX370.html">04/11/2018</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logGA-AX370.html#erp-descripcion">ErP, descripción</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logGA-AX370.html#usb-hub">USB hub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintWS.html">Informe de Persistencia de Tiempo y Redundancia DNS en la WS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="message-Wall.html">Informe Técnico: Configuración de Avisos y Diagnóstico</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netVirtElem.html">MAPA DE INFRAESTRUCTURA DE RED (BRIDGE L2)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Informe Técnico: Conflicto de Direccionamiento PCIe e IOMMU</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#contexto-del-problema">Contexto del Problema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comandos-de-diagnostico-y-mitigacion">Comandos de Diagnóstico y Mitigación</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conclusiones-tecnicas">Conclusiones Técnicas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#justificacion-del-downgrade-a-tx-201">Justificación del Downgrade a TX-201</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#estado-actual">Estado Actual</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="userEnvironment.html">Informe Técnico: Configuración de Monitorización VDO vía IdM/Sudo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Sistemas Operativos</a></li>
+      <li class="breadcrumb-item active">Informe Técnico: Conflicto de Direccionamiento PCIe e IOMMU</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/03_Operating_Systems/Maint/qnap-regresion.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-tecnico-conflicto-de-direccionamiento-pcie-e-iommu">
+<h1>Informe Técnico: Conflicto de Direccionamiento PCIe e IOMMU<a class="headerlink" href="#informe-tecnico-conflicto-de-direccionamiento-pcie-e-iommu" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-04-26</p>
+</dd>
+<dt class="field-even">Host<span class="colon">:</span></dt>
+<dd class="field-even"><p>dev.raulvilchez.org</p>
+</dd>
+<dt class="field-odd">Dispositivo Afectado<span class="colon">:</span></dt>
+<dd class="field-odd"><p>NVMe Samsung SM961 (OS/Journal)</p>
+</dd>
+<dt class="field-even">Hardware Causante<span class="colon">:</span></dt>
+<dd class="field-even"><p>QNAP Dual-Port 2.5GbE (Intel I225-LM)</p>
+</dd>
+<dt class="field-odd">Estado Final<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Estabilizado mediante Downgrade a TX-201</p>
+</dd>
+</dl>
+<section id="contexto-del-problema">
+<h2>Contexto del Problema<a class="headerlink" href="#contexto-del-problema" title="Link to this heading"></a></h2>
+<p>Tras la instalación de una tarjeta de red QNAP de doble puerto, el sistema comenzó a experimentar corrupciones críticas en el Journal de <code class="docutils literal notranslate"><span class="pre">systemd</span></code>. El síntoma principal era la imposibilidad de escribir logs y el fallo de integridad del sistema de archivos, coincidiendo con la reserva de 16 GB de RAM en Hugepages.</p>
+</section>
+<section id="comandos-de-diagnostico-y-mitigacion">
+<h2>Comandos de Diagnóstico y Mitigación<a class="headerlink" href="#comandos-de-diagnostico-y-mitigacion" title="Link to this heading"></a></h2>
+<p>Para estabilizar y diagnosticar el sistema, se emplearon los siguientes comandos:</p>
+<ol class="arabic">
+<li><p><strong>Verificación de Integridad:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>journalctl<span class="w"> </span>--verify
+journalctl<span class="w"> </span>-p<span class="w"> </span><span class="m">3</span>..0<span class="w"> </span>-xb
+</pre></div>
+</div>
+</li>
+<li><p><strong>Gestión de Configuración del Kernel (grubby):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Desactivación de Hugepages y forzado de reasignación PCIe</span>
+grubby<span class="w"> </span>--update-kernel<span class="o">=</span>ALL<span class="w"> </span>--args<span class="o">=</span><span class="s2">&quot;pci=realloc,assign-busses hugepages=0 nomodeset&quot;</span>
+
+<span class="c1"># Intento de aislamiento de grupos IOMMU</span>
+grubby<span class="w"> </span>--update-kernel<span class="o">=</span>ALL<span class="w"> </span>--args<span class="o">=</span><span class="s2">&quot;pcie_acs_override=downstream,multifunction,all&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Análisis de Topología de Bus y Grupos IOMMU:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identificar en qué dirección (Bus ID) ha quedado</span>
+lspci<span class="w"> </span>-nn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;QNAP\|Ethernet\|Network&quot;</span>
+
+<span class="c1"># Localización de BARs por encima de 4GB</span>
+lspci<span class="w"> </span>-vv<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;Region.*Memory at [0-9a-f]\{9,\}&quot;</span>
+
+<span class="c1"># Mapeo de grupos IOMMU por dispositivo</span>
+<span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span>/sys/kernel/iommu_groups/*/devices/*<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">n</span><span class="o">=</span><span class="si">${</span><span class="nv">d</span><span class="p">#*/iommu_groups/*</span><span class="si">}</span><span class="p">;</span><span class="w"> </span><span class="nv">n</span><span class="o">=</span><span class="si">${</span><span class="nv">n</span><span class="p">%%/*</span><span class="si">}</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;IOMMU Group %s &#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span>lspci<span class="w"> </span>-nns<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">d</span><span class="p">##*/</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="conclusiones-tecnicas">
+<h2>Conclusiones Técnicas<a class="headerlink" href="#conclusiones-tecnicas" title="Link to this heading"></a></h2>
+<p>El análisis reveló un conflicto de hardware insalvable en el <strong>Grupo IOMMU 16</strong>.</p>
+<ol class="arabic simple">
+<li><p><strong>Hacinamiento del Bus:</strong> El slot PCIe utilizado cuelga de un switch ASMedia (Chipset) que agrupa en la misma unidad atómica de IOMMU al NVMe de sistema, la controladora Realtek integrada y la tarjeta QNAP.</p></li>
+<li><p><strong>Conflicto MMIO:</strong> La tarjeta QNAP dual-port reclama ventanas de direcciones (BARs) extensas. Al activarse los <strong>16 GB de Hugepages</strong>, el mapa de memoria se satura, provocando que las transacciones DMA de la red “pisen” el espacio de memoria reservado para el controlador del NVMe.</p></li>
+<li><p><strong>Fallo de Aislamiento:</strong> A pesar de aplicar <code class="docutils literal notranslate"><span class="pre">pcie_acs_override=all</span></code>, el hardware no permite el divorcio lógico de estos dispositivos, lo que garantiza que cualquier error de bus en la red corrompa el flujo de datos del disco.</p></li>
+</ol>
+</section>
+<section id="justificacion-del-downgrade-a-tx-201">
+<h2>Justificación del Downgrade a TX-201<a class="headerlink" href="#justificacion-del-downgrade-a-tx-201" title="Link to this heading"></a></h2>
+<p>Se ha determinado que la vuelta a la tarjeta <strong>TX-201 (Single Port)</strong> es la única vía para mantener los requisitos de rendimiento de la estación:</p>
+<ul class="simple">
+<li><p><strong>Estabilidad del Journal:</strong> La TX-201 posee una huella MMIO significativamente menor, reduciendo la probabilidad de colisión en el Grupo 16.</p></li>
+<li><p><strong>Prioridad de Virtualización:</strong> Permite mantener los <strong>8192 Hugepages (2M)</strong> necesarios para <code class="docutils literal notranslate"><span class="pre">libvirt</span></code> sin comprometer la integridad del sistema de archivos.</p></li>
+<li><p><strong>Seguridad de Datos:</strong> Las pruebas con la TX-201 devuelven un estado de <code class="docutils literal notranslate"><span class="pre">PASS</span></code> constante en el Journal, confirmando que la convivencia en el bus es posible con una carga de registros reducida.</p></li>
+</ul>
+</section>
+<section id="estado-actual">
+<h2>Estado Actual<a class="headerlink" href="#estado-actual" title="Link to this heading"></a></h2>
+<p>El sistema opera con la TX-201, con el stack de baja latencia activo y los parámetros de diagnóstico (<code class="docutils literal notranslate"><span class="pre">nomodeset</span></code>, <code class="docutils literal notranslate"><span class="pre">pci=realloc</span></code>) retirados, recuperando la funcionalidad completa de la GPU y el entorno gráfico.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="netVirtElem.html" class="btn btn-neutral float-left" title="MAPA DE INFRAESTRUCTURA DE RED (BRIDGE L2)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="userEnvironment.html" class="btn btn-neutral float-right" title="Informe Técnico: Configuración de Monitorización VDO vía IdM/Sudo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conventional PCI - Peripheral Component Interconnect &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="PCI Express (PCIe) - Peripheral Component Interconnect Express" href="busPCIexpress.html" />
+    <link rel="prev" title="Puentes de Bus PCI - PCI Bus Bridges" href="pciBusBridges.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#placa-base">Placa Base</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Arquitectura de la Placa Base</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Arquitectura de la Placa Base</a></li>
+      <li class="breadcrumb-item active">Conventional PCI - Peripheral Component Interconnect</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/PlacaBase/busPCI.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="conventional-pci-peripheral-component-interconnect">
+<h1>Conventional PCI - Peripheral Component Interconnect<a class="headerlink" href="#conventional-pci-peripheral-component-interconnect" title="Link to this heading"></a></h1>
+<p><strong>Conventional PCI</strong> (<em>Peripheral Component Interconnect</em>) es una especificación de bus local de computador desarrollada para conectar componentes de hardware directamente a la placa base o mediante tarjetas de expansión.</p>
+<p>Diseñado para reemplazar estándares anteriores como ISA, EISA y VLB, PCI abstrae las especificaciones del bus nativo del procesador, ofreciendo una interfaz estandarizada e independiente de la arquitectura del CPU.</p>
+<section id="caracteristicas-principales">
+<h2>Características Principales<a class="headerlink" href="#caracteristicas-principales" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Bus Multiplexado Paralelo</strong>: Utiliza las mismas líneas físicas para transmitir direcciones y datos (AD[31..0] o AD[63..0]), reduciendo el número de pines requeridos.</p></li>
+<li><p><strong>Operación Síncrona</strong>: Funciona bajo una señal de reloj común (<em>CLK</em>), habitualmente a <strong>33 MHz</strong> o <strong>66 MHz</strong>.</p></li>
+<li><p><strong>Bus Mastering y DMA</strong>: Soporta <em>bus mastering</em>, lo que permite a las tarjetas de expansión iniciar transacciones de datos directamente hacia la memoria RAM (<em>Direct Memory Access</em>) sin intermediación constante de la CPU.</p></li>
+<li><p><strong>Autoconfiguración (Plug and Play)</strong>: Los dispositivos no requieren configuración manual de puentes (<em>jumpers</em>) ni de interrupciones (IRQ). El firmware del sistema (BIOS/UEFI) o el sistema operativo asignan dinámicamente las direcciones base de memoria e interrupciones durante la fase de enumeración.</p></li>
+</ul>
+</section>
+<section id="especificaciones-tecnicas">
+<h2>Especificaciones Técnicas<a class="headerlink" href="#especificaciones-tecnicas" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Resumen de Parámetros del Bus PCI</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parámetro</p></th>
+<th class="head"><p>Detalle / Valor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Año de publicación</p></td>
+<td><p>1992 (Versión 1.0 por Intel), 1993 (Versión 2.0)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Entidad reguladora</p></td>
+<td><p>PCI-SIG (<em>PCI Special Interest Group</em>)</p></td>
+</tr>
+<tr class="row-even"><td><p>Reemplaza a</p></td>
+<td><p>ISA, EISA, MCA, VLB (<em>VESA Local Bus</em>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reemplazado por</p></td>
+<td><p>PCI Express (PCIe) en 2004</p></td>
+</tr>
+<tr class="row-even"><td><p>Ancho de bus</p></td>
+<td><p>32 bits (estándar) o 64 bits (extensión)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Frecuencia de reloj</p></td>
+<td><p>33 MHz o 66 MHz</p></td>
+</tr>
+<tr class="row-even"><td><p>Ancho de banda máximo</p></td>
+<td><p>133 MB/s (32 bits a 33 MHz)</p>
+<p>266 MB/s (32 bits a 66 MHz o 64 bits a 33 MHz)</p>
+<p>533 MB/s (64 bits a 66 MHz)</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Arquitectura de señal</p></td>
+<td><p>Paralela, multiplexada</p></td>
+</tr>
+<tr class="row-even"><td><p>Tensiones de trabajo</p></td>
+<td><p>5V, 3.3V o Zócalo Universal (soporta ambas)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="espacio-de-configuracion-pci-configuration-space">
+<h2>Espacio de Configuración (PCI Configuration Space)<a class="headerlink" href="#espacio-de-configuracion-pci-configuration-space" title="Link to this heading"></a></h2>
+<p>Una de las innovaciones clave de PCI fue la definición de un espacio de memoria dedicado de <strong>256 bytes</strong> por función de dispositivo, denominado <em>Configuration Space</em>.</p>
+<p>Los primeros 64 bytes están estandarizados mediante una cabecera (<em>Header Type 0</em> para dispositivos finales y <em>Header Type 1</em> para puentes PCI-to-PCI):</p>
+<ul class="simple">
+<li><p><strong>Vendor ID / Device ID</strong>: Identificadores únicos asignados por el PCI-SIG para reconocer el fabricante y el modelo del periférico.</p></li>
+<li><p><strong>Base Address Registers (BARs)</strong>: Registros donde el sistema operativo asigna los rangos de memoria mapeada en E/S (<em>MMIO</em>) requeridos por el dispositivo.</p></li>
+<li><p><strong>Interrupt Line / Interrupt Pin</strong>: Asignación de líneas de interrupción (<em>INTA#</em>, <em>INTB#</em>, <em>INTC#</em>, <em>INTD#</em>).</p></li>
+</ul>
+</section>
+<section id="tipos-de-zocalos-y-ranuras-fisicas">
+<h2>Tipos de Zócalos y Ranuras Físicas<a class="headerlink" href="#tipos-de-zocalos-y-ranuras-fisicas" title="Link to this heading"></a></h2>
+<p>Las ranuras PCI disponen de muescas mecánicas (<em>keying</em>) para evitar la inserción de tarjetas en placas base con voltajes incompatibles:</p>
+<ol class="arabic simple">
+<li><p><strong>Ranuras de 5 Voltios</strong>: La muesca se encuentra ubicada hacia el lado posterior del equipo (cerca de los conectores traseros).</p></li>
+<li><p><strong>Ranuras de 3.3 Voltios</strong>: La muesca se encuentra hacia la parte frontal de la placa base.</p></li>
+<li><p><strong>Tarjeta Universal</strong>: Incorpora ambas muescas para permitir su instalación tanto en sistemas de 5V como de 3.3V.</p></li>
+</ol>
+</section>
+<section id="limitaciones-y-decadencia-del-bus-paralelo">
+<h2>Limitaciones y Decadencia del Bus Paralelo<a class="headerlink" href="#limitaciones-y-decadencia-del-bus-paralelo" title="Link to this heading"></a></h2>
+<p>A pesar de su enorme éxito durante más de una década, la arquitectura PCI convencional se encontró con cuellos de botella insuperables:</p>
+<ul class="simple">
+<li><p><strong>Compartición del Ancho de Banda</strong>: Todos los dispositivos conectados al mismo bus PCI comparten el ancho de banda total (ej. 133 MB/s). Si un dispositivo satura el bus, el resto sufre demoras.</p></li>
+<li><p><strong>Desviación de Señal (*Clock Skew*)</strong>: En buses paralelos a frecuencias elevadas, las diferencias microscópicas en la longitud de las pistas físicas provocan que los bits lleguen desalineados al destino, limitando el escalado en frecuencia.</p></li>
+<li><p><strong>Evolución</strong>: La necesidad de mayor ancho de banda derivó en soluciones temporales como <strong>PCI-X</strong> (utilizado principalmente en servidores) y, finalmente, en la sustitución completa por la arquitectura punto a punto en serie de <strong>PCI Express (PCIe)</strong>.</p></li>
+</ul>
+</section>
+<section id="referencias">
+<h2>Referencias<a class="headerlink" href="#referencias" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Conventional_PCI">Conventional PCI en Wikipedia</a></p></li>
+<li><p>Especificaciones oficiales del PCI Special Interest Group (<a class="reference external" href="https://pcisig.com/">PCI-SIG</a>).</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pciBusBridges.html" class="btn btn-neutral float-left" title="Puentes de Bus PCI - PCI Bus Bridges" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="busPCIexpress.html" class="btn btn-neutral float-right" title="PCI Express (PCIe) - Peripheral Component Interconnect Express" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

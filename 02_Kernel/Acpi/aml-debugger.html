@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El depurador AML &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Salida de depuración ACPI" href="debug.html" />
+    <link rel="prev" title="Kernel documents" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#acpi">Acpi</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">El depurador AML</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#construir-el-depurador">Construir el depurador</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#iniciar-la-interfase-del-depurador-en-el-espacio-de-usuario">Iniciar la interfase del depurador, en el espacio de usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parar-la-interfase-del-depurador-del-espacio-de-usuario">Parar la interfase del depurador, del espacio de usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ejecucion-del-depurador-en-un-escrito-script">Ejecución del depurador en un escrito(script)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="debug.html">Salida de depuración ACPI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">El depurador AML</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/Acpi/aml-debugger.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="el-depurador-aml">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">El depurador AML</a><a class="headerlink" href="#el-depurador-aml" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#el-depurador-aml" id="id1">El depurador AML</a></p>
+<ul>
+<li><p><a class="reference internal" href="#construir-el-depurador" id="id2">Construir el depurador</a></p></li>
+<li><p><a class="reference internal" href="#iniciar-la-interfase-del-depurador-en-el-espacio-de-usuario" id="id3">Iniciar la interfase del depurador, en el espacio de usuario</a></p></li>
+<li><p><a class="reference internal" href="#parar-la-interfase-del-depurador-del-espacio-de-usuario" id="id4">Parar la interfase del depurador, del espacio de usuario</a></p></li>
+<li><p><a class="reference internal" href="#ejecucion-del-depurador-en-un-escrito-script" id="id5">Ejecución del depurador en un escrito(script)</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>Copyright (C), Intel Corporation <strong>Autor</strong>: Lv Zheng <a class="reference external" href="mailto:lv&#46;zheng&#37;&#52;&#48;intel&#46;com">lv<span>&#46;</span>zheng<span>&#64;</span>intel<span>&#46;</span>com</a></p>
+<p>Este documento describe el uso del depurador AML, embebido en el kernel de Linux.</p>
+<section id="construir-el-depurador">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Construir el depurador</a><a class="headerlink" href="#construir-el-depurador" title="Link to this heading"></a></h2>
+<p>Los siguiente componentes en la configuración del kernel, son necesarios para <em>activar</em> la interfase del depurador, en el kernel de Linux:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CONFIG_ACPI_DEBUGGER</span><span class="o">=</span>y
+<span class="nv">CONFIG_ACPI_DEBUGGER_USER</span><span class="o">=</span>m
+</pre></div>
+</div>
+<p>Las utilidades en el espacio de usuario, podrán ser construidas desde la fuente del kernel, mediante los comandos a continuación:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tools
+$<span class="w"> </span>make<span class="w"> </span>acpi
+</pre></div>
+</div>
+<p>Los resultantes binarios, de las herramientas en el espacio de usuario, están localizadas en:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tools/acpi/power/acpi/acpidbg/acpidbg
+</pre></div>
+</div>
+<p>Podrá ser instalado en los directorios del sistema, ejecutando <code class="docutils literal notranslate"><span class="pre">lmake</span> <span class="pre">install</span></code> -como usuario con los suficientes permisos.</p>
+</section>
+<section id="iniciar-la-interfase-del-depurador-en-el-espacio-de-usuario">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Iniciar la interfase del depurador, en el espacio de usuario</a><a class="headerlink" href="#iniciar-la-interfase-del-depurador-en-el-espacio-de-usuario" title="Link to this heading"></a></h2>
+<p>Después de arrancar el kernel, con el <em>depurador</em> ya construido, tan sólo queda iniciarlo. Desde la cónsola, escribir los siguientes comandos:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mount -t debugfs none /sys/kernel/debug</span>
+<span class="c1"># modprobe acpi_dbg</span>
+<span class="c1"># tools/acpi/power/acpi/acpidbg/acpidbg</span>
+</pre></div>
+</div>
+<p>Aparecerá el entorno del depurador interactivo, donde podrán ejecutarse los comandos del depurador.</p>
+<p>Los comandos están documentados en “Resumen ACPICA y Referencias de Programador”, pudiendo ser descargado desde</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://acpica.org/documentation">ACPICA Overview and Programmer Reference, en inglés.</a></p></li>
+</ul>
+<p>Las referencias detalladas a lso comandos, se encuentran en el <strong>capítulo 12</strong>, “ACPICA Debugger Reference”. El comando <code class="docutils literal notranslate"><span class="pre">help</span></code> es utilizado para una rápida referencia a ellos.</p>
+</section>
+<section id="parar-la-interfase-del-depurador-del-espacio-de-usuario">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Parar la interfase del depurador, del espacio de usuario</a><a class="headerlink" href="#parar-la-interfase-del-depurador-del-espacio-de-usuario" title="Link to this heading"></a></h2>
+<p>La interfase interactiva del depurador, podrá cerrarse presionando <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code> o escribiendo los comandos <code class="docutils literal notranslate"><span class="pre">quit</span></code> o <code class="docutils literal notranslate"><span class="pre">exit</span></code>. Al finalizar, deberán <em>descargarse</em> los módulos con:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># rmmod acpi_dbg</span>
+</pre></div>
+</div>
+<p>La descarga del módulo, podría fallar si hubiese alguna otra instancia de <code class="docutils literal notranslate"><span class="pre">acpidbg</span></code> en activo.</p>
+</section>
+<section id="ejecucion-del-depurador-en-un-escrito-script">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Ejecución del depurador en un escrito(script)</a><a class="headerlink" href="#ejecucion-del-depurador-en-un-escrito-script" title="Link to this heading"></a></h2>
+<p>Podría resultar útil, iniciar el depurador AML en un escrito, <code class="docutils literal notranslate"><span class="pre">acpidbg</span></code> soporta éste modo especial <code class="docutils literal notranslate"><span class="pre">batch</span></code>. Por ejemplo, el siguiente comando entrega como salida el <em>espacio de nombres ACPI</em> al completo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># acpidbg -b &quot;namespace&quot;</span>
+</pre></div>
+</div>
+<div class="admonition-batch admonition">
+<p class="admonition-title">batch</p>
+<p>Aplicación de <em>cónsola</em>, habitualmente utilizada en entornos Linux.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Kernel documents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="debug.html" class="btn btn-neutral float-right" title="Salida de depuración ACPI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

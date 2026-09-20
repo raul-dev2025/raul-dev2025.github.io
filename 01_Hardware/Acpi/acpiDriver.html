@@ -1,0 +1,164 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El controlador ACPI de Windows &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Entrada/Salida de Propósito general" href="acpiGPIO.html" />
+    <link rel="prev" title="Jerarquía para el Espacio de Nombres ACPI" href="acpiNameSpace.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">ACPI (Advanced Configuration and Power Interface)</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">ACPI (Advanced Configuration and Power Interface)</a></li>
+      <li class="breadcrumb-item active">El controlador ACPI de Windows</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/Acpi/acpiDriver.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="el-controlador-acpi-de-windows">
+<h1>El controlador ACPI de Windows<a class="headerlink" href="#el-controlador-acpi-de-windows" title="Link to this heading"></a></h1>
+<p>El controlador ACPI de Windows, <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code>, es un componente de shell, del sistema operativo Windows. Es responsable de dar soporte a la administración de energía y de la enumeración de dispositivo <strong>PnP</strong> <em>(conectar y listo)</em>. En plataformas de hardware con soporte ACPI BIOS, el <strong>HAL</strong>(capa de abstracción de hardware), causa el que <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> sea cargado durante inicio del sistema, en la base del <em>árbol(directorio)</em>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> actua como interfase entre el sistema operativo y ACPI BIOS. <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> es transparente a los demás controladores dentro del <em>árbolo de dispositivos</em>.</p>
+<p>Otras tareas llevadas a cabo por <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> sobre un hardware en particular, puede conllevar la reprogramación de recursos para un puerto <code class="docutils literal notranslate"><span class="pre">COM</span></code> (<em>puerto en serie/ paralelo</em>), o la activación de un controlador <code class="docutils literal notranslate"><span class="pre">USB</span></code>, durante la reactivación de un sistema.</p>
+<section id="dispositivos-acpi">
+<h2>Dispositivos ACPI<a class="headerlink" href="#dispositivos-acpi" title="Link to this heading"></a></h2>
+<p>El fabricante de la plataforma de hardware, especifica la jerarquía del <em>A-en</em> dentro de ACPI BIOS, describiendo la topología de hardware para la plataforma. Para mas información ver.</p>
+<p>Para cada dispositivo descrito en la jerarquía <em>A-en</em>, el controlador ACPI, <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code>, crea un dispositivo <em>filtro de objetos(filter DO)</em> o un dispositivo físico de objetos (<em>PDO</em>). Si el dispositivo está integrado en la placa de sistema, <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> crea un  filtro de objetos de dispositivo, representado por el <em>Bus filtro ACPI</em>, acoplando a él la pila de dispositivos encima del controlador Bus <em>PDO</em>. Para otros dispositivos descritos en <em>A-en</em>, no integrados en la placa de sistema, <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> crea el <em>PDO</em>. <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code>  proporciona la administracion de energía y características <em>PnP</em>, a la pila de dispositivos, para tales dispositivo de objeto. &gt; Windows, en plan elitista, está haciendo una clara referencia al <em>POO, programación orientada a objetos</em>, donde los “objetos” representan una abstracción de las “cosas, los objetos”, que encontraríamos en la vida real. Para más información ver <a class="reference external" href="https://learn.microsoft.com/es-es/windows-hardware/drivers/acpi/device-stacks-for-an-acpi-device">Pila de dispositivos en dispositivos ACPI</a>.</p>
+<p>Un dispositivo para el cual <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> crea un dispositivo de objetos es llamado <code class="docutils literal notranslate"><span class="pre">dispositivo</span> <span class="pre">ACPI</span></code>. El conjunto de “piezas”  <em>hardware</em> varía de una plataforma a otra y, depende de ACPI BIOS y de la configuración de <em>placa base</em>. Cabe mencionar que <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> carga el Bus filtro ACPI, sólo para dispositivos descritos en <em>A-en</em> y están permanentemente conectados a la plataforma de hardware(típicamente, estos dispositivos están integrados en el núcleo de silicona o, soldados a la placa base). No todas las <em>Placas Base</em> disponen de un Bus filtro ACPI.</p>
+<p>Toda la funcionalidad ACPI, es transparente a los controladores de alto nivel. Estos controladores, deben asumir la presencia o ausencia, de un filtro ACPI, para cualquier pila de dispositivo.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> y ACPI BIOS soportan funciones básicas de dispositivos ACPI. Para enriquecer su funcionalidad, el fabricante de dispositivo, puede suministrar un controlador de función <em>WDM</em>. Para más información ver <a class="reference external" href="https://learn.microsoft.com/es-es/windows-hardware/drivers/acpi/operation-of-an-acpi-device-function-driver">Operación de un dispositivo controlador de función ACPI</a>.</p>
+<p>Un dispositivo ACPI, es especificado por una definición de bloque, dentro de un sistema de tablas de descripción, en el ACPI BIOS. Una  definición de dispositivo de bloque, -entre otras cosas, especifica una region donde operar (referido a la RAM), el cuál es un bloque contiguo al dispositivo de memoria, usado para acceder al dispositivo de datos. Únicamente <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> modifica los datos en una operación regional(o de región). El controlador de función de dispositivo, puede leer los datos en una operación de región, pero no debe modificar los mismos. Cuando es llamado, un controlador(<em>handler</em>) de operación de región, transfiere <em>bytes</em> de la operación regional, desde y hacia el almacén de datos en <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code>. La operación combinada del controlador de función y <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> son específicos al controlador y es definida por ACPI BIOS y el hardware de fabricante. En general, el controlador de función y <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> acceden a areas particulares en una operación regional, para llevar a cabo operaciones de dispositivo específicas y, recuperar información. Para mas información, ver <a class="reference external" href="https://learn.microsoft.com/es-es/windows-hardware/drivers/acpi/supporting-an-operation-region">Soportando operaciones de región</a>.</p>
+</section>
+<section id="metodos-de-control-acpi">
+<h2>Métodos de control ACPI<a class="headerlink" href="#metodos-de-control-acpi" title="Link to this heading"></a></h2>
+<p>Son objetos de código, que declaran y definen operaciones simples, para consultar y configurar dispositivos ACPI. Los <em>métodos de control</em> son almacenados en el ACPI BIOS y, son codificados en formato <em>código de bit</em>, llamado lenguaje Máquina ACPI(AML). Los métodos de control para un dispositivo, son cargados en memoria, desde el sistema de <em>firmware</em> al A-en, e interpretados por el controlador ACPI de Windows, <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code>.</p>
+<p>Para invocar al método de control, el controlador <em>modo-kernel</em> para un dispositivo ACPI, inicia una petición IRP_MJ_DEVICE_CONTROL, el cuál es manejado por <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code>. Para controladores cargados en dispositivos de enumeración ACPI, <code class="docutils literal notranslate"><span class="pre">Acpi.sys</span></code> siempre implementa un dispositivo físico de objeto(PDO) en la pila del controlador. Para mas información ver  <a class="reference external" href="https://learn.microsoft.com/es-es/windows-hardware/drivers/acpi/evaluating-acpi-control-methods">Evaluando métodos de control ACPI</a>.</p>
+</section>
+<section id="especificaciones-acpi">
+<h2>Especificaciones ACPI<a class="headerlink" href="#especificaciones-acpi" title="Link to this heading"></a></h2>
+<p>La especificación de configuración avanzada e interfase de energía, está disponible en la <a class="reference external" href="https://uefi.org/specs/ACPI/">web ACPI</a>. La revisión 5.0 de la especificación ACPI introduce un conjunto de  características para dar soporte a móbiles PC’s, etc. System on Chip(SoC).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="acpiNameSpace.html" class="btn btn-neutral float-left" title="Jerarquía para el Espacio de Nombres ACPI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="acpiGPIO.html" class="btn btn-neutral float-right" title="Entrada/Salida de Propósito general" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

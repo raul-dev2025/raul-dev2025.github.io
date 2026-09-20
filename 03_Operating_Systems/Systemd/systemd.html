@@ -1,0 +1,225 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Systemd &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Systemd.unit" href="systemd-unit.html" />
+    <link rel="prev" title="Systemd.device" href="systemd-device.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#boot">Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#certificados-tls">Certificados-TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#file-system">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#man">Man</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#systemd">Systemd</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="systemd-device.html">Systemd.device</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Systemd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#conceptos">Conceptos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="systemd-unit.html">Systemd.unit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="udev.html">Gestor de dispositivos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Sistemas Operativos</a></li>
+      <li class="breadcrumb-item active">Systemd</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/03_Operating_Systems/Systemd/systemd.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="systemd">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Systemd</a><a class="headerlink" href="#systemd" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#systemd" id="id1">Systemd</a></p>
+<ul>
+<li><p><a class="reference internal" href="#conceptos" id="id2">Conceptos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>Systemd es el reemplazo de sysV; es un sistema más moderno, donde se han reemplazado las condiciones de carrera del sistema (race condition/run levels, <em>rc.</em>), por un sistema basado en objetivos(<em>targets</em>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ systemctl get-default
+</pre></div>
+</div>
+<p>Identifica el <em>target</em> o <em>run level</em>, en uso. <code class="docutils literal notranslate"><span class="pre">Systemd</span></code> es un sistema y un gestor de servicios, para las operaciones de sistema de <em>Linux</em>. Cuando corre como primer proceso en el arranque(como <code class="docutils literal notranslate"><span class="pre">PID</span> <span class="pre">1</span></code>), actua como un <em>sistema de inicio</em> que entrega y mantiene los servicios en el espacio de usuario.</p>
+<p>Por compatibilidad con <code class="docutils literal notranslate"><span class="pre">SysV</span></code>, cuando <code class="docutils literal notranslate"><span class="pre">Systemd</span></code> es llamacado como <em>“init”</em> y el <code class="docutils literal notranslate"><span class="pre">PID</span></code> no es 1, <code class="docutils literal notranslate"><span class="pre">Systemd</span></code> ejecutará <code class="docutils literal notranslate"><span class="pre">tellinit</span></code> y pasará todos los argumentos de línea de comando, sin modificar. Esto significa que <code class="docutils literal notranslate"><span class="pre">init</span></code> y <code class="docutils literal notranslate"><span class="pre">tellinit</span></code> son mayoritáriamente equivalentes al ser invocados desde una sesión de entrada normal.</p>
+<blockquote>
+<div><p><em>&gt; ver ``man tellinit``.</em></p>
+</div></blockquote>
+<p>Cuado corre como <em>instancia de sistema</em>, <code class="docutils literal notranslate"><span class="pre">systemd</span></code>, interpretará el archivo de  configuración <code class="docutils literal notranslate"><span class="pre">system.conf</span></code> y, los arlchivos de configuración en los directorios <code class="docutils literal notranslate"><span class="pre">system.conf.d</span></code>. Cuando corre como <em>instancia de usuario</em>, interpretará el archivo de configuaración <code class="docutils literal notranslate"><span class="pre">user.conf</span></code> y los archivos en los directorios <code class="docutils literal notranslate"><span class="pre">system.conf.d</span></code>.</p>
+<blockquote>
+<div><p><em>&gt; ver ``man systemd-system.conf``.</em></p>
+</div></blockquote>
+<section id="conceptos">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Conceptos</a><a class="headerlink" href="#conceptos" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">systemd</span></code> proporciona un sistema de dependencia entre varios entidades, llamado <em>“units”</em>, de 12 diferentes tipos. Las <em>unidades</em> encapsulan varios objetos que son relevantes para el <em>sistema de arranque</em> y <em>mantenimiento</em>. La malloría de <em>unidades</em> son configuradas en archivos de configuración de este tipo, cuya sintaxis y conjunto básico de opciones, es descrito en <code class="docutils literal notranslate"><span class="pre">systemd.unit(5)</span></code>, aunque algunos de ellos, son creados automáticamente desde algún otro archivo de configuración, dinámicamente desde el <em>estado de sistema</em> o, programáticamente durante el <em>tiempo de ejecución</em>.</p>
+<p>Las <em>unidades</em>, pueden estar <em>activas</em> (<code class="docutils literal notranslate"><span class="pre">active</span></code>); significando esto último: <em>activas, vinculadas</em> conectadas en… dependiendo del tipo de unidad.</p>
+<p>También pueden estar <em>inactivas)</em>(<code class="docutils literal notranslate"><span class="pre">inactive</span></code>); significando: <em>paradas, desvinculadas,</em> <em>desconectadas …</em> así como en el proceso de estar alcanzando cualquier de los estados descritos, en tal caso <code class="docutils literal notranslate"><span class="pre">activating</span></code> o <code class="docutils literal notranslate"><span class="pre">deactivating</span></code>, denota su estado transitorio.</p>
+<p>De igual forma, un estado <em>especial</em> <code class="docutils literal notranslate"><span class="pre">failed</span></code> está disponible, el cuál es muy similar al  estado <code class="docutils literal notranslate"><span class="pre">inactive</span></code> donde el entra el servicio al momento de fallar de alguna manera -el proceso retorna código de error al salir, al <em>romper</em> o tras agotar el tiempo de operación. Si alcanza tal estado, la causa será anotada, para posteriores referencias. Nótese que varios de los typos de estados podrían tener un número adicional de subestados, los cuales serán <em>mapeados</em> en los cinco estados generales de unidades, descritos quí:</p>
+<ol class="arabic simple">
+<li><p><em>Servicio de unidades</em>, el cuál empieza y controla los demonios y procesos en que ellos mismos consisten. <em>ver systemd.service(5)</em>.</p></li>
+<li><p>Unidad de zócalos(socket), el cuál encapsula <em>IPC</em>’s o redes  locales en el sistema, útil para la activación basada en zócalos. <em>ver systemd.socket(5)</em>, para detalles sobre la activación basada en zócalos, <em>ver daemon(7)</em>.</p></li>
+<li><p>Las <em>unidades objetivo</em>, son útiles para agrupar unidades o, proporcionar puntos de sincronización bién formados, durante el <em>arranque</em>, ver <code class="docutils literal notranslate"><span class="pre">systemd.target(5)</span></code>.</p></li>
+<li><p>Las unidades de dispositivo, exponen dispositivos del núcleo en <code class="docutils literal notranslate"><span class="pre">systemd</span></code> y pueden ser usados para implementar la <em>activación</em> basada en dispositivos. Ver <code class="docutils literal notranslate"><span class="pre">systemd.device</span></code>.</p></li>
+</ol>
+<div class="admonition-ipc admonition">
+<p class="admonition-title">IPC</p>
+<p><em>InterProcess Communication</em>. ipc() es un punto de entrada <em>habitual</em> en el núcleo, para las llamadas de <code class="docutils literal notranslate"><span class="pre">system</span> <span class="pre">V</span></code> para mensajes, semáforos y memoria compartida. ver msgctl (2), semctl(2), shmctl(2) sobre sistemas x86_64 y ARM, ya que estas arquitecturas, no se utilizan las llamadas a sistema del tipo IPC.</p>
+</div>
+<section id="directorio-de-configuracion-y-precedencia">
+<h3>Directorio de configuración y precedencia<a class="headerlink" href="#directorio-de-configuracion-y-precedencia" title="Link to this heading"></a></h3>
+<p>Durante la compilación del núcleo se crean automáticamente unos archivos de configuración por defecto, aunque habrá que revisarlos por que están en su mayoría comentados.</p>
+<p>Para mantener una copia o plantilla, que después sirva como inicio de una nueva configuración, es conveniente hacer una copias de estas <em>guías</em> a <code class="docutils literal notranslate"><span class="pre">/etc/systemd/user.conf.d</span></code> y realizar sobre este directorio los cambios que se ajusten a un determinado systema o configuración.</p>
+<p>Cuando una aplicación personaliza alguna de estas configuraciones, lo hace sobre el directorio <code class="docutils literal notranslate"><span class="pre">/usr/lib/systemd/*.conf.d/</span></code>. Los archivos de este tipo sobre <code class="docutils literal notranslate"><span class="pre">/etc/</span></code> son reservados para uso del administrador local, quien usará esta lógica para sobreescribir los archivos de configuración, instalados por el fabricante/distribuidor, etc.</p>
+<ul>
+<li><p>El archivo de configuración principal es el primero en leerse, con menor precedencia.</p></li>
+<li><p>Las entradas, en cualquier archivo de configuración, sobreescriben las entradas en otros archivos de configuración.</p></li>
+<li><p>Los archivos almacenados en subdirectorios de configuración <code class="docutils literal notranslate"><span class="pre">*.conf.d/</span></code> serán orndenados por nombre de archivo, en lugar de por el directorio en que se encuentren.</p></li>
+<li><p>Si múltiples archivos, especifican la misma opción, se tomará en cuenta la última leída.</p></li>
+<li><p>Es buena idea inidcar un número delante del archivo, para indicar el orden de   precedencia, algo así: 01-Primero-EnLeer 20-Segundo-EnLeer 50-tercero-EnLeer  99-Ultimo-EnLeer … y ajustar las variables contenidas, teniendo en cuenta lo anterior.</p>
+<blockquote>
+<div><p><em>&gt; Es una question más del orden de precedencia; el momento en que el sistema carga un determinado servicio o programa, que de la importancia del mismo(esto último es irrelevante).</em></p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="relacion-entre-rc-y-targets-objetivos">
+<h3>Relación entre .rc y targets(objetivos)<a class="headerlink" href="#relacion-entre-rc-y-targets-objetivos" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Run level 0 – poweroff.target runlevel0 &lt;–&gt; enlace simbólico a poweroff.target</p></li>
+<li><p>Run level 1 – rescue.target runlevel1 &lt;–&gt; simbólico a rescue.target</p></li>
+<li><p>Run level 2 – PERSONALIZADO USUARIO?? runlevel2 &lt;–&gt; simbólico a</p></li>
+<li><p>Run level 3 – multi-user-target runlevel3 &lt;–&gt; simbólico a multi-user-target</p></li>
+<li><p>Run level 4 – PERSONALIZADO USUARIO?? runlevel4 &lt;–&gt; simbólico a</p></li>
+<li><p>Run level 5 – graphical.target runlevel5 &lt;–&gt; simbólico a graphical.target</p></li>
+<li><p>Run level 6 – reboot.target runlevel6 &lt;–&gt; simbólico a reboot.target</p></li>
+</ul>
+</section>
+<section id="cambiar-el-objetivo-runlevel-con-el-sistema-en-marcha">
+<h3>Cambiar el objetivo(runlevel) con el sistema en marcha.<a class="headerlink" href="#cambiar-el-objetivo-runlevel-con-el-sistema-en-marcha" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># con los permisos apropiados, se cambia el *run level*.</span>
+<span class="n">systemctl</span> <span class="n">isolate</span> <span class="n">multi</span><span class="o">-</span><span class="n">user</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+</section>
+<section id="listado-de-dispositibvos">
+<h3>Listado de dispositibvos<a class="headerlink" href="#listado-de-dispositibvos" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># lista de unidades conocidad, según el man-page, revisar.</span>
+<span class="n">systemctl</span> <span class="nb">list</span><span class="o">-</span><span class="n">units</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="systemd-device.html" class="btn btn-neutral float-left" title="Systemd.device" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="systemd-unit.html" class="btn btn-neutral float-right" title="Systemd.unit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

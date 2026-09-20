@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submódulos de Almacenamiento, Red y Seguridad &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Generación y Sincronización de Señales" href="clk-signal.html" />
+    <link rel="prev" title="Firmware y Arranque" href="fwr-boot.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#placa-base">Placa Base</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Arquitectura de la Placa Base</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Arquitectura de la Placa Base</a></li>
+      <li class="breadcrumb-item active">Submódulos de Almacenamiento, Red y Seguridad</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/PlacaBase/drive-mod.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="submodulos-de-almacenamiento-red-y-seguridad">
+<h1>Submódulos de Almacenamiento, Red y Seguridad<a class="headerlink" href="#submodulos-de-almacenamiento-red-y-seguridad" title="Link to this heading"></a></h1>
+<p>Esta sección aborda los controladores y conectores integrados en la placa base dedicados a la interconexión de almacenamiento masivo de alta velocidad, las interfaces de red locales o inalámbricas y las tecnologías de seguridad criptográfica por hardware.</p>
+<section id="zocalos-m-2-ngff-y-protocolo-nvme">
+<h2>Zócalos M.2 (NGFF) y Protocolo NVMe<a class="headerlink" href="#zocalos-m-2-ngff-y-protocolo-nvme" title="Link to this heading"></a></h2>
+<p>El conector <strong>M.2</strong> (antiguamente conocido como <em>Next Generation Form Factor</em> - NGFF) es el estándar de factor de forma compacto diseñado para tarjetas de expansión internas de pequeño tamaño (unidades SSD, tarjetas Wi-Fi/Bluetooth, etc.).</p>
+<section id="mapeo-de-lineas-y-codificacion-mecanica-keying">
+<h3>Mapeo de Líneas y Codificación Mecánica (<em>Keying</em>)<a class="headerlink" href="#mapeo-de-lineas-y-codificacion-mecanica-keying" title="Link to this heading"></a></h3>
+<p>Los conectores M.2 utilizan muescas mecánicas (<em>Keys</em>) en el zócalo para determinar la compatibilidad eléctrica y evitar la inserción de dispositivos incompatibles:</p>
+<ul class="simple">
+<li><p><strong>M-Key</strong>: Asigna hasta 4 líneas de <strong>PCI Express</strong> (PCIe x4) o SATA. Es el estándar utilizado por los SSDs <strong>NVMe</strong> (<em>Non-Volatile Memory Express</em>) de alto rendimiento.</p></li>
+<li><p><strong>B-Key</strong>: Asigna hasta 2 líneas PCIe (PCIe x2), SATA o buses de comunicación de baja velocidad (USB 2.0/3.0, HSIC).</p></li>
+<li><p><strong>B+M Key</strong>: Dispositivos que incorporan ambas muescas mecánicas, limitados a 2 líneas PCIe o interfaz SATA.</p></li>
+<li><p><strong>E-Key / A-Key</strong>: Diseñados principalmente para módulos de conectividad inalámbrica (Wi-Fi, Bluetooth y módem celular) combinando líneas PCIe x1, USB 2.0 y la interfaz <strong>CNVi</strong> (<em>Intel Integrated Connectivity</em>).</p></li>
+</ul>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Comparativa de Rendimiento en Almacenamiento M.2</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 35.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Interfaz</p></th>
+<th class="head"><p>Protocolo</p></th>
+<th class="head"><p>Ancho de Banda Máximo Teórico</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>M.2 SATA</strong></p></td>
+<td><p>AHCI</p></td>
+<td><p>~600 MB/s (limitado por SATA III)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>M.2 NVMe (PCIe 3.0 x4)</strong></p></td>
+<td><p>NVMe</p></td>
+<td><p>~3.9 GB/s</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>M.2 NVMe (PCIe 4.0 x4)</strong></p></td>
+<td><p>NVMe</p></td>
+<td><p>~7.8 GB/s</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>M.2 NVMe (PCIe 5.0 x4)</strong></p></td>
+<td><p>NVMe</p></td>
+<td><p>~15.7 GB/s</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="controladores-de-red-ethernet-phy-mac">
+<h2>Controladores de Red (Ethernet PHY / MAC)<a class="headerlink" href="#controladores-de-red-ethernet-phy-mac" title="Link to this heading"></a></h2>
+<p>El subsistema de red local Ethernet en la placa base se divide en dos componentes funcionales principales:</p>
+<ol class="arabic simple">
+<li><p><strong>Controlador MAC (*Media Access Control*)</strong>: Integrado directamente dentro del chipset principal (PCH/Southbridge) o en un circuito integrado PCI Express independiente. Gestiona la capa de enlace de datos, las tramas Ethernet y el direccionamiento MAC.</p></li>
+<li><p><strong>Chip PHY (*Physical Layer*)</strong>: Transceptor físico independiente ubicado en la placa base que convierte las señales digitales del controlador MAC en las señales analógicas requeridas por el cable de red de pares trenzados (puerto <strong>RJ-45</strong>).</p></li>
+</ol>
+<p>La comunicación entre el controlador MAC interno y el chip PHY externo se realiza habitualmente a través de interfaces estandarizadas como <strong>MII</strong> (<em>Media Independent Interface</em>) o <strong>RGMII</strong>.</p>
+</section>
+<section id="modulo-tpm-2-0-trusted-platform-module">
+<h2>Módulo TPM 2.0 (Trusted Platform Module)<a class="headerlink" href="#modulo-tpm-2-0-trusted-platform-module" title="Link to this heading"></a></h2>
+<p>El <strong>TPM</strong> (<em>Trusted Platform Module</em>) es un criptoprocesador seguro diseñado para realizar operaciones criptográficas, almacenar claves de cifrado de forma protegida y verificar la integridad de la plataforma.</p>
+<section id="implementaciones-del-tpm">
+<h3>Implementaciones del TPM<a class="headerlink" href="#implementaciones-del-tpm" title="Link to this heading"></a></h3>
+<p>Existen dos formas principales de integrar el estándar TPM 2.0 en una placa base:</p>
+<ul class="simple">
+<li><p><strong>dTPM (*Discrete TPM*)</strong>: Chip dedicado independiente soldado en la placa base (o conectado mediante un cabezal SPI/LPC de 14-20 pines) con su propia memoria integrada y mecanismos físicos contra manipulación (<em>tamper resistance</em>).</p></li>
+<li><p><strong>fTPM / PTT (*Firmware TPM*)</strong>: Implementación basada en firmware que ejecuta las funciones de seguridad dentro de un entorno de ejecución seguro (<em>Trusted Execution Environment - TEE</em>) dentro del propio procesador principal (Intel PTT - <em>Platform Trust Technology</em> o AMD fTPM).</p></li>
+</ul>
+</section>
+<section id="funciones-clave-de-seguridad">
+<h3>Funciones Clave de Seguridad<a class="headerlink" href="#funciones-clave-de-seguridad" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Arranque Medido (*Measured Boot*)</strong>: Registra los checksums criptográficos de cada componente del proceso de arranque (firmware UEFI, tablas ACPI, cargador de arranque y kernel) en los registros <strong>PCR</strong> (<em>Platform Configuration Registers</em>) del TPM.</p></li>
+<li><p><strong>Almacenamiento de Claves de Cifrado</strong>: Guarda de forma segura las claves de cifrado de volumen completo para herramientas del sistema operativo como <strong>BitLocker</strong> (Windows) o <strong>LUKS</strong> (Linux), liberando la clave únicamente si la secuencia de arranque no ha sido alterada.</p></li>
+<li><p><strong>Generador de Números Aleatorios Por Hardware (TRNG)</strong>: Proporciona entropía de alta calidad para la generación de claves asimétricas (RSA, ECC).</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fwr-boot.html" class="btn btn-neutral float-left" title="Firmware y Arranque" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="clk-signal.html" class="btn btn-neutral float-right" title="Generación y Sincronización de Señales" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

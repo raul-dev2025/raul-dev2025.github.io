@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tmpfs &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Gestor FPGA" href="../Fpga/fpga-mgr.html" />
+    <link rel="prev" title="Qué es ramfs?" href="rams-rootfs-initramfs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#filesystem">FileSystem</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Nfs/nfs.html">El cliente NFS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nfsroot.html">Montando el sistema de ficheros raíz, vía NFS(nfsroot)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rams-rootfs-initramfs.html">Qué es ramfs?</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Tmpfs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#varios">Varios</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Tmpfs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/FileSystem/tmpfs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tmpfs">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Tmpfs</a><a class="headerlink" href="#tmpfs" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#tmpfs" id="id1">Tmpfs</a></p>
+<ul>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id2">Referencias y agradecimientos</a></p></li>
+<li><p><a class="reference internal" href="#varios" id="id3">Varios</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p><code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> es un sistema de archivo que guarda los <em>archivos</em> en memoria virtual.</p>
+<p>Cualquier cosa en <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> es <em>temporal</em>, en el sentido de que los <em>archivos</em> no serán creados en el disco duro. Al desmontar un sistema de archivo cualquier <em>algo</em> guardado en él, se perderá.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> guarda todo en las cachés internas del núcleo y, <em>crece o méngua</em> para acomodar los ficheros que contiene y, es capaz de intercambiar páginas  innecesarias, fuera del espacio de intercambio. Tiene un límite máximo de tamaño, el cúal puede ser ajustado, al momento, por medio de <code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">-o</span> <span class="pre">remount</span> <span class="pre">...</span></code></p>
+<p>Comparado con <code class="docutils literal notranslate"><span class="pre">ramfs</span></code> -el cuál fué la plantilla para crear <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code>, se gana el intercambio y límites de comprovación o coincidencia. El <em>disco RAM</em> es algo similar(/dev/ram*), el cuál simula un espacio físico fijo en el disco duro, donde poder crear encima, sistemas de archivo <em>ordinarios</em>. Los <em>discos RAM</em> no pueden intercambiar, tampoco tienen la posibilidad de ser redimensionados.</p>
+<p>Debido a que <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> está completamente integrado en la <em>página de caché</em> y en la <em>memoria de</em> <em>intercambio</em>, todas las páginas <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> serán mostradas como “shmem”(memoria compartida) en <code class="docutils literal notranslate"><span class="pre">/proc/meminfo</span></code> y “Shared” en <code class="docutils literal notranslate"><span class="pre">free(1)</span></code>. Nótese que los <em>contadores</em> incluyen la memoria compartida(<code class="docutils literal notranslate"><span class="pre">shmem</span></code>, ver <code class="docutils literal notranslate"><span class="pre">ipcs(1)</span></code>). Para obtener el contador lo mejor es usar <code class="docutils literal notranslate"><span class="pre">df(1)</span></code> y <code class="docutils literal notranslate"><span class="pre">du(1)</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> tiene los siguiente usos:</p>
+<ol class="arabic simple">
+<li><p>Siempre hay un montaje interno del <em>kernel</em>, que no puede verse. Usado para  _mapas anónimos <em>compartidos</em> y, para <em>memoria compartida SYSV</em>.</p></li>
+</ol>
+<p>Éste <em>montaje</em> no depende de <code class="docutils literal notranslate"><span class="pre">CONFIG_TMPFS</span></code>. Si <code class="docutils literal notranslate"><span class="pre">CONFIG_TMPFS</span></code> no es  configurado, la  parte de <em>tmpfs</em> visible por el usuario, no será construida. Pero el mecanismo interno está siempre presente.</p>
+<ol class="arabic simple" start="2">
+<li><p><em>glibc 2.2</em> y posteriores, esperan que <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> sea montado sobre <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code>,  para memoria compartida POSIX <code class="docutils literal notranslate"><span class="pre">hm_open,</span> <span class="pre">shm_unlink</span></code>. Añadiendo la siguiente línea a <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> debería tomar efecto:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tmpfs<span class="w"> </span>/dev/shmtmpfs<span class="w"> </span>defaults0<span class="w"> </span><span class="m">0</span>
+</pre></div>
+</div>
+<p>Recordar <em>crear</em>, el directorio donde montar <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> si fuese necesario.</p>
+<p>Tal montaje, <em>no es necesario</em> para la memoria compartida de SYSV. El <em>montaje interno</em> es usado para eso. En versiones del kernel <em>v2.3</em> fué necesario montar el predecesor de <em>tmpfs(shm fs)</em> para usar la memoria compartida de SYSV.</p>
+<p><strong>POSIX:</strong> Portable Operating System Interfase UniX like, Interfase Portable para Sistemas Operativos del tipo UniX.</p>
+<ol class="arabic simple" start="3">
+<li><p>Algunas personas -incluido el autor del texto, encuentran muy conveniente montarlo, por ejemplo en <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> y <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code> y tener una _gran_ partición de  intercambio. Reiterar el montaje de <code class="docutils literal notranslate"><span class="pre">tmpfs``(en</span> <span class="pre">plural),</span> <span class="pre">para</span> <span class="pre">que</span> <span class="pre">hagan</span> <span class="pre">su</span> <span class="pre">trabajo,</span> <span class="pre">y</span> <span class="pre">así,</span> <span class="pre">``mkinitrd</span></code> coincida con la mayoría de distribuciones, para que puedan montar <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> sobre <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>.</p></li>
+<li><p>Probablemente muchas más…</p></li>
+</ol>
+<p>tmpfs tiene tres opciones de montaje para el <em>tamaño</em>:</p>
+<p><strong>size:</strong> el límite de <em>bytes direccionados</em> por la instancia de <em>tmpfs</em>. Por defecto es <em>half(medio)</em> la mitad del espacio de RAM sin memoria de intercambio. Sobredimensionar la instancia de <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> la <em>máquina</em> <em>morirá cerrada</em> ya que el OOM -debe ser un mantra.</p>
+<p><strong>nr_blocks:</strong> igual que tamaño, pero en bloques de PAGE_SIZE.
+<strong>nr_inodes:</strong> el máximo número de <em>inodos</em> para esta instancia. Por defecto es <em>half(medio)</em> la mitad del número de páginas físicas de RAM, -o en una máquina con memoria elevada/reservada(highmem) el número de páginas <em>lowmem</em>, las cuáles son siempre <em>lower</em>.</p>
+<p>Éste parámetro accepta un sufijo <code class="docutils literal notranslate"><span class="pre">k,</span> <span class="pre">m,</span> <span class="pre">g</span></code> kilo, mega y giga, respectivamente; que podrá ser cambiado tras volver a montar <em>la unidad</em>. El parámetro <em>tamaño</em>, también acepta un sufijo <code class="docutils literal notranslate"><span class="pre">%</span></code> para limitar la instancia de <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> al porcentaje indicado, respecto a la memoria física RAM: por defecto, cuando ni <code class="docutils literal notranslate"><span class="pre">size</span></code>, ni <code class="docutils literal notranslate"><span class="pre">nr_blocks</span></code> son especificados, el tamaño es <code class="docutils literal notranslate"><span class="pre">size=50%</span></code>.</p>
+<p>Si <code class="docutils literal notranslate"><span class="pre">nr_blocks=0</span> <span class="pre">or</span> <span class="pre">size=0</span></code>, <em>blocks</em> no será limitado en esa instancia. Si <code class="docutils literal notranslate"><span class="pre">nr_blocks=0</span></code> no se limitarán los <em>inodos</em>. En general, no es muy acertado el montaje con ésta opción, ya que permite a cualquier usuario el acceso a escritura, sobre toda la memoria física; pero facilita la <em>escalabilidad</em> de la <em>instancia</em>, sobre sistemas con <em>muchas</em> CPUs, a hacer un uso intensivo de ella -la memoria física.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> tiene una opción de montaje para configurar la <em>política de direccionado NUMA</em>, para todos los <em>archivos</em> en esa instancia -si es activado CONFIG_NUMA, el cuál puede ajustarse <em>al momento</em> con <code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">'o</span> <span class="pre">remount</span> <span class="pre">...</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mpol</span><span class="o">=</span><span class="n">default</span> <span class="n">usa</span> <span class="n">la</span> <span class="n">política</span> <span class="n">_direccionado</span> <span class="n">de</span> <span class="n">proceso_</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>ver <code class="docutils literal notranslate"><span class="pre">set_mempolicy(2)</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mpol</span><span class="o">=</span><span class="n">prefer</span><span class="p">:</span><span class="n">Node</span> <span class="n">preferencia</span> <span class="n">para</span> <span class="n">dirigir</span> <span class="n">la</span> <span class="n">memoria</span> <span class="n">a</span> <span class="n">un</span> <span class="n">determinado</span> <span class="n">nodo</span><span class="o">.</span>
+<span class="n">mpol</span><span class="o">=</span><span class="n">bind</span><span class="p">:</span><span class="n">NodeList</span> <span class="n">preferencia</span> <span class="n">de</span> <span class="n">direccionado</span><span class="p">,</span> <span class="n">sólo</span> <span class="n">de</span> <span class="n">los</span> <span class="n">nodos</span> <span class="n">en</span> <span class="n">NodeLis</span> <span class="p">(</span><span class="n">lista</span> <span class="n">de</span> <span class="n">nodos</span><span class="p">)</span><span class="o">.</span>
+<span class="n">mpol</span><span class="o">=</span><span class="n">interleavepreferencia</span> <span class="n">de</span> <span class="n">direccionado</span> <span class="n">desde</span> <span class="n">cada</span> <span class="n">nodo</span><span class="p">,</span> <span class="n">por</span> <span class="n">turno</span><span class="o">.</span>
+<span class="n">mpol</span><span class="o">=</span><span class="n">interleave</span><span class="p">:</span><span class="n">NodeList</span> <span class="n">direccionado</span> <span class="n">desde</span> <span class="n">cada</span> <span class="n">nodo</span><span class="p">,</span> <span class="n">por</span> <span class="n">turno</span><span class="o">.</span>
+<span class="n">mpol</span><span class="o">=</span><span class="n">local</span> <span class="n">preferencia</span> <span class="n">de</span> <span class="n">direccionado</span> <span class="n">desde</span> <span class="n">nodos</span> <span class="n">locales</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>El formato <em>NodeList</em> es una lista separada por comas, de <em>números decimales y rangos</em>; siendo una rango <em>dos números separados por guión</em>. El más pequeño y el más grande, por ejemplo.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mpol</span><span class="o">=</span><span class="n">bind</span><span class="p">:</span><span class="mi">0</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="o">-</span><span class="mi">15</span>
+</pre></div>
+</div>
+<p>Una <em>política de memoria</em> con un <em>NodeList</em> válido, será guardado -como se especificó, para ser usado durante la creación del archivo. Cuando una tarea coloca un archivo en el lsistema de archivos, la opción para montar la política de memoria, será aplicada con el <em>NodeList</em>, si hay alguno, modificado por la restricción de la tarea que hace la llamada.
+Los argumentos opcionales, también serán añadidos, listados más abajo. Si el resultante <em>NodeList</em> es configurado <em>vacío</em>, la política de memoria <em>efectiva</em> para el <em>archivo</em> será revertida en su defecto, <code class="docutils literal notranslate"><span class="pre">default</span> <span class="pre">policy</span></code>.</p>
+<blockquote>
+<div><p>Ver <code class="docutils literal notranslate"><span class="pre">Documentation/cgroup-v1/cpusets.txt</span></code>.</p>
+</div></blockquote>
+<p>Las políticas de direccionado NUMA, tienen opciones de argumentos que pueden ser usados en conjunción con sus modos. Éstos <em>optional flags</em> podrán ser especificados al momento de montar <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> añadiendolos al <em>modo</em> antes del <em>Nodelist</em>. Ver <code class="docutils literal notranslate"><span class="pre">Documentation/vm/numa_memory_policy.txt</span></code>, para una lista de todas las políticas de direccionado de memoria disponibles.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">=</span><span class="n">static</span> <span class="ow">is</span> <span class="n">equivalent</span> <span class="n">toMPOL_F_STATIC_NODES</span>
+<span class="o">=</span><span class="n">relative</span> <span class="ow">is</span> <span class="n">equivalent</span> <span class="n">toMPOL_F_RELATIVE_NODES</span>
+</pre></div>
+</div>
+<p>Por ejemplo, <code class="docutils literal notranslate"><span class="pre">mpol=bind=static:Nodelist</span></code> es el equivalente de una política de direccionado <code class="docutils literal notranslate"><span class="pre">MPOL_BIND</span> <span class="pre">MPOL_F_STATIC_NODES</span></code>.</p>
+<p>Nótese que intentar montar un <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> con la opción <code class="docutils literal notranslate"><span class="pre">mpol</span></code> fallará si el <em>kernel</em> no soporta <em>NUMA</em>; igualmente fallará si el <em>Nodelist</em> especificado no <em>está en línea</em>. Si el sistema sobre el <em>tmpfs</em> que está siendo montado, pero de vez en cuando, alcanza la contrucción de un <em>kernel</em>, sin la capacidad <em>NUMA</em>(quizás el modo de recuperación del <em>kernel</em>), o sin estar todos los <em>nodosen línea</em>, entonces será poosible omitir la opción <em>mpol</em> desde las opciones de montaje automático. Podrá ser añadido después, cuando  <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> efectivamente esté montado en el <em>punto de montaje</em> con:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mount</span> <span class="o">-</span><span class="n">o</span> <span class="n">remount</span><span class="p">,</span><span class="n">mpol</span><span class="o">=</span><span class="n">Policy</span><span class="p">:</span><span class="n">NodeList</span> <span class="n">MountPoint</span>
+</pre></div>
+</div>
+<p>Para especificar el directorio raíz pueden utilizarse las siguientes opciones de montaje:</p>
+<p>mode: los permisos como <em>número octal</em> uid: el <em>id</em> de usuario gid: el <em>id</em> de grupo</p>
+<p>Ésta opción no tiene ningún efecto sobre <em>remount</em>. Podrán cambiarse estos parámetros con <code class="docutils literal notranslate"><span class="pre">chmod(1)</span></code>, <code class="docutils literal notranslate"><span class="pre">chown(1)</span></code> y <code class="docutils literal notranslate"><span class="pre">chgrp(1)</span></code> sobre un <em>sistema de archivo</em> montado.</p>
+<p>Así que <code class="docutils literal notranslate"><span class="pre">mount</span> <span class="pre">-t</span> <span class="pre">tmpfs</span> <span class="pre">-o</span> <span class="pre">size=10G,nr_inodes=10k,mode=700</span> <span class="pre">tmpfs</span> <span class="pre">/mytmpfs</span></code> porporcionará
+una <em>instancia</em> de <code class="docutils literal notranslate"><span class="pre">/mitmpfs</span></code> el cuál puede colocar <code class="docutils literal notranslate"><span class="pre">10GB</span></code> de <em>ram/swap</em> sobre <code class="docutils literal notranslate"><span class="pre">10240</span></code> <em>inodos</em>, y sólo es accesible por el usuario <code class="docutils literal notranslate"><span class="pre">root</span></code>.</p>
+<section id="referencias-y-agradecimientos">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<p>Author: Christoph Rohland <a class="reference external" href="mailto:cr&#37;&#52;&#48;sap&#46;com">cr<span>&#64;</span>sap<span>&#46;</span>com</a>, 1.12.01 Updated: Hugh Dickins, 4 June 2007 Updated: KOSAKI Motohiro, 16 Mar 2010</p>
+</section>
+<section id="varios">
+<span id="varios-1"></span><h2><a class="toc-backref" href="#id3" role="doc-backlink">Varios</a><a class="headerlink" href="#varios" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><strong>Fichero/archivo:</strong> En algunos idiomas, se hace una distinción  entre estos dos términos, aludiendo a un significado distinto; fichero sería la <em>unidad  mínima indivisible</em> -por  así decirlo. Archivo, trata de referirse a un “contenedor” pudiendo  guardar en su interior,  otras <em>unidades</em>. En castellano ésta distición queda un poco  fuera de lugar, ya que ambos terminos son usados indistíntamente para  referirse a lo mismo. Un fichero puede ser <code class="docutils literal notranslate"><span class="pre">unFichero.extension</span></code>  ó <code class="docutils literal notranslate"><span class="pre">/unDirectorio</span></code> ó <code class="docutils literal notranslate"><span class="pre">unPaquete.rpm</span></code>. Por lo que archivo como  término, podría referirse  igualmente a cualquiera de ellos. fichero: lugar donde se guardan  fichas. El orden es implícito por que sólo se guardan fichas.
+<strong>Archivo</strong>: lugar donde se guardan cosas, de forma organizada. Por fichas, por fechas, por fajos.</p>
+</div></blockquote>
+<p><strong>on the fly</strong>: en el aire, en caliente, al momento.</p>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p><em>OOM Out Of Memory</em> managment, Gestión para la <em>memoria fuera de rango</em>. <em>direccionado de proceso</em>, esto podría traducirse de alguna otra manera que ahora no  consigo ver, el <em>manual</em> hace referencia a los <em>hilos(thread)</em> del procesador. NUMA es un un entorno -o interfase, para el procesador, el cuál implementa una caché -o pseudo  cache, como extensión al procesador, proporcionando memoria separada para cada procesador…</p>
+</div>
+<p>Sin embargo también, es necesario coordinar la carga de trabajo sobre la CPUs, y habilitar un mecanismo capaz de dar aceso a procesos de escritura en <em>bloques</em>, que están siendo usados por distintos procesos al mismo tiempo, <em>el rcu way!</em>, ya que ningún ordenador convencional, es capaz hoy en día de llevar a cabo <em>“dos tareas a la vez”</em>. Se han construído en laboratorios, célucas de memoria que sí son capaces de de existir en dos estados distintos al mismo tiempo(<code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">1</span></code>), pero no es algo que se comercialize. RCU explica este mecanismo, donde el disco puede <em>estar escrito y, no escrito</em> al mismo tiempo.</p>
+<p><strong>Data structure alignment:</strong> alineamiento de la estructura de datos; significa poner los datos en la dirección de memoria, IGUAL, a algún <em>múltiplo</em> del <em>tamaño de palabra debit</em>, frecuentemente <strong>32 bits ó 64 bits</strong>, en computadoras modernas.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rams-rootfs-initramfs.html" class="btn btn-neutral float-left" title="Qué es ramfs?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Fpga/fpga-mgr.html" class="btn btn-neutral float-right" title="Gestor FPGA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parámetros para la línea de comandos del kernel &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unidad de prueba, del árbol de dispositivo Open Firmware" href="of_unittest.html" />
+    <link rel="prev" title="InitRD" href="initrd.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="1-boot.html">Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="initrd.html">InitRD</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Parámetros para la línea de comandos del <em>kernel</em></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#listas-de-cpu">Listas de CPU</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="serial-console.html">Cónsola en serie Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deadline-iosched.html">Parámetros de Ajuste del Planificador de E/S Deadline</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Parámetros para la línea de comandos del <em>kernel</em></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/Admin-guide/kernParam.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="parametros-para-la-linea-de-comandos-del-kernel">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Parámetros para la línea de comandos del <em>kernel</em></a><a class="headerlink" href="#parametros-para-la-linea-de-comandos-del-kernel" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#parametros-para-la-linea-de-comandos-del-kernel" id="id1">Parámetros para la línea de comandos del <em>kernel</em></a></p>
+<ul>
+<li><p><a class="reference internal" href="#listas-de-cpu" id="id2">Listas de CPU</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id3">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>Los siguientes, son una lista consolidada de parámetros del núcleo implementados por las funciones(macros) <code class="docutils literal notranslate"><span class="pre">__setup()</span></code>, <code class="docutils literal notranslate"><span class="pre">core_param()</span></code> y <code class="docutils literal notranslate"><span class="pre">module_param()</span></code>. Han sido ordenadas alfabéticamente siguiendo el orden del alfabeto Inglés.</p>
+<p>El núcleo analiza los parámetros desde la línea de comandos hasta encontrar <code class="docutils literal notranslate"><span class="pre">--</span></code>; si no reconoce el parámetro y no contiene un <code class="docutils literal notranslate"><span class="pre">.</span></code>, el parámetro es pasado a <code class="docutils literal notranslate"><span class="pre">init</span></code>: parámetros con <code class="docutils literal notranslate"><span class="pre">=</span></code> van al entorno de <code class="docutils literal notranslate"><span class="pre">init</span></code>, otros son pasados como argumentos de la línea de comandos a <code class="docutils literal notranslate"><span class="pre">init</span></code>.</p>
+<p>Los parámetros de módulos, pueden ser especificados de dos formas: <em>via</em> línea de comandos con un prefijo de nombre de módulo, o <em>via</em> <code class="docutils literal notranslate"><span class="pre">modprobe</span></code>, ejem.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">línea</span> <span class="n">de</span> <span class="n">comandos</span> <span class="n">kernel</span><span class="p">)</span> <span class="n">usbcore</span><span class="o">.</span><span class="n">blinkenlights</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">(</span><span class="n">líne</span> <span class="n">de</span> <span class="n">comandos</span> <span class="n">modprobe</span><span class="p">)</span><span class="n">modprobe</span> <span class="n">usbcore</span> <span class="n">blinkenlights</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>Los parámetros para módulos, los cuales están construidos <em>dentro</em> del núcleo, necesitan ser especificados en la línea de comandos kernel. <code class="docutils literal notranslate"><span class="pre">modprobe</span></code> busca a través de la línea de  comandos kernel (<code class="docutils literal notranslate"><span class="pre">/proc/cmdline</span></code>) y recoge los parámetros de los módulos cuando lee uno, así que la línea de comandos kernel, puede usarse para cargar módulos también.</p>
+<p>Los guiones <code class="docutils literal notranslate"><span class="pre">-</span></code> y guión bajo <code class="docutils literal notranslate"><span class="pre">_</span></code> son equivalentes en los nombres de parámetros, así:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">log_buf_len</span><span class="o">=</span><span class="mi">1</span><span class="n">M</span> <span class="nb">print</span><span class="o">-</span><span class="n">fatal</span><span class="o">-</span><span class="n">signals</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>puede intrerpretarse igual que:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">log</span><span class="o">-</span><span class="n">buf</span><span class="o">-</span><span class="nb">len</span><span class="o">=</span><span class="mi">1</span><span class="n">M</span> <span class="n">print_fatal_signals</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>Las dobles comillas <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>, son usadas para proteger espacios en <em>valores</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">param</span><span class="o">=</span><span class="s2">&quot;spaces in here&quot;</span>
+</pre></div>
+</div>
+<p><strong>parser:</strong> analizador de sentencias.</p>
+<section id="listas-de-cpu">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Listas de CPU</a><a class="headerlink" href="#listas-de-cpu" title="Link to this heading"></a></h2>
+<p>Algunos parámetros del <em>kernel</em> toman una lista de CPUs como valor ejem. <code class="docutils literal notranslate"><span class="pre">isolcpu</span></code>,  <code class="docutils literal notranslate"><span class="pre">nohz_full</span></code>, <code class="docutils literal notranslate"><span class="pre">irqaffinity</span></code>, <code class="docutils literal notranslate"><span class="pre">rcu_nocbs</span></code>. El formato de estas listas es:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">cpu</span> <span class="n">number</span><span class="o">&gt;</span><span class="p">,</span><span class="o">....</span><span class="p">,</span><span class="o">&lt;</span><span class="n">cpu</span> <span class="n">number</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>ó</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">cpu</span> <span class="n">number</span><span class="o">&gt;-&lt;</span><span class="n">cpu</span> <span class="n">number</span><span class="o">&gt;</span>
+<span class="p">(</span><span class="n">debe</span> <span class="n">ser</span> <span class="n">un</span> <span class="n">rango</span> <span class="n">positivo</span> <span class="n">en</span> <span class="n">orden</span> <span class="n">ascendente</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>ó una mezcla</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">cpu</span> <span class="n">number</span><span class="o">&gt;</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="o">&lt;</span><span class="n">cpu</span> <span class="n">number</span><span class="o">&gt;-&lt;</span><span class="n">cpu</span> <span class="n">number</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Nótese, que para el caso especial de un rango, podría separarse el rango en dos grupos de igual tamaño y, para cada grupo, usar cierta cantidad desde el comienzo de ese grupo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">cpu</span> <span class="n">number</span><span class="o">&gt;-</span><span class="n">cpu</span> <span class="n">number</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">used</span> <span class="n">size</span><span class="o">&gt;/&lt;</span><span class="n">group</span> <span class="n">size</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Por ejemplo, uno podría añadir el siguiente parámetro a la línea de comandos:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">isolcpus</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">100</span><span class="o">-</span><span class="mi">2000</span><span class="p">:</span><span class="mi">2</span><span class="o">/</span><span class="mi">25</span>
+</pre></div>
+</div>
+<p>Donde el objeto final, representa CPUs 100,101,125,126,150,151,…</p>
+<p>El comando <code class="docutils literal notranslate"><span class="pre">modinfo</span> <span class="pre">$(modulName)</span></code> muestra una lista actualizada de todos los parámetros de un módulo <em>cargable</em>. Los módulos <em>cargables</em>, después de ser cargados dentro del kernel en  carrera, también revelarán sus parámetros desde <code class="docutils literal notranslate"><span class="pre">/sys/module/$(modulname)/parameters/$(parm)</span></code>.</p>
+<p>Los parámetros listados más abajo, sólo son válidos si ciertas opciones de núcleo, fueron activadas y, si cierto <em>hardware</em> está presente. El texto entre corchetes <code class="docutils literal notranslate"><span class="pre">[]</span></code> al principio  de cada descripción, establece las restricciones en el que es aplicable un parámetro:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ACPI</span>    <span class="n">activado</span> <span class="n">soporte</span> <span class="n">para</span> <span class="n">ACPI</span>
+<span class="n">AGP</span> <span class="n">AGP</span> <span class="p">(</span><span class="n">Accelerated</span> <span class="n">Graphics</span> <span class="n">Port</span><span class="p">)</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">ALSA</span>    <span class="n">ALSA</span> <span class="n">sound</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">APIC</span>    <span class="n">APIC</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">APM</span> <span class="n">Advanced</span> <span class="n">Power</span> <span class="n">Management</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">ARM</span> <span class="n">ARM</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">AX25</span>    <span class="n">Appropriate</span> <span class="n">AX</span><span class="mf">.25</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">BLACKFIN</span> <span class="n">Blackfin</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">CLK</span> <span class="n">Common</span> <span class="n">clock</span> <span class="n">infrastructure</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">CMA</span> <span class="n">Contiguous</span> <span class="n">Memory</span> <span class="n">Area</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">DRM</span> <span class="n">Direct</span> <span class="n">Rendering</span> <span class="n">Management</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">DYNAMIC_DEBUG</span> <span class="n">Build</span> <span class="ow">in</span> <span class="n">debug</span> <span class="n">messages</span> <span class="ow">and</span> <span class="n">enable</span> <span class="n">them</span> <span class="n">at</span> <span class="n">runtime</span>
+<span class="n">EDD</span> <span class="n">BIOS</span> <span class="n">Enhanced</span> <span class="n">Disk</span> <span class="n">Drive</span> <span class="n">Services</span> <span class="p">(</span><span class="n">EDD</span><span class="p">)</span> <span class="ow">is</span> <span class="n">enabled</span>
+<span class="n">EFI</span> <span class="n">EFI</span> <span class="n">Partitioning</span> <span class="p">(</span><span class="n">GPT</span><span class="p">)</span> <span class="ow">is</span> <span class="n">enabled</span>
+<span class="n">EIDE</span>    <span class="n">EIDE</span><span class="o">/</span><span class="n">ATAPI</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">EVM</span> <span class="n">Extended</span> <span class="n">Verification</span> <span class="n">Module</span>
+<span class="n">FB</span>  <span class="n">The</span> <span class="n">frame</span> <span class="n">buffer</span> <span class="n">device</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">FTRACE</span>  <span class="n">Function</span> <span class="n">tracing</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">GCOV</span>    <span class="n">GCOV</span> <span class="n">profiling</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">HW</span>  <span class="n">Appropriate</span> <span class="n">hardware</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">IA</span><span class="o">-</span><span class="mi">64</span>   <span class="n">IA</span><span class="o">-</span><span class="mi">64</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">IMA</span> <span class="n">Integrity</span> <span class="n">measurement</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">IOSCHED</span> <span class="n">More</span> <span class="n">than</span> <span class="n">one</span> <span class="n">I</span><span class="o">/</span><span class="n">O</span> <span class="n">scheduler</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">IP_PNP</span>  <span class="n">IP</span> <span class="n">DHCP</span><span class="p">,</span> <span class="n">BOOTP</span><span class="p">,</span> <span class="ow">or</span> <span class="n">RARP</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">IPV6</span>    <span class="n">IPv6</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">ISAPNP</span>  <span class="n">ISA</span> <span class="n">PnP</span> <span class="n">code</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">ISDN</span>    <span class="n">Appropriate</span> <span class="n">ISDN</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">JOY</span> <span class="n">Appropriate</span> <span class="n">joystick</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">KGDB</span>    <span class="n">Kernel</span> <span class="n">debugger</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">KVM</span> <span class="n">Kernel</span> <span class="n">Virtual</span> <span class="n">Machine</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">LIBATALibata</span> <span class="n">driver</span> <span class="ow">is</span> <span class="n">enabled</span>
+<span class="n">LP</span>  <span class="n">Printer</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">LOOP</span>    <span class="n">Loopback</span> <span class="n">device</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">M68k</span>    <span class="n">M68k</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+        <span class="n">These</span> <span class="n">options</span> <span class="n">have</span> <span class="n">more</span> <span class="n">detailed</span> <span class="n">description</span> <span class="n">inside</span> <span class="n">of</span>
+        <span class="n">Documentation</span><span class="o">/</span><span class="n">m68k</span><span class="o">/</span><span class="n">kernel</span><span class="o">-</span><span class="n">options</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span>
+<span class="n">MDA</span> <span class="n">MDA</span> <span class="n">console</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">MIPS</span>    <span class="n">MIPS</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">MOUSE</span>   <span class="n">Appropriate</span> <span class="n">mouse</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">MSI</span> <span class="n">Message</span> <span class="n">Signaled</span> <span class="n">Interrupts</span> <span class="p">(</span><span class="n">PCI</span><span class="p">)</span><span class="o">.</span>
+<span class="n">MTD</span> <span class="n">MTD</span> <span class="p">(</span><span class="n">Memory</span> <span class="n">Technology</span> <span class="n">Device</span><span class="p">)</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">NET</span> <span class="n">Appropriate</span> <span class="n">network</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">NUMA</span>    <span class="n">NUMA</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">NFS</span> <span class="n">Appropriate</span> <span class="n">NFS</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">OSS</span> <span class="n">OSS</span> <span class="n">sound</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">PV_OPS</span>  <span class="n">A</span> <span class="n">paravirtualized</span> <span class="n">kernel</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">PARIDE</span>  <span class="n">The</span> <span class="n">ParIDE</span> <span class="p">(</span><span class="n">parallel</span> <span class="n">port</span> <span class="n">IDE</span><span class="p">)</span> <span class="n">subsystem</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">PARISC</span>  <span class="n">The</span> <span class="n">PA</span><span class="o">-</span><span class="n">RISC</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">PCI</span> <span class="n">PCI</span> <span class="n">bus</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">PCIE</span>    <span class="n">PCI</span> <span class="n">Express</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">PCMCIA</span>  <span class="n">The</span> <span class="n">PCMCIA</span> <span class="n">subsystem</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">PNP</span> <span class="n">Plug</span> <span class="o">&amp;</span> <span class="n">Play</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">PPC</span> <span class="n">PowerPC</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">PPT</span> <span class="n">Parallel</span> <span class="n">port</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">PS2</span> <span class="n">Appropriate</span> <span class="n">PS</span><span class="o">/</span><span class="mi">2</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">RAM</span> <span class="n">RAM</span> <span class="n">disk</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">RDT</span> <span class="n">Intel</span> <span class="n">Resource</span> <span class="n">Director</span> <span class="n">Technology</span><span class="o">.</span>
+<span class="n">S390</span>    <span class="n">S390</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">SCSI</span>    <span class="n">Appropriate</span> <span class="n">SCSI</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+        <span class="n">A</span> <span class="n">lot</span> <span class="n">of</span> <span class="n">drivers</span> <span class="n">have</span> <span class="n">their</span> <span class="n">options</span> <span class="n">described</span> <span class="n">inside</span>
+        <span class="n">the</span> <span class="n">Documentation</span><span class="o">/</span><span class="n">scsi</span><span class="o">/</span> <span class="n">sub</span><span class="o">-</span><span class="n">directory</span><span class="o">.</span>
+<span class="n">SECURITY</span> <span class="n">Different</span> <span class="n">security</span> <span class="n">models</span> <span class="n">are</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">SELINUX</span> <span class="n">SELinux</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">APPARMOR</span> <span class="n">AppArmor</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">SERIAL</span>  <span class="n">Serial</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">SH</span>  <span class="n">SuperH</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">SMP</span> <span class="n">The</span> <span class="n">kernel</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">SMP</span> <span class="n">kernel</span><span class="o">.</span>
+<span class="n">SPARC</span>   <span class="n">Sparc</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">SWSUSP</span>  <span class="n">Software</span> <span class="n">suspend</span> <span class="p">(</span><span class="n">hibernation</span><span class="p">)</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">SUSPEND</span> <span class="n">System</span> <span class="n">suspend</span> <span class="n">states</span> <span class="n">are</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">TPM</span> <span class="n">TPM</span> <span class="n">drivers</span> <span class="n">are</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">TS</span>  <span class="n">Appropriate</span> <span class="n">touchscreen</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">UMS</span> <span class="n">USB</span> <span class="n">Mass</span> <span class="n">Storage</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">USB</span> <span class="n">USB</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">USBHID</span>  <span class="n">USB</span> <span class="n">Human</span> <span class="n">Interface</span> <span class="n">Device</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">V4L</span> <span class="n">Video</span> <span class="n">For</span> <span class="n">Linux</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">VMMIO</span> <span class="n">Driver</span> <span class="k">for</span> <span class="n">memory</span> <span class="n">mapped</span> <span class="n">virtio</span> <span class="n">devices</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">VGA</span> <span class="n">The</span> <span class="n">VGA</span> <span class="n">console</span> <span class="n">has</span> <span class="n">been</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">VT</span>  <span class="n">Virtual</span> <span class="n">terminal</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">WDT</span> <span class="n">Watchdog</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">XT</span>  <span class="n">IBM</span> <span class="n">PC</span><span class="o">/</span><span class="n">XT</span> <span class="n">MFM</span> <span class="n">hard</span> <span class="n">disk</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">X86</span><span class="o">-</span><span class="mi">32</span>  <span class="n">X86</span><span class="o">-</span><span class="mi">32</span><span class="p">,</span> <span class="n">aka</span> <span class="n">i386</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">X86</span><span class="o">-</span><span class="mi">64</span>  <span class="n">X86</span><span class="o">-</span><span class="mi">64</span> <span class="n">architecture</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+        <span class="n">More</span> <span class="n">X86</span><span class="o">-</span><span class="mi">64</span> <span class="n">boot</span> <span class="n">options</span> <span class="n">can</span> <span class="n">be</span> <span class="n">found</span> <span class="ow">in</span>
+        <span class="n">Documentation</span><span class="o">/</span><span class="n">x86</span><span class="o">/</span><span class="n">x86_64</span><span class="o">/</span><span class="n">boot</span><span class="o">-</span><span class="n">options</span><span class="o">.</span><span class="n">txt</span> <span class="o">.</span>
+<span class="n">X86</span> <span class="n">Either</span> <span class="mi">32</span><span class="o">-</span><span class="n">bit</span> <span class="ow">or</span> <span class="mi">64</span><span class="o">-</span><span class="n">bit</span> <span class="n">x86</span> <span class="p">(</span><span class="n">same</span> <span class="k">as</span> <span class="n">X86</span><span class="o">-</span><span class="mi">32</span><span class="o">+</span><span class="n">X86</span><span class="o">-</span><span class="mi">64</span><span class="p">)</span>
+<span class="n">X86_UV</span>  <span class="n">SGI</span> <span class="n">UV</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">XEN</span> <span class="n">Xen</span> <span class="n">support</span> <span class="ow">is</span> <span class="n">enabled</span>
+</pre></div>
+</div>
+<p>El siguiente texto explica otras opciones:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BUGS</span><span class="o">=</span>   <span class="n">Relacionado</span> <span class="n">con</span> <span class="n">posibles</span> <span class="n">errores</span><span class="p">(</span><span class="n">bugs</span><span class="p">)</span> <span class="k">del</span> <span class="n">procesador</span><span class="p">,</span> <span class="n">en</span> <span class="n">dicho</span> <span class="n">procesador</span><span class="o">.</span>
+
+<span class="n">KNL</span> <span class="n">es</span> <span class="n">un</span> <span class="n">parámetro</span> <span class="n">de</span> <span class="n">arranque</span> <span class="k">del</span> <span class="n">kernel</span>
+<span class="n">BOOT</span>    <span class="n">es</span> <span class="n">un</span> <span class="n">parámetro</span> <span class="k">del</span> <span class="n">gestor</span> <span class="n">de</span> <span class="n">arranque</span>
+</pre></div>
+</div>
+<p>Los parámetros marcados con BOOT son de hecho, interpretados por el gestor de arranque, y no tienen un significado directo para el kernel.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>No modificar la sintaxis de los parámetros del gestor de arranque, sin una necesidad extrema o sin ser coordinados con la documentación aportada en:</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;Documentacion&gt;$plataforma/boot.txt
+</pre></div>
+</div>
+<p>Nótese que todos los parámetros del kernel listados más abajo<a class="reference external" href="#ref1">Doc</a>, hacen  distinción entre mayúsculas o no. El símbolo <code class="docutils literal notranslate"><span class="pre">=</span></code> en el nombre de stado de un parámetro, será <em>entrado</em> como <em>variable de entorno</em>, donde su ausencia indica que aparecerá como argumente del <em>kernel</em> leíble via <code class="docutils literal notranslate"><span class="pre">/proc/cmdline</span></code> por los programas en carrera, una vez el sistema este en marcha.</p>
+<p>El número de parámetros del núcleo, <em>no es límitado</em>, pero su longitud <em>lo está</em>, a un número fijo de carácteres. Éste límite depende de la arquitectura y, está comprendida entre <em>256 y  4096 carácteres</em>. Definido en el archivo <code class="docutils literal notranslate"><span class="pre">./include/asm/setup.h</span></code> como <code class="docutils literal notranslate"><span class="pre">COMMAND_LINE_SIZE</span></code>.</p>
+<p>Finalmente, el sufijo <code class="docutils literal notranslate"><span class="pre">[KMG]</span></code> es comunmente descrito después de un número de valores de parámetro. Éstas letras ‘K’, ‘M’ y ‘G’, representan el multiplicador <em>Kilo, Mega, Giga</em>, iguales a 2^10, 2^20, and 2^30, <code class="docutils literal notranslate"><span class="pre">bytes</span></code> respectivamente. Estos sufjos de letras, podrán ser  omitidos completamente.</p>
+<blockquote>
+<div><p>Éste documento podría no estar completamente actualizado.
+Efestivamente, no hay corchetes. La lista de parámetros está copiada, tal y como el traductor la encontró al descargar la fuente.</p>
+</div></blockquote>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<p>Documentación extraida de la fuente del <em>núcleo de linux</em>. documentación: <code class="docutils literal notranslate"><span class="pre">kernel-parameters.txt</span></code></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="initrd.html" class="btn btn-neutral float-left" title="InitRD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="of_unittest.html" class="btn btn-neutral float-right" title="Unidad de prueba, del árbol de dispositivo Open Firmware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

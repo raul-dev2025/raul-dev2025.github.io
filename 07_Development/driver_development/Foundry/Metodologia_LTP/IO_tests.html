@@ -1,0 +1,236 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Tests &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Interrupciones y Comunicación con Bus PCI - Teoría" href="BUS_teorica.html" />
+    <link rel="prev" title="Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Teoría" href="IO_teorica.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwbus-io/index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Metodología para el estudio de “The Linux Test Project(LTP)”</a></li>
+      <li class="breadcrumb-item active">Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Tests</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/Foundry/Metodologia_LTP/IO_tests.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="entrada-salida-y-gestion-de-memoria-e-s-mm-tests">
+<h1>Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Tests<a class="headerlink" href="#entrada-salida-y-gestion-de-memoria-e-s-mm-tests" title="Link to this heading"></a></h1>
+<nav class="contents local" id="pruebas-evaluadas">
+<p class="topic-title">Pruebas Evaluadas</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#analisis-del-caso-de-prueba-mmap01" id="id3">Análisis del Caso de Prueba: <code class="docutils literal notranslate"><span class="pre">mmap01</span></code></a></p>
+<ul>
+<li><p><a class="reference internal" href="#analisis-de-ejecucion" id="id4">Análisis de Ejecución</a></p></li>
+<li><p><a class="reference internal" href="#resultados-en-entorno-buildlab" id="id5">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#analisis-del-caso-de-prueba-direct-io01" id="id6">Análisis del Caso de Prueba: <code class="docutils literal notranslate"><span class="pre">direct_io01</span></code></a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id7">Análisis de Ejecución</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id8">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="analisis-del-caso-de-prueba-mmap01">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Análisis del Caso de Prueba: <code class="docutils literal notranslate"><span class="pre">mmap01</span></code></a><a class="headerlink" href="#analisis-del-caso-de-prueba-mmap01" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Subsistema</strong>: <code class="docutils literal notranslate"><span class="pre">syscalls/mmap</span></code></p></li>
+<li><p><strong>Objetivo</strong>: Verificar que la asignación de memoria compartida (<code class="docutils literal notranslate"><span class="pre">MAP_SHARED</span></code>) mediante <code class="docutils literal notranslate"><span class="pre">mmap()</span></code> proyecte correctamente un descriptor de archivo en la memoria del proceso.</p></li>
+<li><p><strong>Fundamento Teórico</strong>: Consulte <a class="reference internal" href="IO_teorica.html"><span class="doc">Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Teoría</span></a> para revisar el funcionamiento de la estructura <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">file_operations</span></code> y el mapeo de memoria virtual.</p></li>
+</ul>
+<section id="analisis-de-ejecucion">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Análisis de Ejecución</a><a class="headerlink" href="#analisis-de-ejecucion" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Configuración del Entorno</strong> (<code class="docutils literal notranslate"><span class="pre">setup</span></code>):
+Se utiliza la macro <code class="docutils literal notranslate"><span class="pre">SAFE_OPEN</span></code> de LTP para crear un fichero temporal en un directorio aislado (<code class="docutils literal notranslate"><span class="pre">needs_tmpdir</span> <span class="pre">=</span> <span class="pre">1</span></code>) y se ajusta su tamaño al de una página mediante <code class="docutils literal notranslate"><span class="pre">ftruncate</span></code>.</p></li>
+<li><p><strong>Invocación de Syscall</strong> (<code class="docutils literal notranslate"><span class="pre">run</span></code>):
+Se invoca <code class="docutils literal notranslate"><span class="pre">mmap()</span></code> con los flags <code class="docutils literal notranslate"><span class="pre">PROT_READ</span> <span class="pre">|</span> <span class="pre">PROT_WRITE</span></code> y <code class="docutils literal notranslate"><span class="pre">MAP_SHARED</span></code>.</p></li>
+<li><p><strong>Verificación</strong>:
+Se realiza una escritura directa en la dirección devuelta por el kernel (<code class="docutils literal notranslate"><span class="pre">addr[0]</span> <span class="pre">=</span> <span class="pre">'A'</span></code>) comprobando la persistencia en el buffer.</p></li>
+</ol>
+</section>
+<section id="resultados-en-entorno-buildlab">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a><a class="headerlink" href="#resultados-en-entorno-buildlab" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tst_test.c:1690: TINFO: LTP version: 20240129
+tst_test.c:1578: TINFO: Timeout per test is 0h 05m 00s
+mmap01.c:58: TPASS: mmap() funcionó y la memoria es accesible
+
+Summary:
+passed   1
+failed   0
+broken   0
+skipped  0
+warnings 0
+</pre></div>
+</div>
+</section>
+</section>
+<section id="analisis-del-caso-de-prueba-direct-io01">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Análisis del Caso de Prueba: <code class="docutils literal notranslate"><span class="pre">direct_io01</span></code></a><a class="headerlink" href="#analisis-del-caso-de-prueba-direct-io01" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Subsistema</strong>: <code class="docutils literal notranslate"><span class="pre">syscalls/read</span></code> / <code class="docutils literal notranslate"><span class="pre">syscalls/write</span></code> / <code class="docutils literal notranslate"><span class="pre">fs</span></code></p></li>
+<li><p><strong>Objetivo</strong>: Verificar la correcta ejecución de operaciones de Entrada/Salida Directa utilizando la bandera <code class="docutils literal notranslate"><span class="pre">O_DIRECT</span></code>, garantizando la omisión de la <em>Page Cache</em> del kernel y el uso de memoria alineada.</p></li>
+<li><p><strong>Fundamento Teórico</strong>: Consulte <a class="reference internal" href="IO_teorica.html"><span class="doc">Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Teoría</span></a> para revisar la abstracción de descriptores de archivo, la gestión de buffers a nivel de VFS y el mecanismo de lectura/escritura en dispositivos de bloque.</p></li>
+</ul>
+<section id="id1">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Análisis de Ejecución</a><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Configuración del Entorno</strong> (<code class="docutils literal notranslate"><span class="pre">setup</span></code>):
+Se abre un archivo temporal en un sistema de archivos compatible mediante la bandera <code class="docutils literal notranslate"><span class="pre">O_DIRECT</span></code> de <code class="docutils literal notranslate"><span class="pre">openat()</span></code> (requiere <code class="docutils literal notranslate"><span class="pre">_GNU_SOURCE</span></code>). Se reserva un buffer de memoria virtual alineado estrictamente a límites de página/bloque (utilizando <code class="docutils literal notranslate"><span class="pre">posix_memalign</span></code> o atributos de alineación) para cumplir los requisitos de E/S sin caché.</p></li>
+<li><p><strong>Invocación de Syscall</strong> (<code class="docutils literal notranslate"><span class="pre">run</span></code>):
+Se escribe un patrón de datos en el archivo mediante <code class="docutils literal notranslate"><span class="pre">write()</span></code> directamente desde el buffer alineado y se reposiciona el cursor a cero (<code class="docutils literal notranslate"><span class="pre">lseek</span></code>). Posteriormente, se ejecuta una lectura mediante <code class="docutils literal notranslate"><span class="pre">read()</span></code> sobre un segundo buffer alineado.</p></li>
+<li><p><strong>Verificación</strong>:
+Se valida que la llamada a <code class="docutils literal notranslate"><span class="pre">write()</span></code> devuelva la cantidad exacta de bytes escritos sin errores de alineación (<code class="docutils literal notranslate"><span class="pre">EINVAL</span></code>) y que los datos leídos coincidan exactamente con el patrón original, garantizando la omisión efectiva del <em>Page Cache</em>.</p></li>
+</ol>
+</section>
+<section id="id2">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a><a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<div class="admonition-test-direct-io01 admonition">
+<p class="admonition-title">Test direct_io01</p>
+<p>Sección reservada para documentar las salidas de ejecución y registros en <code class="docutils literal notranslate"><span class="pre">buildlab</span></code>
+clasificando los resultados según la metodología LTP (<code class="docutils literal notranslate"><span class="pre">TPASS</span></code>, <code class="docutils literal notranslate"><span class="pre">TFAIL</span></code>, <code class="docutils literal notranslate"><span class="pre">TCONF</span></code>).</p>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tst_tmpdir.c:316: TINFO: Using /tmp/LTP_dirYgRNov as tmpdir (xfs filesystem)
+tst_test.c:1900: TINFO: LTP version: 20250130
+tst_test.c:1904: TINFO: Tested kernel: 6.12.0-124.8.1.el10_1.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Nov 11 22:54:28 UTC 2025 x86_64
+tst_kconfig.c:88: TINFO: Parsing kernel config &#39;/lib/modules/6.12.0-124.8.1.el10_1.x86_64/build/.config&#39;
+tst_test.c:1722: TINFO: Overall timeout per run is 0h 00m 30s
+direct_io_test.c:68: TINFO: Probando escritura directa (O_DIRECT) de 4096 bytes...
+direct_io_test.c:83: TINFO: Probando lectura directa (O_DIRECT)...
+direct_io_test.c:94: TPASS: Escritura y lectura O_DIRECT exitosas con datos coherentes
+
+Summary:
+passed   1
+failed   0
+broken   0
+skipped  0
+warnings 0
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="IO_teorica.html" class="btn btn-neutral float-left" title="Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Teoría" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="BUS_teorica.html" class="btn btn-neutral float-right" title="Interrupciones y Comunicación con Bus PCI - Teoría" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

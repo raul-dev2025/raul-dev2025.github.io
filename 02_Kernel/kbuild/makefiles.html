@@ -1,0 +1,1028 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Makefiles en el kernel de Linux &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Construcción de módulos externos" href="modules.html" />
+    <link rel="prev" title="Inpunt" href="../Input/input.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Makefiles en el kernel de Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quien-hace-que">Quién hace qué</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#los-archivos-kbuild">Los archivos <em>kbuild</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#definicion-de-objetivos">Definición de objetivos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#archivos-objeto-integrados-obj-y">Archivos <em>objeto</em> integrados <code class="docutils literal notranslate"><span class="pre">obj-y</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proposito-de-los-modulos-cargables-obj-m">Propósito de los módulos <em>cargables</em> <code class="docutils literal notranslate"><span class="pre">obj-m</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#objetos-que-exportan-simbolos">Objetos que exportan <em>símbolos</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proposito-de-los-archivos-librerias-lib-y">Propósito de los archivos <em>librerías</em> <code class="docutils literal notranslate"><span class="pre">lib-y</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#descendiendo-a-los-directorios">Descendiendo a los directorios</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compilacion-de-opciones">Compilación de opciones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#soporte-a-las-funciones-cc">Soporte a las funciones <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#seguimiento-de-las-dependencias">Seguimiento de las dependencias</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reglas-especiales">Reglas especiales</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#soporte-a-las-funciones-ld">Soporte a las funciones <code class="docutils literal notranslate"><span class="pre">$(LD)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#soporte-a-programas-host">Soporte a programas <em>Host</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#programas-host-simple">Programas <em>Host</em> simple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#composicion-de-programas-host">Composición de programas <em>Host</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#empleo-de-c-en-programas-host">Empleo de <code class="docutils literal notranslate"><span class="pre">C++</span></code> en programas <em>Host</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#control-de-las-opciones-del-compilador-en-programas-host">Control de las opciones del compilador en programas <em>Host</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cuando-son-construidos-los-programas-host">Cuándo son construidos los programas <em>Host</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#utilizacion-de-hostprogs-config-foo">Utilización de <code class="docutils literal notranslate"><span class="pre">hostprogs-$(CONFIG_FOO)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kbuild-limpiar-infraestructura"><em>Kbuild</em>, limpiar infraestructura</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arquitectura-de-archivos-makefiles">Arquitectura de archivos <em>Makefiles</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuracion-de-variables-para-complementar-la-construccion-de-la-arquitectura">Configuración de variables, para complementar la construcción de la arquitectura</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comandos-utiles-en-la-construccion-de-una-imagen-de-arranque">Comandos útiles, en la construcción de una imagen de arranque</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modules.html">Construcción de módulos externos</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Makefiles en el kernel de Linux</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/kbuild/makefiles.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="makefiles-en-el-kernel-de-linux">
+<h1>Makefiles en el kernel de Linux<a class="headerlink" href="#makefiles-en-el-kernel-de-linux" title="Link to this heading"></a></h1>
+<nav class="contents local" id="tabla-de-contenidos">
+<p class="topic-title">Tabla de contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduccion" id="id1">Introducción</a></p></li>
+<li><p><a class="reference internal" href="#quien-hace-que" id="id2">Quién hace qué</a></p></li>
+<li><p><a class="reference internal" href="#los-archivos-kbuild" id="id3">Los archivos <em>kbuild</em></a></p></li>
+<li><p><a class="reference internal" href="#definicion-de-objetivos" id="id4">Definición de objetivos</a></p></li>
+<li><p><a class="reference internal" href="#archivos-objeto-integrados-obj-y" id="id5">Archivos <em>objeto</em> integrados <code class="docutils literal notranslate"><span class="pre">obj-y</span></code></a></p></li>
+<li><p><a class="reference internal" href="#proposito-de-los-modulos-cargables-obj-m" id="id6">Propósito de los módulos <em>cargables</em> <code class="docutils literal notranslate"><span class="pre">obj-m</span></code></a></p></li>
+<li><p><a class="reference internal" href="#objetos-que-exportan-simbolos" id="id7">Objetos que exportan <em>símbolos</em></a></p></li>
+<li><p><a class="reference internal" href="#proposito-de-los-archivos-librerias-lib-y" id="id8">Propósito de los archivos <em>librerías</em> <code class="docutils literal notranslate"><span class="pre">lib-y</span></code></a></p></li>
+<li><p><a class="reference internal" href="#descendiendo-a-los-directorios" id="id9">Descendiendo a los directorios</a></p></li>
+<li><p><a class="reference internal" href="#compilacion-de-opciones" id="id10">Compilación de opciones</a></p></li>
+<li><p><a class="reference internal" href="#soporte-a-las-funciones-cc" id="id11">Soporte a las funciones <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code></a></p>
+<ul>
+<li><p><a class="reference internal" href="#as-option" id="id12">as-option</a></p></li>
+<li><p><a class="reference internal" href="#cc-ldoption" id="id13">cc-ldoption</a></p></li>
+<li><p><a class="reference internal" href="#as-instr" id="id14">as-instr</a></p></li>
+<li><p><a class="reference internal" href="#cc-option" id="id15">cc-option</a></p></li>
+<li><p><a class="reference internal" href="#cc-option-yn" id="id16">cc-option-yn</a></p></li>
+<li><p><a class="reference internal" href="#cc-disable-warning" id="id17">cc-disable-warning</a></p></li>
+<li><p><a class="reference internal" href="#cc-version" id="id18">cc-version</a></p></li>
+<li><p><a class="reference internal" href="#cc-ifversion" id="id19">cc-ifversion</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#seguimiento-de-las-dependencias" id="id20">Seguimiento de las dependencias</a></p></li>
+<li><p><a class="reference internal" href="#reglas-especiales" id="id21">Reglas especiales</a></p>
+<ul>
+<li><p><a class="reference internal" href="#cc-cross-prefix" id="id22">cc-cross-prefix</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#soporte-a-las-funciones-ld" id="id23">Soporte a las funciones <code class="docutils literal notranslate"><span class="pre">$(LD)</span></code></a></p>
+<ul>
+<li><p><a class="reference internal" href="#ld-option" id="id24">ld-option</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#soporte-a-programas-host" id="id25">Soporte a programas <em>Host</em></a></p></li>
+<li><p><a class="reference internal" href="#programas-host-simple" id="id26">Programas <em>Host</em> simple</a></p></li>
+<li><p><a class="reference internal" href="#composicion-de-programas-host" id="id27">Composición de programas <em>Host</em></a></p></li>
+<li><p><a class="reference internal" href="#empleo-de-c-en-programas-host" id="id28">Empleo de <code class="docutils literal notranslate"><span class="pre">C++</span></code> en programas <em>Host</em></a></p></li>
+<li><p><a class="reference internal" href="#control-de-las-opciones-del-compilador-en-programas-host" id="id29">Control de las opciones del compilador en programas <em>Host</em></a></p></li>
+<li><p><a class="reference internal" href="#cuando-son-construidos-los-programas-host" id="id30">Cuándo son construidos los programas <em>Host</em></a></p></li>
+<li><p><a class="reference internal" href="#utilizacion-de-hostprogs-config-foo" id="id31">Utilización de <code class="docutils literal notranslate"><span class="pre">hostprogs-$(CONFIG_FOO)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#kbuild-limpiar-infraestructura" id="id32"><em>Kbuild</em>, limpiar infraestructura</a></p></li>
+<li><p><a class="reference internal" href="#arquitectura-de-archivos-makefiles" id="id33">Arquitectura de archivos <em>Makefiles</em></a></p></li>
+<li><p><a class="reference internal" href="#configuracion-de-variables-para-complementar-la-construccion-de-la-arquitectura" id="id34">Configuración de variables, para complementar la construcción de la arquitectura</a></p>
+<ul>
+<li><p><a class="reference internal" href="#anadir-prerrequisitos-a-archheaders" id="id35">Añadir <em>prerrequisitos</em>, a <code class="docutils literal notranslate"><span class="pre">archheaders:</span></code></a></p></li>
+<li><p><a class="reference internal" href="#anadir-prerrequisitos-a-archprepare" id="id36">Añadir <em>prerrequisitos</em>, a <code class="docutils literal notranslate"><span class="pre">archprepare:</span></code></a></p></li>
+<li><p><a class="reference internal" href="#listar-directorios-que-visitar-al-descender" id="id37">Listar directorios que visitar, al descender</a></p></li>
+<li><p><a class="reference internal" href="#imagenes-de-arranque-especificos-de-la-arquitectura" id="id38">Imagenes de arranque, específicos de la arquitectura</a></p></li>
+<li><p><a class="reference internal" href="#construccion-de-objetivos-no-kabuild" id="id39">Construcción de objetivos <em>no-kabuild</em></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#comandos-utiles-en-la-construccion-de-una-imagen-de-arranque" id="id40">Comandos útiles, en la construcción de una imagen de arranque</a></p>
+<ul>
+<li><p><a class="reference internal" href="#if-changed" id="id41">if_changed</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="introduccion">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Introducción</a><a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>El documento describe los archivos <em>Makefiles</em> en el kernel de Linux. Los archivos <em>Makefiles</em> contienen cinco partes:</p>
+<ul class="simple">
+<li><p><strong>Makefile</strong>: El principio del archivo.</p></li>
+<li><p><strong>.config</strong>: El archivo de configuración del kernel.</p></li>
+<li><p><strong>arch/$(ARCH)/Makefile</strong>: La arquitectura del archivo <em>Makefile</em>.</p></li>
+<li><p><strong>scripts/Makefile.*</strong>: Reglas comunes, etc., para todos los archivos <em>Makefiles</em> en kbuild.</p></li>
+<li><p><strong>kbuild Makefiles</strong>: Son cerca de 500.</p></li>
+</ul>
+<p>Al principio del archivo <em>Makefile</em>, será leído el archivo <code class="docutils literal notranslate"><span class="pre">.config</span></code>, el cual proviene del proceso de configuración del kernel.</p>
+<p>El principio del archivo es responsable de la construcción de dos elementos importantes: <code class="docutils literal notranslate"><span class="pre">vmlinux</span></code> (la imagen residente del kernel) y los módulos (cualquier archivo de módulo). Todo esto es construido de manera recursiva, descendiendo a los subdirectorios en el árbol fuente del kernel. La lista de subdirectorios visitada dependerá de la configuración del kernel. El principio del archivo incluye textualmente una arquitectura <em>Makefile</em> con el nombre <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/Makefile</span></code>. La arquitectura <em>Makefile</em> proporciona información específica acerca de la misma indicada al principio del archivo.</p>
+<p>Cada subdirectorio tendrá un <em>kbuild Makefile</em>, el cual sucede los comandos de forma secuencial, de arriba a abajo. El archivo <em>kbuild Makefile</em> utiliza la información del archivo <code class="docutils literal notranslate"><span class="pre">.config</span></code> para construir varias listas de archivos utilizadas por kbuild para construir cualquier objetivo modular integrado en la construcción.</p>
+<p><code class="docutils literal notranslate"><span class="pre">scripts/Makefile.*</span></code> contiene todas las definiciones/reglas etc. usada en la construcción del kernel, basado en los archivos <em>kbuild Makefiles</em>.</p>
+</section>
+<section id="quien-hace-que">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Quién hace qué</a><a class="headerlink" href="#quien-hace-que" title="Link to this heading"></a></h2>
+<p>Las personas tienen cuatro relaciones distintas con los <em>Makefiles</em> del kernel:</p>
+<dl class="simple">
+<dt><strong>Usuarios</strong></dt><dd><p>Personas que construyen kernels. Aquellos que escribirían comandos tales como <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">menuconfig</span></code> o <code class="docutils literal notranslate"><span class="pre">make</span></code>. Es habitual que no lean o editen ningún <em>Makefile</em> del kernel o cualquier otro archivo fuente.</p>
+</dd>
+<dt><strong>Desarrollador regular</strong></dt><dd><p>Trabajan en características tales como controladores de dispositivo, sistemas de archivo y protocolos de red. Estas personas necesitan mantener los archivos del subsistema en el que trabajan. Para llevar a cabo esta tarea, es necesario cierto conocimiento acerca de los archivos <em>kbuild Makefiles</em>, además de otros aspectos relacionados con la interfaz pública de kbuild.</p>
+</dd>
+<dt><strong>Desarrollador de arquitectura</strong></dt><dd><p>Personas que trabajan en una plataforma en particular, como <code class="docutils literal notranslate"><span class="pre">sparc</span></code> o <code class="docutils literal notranslate"><span class="pre">ia64</span></code>. Los desarrolladores de plataforma necesitan conocer tanto el <em>Makefile</em> como los archivos <em>kbuild Makefiles</em> relacionados.</p>
+</dd>
+<dt><strong>Desarrollador kbuild</strong></dt><dd><p>Trabajan en el <em>sistema de construcción del kernel</em>, en sí mismo. Imprescindible conocer todos los aspectos relativos a los archivos Makefile del kernel.</p>
+</dd>
+</dl>
+<p>El presente documento está dirigido al <strong>Desarrollador regular</strong> y al <strong>Desarrollador de arquitectura</strong>.</p>
+</section>
+<section id="los-archivos-kbuild">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Los archivos <em>kbuild</em></a><a class="headerlink" href="#los-archivos-kbuild" title="Link to this heading"></a></h2>
+<p>La mayoría de <em>Makefiles</em> parte del kernel, son archivos tipo <em>Makefile</em>, que hará uso de la infraestructura <em>kbuild</em>. Este capítulo introduce la sintaxis utilizada en tales archivos -<em>kbuild Makefiles</em>.
+El nombre preferido para estos archivos <em>kbuild</em>, es <em>Makefile</em>, aunque <em>kbuild</em> es igualmente usado. Si ambos archivos existen, será empleado <em>kbuild</em>.</p>
+<p>La Sección <a class="reference internal" href="#definicion-de-objetivos">Definición de objetivos</a> es una rápida introducción, otros capítulos proporcionan más detalle, con ejemplos reales.</p>
+</section>
+<section id="definicion-de-objetivos">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Definición de objetivos</a><a class="headerlink" href="#definicion-de-objetivos" title="Link to this heading"></a></h2>
+<p>La definición de objetivos es la parte principar -el corazón, de los archivos <em>kbuild</em>.
+Estas líneas, definen los archivos a ser construidos, cualquier opción de compilación y, cualquier subdirectorio al que <em>entrar recursivamente</em>.</p>
+<p>El archivo makefile kbuild mas simple, contiene una línea:</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nv">obj-y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>foo.o
+</pre></div>
+</div>
+<p>Esto dice a kbuild que hay un objeto en el directorio, llamado <code class="docutils literal notranslate"><span class="pre">foo.o</span></code> a ser construido desde <code class="docutils literal notranslate"><span class="pre">foo.c</span></code> o <code class="docutils literal notranslate"><span class="pre">foo.S</span></code>.</p>
+<p>Si <code class="docutils literal notranslate"><span class="pre">foo.o</span></code> debiera ser construido como módulo, será empleada la variable <code class="docutils literal notranslate"><span class="pre">obj-m</span></code>.
+Consecuentemente, será utilizado el siguiente patrón:</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nv">obj-$(CONFIG_FOO)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>foo.o
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">$(CONFIG_FOO)</span></code> evalúa tanto a <code class="docutils literal notranslate"><span class="pre">y</span></code> (integrado) como a <code class="docutils literal notranslate"><span class="pre">m</span></code> (módulo). Si <code class="docutils literal notranslate"><span class="pre">CONFIG_FOO</span></code> no es ni <code class="docutils literal notranslate"><span class="pre">y</span></code> ni <code class="docutils literal notranslate"><span class="pre">m</span></code>, entonces el archivo no será compilado ni enlazado… _i3i1i2:</p>
+</section>
+<section id="archivos-objeto-integrados-obj-y">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Archivos <em>objeto</em> integrados <code class="docutils literal notranslate"><span class="pre">obj-y</span></code></a><a class="headerlink" href="#archivos-objeto-integrados-obj-y" title="Link to this heading"></a></h2>
+<p>El Makefile kbuild, especifica archivos de objeto en la <code class="docutils literal notranslate"><span class="pre">vmlinux</span></code> con la lista <code class="docutils literal notranslate"><span class="pre">$(obj-y)</span></code>. Esta lista, depende de la configuración del kernel.</p>
+<p>Kbuild compila todos los archivos <code class="docutils literal notranslate"><span class="pre">$(obj-y)</span></code>. Después llama a <code class="docutils literal notranslate"><span class="pre">$(AR)</span> <span class="pre">rcSTP</span></code>, para mezclar todos los archivos en un archivo <code class="docutils literal notranslate"><span class="pre">integrado.a</span></code>.
+Es un pequeño <em>fichero</em>, sin tabla de símbolos, el cuál resulta impracticable, como entrada al enlazador.</p>
+<p>El escrito -<em>script</em>, <code class="docutils literal notranslate"><span class="pre">scripts/link-vmlinux.sh</span></code> hará después un agregado con <code class="docutils literal notranslate"><span class="pre">${AR}</span> <span class="pre">rcsTP</span></code>, el cuál crea un archivo <em>ligero</em>, con una tabla de símbolos y un índice, convirtíendolo en una entrada válida, para la imagen final <code class="docutils literal notranslate"><span class="pre">vmlinux</span></code>.</p>
+<p>El orden de los archivos en <code class="docutils literal notranslate"><span class="pre">$(obj-y)</span></code> es imortante. Están permitidos los duplicados: la primera instancia, será enlazada dentro del <code class="docutils literal notranslate"><span class="pre">integrado.a</span></code>, sucesivas instancias ignoradas.</p>
+<p>El orden de enlace es importante, por que ciertas funciones <code class="docutils literal notranslate"><span class="pre">module_init()</span> <span class="pre">__initcall</span></code> serán llamadas durante el arranque, en orden de aparición. Recordar, que cambiar el orden de los enlaces, podría cambiar el orden en el que los controladores SCSI fuesen detectados, <em>reenumerando</em> los discos.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c"># drivers/isdn/i4l/Makefile</span>
+<span class="c"># Makefile for the kernel ISDN subsystem and device drivers.</span>
+<span class="c"># Each configuration option enables a list of files.</span>
+<span class="nv">obj-$(CONFIG_ISDN_I4L)</span><span class="w">         </span><span class="o">+=</span><span class="w"> </span>isdn.o
+<span class="nv">obj-$(CONFIG_ISDN_PPP_BSDCOMP)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>isdn_bsdcomp.o
+</pre></div>
+</div>
+</section>
+<section id="proposito-de-los-modulos-cargables-obj-m">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Propósito de los módulos <em>cargables</em> <code class="docutils literal notranslate"><span class="pre">obj-m</span></code></a><a class="headerlink" href="#proposito-de-los-modulos-cargables-obj-m" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">$(obj-m)</span></code> especifica archivos objeto, los cuáles serán construidos como módulos <em>cargables</em> por el kernel.</p>
+<p>Un módulo podría ser construido desde un archivo fuente, o varios. En el primer caso, el makefile kbuild simplemente añadirá el archivo a <code class="docutils literal notranslate"><span class="pre">$(obj-m)</span></code>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c"># drivers/isdn/i4l/Makefile</span>
+<span class="nv">obj-$(CONFIG_ISDN_PPP_BSDCOMP)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>isdn_bsdcomp.o
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>En este ejemplo <code class="docutils literal notranslate"><span class="pre">$(CONFIG_ISDN_PPP_BSDCOMP)</span></code> evalua <code class="docutils literal notranslate"><span class="pre">m</span></code>.</p>
+</div>
+<p>Si un módulo del kernel es construido desde distintas fuentes, la forma de especificar cómo construir el módulo es la misma; aunque kbuild necesitará saber qué <em>archivos objeto</em> participarán en la construcción del módulo, así que habrá que especificarlo mediante la variable <code class="docutils literal notranslate"><span class="pre">$(&lt;module_name&gt;-y)</span></code>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c"># drivers/isdn/i4l/Makefile</span>
+<span class="nv">obj-$(CONFIG_ISDN_I4L)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>isdn.o
+<span class="nv">isdn-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>isdn_net_lib.o<span class="w"> </span>isdn_v110.o<span class="w"> </span>isdn_common.o
+</pre></div>
+</div>
+<p>En el ejemplo, el nombre del módulo será <code class="docutils literal notranslate"><span class="pre">isdn.o</span></code>. Kbuild compilará los objetos listados en <code class="docutils literal notranslate"><span class="pre">$(isdn-y)</span></code>, después ejecutará <code class="docutils literal notranslate"><span class="pre">$(LD)</span> <span class="pre">-r</span></code> sobre la lista de esos archivos, para generar <code class="docutils literal notranslate"><span class="pre">isdn.o</span></code>.</p>
+<p>Dado que kbuild reconoce <code class="docutils literal notranslate"><span class="pre">$(&lt;module_name&gt;-y)</span></code> en la composición de objetos, es posible utilizar el valor de un <code class="docutils literal notranslate"><span class="pre">CONFIG_</span> <span class="pre">symbol</span></code>, para opcionalmente incluir un archivo de objeto como parte de la composición de un objeto.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c"># fs/ext2/Makefile</span>
+<span class="nv">obj-$(CONFIG_EXT2_FS)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>ext2.o
+<span class="nv">ext2-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>balloc.o<span class="w"> </span>dir.o<span class="w"> </span>file.o<span class="w"> </span>ialloc.o<span class="w"> </span>inode.o<span class="w"> </span>ioctl.o<span class="w"> </span><span class="se">\</span>
+<span class="w">          </span>namei.o<span class="w"> </span>super.o<span class="w"> </span>symlink.o
+<span class="nv">ext2-$(CONFIG_EXT2_FS_XATTR)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>xattr.o<span class="w"> </span>xattr_user.o<span class="w"> </span><span class="se">\</span>
+<span class="w">                                </span>xattr_trusted.o
+</pre></div>
+</div>
+<p>En este ejemplo, <code class="docutils literal notranslate"><span class="pre">xattr.o</span></code>, <code class="docutils literal notranslate"><span class="pre">xattr_user.o</span></code> y <code class="docutils literal notranslate"><span class="pre">xattr_trusted.o</span></code> sólo son parte en la composición del objeto <code class="docutils literal notranslate"><span class="pre">ext2.o</span></code> si <code class="docutils literal notranslate"><span class="pre">$(CONFIG_EXT2_FS_XATTR)</span></code> evalua <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Al construir objetos dentro del kernel, la sintaxis de arriba también funcionará. Por tanto, si la opción es <code class="docutils literal notranslate"><span class="pre">CONFIG_EXT2_FS=y</span></code>, kbuild construirá un archivo <code class="docutils literal notranslate"><span class="pre">ext2.o</span></code> al margen de partes individuales, enlazando entonces con <code class="docutils literal notranslate"><span class="pre">integrado.a</span></code>; tal y como cabría esperar.</p>
+</div>
+</section>
+<section id="objetos-que-exportan-simbolos">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Objetos que exportan <em>símbolos</em></a><a class="headerlink" href="#objetos-que-exportan-simbolos" title="Link to this heading"></a></h2>
+<p>Las notaciones requeridas en los makefiles, no son necesarias para los módulos que exportan símbolos.</p>
+</section>
+<section id="proposito-de-los-archivos-librerias-lib-y">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Propósito de los archivos <em>librerías</em> <code class="docutils literal notranslate"><span class="pre">lib-y</span></code></a><a class="headerlink" href="#proposito-de-los-archivos-librerias-lib-y" title="Link to this heading"></a></h2>
+<p>Los objetos listados con <code class="docutils literal notranslate"><span class="pre">obj-*</span></code> son utilizados para los módulos, o combinados en un <code class="docutils literal notranslate"><span class="pre">integrado.a</span></code> que especifique el directorio. Aparece la posibilidad de listar objetos incluyéndolos en una librería <code class="docutils literal notranslate"><span class="pre">lib.a</span></code>. Todos los objetos listados con <code class="docutils literal notranslate"><span class="pre">lib-y</span></code> serán combinados en una librería única, para ese directorio.</p>
+<p>Los objetos listados en <code class="docutils literal notranslate"><span class="pre">obj-y</span></code> que adicionalmente estén en <code class="docutils literal notranslate"><span class="pre">lib-y</span></code> no serán incluidos en la librería, ya que podrán ser accedidos de igual forma. En cuanto a consistencia, los objetos listados en <code class="docutils literal notranslate"><span class="pre">lib-m</span></code> serán incluidos en <code class="docutils literal notranslate"><span class="pre">lib.a</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Algunos makefile kbuild podrían listar archivos por <em>construir en</em> y que fuesen parte de una librería. El mismo directorio podría contener ambos: <code class="docutils literal notranslate"><span class="pre">integrado.a</span></code> y <code class="docutils literal notranslate"><span class="pre">lib.a</span></code>.</p>
+</div>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c"># arch/x86/lib/Makefile</span>
+<span class="nv">lib-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>delay.o
+</pre></div>
+</div>
+<p>Esto creará una librería <code class="docutils literal notranslate"><span class="pre">lib.a</span></code> basada en <code class="docutils literal notranslate"><span class="pre">delay.o</span></code>. Para que kbuild reconozca que está siendo construida <code class="docutils literal notranslate"><span class="pre">lib.a</span></code>, el directorio deberá ser listado en <code class="docutils literal notranslate"><span class="pre">libs-y</span></code>. El uso de <code class="docutils literal notranslate"><span class="pre">lib-y</span></code> está normalmente restringido a <code class="docutils literal notranslate"><span class="pre">lib/</span></code> y a <code class="docutils literal notranslate"><span class="pre">arch/*/lib</span></code>.</p>
+</section>
+<section id="descendiendo-a-los-directorios">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Descendiendo a los directorios</a><a class="headerlink" href="#descendiendo-a-los-directorios" title="Link to this heading"></a></h2>
+<p>Un <em>Makefile</em> sólo es responsable de construir objetos en su propio directorio. Archivos en subdirectorios deberían ser tenidos en cuenta por los <em>Makefiles</em> en sus respectivos directorios. El sistema de construcción invocará <code class="docutils literal notranslate"><span class="pre">make</span></code> de manera recursiva en los subdirectorios indicados.</p>
+<p>Para esto será utilizado <code class="docutils literal notranslate"><span class="pre">obj-y</span></code> y <code class="docutils literal notranslate"><span class="pre">obj-m</span></code>. Por ejemplo, <code class="docutils literal notranslate"><span class="pre">ext2</span></code> vive en un directorio separado. El <em>Makefile</em> presente en <code class="docutils literal notranslate"><span class="pre">fs/</span></code> indica a kbuild cómo descender utilizando la siguiente asignación:</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c"># fs/Makefile</span>
+<span class="nv">obj-$(CONFIG_EXT2_FS)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>ext2/
+</pre></div>
+</div>
+<p>Si <code class="docutils literal notranslate"><span class="pre">CONFIG_EXT2_FS</span></code> es configurado con <code class="docutils literal notranslate"><span class="pre">y</span></code> (integrado) o <code class="docutils literal notranslate"><span class="pre">m</span></code> (modular), será empleada la correspondiente variable <code class="docutils literal notranslate"><span class="pre">obj-</span></code> y kbuild descenderá al directorio <code class="docutils literal notranslate"><span class="pre">ext2</span></code>. Kbuild sólo usa esta información para decidir cuándo visitar el directorio. El Makefile situado en tal directorio especificará qué es modular y qué es integrado.</p>
+<p>Es una buena práctica utilizar la variable <code class="docutils literal notranslate"><span class="pre">CONFIG_</span></code> en la asignación de nombres de directorios. Esto permitirá a kbuild omitir el directorio si la correspondiente opción <code class="docutils literal notranslate"><span class="pre">CONFIG_</span></code> no contiene ni <code class="docutils literal notranslate"><span class="pre">y</span></code> ni <code class="docutils literal notranslate"><span class="pre">m</span></code>.</p>
+</section>
+<section id="compilacion-de-opciones">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Compilación de opciones</a><a class="headerlink" href="#compilacion-de-opciones" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ccflags-y,</span> <span class="pre">asflags-y</span></code> y <code class="docutils literal notranslate"><span class="pre">ldflags-y</span></code>. Estas tres opciones(<em>flags</em>) únicamente son aplicables al makefile kbuild asignado. Son utilizadas en todas las invocaciones a <code class="docutils literal notranslate"><span class="pre">cc,</span> <span class="pre">as</span></code> y <code class="docutils literal notranslate"><span class="pre">ld</span></code> sucedidas durante la construcción recursiva.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Opciones con un comportamiento similar que fueron previamente nombradas: <code class="docutils literal notranslate"><span class="pre">EXTRA_CFLAGS,</span> <span class="pre">EXTRA_AFLAGS</span></code> y <code class="docutils literal notranslate"><span class="pre">EXTRA_LDFLAGS</span></code>; continuarán siendo soportadas, aunque su empleo es depreciado -obsoleto.</p>
+</div>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c"># drivers/acpi/acpica/Makefile</span>
+<span class="nv">ccflags-y</span><span class="w">                       </span><span class="o">:=</span><span class="w"> </span>-Os<span class="w"> </span>-D_LINUX<span class="w"> </span>-DBUILDING_ACPICA
+<span class="nv">ccflags-$(CONFIG_ACPI_DEBUG)</span><span class="w">    </span><span class="o">+=</span><span class="w"> </span>-DACPI_DEBUG_OUTPUT
+</pre></div>
+</div>
+<p>Esta variable es necesaria, por que el Makefiles <em>ostenta</em> la variable <code class="docutils literal notranslate"><span class="pre">$(KBUILD_CFLAGS)</span></code> y, la utiliza como opción de compilación, en todo el directorio.</p>
+<p><code class="docutils literal notranslate"><span class="pre">asflags-y</span></code> especifica la opción de ensamblado, mediane <code class="docutils literal notranslate"><span class="pre">$(AS)</span></code>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/sparc/kernel/Makefile</span>
+<span class="nv">asflags-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-ansi
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ldflags-y</span></code> especifica la opción de enlazado, mediane <code class="docutils literal notranslate"><span class="pre">$(LD)</span></code>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/cris/boot/compressed/Makefile</span>
+<span class="nv">ldflags-y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-T<span class="w"> </span><span class="k">$(</span>srctree<span class="k">)</span>/<span class="k">$(</span>src<span class="k">)</span>/decompress_<span class="k">$(</span>arch-y<span class="k">)</span>.lds
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">subdir-ccflags-y,</span> <span class="pre">subdir-asflags-y</span></code>. Las dos opciones listadas arriba, son similares a <code class="docutils literal notranslate"><span class="pre">ccflags-y</span></code> y <code class="docutils literal notranslate"><span class="pre">asflags-y</span></code>. La diferencia es que la variante <code class="docutils literal notranslate"><span class="pre">subdir-</span></code>, tiene efecto sobre el archivo kbuild, donde estén presentes y, en todos los subdirectorios.
+Las opciones especificadas mediante <code class="docutils literal notranslate"><span class="pre">subdir-*</span></code> son añadidas a la <em>línea de comando</em>, antes de especificar la opción, por medio de variantes de <em>non-subdir</em>.</p>
+</section>
+<section id="soporte-a-las-funciones-cc">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Soporte a las funciones <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code></a><a class="headerlink" href="#soporte-a-las-funciones-cc" title="Link to this heading"></a></h2>
+<p>El kernel podría ser construido junto a distintas versiones <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>, cada una de ellas, con soporte a un único grupo de características y opciones.
+Kbuild proporciona soporte básico a la comprobación de opciones válidas de <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>.
+<code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>, habitualmente el compilador <code class="docutils literal notranslate"><span class="pre">gcc</span></code>. También disponibles, otras alternativas.</p>
+<section id="as-option">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">as-option</a><a class="headerlink" href="#as-option" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">as-option</span></code>, es utilizada para comprobar si <code class="docutils literal notranslate"><span class="pre">$(CC)</span> <span class="pre">--</span></code>, fue empleada para compilar archivos ensamblador <code class="docutils literal notranslate"><span class="pre">*.S</span></code>, soportan la opción dada. Una segunda opción alternativa, podría ser especificada si la primera opción no fuese soportada.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/sh/Makefile</span>
+<span class="nv">cflags-y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">$(</span>call<span class="w"> </span>as-option,-Wa<span class="k">$(</span>comma<span class="k">)</span>-isa<span class="o">=</span><span class="k">$(</span>isa-y<span class="k">)</span>,<span class="k">)</span>
+</pre></div>
+</div>
+<p>En el ejemplo de arriba, <code class="docutils literal notranslate"><span class="pre">cflags-y</span></code> será asignada la opción <code class="docutils literal notranslate"><span class="pre">-Wa$(comma)-isa=$(isa-y)</span></code>, si es soportada por <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>.
+El segundo argumento es opcional y, de ser porporcionado, será utilizado si el primer argumento no tiene soporte.</p>
+</section>
+<section id="cc-ldoption">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">cc-ldoption</a><a class="headerlink" href="#cc-ldoption" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cc-ldoption</span></code>, es utilizado para comprobar si <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code> fue empleado para enlazar <em>archivos objeto</em>, soportados por una determinada opción. Podrá ser indicada una segunda alternativa, de no haber soporte a la primera.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/x86/kernel/Makefile</span>
+<span class="nv">vsyscall-flags</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">$(</span>call<span class="w"> </span>cc-ldoption,<span class="w"> </span>-Wl<span class="k">$(</span>comma<span class="k">)</span>--hash-style<span class="o">=</span>sysv<span class="k">)</span>
+</pre></div>
+</div>
+<p>En el ejemplo anterior, <code class="docutils literal notranslate"><span class="pre">vsyscall-flags</span></code> asignará la opción <code class="docutils literal notranslate"><span class="pre">-Wl$(comma)--hash-style=sysv</span></code>, si hay soporte a <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>. El segundo argumento es opcional. Podrá ser indicada una segunda alternativa, de no haber soporte a la primera.</p>
+</section>
+<section id="as-instr">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">as-instr</a><a class="headerlink" href="#as-instr" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">as-instr</span></code> comprueba si el ensamblador, informa acerca de una instrucción específica, imprimiendo tanto la <em>opción1</em> como <em>opción2</em>.
+<em>Secuencias de escape</em> C, tienen soporte en la <em>instrucción de ensayo</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>la opción <code class="docutils literal notranslate"><span class="pre">as-instr</span></code>, utiliza <code class="docutils literal notranslate"><span class="pre">KBUILD_AFLAGS</span></code> en las opciones <code class="docutils literal notranslate"><span class="pre">$(AS)</span></code> -ensamblador.</p>
+</div>
+</section>
+<section id="cc-option">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">cc-option</a><a class="headerlink" href="#cc-option" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cc-option</span></code>, es utilizado para comprobar si <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code> soporta un determinado conmutador de línea. Si es soportado, retorna la opción; de lo contrario, retorna un segundo parámetro si este fue especificado.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c"># Tarea de Makefile</span>
+<span class="nv">KBUILD_CFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">$(</span>call<span class="w"> </span>cc-option,-march<span class="o">=</span>winchip-c6,-march<span class="o">=</span>i586<span class="k">)</span>
+</pre></div>
+</div>
+<p>En el ejemplo de arriba, <code class="docutils literal notranslate"><span class="pre">cflags-y</span></code> asignará la opción <code class="docutils literal notranslate"><span class="pre">-march=pentium-mmx</span></code> si es soportado por <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>, de cualquier otra forma, <code class="docutils literal notranslate"><span class="pre">-march=i586</span></code>.
+El segundo argumento a la alternativa <code class="docutils literal notranslate"><span class="pre">cc-option</span></code>, es opcional. Si es omitida, <code class="docutils literal notranslate"><span class="pre">cflags-y</span></code> no asignará ningún valor, de no haber soporte a la primera opción.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">cc-option</span></code> utiliza <code class="docutils literal notranslate"><span class="pre">KBUILD_CFLAGS</span></code> en opciones <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>.</p>
+</div>
+</section>
+<section id="cc-option-yn">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">cc-option-yn</a><a class="headerlink" href="#cc-option-yn" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cc-option-yn</span></code>, es utilizada para comprobar si <code class="docutils literal notranslate"><span class="pre">gcc</span></code> soporta determinada opción, retornando <code class="docutils literal notranslate"><span class="pre">y</span></code> en caso afirmativo, <code class="docutils literal notranslate"><span class="pre">n</span></code> en caso contrario.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/ppc/Makefile</span>
+<span class="nv">biarch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>call<span class="w"> </span>cc-option-yn,<span class="w"> </span>-m32<span class="k">)</span>
+<span class="nv">aflags-$(biarch)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-a32
+<span class="nv">cflags-$(biarch)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-m32
+</pre></div>
+</div>
+<p>En el ejemplo anterior, <code class="docutils literal notranslate"><span class="pre">$(biarch)</span></code> establece <code class="docutils literal notranslate"><span class="pre">y</span></code>, si <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code> soporta la opción <code class="docutils literal notranslate"><span class="pre">-m32</span></code>. Siempre que <code class="docutils literal notranslate"><span class="pre">$(biarch)</span></code> sea igual a <code class="docutils literal notranslate"><span class="pre">y</span></code>, las variables <em>expandidas</em> <code class="docutils literal notranslate"><span class="pre">$(aflags-y)</span></code> y <code class="docutils literal notranslate"><span class="pre">$(cflags-y)</span></code>, asignarán los valores <code class="docutils literal notranslate"><span class="pre">-a32</span></code> y <code class="docutils literal notranslate"><span class="pre">-m32</span></code>, respectivamente.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">cc-option-yn</span></code> utiliza <code class="docutils literal notranslate"><span class="pre">KBUILD_CFLAGS</span></code> en opciones <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>.</p>
+</div>
+</section>
+<section id="cc-disable-warning">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">cc-disable-warning</a><a class="headerlink" href="#cc-disable-warning" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cc-disable-warning</span></code> comprueba si <code class="docutils literal notranslate"><span class="pre">gcc</span></code> da soporte a <em>advertencias</em>, retorna el <em>conmutado de línea</em>, para desactivarlo. Esta función especial, es necesaria puesto que <code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">v4.4</span></code> y posteriores, aceptan cualquier opción <code class="docutils literal notranslate"><span class="pre">-Wno-*</span></code> desconocida y, sólo avisa de ello, si algúna otra advertencia en el archivo fuente.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nv">KBUILD_CFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">$(</span>call<span class="w"> </span>cc-disable-warning,<span class="w"> </span>unused-but-set-variable<span class="k">)</span>
+</pre></div>
+</div>
+<p>El ejemplo añade <code class="docutils literal notranslate"><span class="pre">-Wno-unused-but-set-variable</span></code> a la variable <code class="docutils literal notranslate"><span class="pre">KBUILD_CFLAGS</span></code>, sólo si <code class="docutils literal notranslate"><span class="pre">gcc</span></code> la acepta realmente.</p>
+</section>
+<section id="cc-version">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">cc-version</a><a class="headerlink" href="#cc-version" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cc-version</span></code>, retorna una versión numérica, de la versión del compilador <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>.
+El formato es <code class="docutils literal notranslate"><span class="pre">&lt;mayor&gt;&lt;menor&gt;</span></code>, dónde ambos son dígitos. Por ejemplo, <code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">3.41</span></code> retornará <code class="docutils literal notranslate"><span class="pre">0341</span></code>.
+<code class="docutils literal notranslate"><span class="pre">cc-version</span></code>, resulta útil cuando una versión específica de <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>, es erronea en determinda área, por ejemplo, <code class="docutils literal notranslate"><span class="pre">-mregparm=3</span></code> resultó <em>rota</em> en algunas versiones <code class="docutils literal notranslate"><span class="pre">gcc</span></code>, incluso siendo aceptada por el mismo.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/x86/Makefile</span>
+<span class="nv">cflags-y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">$(</span>shell<span class="w"> </span><span class="se">\</span>
+<span class="cp">if [ $(cc-version) -ge 0300 ] ; then \</span>
+<span class="cp">    echo &quot;-mregparm=3&quot;; fi ;)</span>
+</pre></div>
+</div>
+<p>El ejemplo de arriba, <code class="docutils literal notranslate"><span class="pre">-mregparm=3</span></code> sólo es utilizado en versiones 3.0 de <code class="docutils literal notranslate"><span class="pre">gcc</span></code>, o posteriores.</p>
+</section>
+<section id="cc-ifversion">
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">cc-ifversion</a><a class="headerlink" href="#cc-ifversion" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cc-ifversion</span></code> <em>prueba</em> la versión de <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>, e iguala(<code class="docutils literal notranslate"><span class="pre">:=</span></code>) el cuarto parámetro si la <em>expresión de versión</em> es <em>cierta</em>, o la quinta -de ser aportada, si la <em>expresión de versión</em> es <em>falsa</em>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#fs/reiserfs/Makefile</span>
+<span class="nv">ccflags-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>call<span class="w"> </span>cc-ifversion,<span class="w"> </span>-lt,<span class="w"> </span><span class="m">0402</span>,<span class="w"> </span>-O1<span class="k">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>n. de t.</strong>: <code class="docutils literal notranslate"><span class="pre">ccflags-y</span> <span class="pre">:=</span> <span class="pre">$(call</span> <span class="pre">cc-ifversion,</span> <span class="pre">-lt,</span> <span class="pre">0402,</span> <span class="pre">-O1)</span></code>.Ejemplo,</p>
+</div>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nv">subdir-ccflags-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-Werror
+<span class="nv">CFLAGS_filename.o</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-Werror
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">CFLAGS_$&#64;</span></code> y <code class="docutils literal notranslate"><span class="pre">AFLAGS_$&#64;</span></code>, únicamente son aplicables, a comandos en el makefile kbuild activo.</p>
+<p><code class="docutils literal notranslate"><span class="pre">$(CFLAGS_$&#64;)</span></code> especifica opciones por archivo, con <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>. La parte <code class="docutils literal notranslate"><span class="pre">$&#64;</span></code>, tiene un valor literal, el cuál especifica el archivo para el que és.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c"># drivers/scsi/Makefile</span>
+<span class="nv">CFLAGS_aha152x.o</span><span class="w"> </span><span class="o">=</span><span class="w">   </span>-DAHA152X_STAT<span class="w"> </span>-DAUTOCONF
+<span class="nv">CFLAGS_gdth.o</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="c1"># -DDEBUG_GDTH=2 -D__SERIAL__ -D__COM2__ \</span>
+<span class="w">                     </span>-DGDTH_STATISTICS
+</pre></div>
+</div>
+<p>Estas dos líneas especifican las opciones de compilación para <code class="docutils literal notranslate"><span class="pre">aha152x.o</span></code> y <code class="docutils literal notranslate"><span class="pre">gdth.o</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">$(AFLAGS_$&#64;)</span></code> es una característica similar, para los archivos fuente, en lenguaje ensamblador.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c"># arch/arm/kernel/Makefile</span>
+<span class="nv">AFLAGS_head.o</span><span class="w">        </span><span class="o">:=</span><span class="w"> </span>-DTEXT_OFFSET<span class="o">=</span><span class="k">$(</span>TEXT_OFFSET<span class="k">)</span>
+<span class="nv">AFLAGS_crunch-bits.o</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-Wa,-mcpu<span class="o">=</span>ep9312
+<span class="nv">AFLAGS_iwmmxt.o</span><span class="w">      </span><span class="o">:=</span><span class="w"> </span>-Wa,-mcpu<span class="o">=</span>iwmmxt
+</pre></div>
+</div>
+</section>
+</section>
+<section id="seguimiento-de-las-dependencias">
+<h2><a class="toc-backref" href="#id20" role="doc-backlink">Seguimiento de las dependencias</a><a class="headerlink" href="#seguimiento-de-las-dependencias" title="Link to this heading"></a></h2>
+<p>Kbuild <em>sigue las dependencias</em>, así:</p>
+<ul class="simple">
+<li><ol class="arabic simple">
+<li><p>Todos los archivos requeridos(tanto <code class="docutils literal notranslate"><span class="pre">*.c</span></code> como <code class="docutils literal notranslate"><span class="pre">*.h</span></code>).</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="2">
+<li><p>Todas las opciones <code class="docutils literal notranslate"><span class="pre">CONFIG_</span></code>, en archivos requeridos.</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="3">
+<li><p>La líne de comandos utilizada, para compilar el objetivo.</p></li>
+</ol>
+</li>
+</ul>
+<p>Por tanto, de cambiar la opción <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>, todos los archivos afectados serán recompilados.</p>
+</section>
+<section id="reglas-especiales">
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">Reglas especiales</a><a class="headerlink" href="#reglas-especiales" title="Link to this heading"></a></h2>
+<p>Son utilizadas reglas especiales cuando la infraestructura kbuild, no proporcione el soporte requerido. Un ejemplo típico, son los archivos de <em>cabecera</em> generados durante el proceso de construcción.
+Otro ejemplo, son los Makefiles de arquitectura, que necesitan reglas especiales para preparar la imagen final.</p>
+<p>Las reglas especiales son escritas como reglas normales de <code class="docutils literal notranslate"><span class="pre">make</span></code>.
+Kbuild no se ejecuta en el directorio donde el Makefile está presente, por lo que todas las <em>reglas especiales</em>, deberían proporcionar una ruta relativa a archivos <em>pre-requeridos</em> y <em>archivos objetivo</em>.</p>
+<p>Son utilizadas dos variables en el momento de definir una regla especial:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">$(src)</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">$(src)</span></code> es una ruta relativa, la cuál apunta al directorio donde está localizado el Makefile. Utilizar siempre <code class="docutils literal notranslate"><span class="pre">$(src)</span></code>, al referir alrchivos localizados en el <em>árbol</em> <code class="docutils literal notranslate"><span class="pre">src</span></code> -fuente.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">$(obj)</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">$(obj)</span></code> es una ruta relativa, la cuál apunta al directorio donde está guardado el objetivo. Utilizar siempre <code class="docutils literal notranslate"><span class="pre">$(obj)</span></code>, al referir alrchivos generados.</p>
+</dd>
+</dl>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#drivers/scsi/Makefile</span>
+<span class="nf">$(obj)/53c8xx_d.h</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">src</span><span class="k">)</span>/53<span class="n">c</span>7<span class="p">,</span>8<span class="n">xx</span>.<span class="n">scr</span> <span class="k">$(</span><span class="nv">src</span><span class="k">)</span>/<span class="n">script_asm</span>.<span class="n">pl</span>
+<span class="w">    </span><span class="k">$(</span>CPP<span class="k">)</span><span class="w"> </span>-DCHIP<span class="o">=</span><span class="m">810</span><span class="w"> </span>-<span class="w"> </span>&lt;<span class="w"> </span>$&lt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>...<span class="w"> </span><span class="k">$(</span>src<span class="k">)</span>/script_asm.pl
+</pre></div>
+</div>
+<p>Es esta una regla especial; siguiendo la sintaxis habitual requerida por make.
+El <em>objetivo</em>, depende de dos <em>pre-requisitos</em> de archivo. Referencias al <em>archivo objetivo</em>, añaden el prefijo <code class="docutils literal notranslate"><span class="pre">$(obj)</span></code>, referencias a <em>pre-requisitos</em>, añaden <code class="docutils literal notranslate"><span class="pre">$(src)</span></code> -puesto que no son archivos generados.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">$(kecho)</span></code></dt><dd><p>Presentar información al usuario mediante una <em>regla</em>, resulta una buena práctica, pero al ejecutar <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-s</span></code>, no cabe esperar ver ninguna salida, exceptuando <em>avisos/errores</em> -warning/errors.
+Para dar soporte a lo anterior, kbuild define <code class="docutils literal notranslate"><span class="pre">$(kecho)</span></code>, presentando el texto seguido de <code class="docutils literal notranslate"><span class="pre">$(kecho)</span></code> sobre la salida estandar(fd1), salvo si es utilizado <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-s</span></code>.</p>
+</dd>
+</dl>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c"># arch/arm/Makefile</span>
+<span class="nf">$(BOOT_TARGETS)</span><span class="o">:</span><span class="w"> </span><span class="n">vmlinux</span> <span class="n">TARGET</span>
+<span class="w">    </span><span class="k">$(</span>Q<span class="k">)$(</span>MAKE<span class="k">)</span><span class="w"> </span><span class="k">$(</span>build<span class="k">)</span><span class="o">=</span><span class="k">$(</span>boot<span class="k">)</span><span class="w"> </span><span class="nv">MACHINE</span><span class="o">=</span><span class="k">$(</span>MACHINE<span class="k">)</span><span class="w"> </span><span class="k">$(</span>obj<span class="k">)</span>/<span class="nv">$@</span>
+<span class="w">    </span>@<span class="k">$(</span>kecho<span class="k">)</span><span class="w"> </span><span class="s1">&#39;  Kernel: $(obj)/$@ is ready&#39;</span>En<span class="w"> </span>este<span class="w"> </span>ejemplo,<span class="w"> </span><span class="sb">``</span>ccflags-y<span class="sb">``</span><span class="w"> </span>asignará<span class="w"> </span>el<span class="w"> </span>valor<span class="w"> </span><span class="sb">``</span>-01<span class="sb">``</span><span class="w"> </span>si<span class="w"> </span>la<span class="w"> </span>versión<span class="w"> </span><span class="sb">``</span><span class="k">$(</span>CC<span class="k">)</span><span class="sb">``</span><span class="w"> </span>es<span class="w"> </span>menor<span class="w"> </span>a<span class="w"> </span><span class="m">4</span>.2.
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cc-ifversion</span></code> toma todos los operadores de <em>shell</em>: <code class="docutils literal notranslate"><span class="pre">-eq,</span> <span class="pre">-ne,</span> <span class="pre">-lt,</span> <span class="pre">-le,</span> <span class="pre">-gt,</span> <span class="pre">and</span> <span class="pre">-ge</span></code>. El tercer parámetro podría ser un texto, como lo és, en aquí, aunque podría ser una variable <em>expandida</em> o una <em>macro</em>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#arch/powerpc/Makefile
+$(Q)if test &quot;$(cc-fullversion)&quot; = &quot;040200&quot; ; then \
+        echo -n &#39;*** GCC-4.2.0 cannot compile the 64-bit powerpc &#39; ; \
+        false ; \
+fi
+</pre></div>
+</div>
+<p>En este ejemplo, una versión específica de GCC, mostrará un error explicando al usuario, por qué se detuvo en la construcción.</p>
+<section id="cc-cross-prefix">
+<h3><a class="toc-backref" href="#id22" role="doc-backlink">cc-cross-prefix</a><a class="headerlink" href="#cc-cross-prefix" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cc-cross-prefix</span></code> es utilizado para comprobar si existe un <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code> en <em>la ruta</em> de alguno de los prefijos listados. El primer prefijo, donde aparece un <code class="docutils literal notranslate"><span class="pre">prefix$(CC)</span></code>, retornará PATH -si no lo hay, no retornará nada.
+Además, los prefijos están separados por una <em>sólo espacio</em> en la llamada a <code class="docutils literal notranslate"><span class="pre">cc-cross-prefix</span></code>.
+Esta funcionalidad es útil en arquitecturas, donde los Makefiles tratarán de establecer <code class="docutils literal notranslate"><span class="pre">CROSS_COMPILE</span></code>, en valores conocidos, entre varios de los mismos.
+Es recomendable asignar la variable, en una construcción cruzada -<em>host arch</em> es distinta a <em>target arch</em>. Si <code class="docutils literal notranslate"><span class="pre">CROSS_COMPILE</span></code> ha sido ya asignada, es mejor dejar el valor tal cuál.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/m68k/Makefile</span>
+<span class="cp">ifneq ($(SUBARCH),$(ARCH))</span>
+<span class="cp">        ifeq ($(CROSS_COMPILE),)</span>
+<span class="w">               </span>CROSS_COMPILE<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">$(</span>call<span class="w"> </span>cc-cross-prefix,<span class="w"> </span>m68k-linux-gnu-<span class="k">)</span>
+<span class="cp">        endif</span>
+<span class="cp">endif</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="soporte-a-las-funciones-ld">
+<h2><a class="toc-backref" href="#id23" role="doc-backlink">Soporte a las funciones <code class="docutils literal notranslate"><span class="pre">$(LD)</span></code></a><a class="headerlink" href="#soporte-a-las-funciones-ld" title="Link to this heading"></a></h2>
+<section id="ld-option">
+<h3><a class="toc-backref" href="#id24" role="doc-backlink">ld-option</a><a class="headerlink" href="#ld-option" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ld-option</span></code> es utilizada para comprobar si <code class="docutils literal notranslate"><span class="pre">$(LD)</span></code> soporta la opción proporcionada.
+<code class="docutils literal notranslate"><span class="pre">ld-option</span></code> toma dos opciones como argumento.
+El segundo argumento es una opción alternativa, que podrá ser utilizada si la primera opción no es soportada por <code class="docutils literal notranslate"><span class="pre">$(LD)</span></code>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#Makefile</span>
+<span class="nv">LDFLAGS_vmlinux</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">$(</span>call<span class="w"> </span>ld-option,<span class="w"> </span>-X<span class="k">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="soporte-a-programas-host">
+<h2><a class="toc-backref" href="#id25" role="doc-backlink">Soporte a programas <em>Host</em></a><a class="headerlink" href="#soporte-a-programas-host" title="Link to this heading"></a></h2>
+<p>Kbuild soporta la construcción de ejecutables en el anfitrión -host, para utilizarlos durante la fase de compilación. Son necesarios dos pasos, para utilizarlos.</p>
+<p>El primer paso, es decir a kbuild, que tal programa existe. Con este propósito es utilizada la variable <code class="docutils literal notranslate"><span class="pre">hostprogs-y</span></code>.</p>
+<p>El segundo paso, consiste en añadir una dependencia explícita, al ejecutable. Hay dos formas de hacerlo; añadiendo la dependencia en una regla, o mediante la variable <code class="docutils literal notranslate"><span class="pre">$(always)</span></code>.
+Ambas posibilidades, serán descritas a continuación.</p>
+</section>
+<section id="programas-host-simple">
+<h2><a class="toc-backref" href="#id26" role="doc-backlink">Programas <em>Host</em> simple</a><a class="headerlink" href="#programas-host-simple" title="Link to this heading"></a></h2>
+<p>En determinados casos, aparece la necesidad de <em>compilar y lanzar</em> un programa, en la computadora donde trabaja la construcción.
+La siguiente línea, dice a kbuild, que el programa bin2hex, debería ser constuido en el anfitrión.</p>
+<p>ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nv">hostprogs-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>bin2hex
+</pre></div>
+</div>
+<p>Kbuild asume que <code class="docutils literal notranslate"><span class="pre">bin2hex</span></code> procede de un archivo <em>fuente C</em>, llamado <code class="docutils literal notranslate"><span class="pre">bin2hex.c</span></code>, localizado en el mismo directorio que el Makefile.</p>
+</section>
+<section id="composicion-de-programas-host">
+<h2><a class="toc-backref" href="#id27" role="doc-backlink">Composición de programas <em>Host</em></a><a class="headerlink" href="#composicion-de-programas-host" title="Link to this heading"></a></h2>
+<p>Podrán hacerse programas <em>anfitrión</em>, basados en una composición de objetos.
+La sintaxis utilizada para definir la composición de objetos, es similar a la sintaxis utilizada para objetos del kernel.
+<code class="docutils literal notranslate"><span class="pre">$(&lt;executable&gt;-objs)</span></code> lista todos los objetos utilizados, para enlazar el ejecutable final.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#scripts/lxdialog/Makefile</span>
+<span class="nv">hostprogs-y</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span>lxdialog
+<span class="nv">lxdialog-objs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>checklist.o<span class="w"> </span>lxdialog.o
+</pre></div>
+</div>
+<p>Objetos con la extensión <code class="docutils literal notranslate"><span class="pre">.o</span></code>, son compilados desde los correspondientes archivos <code class="docutils literal notranslate"><span class="pre">.c</span></code>. En el ejemplo de arriba, <code class="docutils literal notranslate"><span class="pre">checklist.c</span></code> es compilado en <code class="docutils literal notranslate"><span class="pre">checklist.o</span></code> y, <code class="docutils literal notranslate"><span class="pre">lxdialog.c</span></code> en <code class="docutils literal notranslate"><span class="pre">lxdialog.o</span></code>.
+Finalmente, los dos archivos <code class="docutils literal notranslate"><span class="pre">.o</span></code>, serán enlazados al ejecutable <code class="docutils literal notranslate"><span class="pre">lxdialog</span></code> .</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La sintaxis <code class="docutils literal notranslate"><span class="pre">&lt;executable&gt;-y</span></code> no está permitida en <em>host-programs</em>.</p>
+</div>
+</section>
+<section id="empleo-de-c-en-programas-host">
+<h2><a class="toc-backref" href="#id28" role="doc-backlink">Empleo de <code class="docutils literal notranslate"><span class="pre">C++</span></code> en programas <em>Host</em></a><a class="headerlink" href="#empleo-de-c-en-programas-host" title="Link to this heading"></a></h2>
+<p>Kbuild ofrece soporte a programas <em>host</em>, escritos en C++. La característica se introdujo para dar soporte a <em>kconfig</em>; no es recomendable un uso general.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#scripts/kconfig/Makefile</span>
+<span class="nv">hostprogs-y</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span>qconf
+<span class="nv">qconf-cxxobjs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>qconf.o
+</pre></div>
+</div>
+<p>El ejecutable es compuesto desde el archivo C++ <code class="docutils literal notranslate"><span class="pre">qconf.cc</span></code> -identificado por <code class="docutils literal notranslate"><span class="pre">$(qconf-cxxobjs)</span></code>.</p>
+<p>Si <code class="docutils literal notranslate"><span class="pre">qconf</span></code> es compuesto por una mezcla de archivos <code class="docutils literal notranslate"><span class="pre">.c</span></code> y <code class="docutils literal notranslate"><span class="pre">.cc</span></code>, podrá utilizarse una línea adicional, para su identificación.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#scripts/kconfig/Makefile</span>
+<span class="nv">hostprogs-y</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span>qconf
+<span class="nv">qconf-cxxobjs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>qconf.o
+<span class="nv">qconf-objs</span><span class="w">    </span><span class="o">:=</span><span class="w"> </span>check.o
+</pre></div>
+</div>
+</section>
+<section id="control-de-las-opciones-del-compilador-en-programas-host">
+<h2><a class="toc-backref" href="#id29" role="doc-backlink">Control de las opciones del compilador en programas <em>Host</em></a><a class="headerlink" href="#control-de-las-opciones-del-compilador-en-programas-host" title="Link to this heading"></a></h2>
+<p>En la compilación de programas <em>host</em>, es posible establecer opciones específicas.
+El programa siempre compilará pasando las opciones en <code class="docutils literal notranslate"><span class="pre">$(HOSTCFLAGS)</span></code> a la varible <code class="docutils literal notranslate"><span class="pre">$(HOSTCC)</span></code>.
+La determinar qué opciones tomarán efecto, en todos los programas <em>host</em>, creados en ese Makefile, utilizar la variable <code class="docutils literal notranslate"><span class="pre">HOST_EXTRACFLAGS</span></code>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#scripts/lxdialog/Makefile</span>
+<span class="nv">HOST_EXTRACFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-I/usr/include/ncurses
+</pre></div>
+</div>
+<p>Para establecer opciones específicas, para un sólo archivo, es utilizada la siguiente opción:</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/ppc64/boot/Makefile</span>
+<span class="nv">HOSTCFLAGS_piggyback.o</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-DKERNELBASE<span class="o">=</span><span class="k">$(</span>KERNELBASE<span class="k">)</span>
+</pre></div>
+</div>
+<p>Es posible también, especificar opciones adicionales en el <em>enlazador</em>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#scripts/kconfig/Makefile</span>
+<span class="nv">HOSTLOADLIBES_qconf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-L<span class="k">$(</span>QTDIR<span class="k">)</span>/lib
+</pre></div>
+</div>
+<p>Al enlazar <code class="docutils literal notranslate"><span class="pre">qconf</span></code>, será <em>pasado</em> como opción <em>extra</em> <code class="docutils literal notranslate"><span class="pre">-L$(QTDIR)/lib</span></code>.</p>
+</section>
+<section id="cuando-son-construidos-los-programas-host">
+<h2><a class="toc-backref" href="#id30" role="doc-backlink">Cuándo son construidos los programas <em>Host</em></a><a class="headerlink" href="#cuando-son-construidos-los-programas-host" title="Link to this heading"></a></h2>
+<p>Kbuid únicamente contruye programas <em>host</em>, cuando son referenciados como requisito.
+Esto es posible de dos formas distintas:</p>
+<ul class="simple">
+<li><ol class="arabic simple">
+<li><p>Listar el requisito de forma explícita, en una regla especial.</p></li>
+</ol>
+</li>
+</ul>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#drivers/pci/Makefile</span>
+<span class="nv">hostprogs-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>gen-devlist
+<span class="nf">$(obj)/devlist.h</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">src</span><span class="k">)</span>/<span class="n">pci</span>.<span class="n">ids</span> <span class="k">$(</span><span class="nv">obj</span><span class="k">)</span>/<span class="n">gen</span>-<span class="n">devlist</span>
+<span class="w">        </span><span class="o">(</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span><span class="k">$(</span>obj<span class="k">)</span><span class="p">;</span><span class="w"> </span>./gen-devlist<span class="w"> </span><span class="o">)</span><span class="w"> </span>&lt;<span class="w"> </span>$&lt;
+</pre></div>
+</div>
+<p>El objetivo <code class="docutils literal notranslate"><span class="pre">$(obj)/devlist.h</span></code> no será construido antes de actualizar <code class="docutils literal notranslate"><span class="pre">$(obj)/gen-devlist</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>referencias al programa <em>host</em> en reglas especiales, deben utilizar el prefijo <code class="docutils literal notranslate"><span class="pre">$(obj)</span></code>.</p>
+</div>
+<ul class="simple">
+<li><ol class="arabic simple" start="2">
+<li><p>Uso de <code class="docutils literal notranslate"><span class="pre">$(always)</span></code>.Ejemplo,</p></li>
+</ol>
+</li>
+</ul>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#scripts/lxdialog/Makefile</span>
+<span class="nv">hostprogs-y</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span>lxdialog
+<span class="nv">always</span><span class="w">        </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>hostprogs-y<span class="k">)</span>
+</pre></div>
+</div>
+<p>Indica a kbuild, el construir <code class="docutils literal notranslate"><span class="pre">lxdialog</span></code> incluso si no hubiese sido referenciado en ninguna regla.</p>
+</section>
+<section id="utilizacion-de-hostprogs-config-foo">
+<h2><a class="toc-backref" href="#id31" role="doc-backlink">Utilización de <code class="docutils literal notranslate"><span class="pre">hostprogs-$(CONFIG_FOO)</span></code></a><a class="headerlink" href="#utilizacion-de-hostprogs-config-foo" title="Link to this heading"></a></h2>
+<p>Un patrón habitual en archivos kbuild, tienen este aspecto:</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#scripts/Makefile</span>
+<span class="nv">hostprogs-$(CONFIG_KALLSYMS)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>kallsyms
+</pre></div>
+</div>
+<p>Kbuild entiende ambas asignaciones; <code class="docutils literal notranslate"><span class="pre">y</span></code>, para <em>integrados</em>, <code class="docutils literal notranslate"><span class="pre">m</span></code>, para módulos.
+Por lo que si un símbolo evalúa <code class="docutils literal notranslate"><span class="pre">m</span></code>, kbuild seguirá construyendo el binario. En otras palablas; kbuild gestiona <code class="docutils literal notranslate"><span class="pre">hostprogs-m</span></code> de igual modo a <code class="docutils literal notranslate"><span class="pre">hostprogs-y</span></code>. Aunque es recomendable el empleo de <code class="docutils literal notranslate"><span class="pre">hostprogs-y</span></code>, cuando no hay <em>símbolos de configuración</em> involucrados.</p>
+</section>
+<section id="kbuild-limpiar-infraestructura">
+<h2><a class="toc-backref" href="#id32" role="doc-backlink"><em>Kbuild</em>, limpiar infraestructura</a><a class="headerlink" href="#kbuild-limpiar-infraestructura" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code>, borra la mayoría de archivos generados en el <em>árbol objetivo</em>, donde es compilado el kernel. Esto incluye los archivos generados como <em>programas host</em>.
+Kbuild conoce los objetivos listados en <code class="docutils literal notranslate"><span class="pre">$(hostprogs-y),</span> <span class="pre">$(hostprogs-m),</span> <span class="pre">$(always),$(extra-y)</span></code> y <code class="docutils literal notranslate"><span class="pre">$(targets)</span></code>. Estos serán borrados los archivos durante <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code>.
+Archivos que coincidan con el patrón <code class="docutils literal notranslate"><span class="pre">*.[oas]</span></code>, <code class="docutils literal notranslate"><span class="pre">*.ko</span></code>, además de otros generados por kbuild, serán borrados del árbol fuente, al ejecutar dicho comando.</p>
+<p>Es posible especificar archivos adicionales, mediante la variable <code class="docutils literal notranslate"><span class="pre">$(clean-files)</span></code>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#lib/Makefile</span>
+<span class="nv">clean-files</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>crc32table.h
+</pre></div>
+</div>
+<p>Al ejecutar <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code>, el archivo <code class="docutils literal notranslate"><span class="pre">crc32table.h</span></code> será borrado.
+Kbuild asumirá que los archivos están en el mismo directorio relativo al archivo <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, excepto si fue utilizado el prefijo <code class="docutils literal notranslate"><span class="pre">$(objtree)</span></code>.</p>
+<p>Para borrar la <em>jerarquía</em> de directorio -recursivamente:</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#scripts/package/Makefile</span>
+<span class="nv">clean-dirs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>objtree<span class="k">)</span>/debian/
+</pre></div>
+</div>
+<p>Esto borrará el directorio <em>debian</em>, empezando por el nivel más alto del directorio, e incluyendo todos los subdirectorios.</p>
+<p>Para exluir ciertos archivos, utilizar la variable <code class="docutils literal notranslate"><span class="pre">$(no-clean-files)</span></code>. Se trata de un caso especial, utilizado en el nivel <em>más alto</em> del archivo kbuild:</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#Kbuild</span>
+<span class="nv">no-clean-files</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>bounds-file<span class="k">)</span><span class="w"> </span><span class="k">$(</span>offsets-file<span class="k">)</span>
+</pre></div>
+</div>
+<p>Habitualmente, kbuild desciende a los subdirectorios mediante <code class="docutils literal notranslate"><span class="pre">obj-*</span> <span class="pre">:=</span> <span class="pre">dir/&quot;</span></code>, aunque en estructuras <em>makefiles</em>, donde la infraestructura kbuild no es suficiente, algunas veces necesitará ser explicitado.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/x86/boot/Makefile</span>
+<span class="nv">subdir-</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>compressed/
+</pre></div>
+</div>
+<p>La asignación de arriba, instruye a kbuild para descender al directorio <code class="docutils literal notranslate"><span class="pre">compressed/</span></code>, al ejecutar <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code>.</p>
+<p>El soporte a la infraestructura <em>clean</em> el los <em>Makefiles</em>, que construyen la imagen arrancable, dispone de un <em>objetivo opcional</em> llamado <em>archclean</em>:</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/x86/Makefile</span>
+<span class="nf">archclean</span><span class="o">:</span>
+<span class="w">    </span><span class="k">$(</span>Q<span class="k">)$(</span>MAKE<span class="k">)</span><span class="w"> </span><span class="k">$(</span>clean<span class="k">)</span><span class="o">=</span>arch/x86/boot
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> descenderá en <code class="docutils literal notranslate"><span class="pre">arch/x86/boot</span></code> y, hará la limpieza habitual. El Makefile localizado en <code class="docutils literal notranslate"><span class="pre">arch/x86/boot/</span></code>, podría utilizar el artificio <code class="docutils literal notranslate"><span class="pre">subdir-</span></code>, para descender <em>afondo</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Nota 1</strong>: <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/Makefile</span></code> no podrá utilizar <code class="docutils literal notranslate"><span class="pre">subdir-</span></code>, puesto que el archivo es incluido en el nivel más alto de <em>makefile</em> y, la infraestructura kbuild no es operativa en ese punto.</p>
+<p><strong>Nota 2</strong>: todos los directorios listados en <code class="docutils literal notranslate"><span class="pre">core-y,</span> <span class="pre">libs-y,</span> <span class="pre">drivers-y</span></code> y <code class="docutils literal notranslate"><span class="pre">net-y</span></code>, serán visitados durante <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code>.</p>
+</div>
+</section>
+<section id="arquitectura-de-archivos-makefiles">
+<h2><a class="toc-backref" href="#id33" role="doc-backlink">Arquitectura de archivos <em>Makefiles</em></a><a class="headerlink" href="#arquitectura-de-archivos-makefiles" title="Link to this heading"></a></h2>
+<p>La <em>raiz</em> de Makefile establece el entorno y, hace los preparativos antes de empezar a cescender a directorios individuales.
+Contiene una parte genérica, donde <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/Makefile</span></code> decidirá qué es requerido con objeto de establecer kbuild, en la arquitectura mencionada.
+Así, <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/Makefile</span></code> establece un número de variables y define nuevos objetivos.</p>
+<p>En la ejecución de kbuild, los siguientes pasos tomarán efecto -aproximádamente:</p>
+<ol class="arabic simple">
+<li><p>Configuración del kenrel =&gt; produce <code class="docutils literal notranslate"><span class="pre">.config</span></code>.</p></li>
+<li><p>Guarda la versión del kernel en <code class="docutils literal notranslate"><span class="pre">include/linux/version.h</span></code>.</p></li>
+<li><dl class="simple">
+<dt>Actualizar el resto de requisitos, para preparar el <em>objetivo</em>:</dt><dd><ul class="simple">
+<li><p>Requisitos adicionales serán especificados en <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/Makefile</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Descenso recursivo a los directorios en <code class="docutils literal notranslate"><span class="pre">init-*</span> <span class="pre">core*</span> <span class="pre">drivers-*</span> <span class="pre">net-*</span> <span class="pre">libs-*</span></code> y la construcción de los objetivos.</dt><dd><ul class="simple">
+<li><p>El valor de las anteriores variables, son expandidos en <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/Makefile</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Todos los archivos <em>objeto</em> son enlazados y, el archivo resultante <code class="docutils literal notranslate"><span class="pre">vmlinux</span></code>, localizado en la raíz del ábol objetivo.
+Los primeros objetos enlazados, serán listados en <code class="docutils literal notranslate"><span class="pre">head-y</span></code>; asignados por <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/Makefile</span></code>.</p></li>
+<li><dl class="simple">
+<dt>Finalmente, la parte específica de la arquitectura, efectuará cualquier <em>pos-procesado</em> requerido y, construirá la imagen de arranque final.</dt><dd><ul class="simple">
+<li><p>Esto incluye la construcción de registros de arranque.</p></li>
+<li><p>Preparar la imagen <em>initrd</em> y similares.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="configuracion-de-variables-para-complementar-la-construccion-de-la-arquitectura">
+<h2><a class="toc-backref" href="#id34" role="doc-backlink">Configuración de variables, para complementar la construcción de la arquitectura</a><a class="headerlink" href="#configuracion-de-variables-para-complementar-la-construccion-de-la-arquitectura" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">LDFLAGS</span></code></dt><dd><p>Generic <code class="docutils literal notranslate"><span class="pre">$(LD)</span></code> options. Opciones utilizadas en todas las invocaciones del enlazador. Especificar <em>la emulación</em>, amenudo es suficiente.</p>
+</dd>
+</dl>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/s390/Makefile</span>
+<span class="nv">LDFLAGS</span><span class="w">         </span><span class="o">:=</span><span class="w"> </span>-m<span class="w"> </span>elf_s390
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ldflags-y</span></code> puede ser utilizado para personalizar las opciones utilizadas. Ver capítulo <a class="reference internal" href="#compilacion-de-opciones">Compilación de opciones</a>.</p>
+</div>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">LDFLAGS_vmlinux</span></code></dt><dd><p>Options for <code class="docutils literal notranslate"><span class="pre">$(LD)</span></code> when linking <em>vmlinux</em>. <code class="docutils literal notranslate"><span class="pre">LDFLAGS_vmlinux</span></code> utilizada para especificar opciones adicionales, pasadas al enlazador, en el momento de concluir el enlace final de la imagen <em>vmlinx</em>. <code class="docutils literal notranslate"><span class="pre">LDFLAGS_vmlinux</span></code> utiliza el soporte a <code class="docutils literal notranslate"><span class="pre">LDFLAGS_&#64;</span></code>.</p>
+</dd>
+</dl>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/x86/Makefile</span>
+<span class="nv">LDFLAGS_vmlinux</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-e<span class="w"> </span>stext
+</pre></div>
+</div>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">OBJCOPYFLAGS</span></code></dt><dd><p>objcopy flags. En el empleo de <code class="docutils literal notranslate"><span class="pre">$(call</span> <span class="pre">if_changed,objcopy)</span></code> para traducir archivos <code class="docutils literal notranslate"><span class="pre">.o</span></code>, serán utilizadas las opciones especificadas en <code class="docutils literal notranslate"><span class="pre">OBJCOPYFLAGS</span></code>. <code class="docutils literal notranslate"><span class="pre">$(call</span> <span class="pre">if_changed,objcopy)</span></code> es habitualmente usado para generar <em>binarios en crudo</em>, soble <em>vmlinux</em>.</p>
+</dd>
+</dl>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/s390/Makefile</span>
+<span class="nv">OBJCOPYFLAGS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-O<span class="w"> </span>binary
+
+<span class="c">#arch/s390/boot/Makefile</span>
+<span class="nf">$(obj)/image</span><span class="o">:</span><span class="w"> </span><span class="n">vmlinux</span> <span class="n">FORCE</span>
+<span class="w">    </span><span class="k">$(</span>call<span class="w"> </span>if_changed,objcopy<span class="k">)</span>
+</pre></div>
+</div>
+<p>En el ejemplo, el binario <code class="docutils literal notranslate"><span class="pre">$(obj)/image</span></code> es el vinario de una versión de <em>vmlinux</em>. El método de uso de <code class="docutils literal notranslate"><span class="pre">$(call</span> <span class="pre">if_changed,xxx)</span></code>, será descrita más tarde.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">KBUILD_AFLAGS</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">$(AS)</span></code> assembler flags. Valor por defecto; ver <em>raíz</em> de <em>Makefile</em>. Anexar o modificar, de ser requerido por la arquitectura.</p>
+</dd>
+</dl>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/sparc64/Makefile</span>
+<span class="nv">KBUILD_AFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-m64<span class="w"> </span>-mcpu<span class="o">=</span>ultrasparc
+</pre></div>
+</div>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">KBUILD_CFLAGS</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">$(CC)</span></code> compiler flags. Valor por defecto; ver <em>raíz</em> de <em>Makefile</em>. Anexar o modificar, de ser requerido por la arquitectura.</p>
+</dd>
+</dl>
+<p>Frecuentemente, la variable <code class="docutils literal notranslate"><span class="pre">KBUILD_CFLAGS</span></code> depende de la configuración.Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/x86/boot/compressed/Makefile</span>
+<span class="nv">cflags-$(CONFIG_X86_32)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-march<span class="o">=</span>i386
+<span class="nv">cflags-$(CONFIG_X86_64)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-mcmodel<span class="o">=</span>small
+<span class="nv">KBUILD_CFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">$(</span>cflags-y<span class="k">)</span>
+</pre></div>
+</div>
+<p>Muchos de los <em>Makefiles</em> específicos de arquitectura, lanzan el compilador de C, para testar el <em>soporte a opciones</em>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#arch/x86/Makefile
+...
+cflags-$(CONFIG_MPENTIUMII)     += $(call cc-option,\
+                                -march=pentium2,-march=i686)
+...
+# Disable unit-at-a-time mode ...
+KBUILD_CFLAGS += $(call cc-option,-fno-unit-at-a-time)
+...
+</pre></div>
+</div>
+<p>El primer ejemplo, utiliza el “truco” de expandir la opción de configuración, cuando es seleccionada <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">KBUILD_AFLAGS_KERNEL</span> <span class="pre">$(AS)</span></code> opciones específicas con <em>integrados</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$(KBUILD_AFLAGS_KERNEL)</span></code> contiene <em>opciones extra</em> del compilador C, empleadas para compilar el código del kernel residente.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KBUILD_AFLAGS_MODULE</span></code> Opciones para <code class="docutils literal notranslate"><span class="pre">$(AS)</span></code> en la construcción de módulos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$(</span> <span class="pre">KBUILD_AFLAGS_MODULE)</span></code> empleado para añadir opciones específicas de la arquitectura, utilizadas por <code class="docutils literal notranslate"><span class="pre">$(AS)</span></code>.</p></li>
+<li><p>Desde la línea de comandos, debería ser usado <code class="docutils literal notranslate"><span class="pre">AFLAGS_MODULE</span></code>. Ver <code class="docutils literal notranslate"><span class="pre">kbuild.txt</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KBUILD_CFLAGS_KERNEL</span> <span class="pre">$(CC)</span></code> opciones específicas con <em>integrados</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$(KBUILD_CFLAGS_KERNEL)</span></code> contiene <em>opciones extra</em> del compilador C, empleadas para compilar el código del kernel residente.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KBUILD_CFLAGS_MODULE</span></code> Opciones para <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code> en la construcción de módulos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$(KBUILD_CFLAGS_MODULE)</span></code> empleado para añadir opciones específicas de la arquitectura, utilizadas por <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>.</p></li>
+<li><p>Desde la línea de comandos, debería ser usado <code class="docutils literal notranslate"><span class="pre">CFLAGS_MODULE</span></code>. Ver <code class="docutils literal notranslate"><span class="pre">kbuild.txt</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KBUILD_LDFLAGS_MODULE</span></code> Opciones para <code class="docutils literal notranslate"><span class="pre">$(LD)</span></code> en el enlazado de módulos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$(KBUILD_LDFLAGS_MODULE)</span></code> empleado para añadir opciones específicas de la arquitectura, utilizadas al enlazar módulos. A menudo un escrito del enlazador.</p></li>
+<li><p>Desde la línea de comandos, debería ser usado <code class="docutils literal notranslate"><span class="pre">LDFLAGS_MODULE</span></code>. Ver <code class="docutils literal notranslate"><span class="pre">kbuild.txt</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KBUILD_ARFLAGS</span></code> Opciones para <code class="docutils literal notranslate"><span class="pre">$(AR)</span></code> al crear archivos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$(KBUILD_ARFLAGS)</span></code> configurado por la <em>raíz de Makefile</em> a D, (modo determinista) -si es que la opción es soportadapor <code class="docutils literal notranslate"><span class="pre">$(AR)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ARCH_CPPFLAGS,</span> <span class="pre">ARCH_AFLAGS,</span> <span class="pre">ARCH_CFLAGS</span></code> sobreesrcribe los valores por defecto de kbuiild.</p></li>
+</ul>
+<p>Estas variables son un apéndice de <code class="docutils literal notranslate"><span class="pre">KBUILD_CPPFLAGS</span></code>, <code class="docutils literal notranslate"><span class="pre">KBUILD_AFLAGS</span></code> y <code class="docutils literal notranslate"><span class="pre">KBUILD_CFLAGS</span></code>, respectivamente, después de haber sido configuradas otras opciones, por la <em>raíz Makefile</em>. Da sentido, a la sobreescritura de los valores por defecto en la arquitectura.</p>
+<section id="anadir-prerrequisitos-a-archheaders">
+<h3><a class="toc-backref" href="#id35" role="doc-backlink">Añadir <em>prerrequisitos</em>, a <code class="docutils literal notranslate"><span class="pre">archheaders:</span></code></a><a class="headerlink" href="#anadir-prerrequisitos-a-archheaders" title="Link to this heading"></a></h3>
+<p>Cabeceras: la regla es utilizada para generar <em>archivos cabecera</em>, que podrían ser instalados en el espacio de usuario, mediante <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">header</span> <span class="pre">install</span></code> o <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">headers</span> <span class="pre">install</span> <span class="pre">all</span></code>. Para dar soporte a <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">headers</span> <span class="pre">install</span> <span class="pre">all</span></code>, el objetivo debe ser capaz de trabajar con un <em>árbol</em> no configurado, o un <em>árbol</em> configurado para otra arquitectura.</p>
+<p>Es lanzado antes de <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">archprepare</span></code> sobre la própia arquitectura.</p>
+</section>
+<section id="anadir-prerrequisitos-a-archprepare">
+<h3><a class="toc-backref" href="#id36" role="doc-backlink">Añadir <em>prerrequisitos</em>, a <code class="docutils literal notranslate"><span class="pre">archprepare:</span></code></a><a class="headerlink" href="#anadir-prerrequisitos-a-archprepare" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">archprepare:</span></code> regla usada para listar pre-requisitos, que necesiten ser construidos antes de comenzar a descender en subdirectorios.
+Habitualmente usado por archivos de cabecera, conteniendo <em>constantes</em> de ensamblador.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/arm/Makefile</span>
+<span class="nf">archprepare</span><span class="o">:</span><span class="w"> </span><span class="n">maketools</span>
+</pre></div>
+</div>
+<p>El objetivo <code class="docutils literal notranslate"><span class="pre">maketools</span></code> será procesado antes de descender a subdirectorios.
+Ver también capítulo XXX-TODO, que describe cómo kabuild, soporta generar el <em>offset</em> de archivos de cabecera.</p>
+</section>
+<section id="listar-directorios-que-visitar-al-descender">
+<h3><a class="toc-backref" href="#id37" role="doc-backlink">Listar directorios que visitar, al descender</a><a class="headerlink" href="#listar-directorios-que-visitar-al-descender" title="Link to this heading"></a></h3>
+<p>El archivo <em>Makefile</em> especíifico de la arquitectura, trabaja en colaboración con el <em>Makefile</em> principal, para definir variables utilizadas en la construcción del archivo <em>vmlinux</em>. Nótese que no hay una correspondiente sección para módulos, en este mismo sentido; la maquinaria de construcción de modulos es independiente.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>head-y, init-y, core-y, libs-y, drivers-y, net-y
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">$(head-y)</span></code> lista objetos a enlazar primero, en vmlinux.
+<code class="docutils literal notranslate"><span class="pre">$(libs-y)</span></code> lista directorios donde un fichero <code class="docutils literal notranslate"><span class="pre">lib.a</span></code> podrá ser localizado.
+El resto, lista directorios donde un archivo objeto <code class="docutils literal notranslate"><span class="pre">integrado.a</span></code>, podrá ser localizado.</p>
+<p><code class="docutils literal notranslate"><span class="pre">$(init-y)</span></code> objetos que serán localizados después de <code class="docutils literal notranslate"><span class="pre">$(head-y)</span></code>.
+El resto seguirá este orden:
+<code class="docutils literal notranslate"><span class="pre">$(core-y),</span> <span class="pre">$(libs-y),</span> <span class="pre">$(drivers-y)</span></code> y <code class="docutils literal notranslate"><span class="pre">$(net-y)</span></code>.</p>
+<p>El <em>Makefile</em> principal, define valores en directorios genéricos, y <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/Makefile</span></code> sólo añade deirectorios específicos de la arquitectura.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/sparc64/Makefile</span>
+<span class="nv">core-y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>arch/sparc64/kernel/
+<span class="nv">libs-y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>arch/sparc64/prom/<span class="w"> </span>arch/sparc64/lib/
+<span class="nv">drivers-$(CONFIG_OPROFILE)</span><span class="w">  </span><span class="o">+=</span><span class="w"> </span>arch/sparc64/oprofile/
+</pre></div>
+</div>
+</section>
+<section id="imagenes-de-arranque-especificos-de-la-arquitectura">
+<h3><a class="toc-backref" href="#id38" role="doc-backlink">Imagenes de arranque, específicos de la arquitectura</a><a class="headerlink" href="#imagenes-de-arranque-especificos-de-la-arquitectura" title="Link to this heading"></a></h3>
+<p>Un <em>Makefile*específico, persigue un fin tomado en consideración por el archivo *vmlinux</em>, lo comprime, agrupa en código y, copia los archivos resultantes <em>en algún lugar</em>. Esto incluye distintos tipos de comandos de instalación. El fin primario, no es un estandar entre arquitecturas.</p>
+<p>Es común localizar otros adicionales, bajo <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/</span></code> en el directorio <code class="docutils literal notranslate"><span class="pre">boot/</span></code>.</p>
+<p><em>Kbuild</em> no proporciona ninguna forma simple de dar soporte a la construcción de objetivos específicos en <code class="docutils literal notranslate"><span class="pre">boot/</span></code>. Es más <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/Makefile</span></code> deberá llamar a <code class="docutils literal notranslate"><span class="pre">make</span></code> manualmente, para construir el objetivo en <code class="docutils literal notranslate"><span class="pre">boot/</span></code>.</p>
+<p>La aproximación recomendada, es incluir <em>atajos</em> en <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/Makefile</span></code> y, utilizar la ruta completa en llamadas a <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/boot/Makefile</span></code>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/x86/Makefile</span>
+<span class="nv">boot</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>arch/x86/boot
+<span class="nf">bzImage</span><span class="o">:</span><span class="w"> </span><span class="n">vmlinux</span>
+<span class="w">        </span><span class="k">$(</span>Q<span class="k">)$(</span>MAKE<span class="k">)</span><span class="w"> </span><span class="k">$(</span>build<span class="k">)</span><span class="o">=</span><span class="k">$(</span>boot<span class="k">)</span><span class="w"> </span><span class="k">$(</span>boot<span class="k">)</span>/<span class="nv">$@</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">$(Q)$(MAKE)</span> <span class="pre">$(build)=&lt;dir&gt;</span></code> es la forma recomendada de invocar a <code class="docutils literal notranslate"><span class="pre">make</span></code> en un subdirectorio.</p>
+<p>Sin reglas específicas de nombrado, el comando <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">help</span></code> imprimirá una lista de objetivos relevantes. El soporte a esta característica es conseguido definiendo <code class="docutils literal notranslate"><span class="pre">$(archhelp)</span></code>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/x86/Makefile</span>
+<span class="cp">define archhelp</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w">  </span><span class="s1">&#39;* bzImage      - Image (arch/$(ARCH)/boot/bzImage)&#39;</span>
+<span class="cp">endif</span>
+</pre></div>
+</div>
+<p>Ejecutar <code class="docutils literal notranslate"><span class="pre">make</span></code> sin argumentos, construirá el primer <em>objetivo</em> encontrado. El primer objetivo en el <em>Makefile principal</em> es <code class="docutils literal notranslate"><span class="pre">all:</span></code>
+Una <em>arquitectura</em>, debería siempre, construir una imagen arrancable. En <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">help</span></code>, la opción por defecto es destacada con <code class="docutils literal notranslate"><span class="pre">*</span></code>. Habrá que añadir un nuevo <em>prerrequsito</em>, para construir un objetivo distinto en su defecto.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/x86/Makefile</span>
+<span class="nf">all</span><span class="o">:</span><span class="w"> </span><span class="n">bzImage</span>
+</pre></div>
+</div>
+<p>Cuando <code class="docutils literal notranslate"><span class="pre">make</span></code> es ejecutado sin argumentos, será construida <code class="docutils literal notranslate"><span class="pre">bzimage</span></code>.</p>
+</section>
+<section id="construccion-de-objetivos-no-kabuild">
+<h3><a class="toc-backref" href="#id39" role="doc-backlink">Construcción de objetivos <em>no-kabuild</em></a><a class="headerlink" href="#construccion-de-objetivos-no-kabuild" title="Link to this heading"></a></h3>
+<p><strong>extra-y</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">extra-y</span></code> especifica objetivos adicionales, creados en el directorio activo, en adición a cualquier objetivo especificado por <code class="docutils literal notranslate"><span class="pre">obj-*</span></code>.</p>
+<p>Listar todos los objetivos en <code class="docutils literal notranslate"><span class="pre">extra-y</span></code> es necesario por dos motivos:
+1. Activar <em>kbuild</em> para comprobar cambios en líneas de comando -cuando es utilizado <code class="docutils literal notranslate"><span class="pre">$(call</span> <span class="pre">if_changed,xxx)</span></code>.
+2. Kbuild sabrá que archivos borrar, durante <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code>.</p>
+<p>Ejemplo,</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#arch/x86/kernel/Makefile</span>
+<span class="nv">extra-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>head.o<span class="w"> </span>init_task.o
+</pre></div>
+</div>
+<p>En este ejemplo, <code class="docutils literal notranslate"><span class="pre">extra-y</span></code> es utilizado para listar archivos objeto, que deban ser construidos, pero no debería ser enlazado como parte de <code class="docutils literal notranslate"><span class="pre">integrado.a</span></code>.. _i6i7:</p>
+</section>
+</section>
+<section id="comandos-utiles-en-la-construccion-de-una-imagen-de-arranque">
+<h2><a class="toc-backref" href="#id40" role="doc-backlink">Comandos útiles, en la construcción de una imagen de arranque</a><a class="headerlink" href="#comandos-utiles-en-la-construccion-de-una-imagen-de-arranque" title="Link to this heading"></a></h2>
+<p><em>Kbuild</em> proporciona algunas <em>macros</em>, útiles durante la construcción de una imagen de arranque.</p>
+<section id="if-changed">
+<h3><a class="toc-backref" href="#id41" role="doc-backlink">if_changed</a><a class="headerlink" href="#if-changed" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">if_changed</span></code> usado con los siguientes comandos.</p>
+<p>Modo de empleo:</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">target</span><span class="o">:</span><span class="w"> </span><span class="n">source</span>(<span class="n">s</span>) <span class="n">FORCE</span>
+<span class="w">    </span><span class="k">$(</span>call<span class="w"> </span>if_changed,ld/objcopy/gzip/...<span class="k">)</span>
+</pre></div>
+</div>
+<p>Cuando es evaluada la regla, comprueba si hay algún archivo que necesite ser actualizado, o si cambió la línea de comandos desde la última invocación. Lo último forzará la reconstrucción si alguna de las opciones del ejecutable cambiaron.
+Cualquier objetivo que utilice <code class="docutils literal notranslate"><span class="pre">if_changed</span></code> deberá ser listado en <code class="docutils literal notranslate"><span class="pre">$(targets)</span></code>, en otro sentido, la comprobación en la línea de comandos fallará y, el objetivo será construido.
+Asignaciones a <code class="docutils literal notranslate"><span class="pre">$(targets)</span></code> son escritas sin el prefijo <code class="docutils literal notranslate"><span class="pre">$(obj)/</span></code>.
+<code class="docutils literal notranslate"><span class="pre">if_changed</span></code> podría ser utilizado en conjunción con otros comandos pesonalizados, tal y como está definido en <cite>Comando kbuild personalizados</cite>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>es un error habitual, olvidar el requisito FORCE <code class="docutils literal notranslate"><span class="pre">--f</span></code>. Otro error común, es que los espacios en blanco, son significativos; por ejemplo, lo siguiente fallará(nótese el espacio en blanco después de la coma):</p>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>target: source(s) FORCE
+#WRONG!#    $(call if_changed, ld/objcopy/gzip/...)
+ld
+--
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Input/input.html" class="btn btn-neutral float-left" title="Inpunt" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="Construcción de módulos externos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

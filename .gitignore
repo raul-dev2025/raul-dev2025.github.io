@@ -1,7 +1,0 @@
-# .gitignore
-
-# Ignore Sphinx build output
-build/
-
-# Ignore Sphinx build cache
-source/.doctrees/

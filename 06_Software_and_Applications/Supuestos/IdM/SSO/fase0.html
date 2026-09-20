@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acta de Cierre: Fase 0 - Preparación del Entorno &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Infraestructura IdM: Fase 1 - Despliegue de Proxy-Auth" href="fase1.html" />
+    <link rel="prev" title="Hoja de Ruta: Proyecto SSO RAULVILCHEZ.ORG" href="hojaDeRuta.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#idm-configuracion">IdM - Configuracion</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Índice ‘Single Sign-On’</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#planificacion-y-fases">Planificación y Fases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#infraestructura-y-red">Infraestructura y Red</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#integracion-sso-y-borradores">Integración SSO y Borradores</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Índice ‘Single Sign-On’</a></li>
+      <li class="breadcrumb-item active">Acta de Cierre: Fase 0 - Preparación del Entorno</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/06_Software_and_Applications/Supuestos/IdM/SSO/fase0.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="acta-de-cierre-fase-0-preparacion-del-entorno">
+<h1>Acta de Cierre: Fase 0 - Preparación del Entorno<a class="headerlink" href="#acta-de-cierre-fase-0-preparacion-del-entorno" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Proyecto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>SSO RAULVILCHEZ.ORG</p>
+</dd>
+<dt class="field-even">Infraestructura<span class="colon">:</span></dt>
+<dd class="field-even"><p>NVMe + VDO + Podman Rootless</p>
+</dd>
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>28 de Marzo, 2026</p>
+</dd>
+<dt class="field-even">Estado<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>COMPLETADA</strong></p>
+</dd>
+</dl>
+<section id="validacion-de-capa-fisica-y-logica-vdo">
+<h2>1. Validación de Capa Física y Lógica (VDO)<a class="headerlink" href="#validacion-de-capa-fisica-y-logica-vdo" title="Link to this heading"></a></h2>
+<p>El volumen de almacenamiento sobre tecnología NVMe ha sido auditado mediante la herramienta <code class="docutils literal notranslate"><span class="pre">vdostats</span></code>.</p>
+<ul class="simple">
+<li><p><strong>Dispositivo:</strong> <code class="docutils literal notranslate"><span class="pre">infra_dev-vpool0-vpool</span></code></p></li>
+<li><p><strong>Estado de Salud:</strong> Saludable (Healthy)</p></li>
+<li><p><strong>Eficiencia (Space Saving):</strong> <strong>19%</strong></p></li>
+<li><p><strong>Conclusión:</strong> La deduplicación y compresión están operativas, garantizando una base de alto rendimiento y baja latencia para el despliegue de servicios críticos.</p></li>
+</ul>
+</section>
+<section id="zona-contenedores-jerarquia-y-seguridad">
+<h2>2. Zona Contenedores: Jerarquía y Seguridad<a class="headerlink" href="#zona-contenedores-jerarquia-y-seguridad" title="Link to this heading"></a></h2>
+<p>Se ha consolidado la estructura de directorios bajo la ruta maestra <code class="docutils literal notranslate"><span class="pre">/var/lib/virt_storage/</span></code>. Se ha priorizado el aislamiento para la ejecución de contenedores sin privilegios (Rootless).</p>
+<section id="jerarquia-y-permisos-actuales">
+<h3>Jerarquía y Permisos Actuales<a class="headerlink" href="#jerarquia-y-permisos-actuales" title="Link to this heading"></a></h3>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Estado de Permisos y Directorios</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 15.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Directorio</p></th>
+<th class="head"><p>Propiedad</p></th>
+<th class="head"><p>Permisos</p></th>
+<th class="head"><p>Estado Rootless / ACL</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">configs/</span></code></p></td>
+<td><p>raul-ipa:raul-ipa</p></td>
+<td><p>0700 (S)</p></td>
+<td><p><strong>Listo</strong> (ACLs eliminadas)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">containers/raul-ipa/</span></code></p></td>
+<td><p>raul-ipa:raul-ipa</p></td>
+<td><p>0700</p></td>
+<td><p><strong>Listo</strong> (Aislamiento total)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">containers/system/</span></code></p></td>
+<td><p>raul-ipa:containers</p></td>
+<td><p>2775 (+)</p></td>
+<td><p>Pendiente normalizar a root</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scripts/Containers/</span></code></p></td>
+<td><p>raul-ipa:containers</p></td>
+<td><p>2775 (+)</p></td>
+<td><p>Funcional para gestión</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La normalización de <code class="docutils literal notranslate"><span class="pre">configs/</span></code> eliminando los atributos extendidos (ACLs) garantiza que el mapeo de IDs de Podman (User Namespaces) no encuentre fricciones en el montaje de volúmenes.</p>
+</div>
+</section>
+</section>
+<section id="red-y-abstraccion-stack-pasta">
+<h2>3. Red y Abstracción (Stack Pasta)<a class="headerlink" href="#red-y-abstraccion-stack-pasta" title="Link to this heading"></a></h2>
+</section>
+<section id="id1">
+<h2>3. Red y Abstracción (Stack Pasta)<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>NIC Dedicada:</strong> <code class="docutils literal notranslate"><span class="pre">enp9s0</span></code>.</p></li>
+<li><p><strong>Tecnología de Red:</strong> Implementación de <strong>passt/pasta</strong> para conectividad de Nivel 2.</p></li>
+<li><p><strong>Imagen de Validación:</strong> <code class="docutils literal notranslate"><span class="pre">localhost/rocky10-sandbox</span></code> (construida con <code class="docutils literal notranslate"><span class="pre">dnf</span></code> para incluir <code class="docutils literal notranslate"><span class="pre">iputils</span></code> e <code class="docutils literal notranslate"><span class="pre">iproute</span></code>).</p></li>
+<li><p><strong>Protocolo de Red:</strong> Operación forzada en IPv4 (<code class="docutils literal notranslate"><span class="pre">-4</span></code>) para garantizar estabilidad en el stack de red actual.</p></li>
+<li><p><strong>Ventaja Técnica:</strong> Se elimina la dependencia de bridges de red del sistema (como <code class="docutils literal notranslate"><span class="pre">br_lab</span></code>) y la necesidad de privilegios de superusuario para el tráfico de los contenedores, optimizando el rendimiento de red.</p></li>
+</ul>
+<section id="configuracion-de-red-abstraccion-pasta">
+<h3>Configuración de Red (Abstracción pasta)<a class="headerlink" href="#configuracion-de-red-abstraccion-pasta" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Herramienta:</strong> <code class="docutils literal notranslate"><span class="pre">passt</span> <span class="pre">/</span> <span class="pre">pasta</span></code> (Rootless networking).</p></li>
+<li><p><strong>Interfaz Física:</strong> <code class="docutils literal notranslate"><span class="pre">enp9s0</span></code>.</p></li>
+<li><dl class="simple">
+<dt><strong>Configuración:</strong> * Se utiliza el modo de emulación de Nivel 2 para mapear la NIC directamente al contenedor.</dt><dd><ul>
+<li><p>Evita el uso de privilegios de administración (CAP_NET_ADMIN) en el host.</p></li>
+<li><p>Permite la preservación de cabeceras IP originales para auditoría de seguridad en Authelia/Keycloak.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="saneamiento-de-interfaces-virtuales">
+<h3>Saneamiento de Interfaces Virtuales<a class="headerlink" href="#saneamiento-de-interfaces-virtuales" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Acción:</strong> Eliminación de interfaces huérfanas <code class="docutils literal notranslate"><span class="pre">vnetX</span></code>.</p></li>
+<li><p><strong>Estado:</strong> Entorno de red purificado. Solo permanecen activas las interfaces físicas necesarias y los puentes de virtualización críticos.</p></li>
+<li><p><strong>Resultado:</strong> <code class="docutils literal notranslate"><span class="pre">nmcli</span> <span class="pre">device</span> <span class="pre">status</span></code> muestra una jerarquía clara y sin ruidos para el inicio de la Fase 1.</p></li>
+</ul>
+</section>
+<section id="configuracion-de-red-api-pasta">
+<h3>Configuración de Red (API pasta)<a class="headerlink" href="#configuracion-de-red-api-pasta" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Dispositivo Dedicado:</strong> <code class="docutils literal notranslate"><span class="pre">enp9s0</span></code>.</p></li>
+<li><p><strong>Estado de Gestión:</strong> <strong>Unmanaged</strong> (Excluido de NetworkManager).</p></li>
+<li><p><strong>Persistencia:</strong> Configurada mediante <code class="docutils literal notranslate"><span class="pre">99-unmanaged-devices.conf</span></code>.</p></li>
+<li><p><strong>Objetivo:</strong> Permitir que el usuario <code class="docutils literal notranslate"><span class="pre">raul-ipa</span></code> utilice la herramienta <code class="docutils literal notranslate"><span class="pre">pasta</span></code> para gestionar el tráfico de red de Nivel 2 de forma directa y sin privilegios de root.</p></li>
+</ul>
+</section>
+<section id="saneamiento-del-entorno">
+<h3>Saneamiento del Entorno<a class="headerlink" href="#saneamiento-del-entorno" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Acción:</strong> Eliminación de perfiles de conexión obsoletos y limpieza de interfaces virtuales (vnet) huérfanas.</p></li>
+<li><p><strong>Resultado:</strong> Salida de <code class="docutils literal notranslate"><span class="pre">nmcli</span> <span class="pre">device</span> <span class="pre">status</span></code> normalizada y lista para la Fase 1.</p></li>
+<li><p><strong>Estado de Gestión:</strong> Interfaz configurada como <strong>Unmanaged</strong> en NetworkManager.</p></li>
+<li><p><strong>Persistencia de Reglas:</strong> Configuraciones en <code class="docutils literal notranslate"><span class="pre">/etc/NetworkManager/conf.d/</span></code> migradas al disco de datos y vinculadas mediante enlaces simbólicos.</p></li>
+<li><p><strong>Saneamiento:</strong> Eliminación de interfaces huérfanas <code class="docutils literal notranslate"><span class="pre">vnetX</span></code> y perfiles obsoletos para garantizar una jerarquía limpia.</p></li>
+</ul>
+</section>
+<section id="validacion-operativa-poc">
+<h3>Validación Operativa (PoC)<a class="headerlink" href="#validacion-operativa-poc" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Comando de Red:</strong> <code class="docutils literal notranslate"><span class="pre">pasta</span> <span class="pre">-4</span> <span class="pre">-i</span> <span class="pre">enp9s0</span></code>.</p></li>
+<li><p><strong>Interfaz en Contenedor:</strong> <code class="docutils literal notranslate"><span class="pre">tap0</span></code> con enrutamiento gestionado hacia la red física.</p></li>
+<li><p><strong>Resultado:</strong> Conectividad verificada (0% packet loss) desde el espacio de nombres del usuario <code class="docutils literal notranslate"><span class="pre">raul-ipa</span></code> hacia el IdM (<code class="docutils literal notranslate"><span class="pre">ipa.raulvilchez.org</span></code>).</p></li>
+<li><p><strong>Ventaja Técnica:</strong> Eliminación de privilegios <code class="docutils literal notranslate"><span class="pre">CAP_NET_ADMIN</span></code> en el host y preservación de cabeceras IP originales.</p></li>
+</ul>
+</section>
+<section id="persistencia-y-saneamiento">
+<h3>Persistencia y Saneamiento<a class="headerlink" href="#persistencia-y-saneamiento" title="Link to this heading"></a></h3>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hojaDeRuta.html" class="btn btn-neutral float-left" title="Hoja de Ruta: Proyecto SSO RAULVILCHEZ.ORG" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fase1.html" class="btn btn-neutral float-right" title="Infraestructura IdM: Fase 1 - Despliegue de Proxy-Auth" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

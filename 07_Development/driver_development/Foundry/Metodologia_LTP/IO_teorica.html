@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Teoría &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Tests" href="IO_tests.html" />
+    <link rel="prev" title="Gestión de Procesos y Recursos (Sched &amp; Proc) - Tests" href="PROC_tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwbus-io/index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Metodología para el estudio de “The Linux Test Project(LTP)”</a></li>
+      <li class="breadcrumb-item active">Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Teoría</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/Foundry/Metodologia_LTP/IO_teorica.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="entrada-salida-y-gestion-de-memoria-e-s-mm-teoria">
+<h1>Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Teoría<a class="headerlink" href="#entrada-salida-y-gestion-de-memoria-e-s-mm-teoria" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contenidos">
+<p class="topic-title">Contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#conceptos-fundamentales" id="id4">Conceptos Fundamentales</a></p>
+<ul>
+<li><p><a class="reference internal" href="#descriptores-de-archivo-file-descriptors-fd" id="id5">1. Descriptores de Archivo (File Descriptors - FD)</a></p></li>
+<li><p><a class="reference internal" href="#mapeo-de-memoria-en-espacio-de-usuario-mmap" id="id6">2. Mapeo de Memoria en Espacio de Usuario (<code class="docutils literal notranslate"><span class="pre">mmap</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#control-de-dispositivos-e-s-ioctl" id="id7">3. Control de Dispositivos E/S <code class="docutils literal notranslate"><span class="pre">ioctl</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#interaccion-con-hardware" id="id8">Interacción con Hardware</a></p>
+<ul>
+<li><p><a class="reference internal" href="#acceso-directo-a-memoria-direct-memory-access-dma" id="id9">1. Acceso Directo a Memoria (Direct Memory Access - DMA)</a></p></li>
+<li><p><a class="reference internal" href="#unidad-de-gestion-de-memoria-e-s-iommu" id="id10">2. Unidad de Gestión de Memoria E/S (IOMMU)</a></p></li>
+<li><p><a class="reference internal" href="#mapeo-en-la-jerarquia-del-bus-pci" id="id11">3. Mapeo en la Jerarquía del Bus PCI</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#gestion-de-direcciones-y-estructuras-de-vfs" id="id12">Gestión de Direcciones y Estructuras de VFS</a></p>
+<ul>
+<li><p><a class="reference internal" href="#mapeo-de-memoria-y-espacios-de-direcciones" id="id13">Mapeo de Memoria y Espacios de Direcciones</a></p></li>
+<li><p><a class="reference internal" href="#estructuras-internas-de-vfs-file-operations-file-e-inode" id="id14">Estructuras Internas de VFS (<code class="docutils literal notranslate"><span class="pre">file_operations</span></code>, <code class="docutils literal notranslate"><span class="pre">file</span></code> e <code class="docutils literal notranslate"><span class="pre">inode</span></code>)</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="conceptos-fundamentales">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Conceptos Fundamentales</a><a class="headerlink" href="#conceptos-fundamentales" title="Link to this heading"></a></h2>
+<p>La interacción entre el espacio de usuario, el sistema de archivos y los dispositivos
+de hardware descansa sobre tres pilares conceptuales en el kernel de Linux:
+los descriptores de archivo, el mapeo de memoria y la interfaz de control E/S.</p>
+<section id="descriptores-de-archivo-file-descriptors-fd">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">1. Descriptores de Archivo (File Descriptors - FD)</a><a class="headerlink" href="#descriptores-de-archivo-file-descriptors-fd" title="Link to this heading"></a></h3>
+<p>En Linux, la abstracción <em>“todo es un archivo”</em> significa que tanto los ficheros
+en disco como los dispositivos físicos (bloques, caracteres) se exponen al espacio
+de usuario mediante un entero no negativo denominado <strong>File Descriptor (FD)</strong>.</p>
+<ul>
+<li><p><strong>Estructura en el Kernel</strong>:</p>
+<p>Cada proceso mantiene una tabla de descriptores de archivo en su <code class="docutils literal notranslate"><span class="pre">task_struct</span></code>.
+Estos FDs apuntan a una estructura <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">file</span></code> en el kernel, la cual contiene
+los punteros a las operaciones del archivo (<code class="docutils literal notranslate"><span class="pre">file_operations</span></code>) asociadas al driver
+o sistema de archivos correspondiente (<code class="docutils literal notranslate"><span class="pre">openat</span></code>, <code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">write</span></code>, <code class="docutils literal notranslate"><span class="pre">ioctl</span></code>).</p>
+</li>
+</ul>
+</section>
+<section id="mapeo-de-memoria-en-espacio-de-usuario-mmap">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">2. Mapeo de Memoria en Espacio de Usuario (<code class="docutils literal notranslate"><span class="pre">mmap</span></code>)</a><a class="headerlink" href="#mapeo-de-memoria-en-espacio-de-usuario-mmap" title="Link to this heading"></a></h3>
+<p>La llamada al sistema <code class="docutils literal notranslate"><span class="pre">mmap()</span></code> permite proyectar un archivo o un dispositivo físico
+directamente en el espacio de direcciones virtuales del proceso invocador.</p>
+<ul>
+<li><p><strong>Ventajas frente a</strong> <code class="docutils literal notranslate"><span class="pre">read</span></code> / <code class="docutils literal notranslate"><span class="pre">write</span></code>:</p>
+<p>Evita la doble copia de datos entre el buffer del espacio de kernel (page cache)
+y el buffer de espacio de usuario, reduciendo drásticamente la carga sobre la CPU.</p>
+</li>
+<li><p><strong>Tipos de Mapeo</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MAP_SHARED</span></code>: Los cambios en la memoria son visibles por otros procesos
+que mapeen el mismo recurso y se escriben eventualmente en el dispositivo subyacente.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MAP_PRIVATE</span></code>: Crea un mapeo de <em>Copia en Escritura</em> (Copy-On-Write / COW).
+Los cambios no son visibles para otros procesos ni afectan al recurso físico.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="control-de-dispositivos-e-s-ioctl">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">3. Control de Dispositivos E/S <code class="docutils literal notranslate"><span class="pre">ioctl</span></code></a><a class="headerlink" href="#control-de-dispositivos-e-s-ioctl" title="Link to this heading"></a></h3>
+<p>Mientras que <code class="docutils literal notranslate"><span class="pre">read()</span></code> y <code class="docutils literal notranslate"><span class="pre">write()</span></code> gestionan el flujo plano de datos, <code class="docutils literal notranslate"><span class="pre">ioctl()</span></code>
+(Input/Output Control) es la “navaja suiza” de los syscalls para la comunicación
+de control fuera de banda (<em>out-of-band</em>).</p>
+<ul class="simple">
+<li><p>Permite al espacio de usuario enviar comandos específicos al controlador o driver
+(p. ej., consultar el estado de un bus, configurar parámetros de DMA o solicitar
+operaciones específicas del hardware que no encajan en el modelo estándar de lectura/escritura).</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Para revisar los casos de prueba prácticos aplicados a estas llamadas al sistema,
+consulte la sección de pruebas asociadas en <a class="reference internal" href="IO_tests.html"><span class="doc">Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Tests</span></a>.</p>
+</div>
+</section>
+</section>
+<section id="interaccion-con-hardware">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Interacción con Hardware</a><a class="headerlink" href="#interaccion-con-hardware" title="Link to this heading"></a></h2>
+<p>El subsistema de E/S del kernel coordina la transferencia de datos entre la memoria RAM
+y los periféricos conectados al bus PCI. Comprender esta capa requiere analizar
+cómo se traducen las direcciones virtuales a físicas y cómo los dispositivos
+acceden a la memoria sin saturar la CPU.</p>
+<section id="acceso-directo-a-memoria-direct-memory-access-dma">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">1. Acceso Directo a Memoria (Direct Memory Access - DMA)</a><a class="headerlink" href="#acceso-directo-a-memoria-direct-memory-access-dma" title="Link to this heading"></a></h3>
+<p>DMA es el mecanismo que permite a los dispositivos de hardware (controladores NVMe,
+tarjetas de red, GPUs) leer o escribir datos directamente en la memoria RAM del sistema
+sin la intervención continua del procesador.</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Comparativa de Operaciones E/S</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 35.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Mecanismo</p></th>
+<th class="head"><p>Intervención de CPU</p></th>
+<th class="head"><p>Caso de Uso Típico</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>E/S Programada (PIO)</p></td>
+<td><p>Alta (byte a byte por registros)</p></td>
+<td><p>Dispositivos lentos / Legacy (ISA, Serie)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Operación DMA</p></td>
+<td><p>Baja (solo inicio y fin de transferencia)</p></td>
+<td><p>Dispositivos de alto rendimiento (PCIe, NVMe, GbE)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="unidad-de-gestion-de-memoria-e-s-iommu">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">2. Unidad de Gestión de Memoria E/S (IOMMU)</a><a class="headerlink" href="#unidad-de-gestion-de-memoria-e-s-iommu" title="Link to this heading"></a></h3>
+<p>Así como la MMU traduce las direcciones virtuales del proceso (VA) a direcciones
+físicas de la RAM (PA), la <strong>IOMMU</strong> (Input/Output Memory Management Unit) traduce
+las direcciones virtuales de E/S (IOVA) empleadas por los dispositivos PCI.</p>
+<ul class="simple">
+<li><p><strong>Protección y Aislamiento</strong>:
+Impide que un dispositivo PCI malintencionado o defectuoso realice accesos DMA
+en regiones de memoria no autorizadas pertenientes al kernel u otros procesos.</p></li>
+<li><p><strong>Remapeo de Direcciones</strong>:
+Permite que dispositivos de 32 bits accedan a rangos de memoria RAM de 64 bits
+mediante tablas de traducción de páginas E/S.</p></li>
+<li><p><strong>Passthrough y Virtualización</strong>:
+Facilita la asignación directa (<em>device passthrough</em>) de un endpoint PCI hacia una
+máquina virtual de forma segura.</p></li>
+</ul>
+</section>
+<section id="mapeo-en-la-jerarquia-del-bus-pci">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">3. Mapeo en la Jerarquía del Bus PCI</a><a class="headerlink" href="#mapeo-en-la-jerarquia-del-bus-pci" title="Link to this heading"></a></h3>
+<p>Los dispositivos en la topología PCI se identifican mediante una tripleta BDF
+(Bus:Device:Function), dentro de un dominio específico (p. ej., <code class="docutils literal notranslate"><span class="pre">0000:01:00.0</span></code>).</p>
+<ul class="simple">
+<li><p><strong>Host Bridge</strong>:
+Punto de enlace entre la CPU/interconexión del sistema y la raíz de la topología PCI.</p></li>
+<li><p><strong>PCI Bridge</strong>:
+Conecta diferentes segmentos de bus (p. ej., permitiendo la expansión de un bus
+secundario a partir de un bus primario).</p></li>
+<li><p><strong>MMIO (Memory-Mapped I/O)</strong>:
+Los registros de control e interfaces del dispositivo se proyectan en el espacio
+de direcciones de memoria del kernel/usuario, permitiendo interactuar con el hardware
+mediante instrucciones de memoria estándar.</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Para revisar los resultados y trazado de pruebas reales en la jerarquía PCI,
+consulte <a class="reference internal" href="IO_tests.html"><span class="doc">Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Tests</span></a>.</p>
+</div>
+</section>
+</section>
+<section id="gestion-de-direcciones-y-estructuras-de-vfs">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Gestión de Direcciones y Estructuras de VFS</a><a class="headerlink" href="#gestion-de-direcciones-y-estructuras-de-vfs" title="Link to this heading"></a></h2>
+<section id="mapeo-de-memoria-y-espacios-de-direcciones">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Mapeo de Memoria y Espacios de Direcciones</a><a class="headerlink" href="#mapeo-de-memoria-y-espacios-de-direcciones" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id2">
+<img alt="Mapeo de Direcciones y Memoria Física" src="../../../../_images/memory_mapping.jpg" />
+<figcaption>
+<p><span class="caption-text">Esquema de Mapeo de Direcciones: Relación entre espacios de usuario/kernel y la RAM.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+<div class="legend">
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../../../../_downloads/bd3f2ad5a7085f23bf8deb7b8de8baaa/kmm.txt"><code class="xref download docutils literal notranslate"><span class="pre">Linux</span> <span class="pre">Kernel</span> <span class="pre">Memory</span> <span class="pre">Management</span></code></a> (ASCII art).</p></li>
+</ul>
+</div>
+</figcaption>
+</figure>
+<p>El kernel de Linux gestiona distintos tipos de direcciones para coordinar la CPU, la RAM y los buses:</p>
+<ul class="simple">
+<li><p><strong>User Virtual Address</strong>: Direcciones vistas por los procesos de usuario.</p></li>
+<li><p><strong>Kernel Logical Address</strong>: Mapeo directo y continuo en <strong>Low Memory</strong> (offset fijo respecto a la memoria física).</p></li>
+<li><p><strong>Kernel Virtual Address</strong>: Mapeos no continuos (p. ej. creados mediante <code class="docutils literal notranslate"><span class="pre">vmalloc</span></code>).</p></li>
+<li><p><strong>Bus Address</strong>: Direcciones utilizadas por los dispositivos en el bus PCI/DMA para acceder a la RAM.</p></li>
+<li><p><strong>Low Memory vs High Memory</strong>: En arquitecturas donde la RAM supera el espacio direccionable directo del kernel, <strong>Low Memory</strong> mantiene mapeo lógico permanente, mientras que <strong>High Memory</strong> requiere mapeos explícitos y dinámicos.</p></li>
+</ul>
+</section>
+<section id="estructuras-internas-de-vfs-file-operations-file-e-inode">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">Estructuras Internas de VFS (<code class="docutils literal notranslate"><span class="pre">file_operations</span></code>, <code class="docutils literal notranslate"><span class="pre">file</span></code> e <code class="docutils literal notranslate"><span class="pre">inode</span></code>)</a><a class="headerlink" href="#estructuras-internas-de-vfs-file-operations-file-e-inode" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id3">
+<img alt="Estructuras file_operations, file e inode" src="../../../../_images/vfs_structures.jpg" />
+<figcaption>
+<p><span class="caption-text">Relación de estructuras internas en el VFS del Kernel de Linux.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+<div class="legend">
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../../../../_downloads/5bf642e677ad71ba2eac4b1034a6a267/kernel_fs_structures.txt"><code class="xref download docutils literal notranslate"><span class="pre">Virtual</span> <span class="pre">File</span> <span class="pre">System</span></code></a> (ASCII art).</p></li>
+</ul>
+</div>
+</figcaption>
+</figure>
+<p>Cuando una syscall como <code class="docutils literal notranslate"><span class="pre">mmap()</span></code> o <code class="docutils literal notranslate"><span class="pre">ioctl()</span></code> se invoca, el kernel navega a través de tres estructuras fundamentales:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">inode</span></code>: Representa el fichero o nodo de dispositivo físico en el sistema (contiene número de dispositivo <code class="docutils literal notranslate"><span class="pre">i_rdev</span></code>, punteros a cdev, etc.).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">file</span></code>: Representa una instancia de un fichero abierto por un proceso (contiene la posición del cursor <code class="docutils literal notranslate"><span class="pre">f_pos</span></code>, flags <code class="docutils literal notranslate"><span class="pre">f_flags</span></code> y el puntero <code class="docutils literal notranslate"><span class="pre">f_op</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">file_operations</span></code>: Tabla de callbacks que implementa las operaciones reales del driver/sistema de archivos (<code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">write</span></code>, <code class="docutils literal notranslate"><span class="pre">mmap</span></code>, <code class="docutils literal notranslate"><span class="pre">ioctl</span></code>, <code class="docutils literal notranslate"><span class="pre">poll</span></code>, <code class="docutils literal notranslate"><span class="pre">release</span></code>).</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="PROC_tests.html" class="btn btn-neutral float-left" title="Gestión de Procesos y Recursos (Sched &amp; Proc) - Tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="IO_tests.html" class="btn btn-neutral float-right" title="Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

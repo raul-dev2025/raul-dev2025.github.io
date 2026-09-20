@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inpunt &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Makefiles en el kernel de Linux" href="../kbuild/makefiles.html" />
+    <link rel="prev" title="FPGA Enlaces de zona para el DT" href="../Fpga/fpga-region.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#input">Input</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Inpunt</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#arquitectura">Arquitectura</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controladores-de-dispositivo">Controladores de dispositivo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controlador-de-eventos">Controlador de eventos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Inpunt</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/Input/input.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="inpunt">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Inpunt</a><a class="headerlink" href="#inpunt" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#inpunt" id="id1">Inpunt</a></p>
+<ul>
+<li><p><a class="reference internal" href="#arquitectura" id="id2">Arquitectura</a></p></li>
+<li><p><a class="reference internal" href="#controladores-de-dispositivo" id="id3">Controladores de dispositivo</a></p></li>
+<li><p><a class="reference internal" href="#controlador-de-eventos" id="id4">Controlador de eventos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="arquitectura">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Arquitectura</a><a class="headerlink" href="#arquitectura" title="Link to this heading"></a></h2>
+<p>Los subsistemas de entrada, son una colección de controladores disñados para dar soporte a todos los dispositivos de entrada, bajo el <em>SO Linux</em>. Muchos de los controladores se encuentran en <code class="docutils literal notranslate"><span class="pre">drivers/input</span></code>, también podrían encontrarse bajo los directorios <code class="docutils literal notranslate"><span class="pre">drivers/hid</span></code> y <code class="docutils literal notranslate"><span class="pre">drivers/platform</span></code>.</p>
+<p>El centro del <em>subsistema de entrada</em>, es el modulo <code class="docutils literal notranslate"><span class="pre">input</span></code> , el cuál debe ser cargado antes que cualquier otro módulo -hace las veces de <em>camino de entrada</em>, para las comunicaciones <em>entre dos grupos</em> de módulos.</p>
+</section>
+<section id="controladores-de-dispositivo">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Controladores de dispositivo</a><a class="headerlink" href="#controladores-de-dispositivo" title="Link to this heading"></a></h2>
+<p>Éstos módulos <em>hablan</em> con el <em>hardware</em> -por ejemplo vía USB, y proporciona los eventos -pulsación de teclas, eventos de ratón; al módulo <em>input</em>.</p>
+</section>
+<section id="controlador-de-eventos">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Controlador de eventos</a><a class="headerlink" href="#controlador-de-eventos" title="Link to this heading"></a></h2>
+<p>Éstos módulos toman los <em>eventos</em> desde el <em>centro de entrada “input core”</em> y los pasa al kernel, cundo es necesario, por medio de distintas <em>interfases</em> -pulsación de teclas , eventos de ratón, una interfase PS/2 simulada al <em>GPM</em> y <em>“X”</em> etc.</p>
+<section id="uso-simple">
+<h3>Uso simple<a class="headerlink" href="#uso-simple" title="Link to this heading"></a></h3>
+<p>Para las configuraciones más habituales, con un ratón USB y, un teclado USB, se tendrán que cargar los siguientes módulos(o contruirlos como parte del kernel).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span>
+<span class="n">mousedev</span>
+<span class="n">usbcore</span>
+<span class="n">uhci_hcd</span> <span class="ow">or</span> <span class="n">ohci_hcd</span> <span class="ow">or</span> <span class="n">ehci_hcd</span>
+<span class="n">usbhid</span>
+<span class="n">hid_generic</span>
+</pre></div>
+</div>
+<p>Después de esto, el teclado USB, funcionará <em>como debe</em> y, el ratón, estará disponible como dispositivo de carácteres: <em>mayor 13 y, menor 63</em>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span><span class="mi">63</span> <span class="n">Mar</span> <span class="mi">28</span> <span class="mi">22</span><span class="p">:</span><span class="mi">45</span> <span class="n">mice</span>
+</pre></div>
+</div>
+<p>Éste dispositivo es normalmente creado automáticamente por el sistema. Los comandos para crearlos:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">dev</span>
+<span class="n">mkdir</span> <span class="nb">input</span>
+<span class="n">mknod</span> <span class="nb">input</span><span class="o">/</span><span class="n">mice</span> <span class="n">c</span> <span class="mi">13</span> <span class="mi">63</span>
+</pre></div>
+</div>
+<p>Después de esto, se debe apuntar <em>GPM</em> y, <em>XFree</em> al dispositivo -arriba creado, para poder hacer uso de él.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpm</span> <span class="o">-</span><span class="n">t</span> <span class="n">ps2</span> <span class="o">-</span><span class="n">m</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="nb">input</span><span class="o">/</span><span class="n">mice</span>
+</pre></div>
+</div>
+<p>… para las <em>Xs:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Section</span> <span class="s2">&quot;Pointer&quot;</span>
+<span class="n">Protocol</span><span class="s2">&quot;ImPS/2&quot;</span>
+<span class="n">Device</span><span class="s2">&quot;/dev/input/mice&quot;</span>
+<span class="n">ZAxisMapping</span> <span class="mi">4</span> <span class="mi">5</span>
+<span class="n">EndSection</span>
+</pre></div>
+</div>
+<p>Cuando se haga lo descrito arriba podrá utilizarse ratón y teclado USB.</p>
+<p>GPM: herramienta modo de texto del ratón, <em>copiar y pegar</em>.</p>
+</section>
+<section id="descripcion-detallada">
+<h3>Descripción detallada<a class="headerlink" href="#descripcion-detallada" title="Link to this heading"></a></h3>
+<p><strong>controlador de eventos</strong></p>
+<p>Los controladores de eventos distribuyen los eventos desde los dispositivos al espacio de usuario y, a los <em>usuarios del kernel</em>, cuando sea necesario.</p>
+<p><strong>evdev</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">evdev</span></code> es una interfase genérica para eventos de entrada. Se encarga de <em>traspasar</em> los eventos generados en el <em>kernel</em> directamente a los programas, junto a sus marcas de tiempo.
+Los códigos de eventos, son los mismos en todas las plataformas independiente de hardware.</p>
+<p>Ésta es la interfase preferida para el <em>espacio de usuario</em> para consumar las entradas de usuario, y a todos los clientes, se anima que hagan uso de ésta. Ver <code class="docutils literal notranslate"><span class="pre">event-interface</span></code>.</p>
+<p>Los dispositivos están en <code class="docutils literal notranslate"><span class="pre">/dev/input</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span><span class="mi">64</span> <span class="n">Apr1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">49</span> <span class="n">event0</span>
+<span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span><span class="mi">65</span> <span class="n">Apr1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">50</span> <span class="n">event1</span>
+<span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span><span class="mi">66</span> <span class="n">Apr1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">50</span> <span class="n">event2</span>
+<span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span><span class="mi">67</span> <span class="n">Apr1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">50</span> <span class="n">event3</span>
+</pre></div>
+</div>
+<p>Hay dos rangos de <em>menores</em>: <em>64 hasta 95</em> es el <em>rango estático</em> legado. Si hubiesen más de 32 dispositivos de entrada en un sistema, <code class="docutils literal notranslate"><span class="pre">evdev</span></code> crearía nodos adicionales, cuyos <em>menores</em> empezariam desde 256.</p>
+<p><strong>Teclado</strong></p>
+<p>El controlador de entrada de teclado es parte del <em>kernel</em> y del código VT. Interpreta las pulsaciones de tecla y controla las entradas de usuario para <em>cónsolas VT</em>.</p>
+<p><strong>VT:</strong> virtual terminal</p>
+<p><strong>mousedev</strong></p>
+<p>Es una <em>trampa(hack)</em> hecha para que los programas legados, que hacen uso de las entradas de ratón, puedan funcionar. Toman eventos tanto del ratón como de <em>digitadores/tablets</em> y, permiten que dispositivos del tipo PS/2, estén disponibles en el espacio de usuario.</p>
+<p>Los dispositibos tipo <em>Mousedev</em> en <code class="docutils literal notranslate"><span class="pre">/dev/input</span></code> son:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span><span class="mi">32</span> <span class="n">Mar</span> <span class="mi">28</span> <span class="mi">22</span><span class="p">:</span><span class="mi">45</span> <span class="n">mouse0</span>
+<span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span><span class="mi">33</span> <span class="n">Mar</span> <span class="mi">29</span> <span class="mi">00</span><span class="p">:</span><span class="mi">41</span> <span class="n">mouse1</span>
+<span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span><span class="mi">34</span> <span class="n">Mar</span> <span class="mi">29</span> <span class="mi">00</span><span class="p">:</span><span class="mi">41</span> <span class="n">mouse2</span>
+<span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span><span class="mi">35</span> <span class="n">Apr1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">50</span> <span class="n">mouse3</span>
+<span class="o">...</span>
+<span class="o">...</span>
+<span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span><span class="mi">62</span> <span class="n">Apr1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">50</span> <span class="n">mouse30</span>
+<span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span><span class="mi">63</span> <span class="n">Apr1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">50</span> <span class="n">mice</span>
+</pre></div>
+</div>
+<p>Cada dispositivo <code class="docutils literal notranslate"><span class="pre">mouse</span></code> es asignado a un único ratón o <em>digitador</em>, excepto el último, <code class="docutils literal notranslate"><span class="pre">mice</span></code>. Éste único dispositivo <em>literal</em> es compartido por todos los ratones y  digitadores, e incluso si no hay ninguno conectado, es presentado el dispositivo.
+Ésto es útil para conectar en <em>caliente</em> dispositivos USB. Así, antiguos programas que no soportan conexión en <em>caliente</em>, puedan abrir el dispositivo incluso cuando no hay ratón presente.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CONFIG_INPUT_MOUSEDEV_SCREEN_[XY]</span></code> en la configuración del <em>kernel</em>, represesnta el tamaño de la pantalla(en pixels) en XFree86. Esto es necesario si se quiere hacer uso de un digitador en <em>X</em>, por que su movimiento es enviado a <em>X</em> por medio de un ratón PS/2, necesitando ser <em>escalado</em> adecuadamente.</p>
+<p><em>Mousedev</em> generará protocolos, tanto PS/2, ImPS/2 (Microsoft IntelliMouse) como ExplorerPS/2 (IntelliMouse Explorer), dependiendo de lo que necesite leer el programa.
+Puede configurarse GPM y X, a cualquiera de ellos. Es necesario configurar ImPS/2, si va a hacerse uso de la rueda del ratón y, ExplorerPS/2, para usar (más de 5) botones extra.</p>
+<p><strong>digitador</strong> se utiliza un término genérico, para referirse a dispositivo donde  la pantalla, es en ambos casos, dispositivo de entrada y salida -teclado o ratón y monitor, respectivamente.
+<strong>Las Xs:</strong> Referido al servidor gráfico de Linux <em>Xorg.org</em>.
+<strong>X:</strong> en un eje de coordenadas, la variable horizontal.</p>
+<p><strong>joydev</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">joydev</span></code> implementa las versiones <em>v0.x</em> y <em>v1.x</em> de la API de Linux para joystic. Ver
+<code class="docutils literal notranslate"><span class="pre">joystic.api</span></code> para más detalles.</p>
+<p>Tan pronto como es conectado el <em>joystic</em>, podrá ser accedido desde <code class="docutils literal notranslate"><span class="pre">/dev/input</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span> <span class="mi">0</span> <span class="n">Apr1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">50</span> <span class="n">js0</span>
+<span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span> <span class="mi">1</span> <span class="n">Apr1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">50</span> <span class="n">js1</span>
+<span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span> <span class="mi">2</span> <span class="n">Apr1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">50</span> <span class="n">js2</span>
+<span class="n">crw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root13</span><span class="p">,</span> <span class="mi">3</span> <span class="n">Apr1</span> <span class="mi">10</span><span class="p">:</span><span class="mi">50</span> <span class="n">js3</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>… así, hasta <code class="docutils literal notranslate"><span class="pre">js31</span></code>, en un rango legado y, <em>menores</em> adicionales por encima de <code class="docutils literal notranslate"><span class="pre">256</span></code> si fuesen necesarios más dispositivos.</p>
+<p><strong>menores:</strong> ver input-misNotas.md</p>
+<p><strong>Controladores de dispositivo</strong></p>
+<p>Son módulos que generan eventos.</p>
+<p><strong>Interfase genérica, de eventos de entrada - HID</strong></p>
+<p>La <em>interfase</em> <code class="docutils literal notranslate"><span class="pre">hid-generic</span></code>, es una de las más grandes y complejas de todo el <em>paquete</em>. Controla todos los dispositivos <em>HID</em>, y puesto que hay una gran variedad de ellas y, la <em>especificación HID USB</em>, no es nada simple, necesita ser, así de grande.</p>
+<p>En estos momentos, controla, el ratón, los <em>joystics</em>, <em>gamepads, steering wheels</em>
+<em>kbd</em>, <em>trackballs, y digitadores</em>.</p>
+<p>Aunque el USB también usa el HID, para el control de monitores, altavoces, UPS, LCD y, muchos otros.</p>
+<p>Los controles del monitor y altavoces, deberían ser fáciles de añadir a la interfase de entrada HID. Sin embargo, no tiene mucho sentido, por ésto, fué diseñada la interfase <code class="docutils literal notranslate"><span class="pre">hiddev</span></code>. Ver documentaciónm <code class="docutils literal notranslate"><span class="pre">Documentation/hid/hiddev.txt</span></code>, para más <em>info</em>.</p>
+<p>El <em>uso</em> del módulo <code class="docutils literal notranslate"><span class="pre">usbhid</span></code> es muy sencillo, no toma parámetros, detecta cualquier cosa automáticamente y, cuando un dispositivo HID, es insertado, lo detecta de forma apropiada.</p>
+<p>Dado que los dispositivos varían <em>inténsamente(wildly)</em>, se podría esperar tener un dispositivo que no funcionase. En ese caso, podría definirse <code class="docutils literal notranslate"><span class="pre">#define</span> <span class="pre">DEBUG</span></code>, al principio de <code class="docutils literal notranslate"><span class="pre">hid-core.c</span></code>, y mandar el resultado a <em>Vojtech Pavlik</em> <a class="reference external" href="mailto:vojtech&#37;&#52;&#48;ucw&#46;cz">vojtech<span>&#64;</span>ucw<span>&#46;</span>cz</a> quien se presta, amigablemente a recoger las <em>trazas de log</em>.</p>
+<p><strong>joystic:</strong> es quizás una de esas excepciones, a palabras que no haya que traducir…
+<code class="docutils literal notranslate"><span class="pre">joy</span></code>–juego/juguete, <code class="docutils literal notranslate"><span class="pre">stick</span></code>–palo: <em>palo de juego</em>.</p>
+<p><strong>HID:</strong> Human Interface Device, toma eventos de entrada(INPUTS) y devuelve salidas(OUTPUTS) .[hardware/hid]:[hid.md].</p>
+<p><strong>usbmouse</strong></p>
+<p>Para sistemas embebidos, para ratones con descriptores <em>HID</em> rotos, y paraqualquier otro uso, cuando el enorme <code class="docutils literal notranslate"><span class="pre">usbhid</span></code>, no seería una buena opción. Es entonces, el controlador <code class="docutils literal notranslate"><span class="pre">usbmouse</span></code> una buena opción. Únicamente controla los ratones USB. Usa un protocolo simple, <em>HIDBP</em>. Significa esto también, que debe soportar dicho protocolo. No todos -los controladores, lo hacen. Pero si no se tiene una “poderosa” razón para usarlo, <code class="docutils literal notranslate"><span class="pre">usbhid</span></code>, es mejor alternativa.</p>
+<p><strong>usbkbd</strong></p>
+<p>Con éste controlador, ocurre algo similar a <code class="docutils literal notranslate"><span class="pre">usbmouse</span></code>, el módulo, se comunica con el teclado, por medio de un protocolo simplificado; <em>HIDBP</em>. Es más pequeño, y no soporta
+<em>teclas especiales</em>. usbhid`, es mejor alternativa.</p>
+<p><strong>psmouse</strong></p>
+<p>Éste controlador es para aquellos dispositivos que apuntan al uso del protocolo PS/2, incluidos <em>Synaptics</em> y <em>ALPS touchpads, Intellimouse</em>, <em>dispositivos Explorer</em>, <em>ratones Logitech PS/2</em> , etc.</p>
+<p><strong>atkbd</strong></p>
+<p>Es un controlador para teclados PS/2(AT).</p>
+<p><strong>iforce</strong></p>
+<p>Controlador para <em>volantes y joystics I-Force</em>, ambos sobre USB Y RS232.
+Ahora esto incluye <em>Force Feedback</em> e incluso Immersion Corp; considérese un “secreto” y espere oir hablar de él.</p>
+</section>
+<section id="verificando-que-funciona">
+<h3>Verificando que funciona<a class="headerlink" href="#verificando-que-funciona" title="Link to this heading"></a></h3>
+<p>Pulsar un par de teclas en el teclado, debería considerarse suficiente para comprobar que funciona y, que está correctamente conectado al controlador de teclado del kernel.</p>
+<p>Hacer un <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/dev/input/mouse0</span></code> verificará que el ratón está funcionando; aparecerán <em>carácteres</em> si se mueve.</p>
+<p>Puede provarse la emulación del joystick con la utilidad <code class="docutils literal notranslate"><span class="pre">jstest</span></code>, disponible el paquete de <em>joystick</em>. Ver <code class="docutils literal notranslate"><span class="pre">joystick-doc</span></code>.</p>
+<p>Los eventos utilizan la aplicación <code class="docutils literal notranslate"><span class="pre">evtest</span></code> para ser probados.</p>
+</section>
+<section id="interfase-de-eventos">
+<h3>Interfase de eventos<a class="headerlink" href="#interfase-de-eventos" title="Link to this heading"></a></h3>
+<p>Podrán usarse lecturas bloqueantes y no bloqueantes y, la función <code class="docutils literal notranslate"><span class="pre">select()</span></code> en dispositivos <code class="docutils literal notranslate"><span class="pre">/dev/input/eventX</span></code>, y siempre se tendrá <em>el completo</em> de eventos de entrada sobre lectura. La plantilla es la siguiente:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">input_event</span> <span class="p">{</span>
+<span class="n">struct</span> <span class="n">timeval</span> <span class="n">time</span><span class="p">;</span>
+<span class="n">unsigned</span> <span class="n">short</span> <span class="nb">type</span><span class="p">;</span>
+<span class="n">unsigned</span> <span class="n">short</span> <span class="n">code</span><span class="p">;</span>
+<span class="n">unsigned</span> <span class="nb">int</span> <span class="n">value</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code> es la marca de tiempo, devuelve el tiempo en el que sucedió el evento.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code> es -por ejemplo, <code class="docutils literal notranslate"><span class="pre">EV_REL</span></code>, para el momento relativo,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EV_KEY</span></code> para pulsaciones de teclas o <em>soltar tecla(to release)</em>. Hay más tipos definidos en <code class="docutils literal notranslate"><span class="pre">include/uapi/linux/input-event-codes.h</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">code</span></code> es el código de evento. Por ejemplo, <em>REL_X o KEY_BACKSPACE</em>, de nuevo, la lista completa en <code class="docutils literal notranslate"><span class="pre">include/uapi/linux/input-event-codes.h</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code> es el valor que acarrea evento. Tanto el <em>cambio relativo</em> para <code class="docutils literal notranslate"><span class="pre">EV_REL</span></code> como el <em>absolumto</em> <code class="docutils literal notranslate"><span class="pre">EV_KEY</span></code> al soltar, 1 para pulsaciones y 2 para autorepetir.</p></li>
+</ul>
+<p>Ver <code class="docutils literal notranslate"><span class="pre">input-event-codes</span></code>, para más información sobre distintos códigos.</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<h3>Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h3>
+<p>Documentación del sistema operativo Linux.
+Referencia al documento <code class="docutils literal notranslate"><span class="pre">input.rst</span></code>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Fpga/fpga-region.html" class="btn btn-neutral float-left" title="FPGA Enlaces de zona para el DT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../kbuild/makefiles.html" class="btn btn-neutral float-right" title="Makefiles en el kernel de Linux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

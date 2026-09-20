@@ -1,0 +1,161 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explicación del temido mensaje No init found. por parte del boot. &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Man Dracut" href="../Man/dracutMan.html" />
+    <link rel="prev" title="Initrd" href="initrd.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#boot">Boot</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Arranque del Sistema Operativo</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../index.html#boot">Boot</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#boot-gestordearranque">Boot/GestorDeArranque</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#boot-man">Boot/Man</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#certificados-tls">Certificados-TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#file-system">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Sistemas Operativos</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Arranque del Sistema Operativo</a></li>
+      <li class="breadcrumb-item active">Explicación del temido mensaje <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">init</span> <span class="pre">found.</span></code> por parte del <em>boot</em>.</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/03_Operating_Systems/Boot/GestorDeArranque/init.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="explicacion-del-temido-mensaje-no-init-found-por-parte-del-boot">
+<h1>Explicación del temido mensaje <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">init</span> <span class="pre">found.</span></code> por parte del <em>boot</em>.<a class="headerlink" href="#explicacion-del-temido-mensaje-no-init-found-por-parte-del-boot" title="Link to this heading"></a></h1>
+<p>OK, así que aprece éste <em>precioso y poco intuitivo</em>, mensaje -actualmente localizado en <code class="docutils literal notranslate"><span class="pre">init/main.c</span></code> y queremos saber que <code class="docutils literal notranslate"><span class="pre">*palabrota_aquí</span></code> ha ido mal. Algunas razones de <em>alto-nivel</em> en cuanto al <em>error</em>, -listadas en orden de ejecución, aproximádamente, para leer el binario de <code class="docutils literal notranslate"><span class="pre">init</span></code> son:</p>
+<ol class="arabic simple">
+<li><p>Imposible montar el FS raíz - <code class="docutils literal notranslate"><span class="pre">unable</span> <span class="pre">to</span> <span class="pre">mount</span> <span class="pre">root</span> <span class="pre">FS</span></code>.</p></li>
+<li><p>El binario <code class="docutils literal notranslate"><span class="pre">init</span></code> no existe en <code class="docutils literal notranslate"><span class="pre">rootfs</span></code> - <code class="docutils literal notranslate"><span class="pre">init</span> <span class="pre">binary</span> <span class="pre">doesn't</span> <span class="pre">exist</span> <span class="pre">on</span> <span class="pre">rootfs</span></code>.</p></li>
+<li><p>Dispositivo de cónsola roto - <code class="docutils literal notranslate"><span class="pre">broken</span> <span class="pre">console</span> <span class="pre">device</span></code>.</p></li>
+<li><p>El binario existe pero sus dependencias no están disponibles - <code class="docutils literal notranslate"><span class="pre">binary</span> <span class="pre">exists</span> <span class="pre">but</span> <span class="pre">dependencies</span> <span class="pre">not</span> <span class="pre">available</span></code>.</p></li>
+<li><p>El binario no puede ser leído - <code class="docutils literal notranslate"><span class="pre">binary</span> <span class="pre">cannot</span> <span class="pre">be</span> <span class="pre">loaded</span></code>.</p></li>
+</ol>
+<section id="detalles-de-la-explicacion">
+<h2>Detalles de la explicación<a class="headerlink" href="#detalles-de-la-explicacion" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Configurar el parámetro de kernel <code class="docutils literal notranslate"><span class="pre">debug</span></code>, en el archivo de  configuración del  <em>cargador de arranque</em> <code class="docutils literal notranslate"><span class="pre">CONFIG_CMDLINE</span></code>.</p></li>
+<li><p>Asegurar que el tipo de <em>FS</em> raíz es el correcto. El parámetro de  kernel <code class="docutils literal notranslate"><span class="pre">root=</span></code>  apunte a la partición correcta, los dirivers cómo el de <em>hardware</em> de lamacenamiento (ejem. SCSI o USB) y los <em>sistemas de archivo(ext3, jfs2, etc.)</em> estén construidos (alternativamente cargados como módulos), para poder ser <em>precargardos</em> por <code class="docutils literal notranslate"><span class="pre">initrd</span></code>.</p></li>
+<li><p>Posible conflicto en <code class="docutils literal notranslate"><span class="pre">console=</span> <span class="pre">setup</span></code> –&gt; consola inicial no disponible. Algunas cónsolas en serie no son confiables, debido a problemas en los IRQ en serie. Por ejemplo al faltar una configuración en interrupciones básicas.</p></li>
+<li><p>Dependencias a librerías requeridas, como <code class="docutils literal notranslate"><span class="pre">/lib/ld-linux.so.2</span></code> están rotas u omitidas Utilizar <code class="docutils literal notranslate"><span class="pre">readelf</span> <span class="pre">-d</span> <span class="pre">&lt;INIT&gt;|grep</span> <span class="pre">NECESITADA</span></code> para encontrar que cuál librería es requerida.</p></li>
+<li><p>Comprobar que el binario de la <em>arquitectura</em> coincide con el <em>hardware</em>. i386 y x86_64, no coinciden o, se intenta cargar x86 sobre <em>hardware</em> ARM. En caso de intentar cargar un archivo no binario -<em>shell script?</em>, debería comprobarse que el <em>script</em> especifica un intérprete en la línea de cabecera <em>shebang</em> ejem. <code class="docutils literal notranslate"><span class="pre">#!/...</span></code>, y que funciona, incluidas las dependencias a librerías. Antes de <em>ir montando scripts</em>, es preferible probar binarios como <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code> y confirmar su ejecución exitosa. Incluso probar añadir código a <code class="docutils literal notranslate"><span class="pre">init/main.c</span></code> para ver los valores de retorno de <em>kernel_execve()</em>.</p></li>
+</ol>
+<p>Por favor, adecuar esta explicación en el caso de ocurrir nuevas <em>fallas</em> - después de toda la carga del binario <code class="docutils literal notranslate"><span class="pre">init</span></code>, resulta un paso CRÍTICO y una <em>transición</em> dificil, la cuál necesita ser lo “dolorosa” posible, después subir el parche a LKML.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="initrd.html" class="btn btn-neutral float-left" title="Initrd" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Man/dracutMan.html" class="btn btn-neutral float-right" title="Man Dracut" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apuntes sobre Protocolo TLS y Gestión de Certificados &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Comprobación y Supervisión de Certificados" href="compCA.html" />
+    <link rel="prev" title="Disco Ram de inicio" href="../Boot/Man/manInitrd-wiki.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#boot">Boot</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#certificados-tls">Certificados-TLS</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Apuntes sobre Protocolo TLS y Gestión de Certificados</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gestion-centralizada-de-certificados-fedora-rhel">Gestión Centralizada de Certificados (Fedora / RHEL)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diagnostico-e-inspeccion-con-openssl">Diagnóstico e Inspección con OpenSSL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fundamentos-del-protocolo-tls">Fundamentos del Protocolo TLS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-fuentes">Referencias y Fuentes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="compCA.html">Comprobación y Supervisión de Certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MiTm.html">Ataques Man-in-the-Middle (MitM) y TLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OpenSSL/OpenSSL-saga.html">OpenSSL Certificado de Autoridad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TLS-libvirt/1-concepts.html">certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TLS-libvirt/2-CA.html">TLSCreateCACert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TLS-libvirt/3creSerCer.html">Certificados</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#file-system">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Sistemas Operativos</a></li>
+      <li class="breadcrumb-item active">Apuntes sobre Protocolo TLS y Gestión de Certificados</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/03_Operating_Systems/Certificados-TLS/apuntesTLS.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="apuntes-sobre-protocolo-tls-y-gestion-de-certificados">
+<h1><a class="toc-backref" href="#id4" role="doc-backlink">Apuntes sobre Protocolo TLS y Gestión de Certificados</a><a class="headerlink" href="#apuntes-sobre-protocolo-tls-y-gestion-de-certificados" title="Link to this heading"></a></h1>
+<nav class="contents" id="indice-de-contenidos">
+<p class="topic-title">Índice de contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#apuntes-sobre-protocolo-tls-y-gestion-de-certificados" id="id4">Apuntes sobre Protocolo TLS y Gestión de Certificados</a></p>
+<ul>
+<li><p><a class="reference internal" href="#gestion-centralizada-de-certificados-fedora-rhel" id="id5">Gestión Centralizada de Certificados (Fedora / RHEL)</a></p></li>
+<li><p><a class="reference internal" href="#diagnostico-e-inspeccion-con-openssl" id="id6">Diagnóstico e Inspección con OpenSSL</a></p></li>
+<li><p><a class="reference internal" href="#fundamentos-del-protocolo-tls" id="id7">Fundamentos del Protocolo TLS</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-fuentes" id="id8">Referencias y Fuentes</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="gestion-centralizada-de-certificados-fedora-rhel">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Gestión Centralizada de Certificados (Fedora / RHEL)</a><a class="headerlink" href="#gestion-centralizada-de-certificados-fedora-rhel" title="Link to this heading"></a></h2>
+<p>Fedora utiliza un sistema de gestión de certificados llamado <code class="docutils literal notranslate"><span class="pre">SharedSystemCertificates</span></code> para proveer un almacén de certificados centralizado en el sistema.</p>
+<p>Aplicaciones como Firefox prestan atención a este almacén central, aunque algunas aplicaciones gestionan sus certificados de forma independiente (como herramientas con almacenes NSS propios o librerías específicas).</p>
+<p>Desgraciadamente, como el <em>software</em> puede escoger la manera de gestionar los certificados, es necesaria la adopción de la característica <code class="docutils literal notranslate"><span class="pre">Fedora</span> <span class="pre">enforcing</span></code> y ser diligentes si queremos que nuestro sistema haga uso de él.</p>
+<section id="estructura-de-directorios-del-almacen-central">
+<h3>Estructura de Directorios del Almacén Central<a class="headerlink" href="#estructura-de-directorios-del-almacen-central" title="Link to this heading"></a></h3>
+<p>Las rutas principales utilizadas por el subsistema <code class="docutils literal notranslate"><span class="pre">ca-certificates</span></code> son:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Directorios del sistema de confianza</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Ruta</p></th>
+<th class="head"><p>Propósito</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/etc/pki/ca-trust/source/anchors/</span></code></p></td>
+<td><p>Certificados CA de confianza añadidos por el administrador.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/etc/pki/ca-trust/source/blacklist/</span></code></p></td>
+<td><p>Certificados explícitamente revocados o aislados.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/etc/pki/tls/certs/ca-bundle.crt</span></code></p></td>
+<td><p><em>Bundle</em> consolidado generado automáticamente para OpenSSL.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="procedimiento-para-aislar-blacklisting-certificados-no-deseados">
+<h3>Procedimiento para Aislar (<em>Blacklisting</em>) Certificados No Deseados<a class="headerlink" href="#procedimiento-para-aislar-blacklisting-certificados-no-deseados" title="Link to this heading"></a></h3>
+<p>Históricamente o de forma manual, se han utilizado enlaces simbólicos directos hacia la ruta de <em>blacklist</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ for f in /etc/ssl/certs/*.pem; do sudo ln -sfn &quot;$f&quot; /etc/ca-certificates/trust-source/blacklist/; done
+$ update-ca-trust
+</pre></div>
+</div>
+<p>Para verificar los recuentos de certificados presentes y aislados:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo rm DigiCert_* GeoTrust_* Go_Daddy_* GlobalSign_* VeriSign_* StartCom_Certification_Authority* Comodo_* AddTrust_* Thawte_* thawte_Primary_Root_CA* Baltimore_CyberTrust_Root.pem UTN_USERFirst_Hardware_Root_CA.pem Visa_eCommerce_Root.pem
+
+$ ls /etc/ssl/certs/*.pem | wc -l
+206
+$ ls /etc/ca-certificates/trust-source/blacklist/ | wc -l
+163
+</pre></div>
+</div>
+<p>Procedimiento estándar para descargar y aislar un certificado remoto:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ &lt; /dev/null openssl s_client -showcerts -connect www1.cnnic.cn:https &gt; ccnic
+# mv ccnic /etc/pki/ca-trust/source/blacklist/
+# update-ca-trust extract
+</pre></div>
+</div>
+<p>Es necesario reiniciar la aplicación (por ejemplo, Firefox) para que recargue el almacén actualizado por <code class="docutils literal notranslate"><span class="pre">SharedSystemCertificates</span></code>.</p>
+</section>
+</section>
+<section id="diagnostico-e-inspeccion-con-openssl">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Diagnóstico e Inspección con OpenSSL</a><a class="headerlink" href="#diagnostico-e-inspeccion-con-openssl" title="Link to this heading"></a></h2>
+<section id="inspeccion-de-certificados-locales">
+<h3>Inspección de Certificados Locales<a class="headerlink" href="#inspeccion-de-certificados-locales" title="Link to this heading"></a></h3>
+<p>Para verificar el contenido, fechas de validez e emisor de un archivo PEM:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ openssl x509 -in certificado.crt -text -noout
+</pre></div>
+</div>
+</section>
+<section id="verificacion-de-conexiones-tls-remotas">
+<h3>Verificación de Conexiones TLS Remotas<a class="headerlink" href="#verificacion-de-conexiones-tls-remotas" title="Link to this heading"></a></h3>
+<p>Para comprobar la cadena de certificados devuelta por un servidor web:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ openssl s_client -connect dominio.com:443 -servername dominio.com -CAfile /etc/pki/tls/certs/ca-bundle.crt
+</pre></div>
+</div>
+</section>
+</section>
+<section id="fundamentos-del-protocolo-tls">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Fundamentos del Protocolo TLS</a><a class="headerlink" href="#fundamentos-del-protocolo-tls" title="Link to this heading"></a></h2>
+<section id="versiones-del-protocolo">
+<h3>Versiones del Protocolo<a class="headerlink" href="#versiones-del-protocolo" title="Link to this heading"></a></h3>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Comparativa de versiones TLS</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Versión</p></th>
+<th class="head"><p>Estado y Características</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TLS 1.2</p></td>
+<td><p>Soporta algoritmos de cifrado auténtico (AEAD). Se encuentra obsoleto en configuraciones de alta seguridad si utiliza intercambios de clave no efímeros.</p></td>
+</tr>
+<tr class="row-odd"><td><p>TLS 1.3</p></td>
+<td><p>Estándar actual. Reduce la latencia de negociación a 1-RTT, elimina cifradores inseguros y obliga el uso de Secreto Perfecto Hacia Adelante (PFS).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="politicas-de-cifrado-en-fedora-crypto-policies">
+<h3>Políticas de Cifrado en Fedora (Crypto-Policies)<a class="headerlink" href="#politicas-de-cifrado-en-fedora-crypto-policies" title="Link to this heading"></a></h3>
+<p>Fedora permite definir el nivel de seguridad criptográfica global para todas las aplicaciones del sistema mediante el comando <code class="docutils literal notranslate"><span class="pre">update-crypto-policies</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># update-crypto-policies --show</span>
+<span class="c1"># update-crypto-policies --set FUTURE</span>
+</pre></div>
+</div>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Niveles de Crypto-Policies</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Política</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code></p></td>
+<td><p>Nivel equilibrado entre compatibilidad y seguridad.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">LEGACY</span></code></p></td>
+<td><p>Permite algoritmos antiguos (como TLS 1.0/1.1) para sistemas heredados.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FUTURE</span></code></p></td>
+<td><p>Desactiva algoritmos débiles y exige parámetros criptográficos de alta resistencia.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="referencias-y-fuentes">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Referencias y Fuentes</a><a class="headerlink" href="#referencias-y-fuentes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><cite>Documentación oficial de Red Hat / Fedora sobre ``ca-certificates`</cite> y <code class="docutils literal notranslate"><span class="pre">update-crypto-policies</span></code> &lt;<a class="reference external" href="https://ask.fedoraproject.org/en/question/66484/how-to-blacklist-a-specific-ca-certificate/">https://ask.fedoraproject.org/en/question/66484/how-to-blacklist-a-specific-ca-certificate/</a>&gt;`_</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Boot/Man/manInitrd-wiki.html" class="btn btn-neutral float-left" title="Disco Ram de inicio" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="compCA.html" class="btn btn-neutral float-right" title="Comprobación y Supervisión de Certificados" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

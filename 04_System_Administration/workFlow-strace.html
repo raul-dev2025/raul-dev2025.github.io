@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flujo de Trabajo para la Captura de Llamadas con strace &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../_static/simulation.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Creación y Grabación de Imágenes ISO (Joliet / ISO 9660)" href="ISO9660/gen_iso_joliet.html" />
+    <link rel="prev" title="Herramientas de Trazado e Inspección de Procesos" href="track-tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Índice de Administración de Sistemas</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#administracion">Administración</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="empaquetadoDocs.html">Guía de Empaquetado y Despliegue de Documentación en Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="track-tools.html">Herramientas de Trazado e Inspección de Procesos</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Flujo de Trabajo para la Captura de Llamadas con strace</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#instalacion-de-la-utilidad">Instalación de la Utilidad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uso-basico">Uso Básico</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filtrado-de-llamadas-especificas">Filtrado de Llamadas Específicas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#intercepcion-de-procesos-en-ejecucion">Intercepción de Procesos en Ejecución</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redireccion-de-resultados-a-archivo">Redirección de Resultados a Archivo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rastreo-con-marcas-de-tiempo">Rastreo con Marcas de Tiempo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#seguimiento-de-procesos-hijos-forks">Seguimiento de Procesos Hijos (<em>Forks</em>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resumen-estadistico-y-perfilado">Resumen Estadístico y Perfilado</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filtrado-avanzado-e-inyeccion-de-errores">Filtrado Avanzado e Inyección de Errores</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ejemplo-integrado-de-flujo-practico">Ejemplo Integrado de Flujo Práctico</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#imagenes-iso-9660-y-medios-opticos">Imágenes ISO 9660 y Medios Ópticos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#aplicaciones-de-sistema">Aplicaciones de sistema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#systemd">Systemd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#listas-de-control-de-acceso-acls">Listas de control de acceso(ACLs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configuracion-del-kernel">Configuración del Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configuracion-de-sistema">Configuración de sistema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#incidencias">Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Índice de Administración de Sistemas</a></li>
+      <li class="breadcrumb-item active">Flujo de Trabajo para la Captura de Llamadas con strace</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/04_System_Administration/workFlow-strace.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="flujo-de-trabajo-para-la-captura-de-llamadas-con-strace">
+<h1>Flujo de Trabajo para la Captura de Llamadas con strace<a class="headerlink" href="#flujo-de-trabajo-para-la-captura-de-llamadas-con-strace" title="Link to this heading"></a></h1>
+<p>La herramienta <strong>``strace``</strong> permite rastrear, interceptar y analizar las llamadas al sistema (<em>system calls</em>) ejecutadas por un proceso en entornos Linux, así como las señales que este recibe. A continuación se detalla el flujo de trabajo práctico para la captura y diagnóstico de procesos.</p>
+<section id="instalacion-de-la-utilidad">
+<h2>Instalación de la Utilidad<a class="headerlink" href="#instalacion-de-la-utilidad" title="Link to this heading"></a></h2>
+<p>Asegúrese de contar con la herramienta instalada en el sistema host:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># En distribuciones basadas en Debian / Ubuntu:</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>strace
+
+<span class="c1"># En distribuciones basadas en RHEL / Rocky Linux / Fedora:</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>strace
+</pre></div>
+</div>
+</section>
+<section id="uso-basico">
+<h2>Uso Básico<a class="headerlink" href="#uso-basico" title="Link to this heading"></a></h2>
+<p>Para rastrear la totalidad de las llamadas al sistema generadas por un ejecutable, invoque la herramienta anteponiéndola al comando:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>strace<span class="w"> </span>&lt;comando&gt;
+</pre></div>
+</div>
+<p>Ejemplo de ejecución:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>strace<span class="w"> </span>ls<span class="w"> </span>-l
+</pre></div>
+</div>
+</section>
+<section id="filtrado-de-llamadas-especificas">
+<h2>Filtrado de Llamadas Específicas<a class="headerlink" href="#filtrado-de-llamadas-especificas" title="Link to this heading"></a></h2>
+<p>Para acotar la salida a llamadas al sistema concretas, utilice el parámetro <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">trace=</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>strace<span class="w"> </span>-e<span class="w"> </span><span class="nv">trace</span><span class="o">=</span>openat,read<span class="w"> </span>&lt;comando&gt;
+</pre></div>
+</div>
+<p>Ejemplo para inspeccionar únicamente operaciones de apertura y lectura de archivos:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>strace<span class="w"> </span>-e<span class="w"> </span><span class="nv">trace</span><span class="o">=</span>openat,read<span class="w"> </span>cat<span class="w"> </span>/etc/passwd
+</pre></div>
+</div>
+</section>
+<section id="intercepcion-de-procesos-en-ejecucion">
+<h2>Intercepción de Procesos en Ejecución<a class="headerlink" href="#intercepcion-de-procesos-en-ejecucion" title="Link to this heading"></a></h2>
+<p>Para asociar <code class="docutils literal notranslate"><span class="pre">strace</span></code> a un proceso que ya se encuentra activo en el sistema, emplee la opción <code class="docutils literal notranslate"><span class="pre">-p</span></code> especificando su PID (<em>Process ID</em>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>strace<span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
+</pre></div>
+</div>
+<p>Ejemplo de vinculación a un demonio en ejecución:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>strace<span class="w"> </span>-p<span class="w"> </span><span class="m">1234</span>
+</pre></div>
+</div>
+</section>
+<section id="redireccion-de-resultados-a-archivo">
+<h2>Redirección de Resultados a Archivo<a class="headerlink" href="#redireccion-de-resultados-a-archivo" title="Link to this heading"></a></h2>
+<p>Dado que <code class="docutils literal notranslate"><span class="pre">strace</span></code> redirige su salida por defecto a la salida de error estándar (<code class="docutils literal notranslate"><span class="pre">stderr</span></code>), utilice la opción <code class="docutils literal notranslate"><span class="pre">-o</span></code> para guardar la traza en un archivo de texto:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>strace<span class="w"> </span>-o<span class="w"> </span>traza_proceso.log<span class="w"> </span>ls<span class="w"> </span>-l
+</pre></div>
+</div>
+</section>
+<section id="rastreo-con-marcas-de-tiempo">
+<h2>Rastreo con Marcas de Tiempo<a class="headerlink" href="#rastreo-con-marcas-de-tiempo" title="Link to this heading"></a></h2>
+<p>Para evaluar latencias o momentos exactos de ejecución, añada marcas de tiempo absolutas mediante el parámetro <code class="docutils literal notranslate"><span class="pre">-tt</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>strace<span class="w"> </span>-tt<span class="w"> </span>ls<span class="w"> </span>-l
+</pre></div>
+</div>
+</section>
+<section id="seguimiento-de-procesos-hijos-forks">
+<h2>Seguimiento de Procesos Hijos (<em>Forks</em>)<a class="headerlink" href="#seguimiento-de-procesos-hijos-forks" title="Link to this heading"></a></h2>
+<p>Para interceptar llamadas realizadas por hilos o procesos derivados creados por el proceso principal, utilice el indicador <code class="docutils literal notranslate"><span class="pre">-f</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>strace<span class="w"> </span>-f<span class="w"> </span>./script_automatizacion.sh
+</pre></div>
+</div>
+</section>
+<section id="resumen-estadistico-y-perfilado">
+<h2>Resumen Estadístico y Perfilado<a class="headerlink" href="#resumen-estadistico-y-perfilado" title="Link to this heading"></a></h2>
+<p>Para obtener un reporte consolidado con el recuento, tiempo total consumido y tasa de errores por cada llamada al sistema, aplique la opción <code class="docutils literal notranslate"><span class="pre">-c</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>strace<span class="w"> </span>-c<span class="w"> </span>ls<span class="w"> </span>-l
+</pre></div>
+</div>
+</section>
+<section id="filtrado-avanzado-e-inyeccion-de-errores">
+<h2>Filtrado Avanzado e Inyección de Errores<a class="headerlink" href="#filtrado-avanzado-e-inyeccion-de-errores" title="Link to this heading"></a></h2>
+<p>Es posible filtrar llamadas que resulten exclusivamente en error o simular fallos en llamadas del kernel para pruebas de resiliencia:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capturar llamadas openat que devuelvan error:</span>
+strace<span class="w"> </span>-e<span class="w"> </span><span class="nv">trace</span><span class="o">=</span>openat<span class="w"> </span>-e<span class="w"> </span><span class="nv">status</span><span class="o">=</span>failed<span class="w"> </span>cat<span class="w"> </span>/archivo_inexistente
+
+<span class="c1"># Inyectar un error simular (ENOENT) ante la llamada openat:</span>
+strace<span class="w"> </span>-e<span class="w"> </span><span class="nv">inject</span><span class="o">=</span>openat:error<span class="o">=</span>ENOENT<span class="w"> </span>cat<span class="w"> </span>/etc/hosts
+</pre></div>
+</div>
+</section>
+<section id="ejemplo-integrado-de-flujo-practico">
+<h2>Ejemplo Integrado de Flujo Práctico<a class="headerlink" href="#ejemplo-integrado-de-flujo-practico" title="Link to this heading"></a></h2>
+<p>Ejecución típica para diagnóstico completo guardando marcas de tiempo y siguiendo subprocesos:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>strace<span class="w"> </span>-o<span class="w"> </span>traza_completa.log<span class="w"> </span>-tt<span class="w"> </span>-f<span class="w"> </span>./binario_a_depurar
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="track-tools.html" class="btn btn-neutral float-left" title="Herramientas de Trazado e Inspección de Procesos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ISO9660/gen_iso_joliet.html" class="btn btn-neutral float-right" title="Creación y Grabación de Imágenes ISO (Joliet / ISO 9660)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

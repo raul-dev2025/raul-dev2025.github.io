@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cpusets &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="NX-Bit – No-eXecute" href="nx-Bit.html" />
+    <link rel="prev" title="RCU (Read-Copy-Update)" href="rcu.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#processador">Processador</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Arquitectura del Procesador y Kernel</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Arquitectura del Procesador y Kernel</a></li>
+      <li class="breadcrumb-item active">cpusets</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/Processador/cpusets.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cpusets">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">cpusets</a><a class="headerlink" href="#cpusets" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#cpusets" id="id1">cpusets</a></p>
+<ul>
+<li><p><a class="reference internal" href="#que-son-los-cpusets" id="id2">Qué son los <code class="docutils literal notranslate"><span class="pre">cpusets</span></code></a></p></li>
+<li><p><a class="reference internal" href="#por-que-son-necesarios-los-cpusets" id="id3">Por qué son necesarios los <code class="docutils literal notranslate"><span class="pre">cpusets</span></code></a></p></li>
+<li><p><a class="reference internal" href="#como-son-implementados-los-cpusets" id="id4">Cómo son implementados los <code class="docutils literal notranslate"><span class="pre">cpusets</span></code></a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="que-son-los-cpusets">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Qué son los <code class="docutils literal notranslate"><span class="pre">cpusets</span></code></a><a class="headerlink" href="#que-son-los-cpusets" title="Link to this heading"></a></h2>
+<p>Proporciona un mecanismo para la asignación de conjuntos de CPUs y nodos de memoria, a un <em>grupo de tareas</em>. En éste documento <em>Nodo de memoria</em> se refiere a un nodo <em>en línea</em> que contiene memoria.</p>
+<p><em>Cpusets</em> restringe los recursos de la CPU y el direccionado de memoria de tareas, a las tareas en uso por el <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>. Forma una estructura gerarquica, visible en el <em>sistema de archivo</em> virtual. Son en esencia los <em>enlaces -o ganchos(hooks)</em>: al margen de <em>lo que esté presente</em> en el sistema, para gestionar el emplazamiento de trabajos en grandes sistemas.</p>
+<p><em>Cpusets</em> usa un subsistema <code class="docutils literal notranslate"><span class="pre">cgroup</span></code> genérico descrito en <code class="docutils literal notranslate"><span class="pre">Documentation/cgroup-v1/cgroups.txt</span></code>.</p>
+<p>Las peticiones de una tarea, haciendo uso de la llamada de sistema <code class="docutils literal notranslate"><span class="pre">sched_setaffinity(2)</span></code> para incluir CPU’s en su <em>máscara de afinidad</em>, y usando <code class="docutils literal notranslate"><span class="pre">mbind(2)</span></code> y <code class="docutils literal notranslate"><span class="pre">set_mempolicy(2)</span></code> para incluir <em>nodos de memoria</em> en la <em>política de memoria</em>, serán filtrados a través de las tareas de <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>, el cuál excluirá cualquier CPU o <em>nodo de memoria</em> que no esté en ese <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>.</p>
+<p>La agenda, no indexará una tarea en la CPU que no esté permitida en el vector <code class="docutils literal notranslate"><span class="pre">cpus_allowed</span></code>, y el <em>emplazador</em> de páginas del <em>kernel</em>, no colocará ninguna página en un nodo no permitido, en la petición del tarea para el vector <code class="docutils literal notranslate"><span class="pre">mems_allowed</span></code>.</p>
+<blockquote>
+<div><p><strong>scheduler:</strong> agenda, diario, programa, hoja de ruta El código en el espacio de usuario, puede crear y destruir <code class="docutils literal notranslate"><span class="pre">cpusets</span></code> por nombre; en el sistema de archivos virtual <code class="docutils literal notranslate"><span class="pre">cgroup</span></code>. Gestionar los atributos y permisos de los <code class="docutils literal notranslate"><span class="pre">cpusets</span></code> y qué <em>CPUs y nodos de memoria</em> son asignados a cada <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>. Especificar y consultar en qué <code class="docutils literal notranslate"><span class="pre">cpuset</span></code> fué asignada una tarea y, listar el <code class="docutils literal notranslate"><span class="pre">pid</span></code> de tarea asignado a un determinado <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>.</p>
+<p><strong>pid:</strong> process identifier, identificador de proceso.</p>
+</div></blockquote>
+</section>
+<section id="por-que-son-necesarios-los-cpusets">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Por qué son necesarios los <code class="docutils literal notranslate"><span class="pre">cpusets</span></code></a><a class="headerlink" href="#por-que-son-necesarios-los-cpusets" title="Link to this heading"></a></h2>
+<p>La gestión de grandes sistemas de computación, con muchos procesadores (CPUs), y complejas jerarquiías para la caché y múltiples nodos de memoria con acceso no uniforme (NUMA),  presenta desafios adicionales, en cuanto al “indexado” y el emplazamiento de memoria para los procesos.</p>
+<blockquote>
+<div><p><strong>NUMA:</strong> non uniform memory acces, acceso a memoria no uniforme.  <strong>agenda:</strong> se usa el término agenda, en el sentido de <em>programa</em> u  “hoja de ruta”,  de tal forma que una tarea pueda llevarse a cabo de manera  programática o planificada.</p>
+</div></blockquote>
+<p>Sobre sistemas con <em>tamaños modestos</em>, puede operarse con una adecuada eficiencia, con tan sólo dejar que el sistema operativo, comparta automáticamente las CPUs y los recursos de memoria para la <em>peticiones de tareas</em>.</p>
+<p>Pero en sistemas mayores, los cuáles se benefician más, de un <em>cuidadoso</em> emplazamiento de la memoria y del procesador, para reducir el número de <em>accesos a memoria</em> y contención, el cuál típicamente representa una gran inversión para el cliente, puede beneficiarse si explícitamente son emplazados determinados trabajos, sobre <em>subconjuntos de sistemas</em> apropiadamente dimensionados.</p>
+<p>Ésto podría ser especialmente valioso en:</p>
+<ul class="simple">
+<li><p>Servidores Web, corriendo múltiples instancias de la misma aplicación web</p></li>
+<li><p>Servidores corriendo distintas aplicaciones (ejem. un servidor web y una base de datos).</p></li>
+<li><p>Sistemas NUMA, corriendo grandes aplicaciones HPC, con mucha demanda.</p></li>
+</ul>
+<div class="admonition-hpc admonition">
+<p class="admonition-title">HPC</p>
+<p>High Performance Computing, servidores con grandes cargas de trabajo.</p>
+</div>
+<p>Éstos subconjuntos -o <em>particiones blandas</em>, deben ser capaces de ser dinámicamente ajustadas, cuando el trabajo cambie, sin afectar a otros trabajos concurrentes, en ejecución. La localización de las <em>páginas de trabajos</em> en carrera, podrían ser movidas cuando los emplazamientos de memoria, sean cambiados.</p>
+<p>Los parches <code class="docutils literal notranslate"><span class="pre">cpuset</span></code> del <em>kernel</em>, proporcionan un mecanismo esencial, a la hora de implementar dichos subconjuntos. Presionando existentes CPUs y el emplazamiento de memoria de dichas infraestructuras en el <em>núcleo</em>, con objeto de evitar cualquier impacto sobre el gestor programático o, código de emplazamiento de memoria.</p>
+<dl class="simple">
+<dt><strong>Concurrente</strong></dt><dd><p>En el ámbito de los sistemas operativos y la programación concurrente, se refiere a la propiedad de un sistema en la que múltiples secuencias de ejecución (procesos, hilos o tareas) avanzan en intervalos de tiempo solapados, compartiendo o compitiendo por los mismos recursos del sistema (CPU, memoria o dispositivos de E/S).</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Es importante diferenciar <strong>concurrencia</strong> (gestión y estructuración de múltiples tareas que progresan de forma alternada o discontinua mediante la conmutación de contexto) de <strong>paralelismo</strong> (ejecución física simultánea de dos o más instrucciones en núcleos o procesadores distintos en el mismo instante).</p>
+<dl class="simple">
+<dt><strong>Ejemplo técnico:</strong></dt><dd><p>En un sistema operativo mononúcleo, el <strong>planificador de procesos</strong> (<em>scheduler</em>) gestiona la ejecución concurrente de un servidor web (proceso <em>A</em>) y un servidor de base de datos (proceso <em>B</em>). Aunque la CPU solo puede ejecutar una instrucción a la vez, alterna rápidamente entre ambos procesos mediante <strong>conmutación de contexto</strong> (<em>context switch</em>) e interrupciones del reloj del sistema (<em>timer interrupts</em>), dando la ilusión de ejecución simultánea mientras ambos compiten de forma concurrente por el acceso al bus de disco.</p>
+</dd>
+</dl>
+</div>
+</section>
+<section id="como-son-implementados-los-cpusets">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Cómo son implementados los <code class="docutils literal notranslate"><span class="pre">cpusets</span></code></a><a class="headerlink" href="#como-son-implementados-los-cpusets" title="Link to this heading"></a></h2>
+<p><em>Cpusets</em> proporciona al <em>kernel de Linux</em>, un mecanismo que obliga a dichas CPUs y, nodos de memoria, a ser usados por un proceso o conjunto de procesos.</p>
+<p>De hecho, el <em>kernel de Linux</em> tiene un par de mecanismos, para especificar en cuál CPU <em>programar</em> una tarea y, en cuál <em>nodo de memoria</em> podrá obtener la memoria(<code class="docutils literal notranslate"><span class="pre">mbind</span></code>, <code class="docutils literal notranslate"><span class="pre">set_mempolicy</span></code>).</p>
+<p><em>Cpusets</em> extiende éste mecanismo de la siguiente forma:</p>
+<ul class="simple">
+<li><p><em>Cpusets</em> son conjuntos de CPUs y nodos de memoria permitidos. Conocidos por el <em>kernel</em>.</p></li>
+<li><p>Cada tarea en el sistema, es acoplada a un <em>cpuset</em>; por medio de un puntero en la  estructura de tareas, a una referencia en la estructura <code class="docutils literal notranslate"><span class="pre">cgroup</span></code>.</p></li>
+<li><p>Las llamadas a <code class="docutils literal notranslate"><span class="pre">sched_setaffinity</span></code> son fitradas, para permitir únicamente esas CPUs en ese <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>.</p></li>
+<li><p>Las llamadas a <code class="docutils literal notranslate"><span class="pre">mbind</span></code> y <code class="docutils literal notranslate"><span class="pre">set_memplolicy</span></code> son filtradas, para permitir únicamente esos <em>nodos de memoria</em> en esas <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>.</p></li>
+<li><p>El <code class="docutils literal notranslate"><span class="pre">cpuset</span></code> <em>raíz</em> contiene todas las CPUs del sistema y <em>Nodos de memoria</em>.</p></li>
+<li><p>Para cualquier <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>, podrá definirse un proceso hijo, o “anidado”, conteniendo un subconjunto de CPUs y <em>nodos de memoria</em>.</p></li>
+<li><p>La jerarquía <em>cpuset</em>, podrá ser montada en <code class="docutils literal notranslate"><span class="pre">/dev/cpuset</span></code>, y gestionada desde el espacio de usuario.</p></li>
+<li><p>Un <code class="docutils literal notranslate"><span class="pre">cpuset</span></code> marcado como <em>exclusivo</em> garantiza que ningún otro <code class="docutils literal notranslate"><span class="pre">cpuset</span></code> (con excepción de sus ancestros y descendientes directos) pueda contener una CPU o un nodo de memoria solapado.</p></li>
+<li><p>Podrán listarse todas las tareas (por pid) acopladas a cualquier <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>. La implementación de un <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>, requiere unos pocos y simples enlaces, dentro del resto del <em>kernel</em>, ninguno en rutas críticas de desarrollo.</p></li>
+<li><p>En <code class="docutils literal notranslate"><span class="pre">init/main.c</span></code>, para inicializar el <code class="docutils literal notranslate"><span class="pre">cpuset</span></code> <em>raíz</em> durante el arranque del sistema.</p></li>
+<li><p>En el <em>enlazado</em> y la <em>salida</em>, para acoplar y desacoplar una tarea a su <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>.</p></li>
+<li><p>En su <code class="docutils literal notranslate"><span class="pre">sched_setaffinity</span></code>, para <em>enmascarar</em> las CPUs solicitadas por <em>lo que es permitido</em> en las tareas <em>cpuset</em>.</p></li>
+<li><p>En <code class="docutils literal notranslate"><span class="pre">sched.c</span> <span class="pre">migrate_live_tasks()</span></code>, para seguir migrando tareas dentro de las CPUs permitidas por su <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>, si es posible.</p></li>
+<li><p>En las lamadas <code class="docutils literal notranslate"><span class="pre">mbind</span></code> y <code class="docutils literal notranslate"><span class="pre">set_mempolicy</span></code>, para enmascarar las peticiones de nodos de memoria por <em>lo que es permitido</em> en esa tarea <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>.</p></li>
+<li><p>En la <code class="docutils literal notranslate"><span class="pre">page_alloc.c</span></code> para restringir memoria a los nodos permitidos.</p></li>
+<li><p>En <code class="docutils literal notranslate"><span class="pre">vmscan.c</span></code> para restringir <em>recuperación de pagina</em>, al <code class="docutils literal notranslate"><span class="pre">cpuset</span></code> en uso.</p></li>
+</ul>
+<div class="admonition-enmascarar admonition">
+<p class="admonition-title">Enmascarar</p>
+<p>Del verbo inglés <em>to mask</em>. Hace referencia al uso de una máscara de bits (como la configurada mediante <code class="docutils literal notranslate"><span class="pre">umask</span></code>) para limitar o suprimir permisos de acceso predeterminados en el momento de crear un objeto en el sistema de archivos.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">umask</span><span class="w"> </span><span class="m">0022</span>
+</pre></div>
+</div>
+</div>
+<p>Debería montarse un tipo de sistema de archivo <em>cgroup</em>, para activar la navegación y modificación de los cpusets <em>presentes</em>, conocidos por el kernel. Nuevas llamadas de sistema a <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>, no serán añadidas. Todo soporte de consulta y modificación <em>cpuset</em> será por medio del sistema de archivo <em>cpuset</em>.</p>
+<p>El archivo <code class="docutils literal notranslate"><span class="pre">/proc/&lt;pid&gt;/status</span></code> tiene añadidas <em>cuatro líneas</em> por cada tarea, mostrando las tareas permitidas <code class="docutils literal notranslate"><span class="pre">cpus_allowed</span></code> (en la cpu que podrá ser programada), los siguientes archivos describen el <code class="docutils literal notranslate"><span class="pre">cpuset</span></code>.</p>
+<ul class="simple">
+<li><p>cpuset.cpus: lista CPUs en el <em>cpuset</em></p></li>
+<li><p>cpuset.mems: lista Memory Nodes en <em>cpuset</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpuset.memory_migrate</span> <span class="pre">flag</span></code>: si es configurado, mueve páginas a los nodos <em>cpuset</em></p></li>
+<li><p>cpuset.cpu_exclusive flag: is cpu placement exclusive?</p></li>
+<li><p>cpuset.mem_exclusive flag: is memory placement exclusive?</p></li>
+<li><p>cpuset.mem_hardwall flag: is memory allocation hardwalled</p></li>
+<li><p>cpuset.memory_pressure: measure of how much paging pressure in cpuset</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpuset.memory_spread_page</span></code> flag: if set, spread page cache evenly on allowed nodes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpuset.memory_spread_slab</span></code> flag: if set, spread slab cache evenly on allowed nodes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpuset.sched_load_balance</span></code> flag: if set, load balance within CPUs on that cpuset</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpuset.sched_relax_domain_level</span></code>: the searching range when migrating tasks</p></li>
+</ul>
+<section id="referencias-y-agradecimeintos">
+<h3>Referencias y agradecimeintos<a class="headerlink" href="#referencias-y-agradecimeintos" title="Link to this heading"></a></h3>
+<p>Copyright (C) 2004 BULL SA.
+Written by <a class="reference external" href="mailto:Simon&#46;Derr&#37;&#52;&#48;bull&#46;net">Simon<span>&#46;</span>Derr<span>&#64;</span>bull<span>&#46;</span>net</a></p>
+<p>Portions Copyright (c) 2004-2006 Silicon Graphics, Inc.
+Modified by Paul Jackson <a class="reference external" href="mailto:pj&#37;&#52;&#48;sgi&#46;com">pj<span>&#64;</span>sgi<span>&#46;</span>com</a>
+Modified by Christoph Lameter <a class="reference external" href="mailto:cl&#37;&#52;&#48;linux&#46;com">cl<span>&#64;</span>linux<span>&#46;</span>com</a>
+Modified by Paul Menage <a class="reference external" href="mailto:menage&#37;&#52;&#48;google&#46;com">menage<span>&#64;</span>google<span>&#46;</span>com</a>
+Modified by Hidetoshi Seto <a class="reference external" href="mailto:seto&#46;hidetoshi&#37;&#52;&#48;jp&#46;fujitsu&#46;com">seto<span>&#46;</span>hidetoshi<span>&#64;</span>jp<span>&#46;</span>fujitsu<span>&#46;</span>com</a></p>
+<p><strong>kernel de Linux:</strong> se refiere al núcleo de un sistema operativo,  que ha tomado el  nombre, de la persona -y su grupo de investigadores, que <em>desarrolló y liberó</em>,  el código del núcleo del sistema operativo.</p>
+<dl>
+<dt><strong>GNU</strong></dt><dd><p>Es un acrónimo recursivo para <em>“GNU’s Not Unix”</em> (<em>GNU no es UNIX</em>). Fue diseñado para ser un sistema operativo compatible con UNIX, pero difiere de este en que no contiene ni una sola línea de código fuente de UNIX, siendo completamente software libre.</p>
+<p>El proyecto GNU abarca una amplia colección de herramientas esenciales, librerías del sistema, compiladores (como GCC) y aplicaciones que, junto al <em>kernel</em> de Linux, forman la base funcional de la mayoría de las distribuciones informáticas modernas. <strong>Richard Stallman</strong> fue el fundador del Proyecto GNU en 1983 y de la <em>Free Software Foundation</em> (FSF) en 1985.</p>
+</dd>
+<dt><strong>Linus Torvalds</strong></dt><dd><p>Ingeniero de software finlandés-estadounidense, reconocido por ser el creador original y desarrollador principal del <em>kernel</em> de <strong>Linux</strong> en 1991.</p>
+<p>Torvalds comenzó el desarrollo de Linux como un proyecto personal mientras estudiaba en la Universidad de Helsinki, buscando crear un núcleo libre similar a MINIX. En 1992, decidió adoptar la licencia pública general <strong>GNU GPLv2</strong> para el <em>kernel</em>, lo que permitió combinar las herramientas del Proyecto GNU con su núcleo para dar origen al sistema operativo utilizable <strong>GNU/Linux</strong>.</p>
+<p>Asimismo, es el creador del sistema de control de versiones distribuido <strong>Git</strong>, diseñado en 2005 para gestionar el desarrollo masivo y colaborativo del propio <em>kernel</em> de Linux.</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rcu.html" class="btn btn-neutral float-left" title="RCU (Read-Copy-Update)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nx-Bit.html" class="btn btn-neutral float-right" title="NX-Bit – No-eXecute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

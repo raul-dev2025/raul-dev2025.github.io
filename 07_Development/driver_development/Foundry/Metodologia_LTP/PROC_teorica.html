@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Procesos y Recursos (Sched &amp; Proc) - Teoría &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Gestión de Procesos y Recursos (Sched &amp; Proc) - Tests" href="PROC_tests.html" />
+    <link rel="prev" title="De Test LTP a Driver de Dispositivo" href="guion.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwbus-io/index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Metodología para el estudio de “The Linux Test Project(LTP)”</a></li>
+      <li class="breadcrumb-item active">Gestión de Procesos y Recursos (Sched &amp; Proc) - Teoría</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/Foundry/Metodologia_LTP/PROC_teorica.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gestion-de-procesos-y-recursos-sched-proc-teoria">
+<h1>Gestión de Procesos y Recursos (Sched &amp; Proc) - Teoría<a class="headerlink" href="#gestion-de-procesos-y-recursos-sched-proc-teoria" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contenidos">
+<p class="topic-title">Contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ciclo-de-vida-del-proceso-y-espacio-de-direcciones" id="id1">Ciclo de Vida del Proceso y Espacio de Direcciones</a></p>
+<ul>
+<li><p><a class="reference internal" href="#duplicacion-y-ejecucion-fork-vfork-execve" id="id2">1. Duplicación y Ejecución (<code class="docutils literal notranslate"><span class="pre">fork</span></code>, <code class="docutils literal notranslate"><span class="pre">vfork</span></code>, <code class="docutils literal notranslate"><span class="pre">execve</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#inspeccion-de-recursos-y-entorno-sysconf" id="id3">2. Inspección de Recursos y Entorno (<code class="docutils literal notranslate"><span class="pre">sysconf</span></code>)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#planificacion-y-programacion-de-tareas-scheduler" id="id4">Planificación y Programación de Tareas (Scheduler)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#estructura-de-control-task-struct" id="id5">1. Estructura de Control <code class="docutils literal notranslate"><span class="pre">task_struct</span></code></a></p></li>
+<li><p><a class="reference internal" href="#consultas-e-interfaces-de-kernel" id="id6">2. Consultas e Interfaces de Kernel</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="ciclo-de-vida-del-proceso-y-espacio-de-direcciones">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Ciclo de Vida del Proceso y Espacio de Direcciones</a><a class="headerlink" href="#ciclo-de-vida-del-proceso-y-espacio-de-direcciones" title="Link to this heading"></a></h2>
+<p>La creación de procesos en Linux se basa en la duplicación y reemplazo de espacios de direcciones virtuales mediante llamadas al sistema del VFS y la gestión de tareas del kernel.</p>
+<section id="duplicacion-y-ejecucion-fork-vfork-execve">
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">1. Duplicación y Ejecución (<code class="docutils literal notranslate"><span class="pre">fork</span></code>, <code class="docutils literal notranslate"><span class="pre">vfork</span></code>, <code class="docutils literal notranslate"><span class="pre">execve</span></code>)</a><a class="headerlink" href="#duplicacion-y-ejecucion-fork-vfork-execve" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fork()</span></code> <strong>y Copy-On-Write (COW)</strong>:
+La llamada <code class="docutils literal notranslate"><span class="pre">fork()</span></code> crea un proceso hijo duplicando la estructura <code class="docutils literal notranslate"><span class="pre">task_struct</span></code> y la tabla de páginas del proceso padre. Las páginas de memoria física no se copian inmediatamente; se marcan como de solo lectura para ambos procesos. La copia real ocurre solo cuando alguno de los dos intenta escribir en la página (COW).</p></li>
+<li><p><strong>Reemplazo de Imagen con</strong> <code class="docutils literal notranslate"><span class="pre">execve()</span></code>:
+Sustituye el espacio de direcciones virtuales, el segmento de texto (código), los datos y la pila del proceso actual por los de un nuevo programa ejecutable en formato ELF, manteniendo únicamente atributos específicos como ciertos descriptores de archivo abiertos.</p></li>
+<li><p><strong>Recolección de Estado</strong> (<code class="docutils literal notranslate"><span class="pre">waitpid</span></code>):
+Permite al proceso padre bloquear su ejecución hasta que un hijo cambie de estado (finalización, detención por señal). Evita la proliferación de procesos en estado <em>Zombie</em> (procesos finalizados cuya entrada en la tabla de procesos no ha sido leída).</p></li>
+</ul>
+</section>
+<section id="inspeccion-de-recursos-y-entorno-sysconf">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">2. Inspección de Recursos y Entorno (<code class="docutils literal notranslate"><span class="pre">sysconf</span></code>)</a><a class="headerlink" href="#inspeccion-de-recursos-y-entorno-sysconf" title="Link to this heading"></a></h3>
+<p>La interfaz <code class="docutils literal notranslate"><span class="pre">sysconf()</span></code> permite a las aplicaciones consultar límites del sistema y parámetros de configuración en tiempo de ejecución sin hardcodear constantes.</p>
+<ul class="simple">
+<li><p><strong>Parámetros Clave</strong>:
+- <code class="docutils literal notranslate"><span class="pre">_SC_CLK_TCK</span></code>: Frecuencia de los tics del reloj del sistema.
+- <code class="docutils literal notranslate"><span class="pre">_SC_NPROCESSORS_ONLN</span></code>: Número de procesadores activos/en línea.
+- <code class="docutils literal notranslate"><span class="pre">_SC_PAGESIZE</span></code> / <code class="docutils literal notranslate"><span class="pre">_SC_PAGE_SIZE</span></code>: Tamaño de página en bytes.</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Para revisar los casos de prueba prácticos aplicados a estas llamadas al sistema,
+consulte la sección de pruebas asociadas en <a class="reference internal" href="PROC_tests.html"><span class="doc">Gestión de Procesos y Recursos (Sched &amp; Proc) - Tests</span></a>.</p>
+</div>
+</section>
+</section>
+<section id="planificacion-y-programacion-de-tareas-scheduler">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Planificación y Programación de Tareas (Scheduler)</a><a class="headerlink" href="#planificacion-y-programacion-de-tareas-scheduler" title="Link to this heading"></a></h2>
+<p>El planificador del kernel (EEVDF / CFS) gestiona la asignación del tiempo de CPU entre los hilos de ejecución (<em>tasks</em>).</p>
+<section id="estructura-de-control-task-struct">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">1. Estructura de Control <code class="docutils literal notranslate"><span class="pre">task_struct</span></code></a><a class="headerlink" href="#estructura-de-control-task-struct" title="Link to this heading"></a></h3>
+<p>Cada proceso e hilo en el sistema está representado internamente por una instancia de <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">task_struct</span></code>. Contiene:</p>
+<ul class="simple">
+<li><p>Identificadores de proceso (PID, TGID, PPID).</p></li>
+<li><p>Estado del proceso (<code class="docutils literal notranslate"><span class="pre">TASK_RUNNING</span></code>, <code class="docutils literal notranslate"><span class="pre">TASK_INTERRUPTIBLE</span></code>, <code class="docutils literal notranslate"><span class="pre">TASK_UNINTERRUPTIBLE</span></code>).</p></li>
+<li><p>Punteros al espacio de memoria (<code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">mm_struct</span> <span class="pre">*mm</span></code>).</p></li>
+<li><p>Credenciales de seguridad (UID, GID, capacidades POSIX).</p></li>
+</ul>
+</section>
+<section id="consultas-e-interfaces-de-kernel">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">2. Consultas e Interfaces de Kernel</a><a class="headerlink" href="#consultas-e-interfaces-de-kernel" title="Link to this heading"></a></h3>
+<p>El sistema de archivos pseudo-virtual <code class="docutils literal notranslate"><span class="pre">/proc</span></code> expone las métricas de estado de cada proceso mediante las entradas <code class="docutils literal notranslate"><span class="pre">/proc/&lt;PID&gt;/status</span></code> y <code class="docutils literal notranslate"><span class="pre">/proc/&lt;PID&gt;/stat</span></code>, permitiendo validar dinámicamente el comportamiento del planificador y la asignación de recursos.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Para revisar los resultados y trazado de pruebas reales de gestión de procesos,
+consulte <a class="reference internal" href="PROC_tests.html"><span class="doc">Gestión de Procesos y Recursos (Sched &amp; Proc) - Tests</span></a>.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="guion.html" class="btn btn-neutral float-left" title="De Test LTP a Driver de Dispositivo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="PROC_tests.html" class="btn btn-neutral float-right" title="Gestión de Procesos y Recursos (Sched &amp; Proc) - Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.8 Modelo de registro ACPI &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="tecnología de virtualización para direccionado de I/O" href="../Intel-VTd.html" />
+    <link rel="prev" title="Configuración Avanzada e Interfase de Energía (ACPI)" href="Introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">ACPI (Advanced Configuration and Power Interface)</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#processador">Processador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">ACPI (Advanced Configuration and Power Interface)</a></li>
+      <li class="breadcrumb-item active">4.8 Modelo de registro ACPI</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/01_Hardware/Acpi/ACPICA/spec.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="modelo-de-registro-acpi">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">4.8 Modelo de registro ACPI</a><a class="headerlink" href="#modelo-de-registro-acpi" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#modelo-de-registro-acpi" id="id1">4.8 Modelo de registro ACPI</a></p></li>
+</ul>
+</nav>
+<p>El hardware de ACPI reside en uno de los seis siguiente espacios:</p>
+<ul class="simple">
+<li><p>Sistema I/O</p></li>
+<li><p>Sistema de memoria</p></li>
+<li><p>Configuración PCI</p></li>
+<li><p>SMBus</p></li>
+<li><p>Controlador embebido</p></li>
+<li><p>Hardware fijo funcional</p></li>
+</ul>
+<p>Diferentes implementaciones resultarán en diferentes espacios de direcciones, siendo estas, usadas para distintas funciones. La especificación <em>ACPI</em> consiste en registros de hardware fijo y registros de hardware genérico. Registros de hardware fijo, son necesarios para implementar las definiciones de interfases <em>ACPI</em>. Los registros de hardware
+genérico, para cualquier evento generado por el “hardware de valor añadido”.</p>
+<p><em>ACPI</em> define bloques de rigistro. Un sistema ACPI-compatible, proporciona una tabla <em>ACPI</em> (la <em>FADT</em>, construida en memoria durante el arranque) esto, contiene una lista de punteros para los difentes bloques fijos de registros de hardware, usados por el <em>OSPM</em>.
+Los <em>bits</em> dentro de estos registros, constan de atributos definidos por los bloques de registros dados.</p>
+<p>Estos <em>tipos</em> de registros que <em>ACPI</em> define son:</p>
+<ul class="simple">
+<li><p>Registros de <em>estado/activo</em> -para eventos(status/enable).</p></li>
+<li><p>Registros de control.</p></li>
+</ul>
+<p>Si un bloque de registro es del tipo <em>estado/activo</em>, entonces contendrá un registro con <em>bits</em> de estado, y el correspondiente registro con los <em>bits</em> activos. Los <em>bits</em> de <em>estado</em> y <em>activo</em>, deben seguir exactamente la misma definición de implementación -a menos que se indique lo contrario, la cuál es ilustrada por el siguiente diagrama:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                         Bit de estado
+                               |
+                               v
+                      +-----------------+
+                      |       (x)       |
+                      |   Bit activo    |
+                      +-----------------+
+                               |
+                               v
+Event Input &gt;-----------------[x]-----------------[)-----&gt; Event Output
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Figura 4-10, diagrama de bloque de una celda estado/activo</p></li>
+</ul>
+<p>Nótese que el <em>bit</em> de estado, el cuál configura el hardware mediante el evento de entrada configurado en éste ejemplo, únicamente puede ser borrado(limpiado) escribiendo con <em>software</em>, su posición de <em>bit</em> a 1. Igualmente, el <em>bit</em> activo, no tiene efecto alguno a la hora de establecer o borrar el <em>bit</em> de estado; únicamente determina si la <strong>configuración</strong> de <em>bit</em> de estado generará un <em>evento de salida</em>, el cuál genera un <em>SCI</em> cuando se configura, si su <em>bit activo</em> es configurado/activado.</p>
+<p><em>ACPI</em> también define agrupaciones de registros. Una agrupaciones de registros, consiste
+en dos bloques de registros, con dos punteros a dos bloques de registros diferentes, donde cada localización de <em>bit</em> dentro de una agrupación de registros, es fijada y no puede ser cambiada. Los <em>bits</em> dentro de una agrupación de registros, los cuales tienen una posiciones de <em>bit</em> fijadas, pueden ser separados entre dos bloques de registros. Ésto permite al <em>bit</em> dentro de la agrupación de registros residir en uno o en ambos bloques de registros, facilitando la facultad de mapear los <em>bits</em>, dentro de muy distintos <em>chips</em>, a los mismos registros, así como proporcionar un modelo de programación con una única estructura de agrupación de registro  de <em>bit</em>.</p>
+<p><em>OSPM</em> trata la agrupación de registros, como un único registro; pero localizado en múltiples lugares. Para leer una agrupación de registros, <em>OSPM</em> leerá el bloque de registros <em>A</em>, seguido por el <em>B</em> y, después alternar(“OR”) los dos resultados juntos(el campo <code class="docutils literal notranslate"><span class="pre">SLP_TYP</span></code> es una excepción a esta regla).
+Los <em>bits</em> reservados o no utilizados dentro de un bloque de registros, siempre retornan cero en su lectura y, no tiene efectos secundarios en la escritura -lo cuál es un requisito.</p>
+<p>El campo <code class="docutils literal notranslate"><span class="pre">SLP_TYP</span></code> puede ser distinto para cada agrupación de registros. El respectivo objeto durmiente <code class="docutils literal notranslate"><span class="pre">\_Sx</span></code>contiene un campo <code class="docutils literal notranslate"><span class="pre">SLP_TYPa</span></code> y un campo <code class="docutils literal notranslate"><span class="pre">SLP_TYPb</span></code>. Esto es, el objeto retorna un paquete con dos valores enteros de <code class="docutils literal notranslate"><span class="pre">0-7</span></code> en él. El <em>OSPM</em> siempre escribirá el valor <code class="docutils literal notranslate"><span class="pre">SLP_TYPa</span></code> en el bloque de registro <em>“A”</em>, seguido por el valor <code class="docutils literal notranslate"><span class="pre">SLP_TYPb</span></code> dentro del bloque de registro <em>“B”</em>. Todas las demás localizaciones de <em>bit</em> serán escritas con el mismo valor. El <em>OSPM</em> tampoco lee el valor <code class="docutils literal notranslate"><span class="pre">SLP_TYPx</span></code> pero lo “saca fuera”!</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Introduction.html" class="btn btn-neutral float-left" title="Configuración Avanzada e Interfase de Energía (ACPI)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Intel-VTd.html" class="btn btn-neutral float-right" title="tecnología de virtualización para direccionado de I/O" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

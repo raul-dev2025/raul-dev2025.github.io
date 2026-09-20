@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zero page &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="GPMC" href="../../bus-devices/ti-gpmc.html" />
+    <link rel="prev" title="El arranque del núcleo deLinux/ppc sin Open Firmware" href="../powerpc/booting-without-of.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#arch-x86">arch/x86</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Zero page</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Zero page</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/02_Kernel/arch/x86/zero-page.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zero-page">
+<h1>Zero page<a class="headerlink" href="#zero-page" title="Link to this heading"></a></h1>
+<p>Los campos adicionanes en el <em>struct</em> <code class="docutils literal notranslate"><span class="pre">boot_params</span></code>, como parte del protocolo de arranque del kernel. Debería ser completado por el gestor, o el código de configuración de 16-bit en <em>modo real</em>. Referencias/configuraciones al mismo, en:</p>
+<p><code class="docutils literal notranslate"><span class="pre">arch/x86/include/uapi/asm/bootparam.h</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Offset  Proto   Name            Meaning
+/Size
+
+000/040 ALL     screen_info     Text mode or frame buffer information
+                                (struct screen_info)
+040/014 ALL     apm_bios_info   APM BIOS information (struct apm_bios_info)
+058/008 ALL     tboot_addr      Physical address of tboot shared page
+060/010 ALL     ist_info        Intel SpeedStep (IST) BIOS support information
+                                (struct ist_info)
+080/010 ALL     hd0_info        hd0 disk parameter, OBSOLETE!!
+090/010 ALL     hd1_info        hd1 disk parameter, OBSOLETE!!
+0A0/010 ALL     sys_desc_table  System description table (struct sys_desc_table),
+                                OBSOLETE!!
+0B0/010 ALL     olpc_ofw_header OLPC&#39;s OpenFirmware CIF and friends
+0C0/004 ALL     ext_ramdisk_image ramdisk_image high 32bits
+0C4/004 ALL     ext_ramdisk_size  ramdisk_size high 32bits
+0C8/004 ALL     ext_cmd_line_ptr  cmd_line_ptr high 32bits
+140/080 ALL     edid_info       Video mode setup (struct edid_info)
+1C0/020 ALL     efi_info        EFI 32 information (struct efi_info)
+1E0/004 ALL     alk_mem_k       Alternative mem check, in KB
+1E4/004 ALL     scratch         Scratch field for the kernel setup code
+1E8/001 ALL     e820_entries    Number of entries in e820_table (below)
+1E9/001 ALL     eddbuf_entries  Number of entries in eddbuf (below)
+1EA/001 ALL     edd_mbr_sig_buf_entries Number of entries in edd_mbr_sig_buffer
+                                (below)
+1EB/001 ALL     kbd_status      Numlock is enabled
+1EC/001 ALL     secure_boot     Secure boot is enabled in the firmware
+1EF/001 ALL     sentinel        Used to detect broken bootloaders
+290/040 ALL     edd_mbr_sig_buffer EDD MBR signatures
+2D0/A00 ALL     e820_table      E820 memory map table
+                                (array of struct e820_entry)
+D00/1EC ALL     eddbuf          EDD data (array of struct edd_info)
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../powerpc/booting-without-of.html" class="btn btn-neutral float-left" title="El arranque del núcleo deLinux/ppc sin Open Firmware" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../bus-devices/ti-gpmc.html" class="btn btn-neutral float-right" title="GPMC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

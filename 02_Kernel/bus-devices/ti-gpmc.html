@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPMC &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unidad de prueba, del árbol de dispositivo Open Firmware" href="../DeviceTree/0-of_unittest.html" />
+    <link rel="prev" title="Zero page" href="../arch/x86/zero-page.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GPMC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gpmc-controlador-de-memoria-de-propuesta-general">GPMC Controlador de memoria de propuesta general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">GPMC</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/bus-devices/ti-gpmc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gpmc">
+<h1><a class="toc-backref" href="#id2" role="doc-backlink">GPMC</a><a class="headerlink" href="#gpmc" title="Link to this heading"></a></h1>
+<nav class="contents" id="tabla-de-contenido">
+<p class="topic-title">Tabla de Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#gpmc" id="id2">GPMC</a></p>
+<ul>
+<li><p><a class="reference internal" href="#gpmc-controlador-de-memoria-de-propuesta-general" id="id3">GPMC Controlador de memoria de propuesta general</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id4">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="gpmc-controlador-de-memoria-de-propuesta-general">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">GPMC Controlador de memoria de propuesta general</a><a class="headerlink" href="#gpmc-controlador-de-memoria-de-propuesta-general" title="Link to this heading"></a></h2>
+<p>GPMC es un controlador de memoria unificado, para hacer de interfaz con dispositivos de memoria externa como:</p>
+<ul class="simple">
+<li><p>SRAM asíncronos, como memorias y aplicaciones específicas integradas en circuitos de dispositivo.</p></li>
+<li><p>Asíncrono, síncronos y, modos de página en dispositivos tipo NOR y NAND.</p></li>
+<li><p>Pseudo-dispositivos SRAM.</p></li>
+</ul>
+<p>GPMC, se encuentra en SoC’s de la marca <a class="reference external" href="http://www.ti.com/lit/pdf/spruh73">*Texas Instruments*</a> (OMAP based) sección 7.1</p>
+<p>GPMC tiene ciertas <em>reglas de tiempo</em>, que deben ser programadas para un correcto funcionamiento del periférico, mientras que el periférico, sostiene otro conjunto de <em>reglas</em>. Hacer funcionar al periférico con GPMC, dichas reglas de tiempo deben ser traducidas para que las entienda. La forma en que deban ser traducidas, dependen del periférico conectado. Hay también ciertas reglas dependientes, en cuanto a frecuencia del reloj GPMC. Consecuentemente, ha sido desarrollada una <em>regla genérica de tiempo</em>, para alcanzar dichos requisitos.</p>
+<p>La <em>rutina genérica</em>, proporciona un método para calcular los tiempos GPMC, desde las reglas del periférico. El campo de la estructura <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">gpmc_device_timings</span></code> deberá ser actualizado con los tiempos provistos en las características de fabricante. Algunos de los tiempos de estos periféricos, podrán buscar la respectiva conicidencia, tanto en ciclos como en tiempo. En previsión al control de este escenario, ver la refencia a la definición de la estructura - <code class="docutils literal notranslate"><span class="pre">struct</span></code> <code class="docutils literal notranslate"><span class="pre">gpmc_device_timings</span></code>. Podría ocurrir que el tiempo especificado por la hoja de características del periférico, no estuviese presente en la <em>estructura de tiempo</em>, en tal situación, es conveniente intentar una correlación entre la <em>regla</em> del periférico y <em>alguna disponible</em>. <em>Educar</em> consecuentemente una rutina de tiempo genérica, para ejercer control. Asegurar que no rompe alguna de las reglas existentes.
+Podrían aparecer casos, en los que la hoja de características -datasheet, no mencionase ciertos campos de la estructura <code class="docutils literal notranslate"><span class="pre">gpmc_device_timings</span></code>, <em>Encerar</em> dichas entradas -poner a cero.</p>
+<p>Las reglas de tiempo, han sido verificadas para que funcionen apropiadamente en múltiples periféricos de un sólo <code class="docutils literal notranslate"><span class="pre">NAND</span></code> y, <code class="docutils literal notranslate"><span class="pre">tusb6010</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>las reglas de tiempo, han sido desarrolladas basándose en la comprensión de las <em>reglas de tiempo</em>, tiempos de periféricos, reglas personalizadas, algo de ingeniería inversa sin disponer de las características de fabricante y, el <em>hardware</em> -for ser exactos, ninguna de las soportadas en la <em>línea principal</em>, con reglas personalizadas, también por simulación.</p>
+</div>
+<p>Dependencias a <em>reglas</em> en los periféricos:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">[&lt;gpmc_timing&gt;:</span> <span class="pre">&lt;peripheral</span> <span class="pre">timing1&gt;,</span> <span class="pre">&lt;peripheral</span> <span class="pre">timing2&gt;</span> <span class="pre">...]</span></code></p>
+<ol class="arabic simple">
+<li><p>common</p></li>
+</ol>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cs_on</span><span class="p">:</span> <span class="n">t_ceasu</span>
+<span class="n">adv_on</span><span class="p">:</span> <span class="n">t_avdasu</span><span class="p">,</span> <span class="n">t_ceavd</span>
+
+ <span class="mf">2.</span> <span class="n">sync</span> <span class="n">common</span>
+</pre></div>
+</div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="nl">sync_clk</span><span class="p">:</span><span class="w"> </span><span class="n">clk</span>
+<span class="nl">page_burst_access</span><span class="p">:</span><span class="w"> </span><span class="n">t_bacc</span>
+<span class="nl">clk_activation</span><span class="p">:</span><span class="w"> </span><span class="n">t_ces</span><span class="p">,</span><span class="w"> </span><span class="n">t_avds</span>
+
+<span class="w"> </span><span class="mf">3.</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">async</span><span class="w"> </span><span class="n">muxed</span>
+</pre></div>
+</div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="nl">adv_rd_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_avdp_r</span>
+<span class="nl">oe_on</span><span class="p">:</span><span class="w"> </span><span class="n">t_oeasu</span><span class="p">,</span><span class="w"> </span><span class="n">t_aavdh</span>
+<span class="nl">access</span><span class="p">:</span><span class="w"> </span><span class="n">t_iaa</span><span class="p">,</span><span class="w"> </span><span class="n">t_oe</span><span class="p">,</span><span class="w"> </span><span class="n">t_ce</span><span class="p">,</span><span class="w"> </span><span class="n">t_aa</span>
+<span class="nl">rd_cycle</span><span class="p">:</span><span class="w"> </span><span class="n">t_rd_cycle</span><span class="p">,</span><span class="w"> </span><span class="n">t_cez_r</span><span class="p">,</span><span class="w"> </span><span class="n">t_oez</span>
+
+<span class="w"> </span><span class="mf">4.</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">async</span><span class="w"> </span><span class="n">non</span><span class="o">-</span><span class="n">muxed</span>
+</pre></div>
+</div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="nl">adv_rd_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_avdp_r</span>
+<span class="nl">oe_on</span><span class="p">:</span><span class="w"> </span><span class="n">t_oeasu</span>
+<span class="nl">access</span><span class="p">:</span><span class="w"> </span><span class="n">t_iaa</span><span class="p">,</span><span class="w"> </span><span class="n">t_oe</span><span class="p">,</span><span class="w"> </span><span class="n">t_ce</span><span class="p">,</span><span class="w"> </span><span class="n">t_aa</span>
+<span class="nl">rd_cycle</span><span class="p">:</span><span class="w"> </span><span class="n">t_rd_cycle</span><span class="p">,</span><span class="w"> </span><span class="n">t_cez_r</span><span class="p">,</span><span class="w"> </span><span class="n">t_oez</span>
+
+<span class="w"> </span><span class="mf">5.</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">sync</span><span class="w"> </span><span class="n">muxed</span>
+</pre></div>
+</div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="nl">adv_rd_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_avdp_r</span><span class="p">,</span><span class="w"> </span><span class="n">t_avdh</span>
+<span class="nl">oe_on</span><span class="p">:</span><span class="w"> </span><span class="n">t_oeasu</span><span class="p">,</span><span class="w"> </span><span class="n">t_ach</span><span class="p">,</span><span class="w"> </span><span class="n">cyc_aavdh_oe</span>
+<span class="nl">access</span><span class="p">:</span><span class="w"> </span><span class="n">t_iaa</span><span class="p">,</span><span class="w"> </span><span class="n">cyc_iaa</span><span class="p">,</span><span class="w"> </span><span class="n">cyc_oe</span>
+<span class="nl">rd_cycle</span><span class="p">:</span><span class="w"> </span><span class="n">t_cez_r</span><span class="p">,</span><span class="w"> </span><span class="n">t_oez</span><span class="p">,</span><span class="w"> </span><span class="n">t_ce_rdyz</span>
+
+<span class="w"> </span><span class="mf">6.</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">sync</span><span class="w"> </span><span class="n">non</span><span class="o">-</span><span class="n">muxed</span>
+</pre></div>
+</div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="nl">adv_rd_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_avdp_r</span>
+<span class="nl">oe_on</span><span class="p">:</span><span class="w"> </span><span class="n">t_oeasu</span>
+<span class="nl">access</span><span class="p">:</span><span class="w"> </span><span class="n">t_iaa</span><span class="p">,</span><span class="w"> </span><span class="n">cyc_iaa</span><span class="p">,</span><span class="w"> </span><span class="n">cyc_oe</span>
+<span class="nl">rd_cycle</span><span class="p">:</span><span class="w"> </span><span class="n">t_cez_r</span><span class="p">,</span><span class="w"> </span><span class="n">t_oez</span><span class="p">,</span><span class="w"> </span><span class="n">t_ce_rdyz</span>
+
+<span class="w"> </span><span class="mf">7.</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">async</span><span class="w"> </span><span class="n">muxed</span>
+</pre></div>
+</div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="nl">adv_wr_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_avdp_w</span>
+<span class="n">we_on</span><span class="p">,</span><span class="w"> </span><span class="n">wr_data_mux_bus</span><span class="o">:</span><span class="w"> </span><span class="n">t_weasu</span><span class="p">,</span><span class="w"> </span><span class="n">t_aavdh</span><span class="p">,</span><span class="w"> </span><span class="n">cyc_aavhd_we</span>
+<span class="nl">we_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_wpl</span>
+<span class="nl">cs_wr_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_wph</span>
+<span class="nl">wr_cycle</span><span class="p">:</span><span class="w"> </span><span class="n">t_cez_w</span><span class="p">,</span><span class="w"> </span><span class="n">t_wr_cycle</span>
+
+<span class="w"> </span><span class="mf">8.</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">async</span><span class="w"> </span><span class="n">non</span><span class="o">-</span><span class="n">muxed</span>
+</pre></div>
+</div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="nl">adv_wr_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_avdp_w</span>
+<span class="n">we_on</span><span class="p">,</span><span class="w"> </span><span class="n">wr_data_mux_bus</span><span class="o">:</span><span class="w"> </span><span class="n">t_weasu</span>
+<span class="nl">we_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_wpl</span>
+<span class="nl">cs_wr_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_wph</span>
+<span class="nl">wr_cycle</span><span class="p">:</span><span class="w"> </span><span class="n">t_cez_w</span><span class="p">,</span><span class="w"> </span><span class="n">t_wr_cycle</span>
+
+<span class="w"> </span><span class="mf">9.</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">sync</span><span class="w"> </span><span class="n">muxed</span>
+</pre></div>
+</div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="nl">adv_wr_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_avdp_w</span><span class="p">,</span><span class="w"> </span><span class="n">t_avdh</span>
+<span class="n">we_on</span><span class="p">,</span><span class="w"> </span><span class="n">wr_data_mux_bus</span><span class="o">:</span><span class="w"> </span><span class="n">t_weasu</span><span class="p">,</span><span class="w"> </span><span class="n">t_rdyo</span><span class="p">,</span><span class="w"> </span><span class="n">t_aavdh</span><span class="p">,</span><span class="w"> </span><span class="n">cyc_aavhd_we</span>
+<span class="nl">we_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_wpl</span><span class="p">,</span><span class="w"> </span><span class="n">cyc_wpl</span>
+<span class="nl">cs_wr_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_wph</span>
+<span class="nl">wr_cycle</span><span class="p">:</span><span class="w"> </span><span class="n">t_cez_w</span><span class="p">,</span><span class="w"> </span><span class="n">t_ce_rdyz</span>
+
+<span class="w"> </span><span class="mf">10.</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">sync</span><span class="w"> </span><span class="n">non</span><span class="o">-</span><span class="n">muxed</span>
+</pre></div>
+</div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="nl">adv_wr_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_avdp_w</span>
+<span class="n">we_on</span><span class="p">,</span><span class="w"> </span><span class="n">wr_data_mux_bus</span><span class="o">:</span><span class="w"> </span><span class="n">t_weasu</span><span class="p">,</span><span class="w"> </span><span class="n">t_rdyo</span>
+<span class="nl">we_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_wpl</span><span class="p">,</span><span class="w"> </span><span class="n">cyc_wpl</span>
+<span class="nl">cs_wr_off</span><span class="p">:</span><span class="w"> </span><span class="n">t_wph</span>
+<span class="nl">wr_cycle</span><span class="p">:</span><span class="w"> </span><span class="n">t_cez_w</span><span class="p">,</span><span class="w"> </span><span class="n">t_ce_rdyz</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>muchas de las reglas GPMC, son dependientes de otros tiempos -algunos tiempos son púramente dependientes de otros, razón por la que alguna de estas reglas hayan sido arriba omitidas. Resultando en una dependencia indirecta a las reglas del periférico. Referir a la rutina de tiempos, para más detalles.
+Para saber a que tiempos corresponden estos periféricos, ver por favor, la explicación en la estructura <code class="docutils literal notranslate"><span class="pre">gpmc_device_timings</span></code>. Para reglas gpmc referir la IP del enlace arriba expuesto.</p>
+</div>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="http://www.ti.com/">Texas Instruments</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../arch/x86/zero-page.html" class="btn btn-neutral float-left" title="Zero page" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../DeviceTree/0-of_unittest.html" class="btn btn-neutral float-right" title="Unidad de prueba, del árbol de dispositivo Open Firmware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

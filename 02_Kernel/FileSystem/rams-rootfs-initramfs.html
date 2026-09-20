@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qué es ramfs? &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tmpfs" href="tmpfs.html" />
+    <link rel="prev" title="Montando el sistema de ficheros raíz, vía NFS(nfsroot)" href="nfsroot.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#filesystem">FileSystem</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Nfs/nfs.html">El cliente NFS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nfsroot.html">Montando el sistema de ficheros raíz, vía NFS(nfsroot)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Qué es ramfs?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ramfs-y-ramdisk">ramfs y ramdisk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ramfs-y-tmpfs">ramfs y tmpfs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#que-es-rootfs">Qué es rootfs?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#que-es-initramfs">Qué es initramfs?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#poblando-initramfs">Poblando <em>initramfs</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#imagenes-externas-initramfs">Imágenes externas <em>initramfs</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#contenido-de-initramfs">Contenido de <code class="docutils literal notranslate"><span class="pre">initramfs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#por-que-cpio-en-lugar-de-tar">Por qué cpio en lugar de tar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#futuras-direcciones">Futuras direcciones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tmpfs.html">Tmpfs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Qué es ramfs?</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/FileSystem/rams-rootfs-initramfs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="que-es-ramfs">
+<h1>Qué es ramfs?<a class="headerlink" href="#que-es-ramfs" title="Link to this heading"></a></h1>
+<p>Es un sistema de archivos muy simple, el cuál exporta los mecanismos de <em>cacheado</em> de disco de <em>Linux</em>(la página caché y la <code class="docutils literal notranslate"><span class="pre">dentry</span></code> caché), como un sistema de archivo dinámicamente redimensionable, basado en el sistema de archivo de <em>la RAM</em>.</p>
+<p>Normalmente, todos los archivos son <em>cacheados</em> por el <em>kernel linux</em>. Las página de datos de lectura desde el almacén de soporte(<code class="docutils literal notranslate"><span class="pre">backing</span> <span class="pre">store</span></code>, habitualmente el <em>dispositivo de bloque</em>, donde es montado el <em>FS</em>)son mantenidos en caso de ser necesitado de nuevo, pero marcado como <code class="docutils literal notranslate"><span class="pre">clean</span></code>(liberable), en caso de que el <em>sistema memoria virtual</em> necesitase la memoria para alguna otra cosa. De manera parecida, los datos escritos a archivos, son marcados “limpios”, tan pronto como han sido escritos el <code class="docutils literal notranslate"><span class="pre">backing</span> <span class="pre">store</span></code>, aunque <em>mantenidos</em> para  propósitos de caché, hasta que <em>VM(memoria virtual)</em> realoje la memoria. Un mecanismo similar(<code class="docutils literal notranslate"><span class="pre">dentry</span> <span class="pre">cache</span></code>) mejora la volocidad de acceso a directorios.</p>
+<p>Con <em>ramfs</em> no hay <code class="docutils literal notranslate"><span class="pre">backing</span> <span class="pre">store</span></code>. Los archivos escritos en <em>ramfs</em> colocan <code class="docutils literal notranslate"><span class="pre">dentry</span></code> s* y caché de páginas como es lo habitual, pero no hay ningún lugar donde escribir. Ésto significa que las páginas nunca son marcadas como “limpias”, así que no podrán ser <em>liberadas</em> por la <em>VM</em> cuando busque <em>reciclar memoria</em>.</p>
+<p>La cantidad de código necesario par implementar <code class="docutils literal notranslate"><span class="pre">ramfs</span></code> es pequeñita, por que todo el trabajo es realizado por la <em>infraestructura cacheada del existente Linux</em>. Básicamente, se está montando el disco caché como sistema de archivo. Por esta razón, <code class="docutils literal notranslate"><span class="pre">ramfs</span></code>, no es una opción de componente, para el <em>menú de configuración</em> <code class="docutils literal notranslate"><span class="pre">menuconfig</span></code>, que pueda ser <em>desactivada</em>, ya que podrían haber espacios de guardado corruptos.</p>
+<blockquote>
+<div><p><strong>dentry:</strong> es utilizado para relacionar el número de <em>inodos</em> con  los nombres de archivo. Juegan un papel importante en el <em>cacheado de un directorio</em>, donde  se guardan los archivos frecuentemente accedidos (ejem. <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-ltru</span> <span class="pre">/etc</span></code>), para un más  rápido acceso a los mismos. El <em>sistema de archivos transversal</em>,  es otro de los aspectos de <code class="docutils literal notranslate"><span class="pre">dentry</span></code> ya que mantiene  una relación entre directorios y sus archivos.</p>
+</div></blockquote>
+<section id="ramfs-y-ramdisk">
+<h2>ramfs y ramdisk<a class="headerlink" href="#ramfs-y-ramdisk" title="Link to this heading"></a></h2>
+<p>El antiguo mecanismo “disco ram”, creaba un dispositivo de bloque sintético, fuera de un area para la RAM, y lo usó como <code class="docutils literal notranslate"><span class="pre">backing</span> <span class="pre">store</span></code> para el sistema de archivos. Éste dispositivo de bloque, tenía un tamaño fijo, así que el FS montado en él, también con tamaño fijo. Usar un “disco de ram” requería copiar memoria innecesariamente desde el <em>falso</em> dispositivo de bloque, al caché de página(y volver a copiar los cambios). También crear y destruir <em>``dentry``s</em>. Además necesitó un controlador para el <em>FS</em> -como el <em>ext2</em>, para formar e interpretar los datos.</p>
+<p>Comparado con el <code class="docutils literal notranslate"><span class="pre">ramfs</span></code>, malgastaba la memoria(y el ancho de banda del bus de memoria), generaba innecesario trabajo a la <em>CPU</em>, y contaminaba las cachés para la <em>CPU</em>. Hay trucos, para evitar estas “copias”, jugando con las <em>tablas de páginas</em>, pero son tan desafortunadamente complicadas, que cuesta más trabajo que dejarlas estar. Aún otra consideración, es que el trabajo que hace <code class="docutils literal notranslate"><span class="pre">ramfs</span></code>, tenía que suceder a la fuerza, ya que todo el acceso a archivos, va a través de la página y de la caché <code class="docutils literal notranslate"><span class="pre">dentry</span></code>. El  disco RAM es simplemente innecesario; internamente, <code class="docutils literal notranslate"><span class="pre">ramfs</span></code> es mucho mas simple.</p>
+<p>Otra razón por la que <code class="docutils literal notranslate"><span class="pre">ramfs</span></code> ha quedado <em>semi obsoleta</em> es que la introducción de los dispositivos de retorno(<code class="docutils literal notranslate"><span class="pre">loopback</span></code>), ofrece una mayor flexibilidad y forma conveniente, de crear <em>dispositivos de bloque sintéticos</em>; ahora desde archivos, en lugar de <em>memoria no</em> <em>limpia</em>. Ver <code class="docutils literal notranslate"><span class="pre">losetup(8)</span></code> para más detalles.</p>
+</section>
+<section id="ramfs-y-tmpfs">
+<h2>ramfs y tmpfs<a class="headerlink" href="#ramfs-y-tmpfs" title="Link to this heading"></a></h2>
+<p>Uno de los <em>contras</em> en <code class="docutils literal notranslate"><span class="pre">ramfs</span></code>, es que se puede seguir escribiendo datos, hasta que se ha ocupado toda la memoria, y la <em>VM</em> no puede liberarla por que la <em>VM</em> piensa que todos los archivos deberían ser escritos al <code class="docutils literal notranslate"><span class="pre">backing</span> <span class="pre">store</span></code> (en lugar del espacio de intercambio), pero <code class="docutils literal notranslate"><span class="pre">ramfs</span></code> no tiene <code class="docutils literal notranslate"><span class="pre">backing</span> <span class="pre">store</span></code>. Así que sólo el <code class="docutils literal notranslate"><span class="pre">root</span></code> -o usuario con permisos, debería tener acceso de escritura al montado de <em>ramfs</em>.</p>
+<p>Se creó un derivativo de <code class="docutils literal notranslate"><span class="pre">ramfs</span></code> para añadir límite de tamaño, y la habilidad de escribir los datos en el espacio de intercambio(swap). Normalmente los usuarios tienen permisos de escritura al FS <code class="docutils literal notranslate"><span class="pre">tmpfs</span></code> montado. Ver <code class="docutils literal notranslate"><span class="pre">Documentation/filesystems/tmpfs.txt</span></code> para más información.</p>
+</section>
+<section id="que-es-rootfs">
+<h2>Qué es rootfs?<a class="headerlink" href="#que-es-rootfs" title="Link to this heading"></a></h2>
+<p>Es una instancia especial, de <em>ramfs</em> -o tmpfs si está activado, el cuál está siempre presente en sistemas v2.6. No se puede desmontar un <code class="docutils literal notranslate"><span class="pre">root</span></code>, casi por la misma razón, de que no se puede <em>matar(``kill``)</em> el proceso <code class="docutils literal notranslate"><span class="pre">init</span></code>; en lugar de tener un código especial para comprobar y controlar una lista vacía, le cuesta menos al <em>kernel</em> asegurarse de que ciertas listas no estén vacias.</p>
+<p>Muchos sistemas, montan otros <em>FS’s</em> sobre el raíz, y lo ignoran. El montante de espacio que toma una instancia de <code class="docutils literal notranslate"><span class="pre">ramfs</span></code> vacía, es pequeña.</p>
+<p>Si es activado <em>CONFIG_TMPFS</em>, <em>rootfs</em> usará <em>tmpfs</em> en lugar de <em>ramfs</em> por defecto. Para forzar <em>ramfs</em>, añadir <code class="docutils literal notranslate"><span class="pre">rootfstype=ramfs</span></code> a la líne de comando del <em>kernel</em>.</p>
+</section>
+<section id="que-es-initramfs">
+<h2>Qué es initramfs?<a class="headerlink" href="#que-es-initramfs" title="Link to this heading"></a></h2>
+<p>Todos los núcleos <em>Linux</em> v2.6, contienen un archivo <code class="docutils literal notranslate"><span class="pre">cpio</span></code>, en formato <em>gzip</em>, el cuaĺ es extraido a <code class="docutils literal notranslate"><span class="pre">rootfs</span></code> cuando el kernel arranca. Después de la extracción, el kernel comprueba si <code class="docutils literal notranslate"><span class="pre">rootfs</span></code> contiene el archivo <code class="docutils literal notranslate"><span class="pre">init</span></code>, de ser así, lo ejecuta como <code class="docutils literal notranslate"><span class="pre">PID</span> <span class="pre">1</span></code>. Si se encuentra, éste proceso es el responsable de entregar al sistema el resto de recursos, incluidos, localizar y montar el <em>dispositivo raíz</em> “real” -si lo hay. Si <code class="docutils literal notranslate"><span class="pre">rootfs</span></code> no contiene ningún programa <code class="docutils literal notranslate"><span class="pre">init</span></code>, después de que el archivo embebido <code class="docutils literal notranslate"><span class="pre">cpio</span></code>, sea extraído, el kernel utilizará el <em>“antiguo código”</em>, para localizar y montar la partición raíz, después ejecutará alguna variante de <code class="docutils literal notranslate"><span class="pre">/sbin/</span> <span class="pre">init</span></code>.</p>
+<p>Todo esto, difiere del viejo <code class="docutils literal notranslate"><span class="pre">initrd</span></code> en más de un aspecto:</p>
+<ul class="simple">
+<li><p>El antiguo <code class="docutils literal notranslate"><span class="pre">initrd</span></code>, fue siempre un archivo separado, mientras que el archivo <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> es enlazado a la imagen del <em>kernel de linux</em>. El directorio <code class="docutils literal notranslate"><span class="pre">linux-*/usr</span></code>, es habitualmente usado donde generar el archivo, durante la <em>construcción</em>.</p></li>
+<li><p>El antiguo <code class="docutils literal notranslate"><span class="pre">initrd</span></code>, era una imagen FS comprimida (en algun formato de archivo, como ext2, eso necesitó de un controlador construido dentro del <em>kern el</em>) mientras que el nuevo <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> es un archivo <code class="docutils literal notranslate"><span class="pre">cpio</span></code> comprimido. Ver <code class="docutils literal notranslate"><span class="pre">buffer-format.txt</span></code>. La extracción del código <code class="docutils literal notranslate"><span class="pre">cpio</span></code> por el kernel, es extremadamente pequeña. Además son texto y datos <code class="docutils literal notranslate"><span class="pre">__init</span></code>, que pueden ser descartados durante el proceso de arranque.</p></li>
+<li><p>El programa utilizado por el viejo <code class="docutils literal notranslate"><span class="pre">initrd</span></code>, -se llamó <code class="docutils literal notranslate"><span class="pre">/initrd</span></code> no <code class="docutils literal notranslate"><span class="pre">/init</span></code>, hizo alguna configuración, retornando después al <em>kernel</em>. Mientras que no se espera lo mismo de <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>, retornar al kernel. Si <code class="docutils literal notranslate"><span class="pre">/init</span></code> necesita dejar de controlar, puede <em>sobremontar</em> <code class="docutils literal notranslate"><span class="pre">/</span></code> con un nuevo dispositivo raíz y, ejecutar otro programa  <code class="docutils literal notranslate"><span class="pre">init</span></code>. Ver <code class="docutils literal notranslate"><span class="pre">switch_root</span> <span class="pre">utility</span></code>, abajo.</p></li>
+<li><p>Cuando se cambia a otro dispositivo raíz, <code class="docutils literal notranslate"><span class="pre">initrd</span></code> pivotará <code class="docutils literal notranslate"><span class="pre">pivot_root</span></code>, y luego desmontará <em>ramdisk</em>. Pero initramfs es rootfs; nunca se podrá pivotar a <code class="docutils literal notranslate"><span class="pre">rootfs</span></code> ni desmontarlo. En su lugar, borrará todo lo que esté fuera de <code class="docutils literal notranslate"><span class="pre">rootfs</span></code>, liberará espacio (<code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">-xdev</span> <span class="pre">/</span> <span class="pre">-exec</span> <span class="pre">rm</span> <span class="pre">'{}'</span> <span class="pre">';'</span></code>), <em>sobremontará</em> <code class="docutils literal notranslate"><span class="pre">rootfs</span></code> con el nuevo raíz (<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/newmount;</span> <span class="pre">mount</span> <span class="pre">--move</span> <span class="pre">.</span> <span class="pre">/;</span> <span class="pre">chroot</span> <span class="pre">.</span></code>), acoplará <code class="docutils literal notranslate"><span class="pre">stdin/stdout/stderr</span></code> al nevo <code class="docutils literal notranslate"><span class="pre">/dev/console</span></code>, y <em>ejecutará</em> el nuevo raíz.</p></li>
+</ul>
+<p>Como esto es un proceso prostobutifláutico y entraña el borrar comandos, antes de poder <em>ejecutarlos</em>, el paquete <code class="docutils literal notranslate"><span class="pre">klibc</span></code> introdujo un programa de ayuda <code class="docutils literal notranslate"><span class="pre">utils/run_init.c</span></code> para hacer todo esto. Muchos otros paquetes -como <code class="docutils literal notranslate"><span class="pre">busybox</span></code>, han llamado a éste comando “switch_root”.</p>
+</section>
+<section id="poblando-initramfs">
+<h2>Poblando <em>initramfs</em><a class="headerlink" href="#poblando-initramfs" title="Link to this heading"></a></h2>
+<p>El proceso de construcción del <em>kernel</em> v2.6, siempre crea un <em>initramfs</em> con formato de archivo <code class="docutils literal notranslate"><span class="pre">cpio</span></code>, y lo enlaza con el <em>binario resultante del kernel</em>. Por defecto este archivo está vacío -consumiendo 134 bytes en <em>x86</em>. La opción de configuración <code class="docutils literal notranslate"><span class="pre">CONFIG_INITRAMFS_SOURCE</span></code>, -en <em>General Setup</em> dentro del menú de configuración(ver <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">help</span></code>) puede ser utilizada para especificar la fuente al archivo <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>, el cuál será incorporado automáticamente en el binario resultante. Ésta opción puede apuntar tanto a un archivo <code class="docutils literal notranslate"><span class="pre">cpio</span></code> comprimido(gzip), como a un directorio conteniendo otros archivos para ser <em>empaquetados</em>, o un archivo de texto con especificaciones como las siguientes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">dir</span> <span class="o">/</span><span class="n">dev</span> <span class="mi">755</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">nod</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">console</span> <span class="mi">644</span> <span class="mi">0</span> <span class="mi">0</span> <span class="n">c</span> <span class="mi">5</span> <span class="mi">1</span>
+<span class="n">nod</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">loop0</span> <span class="mi">644</span> <span class="mi">0</span> <span class="mi">0</span> <span class="n">b</span> <span class="mi">7</span> <span class="mi">0</span>
+<span class="nb">dir</span> <span class="o">/</span><span class="nb">bin</span> <span class="mi">755</span> <span class="mi">1000</span> <span class="mi">1000</span>
+<span class="n">slink</span> <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">sh</span> <span class="n">busybox</span> <span class="mi">777</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">file</span> <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">busybox</span> <span class="n">initramfs</span><span class="o">/</span><span class="n">busybox</span> <span class="mi">755</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="nb">dir</span> <span class="o">/</span><span class="n">proc</span> <span class="mi">755</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="nb">dir</span> <span class="o">/</span><span class="n">sys</span> <span class="mi">755</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="nb">dir</span> <span class="o">/</span><span class="n">mnt</span> <span class="mi">755</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">file</span> <span class="o">/</span><span class="n">init</span> <span class="n">initramfs</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">sh</span> <span class="mi">755</span> <span class="mi">0</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Al lanzar la aplicación <code class="docutils literal notranslate"><span class="pre">usr/gen_init_cpio</span></code> -depués de construir el núcleo, se  obtendrá un <em>mesaje de uso</em> documentando el archivo anterior</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Usage:
+./usr/gen_init_cpio [-t &lt;timestamp&gt;] &lt;cpio_list&gt;
+
+&lt;cpio_list&gt; is a file containing newline separated entries that
+describe the files to be included in the initramfs archive:
+
+# a comment
+file &lt;name&gt; &lt;location&gt; &lt;mode&gt; &lt;uid&gt; &lt;gid&gt; [&lt;hard links&gt;]
+dir &lt;name&gt; &lt;mode&gt; &lt;uid&gt; &lt;gid&gt;
+nod &lt;name&gt; &lt;mode&gt; &lt;uid&gt; &lt;gid&gt; &lt;dev_type&gt; &lt;maj&gt; &lt;min&gt;
+slink &lt;name&gt; &lt;target&gt; &lt;mode&gt; &lt;uid&gt; &lt;gid&gt;
+pipe &lt;name&gt; &lt;mode&gt; &lt;uid&gt; &lt;gid&gt;
+sock &lt;name&gt; &lt;mode&gt; &lt;uid&gt; &lt;gid&gt;
+
+&lt;name&gt; name of the file/dir/nod/etc in the archive
+&lt;location&gt; location of the file in the current filesystem
+expands shell variables quoted with ${}
+&lt;target&gt; link target
+&lt;mode&gt; mode/permissions of the file
+&lt;uid&gt;user id (0=root)
+&lt;gid&gt;group id (0=root)
+&lt;dev_type&gt; device type (b=block, c=character)
+&lt;maj&gt;major number of nod
+&lt;min&gt;minor number of nod
+&lt;hard links&gt; space separated list of other links to file
+
+example:
+# A simple initramfs
+dir /dev 0755 0 0
+nod /dev/console 0600 0 0 c 5 1
+dir /root 0700 0 0
+dir /sbin 0755 0 0
+file /sbin/kinit /usr/src/klibc/kinit/kinit 0755 0 0
+
+&lt;timestamp&gt; is time in seconds since Epoch that will be used
+ as mtime for symlinks, special files and directories. The default
+ is to use the current time for these entries.
+</pre></div>
+</div>
+<p>Una de las ventajas del archivo de configuración, es que el acceso <em>root</em>, no es necesario, para configurar los permisos o crear nuevos <em>nodos de dispositivo</em> en el nuevo archivo. Nótese, que las dos <em>entradas</em> en el siguiente archivo, esperan <em>encontrar</em> los archivos</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">/</span><span class="n">init</span> <span class="n">initramfs</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">sh</span> <span class="mi">755</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">file</span> <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">busybox</span> <span class="n">initramfs</span><span class="o">/</span><span class="n">busybox</span> <span class="mi">755</span> <span class="mi">0</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">init.sh</span></code> y <code class="docutils literal notranslate"><span class="pre">busybox</span></code>, en un directorio llamadao <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>, bajo el directorio de linux-2.6.*. Ver <code class="docutils literal notranslate"><span class="pre">Documentation/early-userspace/README</span></code> para más detalles.</p>
+<p>El <em>kernel</em> no depende de herramientas <code class="docutils literal notranslate"><span class="pre">cpio</span></code> externas. Si es necesario especificar un <em>directorio</em> en lugar de un <em>archivo de configuración</em>, la infraestructura del núcleo crea un <em>archivo de configuración</em> desde el directorio</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usr</span><span class="o">/</span><span class="n">Makefile</span>
+</pre></div>
+</div>
+<p>…llama a</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scripts</span><span class="o">/</span><span class="n">gen_initramfs_list</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p><em>Procede</em> entoncces a configurar ese directorio, a empaquetar el directorio usando el <em>archivo de configuración</em> haciéndolo <em>coincidir</em> con <code class="docutils literal notranslate"><span class="pre">usr/gen_init_cpio</span></code>, el cuál es creado desde <code class="docutils literal notranslate"><span class="pre">usr/gen_init_cpio.c</span></code>. El proceso del <em>kernel</em> para construir el código <code class="docutils literal notranslate"><span class="pre">cpio</span></code>, es <em>autocontenido</em>, igual que el proceso de <em>extracción del arranque</em> -no se  si muy alegremente, pero con cierta obviedad.</p>
+<p>La única cosa, que podría necesitar <em>utilidades externas instaladas</em>, es <em>el crear</em>, o <em>extraer</em>, un <code class="docutils literal notranslate"><span class="pre">cpio</span></code> personalizado, que coincidiese con la <em>construcción del núcleo</em>, en lugar de un <em>archivo de configuració o directorio</em>.</p>
+<p>La siguiente línea de comando, puede extraer la <em>imagen cpio</em> -tanto con el <code class="docutils literal notranslate"><span class="pre">script</span></code> arriba descrito, commo por la <em>contrucción del kernel</em>; de vuelta a los <em>componentes de archvo</em>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpio</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">H</span> <span class="n">newc</span> <span class="o">-</span><span class="n">F</span> <span class="n">initramfs_data</span><span class="o">.</span><span class="n">cpio</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">absolute</span><span class="o">-</span><span class="n">filenames</span>
+</pre></div>
+</div>
+<p>El siguiente <code class="docutils literal notranslate"><span class="pre">script</span></code> de <em>shell</em>, puede crear una <em>pre-construcción</em> del archivo  cpio* para ser usada en lugar del anterior archivo de configuración:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="c1"># Copyright 2006 Rob Landley &lt;rob@landley.net&gt; and TimeSys Corporation.</span>
+<span class="c1"># Licensed under GPL version 2</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-ne<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;usage: mkinitramfs directory imagename.cpio.gz&quot;</span>
+<span class="w">   </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="k">then</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;creating </span><span class="nv">$2</span><span class="s2"> from </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">   </span><span class="o">(</span><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span>find<span class="w"> </span>.<span class="w"> </span>cpio<span class="w"> </span>-o<span class="w"> </span>-H<span class="w"> </span>newc<span class="w"> </span>gzip<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
+<span class="w">   </span><span class="k">else</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;First argument must be a directory&quot;</span>
+<span class="w">   </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>La página de manual de <code class="docutils literal notranslate"><span class="pre">cpio</span></code> contiene algunas advertencias, “malas”, sobre si <em>romperá el sistema al seguir sus instrucciones</em>. Dice algo así como:</p>
+<p>“A typical way to generate the list of filenames is with the find
+command; you should
+give find the -depth option to minimize problems with permissions on
+directories that
+are unwritable or not searchable.”</p>
+</div>
+<p>La forma habitual de generar la lista de nobres de archivos es con el comando <code class="docutils literal notranslate"><span class="pre">find</span></code>; se debería dar la opción <code class="docutils literal notranslate"><span class="pre">-depth</span></code>(profundidad), para minimizar problemas con permisos sobre directorios que son <em>ireescribibles o no buscables</em>.</p>
+<p>Esto no se debe hacer, mientras se crean imágenes <code class="docutils literal notranslate"><span class="pre">initramfs.cpio.gz</span></code>, no funcionará. El extractor de <code class="docutils literal notranslate"><span class="pre">cpio</span></code> del <em>núcleo Linux</em>, crea archivos en un directorio que no  xiste, así que las _entradas de directorio_m deben ir <em>antes</em>, que los archivos que van en ese directorio. El anterior <em>script</em>, los toma en el orden correcto.</p>
+<p><strong>enlace duro</strong>, <em>ed</em>: igual que en el <em>eb</em> se trata de un archivo de enlace o puntero. Apuntamos a la dirección del archivo que contiene los datos. Sin embargo, con <em>ed</em> se deberá <em>desEnlazar</em> todos los <em>eds</em> para liberar espacio en el <em>disco</em>. <em>ed</em> no duplica los datos. &gt; <strong>eb</strong>: enlaze blando, permite apuntar a otros FS.</p>
+</section>
+<section id="imagenes-externas-initramfs">
+<h2>Imágenes externas <em>initramfs</em><a class="headerlink" href="#imagenes-externas-initramfs" title="Link to this heading"></a></h2>
+<p>Si el <em>kernel</em> tiene activada la opción <em>soporte initrd</em>, un archivo externo <code class="docutils literal notranslate"><span class="pre">cpio.gz</span></code> puede seer pasado en lugar del <code class="docutils literal notranslate"><span class="pre">initrd</span></code>. En este caso, detectará el <em>tipo</em> de (initramfs, no initramfs) y, extraerá el archivo externo <code class="docutils literal notranslate"><span class="pre">cpio</span></code> dentro del <code class="docutils literal notranslate"><span class="pre">rootfs</span></code>, antes de intentar lanzar <code class="docutils literal notranslate"><span class="pre">/init</span></code>.</p>
+<p>Usar <em>initramfs</em> tiene la ventaja de una mejor eficiencia en la memoria -no hay  dispositivos de bloque <em>disco-ram</em>, el empaquetado por separado de <em>initramfs</em>, resulta oportuno, si no se dispone código <em>GPL</em>, que necesite ser iniciado desde <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>, sin combinarlo con la licencia <em>GPL</em>, del <em>binario</em> del núcleo Linux.</p>
+<p>Puede se usado para suplementar la construcción de la <em>imagen del núcleo initramfs</em>. Los archivos externos, sobreescribirán cualquier conflicto en construcción del archivo <em>initramfs</em>. Algunos <em>distribuidores</em> prefieren personalizar la <em>imagen del núcleo</em>, con tareas específicas en la imagen <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>, sin recompilar.</p>
+<blockquote>
+<div><p><strong>GPL o [#copyleft]</strong> … sin limitaciones para la distribución y uso  del <em>software</em>, debe  estar siempre disponible el código. Cualquiera puede modificarlo y  mejorarlo, permaneciendo esta modificación bajo licencia GPL.</p>
+</div></blockquote>
+</section>
+<section id="contenido-de-initramfs">
+<h2>Contenido de <code class="docutils literal notranslate"><span class="pre">initramfs</span></code><a class="headerlink" href="#contenido-de-initramfs" title="Link to this heading"></a></h2>
+<p>Un archivo <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> contiene el <em>sistema de archivo raíz</em> de <em>Linux</em>. Si aún no se entiende “que son” las librerías compartidas, dispositivos y rutas; aquí ahi algunas referencias para construir un <em>sistema de archivo raíz</em> mínimo.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">tldp</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">HOWTO</span><span class="o">/</span><span class="n">Bootdisk</span><span class="o">-</span><span class="n">HOWTO</span><span class="o">/</span>
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">tldp</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">HOWTO</span><span class="o">/</span><span class="n">From</span><span class="o">-</span><span class="n">PowerUp</span><span class="o">-</span><span class="n">To</span><span class="o">-</span><span class="n">Bash</span><span class="o">-</span><span class="n">Prompt</span><span class="o">-</span><span class="n">HOWTO</span><span class="o">.</span><span class="n">html</span>
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">linuxfromscratch</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">lfs</span><span class="o">/</span><span class="n">view</span><span class="o">/</span><span class="n">stable</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>El paquete [#klibc] está diseñado para ser una pequeña librería de <code class="docutils literal notranslate"><span class="pre">C</span></code> para enlazar estáticamente el código en el <em>temprano espacio de usuario</em>, junto a algunas <em>utilidades</em> relacionadas. Es licencia BSD.</p>
+<p><strong>BSD</strong>, es una licencia algo más flexible y más simple, pretende que se haga reconocimiento a los autores de código. Debe existir una mención expresa de los autores un aviso de copyright. Si se acceden a los binarios, el reconocimiento debe constar en la aplicación.</p>
+<p>Las librerías [#uClibc] y [#busybox] son licencia LGPL y GPL respectivamente. Para la  versión v1.3 de <code class="docutils literal notranslate"><span class="pre">busybox</span></code>, se planea una <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> autocontenida.</p>
+<p><em>En teoría</em>, es posible usar <code class="docutils literal notranslate"><span class="pre">glibc</span></code>, pero no se acomoda adecuadamente, para usos  <em>embebidos</em>, como éste. Un programa “Hola Mundo”, enlazado estáticamente a <code class="docutils literal notranslate"><span class="pre">glibc</span></code> ocupa unos <em>400k</em>. Con <code class="docutils literal notranslate"><span class="pre">uclibc</span></code> ocuparía <em>7k</em>. Notese también que <code class="docutils literal notranslate"><span class="pre">glibc</span></code> abre(<code class="docutils literal notranslate"><span class="pre">dlopens</span></code>) la librería (<code class="docutils literal notranslate"><span class="pre">libnss</span></code>) para efectuar <em>lookups</em>, incluso cuanto es  <em>estáticamente</em> enlazada.</p>
+<p>Un primer buen <em>inicio</em>, sería obtener <em>initramfs</em> capaz de lanzar “hola mundo”, enlazado estáticamente como <em>programa init</em>, y probado bajo un emulador como qemu (www.qemu.org) o, como un <em>módulo de usuario</em>, Linux:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">&gt;</span> <span class="n">hello</span><span class="o">.</span><span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">EOF</span>
+   <span class="c1">#include &lt;stdio.h&gt;</span>
+   <span class="c1">#include &lt;unistd.h&gt;</span>
+
+   <span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+   <span class="p">{</span>
+     <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Hello world!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+     <span class="n">sleep</span><span class="p">(</span><span class="mi">999999999</span><span class="p">);</span>
+   <span class="p">}</span>
+<span class="n">EOF</span>
+<span class="n">gcc</span> <span class="o">-</span><span class="n">static</span> <span class="n">hello</span><span class="o">.</span><span class="n">c</span> <span class="o">-</span><span class="n">o</span> <span class="n">init</span>
+<span class="n">echo</span> <span class="n">init</span> <span class="n">cpio</span> <span class="o">-</span><span class="n">o</span> <span class="o">-</span><span class="n">H</span> <span class="n">newc</span> <span class="n">gzip</span> <span class="o">&gt;</span> <span class="n">test</span><span class="o">.</span><span class="n">cpio</span><span class="o">.</span><span class="n">gz</span>
+<span class="c1"># Testing external initramfs using the initrd loading mechanism.</span>
+<span class="n">qemu</span> <span class="o">-</span><span class="n">kernel</span> <span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">vmlinuz</span> <span class="o">-</span><span class="n">initrd</span> <span class="n">test</span><span class="o">.</span><span class="n">cpio</span><span class="o">.</span><span class="n">gz</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">zero</span>
+</pre></div>
+</div>
+<p>Al depurar el <em>sistema de archivos raíz</em>, es oportuno ser capaz de arrancar con <code class="docutils literal notranslate"><span class="pre">init=/bin/sh</span></code>, el equivalente es <code class="docutils literal notranslate"><span class="pre">rdinit=/bin/sh</span></code>, que también resulta útil.</p>
+</section>
+<section id="por-que-cpio-en-lugar-de-tar">
+<h2>Por qué cpio en lugar de tar<a class="headerlink" href="#por-que-cpio-en-lugar-de-tar" title="Link to this heading"></a></h2>
+<p>Fué una decisión que se tomó en 2001. La discusión empezó en:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.uwsg.iu.edu/hypermail/linux/kernel/0112.2/1538.html">http://www.uwsg.iu.edu/hypermail/linux/kernel/0112.2/1538.html</a></p></li>
+</ul>
+<p>Prontro apareció un <em>segundo hilo</em> de discusión:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.uwsg.iu.edu/hypermail/linux/kernel/0112.2/1587.html">http://www.uwsg.iu.edu/hypermail/linux/kernel/0112.2/1587.html</a></p></li>
+</ul>
+<p>Se extrajo un <em>borrador preliminar</em>, el cuál no desaconseja la lectura de los  anteriores, que es:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cpio</span></code> es un estandar. Durante décadas, ha sido y es, ámpliamente usado en Linux (dentro de <code class="docutils literal notranslate"><span class="pre">RPM</span></code>, el dispositivo de discos de <em>Red Hat</em>). Aquí hay un artículo de 1996 en el <em>Linux Journal</em>, sobre ello.</p></li>
+</ol>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.linuxjournal.com/article/1213">http://www.linuxjournal.com/article/1213</a></p></li>
+</ul>
+<p>Resulta menos popular que <code class="docutils literal notranslate"><span class="pre">tar</span></code>, por que la <em>línea de comando</em> del <code class="docutils literal notranslate"><span class="pre">cpio</span></code> <em>tradicional</em>, requiere <em>horrendos argumentos</em>. Tampoco dice nada sobre el <em>formato de archivo</em> y, hay otras herramientas alternativas:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://freecode.com/projects/afio">http://freecode.com/projects/afio</a></p></li>
+</ul>
+<p>2. El <em>formato de archio cpio</em> escogido por el <em>kernel</em>, es mucho más simple y límpio, e
+igualmente fácil de <em>crear</em> y <em>analizar</em>, que <em>las docenas</em> de <em>formatos de archivo tar</em>.
+El formato de archivo <em>initramfs</em> al completo, es explicado en <code class="docutils literal notranslate"><span class="pre">buffer-format.txt</span></code>, creado en <code class="docutils literal notranslate"><span class="pre">usr/gen_init_cpio.c</span></code> y extraido en <code class="docutils literal notranslate"><span class="pre">init/initramfs.c</span></code>. Los tres juntos suman menos de <code class="docutils literal notranslate"><span class="pre">26k</span></code> en total -<em>formato lectura humana</em>.</p>
+<p><strong>analizador(parser):</strong> analizador de sentencia, -un argumento, una función, toda una clase.</p>
+<ol class="arabic simple" start="3">
+<li><p>La <em>estandarización</em> del proyecto GNU sobre <em>tar</em>, es aproximadamente tan relevante como la <em>estandarización</em> de <em>Windows</em> sobre <em>zip</em>. Linux no es parte de ninguna y, es libre de tomar sus própias decisiones técnicas.</p></li>
+<li><p>Dado que es un formato interno de <em>kernel</em>, podría darse el caso en  que hubiese alguna otra <em>rama</em> nueva. En cualquier caso, el kernel proporciona las herramientas para extraer y crear este <em>formato</em>. Es preferible utilizar el <em>estandar</em>, pero no esencial.</p></li>
+<li><p><em>Al Viro</em>, anoto el siguiente comentarion: <em>traducción</em></p></li>
+</ol>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.uwsg.iu.edu/hypermail/linux/kernel/0112.2/1540.html">http://www.uwsg.iu.edu/hypermail/linux/kernel/0112.2/1540.html</a></p></li>
+</ul>
+<p><em>traduccion</em>, “tar es mas feo como el demonio, y no tendrá soporte en el lado kernel”</p>
+<p>… y explica su razonamiento:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="http://www.uwsg.iu.edu/hypermail/linux/kernel/0112.2/1550.html">http://www.uwsg.iu.edu/hypermail/linux/kernel/0112.2/1550.html</a></p></li>
+<li><p><a class="reference external" href="http://www.uwsg.iu.edu/hypermail/linux/kernel/0112.2/1638.html">http://www.uwsg.iu.edu/hypermail/linux/kernel/0112.2/1638.html</a></p></li>
+</ul>
+</div></blockquote>
+<p>y mas importante, diseñó e implementó el código <cite>initramfs</cite>.</p>
+</section>
+<section id="futuras-direcciones">
+<h2>Futuras direcciones<a class="headerlink" href="#futuras-direcciones" title="Link to this heading"></a></h2>
+<p>Hoy en día(2.6.16), <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> es siempre compilado dentro -junto al kernel, pero no siempre usado. El <em>kernel</em> regresa al <em>código legado</em>, el cuál únicamente se alcanza si <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> no contiene un programa <code class="docutils literal notranslate"><span class="pre">/init</span></code>. Ésto es, para asegurar una transición <em>suave</em> y permitir funcionalidad de arranque, para ir moviendo gradualmente la <em>raíz</em>, hacia el <em>espacio</em> <em>temprano de usuario</em>(early userspace).</p>
+<p>El <em>espacio temprano de usuario</em> es necesario por que encontrar y montar el dispositivo raíz es complicado. La partición raíz, podría <em>separar múltiples dispositivos</em> -una <em>raid</em> o un <em>journal</em>. Podrían encontrarse fuera de la red, -o necesitar un DHCP para configurar una dirección MAC específica, o <em>identificarse(to log)</em> ante un servidor, etc. Podrían estar alojadas(las particiones), en <em>medios extaibles</em>, con números <em>mayor/menor</em> <em>colocados(to allocate)</em> dinámicamente; o que la resolución de nombres, requiera una completa implementación de <code class="docutils literal notranslate"><span class="pre">udev</span></code> para su <em>presentación</em>. Pueden estar comprimidos, encriptados, <em>copia sobre escritura(``.qcow``)</em>, montados sobre <em>bucle de retorno(loopback)</em>, estráñamente particionados, o cualquier otra cosa.</p>
+<p>Tal complejidad, -inevitáblemente implica distintas <em>políticas</em>, es correctamente llevado a cabo en el <em>espacio de usuario</em>. Tanto <em>klibc</em> como <em>busybox/uClibc</em> trabajan sobre simples paquetes <code class="docutils literal notranslate"><span class="pre">initramfs</span></code> para descargarse en la construcción del <em>kernel</em>.</p>
+<p>El paquete <em>klibc</em>, ha sido aceptado en el árbol <em>Andrew Morton 2.6.17-mm</em>. El código de
+arranque temprano del <em>kernel</em>(detección del particionado, etc) migrará probablemente a un <em>paquete por defecto</em> <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>, creado automáticamente y usado, por la construcción del núcleo.</p>
+<p><strong>journal:</strong> se trata de un sistema implementado en muchos FS(ext4, btrfs, reiserfs, ntfs, etc), con el objetivo de sincronizar aquellas operaciones de escritura sobre el disco duro, que podrían quedar fuera de ámbito, si se diese una situación de pérdida de
+energía o comportamiento inesperado.
+Son “guardados” en una caché, una lista de cosas que quedaron pendientes por hacer metadatos), y en el siguiente arranque -en el peor de los casos, el sistema actualizará el FS, sincronizando a disco(<em>journaling</em>).</p>
+<p><em>desambiguación</em> <strong>log(1):</strong> identificación ante una máquina, un servicio, un programa, etc. Pero además implica la aceptación y confirmación de las credenciales aportadas ante la entidad. De lo contrarió nunca se produciría dicho <em>“logging”</em>. <strong>log(2):</strong> término utilizado para resumir, en <em>texto plano</em> las últimas operaciones realizadas sobre una entidad. Podría realizarlas un proceso o, simplemente ser las anotaciones del usuario que supervisa un determinado proceso…</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2>Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.gnu.org/copyleft/gpl.html">copyleft</a></p></li>
+<li><p><a class="reference external" href="http://www.kernel.org/pub/linux/libs/klibc">klibc</a></p></li>
+<li><p><a class="reference external" href="http://www.uclibc.org">uClibc</a></p></li>
+<li><p><a class="reference external" href="http://www.busybox.net">busybox</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nfsroot.html" class="btn btn-neutral float-left" title="Montando el sistema de ficheros raíz, vía NFS(nfsroot)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tmpfs.html" class="btn btn-neutral float-right" title="Tmpfs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

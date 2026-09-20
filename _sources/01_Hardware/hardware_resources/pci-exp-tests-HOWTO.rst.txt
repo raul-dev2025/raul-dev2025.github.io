@@ -1,3 +1,5 @@
+:orphan:
+
 HOWTO --> PCI-Express test scripts for LTP
 ==========================================
 

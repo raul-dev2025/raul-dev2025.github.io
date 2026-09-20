@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe Técnico: Configuración de Avisos y Diagnóstico &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="MAPA DE INFRAESTRUCTURA DE RED (BRIDGE L2)" href="netVirtElem.html" />
+    <link rel="prev" title="Informe de Persistencia de Tiempo y Redundancia DNS en la WS" href="maintWS.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#boot">Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#certificados-tls">Certificados-TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#file-system">File System</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#maint">Maint</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="anacron-cron.html">Tareas programadas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootFail-CorruptLog.html">Informe de Incidencia: Error de Arranque y Corrupción de Log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cortaFuegos.html">Informe de Configuración de Firewall: Topología FreeIPA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cortaFuegos.html#informe-actualizado-de-firewall-topologia-freeipa">Informe Actualizado de Firewall: Topología FreeIPA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expiredTickets.html">Troubleshooting Report: IdM Authentication Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="git-maint.html">Informe de Consolidación: Entorno de Desarrollo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="infra_hwd_virt.html">Informe Técnico: Infraestructura de Hardware y Virtualización</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logGA-AX370.html">04/11/2018</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logGA-AX370.html#erp-descripcion">ErP, descripción</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logGA-AX370.html#usb-hub">USB hub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintWS.html">Informe de Persistencia de Tiempo y Redundancia DNS en la WS</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Informe Técnico: Configuración de Avisos y Diagnóstico</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#resumen-de-intervenciones">Resumen de Intervenciones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proximos-pasos-sugeridos">Próximos Pasos Sugeridos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="netVirtElem.html">MAPA DE INFRAESTRUCTURA DE RED (BRIDGE L2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qnap-regresion.html">Informe Técnico: Conflicto de Direccionamiento PCIe e IOMMU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userEnvironment.html">Informe Técnico: Configuración de Monitorización VDO vía IdM/Sudo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Sistemas Operativos</a></li>
+      <li class="breadcrumb-item active">Informe Técnico: Configuración de Avisos y Diagnóstico</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/03_Operating_Systems/Maint/message-Wall.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-tecnico-configuracion-de-avisos-y-diagnostico">
+<h1>Informe Técnico: Configuración de Avisos y Diagnóstico<a class="headerlink" href="#informe-tecnico-configuracion-de-avisos-y-diagnostico" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-04-07</p>
+</dd>
+<dt class="field-even">Responsable<span class="colon">:</span></dt>
+<dd class="field-even"><p>raulVilchez</p>
+</dd>
+<dt class="field-odd">Infraestructura<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Nodo NAS (DSM) / Estación de Trabajo Personal</p>
+</dd>
+<dt class="field-even">Estado<span class="colon">:</span></dt>
+<dd class="field-even"><p>Finalizado</p>
+</dd>
+</dl>
+<section id="resumen-de-intervenciones">
+<h2>Resumen de Intervenciones<a class="headerlink" href="#resumen-de-intervenciones" title="Link to this heading"></a></h2>
+<p>Se ha implementado un banner de advertencia avanzado (MOTD) con arte ASCII y códigos de color ANSI, optimizando el método de edición para asegurar la integridad de las secuencias de escape.</p>
+<section id="rectificacion-de-comando-de-diagnostico">
+<h3>1. Rectificación de Comando de Diagnóstico<a class="headerlink" href="#rectificacion-de-comando-de-diagnostico" title="Link to this heading"></a></h3>
+<p>Se corrigió la sintaxis para el monitoreo del kernel, eliminando el error de “invalid option – ‘A’” causado por una expansión de comando incorrecta.</p>
+<ul class="simple">
+<li><p><strong>Solución aplicada:</strong> <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dmesg</span> <span class="pre">-wH</span></code></p></li>
+<li><p><strong>Resultado:</strong> Seguimiento en tiempo real con resaltado humano-legible y colores nativos.</p></li>
+</ul>
+</section>
+<section id="implementacion-de-banner-de-sesion-motd">
+<h3>2. Implementación de Banner de Sesión (MOTD)<a class="headerlink" href="#implementacion-de-banner-de-sesion-motd" title="Link to this heading"></a></h3>
+<p>Se ha configurado un mensaje de bienvenida de alto impacto visual para informar sobre las políticas de facturación por uso de hardware y software.</p>
+<ul class="simple">
+<li><p><strong>Archivo:</strong> <code class="docutils literal notranslate"><span class="pre">/etc/motd</span></code></p></li>
+<li><p><strong>Diseño Final:</strong></p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#####################################################################
+#                                                                   #
+#   █████╗ ██╗   ██╗██╗███████╗ ██████╗                             #
+#  ██╔══██╗██║   ██║██║██╔════╝██╔═══██╗                            #
+#  ███████║██║   ██║██║███████╗██║   ██║                            #
+#  ██╔══██║╚██╗ ██╔╝██║╚════██║██║   ██║                            #
+#  ██║  ██║ ╚████╔╝ ██║███████║╚██████╔╝                            #
+#  ╚═╝  ╚═╝  ╚═══╝  ╚═╝╚══════╝ ╚═════╝                             #
+#                                                                   #
+#  ^[[1;31mEL USO DE ESTA INFRAESTRUCTURA NO ES GRATUITO^[[0m               #
+#                                                                   #
+#  Se aplicará un coste mensual por uso de HW/SW (TBD)              #
+#  + intereses acumulados devengados por sesión.                    #
+#                                                                   #
+#####################################################################
+</pre></div>
+</div>
+</section>
+<section id="procedimiento-de-insercion-de-escapes-en-vim-vi">
+<h3>Procedimiento de Inserción de Escapes en Vim/Vi<a class="headerlink" href="#procedimiento-de-insercion-de-escapes-en-vim-vi" title="Link to this heading"></a></h3>
+<p>Para la correcta visualización del color en el archivo <code class="docutils literal notranslate"><span class="pre">/etc/motd</span></code>, es imperativo insertar el carácter de escape real (ASCII 27) y no una cadena de texto literal. El procedimiento técnico ejecutado es el siguiente:</p>
+<ul class="simple">
+<li><p><strong>Modo de Inserción:</strong> Tras abrir el archivo con <code class="docutils literal notranslate"><span class="pre">vim</span> <span class="pre">/etc/motd</span></code>, se pulsa <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p></li>
+<li><p><strong>Secuencia Verbatim:</strong> Para generar el símbolo de escape (<code class="docutils literal notranslate"><span class="pre">^[</span></code>), se utiliza la combinación de teclas:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">v</span></code> (Indica a Vim que el siguiente carácter debe tomarse literalmente).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Esc</span></code> (Genera el carácter de escape real).</p></li>
+</ol>
+</li>
+<li><p><strong>Construcción del Código:</strong> Inmediatamente después del símbolo generado, se añade el parámetro de color:
+* <strong>Inicio Rojo:</strong> <code class="docutils literal notranslate"><span class="pre">^[</span></code> + <code class="docutils literal notranslate"><span class="pre">[1;31m</span></code>
+* <strong>Reset (Fin de color):</strong> <code class="docutils literal notranslate"><span class="pre">^[</span></code> + <code class="docutils literal notranslate"><span class="pre">[0m</span></code></p></li>
+</ul>
+</section>
+<section id="verificacion-de-integridad">
+<h3>3. Verificación de Integridad<a class="headerlink" href="#verificacion-de-integridad" title="Link to this heading"></a></h3>
+<p>La validación se realiza mediante la salida estándar de la terminal para confirmar que el intérprete de comandos procesa correctamente los metacaracteres.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>/etc/motd
+</pre></div>
+</div>
+</section>
+</section>
+<section id="proximos-pasos-sugeridos">
+<h2>Próximos Pasos Sugeridos<a class="headerlink" href="#proximos-pasos-sugeridos" title="Link to this heading"></a></h2>
+<ul>
+<li><p><strong>Sincronización IdM:</strong> Asegurar que los descriptores de cuenta en el servidor <code class="docutils literal notranslate"><span class="pre">ipa.raulvilchez.org</span></code> reflejen la política de uso establecida.</p></li>
+<li><p><strong>Banner de Pre-Login:</strong> Replicar la lógica en <code class="docutils literal notranslate"><span class="pre">/etc/issue</span></code> para cubrir el acceso por consola física.</p>
+<blockquote>
+<div><p><em>Fin del informe - Propiedad de RAULVILCHEZ.ORG</em></p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="maintWS.html" class="btn btn-neutral float-left" title="Informe de Persistencia de Tiempo y Redundancia DNS en la WS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="netVirtElem.html" class="btn btn-neutral float-right" title="MAPA DE INFRAESTRUCTURA DE RED (BRIDGE L2)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

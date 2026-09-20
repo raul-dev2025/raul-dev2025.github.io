@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Incidence Report: KDC Connection Timeout in Multi-Master IdM &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Informe de Incidencia: Fallo de Autenticación Kerberos (KDC)" href="kdc-maint.html" />
+    <link rel="prev" title="Incidence Report: KDC Connection Timeout in Multi-Master IdM" href="ipa-maint-eng.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#idm-configuracion">IdM - Configuracion</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Implementación de IdM Privado</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#documentos-de-implementacion">Documentos de Implementación</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Implementación de IdM Privado</a></li>
+      <li class="breadcrumb-item active">Incidence Report: KDC Connection Timeout in Multi-Master IdM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipa-maint.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="incidence-report-kdc-connection-timeout-in-multi-master-idm">
+<h1>Incidence Report: KDC Connection Timeout in Multi-Master IdM<a class="headerlink" href="#incidence-report-kdc-connection-timeout-in-multi-master-idm" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Date<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-04-19</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Resolved</p>
+</dd>
+<dt class="field-odd">Node<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ipa02.raulvilchez.org (Replica)</p>
+</dd>
+<dt class="field-even">Standard<span class="colon">:</span></dt>
+<dd class="field-even"><p>IdM documentation standard strictly in English</p>
+</dd>
+</dl>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Users experienced a failure when requesting initial Kerberos credentials (<code class="docutils literal notranslate"><span class="pre">kinit</span></code>) from the workstation. The command returned the error: <code class="docutils literal notranslate"><span class="pre">kinit:</span> <span class="pre">Cannot</span> <span class="pre">contact</span> <span class="pre">any</span> <span class="pre">KDC</span> <span class="pre">for</span> <span class="pre">realm</span> <span class="pre">'RAULVILCHEZ.ORG'</span></code>.</p>
+</section>
+<section id="infrastructure-context">
+<h2>Infrastructure Context<a class="headerlink" href="#infrastructure-context" title="Link to this heading"></a></h2>
+<p>The environment consists of two main nodes:
+* <strong>Master Server:</strong> <code class="docutils literal notranslate"><span class="pre">ipa.raulvilchez.org</span></code> (192.168.17.39)
+* <strong>Replica Server:</strong> <code class="docutils literal notranslate"><span class="pre">ipa02.raulvilchez.org</span></code> (192.168.17.40)</p>
+<p>The issue occurred while the Master node was offline to optimize resource usage, leaving the Replica as the sole active KDC.</p>
+</section>
+<section id="root-cause-analysis">
+<h2>Root Cause Analysis<a class="headerlink" href="#root-cause-analysis" title="Link to this heading"></a></h2>
+<p>Diagnostic traces (<code class="docutils literal notranslate"><span class="pre">KRB5_TRACE</span></code>) revealed that the client was bypassing the local configuration and attempting to connect exclusively to the offline Master IP (.39). Two main misconfigurations were identified:</p>
+<ol class="arabic simple">
+<li><p><strong>SSSD Service Discovery:</strong> The <code class="docutils literal notranslate"><span class="pre">/etc/sssd/sssd.conf</span></code> file was configured with <code class="docutils literal notranslate"><span class="pre">ipa_server</span> <span class="pre">=</span> <span class="pre">_srv_,</span> <span class="pre">ipa.raulvilchez.org</span></code>. The <code class="docutils literal notranslate"><span class="pre">_srv_</span></code> lookup was prioritizing the Master node, and the explicit fallback pointed only to the offline Master.</p></li>
+<li><p><strong>DNS/Kerberos Interaction:</strong> With <code class="docutils literal notranslate"><span class="pre">dns_lookup_kdc</span> <span class="pre">=</span> <span class="pre">true</span></code> enabled in <code class="docutils literal notranslate"><span class="pre">krb5.conf</span></code>, the Kerberos client ignored the manual priority list, favoring SRV records that included the unreachable Master node.</p></li>
+</ol>
+</section>
+<section id="resolution-actions">
+<h2>Resolution Actions<a class="headerlink" href="#resolution-actions" title="Link to this heading"></a></h2>
+<p>The following steps were implemented to restore service using the active Replica:</p>
+<ul class="simple">
+<li><p><strong>SSSD Configuration:</strong> Updated <code class="docutils literal notranslate"><span class="pre">ipa_server</span></code> in <code class="docutils literal notranslate"><span class="pre">sssd.conf</span></code> to explicitly prioritize the Replica:
+<code class="docutils literal notranslate"><span class="pre">ipa_server</span> <span class="pre">=</span> <span class="pre">ipa02.raulvilchez.org,</span> <span class="pre">ipa.raulvilchez.org</span></code></p></li>
+<li><dl class="simple">
+<dt><strong>Kerberos Optimization:</strong> * Adjusted <code class="docutils literal notranslate"><span class="pre">udp_preference_limit</span> <span class="pre">=</span> <span class="pre">1</span></code> to force TCP and ensure faster failover.</dt><dd><ul>
+<li><p>Verified that <code class="docutils literal notranslate"><span class="pre">/etc/krb5.conf.d/freeipa</span></code> remains intact to preserve SPAKE pre-authentication (<code class="docutils literal notranslate"><span class="pre">edwards25519</span></code>).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Cache Purge:</strong> Executed <code class="docutils literal notranslate"><span class="pre">sss_cache</span> <span class="pre">-E</span></code> and restarted the <code class="docutils literal notranslate"><span class="pre">sssd</span></code> service to clear the “dead” status of the KDC nodes.</p></li>
+</ul>
+</section>
+<section id="verification">
+<h2>Verification<a class="headerlink" href="#verification" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Connectivity:</strong> Verified port 88 connectivity via <code class="docutils literal notranslate"><span class="pre">nc</span> <span class="pre">-zv</span> <span class="pre">192.168.17.40</span> <span class="pre">88</span></code>.</p></li>
+<li><p><strong>Authentication:</strong> Successful ticket granting confirmed via <code class="docutils literal notranslate"><span class="pre">kinit</span> <span class="pre">raul-ipa</span></code>.</p></li>
+<li><p><strong>DNS Resolution:</strong> Verified SRV records using <code class="docutils literal notranslate"><span class="pre">dig</span> <span class="pre">-t</span> <span class="pre">SRV</span> <span class="pre">_kerberos._udp.RAULVILCHEZ.ORG</span></code>.</p></li>
+</ul>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<p>When the Master node (<code class="docutils literal notranslate"><span class="pre">ipa.raulvilchez.org</span></code>) is returned to service, the <code class="docutils literal notranslate"><span class="pre">ipa_server</span></code> parameter can be reverted to <code class="docutils literal notranslate"><span class="pre">_srv_</span></code> to restore automated load balancing.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ipa-maint-eng.html" class="btn btn-neutral float-left" title="Incidence Report: KDC Connection Timeout in Multi-Master IdM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="kdc-maint.html" class="btn btn-neutral float-right" title="Informe de Incidencia: Fallo de Autenticación Kerberos (KDC)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

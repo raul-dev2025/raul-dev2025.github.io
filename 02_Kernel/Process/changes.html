@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cambios &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="List RCU" href="../RCU/listRCU.html" />
+    <link rel="prev" title="Controlador de host PCI, genérico" href="../PCI/host-generic-pci.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#process">Process</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Cambios</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#intro">Intro</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requisitos-minimos">Requisitos mínimos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compilacion-del-kernel">Compilación del kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#utilidades-de-sistema">Utilidades de sistema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#networking">Networking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#documentacion-del-kernel">Documentación del kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#obtener-software-actualizado">Obtener <em>software</em> actualizado</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Cambios</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/Process/changes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cambios">
+<h1><a class="toc-backref" href="#id4" role="doc-backlink">Cambios</a><a class="headerlink" href="#cambios" title="Link to this heading"></a></h1>
+<p><strong>Cambios mínimos necesarios para compilar el kernel.</strong></p>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#cambios" id="id4">Cambios</a></p>
+<ul>
+<li><p><a class="reference internal" href="#intro" id="id5">Intro</a></p></li>
+<li><p><a class="reference internal" href="#requisitos-minimos" id="id6">Requisitos mínimos</a></p></li>
+<li><p><a class="reference internal" href="#compilacion-del-kernel" id="id7">Compilación del kernel</a></p></li>
+<li><p><a class="reference internal" href="#utilidades-de-sistema" id="id8">Utilidades de sistema</a></p></li>
+<li><p><a class="reference internal" href="#networking" id="id9">Networking</a></p></li>
+<li><p><a class="reference internal" href="#documentacion-del-kernel" id="id10">Documentación del kernel</a></p></li>
+<li><p><a class="reference internal" href="#obtener-software-actualizado" id="id11">Obtener <em>software</em> actualizado</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="intro">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Intro</a><a class="headerlink" href="#intro" title="Link to this heading"></a></h2>
+<p>El documento fué diseñado con el objeto de proporcionar una lista mínima, con el <em>nivel de versión</em> adecuado para el <em>software</em> necesario en <em>kernels 4.x</em>.</p>
+<p>El documento está basado en el <em>archivo de cambios</em> para <em>kernels 2.0</em>. Por lo tanto conserva el mismo <em>crédito(Jared Mauch, Axel Boldt, Alessandro Sigala, e innumerables usuarios alrededor del mundo)</em> que el archivo origilal.</p>
+</section>
+<section id="requisitos-minimos">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Requisitos mínimos</a><a class="headerlink" href="#requisitos-minimos" title="Link to this heading"></a></h2>
+<p>Actualizar como <strong>mínimo</strong> este <em>software</em>, antes de pensar que ha sido encontrado un <em>bug!</em>. Si no se está seguro de la versión corriendo en el sistema, los comandos sugeridos deberían ayudar.</p>
+<p>De nuevo, recordar que <em>la lista</em> asume un kernel Linux funcianal, corriendo en la máquina. Igualmente, no todas las herramientas son necesarias, en todos los sistemas; obviamente, de carecer de <em>hardware</em> ISDN, no es necesaria la herramienta <code class="docutils literal notranslate"><span class="pre">isdn4k-utils</span></code>, por ejemplo.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">======================</span> <span class="o">===============</span>  <span class="o">========================================</span>
+        <span class="n">Program</span>        <span class="n">Minimal</span> <span class="n">version</span>       <span class="n">Command</span> <span class="n">to</span> <span class="n">check</span> <span class="n">the</span> <span class="n">version</span>
+<span class="o">======================</span> <span class="o">===============</span>  <span class="o">========================================</span>
+<span class="n">GNU</span> <span class="n">C</span>                  <span class="mf">3.2</span>              <span class="n">gcc</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">GNU</span> <span class="n">make</span>               <span class="mf">3.81</span>             <span class="n">make</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">binutils</span>               <span class="mf">2.20</span>             <span class="n">ld</span> <span class="o">-</span><span class="n">v</span>
+<span class="n">util</span><span class="o">-</span><span class="n">linux</span>             <span class="mf">2.10</span><span class="n">o</span>            <span class="n">fdformat</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">module</span><span class="o">-</span><span class="n">init</span><span class="o">-</span><span class="n">tools</span>      <span class="mf">0.9.10</span>           <span class="n">depmod</span> <span class="o">-</span><span class="n">V</span>
+<span class="n">e2fsprogs</span>              <span class="mf">1.41.4</span>           <span class="n">e2fsck</span> <span class="o">-</span><span class="n">V</span>
+<span class="n">jfsutils</span>               <span class="mf">1.1.3</span>            <span class="n">fsck</span><span class="o">.</span><span class="n">jfs</span> <span class="o">-</span><span class="n">V</span>
+<span class="n">reiserfsprogs</span>          <span class="mf">3.6.3</span>            <span class="n">reiserfsck</span> <span class="o">-</span><span class="n">V</span>
+<span class="n">xfsprogs</span>               <span class="mf">2.6.0</span>            <span class="n">xfs_db</span> <span class="o">-</span><span class="n">V</span>
+<span class="n">squashfs</span><span class="o">-</span><span class="n">tools</span>         <span class="mf">4.0</span>              <span class="n">mksquashfs</span> <span class="o">-</span><span class="n">version</span>
+<span class="n">btrfs</span><span class="o">-</span><span class="n">progs</span>            <span class="mf">0.18</span>             <span class="n">btrfsck</span>
+<span class="n">pcmciautils</span>            <span class="mi">004</span>              <span class="n">pccardctl</span> <span class="o">-</span><span class="n">V</span>
+<span class="n">quota</span><span class="o">-</span><span class="n">tools</span>            <span class="mf">3.09</span>             <span class="n">quota</span> <span class="o">-</span><span class="n">V</span>
+<span class="n">PPP</span>                    <span class="mf">2.4.0</span>            <span class="n">pppd</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">isdn4k</span><span class="o">-</span><span class="n">utils</span>           <span class="mf">3.1</span><span class="n">pre1</span>          <span class="n">isdnctrl</span> <span class="mi">2</span><span class="o">&gt;&amp;</span><span class="mi">1</span><span class="o">|</span><span class="n">grep</span> <span class="n">version</span>
+<span class="n">nfs</span><span class="o">-</span><span class="n">utils</span>              <span class="mf">1.0.5</span>            <span class="n">showmount</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">procps</span>                 <span class="mf">3.2.0</span>            <span class="n">ps</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">oprofile</span>               <span class="mf">0.9</span>              <span class="n">oprofiled</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">udev</span>                   <span class="mi">081</span>              <span class="n">udevd</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">grub</span>                   <span class="mf">0.93</span>             <span class="n">grub</span> <span class="o">--</span><span class="n">version</span> <span class="o">||</span> <span class="n">grub</span><span class="o">-</span><span class="n">install</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">mcelog</span>                 <span class="mf">0.6</span>              <span class="n">mcelog</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">iptables</span>               <span class="mf">1.4.2</span>            <span class="n">iptables</span> <span class="o">-</span><span class="n">V</span>
+<span class="n">openssl</span> <span class="o">&amp;</span> <span class="n">libcrypto</span>    <span class="mf">1.0.0</span>            <span class="n">openssl</span> <span class="n">version</span>
+<span class="n">bc</span>                     <span class="mf">1.06.95</span>          <span class="n">bc</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">Sphinx</span>\ <span class="p">[</span><span class="c1">#f1]_         1.3      sphinx-build --version</span>
+<span class="o">======================</span> <span class="o">===============</span>  <span class="o">========================================</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Todas las distribuciones no empaquetan aplicaciones con el mismo nobre exacto. Por ejemplo, <code class="docutils literal notranslate"><span class="pre">udev</span></code> en sistemas <em>Fedora</em>, es controlado a través de <em>systemd</em> … Por lo que habrá que <em>ajustar</em> a lo especificado en la distribución pertinente.</p>
+</div>
+</section>
+<section id="compilacion-del-kernel">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Compilación del kernel</a><a class="headerlink" href="#compilacion-del-kernel" title="Link to this heading"></a></h2>
+<p><strong>GCC</strong>
+Los requisitos para la versión del kernel podrían variar en función del tipo de CPU de la commputadora.</p>
+<p><strong>Make</strong>
+Es necesario la versión <code class="docutils literal notranslate"><span class="pre">3.81</span></code> o posterior para construir el kernel.</p>
+<p><strong>Binutils</strong>
+El <em>sistema de construcción</em> desde la versión <code class="docutils literal notranslate"><span class="pre">4.13</span></code>, está utilizando archivos resumidos (‘ar T’) en lugar del enlazado incremental (‘ld -r’) en los pasos intermedios para la construcción de archivos de <em>objeto</em> <code class="docutils literal notranslate"><span class="pre">.o</span></code>. Requiere <code class="docutils literal notranslate"><span class="pre">binutils</span> <span class="pre">2,20</span></code> o posteriores.</p>
+<p><strong>Perl</strong>
+Será necesario <code class="docutils literal notranslate"><span class="pre">perl</span> <span class="pre">5</span></code> y los módulos lsiguientes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Getopt</span><span class="p">::</span><span class="n">Std</span>
+<span class="n">File</span><span class="p">::</span><span class="n">Basename</span>
+<span class="n">File</span><span class="p">::</span><span class="n">Find</span>
+</pre></div>
+</div>
+<p><strong>BC</strong>
+Para construir kernels 3.10 y posteriores, necesaria esta aplicación <code class="docutils literal notranslate"><span class="pre">bc</span></code>.</p>
+<p><strong>OpenSSL</strong>
+Los módulos de <em>firmado digital</em> y la gestión de certificados <em>externos</em>, utilizan la aplicación <em>OpenSSL</em> y la librería <em>criptográfica</em>, para crear la llave y generar la firma digital.</p>
+<p>Es necesaria la aplicación para construir kernels <code class="docutils literal notranslate"><span class="pre">3.7</span></code> en adelante, si el módulo de <em>firmado</em> está activado. También es necesario los <em>paquetes de desarrollo</em> de <code class="docutils literal notranslate"><span class="pre">openssl</span></code> para constuir kernels <code class="docutils literal notranslate"><span class="pre">4.3</span></code> y posteriores.</p>
+</section>
+<section id="utilidades-de-sistema">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Utilidades de sistema</a><a class="headerlink" href="#utilidades-de-sistema" title="Link to this heading"></a></h2>
+<p>Cambios en la <em>arquitectura</em></p>
+<p>DevFS ha quedado obsoleto, en favor de <a class="reference external" href="http://www.kernel.org/pub/linux/utils/kernel/hotplug/">udev</a></p>
+<p>El soporte para <code class="docutils literal notranslate"><span class="pre">32-bit</span></code> está ahora en su lugar.</p>
+<p>La documentación de Linux para las funciones, está siendo incorporada a los archivos de código, junto a la definición de la fuente. Estos comentarios, podrán ser combinados con archivos <code class="docutils literal notranslate"><span class="pre">ReST</span></code> en el directorio <code class="docutils literal notranslate"><span class="pre">Documentation/</span></code>, el cuál podrá ser más tarde convertido a <code class="docutils literal notranslate"><span class="pre">PostScript,</span> <span class="pre">HTML,</span> <span class="pre">LaTex,</span> <span class="pre">ePUB,</span> <span class="pre">y</span> <span class="pre">PDF</span></code>. Para convertir archivos desde el formato <code class="docutils literal notranslate"><span class="pre">ReST</span></code> a otro formato a elegir, es necesaria la aplicación <code class="docutils literal notranslate"><span class="pre">Sphinx</span></code>.</p>
+<p><strong>Util-linux</strong>
+Las nuevas versiones de <code class="docutils literal notranslate"><span class="pre">util-linux</span></code> proporcionan soporte <code class="docutils literal notranslate"><span class="pre">fdisk</span></code>para <em>grandes discos</em>, soporte a nuevas opciones de montaje, reconocen más tipos de particiones, tiene un <code class="docutils literal notranslate"><span class="pre">fdformat</span></code> el cuál trabaja con kernels <code class="docutils literal notranslate"><span class="pre">2.4</span></code> y similares. Probablemente se querrá actualizar.</p>
+<p><strong>Ksymoops</strong>
+De suceder <em>lo impensable</em>, podría ser necesaria la herramienta para decodificar el kernel; en la mayoría de casos no será necesario. Generalmente es preferible construir el kernel con <code class="docutils literal notranslate"><span class="pre">CONFIG_KALLSYMS</span></code> para producir <em>volcados</em> legibles, que puedan ser utilizados <em>tal-cual</em> -ésto suele producir mejores salidas que <code class="docutils literal notranslate"><span class="pre">ksymoops</span></code>. Si por alguna razón, el kernel no fue construido con <code class="docutils literal notranslate"><span class="pre">CONFIG_KALLSYMS</span></code> y no hay forma de reconstuir y reproducir el <em>Oops</em> con esta opción, entonces será posible decodificar estos <em>Oops</em> con <code class="docutils literal notranslate"><span class="pre">ksymoops</span></code>.</p>
+<p><strong>Module-init-tools</strong>
+Un nuevo <em>cargador</em> de módulos en el kernel, que requiere <code class="docutils literal notranslate"><span class="pre">module-init-tools</span></code>. Es <em>retrocompatible</em> con las series de kernels <code class="docutils literal notranslate"><span class="pre">2.4.x</span></code>.</p>
+<p><strong>Mkinitrd</strong>
+Éste cambia a <code class="docutils literal notranslate"><span class="pre">/lib/modules</span></code>, también necesitará ser actualizado.</p>
+<p><strong>E2fsprogs</strong>
+La nueva version de <code class="docutils literal notranslate"><span class="pre">E2fsprogs</span></code> arregla varios errores en <code class="docutils literal notranslate"><span class="pre">fsck</span></code> y <code class="docutils literal notranslate"><span class="pre">debugfs</span></code>. Obviamente, es buena idea actualizarlo.</p>
+<p><strong>JFSutils</strong>
+El paquete <code class="docutils literal notranslate"><span class="pre">JFSutils</span></code>, contiene las utilidades para el sistema de ficheros. Están disponibles las siguientes utilidades:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fsck.jfs</span></code> inicia la reproducción del <em>log</em> de transacción y, comprueba y repara un formato de partición JFS.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mkfs.jfs</span></code> crea un formato de partición JFS.</p></li>
+<li><p>También disponibles otras utilidaes de sistemas de archivo, en este paquete.</p></li>
+</ul>
+<p><strong>Reiserfsprogs</strong>
+El paquete <em>reiserfsprogs</em>, debería utilizarse para <code class="docutils literal notranslate"><span class="pre">reiserfs-3.6.x</span></code> -kernels de Linux <code class="docutils literal notranslate"><span class="pre">2.4.x</span></code>. Es un paquete combinado conteniendo versiones funcionales de <code class="docutils literal notranslate"><span class="pre">mkreiserfs</span></code>, <code class="docutils literal notranslate"><span class="pre">resize_reiserfs</span></code>, <code class="docutils literal notranslate"><span class="pre">debugreiserfs</span></code> y <code class="docutils literal notranslate"><span class="pre">reiserfsck</span></code>. Estas utilidades sirven tanto para <code class="docutils literal notranslate"><span class="pre">i386</span></code> como en plataforma <em>alfa</em>(x86_64?).</p>
+<p><strong>Xfsprogs</strong>
+La última versión de <code class="docutils literal notranslate"><span class="pre">xfsprogs</span></code> contiene <code class="docutils literal notranslate"><span class="pre">mkfs.xfs</span></code>, <code class="docutils literal notranslate"><span class="pre">xfs_db</span></code> y las utilidades <code class="docutils literal notranslate"><span class="pre">xfs_repair</span></code>, entre otras. Para los sistemas de archivo <code class="docutils literal notranslate"><span class="pre">XFS</span></code>. Es independiente de la <em>arquitecxtura</em> y, cualquier versión desde <code class="docutils literal notranslate"><span class="pre">2.0.0</span></code> en adelante debería poder trabajar correctamente con ésta versión del código XFS del kernel -es recomendable <code class="docutils literal notranslate"><span class="pre">2.6.0</span></code> y posteriores, debido a mejoras significativas.</p>
+<p><strong>PCMCIAutils</strong>
+<code class="docutils literal notranslate"><span class="pre">PCMCIAutils</span></code> reemplaza a <code class="docutils literal notranslate"><span class="pre">pcmcia-cs</span></code>. Configura de forma apropiada los zócales PCMCIA, durante el arranque del sistema, carga los módulos apropiados para dispositivos <code class="docutils literal notranslate"><span class="pre">16-bit</span></code> PCMCIA, si el kernel ha sido <em>modularizado</em> y es utilizado el subsistema <em>conexión en caliente</em>.</p>
+<p><strong>Quota-tools</strong>
+Es necesario el soporte para <code class="docutils literal notranslate"><span class="pre">32bit</span> <span class="pre">uid</span></code> y <code class="docutils literal notranslate"><span class="pre">gid</span></code>, si se pretende utilizar la nueva versión <code class="docutils literal notranslate"><span class="pre">2</span></code> de <code class="docutils literal notranslate"><span class="pre">quota</span></code>. Versiónes <code class="docutils literal notranslate"><span class="pre">3.07</span></code> de <em>Quota-tools</em> y posteriores, tienen este soporte. Utilizar las versiones recomendadas o <em>nuevas</em>, provistas en la tabla de arriba.</p>
+<p><strong>Intel IA32 microcode</strong>
+Ha sido añadido el controlador, para permitir actualizar el <em>microcódigo</em> intel IA32, accesible como un dispositivo normal de carácteres (misc). De no estar utilizando <code class="docutils literal notranslate"><span class="pre">udev</span></code> podría ser necesario:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">cpu</span>
+<span class="n">mknod</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">cpu</span><span class="o">/</span><span class="n">microcode</span> <span class="n">c</span> <span class="mi">10</span> <span class="mi">184</span>
+<span class="n">chmod</span> <span class="mi">0644</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">cpu</span><span class="o">/</span><span class="n">microcode</span>
+</pre></div>
+</div>
+<p>Usuario <code class="docutils literal notranslate"><span class="pre">root</span></code> para poder hacer esto. Probablemente se requiera la utilidad <code class="docutils literal notranslate"><span class="pre">microcode_ctl</span></code> en el espacio de usuario, para poder utilizarlo.</p>
+<p><strong>udev</strong>
+<code class="docutils literal notranslate"><span class="pre">udev</span></code> es una aplicación en el espacio de usuario, para poblar <code class="docutils literal notranslate"><span class="pre">/dev</span></code> dinámicamente, con sólo entradas de dispositivos presentes en el sistema. <code class="docutils literal notranslate"><span class="pre">udev</span></code> reemplaza la funcionalidad básica de <code class="docutils literal notranslate"><span class="pre">devfs</span></code>; al mismo tiempo, permite el <em>nombrado persistente</em>, para dispositivos.</p>
+<p><strong>FUSE</strong>
+Necesita <code class="docutils literal notranslate"><span class="pre">libfuse</span></code> versión <code class="docutils literal notranslate"><span class="pre">2.4.0</span></code> o posterior. El mínimo <em>absoluto</em> es <code class="docutils literal notranslate"><span class="pre">2.3.0</span></code>, pero opciones de montaje <code class="docutils literal notranslate"><span class="pre">direct_io</span></code> y <code class="docutils literal notranslate"><span class="pre">kernel_cache</span></code> no funcionarán.</p>
+</section>
+<section id="networking">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Networking</a><a class="headerlink" href="#networking" title="Link to this heading"></a></h2>
+<p><strong>Cambios generales</strong>
+De tener necesidades avancadas para la configuración de red, debería considerarse el uso de <em>herramientas de red</em> a partir de <code class="docutils literal notranslate"><span class="pre">ip-route2</span></code>.</p>
+<p><strong>Filtro de paquetes /NAT</strong>
+El código para el filtrado de paquetes y <em>NAT</em>, utilizan las mismas herramientas que la serie de <em>kernels 2.4.x</em>(<code class="docutils literal notranslate"><span class="pre">iptables</span></code>). Incluyen de igual forma retro-compatibilidad con módulos, para <code class="docutils literal notranslate"><span class="pre">2.2.x</span></code> en <code class="docutils literal notranslate"><span class="pre">ipchins</span></code> y <code class="docutils literal notranslate"><span class="pre">2.0.x</span></code> en <code class="docutils literal notranslate"><span class="pre">ipfwadm</span></code>.</p>
+<p><strong>PPP</strong>
+El driver PPP ha sido reestructurado para soportal <em>multienlace(multilink)</em> y para activarlo y poder operar sobre distintas <em>capas media</em>. Si estulizado PPP, debería actualizarse <code class="docutils literal notranslate"><span class="pre">pppd</span></code>, como mínimo a la versión <code class="docutils literal notranslate"><span class="pre">2.4.0</span></code></p>
+<p>Si no se utiliza <code class="docutils literal notranslate"><span class="pre">udev</span></code>, debería utilizarse el archivo de dispositivo <code class="docutils literal notranslate"><span class="pre">/dev/ppp</span></code> el cuál podrá crearse con:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mknod</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ppp</span> <span class="n">c</span> <span class="mi">108</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>como root(administrador).</p>
+<p><strong>Isdn4k-utils</strong>
+Debido a los cambios en el tamaño del campo <em>número de teléfono</em>, <code class="docutils literal notranslate"><span class="pre">Isdn4k-utils</span></code> necesita ser recompilado -o preferiblemente actualizado.</p>
+<p><strong>NFS-utils</strong>
+En los <em>antiguos kernels 2.4 y anteriores</em>, el servidor NFS, necesitaba conocer al <em>cliente</em> capaz de tener acceso a los archivos via NFS. Esta información sería dada al kernel, por <code class="docutils literal notranslate"><span class="pre">mountd</span></code>, cuando el <em>cliente</em> montase el <em>sistema de archivos</em>, o por <code class="docutils literal notranslate"><span class="pre">exportfs</span></code> durante el arranque. <code class="docutils literal notranslate"><span class="pre">exportfs</span></code> tomaría la información de <em>clientes activos</em> <code class="docutils literal notranslate"><span class="pre">/var/lib/nfs/rmtab</span></code>.</p>
+<p>Esta aproximación es frágil, puesto que depende de que <code class="docutils literal notranslate"><span class="pre">rmtab</span></code> sea correcto, lo cual no era siempre fácil; en particular al intentar implementar el <em>fail-over</em> -conmutación por error. Incluso funcionando correctamente el sistema, <code class="docutils literal notranslate"><span class="pre">rmtab</span></code> sufre el tener que recupera, cantidades ingentes de <em>viejas entradas</em>, que nunca fueron borradas.</p>
+<p>En kernels modernos, aparece la opción de <em>informar el kernel</em> a <code class="docutils literal notranslate"><span class="pre">mountd</span></code>, cuando recibe una petición desde un <em>host</em> desconocido, <code class="docutils literal notranslate"><span class="pre">mountd</span></code> podrá exportar la información apropiada al kernel. Esto retira las dependencias en <code class="docutils literal notranslate"><span class="pre">rmtab</span></code>, y significa que el kernel únicamente necesita saber sobre los <em>clientes en activo</em>.</p>
+<p>Para activar esta nueva funcionalidad, es necesario:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mount</span> <span class="o">-</span><span class="n">t</span> <span class="n">nfsd</span> <span class="n">nfsd</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">fs</span><span class="o">/</span><span class="n">nfsd</span>
+</pre></div>
+</div>
+<p>Antes de correr <code class="docutils literal notranslate"><span class="pre">esportfs</span></code> o <code class="docutils literal notranslate"><span class="pre">mountd</span></code>. Es recomendable que todos los servicios NFS, sean protegidos con un <em>cortafuegos</em> donde sea posible.</p>
+<p><strong>mcelog</strong>
+En kernels <code class="docutils literal notranslate"><span class="pre">x86</span></code>, la utilidad <code class="docutils literal notranslate"><span class="pre">mcelog</span></code> es necesaria para procesar y leer los eventos de <em>comprovaciones de máquina</em>, cuando <code class="docutils literal notranslate"><span class="pre">CONFIG_X86_MCE</span></code> sea activado. Estos mce -eventos de <em>comprovaciones de máquina</em> (machine check events), son errores reportados por la CPU. Procesarlos es mas que recomendable.</p>
+</section>
+<section id="documentacion-del-kernel">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Documentación del kernel</a><a class="headerlink" href="#documentacion-del-kernel" title="Link to this heading"></a></h2>
+<p><strong>Sphinx</strong>
+Por favor, referir a <code class="docutils literal notranslate"><span class="pre">sphinx_install</span></code> en <code class="docutils literal notranslate"><span class="pre">Documentation/doc-guide/sphinx.rst</span></code> para detalles sobre requisitos de <em>Sphinx</em>.</p>
+</section>
+<section id="obtener-software-actualizado">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Obtener <em>software</em> actualizado</a><a class="headerlink" href="#obtener-software-actualizado" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>Compilación del kernel<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="ftp://ftp.gnu.org/gnu/gcc/">gcc</a></p></li>
+<li><p><a class="reference external" href="ftp://ftp.gnu.org/gnu/make/">Make</a></p></li>
+<li><p><a class="reference external" href="https://www.kernel.org/pub/linux/devel/binutils/">Binutils</a></p></li>
+<li><p><a class="reference external" href="https://www.openssl.org/">OpenSSL</a></p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Utilidades de sistema<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p><strong>Util-linux</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kernel.org/pub/linux/utils/util-linux/">https://www.kernel.org/pub/linux/utils/util-linux/</a></p></li>
+</ul>
+<p><strong>Ksymoops</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kernel.org/pub/linux/utils/kernel/ksymoops/v2.4/">https://www.kernel.org/pub/linux/utils/kernel/ksymoops/v2.4/</a></p></li>
+</ul>
+<p><strong>Module-Init-Tools</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kernel.org/pub/linux/utils/kernel/module-init-tools/">https://www.kernel.org/pub/linux/utils/kernel/module-init-tools/</a></p></li>
+</ul>
+<p><strong>Mkinitrd</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://code.launchpad.net/initrd-tools/main">https://code.launchpad.net/initrd-tools/main</a></p></li>
+</ul>
+<p><strong>E2fsprogs</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://prdownloads.sourceforge.net/e2fsprogs/e2fsprogs-1.29.tar.gz">http://prdownloads.sourceforge.net/e2fsprogs/e2fsprogs-1.29.tar.gz</a></p></li>
+</ul>
+<p><strong>JFSutils</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://jfs.sourceforge.net/">http://jfs.sourceforge.net/</a></p></li>
+</ul>
+<p><strong>Reiserfsprogs</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.kernel.org/pub/linux/utils/fs/reiserfs/">http://www.kernel.org/pub/linux/utils/fs/reiserfs/</a></p></li>
+</ul>
+<p><strong>Xfsprogs</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="ftp://oss.sgi.com/projects/xfs/">ftp://oss.sgi.com/projects/xfs/</a></p></li>
+</ul>
+<p><strong>Pcmciautils</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kernel.org/pub/linux/utils/kernel/pcmcia/">https://www.kernel.org/pub/linux/utils/kernel/pcmcia/</a></p></li>
+</ul>
+<p><strong>Quota-tools</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://sourceforge.net/projects/linuxquota/">http://sourceforge.net/projects/linuxquota/</a></p></li>
+</ul>
+<p><strong>Intel P6 microcode</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://downloadcenter.intel.com/">https://downloadcenter.intel.com/</a></p></li>
+</ul>
+<p><strong>udev</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.freedesktop.org/software/systemd/man/udev.html">http://www.freedesktop.org/software/systemd/man/udev.html</a></p></li>
+</ul>
+<p><strong>FUSE</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://sourceforge.net/projects/fuse">http://sourceforge.net/projects/fuse</a></p></li>
+</ul>
+<p><strong>mcelog</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.mcelog.org/">http://www.mcelog.org/</a></p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Networking<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p><strong>Point To Point Protocol</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="ftp://ftp.samba.org/pub/ppp/">ftp://ftp.samba.org/pub/ppp/</a></p></li>
+</ul>
+<p><strong>Isdn4k-utils</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="ftp://ftp.isdn4linux.de/pub/isdn4linux/utils/">ftp://ftp.isdn4linux.de/pub/isdn4linux/utils/</a></p></li>
+</ul>
+<p><strong>NFS-utils</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://sourceforge.net/project/showfiles.php?group_id=14">http://sourceforge.net/project/showfiles.php?group_id=14</a></p></li>
+</ul>
+<p><strong>Iptables</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.iptables.org/downloads.html">http://www.iptables.org/downloads.html</a></p></li>
+</ul>
+<p><strong>Ip-route2</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kernel.org/pub/linux/utils/net/iproute2/">https://www.kernel.org/pub/linux/utils/net/iproute2/</a></p></li>
+</ul>
+<p><strong>OProfile</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://oprofile.sf.net/download/">http://oprofile.sf.net/download/</a></p></li>
+</ul>
+<p><strong>NFS-Utils</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://nfs.sourceforge.net/">http://nfs.sourceforge.net/</a></p></li>
+<li><p><a class="reference external" href="http://www.sphinx-doc.org/">Sphinx</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../PCI/host-generic-pci.html" class="btn btn-neutral float-left" title="Controlador de host PCI, genérico" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../RCU/listRCU.html" class="btn btn-neutral float-right" title="List RCU" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

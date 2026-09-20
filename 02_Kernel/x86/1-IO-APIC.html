@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IO-APIC &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Índice de Sistemas Operativos" href="../../03_Operating_Systems/index.html" />
+    <link rel="prev" title="Ring buffer" href="../trace/ring-buffer-design.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#x86">x86</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">IO-APIC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">IO-APIC</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/x86/1-IO-APIC.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="io-apic">
+<h1><a class="toc-backref" href="#id2" role="doc-backlink">IO-APIC</a><a class="headerlink" href="#io-apic" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#io-apic" id="id2">IO-APIC</a></p>
+<ul>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id3">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>La mayoría(todas) de placas <em>Intel-MP</em> compatibles con SMP, tienen el llamado <code class="docutils literal notranslate"><span class="pre">IO-APIC</span></code>, que es un controlador de interrupciones <em>mejorado</em>. Permite activar el <em>enrutado</em> de interrupciones del <em>hardware</em>, sobre múltiples CPUs o, un grupo de CPUs.
+Sin el <code class="docutils literal notranslate"><span class="pre">IO-APIC</span></code>, las interrupciones desde el <em>hardware</em>, serían entregadas a una CPU únicamente, desde la que arranca el sistema operativo; habitualmente <code class="docutils literal notranslate"><span class="pre">CPU#0</span></code>.</p>
+<p>Linux soporta <em>todas</em> las variantes de placas compatibles con SMP, incluyendo aquellas con múltiples <code class="docutils literal notranslate"><span class="pre">IO-APIC</span></code>s. Múltiples <code class="docutils literal notranslate"><span class="pre">IO-APIC</span></code>s, son utilizadas en servidores de alta gama, para distribuir la <em>carga de interrupciones</em>.</p>
+<p>Son conocidas <em>ciertas</em> incompatibilidades, en placas más antiguas. Algunos de estos errores, son gestionados por el <em>kernel</em>. Si la placa compatible con SMP, no arranca <em>Linux</em>, es recomendable la lista de correo <strong>linux-smp</strong>, en primer lugar.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">----------------------------&gt;</span>
+<span class="n">hell</span><span class="p">:</span><span class="o">~&gt;</span> <span class="n">cat</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">interrupts</span>
+           <span class="n">CPU0</span>
+  <span class="mi">0</span><span class="p">:</span>    <span class="mi">1360293</span>    <span class="n">IO</span><span class="o">-</span><span class="n">APIC</span><span class="o">-</span><span class="n">edge</span>  <span class="n">timer</span>
+  <span class="mi">1</span><span class="p">:</span>          <span class="mi">4</span>    <span class="n">IO</span><span class="o">-</span><span class="n">APIC</span><span class="o">-</span><span class="n">edge</span>  <span class="n">keyboard</span>
+  <span class="mi">2</span><span class="p">:</span>          <span class="mi">0</span>          <span class="n">XT</span><span class="o">-</span><span class="n">PIC</span>  <span class="n">cascade</span>
+ <span class="mi">13</span><span class="p">:</span>          <span class="mi">1</span>          <span class="n">XT</span><span class="o">-</span><span class="n">PIC</span>  <span class="n">fpu</span>
+ <span class="mi">14</span><span class="p">:</span>       <span class="mi">1448</span>    <span class="n">IO</span><span class="o">-</span><span class="n">APIC</span><span class="o">-</span><span class="n">edge</span>  <span class="n">ide0</span>
+ <span class="mi">16</span><span class="p">:</span>      <span class="mi">28232</span>   <span class="n">IO</span><span class="o">-</span><span class="n">APIC</span><span class="o">-</span><span class="n">level</span>  <span class="n">Intel</span> <span class="n">EtherExpress</span> <span class="n">Pro</span> <span class="mi">10</span><span class="o">/</span><span class="mi">100</span> <span class="n">Ethernet</span>
+ <span class="mi">17</span><span class="p">:</span>      <span class="mi">51304</span>   <span class="n">IO</span><span class="o">-</span><span class="n">APIC</span><span class="o">-</span><span class="n">level</span>  <span class="n">eth0</span>
+<span class="n">NMI</span><span class="p">:</span>          <span class="mi">0</span>
+<span class="n">ERR</span><span class="p">:</span>          <span class="mi">0</span>
+<span class="n">hell</span><span class="p">:</span><span class="o">~&gt;</span>
+<span class="o">&lt;----------------------------</span>
+</pre></div>
+</div>
+<p>Algunas interrupciones son listadas como <code class="docutils literal notranslate"><span class="pre">XT</span> <span class="pre">PIC</span></code>, pero ésto no es un problema; ninguna de esas interrupciones fuentes IRQs denotan rendimiento crítico.</p>
+<p>En caso de que la placa, no haya creado una correcta <em>tabla mp</em>, podrá utilizarse el parámetro de arranque <code class="docutils literal notranslate"><span class="pre">pirq=</span></code> para construir a mano, las entradas IRQ. Nada trivial, puesto que no puede ser automatizado. Un ejemplo de <em>entrada</em> en <code class="docutils literal notranslate"><span class="pre">/etc/lilo.conf</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">append</span><span class="o">=</span><span class="s2">&quot;pirq=15,11,10&quot;</span>
+</pre></div>
+</div>
+<p>Los <em>miembros</em> concretos, dependen del <em>sistema</em>, de las tarjetas PCI y, de las posi- ciones de sus zócalos. Generalmente, los zócalos de las PCI, están <em>encadenados</em> antes de ser conectados a la instalación enrutada, del  conjunto de chips IRQ del PCI(líneas de entrada <code class="docutils literal notranslate"><span class="pre">PIRQ1-4</span></code>) <code class="docutils literal notranslate"><span class="pre">bloodyMary-bloodyMary-bloodyMary</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>          ,-.        ,-.        ,-.        ,-.        ,-.
+PIRQ4 ----| |-.    ,-| |-.    ,-| |-.    ,-| |--------| |
+          |S|  \  /  |S|  \  /  |S|  \  /  |S|        |S|
+PIRQ3 ----|l|-. `/---|l|-. `/---|l|-. `/---|l|--------|l|
+          |o|  \/    |o|  \/    |o|  \/    |o|        |o|
+PIRQ2 ----|t|-./`----|t|-./`----|t|-./`----|t|--------|t|
+          |1| /\     |2| /\     |3| /\     |4|        |5|
+PIRQ1 ----| |-  `----| |-  `----| |-  `----| |--------| |
+          `-&#39;        `-&#39;        `-&#39;        `-&#39;        `-&#39;
+</pre></div>
+</div>
+<p>Cada tarjeta PCI, emite un IRQ PCI(interrupción PCI), que pueden ser <code class="docutils literal notranslate"><span class="pre">INTA</span></code>, <code class="docutils literal notranslate"><span class="pre">INTB</span></code>, <code class="docutils literal notranslate"><span class="pre">INTC</span></code>, <code class="docutils literal notranslate"><span class="pre">INTD</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>      ,-.
+INTD--| |
+      |S|
+INTC--|l|
+      |o|
+INTB--|t|
+      |x|
+INTA--| |
+      `-&#39;
+</pre></div>
+</div>
+<p>Éstas <code class="docutils literal notranslate"><span class="pre">INTA-D</span></code> PCI IRQs, son siempre “locales a la tarjeta” -específicas para la card, su significado <em>real</em>, depende del zócalo de la misma. Mirando al diagrama <em>encadenado</em> de la tarjeta, en el <strong>zócalo 4</strong>; está utilizando el <code class="docutils literal notranslate"><span class="pre">INTA</span></code> como señal en <code class="docutils literal notranslate"><span class="pre">PIRQ4</span></code> del conjunto de chips PCI. La mayoría de tarjetas, utilizan <code class="docutils literal notranslate"><span class="pre">INTA</span></code>, ésta créa una distri- bución optima, entre las líneas PIRQ. La distribución de las fuentes de interrupción apropiadas, <em>no es una necesidad</em>. Las PCI IRQs, pueden compartirse sin mas. Aunque por rendimiento, es mejor no compartir interrupciones. El <em>zócalo 5</em> debe ser usado para video-tarjetas -como norma general, ya que no utilizan las interrupciones normalmente, tampoco están encadenadas(daisy chained).</p>
+<p>Así, contando con una tarjeta SCSI (IRQ11) en el <em>zócalo 1</em>, tarjeta Tulip (IRQ9) en <em>zócalo 2</em>, deberá especificarse ésta línea <code class="docutils literal notranslate"><span class="pre">pirq=</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">append</span><span class="o">=</span><span class="s2">&quot;pirq=11,9&quot;</span>
+</pre></div>
+</div>
+<p>El siguiente <em>script</em>, trata de averiguar la línea <code class="docutils literal notranslate"><span class="pre">pirq=</span></code> por defecto, desde la configuración PCI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>echo -n pirq=; echo `scanpci grep T_L cut -c56-` sed &#39;s/ /,/g&#39;
+</pre></div>
+</div>
+<p>ver <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> sobre <code class="docutils literal notranslate"><span class="pre">scanpci</span></code> y <code class="docutils literal notranslate"><span class="pre">lscpi</span></code> y <code class="docutils literal notranslate"><span class="pre">/proc/interrupts</span></code></p>
+<p>El anterior <em>script</em> no funcionará, si fueron omitidos algunos zócalos, si la tarjeta no realiza el <em>encadenado(daisy chain)</em> por defecto o, si el <code class="docutils literal notranslate"><span class="pre">IO-APIC</span></code> tiene los pins <code class="docutils literal notranslate"><span class="pre">PIRQ</span></code> conectados de forma estraña. Ejemplo, si en el caso de arriba la tarjeta <code class="docutils literal notranslate"><span class="pre">SCSI</span></code> (IRQ11) se encuentra en el <em>zócalo 3</em> y, el <em>zócalo 1</em> está vacio:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">append</span><span class="o">=</span><span class="s2">&quot;pirq=0,9,11&quot;</span>
+</pre></div>
+</div>
+<p>El valor <code class="docutils literal notranslate"><span class="pre">0</span></code> es un <em>marcador de posición(placeholder)</em> genérico. Reservado para zócalos vacios -o IRQ, sin emitir señal.</p>
+<p>Generalmente, es posible encontrar la configuración correcta para <code class="docutils literal notranslate"><span class="pre">pirq=</span></code>, sólo hay que <em>permutar</em> los números IRQ apropiadamente … probablemente tomará algún tiempo. Una línea <code class="docutils literal notranslate"><span class="pre">pirq</span></code> incorrecta, que el proceso de arranque  se <em>cuelgue</em> o, que cierto dispositivo deje de funcionar apropiadamente, <em>ejem. si es insertado como módulo</em>.</p>
+<p>Con dos <em>buses PCI</em>, podrán utilizarse <strong>hasta</strong> <code class="docutils literal notranslate"><span class="pre">8</span></code> valores <code class="docutils literal notranslate"><span class="pre">pirq</span></code>, a pesar de que este tipo de placas, tiendan a tener una configuración <em>correcta</em>.</p>
+<p>Habrá que estar preparado, puesto que podría ser necesario una línea <code class="docutils literal notranslate"><span class="pre">pirq</span></code> estraña:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">append</span><span class="o">=</span><span class="s2">&quot;pirq=0,0,0,0,0,0,9,11&quot;</span>
+</pre></div>
+</div>
+<p>Practica una inteligente técnica de <em>prueba y error</em>, para encontrar la línea correcta <code class="docutils literal notranslate"><span class="pre">pirq</span></code>.</p>
+<p>Buena suerte y si aparecen problemas no cubiertos en éste documento, utiliza éstos buzones <a class="reference external" href="mailto:linux-smp&#37;&#52;&#48;vger&#46;kernel&#46;org">linux-smp<span>&#64;</span>vger<span>&#46;</span>kernel<span>&#46;</span>org</a> <a class="reference external" href="mailto:linux-kernel&#37;&#52;&#48;vger&#46;kernel&#46;org">linux-kernel<span>&#64;</span>vger<span>&#46;</span>kernel<span>&#46;</span>org</a>.</p>
+<section id="referencias-y-agradecimientos">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><strong>nota:</strong> - <code class="docutils literal notranslate"><span class="pre">scanpci</span></code> - <code class="docutils literal notranslate"><span class="pre">lspci</span></code> - <code class="docutils literal notranslate"><span class="pre">/proc/interrupts</span></code></p>
+</aside>
+</aside>
+<p><strong>Autor:</strong> mingo</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../trace/ring-buffer-design.html" class="btn btn-neutral float-left" title="Ring buffer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../03_Operating_Systems/index.html" class="btn btn-neutral float-right" title="Índice de Sistemas Operativos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

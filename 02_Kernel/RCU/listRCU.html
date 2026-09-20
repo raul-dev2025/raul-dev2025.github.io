@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>List RCU &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="RCU" href="rcu.html" />
+    <link rel="prev" title="Cambios" href="../Process/changes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#rcu">RCU</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">List RCU</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#empleo-de-rcu-para-proteger-listas-enlazadas">Empleo de RCU, para proteger listas enlazadas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sumario">Sumario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rcu.html">RCU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UP.html">RCU en sistemas uniprocesador</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">List RCU</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/RCU/listRCU.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="list-rcu">
+<h1>List RCU<a class="headerlink" href="#list-rcu" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="empleo-de-rcu-para-proteger-listas-enlazadas">
+<h2>Empleo de RCU, para proteger listas enlazadas<a class="headerlink" href="#empleo-de-rcu-para-proteger-listas-enlazadas" title="Link to this heading"></a></h2>
+<p>Una de las mejores aplicaciones de RCU, consiste en la protección de la mayoría de listas enlazadas - <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">list_head</span></code> en <code class="docutils literal notranslate"><span class="pre">list.h</span></code>. La ventaja de esta aproximación, es que todas las barreras de memoria, son incluidas de forma automática, en la lista de macros. Este documento describe distintas aplicaciones RCU, empezando por la que mejor se adapta.</p>
+<p>Ejemplo 1: ciclo de lectura, tomado desde fuera del bloqueo, <em>actualizaciones fuera de lugar</em>.</p>
+<p>Las mejores aplicaciones en estos casos, donde si el bloqueo de <em>lectura-escritura</em> es utilizado, el bloqueo en el ciclo de lectura, será desestimado antes de tomar una acción basada en los resultados de la búsqueda. El ejemplo más representativo, es la <em>tabla de ruta</em>. Por que la tabla de ruta, sigue el estado del <em>equipo</em> fuera de la computadora; contendrá los datos que quedaron fuera. A pesar de esto, una vez la ruta ha sido computada, no hay necesidad de mantener la tabla de ruta estática, durante la transmisión del paquete. Después de todo, es posible mantener la tabla de ruta estática, todo lo necesario, pero no será posible guardar la <em>Internet</em> externa, del cambio. Es el estado de la <em>Internet</em> externa lo que importa. En adición, las entradas de ruta son habitualmente añadidas o retiradas, en lugar de ser modificadas <em>in situ</em>.</p>
+<p>Un ejemplo exclarecedor del empleo de RCU, podrá encontrarse mediante el soporte de auditoría a la <em>llamada de sistema</em>. Por ejemplo, la implementación de un bloqueo <em>lectura-escritura</em> de <code class="docutils literal notranslate"><span class="pre">audit_filter_task()</span></code>, podría ser como sigue:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">audit_state</span><span class="w"> </span><span class="nf">audit_filter_task</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">task_struct</span><span class="w"> </span><span class="o">*</span><span class="n">tsk</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_entry</span><span class="w"> </span><span class="o">*</span><span class="n">e</span><span class="p">;</span>
+<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="n">audit_state</span><span class="w">   </span><span class="n">state</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">read_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">auditsc_lock</span><span class="p">);</span>
+<span class="w">    </span><span class="cm">/* Note: audit_netlink_sem held by caller. */</span>
+<span class="w">    </span><span class="n">list_for_each_entry</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">audit_tsklist</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">audit_filter_rules</span><span class="p">(</span><span class="n">tsk</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">state</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">read_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">auditsc_lock</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">read_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">auditsc_lock</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">AUDIT_BUILD_CONTEXT</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>La lista aquí, es buscada através del bloqueo, pero el bloqueo es desestimado antes del correspondiente valor de retorno. En el tiempo en que el valor es aceptado, la lista podría haber sido modificada. Esto tiene sentido, al apagar la <em>auditoría</em>; es correcto auditar ciertas <em>llamadas de sistema</em>.</p>
+<p>Significa que RCU, puede ser aplicado en el ciclo de lectura, como sigue:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">audit_state</span><span class="w"> </span><span class="nf">audit_filter_task</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">task_struct</span><span class="w"> </span><span class="o">*</span><span class="n">tsk</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_entry</span><span class="w"> </span><span class="o">*</span><span class="n">e</span><span class="p">;</span>
+<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="n">audit_state</span><span class="w">   </span><span class="n">state</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rcu_read_lock</span><span class="p">();</span>
+<span class="w">    </span><span class="cm">/* Note: audit_netlink_sem held by caller. */</span>
+<span class="w">    </span><span class="n">list_for_each_entry_rcu</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">audit_tsklist</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">audit_filter_rules</span><span class="p">(</span><span class="n">tsk</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">state</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">rcu_read_unlock</span><span class="p">();</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">rcu_read_unlock</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">AUDIT_BUILD_CONTEXT</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Las llamadas <code class="docutils literal notranslate"><span class="pre">read_lock()</span></code> y <code class="docutils literal notranslate"><span class="pre">read_unlock()</span></code> han sido convertidas a <code class="docutils literal notranslate"><span class="pre">rcu_read_lock()</span></code> y <code class="docutils literal notranslate"><span class="pre">rcu_read_unlock()</span></code>, respectivamente, la <code class="docutils literal notranslate"><span class="pre">list_for_each_entry()</span></code> ha sido convertida a <code class="docutils literal notranslate"><span class="pre">list_for_each_entry_rcu()</span></code>. La macro <code class="docutils literal notranslate"><span class="pre">_rcu()</span></code> de primitivas transversales, inserta la barrera de memoria en el ciclo de lectura, que es requerida en <em>DEC Alpha CPUs</em>.</p>
+<p>Los cambios en el ciclo de actualización son esclarecedores. Un bloqueo <em>lectura-escritura</em>, podría utilizarse como sigue, para el borrado de una inserción:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">audit_del_rule</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_rule</span><span class="w"> </span><span class="o">*</span><span class="n">rule</span><span class="p">,</span>
+<span class="w">                 </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">list</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_entry</span><span class="w">  </span><span class="o">*</span><span class="n">e</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">write_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">auditsc_lock</span><span class="p">);</span>
+<span class="w">    </span><span class="n">list_for_each_entry</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">audit_compare_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">list_del</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">);</span>
+<span class="w">            </span><span class="n">write_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">auditsc_lock</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">write_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">auditsc_lock</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EFAULT</span><span class="p">;</span><span class="w">     </span><span class="cm">/* No matching rule */</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">audit_add_rule</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_entry</span><span class="w"> </span><span class="o">*</span><span class="n">entry</span><span class="p">,</span>
+<span class="w">                 </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">list</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">write_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">auditsc_lock</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">AUDIT_PREPEND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;=</span><span class="w"> </span><span class="o">~</span><span class="n">AUDIT_PREPEND</span><span class="p">;</span>
+<span class="w">        </span><span class="n">list_add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">list_add_tail</span><span class="p">(</span><span class="o">&amp;</span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">write_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">auditsc_lock</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A continuación, las equivalencias RCU para estas dos funciones:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">audit_del_rule</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_rule</span><span class="w"> </span><span class="o">*</span><span class="n">rule</span><span class="p">,</span>
+<span class="w">                 </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">list</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_entry</span><span class="w">  </span><span class="o">*</span><span class="n">e</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* Do not use the _rcu iterator here, since this is the only</span>
+<span class="cm">     * deletion routine. */</span>
+<span class="w">    </span><span class="n">list_for_each_entry</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">audit_compare_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">list_del_rcu</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">);</span>
+<span class="w">            </span><span class="n">call_rcu</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rcu</span><span class="p">,</span><span class="w"> </span><span class="n">audit_free_rule</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EFAULT</span><span class="p">;</span><span class="w">     </span><span class="cm">/* No matching rule */</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">audit_add_rule</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_entry</span><span class="w"> </span><span class="o">*</span><span class="n">entry</span><span class="p">,</span>
+<span class="w">                 </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">list</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">AUDIT_PREPEND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;=</span><span class="w"> </span><span class="o">~</span><span class="n">AUDIT_PREPEND</span><span class="p">;</span>
+<span class="w">        </span><span class="n">list_add_rcu</span><span class="p">(</span><span class="o">&amp;</span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">list_add_tail_rcu</span><span class="p">(</span><span class="o">&amp;</span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Normalmente, la <code class="docutils literal notranslate"><span class="pre">write_lock()</span></code> y <code class="docutils literal notranslate"><span class="pre">write_unlock()</span></code> serán reemplazadas por <code class="docutils literal notranslate"><span class="pre">spin_lock()</span></code> y <code class="docutils literal notranslate"><span class="pre">spin_unlock()</span></code>, pero en tal caso, todas la <em>llamadas</em> mantedrán <code class="docutils literal notranslate"><span class="pre">audit_netlink_sem</span></code>, por lo que no serán necesarios bloqueos adicionales. <code class="docutils literal notranslate"><span class="pre">auditsc_lock</span></code> podrá, por lo tanto, ser eliminado, ya que RCU <em>elimina</em> la necesidad de que los <em>escritores</em> excluyan a <em>lectores</em>. Llamadas <code class="docutils literal notranslate"><span class="pre">write_lock()</span></code> serán convertidas en
+llamadas <code class="docutils literal notranslate"><span class="pre">spin_lock()</span></code>.</p>
+<p>Las primitivas <code class="docutils literal notranslate"><span class="pre">list_del()</span></code>, <code class="docutils literal notranslate"><span class="pre">list_add()</span></code>, y <code class="docutils literal notranslate"><span class="pre">list_add_tail()</span></code>, han sido reemplazadas por <code class="docutils literal notranslate"><span class="pre">list_del_rcu()</span></code>, <code class="docutils literal notranslate"><span class="pre">list_add_rcu()</span></code>, y <code class="docutils literal notranslate"><span class="pre">list_add_tail_rcu()</span></code>. La lista manipuladora de primitivas <code class="docutils literal notranslate"><span class="pre">_rcu()</span></code>, añade barreras de memoria necesarias, en CPUs <em>débilmente</em> ordenadas -la mayoría de ellas. La primitiva <code class="docutils literal notranslate"><span class="pre">list_del_rcu()</span></code> omite el puntero que “envenena”, el código de depuración asistida, que de otra forma ocasionaría a <em>lectores</em> concurrentes, un fallo espectacular.</p>
+<p>Cuando <em>lectores</em>, pueden tolerar datos excedidos y las entradas, son tanto añadidas como borradas, sin una modificación en el lugar, resulta fácil el uso de RCU.</p>
+<p>Ejemplo 2: manipulado de actualizaciones <em>in situ</em>.</p>
+<p>El código de auditoría para las llamadas de sistema, no actualiza las reglas de auditoría en su loacalización. Aunque si lo hacen, el código de bloqueo de <em>lector-escritor</em> podría ser parecido a lo siguiente. Al campo <code class="docutils literal notranslate"><span class="pre">field_count</span></code> únicamente le está permitido decrecer, de cualquier otra forma, los campos añadidos deberá ser definidos:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">audit_upd_rule</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_rule</span><span class="w"> </span><span class="o">*</span><span class="n">rule</span><span class="p">,</span>
+<span class="w">                 </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">list</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">__u32</span><span class="w"> </span><span class="n">newaction</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">__u32</span><span class="w"> </span><span class="n">newfield_count</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_entry</span><span class="w">  </span><span class="o">*</span><span class="n">e</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_newentry</span><span class="w"> </span><span class="o">*</span><span class="n">ne</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">write_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">auditsc_lock</span><span class="p">);</span>
+<span class="w">    </span><span class="cm">/* Note: audit_netlink_sem held by caller. */</span>
+<span class="w">    </span><span class="n">list_for_each_entry</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">audit_compare_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">.</span><span class="n">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newaction</span><span class="p">;</span>
+<span class="w">            </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">.</span><span class="n">file_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newfield_count</span><span class="p">;</span>
+<span class="w">            </span><span class="n">write_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">auditsc_lock</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">write_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">auditsc_lock</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EFAULT</span><span class="p">;</span><span class="w">     </span><span class="cm">/* No matching rule */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>La versión RCU, crea una copia, actualiza la copia. Luego reemplaza la entrada <em>antigua</em> con la entrada actualizada. La secuencia de acciones, permite lecturas concurrentes, mientras se lleva a cabo una actualización efectiva. Es lo que da nombre a RCU; <em>read-copy update</em>.
+El código RCU, es como sigue:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">audit_upd_rule</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_rule</span><span class="w"> </span><span class="o">*</span><span class="n">rule</span><span class="p">,</span>
+<span class="w">                 </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">list</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">__u32</span><span class="w"> </span><span class="n">newaction</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">__u32</span><span class="w"> </span><span class="n">newfield_count</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_entry</span><span class="w">  </span><span class="o">*</span><span class="n">e</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_newentry</span><span class="w"> </span><span class="o">*</span><span class="n">ne</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">list_for_each_entry</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">audit_compare_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">ne</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kmalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">entry</span><span class="p">),</span><span class="w"> </span><span class="n">GFP_ATOMIC</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ne</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">ENOMEM</span><span class="p">;</span>
+<span class="w">            </span><span class="n">audit_copy_rule</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ne</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">);</span>
+<span class="w">            </span><span class="n">ne</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">.</span><span class="n">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newaction</span><span class="p">;</span>
+<span class="w">            </span><span class="n">ne</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">.</span><span class="n">file_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newfield_count</span><span class="p">;</span>
+<span class="w">            </span><span class="n">list_replace_rcu</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ne</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">);</span>
+<span class="w">            </span><span class="n">call_rcu</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rcu</span><span class="p">,</span><span class="w"> </span><span class="n">audit_free_rule</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EFAULT</span><span class="p">;</span><span class="w">     </span><span class="cm">/* No matching rule */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>De nueve, es asumido que la llamada mantiene <code class="docutils literal notranslate"><span class="pre">audit_netlink_sem</span></code>. Normalmente, el bloqueo <em>lector-escritor</em>, sería convertido en un <em>acelerador de bloqueo</em>, con esta suerte de códgo.</p>
+<p>Ejemplo 3: Eliminación de datos excedidos.</p>
+<p>Los ejemplos de auditoría -arriba, toleran la excedencia de datos, como la mayoría de algoritmos, que siguen el estado externo. Por que hay <em>una espera</em>, desde el momento en que <em>estado externo</em> cambia, antes que Linux, advierta el cambio; la excedencia adicional inducida en RCU, no es ningún problema.</p>
+<p>En cualquier caso, existen muchos ejemplos donde los datos excedidos, no son tolerados. Un ejemplo en el kernel de Linux, es el Sistema V IPC.
+Ver la función <code class="docutils literal notranslate"><span class="pre">ipc_lock()</span></code> en <code class="docutils literal notranslate"><span class="pre">/ipc/util.c</span></code>. Este código comprueba una opción de <em>borrado</em>, bajo una entrada <em>individual?</em> del acelerador de bloqueo y, si la opción <em>borrado</em>, es configurada, significa que la entrada no existe. Para que esto sea de ayuda, la función de busqueda debe retornar, manteniento el acelerador de bloqueo selectivo, como <code class="docutils literal notranslate"><span class="pre">ipc_lock()</span></code> de hecho lo hace.</p>
+<p><em>Pregunta rápida</em>: ¿Por qué la función de búsqueda, necesita retornar, manteniento el acelerador de bloqueo selectivo, con la técnica de la opción de <em>borrado</em>, par que sea de ayuda?</p>
+<p>Si el módulo de auditoría de la llamada de sistema, tuviese la necesidad de rechazar los datos excedidos, para conseguirlo, debería añadir la opción <em>borrado</em> y un acelerador de bloqueo, bloqueado, a la estructura <code class="docutils literal notranslate"><span class="pre">audit_entry</span></code> y, modificar <code class="docutils literal notranslate"><span class="pre">audit_filter_task()</span></code>, como sigue:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">audit_state</span><span class="w"> </span><span class="nf">audit_filter_task</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">task_struct</span><span class="w"> </span><span class="o">*</span><span class="n">tsk</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_entry</span><span class="w"> </span><span class="o">*</span><span class="n">e</span><span class="p">;</span>
+<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="n">audit_state</span><span class="w">   </span><span class="n">state</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rcu_read_lock</span><span class="p">();</span>
+<span class="w">    </span><span class="n">list_for_each_entry_rcu</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">audit_tsklist</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">audit_filter_rules</span><span class="p">(</span><span class="n">tsk</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">state</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">spin_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">deleted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+<span class="w">                </span><span class="n">rcu_read_unlock</span><span class="p">();</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">AUDIT_BUILD_CONTEXT</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">rcu_read_unlock</span><span class="p">();</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">rcu_read_unlock</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">AUDIT_BUILD_CONTEXT</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>este ejemplo asume que la entradas, son añadidas y borradas, únicamente. Es necesario un mecanismo adicional, capaz de trabajar correctamente con acciones de actualización, llevadas a cabo por <code class="docutils literal notranslate"><span class="pre">audit_upd_rule()</span></code>. Por éste motivo?, <code class="docutils literal notranslate"><span class="pre">audit_upd_rule()</span></code> tendría la necesidad de barreras adicionales, para asegurar que <code class="docutils literal notranslate"><span class="pre">list_add_rcu()</span></code>, fuese realmente ejecutado antes que <code class="docutils literal notranslate"><span class="pre">list_del_rcu()</span></code>.</p>
+</div>
+<p>La función <code class="docutils literal notranslate"><span class="pre">audit_del_rule()</span></code> tendría que establecer la opción <em>borrado</em>, bajo el <em>acelerador de bloqueo</em>, como sigue:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">audit_del_rule</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_rule</span><span class="w"> </span><span class="o">*</span><span class="n">rule</span><span class="p">,</span>
+<span class="w">                 </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">list</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">audit_entry</span><span class="w">  </span><span class="o">*</span><span class="n">e</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* Do not need to use the _rcu iterator here, since this</span>
+<span class="cm">     * is the only deletion routine. */</span>
+<span class="w">    </span><span class="n">list_for_each_entry</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">audit_compare_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rule</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">spin_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+<span class="w">            </span><span class="n">list_del_rcu</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">);</span>
+<span class="w">            </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">deleted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="n">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+<span class="w">            </span><span class="n">call_rcu</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">rcu</span><span class="p">,</span><span class="w"> </span><span class="n">audit_free_rule</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EFAULT</span><span class="p">;</span><span class="w">     </span><span class="cm">/* No matching rule */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sumario">
+<h2>Sumario<a class="headerlink" href="#sumario" title="Link to this heading"></a></h2>
+<p>La mayoría de lecturas basadas en listas de estructura de datos, que toleran el exceso de datos excedidos, transigen con el uso de RCU. El caso más simple, es donde las entradas son tanto añadidas como borradas de la estructura de datos -o modificadas de forma atómica, en el lugar.
+Pero modificaciones <em>no atómicas</em>, podrán ser gestionadas por medio de una copia, actualizando la copia y, reemplazando entonces, el original con la copia. Si los datos excedidos, no pudiesen ser tolerados, entonces la opción <em>borrado</em>, podría utilizarse en conjunción con el acelerador de bloqueo por entrada, con objeto de permitir a la función
+de búsqueda, rechazar datos recientemente borrados.</p>
+<p>Respuesta a la <em>pregunta rápida</em> ¿Por qué la función de búsqueda, necesita retornar, manteniento el acelerador de bloqueo selectivo, con la técnica de la opción de <em>borrado</em>, par que sea de ayuda?</p>
+<p>Si la función de búsqueda, deshecha el bloqueo por entrada antes de retornar, entonces la llamada procesará los datos escedidos en cualquier caso. Si realmente es correcto procesar los datos excedidos, entonces no hay necesidad de la opción <em>borrado</em>. Si representa un problema su procesado, será necesario mantener un bloqueo por entrada, en todo el código que utilize los valores de retorno.</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2>Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<div class="admonition-n-de-t admonition">
+<p class="admonition-title">n. de t.</p>
+<p>el presente documento es objeto de estudio,    cualquier daño o perjudicio derivado de la <strong>mala interpretación</strong> del mismo, eximirá al autor de consecuencias adversas. Peligro.
+Seguir leyendo bajo su própia responsabilidad.</p>
+</div>
+<p>Atómicas, no divisibles, que no podrán ser pausadas hasta su finalización.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Process/changes.html" class="btn btn-neutral float-left" title="Cambios" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rcu.html" class="btn btn-neutral float-right" title="RCU" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,916 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uso del árbol de dispositivo &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Resolución dinámica, notas" href="dynamic-resolution-notes.html" />
+    <link rel="prev" title="conjunto de cambios" href="changesets.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="0-of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="changesets.html">conjunto de cambios</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Uso del árbol de dispositivo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prologo">Prólogo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#formato-de-datos-basico">Formato de datos básico</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conceptos-basicos">Conceptos básicos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#estructura-inicial">Estructura inicial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cpus">CPUs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nombre-de-nodos">Nombre de nodos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dispositivos">Dispositivos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comprension-de-la-propiedad-compatible">Comprensión de la propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#funcionamiento-del-enrutado">Funcionamiento del _enrutado ####</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#direccionado-de-cpu">Direccionado de CPU</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dispositivo-memoria-de-mapeada">Dispositivo memoria de <em>mapeada</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dispositivo-de-memoria-no-mapeada">Dispositivo de memoria <em>no mapeada</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rangos-traduccion-de-direcciones">Rangos (<em>traducción</em> de direcciones)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#como-funcionan-las-interrupciones">Cómo funcionan las interrupciones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#datos-especificos-de-dispositivo">Datos específicos de dispositivo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nodos-especiales">Nodos especiales</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nodo-escogido">Nodo <em>escogido</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#temas-avanzados">Temas avanzados</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pci-host-bridge-puente-anfitrion-pci">PCI host bridge(puente anfitrion PCI)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#traduccion-del-direccionado-pci">Traducción del direccionado PCI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#interrupcion-avanzada-mapa-de-memoria">Interrupción avanzada, mapa(de memoria)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic-resolution-notes.html">Resolución dinámica, notas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overlay-notes.html"><em>Sobreposición</em> del árbol de dispositivo, notas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage-model.html">Linux y el árbol de dispositivo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Uso del árbol de dispositivo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/DeviceTree/device-tree-usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="uso-del-arbol-de-dispositivo">
+<h1><a class="toc-backref" href="#id9" role="doc-backlink">Uso del árbol de dispositivo</a><a class="headerlink" href="#uso-del-arbol-de-dispositivo" title="Link to this heading"></a></h1>
+<section id="prologo">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Prólogo</a><a class="headerlink" href="#prologo" title="Link to this heading"></a></h2>
+<p>Página localizada previamente en <code class="docutils literal notranslate"><span class="pre">htttp://devicetree.org/Device_Tree_Usage</span></code></p>
+<p>El documento, describe <em>cómo</em> escribir un <em>árbol de dispositivo</em> sobre una máquina
+nueva. Está destinada a proporcionar una <em>vista previa</em>, a los conceptos del árbol de dispositivos y, <em>coḿo</em> son utilizados para describiir la <em>maquina</em>.</p>
+<p>Para una más detallada descripción del <em>formato datos</em> del árbol de dispositivo -<em>DT</em> en adelante, refiérase a la especificación <em>ePAPR v1.1</em>. Dicha especificación, cubre con mucho más detalle los temas básicos aquí descritos. La <em>ePAPR v1.1</em> está siendo actua- lizada con nueva documentación específica.</p>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#uso-del-arbol-de-dispositivo" id="id9">Uso del árbol de dispositivo</a></p>
+<ul>
+<li><p><a class="reference internal" href="#prologo" id="id10">Prólogo</a></p></li>
+<li><p><a class="reference internal" href="#formato-de-datos-basico" id="id11">Formato de datos básico</a></p></li>
+<li><p><a class="reference internal" href="#conceptos-basicos" id="id12">Conceptos básicos</a></p></li>
+<li><p><a class="reference internal" href="#estructura-inicial" id="id13">Estructura inicial</a></p></li>
+<li><p><a class="reference internal" href="#cpus" id="id14">CPUs</a></p></li>
+<li><p><a class="reference internal" href="#nombre-de-nodos" id="id15">Nombre de nodos</a></p></li>
+<li><p><a class="reference internal" href="#dispositivos" id="id16">Dispositivos</a></p></li>
+<li><p><a class="reference internal" href="#comprension-de-la-propiedad-compatible" id="id17">Comprensión de la propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code></a></p></li>
+<li><p><a class="reference internal" href="#funcionamiento-del-enrutado" id="id18">Funcionamiento del _enrutado ####</a></p></li>
+<li><p><a class="reference internal" href="#direccionado-de-cpu" id="id19">Direccionado de CPU</a></p></li>
+<li><p><a class="reference internal" href="#dispositivo-memoria-de-mapeada" id="id20">Dispositivo memoria de <em>mapeada</em></a></p></li>
+<li><p><a class="reference internal" href="#dispositivo-de-memoria-no-mapeada" id="id21">Dispositivo de memoria <em>no mapeada</em></a></p></li>
+<li><p><a class="reference internal" href="#rangos-traduccion-de-direcciones" id="id22">Rangos (<em>traducción</em> de direcciones)</a></p></li>
+<li><p><a class="reference internal" href="#como-funcionan-las-interrupciones" id="id23">Cómo funcionan las interrupciones</a></p></li>
+<li><p><a class="reference internal" href="#datos-especificos-de-dispositivo" id="id24">Datos específicos de dispositivo</a></p></li>
+<li><p><a class="reference internal" href="#nodos-especiales" id="id25">Nodos especiales</a></p></li>
+<li><p><a class="reference internal" href="#nodo-escogido" id="id26">Nodo <em>escogido</em></a></p></li>
+<li><p><a class="reference internal" href="#temas-avanzados" id="id27">Temas avanzados</a></p></li>
+<li><p><a class="reference internal" href="#pci-host-bridge-puente-anfitrion-pci" id="id28">PCI host bridge(puente anfitrion PCI)</a></p></li>
+<li><p><a class="reference internal" href="#traduccion-del-direccionado-pci" id="id29">Traducción del direccionado PCI</a></p></li>
+<li><p><a class="reference internal" href="#interrupcion-avanzada-mapa-de-memoria" id="id30">Interrupción avanzada, mapa(de memoria)</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id31">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+</section>
+<section id="formato-de-datos-basico">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Formato de datos básico</a><a class="headerlink" href="#formato-de-datos-basico" title="Link to this heading"></a></h2>
+<p>El <em>DT</em> es una estructura simple con nodos y propiedades. Las <em>propiedades</em> son pares de valores , y el nodo, podrá contener tanto nodos <em>descendientes</em>, como <em>propiedades</em>. Por ejemplo, el siguiente es una <em>árbol simple</em> en formato <code class="docutils literal notranslate"><span class="pre">.dts</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="p">;</span>
+
+<span class="o">/</span> <span class="p">{</span>
+   <span class="n">node1</span> <span class="p">{</span>
+      <span class="n">a</span><span class="o">-</span><span class="n">string</span><span class="o">-</span><span class="nb">property</span> <span class="o">=</span> <span class="s2">&quot;A string&quot;</span><span class="p">;</span>
+      <span class="n">a</span><span class="o">-</span><span class="n">string</span><span class="o">-</span><span class="nb">list</span><span class="o">-</span><span class="nb">property</span> <span class="o">=</span> <span class="s2">&quot;first string&quot;</span><span class="p">,</span> <span class="s2">&quot;second string&quot;</span><span class="p">;</span>
+      <span class="n">a</span><span class="o">-</span><span class="n">byte</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="nb">property</span> <span class="o">=</span> <span class="p">[</span><span class="mi">01</span> <span class="mi">23</span> <span class="mi">34</span> <span class="mi">56</span><span class="p">];</span>
+
+      <span class="n">child</span><span class="o">-</span><span class="n">node1</span> <span class="p">{</span>
+            <span class="n">first</span><span class="o">-</span><span class="n">child</span><span class="o">-</span><span class="nb">property</span><span class="p">;</span>
+            <span class="n">second</span><span class="o">-</span><span class="n">child</span><span class="o">-</span><span class="nb">property</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+            <span class="n">a</span><span class="o">-</span><span class="n">string</span><span class="o">-</span><span class="nb">property</span> <span class="o">=</span> <span class="s2">&quot;Hello, world&quot;</span><span class="p">;</span>
+      <span class="p">};</span>
+
+      <span class="n">child</span><span class="o">-</span><span class="n">node2</span> <span class="p">{</span>
+      <span class="p">};</span>
+   <span class="p">};</span>
+
+   <span class="n">node2</span> <span class="p">{</span>
+      <span class="n">an</span><span class="o">-</span><span class="n">empty</span><span class="o">-</span><span class="nb">property</span><span class="p">;</span>
+      <span class="n">a</span><span class="o">-</span><span class="n">cell</span><span class="o">-</span><span class="nb">property</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="o">&gt;</span><span class="p">;</span>
+
+      <span class="n">child</span><span class="o">-</span><span class="n">node1</span> <span class="p">{</span>
+      <span class="p">};</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Ahora mismo, éste <em>árbol</em> es poco útil, por que no describe nada; muestra la estructura de <strong>nodos</strong> y <strong>propiedades</strong>:</p>
+<ul class="simple">
+<li><p>Un único <em>nodo</em> raíz <code class="docutils literal notranslate"><span class="pre">/</span></code></p></li>
+<li><p>Un par de nodos <em>descendientes</em>: <strong>nodo1</strong> y <strong>nodo2</strong>.</p></li>
+<li><p>Otro par de nodos <em>descendientes del nodo</em> 1 y 2.</p></li>
+<li><p>Un conjunto de propiedades, dispuestas en la extensión del árbol.</p></li>
+</ul>
+<p>Las propiedades son simples valores , donde el valor, podrá aparecer vacio o, conteniendo un <em>torrente de byte</em>, arbitrario. Mientras los <em>tipos de datos</em>, sean codificados dentro de la <em>estructura de datos</em>, habrá un conjunto de representaciones fundamentales, que podrán ser expresadas en un archivo fuente <em>DT</em>.</p>
+<ul class="simple">
+<li><p><em>Cadenas de texto</em> (terminación nula <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>) serán representadas con doble comilla <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>: string-property = “una cadena”;</p></li>
+<li><p><em>Celdas</em>, <em>números enteros</em> de <code class="docutils literal notranslate"><span class="pre">32</span> <span class="pre">bit</span></code>, delimitados por <em>ángulos</em> <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code>: cell-property = &lt;0xbeef 123 0xabcd1234&gt;;</p></li>
+<li><p>Datos binarios están delimitados por <em>corchetes</em> <code class="docutils literal notranslate"><span class="pre">[]</span></code>: binary-property = [0x01 0x23 0x45 0x67];</p></li>
+<li><p>Representaciones de datos distintos, podrán ser concatenados usando la <em>coma</em> <code class="docutils literal notranslate"><span class="pre">,</span></code>: mixed-property = “a string”, [0x01 0x23 0x45 0x67], &lt;0x12345678&gt;;</p></li>
+<li><p>Las comas, serán utilizadas para crear <em>listas de cadenas</em>: string-list = “red fish”, “blue fish”;</p></li>
+</ul>
+</section>
+<section id="conceptos-basicos">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Conceptos básicos</a><a class="headerlink" href="#conceptos-basicos" title="Link to this heading"></a></h2>
+<p>Comprender cómo utilizar el <em>DT</em>, empieza por utilizar una simple máquina y, construir un <em>árbol</em>, para describirlo <em>paso a paso</em>.</p>
+<p><strong>Ejemplo de máquina</strong></p>
+<p>Considerada una máquina imaginaria, <em>basada en la versátil arquitectura ARM</em>, manufac- turado por <em>Acme</em> y llamada <em>la venganza-del-Coyote</em>:</p>
+<ul>
+<li><p>Una CPU ARM, de <code class="docutils literal notranslate"><span class="pre">32bit</span></code></p></li>
+<li><p>Procesador de <em>bus</em> local, acoplado a la <em>memoria mapeada</em> del puerto en serie, controlador de <em>bus spi</em> <a class="footnote-reference brackets" href="#f2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, controlador <em>i2c</em>, controlador de interrupción y, <em>bus puente externo(external bus bridge)</em>.</p></li>
+<li><p>256MB de SDRAM basada en <code class="docutils literal notranslate"><span class="pre">0</span></code>(dirección de memoria).</p></li>
+<li><p>2 puertos en serie basado en <code class="docutils literal notranslate"><span class="pre">0x101F1000</span> <span class="pre">and</span> <span class="pre">0x101F2000</span></code></p></li>
+<li><p>Controlador GPIO basado en <code class="docutils literal notranslate"><span class="pre">0x101F3000</span></code></p></li>
+<li><p>Controlador SPI basado en <code class="docutils literal notranslate"><span class="pre">0x10170000</span></code>, con los siguientes dispositivos:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Zócalo MMC con <em>pin</em> SS acoplado al GPIO <code class="docutils literal notranslate"><span class="pre">#1</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><em>Bus puente externo</em> con los siguientes componentes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Dispositivo <em>Ethernet</em> SMC SMC91111, acoplado al <em>bus</em> basado <code class="docutils literal notranslate"><span class="pre">0x10100000</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Controlador <em>i2c</em> basado en <code class="docutils literal notranslate"><span class="pre">0x10160000</span></code> con los siguientes dispositivos:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Reloj de Tiempo Real(RTC) <em>Maxim DS1338</em>. responde a la dirección <em>esclava</em> <code class="docutils literal notranslate"><span class="pre">1101000</span> <span class="pre">(0x58)</span></code>.</p></li>
+<li><p>64MB de una memoria flash, tipo NOR, basada en <code class="docutils literal notranslate"><span class="pre">0x30000000</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="estructura-inicial">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">Estructura inicial</a><a class="headerlink" href="#estructura-inicial" title="Link to this heading"></a></h2>
+<p>El primer paso es desplegar el <em>esqueleto</em> de la estructura, de la máquina. Es la estructura mínima necesaria, que requiere un <em>árbol</em> válido. En esta etapa, debe iden- tificarse, <em>inequívocamente</em>, la máquina.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="p">;</span>
+
+<span class="o">/</span> <span class="p">{</span>
+   <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;acme,coyotes-revenge&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>El nombre del sistema es especificado por la propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code>. contiene una cadena en su forma <code class="docutils literal notranslate"><span class="pre">&lt;fabricante&gt;,&lt;modelo&gt;</span></code>. Es importante especificar el nombre exacto del  dispositivo, e incluir el nombre del <em>fabricante</em>, para evitar <em>colisión</em> en el <em>espacio de nombres</em>. Puesto que el sistema operativo, usará el valor <code class="docutils literal notranslate"><span class="pre">compatible</span></code> para tomar decisiones, sobre cómo <em>correr, funcionar</em>, en la máquina; es muy importante colocar correctamente los datos, en sus propiedades.</p>
+<p>En teoría, <code class="docutils literal notranslate"><span class="pre">compatible</span></code>, son todos los datos que un <em>OS</em>, necesitará para identificar de  forma inequívoca, a la máquina. La presunción de sus detalles, dará lugar a que el OS, pueda buscar por <code class="docutils literal notranslate"><span class="pre">&quot;acme,coyotes-revenge&quot;</span></code> específicamente, en el <em>nivel más alto</em>, de la propiedad <code class="docutils literal notranslate"><span class="pre">copatible</span></code>.</p>
+</section>
+<section id="cpus">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">CPUs</a><a class="headerlink" href="#cpus" title="Link to this heading"></a></h2>
+<p>El siguiente paso, es describir cada una de las CPUs. Un nodo contenedor, llamado <code class="docutils literal notranslate"><span class="pre">&quot;cpus&quot;</span></code>, será añadido junto a un <em>nodo descendiente</em>, para cada CPU. En éste caso el sistema es de <em>doble núcleo</em>, <code class="docutils literal notranslate"><span class="pre">Cortex</span> <span class="pre">A9</span></code> en ARM.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="p">;</span>
+
+<span class="o">/</span> <span class="p">{</span>
+   <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;acme,coyotes-revenge&quot;</span><span class="p">;</span>
+
+   <span class="n">cpus</span> <span class="p">{</span>
+      <span class="n">cpu</span><span class="o">@</span><span class="mi">0</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,cortex-a9&quot;</span><span class="p">;</span>
+      <span class="p">};</span>
+      <span class="n">cpu</span><span class="o">@</span><span class="mi">1</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,cortex-a9&quot;</span><span class="p">;</span>
+      <span class="p">};</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>La propiedad compatible e cada <em>nodo CPU</em>, es una cadena, especificando el modelo exacto de CPU, formato <code class="docutils literal notranslate"><span class="pre">&lt;fabricante&gt;,&lt;modelo&gt;</span></code>.
+Igual que para la propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code> en el nivel superior.</p>
+<p>Serán añadidas otras propiedades a la CPU, más tarde. Primero hablaremos de conceptos más específicos.</p>
+</section>
+<section id="nombre-de-nodos">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Nombre de nodos</a><a class="headerlink" href="#nombre-de-nodos" title="Link to this heading"></a></h2>
+<p>Vale la pena, tomarse un momento, para hablar sobre <em>convenciones en el nombrado</em>. Cada nodo, deberá tener un <em>nombre</em> en formato <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;[&#64;&lt;unit-address&gt;]</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> es una cadena ASCII, simple. Podrá contener hasta 31 carácteres -tamaño. En general, los nodos son nombrados de acuerdo al tipo de dispositivo representado. El nodo de un adpatador <em>Ethernet 3com</em>, utilizaría el nombre <code class="docutils literal notranslate"><span class="pre">ethernet</span></code> no <em>3com509</em>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">[&#64;&lt;unit-address&gt;]</span></code> es incluida si el nodo describe al dispositivo con una dirección. Habitualmente, la <em>dirección de unidad</em>, es la dirección principal, utilizada para acceder al dispositibo, y es listado en la propiedad <code class="docutils literal notranslate"><span class="pre">reg</span></code> del nodo. Dicha propiedad será cubierta posteriormente, en éste documento.</p>
+<p>Nodos <em>afín</em>, deben ser llamados de forma unequívoca, aunque es habitual que más de un
+nodo utilize el mismo nombre genérico, siempre que la dirección sea distinta.</p>
+<p>Ver sección <em>2.2.1</em> de EPAPR, para una descripción detallada.</p>
+</section>
+<section id="dispositivos">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">Dispositivos</a><a class="headerlink" href="#dispositivos" title="Link to this heading"></a></h2>
+<p>Cada dispositivo en el sistema, está representado por un nodo <em>DT</em>. El siguiente paso, será poblar el <em>árbol</em> con un nodo por cada dispositivo. Por ahora, <em>los nuevos</em>, permanecerán vacíos, hasta hablar acerca de cómo los rangos de direcciones e IRQs son gestionadas.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="p">;</span>
+
+<span class="o">/</span> <span class="p">{</span>
+   <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;acme,coyotes-revenge&quot;</span><span class="p">;</span>
+
+   <span class="n">cpus</span> <span class="p">{</span>
+      <span class="n">cpu</span><span class="o">@</span><span class="mi">0</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,cortex-a9&quot;</span><span class="p">;</span>
+      <span class="p">};</span>
+      <span class="n">cpu</span><span class="o">@</span><span class="mi">1</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,cortex-a9&quot;</span><span class="p">;</span>
+      <span class="p">};</span>
+   <span class="p">};</span>
+
+   <span class="n">serial</span><span class="o">@</span><span class="mi">101</span><span class="n">F0000</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl011&quot;</span><span class="p">;</span>
+   <span class="p">};</span>
+
+   <span class="n">serial</span><span class="o">@</span><span class="mi">101</span><span class="n">F2000</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl011&quot;</span><span class="p">;</span>
+   <span class="p">};</span>
+
+   <span class="n">gpio</span><span class="o">@</span><span class="mi">101</span><span class="n">F3000</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl061&quot;</span><span class="p">;</span>
+   <span class="p">};</span>
+
+   <span class="n">interrupt</span><span class="o">-</span><span class="n">controller</span><span class="o">@</span><span class="mi">10140000</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl190&quot;</span><span class="p">;</span>
+   <span class="p">};</span>
+
+   <span class="n">spi</span><span class="o">@</span><span class="mi">10115000</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl022&quot;</span><span class="p">;</span>
+   <span class="p">};</span>
+
+   <span class="n">external</span><span class="o">-</span><span class="n">bus</span> <span class="p">{</span>
+      <span class="n">ethernet</span><span class="o">@</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;smc,smc91c111&quot;</span><span class="p">;</span>
+      <span class="p">};</span>
+
+      <span class="n">i2c</span><span class="o">@</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;acme,a1234-i2c-bus&quot;</span><span class="p">;</span>
+
+            <span class="n">rtc</span><span class="o">@</span><span class="mi">58</span> <span class="p">{</span>
+               <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;maxim,ds1338&quot;</span><span class="p">;</span>
+            <span class="p">};</span>
+      <span class="p">};</span>
+
+      <span class="n">flash</span><span class="o">@</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;samsung,k8f1315ebm&quot;</span><span class="p">,</span> <span class="s2">&quot;cfi-flash&quot;</span><span class="p">;</span>
+      <span class="p">};</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>En este árbol, ha sido añadido un nodo, poor cada dispositivo en el sistema. La jerar- quía refleja cómo los dispositivos están conectados al mismo. Ejemplo, los dispositivos conectados al <em>bus</em> externo, son sus descencientes. Los dipositivos del nodo <code class="docutils literal notranslate"><span class="pre">i2c</span></code>, son descendientes del controlador de bus <code class="docutils literal notranslate"><span class="pre">i2c</span></code>. La jerarquía representa el <em>ámbito</em> del sistema, desde la perspectiva de la CPU.</p>
+<p>El <em>árbol</em> tratado, aún no es válido. Ha sido omitida, la información relacionada con las conexiones entre dispositivos. Los datos serán añadidos mas tarde.</p>
+<p>Algunos datos importantes son:</p>
+<ul class="simple">
+<li><p>Cada dispositivo consta de la propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code>.</p></li>
+<li><p>El nodo <em>flash</em>, posée dos cadenas en la propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code>. Leer la siguiente sección, para entender por qué.</p></li>
+<li><p>Como fué mencionado anteriormente, los nombres de nodo reflejan el tipo de dispositivo, no el modelo particular. Ver sección <em>2.2.2</em> de la specificación ePAPR, para una lista genérica de nombre de nodo que deberían utilizarse habitualmente.</p></li>
+</ul>
+</section>
+<section id="comprension-de-la-propiedad-compatible">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">Comprensión de la propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code></a><a class="headerlink" href="#comprension-de-la-propiedad-compatible" title="Link to this heading"></a></h2>
+<p>Cada nodo, representando en el árbol, a un dispositivo; requerirá tener la propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code>. <code class="docutils literal notranslate"><span class="pre">compatible</span></code> es la <em>llave</em>, que utiliza el <em>OS</em>, para decidir qué controlador bincular a <em>cual</em> dispositivo.</p>
+<p><code class="docutils literal notranslate"><span class="pre">compatible</span></code> es una lista de cadenas. La primera cadena en la lista, especifica el dispositivo exacto, que representa al nodo con la forma <code class="docutils literal notranslate"><span class="pre">&lt;fabricante&gt;,&lt;modelo&gt;</span></code>. Las siguientes cadenas representan otros dispositivos <em>compatibles</em>.</p>
+<p>Por ejemplo, el sistema(SoC) <code class="docutils literal notranslate"><span class="pre">Freescale</span> <span class="pre">MPC8349</span></code>, posee un dispositivo en serie, el cual implementa la interfasee de registro <em>National Semiconductor ns16550</em>. La propiedad <code class="docutils literal notranslate"><span class="pre">compatible</span></code> para el <em>dispositivo en serie</em> MPC8349,
+debería ser: <code class="docutils literal notranslate"><span class="pre">compatible</span> <span class="pre">=</span> <span class="pre">&quot;fsl,mpc8349-uart,</span> <span class="pre">ns16550</span></code>. En este caso, <em>fsl,mpc8349-uart</em> especifica el dispositivo exacto, y <em>ns16550</em> determina su compatibilidad, a nivel de registro, con un <em>National Semiconductor 16550 UART</em>.</p>
+<p><strong>nota</strong>: <em>ns16550</em> no tiene prefijo de fabricante -sólo por razones históricas. Todos los valores <code class="docutils literal notranslate"><span class="pre">compatible</span></code> deberían utilizarse con el <em>prefijo de fabricante</em>.</p>
+<p>Esta práctica, permite a <em>controladores</em> existentes, ser vinculados a nuevos dispositivos y, a la vez que identifica de forma única, el <em>hardware</em> exacto.</p>
+<p>Advertencia: no utilizar símbolos “comodín”, en valores <code class="docutils literal notranslate"><span class="pre">compatible</span></code> como <code class="docutils literal notranslate"><span class="pre">fsl,mpc83xx-uart</span></code> o similares. Vendedores de <em>chips de silicio</em>, invariablemente, quebrarán esta <em>asunción</em> de reglas, en el peor momento. En su lugar, especificar el <em>hardware</em>, y compatibilizar el resto de <em>chips</em> con él.</p>
+</section>
+<section id="funcionamiento-del-enrutado">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">Funcionamiento del _enrutado ####</a><a class="headerlink" href="#funcionamiento-del-enrutado" title="Link to this heading"></a></h2>
+<p>Dispositivos direccionables, utilizan las siguientes propiedades para codificar la
+información de dirección dentro del <em>DT</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span>
+<span class="c1">#address-cells</span>
+<span class="c1">#size-cells</span>
+</pre></div>
+</div>
+<p>Cada dispositivo direccionable, consigue un <code class="docutils literal notranslate"><span class="pre">reg</span></code>, el cual es una lista de <em>tuplas</em> en forma <code class="docutils literal notranslate"><span class="pre">&lt;reg</span> <span class="pre">=</span> <span class="pre">&lt;address1length1</span> <span class="pre">[address2</span> <span class="pre">length2]</span> <span class="pre">[address3</span> <span class="pre">length3]</span> <span class="pre">...</span> <span class="pre">&gt;</span></code>. Cada tupla representa un rango, utilizado por el dispositivo. Cada valor, es una lista de uno o mas <em>enteros</em> de <code class="docutils literal notranslate"><span class="pre">32bit</span></code> llamados celdas. El tamaño del valor, podría ser una lista de celdas, o estar vacío.</p>
+<p>Los campos <em>dirección</em> y <em>longitud</em>, son variables en tamaño, las propiedades <code class="docutils literal notranslate"><span class="pre">#address-cells</span></code> y <code class="docutils literal notranslate"><span class="pre">#size-cells</span></code> en el nodo ascendente, son utilizadas para establecer cuantas celdas tiene cada campo. En otras palabras, interpretar la propiedad <code class="docutils literal notranslate"><span class="pre">reg</span></code> corectamente, requiere el valor de los nodos ascendentes <code class="docutils literal notranslate"><span class="pre">#address-cells</span></code> y <code class="docutils literal notranslate"><span class="pre">#size-cells</span></code>. Para ver como funciona todo esto, será añadida la propiedad <em>direc-</em> <em>cionado</em>, en el ejemplo DT.</p>
+</section>
+<section id="direccionado-de-cpu">
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">Direccionado de CPU</a><a class="headerlink" href="#direccionado-de-cpu" title="Link to this heading"></a></h2>
+<p>Los nodos CPU. representan un caso simple cuando se habla acerca del <em>direccionado</em>. Cada CPU  es identificada con un úncio <em>ID</em> -no hay tamaño asociado al mismo.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpus</span> <span class="p">{</span>
+   <span class="c1">#address-cells = &lt;1&gt;;</span>
+   <span class="c1">#size-cells = &lt;0&gt;;</span>
+   <span class="n">cpu</span><span class="o">@</span><span class="mi">0</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,cortex-a9&quot;</span><span class="p">;</span>
+      <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+   <span class="n">cpu</span><span class="o">@</span><span class="mi">1</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,cortex-a9&quot;</span><span class="p">;</span>
+      <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>En los nodos CPUs, <code class="docutils literal notranslate"><span class="pre">#address-cells</span></code> es asignado a <code class="docutils literal notranslate"><span class="pre">1</span></code> y, <code class="docutils literal notranslate"><span class="pre">#size-cells</span></code> a <code class="docutils literal notranslate"><span class="pre">0</span></code>. Esto significa que los valores <code class="docutils literal notranslate"><span class="pre">reg</span></code> <em>descendientes</em>, son un único <code class="docutils literal notranslate"><span class="pre">32bit</span></code>, que repre- senta la dirección de, sin el campos <em>tamaño</em>. En éste caso, las dos CPUs, son asignadas a la dirección  <code class="docutils literal notranslate"><span class="pre">0</span></code> y <code class="docutils literal notranslate"><span class="pre">1</span></code>. <code class="docutils literal notranslate"><span class="pre">#size-cells</span></code> es <code class="docutils literal notranslate"><span class="pre">0</span></code> para los nodos CPU, por que en amabas CPUs, sólo hay asignada una dirección.</p>
+<p>El valor de <code class="docutils literal notranslate"><span class="pre">reg</span></code>, coincide con el valor del <em>nombre de nodo</em>. Por convención, si un nodo, tiene la propiedad <code class="docutils literal notranslate"><span class="pre">reg</span></code>, el nombre de nodo debe incluir <code class="docutils literal notranslate"><span class="pre">unit-addres</span></code>, el cual es el primer valor de dirección en la propiedad <code class="docutils literal notranslate"><span class="pre">reg</span></code></p>
+</section>
+<section id="dispositivo-memoria-de-mapeada">
+<h2><a class="toc-backref" href="#id20" role="doc-backlink">Dispositivo memoria de <em>mapeada</em></a><a class="headerlink" href="#dispositivo-memoria-de-mapeada" title="Link to this heading"></a></h2>
+<p>En lugar de una sóla dirección, tal y como se encuentra en los nodos CPU, la <em>memoria</em> <em>mapeada de un dispositivo</em>, asigna un rango de direcciones, a las que responderá. <code class="docutils literal notranslate"><span class="pre">#size-cells</span></code> es utilizado para establecer <em>cuánto de largo</em>, es el campo, en la tupla de la variable <code class="docutils literal notranslate"><span class="pre">reg</span></code>. En el siguiente ejemplo, cada valor para la dirección de celda <code class="docutils literal notranslate"><span class="pre">#address-cells</span></code> es <code class="docutils literal notranslate"><span class="pre">1</span></code>(32bit) y, cada valor de <em>longitud</em>, es también <em>una celda</em>. En sistemas de <em>32bit</em>, es esto lo habitual . Para máquinas de <em>64bit</em>, podría usarse el valor <code class="docutils literal notranslate"><span class="pre">2</span></code>, en los campos <code class="docutils literal notranslate"><span class="pre">#address-cells</span></code> y <code class="docutils literal notranslate"><span class="pre">#size-cells</span></code>, para conseguir <em>64bit</em> en el direccionado del DT.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="p">;</span>
+
+<span class="o">/</span> <span class="p">{</span>
+    <span class="c1">#address-cells = &lt;1&gt;;</span>
+    <span class="c1">#size-cells = &lt;1&gt;;</span>
+
+    <span class="o">...</span>
+
+    <span class="n">serial</span><span class="o">@</span><span class="mi">101</span><span class="n">f0000</span> <span class="p">{</span>
+        <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl011&quot;</span><span class="p">;</span>
+        <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x101f0000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="n">serial</span><span class="o">@</span><span class="mi">101</span><span class="n">f2000</span> <span class="p">{</span>
+        <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl011&quot;</span><span class="p">;</span>
+        <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x101f2000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="n">gpio</span><span class="o">@</span><span class="mi">101</span><span class="n">f3000</span> <span class="p">{</span>
+        <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl061&quot;</span><span class="p">;</span>
+        <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x101f3000</span> <span class="mh">0x1000</span>
+               <span class="mh">0x101f4000</span> <span class="mh">0x0010</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="n">interrupt</span><span class="o">-</span><span class="n">controller</span><span class="o">@</span><span class="mi">10140000</span> <span class="p">{</span>
+        <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl190&quot;</span><span class="p">;</span>
+        <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x10140000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="n">spi</span><span class="o">@</span><span class="mi">10115000</span> <span class="p">{</span>
+        <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl022&quot;</span><span class="p">;</span>
+        <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x10115000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="o">...</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Para cada dispositivo, es asignada una <em>base</em> de direccción y, un <em>tamaño</em>, de la región, a la qque es asignada. la dirección de dispositivo GPIO en este ejemplo, es asignada a dos rangos; <code class="docutils literal notranslate"><span class="pre">0x101f3000...0x101f3fff</span></code> y <code class="docutils literal notranslate"><span class="pre">0x101f4000..0x101f400f</span></code>.</p>
+<p>Algunos dispositivos, se encuentran en un <em>bus</em>, con un esquema de <em>direccionado</em> distinto. Ejemplo, un dispositivo podría ser acoplado a un bus externo con <em>líneas</em> <em>discretas de selección de chips(discrete chip select lines)</em>. Puesto que cada nodo ascendente, define el <em>nombre de dominio</em> para su descendiente, el <em>mapeado</em> de direc- ción, podrá ser seleccionado, como mejor desccriba al sistema. El código de abajo, muestra la asignación de dirección, para los dispositivos acoplados a un bus externo, codificando el número de chip(ID) seleccionado, dentro de la dirección.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">external</span><span class="o">-</span><span class="n">bus</span> <span class="p">{</span>
+   <span class="c1">#address-cells = &lt;2&gt;;</span>
+   <span class="c1">#size-cells = &lt;1&gt;;</span>
+
+   <span class="n">ethernet</span><span class="o">@</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;smc,smc91c111&quot;</span><span class="p">;</span>
+      <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="mi">0</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+
+   <span class="n">i2c</span><span class="o">@</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;acme,a1234-i2c-bus&quot;</span><span class="p">;</span>
+      <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1</span> <span class="mi">0</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="n">rtc</span><span class="o">@</span><span class="mi">58</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;maxim,ds1338&quot;</span><span class="p">;</span>
+      <span class="p">};</span>
+   <span class="p">};</span>
+
+   <span class="n">flash</span><span class="o">@</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+   <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;samsung,k8f1315ebm&quot;</span><span class="p">,</span> <span class="s2">&quot;cfi-flash&quot;</span><span class="p">;</span>
+   <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">2</span> <span class="mi">0</span> <span class="mh">0x4000000</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>El bus externo, utiliza 2 celdas para el valor de dirección; una para seleccionar el número de chip y, otra par el <code class="docutils literal notranslate"><span class="pre">offset</span></code>, desde la base del <em>chip</em> seleccionado. La longitud del campo, permanece como una sóla celda, ya que únicamente la parte del <code class="docutils literal notranslate"><span class="pre">offset</span></code> de la dirección,  necesita tener un rango. Por lo que en este ejemplo, cada entrada <code class="docutils literal notranslate"><span class="pre">reg</span></code>, contiene tres  celdas; <em>el número de chip</em>, <em>el offset</em> y, <em>la longitud</em>.</p>
+<p>Como el dominio de la dirección, en un nodo y su descendiente, los nodos ascendentes, son libres para definir cualquier <em>esquema de direccionado</em>, que tenga sentido para el bus. Los nodos que estén fuera del <em>ascendente</em> y <em>descendente</em> inmediato, no tendrán que preocuparse por el direccionado <em>local</em>, del dominio y, las direcciones deberán ser <em>mapeadas</em>, para ser obtenenidas de un nodo a otro.</p>
+</section>
+<section id="dispositivo-de-memoria-no-mapeada">
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">Dispositivo de memoria <em>no mapeada</em></a><a class="headerlink" href="#dispositivo-de-memoria-no-mapeada" title="Link to this heading"></a></h2>
+<p>Otros dispositivos no tienen un <em>mapa de memoria</em> dentro del bus del procesador. Podrán tener rangos de direcciones, pero no son directamente accesibles por la CPU. Los controladores <em>ascendentes</em>, de dispositivo, deberían llevar a cabo accesos <em>indi-</em> <em>rectos</em>, en nombre de la CPU.</p>
+<p>Para seguir el ejemplo de dispositivos <code class="docutils literal notranslate"><span class="pre">i2c</span></code>, cada uno de ellos es asignado a una dirección,  pero no hay un rango de direcciones asociadas a ellos. Se parece mucho más a la asignación de direcciones de la CPU.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">i2c</span><span class="o">@</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+   <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;acme,a1234-i2c-bus&quot;</span><span class="p">;</span>
+   <span class="c1">#address-cells = &lt;1&gt;;</span>
+   <span class="c1">#size-cells = &lt;0&gt;;</span>
+   <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1</span> <span class="mi">0</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+
+   <span class="n">rtc</span><span class="o">@</span><span class="mi">58</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;maxim,ds1338&quot;</span><span class="p">;</span>
+      <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">58</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;maxim,ds1338&quot;</span><span class="p">;</span>
+      <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">58</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="rangos-traduccion-de-direcciones">
+<h2><a class="toc-backref" href="#id22" role="doc-backlink">Rangos (<em>traducción</em> de direcciones)</a><a class="headerlink" href="#rangos-traduccion-de-direcciones" title="Link to this heading"></a></h2>
+<p>Hemos hablado sobre cómo asignar direcciones a un dispositivo, pero en este punto, esas direcciones son <em>locales</em> al nodo de dispositivo. Aún no describen como <em>mapear</em> desde esas direcciones a una dirección que pueda utilizar la CPU.</p>
+<p>El nodo raíz, siempre describe el <em>punto de vista</em> -o ámbito, del espacio de dirección de la CPU. Nodos <em>descendientes</em> de la <em>raíz</em>, ya usan la <em>dirección de dominio</em> de las CPUs. No necesitan un mapeado explícito. Ejem. <code class="docutils literal notranslate"><span class="pre">serial&#64;101f0000</span></code> es asignado a la dirección <code class="docutils literal notranslate"><span class="pre">0x101f0000</span></code>.</p>
+<p>Los nodos que no son descendientes directos de la <em>raíz</em>, no utilizarán la <em>dirección</em> <em>de dominio</em> de las CPUs. A fín de obtener <em>el direccionado del mapa de memoria</em>, el DT, debe especificar cómo traducir estas direcciones, desde un dominio a otro. La propiedad <code class="docutils literal notranslate"><span class="pre">ranges</span></code>(rangos), es utilizada con éste propósito.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="p">;</span>
+
+  <span class="o">/</span> <span class="p">{</span>
+     <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;acme,coyotes-revenge&quot;</span><span class="p">;</span>
+     <span class="c1">#address-cells = &lt;1&gt;;</span>
+     <span class="c1">#size-cells = &lt;1&gt;;</span>
+
+     <span class="o">...</span>
+
+     <span class="n">external</span><span class="o">-</span><span class="n">bus</span> <span class="p">{</span>
+        <span class="c1">#address-cells = &lt;2&gt;;</span>
+        <span class="c1">#size-cells = &lt;1&gt;;</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="mi">0</span> <span class="mh">0x10100000</span> <span class="mh">0x10000</span><span class="o">&gt;</span><span class="p">,</span>   <span class="o">/*</span> <span class="n">CS0</span><span class="p">:</span> <span class="n">Ethernet</span>    <span class="o">*/</span>
+                 <span class="o">&lt;</span><span class="mi">1</span> <span class="mi">0</span> <span class="mh">0x10160000</span> <span class="mh">0x10000</span><span class="o">&gt;</span><span class="p">,</span>   <span class="o">/*</span> <span class="n">CS1</span><span class="p">:</span> <span class="n">I2C</span> <span class="n">Controller</span> <span class="o">*/</span>
+                 <span class="o">&lt;</span><span class="mi">2</span> <span class="mi">0</span> <span class="mh">0x30000000</span> <span class="mh">0x1000000</span><span class="o">&gt;</span><span class="p">;</span> <span class="o">/*</span> <span class="n">CS2</span><span class="p">:</span> <span class="n">NOR</span> <span class="n">Flash</span>   <span class="o">*/</span>
+
+        <span class="n">ethernet</span><span class="o">@</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+              <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;smc,smc91c111&quot;</span><span class="p">;</span>
+              <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="mi">0</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="p">};</span>
+
+        <span class="n">i2c</span><span class="o">@</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+              <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;acme,a1234-i2c-bus&quot;</span><span class="p">;</span>
+              <span class="c1">#address-cells = &lt;1&gt;;</span>
+              <span class="c1">#size-cells = &lt;0&gt;;</span>
+              <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1</span> <span class="mi">0</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+
+              <span class="n">rtc</span><span class="o">@</span><span class="mi">58</span> <span class="p">{</span>
+                 <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;maxim,ds1338&quot;</span><span class="p">;</span>
+                 <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">58</span><span class="o">&gt;</span><span class="p">;</span>
+              <span class="p">};</span>
+        <span class="p">};</span>
+
+        <span class="n">flash</span><span class="o">@</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+              <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;samsung,k8f1315ebm&quot;</span><span class="p">,</span> <span class="s2">&quot;cfi-flash&quot;</span><span class="p">;</span>
+              <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">2</span> <span class="mi">0</span> <span class="mh">0x4000000</span><span class="o">&gt;</span><span class="p">;</span>
+        <span class="p">};</span>
+     <span class="p">};</span>
+  <span class="p">};</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ranges</span></code> es una lista de traducciones de dirección. Cada entrada en la tabla de rangos es una tupla, conteniendo la dirección <em>descendente</em>, <em>ascendente</em> y, el tamaño de la región, en el espacio de dirección <em>descendente</em>. El tamaño de cada  campo, es deter- minado tomando los valores de las celdas <code class="docutils literal notranslate"><span class="pre">#address-cells</span></code> descendentes, ascendentes y, el valor de la celda <code class="docutils literal notranslate"><span class="pre">#size-cells</span></code> descendente. En el emplo del <em>bus externo</em>, la dirección descendente es de <code class="docutils literal notranslate"><span class="pre">2</span></code> celdas, y la dirección ascendente es <code class="docutils literal notranslate"><span class="pre">1</span></code> celda y, el tamaño es también <code class="docutils literal notranslate"><span class="pre">1</span></code> celda. Son traducidos tres rangos, -<code class="docutils literal notranslate"><span class="pre">range</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Offset</span> <span class="mi">0</span> <span class="kn">from</span><span class="w"> </span><span class="nn">chip</span> <span class="n">select</span> <span class="mi">0</span> <span class="ow">is</span> <span class="n">mapped</span> <span class="n">to</span> <span class="n">address</span> <span class="nb">range</span> <span class="mh">0x10100000</span><span class="o">.</span><span class="mf">.0</span><span class="n">x1010ffff</span>
+<span class="n">Offset</span> <span class="mi">0</span> <span class="kn">from</span><span class="w"> </span><span class="nn">chip</span> <span class="n">select</span> <span class="mi">1</span> <span class="ow">is</span> <span class="n">mapped</span> <span class="n">to</span> <span class="n">address</span> <span class="nb">range</span> <span class="mh">0x10160000</span><span class="o">.</span><span class="mf">.0</span><span class="n">x1016ffff</span>
+<span class="n">Offset</span> <span class="mi">0</span> <span class="kn">from</span><span class="w"> </span><span class="nn">chip</span> <span class="n">select</span> <span class="mi">2</span> <span class="ow">is</span> <span class="n">mapped</span> <span class="n">to</span> <span class="n">address</span> <span class="nb">range</span> <span class="mh">0x30000000</span><span class="o">.</span><span class="mf">.0</span><span class="n">x30ffffff</span>
+</pre></div>
+</div>
+<p>De forma alternativa, si el espacio de dirección ascendente y descendente son identicos en su lugar, el nodo podrá añadir la propiedad <code class="docutils literal notranslate"><span class="pre">ranges</span></code> vacía. La presencia de la propiedad <code class="docutils literal notranslate"><span class="pre">ranges</span></code> vacia, significa que las direcciones, en el espacio de dirección descendente, están <em>mapeados</em> <code class="docutils literal notranslate"><span class="pre">1:1</span></code> dentro del espacio de dirección ascendente.</p>
+<p>Podría preguntarse, por qué la traducción de direcciones, es utilizada para todo, cuando <em>todo</em> podría estar escrito con un <em>mapa</em> <code class="docutils literal notranslate"><span class="pre">1:1</span></code> (uno a uno). Algunos buses -como PCI, tienen un espacio de direcciones completamente distinto, cuyos detalles deberán ser expuestos <em>al SO</em>. Otros, constan de <em>motor</em> DMA, el cual necesita conocer la dirección <em>real</em> en el bus. En ocasiones, los dispositivos necesitan estar agrupados, por que comparten el mismo <em>mapa físico de dirección</em>, para el <em>software</em> programable. Donde el uso de <em>mapas</em> <code class="docutils literal notranslate"><span class="pre">1:1</span></code> -o no, depende
+estrechamente de la información que necesite el OS, y del diswño del <em>hardware</em>.</p>
+<p>Nótese también, que no hay propiedad <code class="docutils literal notranslate"><span class="pre">ranges</span></code> en el nodo <code class="docutils literal notranslate"><span class="pre">i2c&#64;1,0</span></code>. La razón, que a diferencia del bus externo, dispositivos en el bus <code class="docutils literal notranslate"><span class="pre">i2c</span></code> no tienen un <em>mapa de memoria</em> en la dirección de dominio de la CPU. En su lugar, la CPU accede indirectamente al dispositivo <code class="docutils literal notranslate"><span class="pre">rtc&#64;58</span></code> a través de <code class="docutils literal notranslate"><span class="pre">i2c&#64;1,0</span></code>. La ausencia de la propiedad <code class="docutils literal notranslate"><span class="pre">ranges</span></code>, significa que un dispositivo no puede ser accedido directamente por ninǵún otro dispositivo mas que por su ascendente.</p>
+</section>
+<section id="como-funcionan-las-interrupciones">
+<h2><a class="toc-backref" href="#id23" role="doc-backlink">Cómo funcionan las interrupciones</a><a class="headerlink" href="#como-funcionan-las-interrupciones" title="Link to this heading"></a></h2>
+<p>A diferencia de la traducción -memoria, de <code class="docutils literal notranslate"><span class="pre">range</span></code>, la cual sigue la estructura natural del árbol, las señales de interrupción, podrán originarse y, finalizar, en cualquier dispositivo.  Contrariamente al direccionado de dispositivo, -expesado naturamente en el DT; las señales de interrupción son enlaces entre nodos independientes del DT.
+Cuatro propiedades son utilizadas para describirlas:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">interrupt-controller</span></code> Propiedad vacía, declarando un nodo como dispositivo que recive señales de linterrupción.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#interrupt-cells</span></code> Propiedad del nodo contralador de interrupciones. Establece cuantas celdas hay, en el <em>especificador de interrupción</em> del controlador. Similar a <code class="docutils literal notranslate"><span class="pre">#address-cells</span></code> y <code class="docutils literal notranslate"><span class="pre">#size-cells</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interrupt-parent</span></code> propiedad conteniendo un <code class="docutils literal notranslate"><span class="pre">phandle``[f99],</span> <span class="pre">al</span> <span class="pre">controlador</span> <span class="pre">de</span> <span class="pre">inte-</span> <span class="pre">rrupción,</span> <span class="pre">al</span> <span class="pre">que</span> <span class="pre">está</span> <span class="pre">acoplado.</span> <span class="pre">Nodos</span> <span class="pre">sin</span> <span class="pre">propiedad</span> <span class="pre">``interrupt-parent</span></code>, prodrán heredarla desde el nodo ascendente.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interrupts</span></code> Propiedad del nodo, conteniendo una lista de especificadores interrupción, con una señal de salida, para cada uno.</p></li>
+</ul>
+<p>Un enumerador de interrupción, es una o más celdas de datos, definida por <code class="docutils literal notranslate"><span class="pre">#interrupt-cells</span></code> especificando a qué interrupción de entrada está acoplado el dispositivo. La mayoría, sólo tienen una interrupción de salida, tal y como se muestra en el ejemplo de abajo. Es posible que hayan múltiples interrupciones de ssalida. El significado, de un <em>especificador de interrupción</em>, depende énteramente del enlace del controlador de interrupción del dispositivo. Cada controlador de interrupción, podrá decidir cuantas celdas necesita, inequívocamente una inetrrupción de entradda.</p>
+<p>El siguiente código, añade conexiones de interrupción a nuestra máquina de ejemplo <em>Coyote’s Revenge</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">dts</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="p">;</span>
+
+<span class="o">/</span> <span class="p">{</span>
+   <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;acme,coyotes-revenge&quot;</span><span class="p">;</span>
+   <span class="c1">#address-cells = &lt;1&gt;;</span>
+   <span class="c1">#size-cells = &lt;1&gt;;</span>
+   <span class="n">interrupt</span><span class="o">-</span><span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">intc</span><span class="o">&gt;</span><span class="p">;</span>
+
+   <span class="n">cpus</span> <span class="p">{</span>
+      <span class="c1">#address-cells = &lt;1&gt;;</span>
+      <span class="c1">#size-cells = &lt;0&gt;;</span>
+
+      <span class="n">cpu</span><span class="o">@</span><span class="mi">0</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,cortex-a9&quot;</span><span class="p">;</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="p">};</span>
+
+      <span class="n">cpu</span><span class="o">@</span><span class="mi">1</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,cortex-a9&quot;</span><span class="p">;</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="p">};</span>
+   <span class="p">};</span>
+
+   <span class="n">serial</span><span class="o">@</span><span class="mi">101</span><span class="n">f0000</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl011&quot;</span><span class="p">;</span>
+      <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x101f0000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+
+   <span class="n">serial</span><span class="o">@</span><span class="mi">101</span><span class="n">f2000</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl011&quot;</span><span class="p">;</span>
+      <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x101f2000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">2</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+
+   <span class="n">gpio</span><span class="o">@</span><span class="mi">101</span><span class="n">f3000</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl061&quot;</span><span class="p">;</span>
+      <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x101f3000</span> <span class="mh">0x1000</span>
+               <span class="mh">0x101f4000</span> <span class="mh">0x0010</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">3</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+
+   <span class="n">intc</span><span class="p">:</span> <span class="n">interrupt</span><span class="o">-</span><span class="n">controller</span><span class="o">@</span><span class="mi">10140000</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl190&quot;</span><span class="p">;</span>
+      <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x10140000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="n">interrupt</span><span class="o">-</span><span class="n">controller</span><span class="p">;</span>
+      <span class="c1">#interrupt-cells = &lt;2&gt;;</span>
+   <span class="p">};</span>
+
+   <span class="n">spi</span><span class="o">@</span><span class="mi">10115000</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,pl022&quot;</span><span class="p">;</span>
+      <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x10115000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">4</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+
+   <span class="n">external</span><span class="o">-</span><span class="n">bus</span> <span class="p">{</span>
+      <span class="c1">#address-cells = &lt;2&gt;;</span>
+      <span class="c1">#size-cells = &lt;1&gt;;</span>
+      <span class="n">ranges</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="mi">0</span> <span class="mh">0x10100000</span> <span class="mh">0x10000</span><span class="o">&gt;</span><span class="p">,</span>   <span class="o">/*</span> <span class="n">Chipselect</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ethernet</span>       <span class="o">*/</span>
+               <span class="o">&lt;</span><span class="mi">1</span> <span class="mi">0</span> <span class="mh">0x10160000</span> <span class="mh">0x10000</span><span class="o">&gt;</span><span class="p">,</span>   <span class="o">/*</span> <span class="n">Chipselect</span> <span class="mi">1</span><span class="p">,</span> <span class="n">I2C</span> <span class="n">controller</span> <span class="o">*/</span>
+               <span class="o">&lt;</span><span class="mi">2</span> <span class="mi">0</span> <span class="mh">0x30000000</span> <span class="mh">0x1000000</span><span class="o">&gt;</span><span class="p">;</span> <span class="o">/*</span> <span class="n">Chipselect</span> <span class="mi">2</span><span class="p">,</span> <span class="n">NOR</span> <span class="n">Flash</span>      <span class="o">*/</span>
+
+      <span class="n">ethernet</span><span class="o">@</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;smc,smc91c111&quot;</span><span class="p">;</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="mi">0</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+            <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">5</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="p">};</span>
+
+      <span class="n">i2c</span><span class="o">@</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;acme,a1234-i2c-bus&quot;</span><span class="p">;</span>
+            <span class="c1">#address-cells = &lt;1&gt;;</span>
+            <span class="c1">#size-cells = &lt;0&gt;;</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">1</span> <span class="mi">0</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+            <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">6</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
+
+            <span class="n">rtc</span><span class="o">@</span><span class="mi">58</span> <span class="p">{</span>
+               <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;maxim,ds1338&quot;</span><span class="p">;</span>
+               <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">58</span><span class="o">&gt;</span><span class="p">;</span>
+               <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">7</span> <span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span>
+            <span class="p">};</span>
+      <span class="p">};</span>
+
+      <span class="n">flash</span><span class="o">@</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span> <span class="p">{</span>
+            <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;samsung,k8f1315ebm&quot;</span><span class="p">,</span> <span class="s2">&quot;cfi-flash&quot;</span><span class="p">;</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">2</span> <span class="mi">0</span> <span class="mh">0x4000000</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="p">};</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Señalar lo siguiente:</p>
+<p>La máquina tiene un único controlador de interrupción, <code class="docutils literal notranslate"><span class="pre">interrupt-controller&#64;10140000</span></code>. La etiqueta <code class="docutils literal notranslate"><span class="pre">intc:</span></code> ha sido añadida al nodo controlador de interrupción, y la etiqueta fué utilizada para asignar un <code class="docutils literal notranslate"><span class="pre">phandle</span></code> a la propiedad <code class="docutils literal notranslate"><span class="pre">interrupt-parent</span></code> en el nodo raíz. El valor de <code class="docutils literal notranslate"><span class="pre">interrupt-parent</span></code> se tomará <em>por defecto</em> en el sistema, puesto que los nodos descendentes <em>heredarán</em> su valor, a menos que explícitamente esté sobre- escrito. Cada dispositivo utiliza una propiedad <em>interrpción</em>, para especificar una <em>línea de</em> <em>interrupción</em> distinta. <code class="docutils literal notranslate"><span class="pre">#interrupt-cells</span></code> es <code class="docutils literal notranslate"><span class="pre">2</span></code>, por lo que cada <em>enumerador</em> tendrá 2 celdas. Este ejemplo, usa un patrón común; usar la primera celda, para codificar el número de  línea de interrupción y, la segunda celda, para codificar opciones -flag, <em>sensibles</em>, como <code class="docutils literal notranslate"><span class="pre">active</span> <span class="pre">high</span></code> vs. <code class="docutils literal notranslate"><span class="pre">active</span> <span class="pre">low</span></code> o <code class="docutils literal notranslate"><span class="pre">edge</span></code> vs. <code class="docutils literal notranslate"><span class="pre">level</span></code>. Para un controlador de  interrupción dado, referir la documentación de <em>enlaces</em>, para aprender cómo dodificar los <em>enumeradores</em>.</p>
+</section>
+<section id="datos-especificos-de-dispositivo">
+<h2><a class="toc-backref" href="#id24" role="doc-backlink">Datos específicos de dispositivo</a><a class="headerlink" href="#datos-especificos-de-dispositivo" title="Link to this heading"></a></h2>
+<p>Tras la propiedades comunes, otras <em>arbitrarias</em> y, nodos descendentes, podrán ser añadidas a los nodos. Cualquier dato requerido por el OS, podrá ser añadido, siempre que sigamos <em>determinadas regla</em>.</p>
+<p>Primero, los nombres de propiedades, para nuevos <code class="docutils literal notranslate"><span class="pre">device-specific</span></code> -dispositivos específicos, deberán usar un prefijo de fabricante, de esta mforma no entrarán en conflicto, con nombres de propiedades estandar, ya existentes.</p>
+<p>Segundo, <em>la intención</em> de la propiedad y los nodos descendentes, deberá estar documentada en un enlace, así, el <strong>autor</strong> de un controlador de dispositivo, sabrá como interpretar los datos. Un enlace documenta qué significa un valor compatible en particular, qué propiedad debería tener, qué nodos descendentes podría enumerar y, a qué dispositivo representa. Cada valor <code class="docutils literal notranslate"><span class="pre">compatible</span></code> único, debería tener sus própias vinculaciones -o reclamar compatibilidad, con otro valor <code class="docutils literal notranslate"><span class="pre">compatible</span></code>. Vinculaciones para nuevos dispositivos serán documentados, proxímamente, en ésta <a class="reference external" href="https://docs.raulvilchez.org/">StS</a>  <a class="footnote-reference brackets" href="#f3" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>. Ver la página principal de la citada <em>fuente</em>, para una descripción del formato de documentación y proceso de revisión.</p>
+<p>Tercero, publicar nuevas vinculaciones, para ser revisada en la lista de correo: <a class="reference external" href="mailto:devicetree-discuss&#37;&#52;&#48;lists&#46;ozlabs&#46;org">devicetree-discuss<span>&#64;</span>lists<span>&#46;</span>ozlabs<span>&#46;</span>org</a>. La revisión de nuevas vinculaciones, capturan muchos errores comunes, que causarán posteriores problemas.</p>
+</section>
+<section id="nodos-especiales">
+<h2><a class="toc-backref" href="#id25" role="doc-backlink">Nodos especiales</a><a class="headerlink" href="#nodos-especiales" title="Link to this heading"></a></h2>
+<p><strong>Nodo</strong> <code class="docutils literal notranslate"><span class="pre">aliases</span></code></p>
+<p>Un nodo específico es normalmente referido con la <em>ruta absoluta</em>, como: <code class="docutils literal notranslate"><span class="pre">/external-bus/ethernet&#64;0,0,</span></code>, pero resulta incómodo, cuando un usuario lo que quiere, es saber <em>qué dispositivo es ``eth0``</em>. Los nodos <em>alias</em>, pueden ser utilizados para asignar un <em>nombre corto</em>, a la ruta de un dispositivo. Por ejemplo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aliases</span> <span class="p">{</span>
+   <span class="n">ethernet0</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">eth0</span><span class="p">;</span>
+   <span class="n">serial0</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">serial0</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>El OS es <em>instado</em> a utilizar estos <em>alias</em>, cuando es asignado un identificados al dispositivo.</p>
+<p>Aparece aquí, una nueva <em>sintaxis</em>. La propiedad <code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">=</span> <span class="pre">&amp;label;</span></code> asigna la ruta del nodo, referenciado por la <em>etiqueta</em>, como una propiedad de tipo <code class="docutils literal notranslate"><span class="pre">string</span></code> -cadena. Resulta distinto al formato <em>phandle</em> <code class="docutils literal notranslate"><span class="pre">phandle</span> <span class="pre">=</span> <span class="pre">&lt;</span> <span class="pre">&amp;label</span> <span class="pre">&gt;;</span></code> usado anteriormente <em>Phandle</em> inserta un valor dentro de la celda.</p>
+</section>
+<section id="nodo-escogido">
+<h2><a class="toc-backref" href="#id26" role="doc-backlink">Nodo <em>escogido</em></a><a class="headerlink" href="#nodo-escogido" title="Link to this heading"></a></h2>
+<p>El nodo <em>excogido</em> -o seleccionado, representa un dispositivo real. Es utilizado como <em>lugar</em>, para pasar datos entre el <em>firmware</em> y el sistema operativo; tales como argumentos en el arranque. Los datos en el <em>nodo escogido</em> no representa al <em>hardware</em>. Los archivos fuente son guardados con formato <code class="docutils literal notranslate"><span class="pre">dts</span></code> y, suele estar vacío. Es poblado durante el arranque del sistema.</p>
+<p>En el ejemplo de <em>sistema</em>, el <em>firmware</em> podría añadir el siguiente código al nodo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chosen</span> <span class="p">{</span>
+   <span class="n">bootargs</span> <span class="o">=</span> <span class="s2">&quot;root=/dev/nfs rw nfsroot=192.168.1.1 console=ttyS0,115200&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="temas-avanzados">
+<h2><a class="toc-backref" href="#id27" role="doc-backlink">Temas avanzados</a><a class="headerlink" href="#temas-avanzados" title="Link to this heading"></a></h2>
+<p><strong>Ejemplo avanzado de máquina</strong></p>
+<p>Ha sido definido lo básico, es el momento de añadir “algo” de <em>hardware</em> al ejemplo de máquina, y así discutir cuestiones más complicadas.</p>
+<p>El <em>ejemplo avanzado</em>, añade un PCI <em>host bridge(puente anfitrión)</em> el cuál controla los registro de <em>memoria mapeada</em> en <code class="docutils literal notranslate"><span class="pre">0x10180000</span></code>, y <em>barras programadas?(BARs)</em> al principio de la dirección <code class="docutils literal notranslate"><span class="pre">0x80000000</span></code>.</p>
+<p>Los siguentes datos aparecen en el DT, describiendose el nodo <em>PCI host bridge</em> tal y
+como se sucede:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pci</span><span class="o">@</span><span class="mi">10180000</span> <span class="p">{</span>
+   <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,versatile-pci-hostbridge&quot;</span><span class="p">,</span> <span class="s2">&quot;pci&quot;</span><span class="p">;</span>
+   <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x10180000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">8</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="pci-host-bridge-puente-anfitrion-pci">
+<h2><a class="toc-backref" href="#id28" role="doc-backlink">PCI host bridge(puente anfitrion PCI)</a><a class="headerlink" href="#pci-host-bridge-puente-anfitrion-pci" title="Link to this heading"></a></h2>
+<p>Cierto conocimiento previo, sobre PCI, es necesario. Esto NO es un tutorial sobre PCI, de necesitar información sobre el mismo, son de recomendada lectura <a class="footnote-reference brackets" href="#f3" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>. Igualmente referirse a sPAPR v1.1 <a class="footnote-reference brackets" href="#f4" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> or <em>vinculaciones al Bus PCI en Open Firmware</em>. Desde <em>Freescale</em> <code class="docutils literal notranslate"><span class="pre">MPC5200</span></code> se muestra un ejemplo completamente funcional.</p>
+<p><strong>Enumeración del BUS PCI</strong></p>
+<p>Cada segmente del bus PCI es enumerado de forma única y, expuesto el mismo en el nodo PCI. Por  medio de la propiedad <code class="docutils literal notranslate"><span class="pre">bus-ranges</span></code>, la cual contiene dos celdas. La primera celda, proporciona el número de bus, asignado al nodo. La segunda, delimita el número máximo de bus, de cualquier bus PCI subordinado.</p>
+<p>El ejemplo de máquina, contiene un único bus PCI, por lo que hay <code class="docutils literal notranslate"><span class="pre">0</span></code> celdas.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pci</span><span class="o">@</span><span class="mh">0x10180000</span> <span class="p">{</span>
+   <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,versatile-pci-hostbridge&quot;</span><span class="p">,</span> <span class="s2">&quot;pci&quot;</span><span class="p">;</span>
+   <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x10180000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">8</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="n">bus</span><span class="o">-</span><span class="n">ranges</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="traduccion-del-direccionado-pci">
+<h2><a class="toc-backref" href="#id29" role="doc-backlink">Traducción del direccionado PCI</a><a class="headerlink" href="#traduccion-del-direccionado-pci" title="Link to this heading"></a></h2>
+<p>De forma similar, al bus local descrito con anterioridad, el espacio de dirección PCI, aparece completamente separado del espacio de dirección de la CPU. La <em>traducción</em> de direcciones, es necesaria para obtener una dirección desde PCI a la CPU. Esto siempre se lleva a cabo utilizando un rango, en la propiedades <code class="docutils literal notranslate"><span class="pre">#address-cells</span></code> y <code class="docutils literal notranslate"><span class="pre">#size-cells</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pci</span><span class="o">@</span><span class="mh">0x10180000</span> <span class="p">{</span>
+   <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,versatile-pci-hostbridge&quot;</span><span class="p">,</span> <span class="s2">&quot;pci&quot;</span><span class="p">;</span>
+   <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x10180000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">8</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="n">bus</span><span class="o">-</span><span class="n">ranges</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+
+   <span class="c1">#address-cells = &lt;3&gt;</span>
+   <span class="c1">#size-cells = &lt;2&gt;;</span>
+   <span class="n">ranges</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x42000000</span> <span class="mi">0</span> <span class="mh">0x80000000</span> <span class="mh">0x80000000</span> <span class="mi">0</span> <span class="mh">0x20000000</span>
+   <span class="mh">0x02000000</span> <span class="mi">0</span> <span class="mh">0xa0000000</span> <span class="mh">0xa0000000</span> <span class="mi">0</span> <span class="mh">0x10000000</span>
+   <span class="mh">0x01000000</span> <span class="mi">0</span> <span class="mh">0x00000000</span> <span class="mh">0xb0000000</span> <span class="mi">0</span> <span class="mh">0x01000000</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Tal y como se aprecia, la dirección <em>descendente</em> (PCI) usa 3 celdas y, los rangos PCI están codificados en dos celdas. La primera questión podría ser, ¿ por qué necesitamos tres celdas de <code class="docutils literal notranslate"><span class="pre">32bit</span></code> para especificar <em>una</em> dirección PCI? Hay <em>tres etiquetas</em> de celda; <code class="docutils literal notranslate"><span class="pre">phys.hi,</span> <span class="pre">phys.mid</span></code> y <code class="docutils literal notranslate"><span class="pre">phys.low</span></code> <a class="footnote-reference brackets" href="#f3" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">phys</span><span class="o">.</span><span class="n">hi</span> <span class="n">cell</span><span class="p">:</span> <span class="n">npt000ss</span> <span class="n">bbbbbbbb</span> <span class="n">dddddfff</span> <span class="n">rrrrrrrr</span>
+<span class="n">phys</span><span class="o">.</span><span class="n">mid</span> <span class="n">cell</span><span class="p">:</span> <span class="n">hhhhhhhh</span> <span class="n">hhhhhhhh</span> <span class="n">hhhhhhhh</span> <span class="n">hhhhhhhh</span>
+<span class="n">phys</span><span class="o">.</span><span class="n">low</span> <span class="n">cell</span><span class="p">:</span> <span class="n">llllllll</span> <span class="n">llllllll</span> <span class="n">llllllll</span> <span class="n">llllllll</span>
+</pre></div>
+</div>
+<p>Las direcciones PCI, son <code class="docutils literal notranslate"><span class="pre">64bit</span></code> de <em>ancho</em> y, están codificadas en <code class="docutils literal notranslate"><span class="pre">phys.mid</span></code> y <code class="docutils literal notranslate"><span class="pre">phys.low</span></code>. Aunque lo realmente interesante aparece en el campo <code class="docutils literal notranslate"><span class="pre">phys.hi</span></code>, siendo un <em>campo de bit</em>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">n</span></code>: opción de región reasignable. Aquí no juega ningun papel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p</span></code>: prefetchable(predecible?) cacheable. Opción de región.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">t</span></code>: alias. Opción de región. Aquí no juega ningun papel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ss</span></code>: espacio de código.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">00</span></code>: espacio de configuración</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">01</span></code>: espacio I/O</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">10</span></code>: espacio de memoria de 32 bit</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">11</span></code>: espacio de memoria de 64 bit</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bbbbbbbb</span></code>: el número de bus PCI. Podría estar estructurado jerárquicamente. Así que podría ser un PCI/PCI bridge, el cual definiría buses subordinados.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fff</span></code>: el número de la función. Usado en dispositivos PCI multifunción.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rrrrrrrr</span></code>: número de registro; utilizado en la configuración de <em>ciclos</em>.</p></li>
+</ul>
+<p>En la propuesta <em>traducción de direcciones PCI</em>, los campos importantes son <code class="docutils literal notranslate"><span class="pre">ss</span></code>. El valor de <code class="docutils literal notranslate"><span class="pre">p</span></code> y <code class="docutils literal notranslate"><span class="pre">ss</span></code> en <code class="docutils literal notranslate"><span class="pre">phys.hi</span></code>, determina qué espacio de dirección PCI, está siendo accedida. Mirando en la propiedad <code class="docutils literal notranslate"><span class="pre">ranges</span></code>, son encontradas tres regiones:</p>
+<ul class="simple">
+<li><p>una memoria predecible(chacheable) de 32bit. Empezando en la dirección <code class="docutils literal notranslate"><span class="pre">0x80000000</span></code> PCI, de <code class="docutils literal notranslate"><span class="pre">512</span> <span class="pre">Mbyte</span></code> de tamaño, la cuál está mapeada en la dirección <code class="docutils literal notranslate"><span class="pre">0x80000000</span></code> dentro de la CPU <em>anfitrion</em>.</p></li>
+<li><p>una memoria no predecible de 32bit. Empezando en la dirección <code class="docutils literal notranslate"><span class="pre">0xa0000000</span></code> PCI, de <code class="docutils literal notranslate"><span class="pre">256</span> <span class="pre">MByte</span></code> de tamaño, la cuál está mapeada en la dirección <code class="docutils literal notranslate"><span class="pre">0xa0000000</span></code> dentro de la CPU <em>anfitrion</em>.</p></li>
+<li><p>una región <code class="docutils literal notranslate"><span class="pre">I/O</span></code> Empezando en la dirección <code class="docutils literal notranslate"><span class="pre">0x00000000</span></code> PCI, de <code class="docutils literal notranslate"><span class="pre">16</span> <span class="pre">MByte</span></code> de tamaño, la cuál está mapeada en la dirección <code class="docutils literal notranslate"><span class="pre">0xb0000000</span></code> dentro de la CPU <em>anfitrion</em>.</p></li>
+</ul>
+<p>De alguna manera, la presencia del <em>campo de bit</em> <code class="docutils literal notranslate"><span class="pre">phys.hi</span></code>, significa que un sistema operativo, necesita saber qué nodo representa al <em>puente pci</em>, por lo que se ignorarán los campos irrelevantes, en favor de la <em>traducción de dirección</em>. El OS, deberá mirar el la <em>cadena</em> <code class="docutils literal notranslate"><span class="pre">pci</span></code> dentro del nodo de bus PCI, para determinar dónde <em>enmascarar</em> los campos extra.</p>
+</section>
+<section id="interrupcion-avanzada-mapa-de-memoria">
+<h2><a class="toc-backref" href="#id30" role="doc-backlink">Interrupción avanzada, mapa(de memoria)</a><a class="headerlink" href="#interrupcion-avanzada-mapa-de-memoria" title="Link to this heading"></a></h2>
+<p><em>Ahora viene la parte interesante</em> … Mapeado de interrupción PCI. Un dispositivo PCI, podrá  activar interrupciones, utilizando <em>conexiones(wire)</em> <code class="docutils literal notranslate"><span class="pre">#INTA,</span> <span class="pre">#INTB,</span> <span class="pre">#INTC</span></code> e <code class="docutils literal notranslate"><span class="pre">#INTD</span></code>. Una <em>función única</em> de dispositivo(single-function), es obligada a utilizar <code class="docutils literal notranslate"><span class="pre">#INTA</span></code> para las interrupciones. Una <em>multi función</em> de dispositivo, debe utilizar <code class="docutils literal notranslate"><span class="pre">#INTA</span></code> si utiliza un sólo <em>pin</em> de interrupción, <code class="docutils literal notranslate"><span class="pre">#INTA</span></code> y <code class="docutils literal notranslate"><span class="pre">#INTB</span></code> si utiliza dos <em>pins</em> de interrupción, etc.</p>
+<p>Debido a estas reglas, <code class="docutils literal notranslate"><span class="pre">#INTA</span></code> es usado con mayor frecuencia que <code class="docutils literal notranslate"><span class="pre">#INTB,</span> <span class="pre">#INTC</span></code> e <code class="docutils literal notranslate"><span class="pre">#INTD</span></code>. Para distribuir la <em>carga</em>, sobre la cuatro líneas de interrupción <code class="docutils literal notranslate"><span class="pre">#INTA</span></code> a <code class="docutils literal notranslate"><span class="pre">#INTD</span></code>, cada zócalo de dispositivo PCI, es habitualmente conectado a distintas <em>entradas</em>  del controlador de linterrupciones, de forma rotatoria, para así, evitar que todos los <em>clientes</em>-ejem. SO. tengan que estar conectados a la misma línea de interrupción -<em>entrada</em>. A este procedimiento lo llaman <em>swizzling</em> las interrupciones.</p>
+<p>El DT, necesitará una forma de <em>mapear</em> cada señal de interrupción PCI, en las entradas del controlador. Las propiedades <code class="docutils literal notranslate"><span class="pre">#interrupt-cells</span></code>, <code class="docutils literal notranslate"><span class="pre">interrupt-map</span></code> y <code class="docutils literal notranslate"><span class="pre">interrupt-map-mask</span></code> son utilizadas para describir el <em>mapeado</em> de interrupción.</p>
+<p>Actualmente el <em>mapeado</em> de interrupción, descrito aquí, no se limita únicamente al bus PCI, cualquier nodo, podría especificar complejos mapas de interrupción, pero en el caso del PCI, es por mucho, el más habitual.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pci</span><span class="o">@</span><span class="mh">0x10180000</span> <span class="p">{</span>
+   <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;arm,versatile-pci-hostbridge&quot;</span><span class="p">,</span> <span class="s2">&quot;pci&quot;</span><span class="p">;</span>
+   <span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x10180000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">8</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="n">bus</span><span class="o">-</span><span class="n">ranges</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+
+   <span class="c1">#address-cells = &lt;3&gt;</span>
+
+   <span class="c1">#size-cells = &lt;2&gt;;</span>
+   <span class="n">ranges</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x42000000</span> <span class="mi">0</span> <span class="mh">0x800000000</span><span class="n">x800000000</span> <span class="mh">0x20000000</span>
+   <span class="mh">0x02000000</span> <span class="mi">0</span> <span class="mh">0xa00000000</span><span class="n">xa00000000</span> <span class="mh">0x10000000</span>
+   <span class="mh">0x01000000</span> <span class="mi">0</span> <span class="mh">0x000000000</span><span class="n">xb00000000</span> <span class="mh">0x01000000</span><span class="o">&gt;</span><span class="p">;</span>
+
+   <span class="c1">#interrupt-cells = &lt;1&gt;;</span>
+   <span class="n">interrupt</span><span class="o">-</span><span class="nb">map</span><span class="o">-</span><span class="n">mask</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0xf800</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">7</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="n">interrupt</span><span class="o">-</span><span class="nb">map</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0xc000</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="o">&amp;</span><span class="n">intc9</span> <span class="mi">3</span> <span class="o">//</span> <span class="mi">1</span><span class="n">st</span> <span class="n">slot</span>
+
+   <span class="mh">0xc000</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">2</span> <span class="o">&amp;</span><span class="n">intc</span> <span class="mi">10</span> <span class="mi">3</span>
+   <span class="mh">0xc000</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">3</span> <span class="o">&amp;</span><span class="n">intc</span> <span class="mi">11</span> <span class="mi">3</span>
+   <span class="mh">0xc000</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span> <span class="o">&amp;</span><span class="n">intc</span> <span class="mi">12</span> <span class="mi">3</span>
+
+   <span class="mh">0xc800</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="o">&amp;</span><span class="n">intc</span> <span class="mi">10</span> <span class="mi">3</span> <span class="o">//</span> <span class="mi">2</span><span class="n">nd</span> <span class="n">slot</span>
+   <span class="mh">0xc800</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">2</span> <span class="o">&amp;</span><span class="n">intc</span> <span class="mi">11</span> <span class="mi">3</span>
+   <span class="mh">0xc800</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">3</span> <span class="o">&amp;</span><span class="n">intc</span> <span class="mi">12</span> <span class="mi">3</span>
+   <span class="mh">0xc800</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">4</span> <span class="o">&amp;</span><span class="n">intc9</span> <span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>En primer lugar, debe ser notado, que los números de interrupción PCI, utilizan una única celda, a pesar de que el sistema controlador de interrupciones use 2 celdas; una para el número IRQ, otra para las opciones(flags). PCI sólo necesita una celda, para las interrupciones, por que son <em>especificadas</em>, para ser siempre sensibles a <em>bajo</em> <em>nivel</em>.</p>
+<p>En la placa de ejemplo, aparecen 2 zócalos PCI, con 4 líneas de interrupción, respec- tivamente. Habrá que <em>mapear</em> 8 líneas de interrupción, en el controlador de interrupciones. LLevado a cabo, por medio de la propiedad <code class="docutils literal notranslate"><span class="pre">interrupt-map</span></code>. El proce- dimiento exacto en el mapeado de interrupción, es descrito en <a class="footnote-reference brackets" href="#f5" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a></p>
+<p>Puesto que el número de interrupción -<code class="docutils literal notranslate"><span class="pre">#INTA</span></code> etc, no es suficiente para distinguir entre diversos dispositivos PCI, sobre un bus PCI, es necesario observar, qué dispositivo PCI, activó la línea de interrupción. Afortunádamente, cada dispositivo PCI, tiene un <em>número único</em>, de dispositivo, utilizado para dicho propósito. Para distinguir, entre varios dispositivos PCI, es necesaria una tupla, la cual consta de <em>número de dispositivo PCI</em> y, <em>número de interrupción PCI</em>. En general, construiremos una <em>unidad enumeradora de interrupción</em>, con cuatro celdas:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tres</span> <span class="c1">#address-cells constituidad por phys.hi, phys.mid, phys.low, y</span>
+<span class="n">una</span> <span class="c1">#interrupt-cell (#INTA, #INTB, #INTC, #INTD).</span>
+</pre></div>
+</div>
+<p>Puesto que sólo es necesaria la parte del número de dispositivo, de la dirección PCI, la propiedad <code class="docutils literal notranslate"><span class="pre">interrupt-map-mask</span></code>, <em>entra en juego</em>. <code class="docutils literal notranslate"><span class="pre">interrupt-map-mask</span></code> es también una tupla <em>4-tupla</em>, como la unidad enumeradora de interrupción. La 1, es la máscara cuya parte unidad enumeradora de interrupción, deberá mmtomarse en consideración. En el ejemplo, puede verse que sólo la parte del número de dispositivo de <code class="docutils literal notranslate"><span class="pre">phys.hi</span></code>, es requerido y, se necesitarán 3 <em>bits</em>, para distiguir entre las cuatro líneas de interrupión. Empiezan a contar desde <code class="docutils literal notranslate"><span class="pre">1</span></code> no desde <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p>Ahora es construida la propiedad <code class="docutils literal notranslate"><span class="pre">interrupt-map</span></code>. Esta propiedad, es una tabla y, cada entrada en la misma, consiste en una unidad enumeradora de interrupción descendente -bus PCI, un controlador ascendente (el controlador de interrupción, es representado para servir, presentar, las interrupciónes). También el ascendente. Así que, en la primera línea, pueda leerse que la linterrupción PCI <code class="docutils literal notranslate"><span class="pre">#INTA</span></code>, está mapeado en <em>IRQ 9</em> -bajo nivel sensitivo del controlador de interrupción <a class="footnote-reference brackets" href="#f6" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a></p>
+<p>La única parte que falta hasta el momento, es los extraños números de la unidad enu- meradora de interrupción. La parte importante, es el número de dispositivo en el campo <code class="docutils literal notranslate"><span class="pre">phys.hi</span></code>. El número de dispositivo es específico de la placa y, depende de, <em>cómo</em> el controlador anfitrión PCI, activa el pin IDSEL, en cada dispositivo. En este ejemplo, el zócalo PCI 1, es asignado al ID de dispositivo <code class="docutils literal notranslate"><span class="pre">24</span> <span class="pre">(0x18)</span></code> y, el zócalo PCI 2, es asignado al ID de dispositivo <code class="docutils literal notranslate"><span class="pre">25</span> <span class="pre">(0x19)</span></code>. El valor de <code class="docutils literal notranslate"><span class="pre">phys.hi</span></code> para cada zócalo, es determinado por el número dispositio coincidente -hasta 11 bits, encontrado en la sección <code class="docutils literal notranslate"><span class="pre">ddddd</span></code> del <em>campo bit</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">phys</span><span class="o">.</span><span class="n">hi</span> <span class="k">for</span> <span class="n">slot</span> <span class="mi">1</span> <span class="ow">is</span> <span class="mh">0xC000</span><span class="p">,</span> <span class="n">y</span>
+<span class="n">phys</span><span class="o">.</span><span class="n">hi</span> <span class="k">for</span> <span class="n">slot</span> <span class="mi">2</span> <span class="ow">is</span> <span class="mh">0xC800</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Colocándolos todos juntos, la propiedad <code class="docutils literal notranslate"><span class="pre">interrupt-map</span></code> muestra:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#INTA of slot 1 is IRQ9, level low sensitive on the primary interrupt controller</span>
+<span class="c1">#INTB of slot 1 is IRQ10, level low sensitive on the primary interrupt controller</span>
+<span class="c1">#INTC of slot 1 is IRQ11, level low sensitive on the primary interrupt controller</span>
+<span class="c1">#INTD of slot 1 is IRQ12, level low sensitive on the primary interrupt controller</span>
+</pre></div>
+</div>
+<p>y</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#INTA of slot 2 is IRQ10, level low sensitive on the primary interrupt controller</span>
+<span class="c1">#INTB of slot 2 is IRQ11, level low sensitive on the primary interrupt controller</span>
+<span class="c1">#INTC of slot 2 is IRQ12, level low sensitive on the primary interrupt controller</span>
+<span class="c1">#INTD of slot 2 is IRQ9, level low sensitive on the primary interrupt controller</span>
+</pre></div>
+</div>
+<p>Las propiedades de interrupción = &lt;8 0&gt;; describen la interrupciones del controlador <em>host/PCI-bridge</em>, que él mismo activa. No mezclar estas interrupciones con disposi- tivos de interrupción PCI, que pudieran activar (using INTA, INTB, …).</p>
+<p>Nota final. igual que en la propiedad <code class="docutils literal notranslate"><span class="pre">interrupt-parent</span></code>, la presencia de la propiedad <code class="docutils literal notranslate"><span class="pre">interrupt-map</span></code>, en un nodo, cambiará el <em>controlador por defecto</em> , para todos los descendentes y nodos <em>afínes</em>. En éste ejemplo PCI, significa que el <em>host/PCI-bridge</em> pasa a ser el controlador de interrupción <em>por defecto</em>. Si un dispositivo acoplado vía el bus PCI, tubiese una conexión directa, a otro controlador, necesitaría especificar su propiedad <code class="docutils literal notranslate"><span class="pre">interrupt-parent</span></code>.</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2><a class="toc-backref" href="#id31" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://elinux.org/Device_Tree_Usage">wiki-elinux.org</a></p></li>
+</ul>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>enlace al artículo sobre símbolos de ruby?– comprobar</p>
+</aside>
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>ver siglas / enlace a phandle</p>
+</aside>
+<aside class="footnote brackets" id="f3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id4">2</a>,<a role="doc-backlink" href="#id6">3</a>)</span>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.mindshare.com/">(PCIe)mindshare</a></p></li>
+</ul>
+</aside>
+<aside class="footnote brackets" id="f4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">4</a><span class="fn-bracket">]</span></span>
+<p>ePAPR</p>
+</aside>
+<aside class="footnote brackets" id="f5" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">5</a><span class="fn-bracket">]</span></span>
+<p>Open Firmware Recommended Practice: Interrupt Mapping</p>
+</aside>
+<aside class="footnote brackets" id="f6" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">6</a><span class="fn-bracket">]</span></span>
+<p>PCI interrupts are always level low sensitive</p>
+</aside>
+</aside>
+<div class="admonition-nota-d-t admonition">
+<p class="admonition-title">nota d.t.</p>
+<p>Muchas de las abreviaturas y definiciones o tecnicísmos, son descritas en otros documentos, por lo que se ha evitado su reiteración.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.raulvilchez.org/">índice Docs</a></p></li>
+<li><p><a class="reference external" href="https://docs.raulvilchez.org/99_General/siglas.html">siglas</a></p></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="changesets.html" class="btn btn-neutral float-left" title="conjunto de cambios" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dynamic-resolution-notes.html" class="btn btn-neutral float-right" title="Resolución dinámica, notas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

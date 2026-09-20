@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interrupciones y Comunicación con Bus PCI - Teoría &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Interrupciones y Comunicación con Bus PCI - Tests" href="BUS_tests.html" />
+    <link rel="prev" title="Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Tests" href="IO_tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwbus-io/index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Metodología para el estudio de “The Linux Test Project(LTP)”</a></li>
+      <li class="breadcrumb-item active">Interrupciones y Comunicación con Bus PCI - Teoría</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/Foundry/Metodologia_LTP/BUS_teorica.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="interrupciones-y-comunicacion-con-bus-pci-teoria">
+<h1>Interrupciones y Comunicación con Bus PCI - Teoría<a class="headerlink" href="#interrupciones-y-comunicacion-con-bus-pci-teoria" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contenidos">
+<p class="topic-title">Contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#conceptos-fundamentales-del-bus-pci-pcie" id="id3">Conceptos Fundamentales del Bus PCI/PCIe</a></p>
+<ul>
+<li><p><a class="reference internal" href="#jerarquia-y-topologia-pci" id="id4">1. Jerarquía y Topología PCI</a></p></li>
+<li><p><a class="reference internal" href="#identificacion-bdf-y-espacio-de-configuracion" id="id5">2. Identificación BDF y Espacio de Configuración</a></p></li>
+<li><p><a class="reference internal" href="#acceso-a-memoria-mapeada-mmio-vs-port-i-o" id="id6">3. Acceso a Memoria Mapeada (MMIO) vs. Port I/O</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#gestion-de-interrupciones-y-notificaciones" id="id7">Gestión de Interrupciones y Notificaciones</a></p>
+<ul>
+<li><p><a class="reference internal" href="#lineas-de-interrupcion-tradicionales-intx" id="id8">1. Líneas de Interrupción Tradicionales (INTx)</a></p></li>
+<li><p><a class="reference internal" href="#interrupciones-senaladas-por-mensaje-msi-msi-x" id="id9">2. Interrupciones Señaladas por Mensaje (MSI / MSI-X)</a></p></li>
+<li><p><a class="reference internal" href="#ciclo-de-vida-del-procesamiento-de-interrupciones-en-el-kernel" id="id10">3. Ciclo de Vida del Procesamiento de Interrupciones en el Kernel</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#estructuras-internas-del-kernel-y-sysfs" id="id11">Estructuras Internas del Kernel y Sysfs</a></p>
+<ul>
+<li><p><a class="reference internal" href="#estructuras-c-del-subcistema-pci" id="id12">Estructuras C del Subcistema PCI</a></p></li>
+<li><p><a class="reference internal" href="#interfaz-en-espacio-de-usuario-mediante-sysfs" id="id13">Interfaz en Espacio de Usuario mediante Sysfs</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="conceptos-fundamentales-del-bus-pci-pcie">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Conceptos Fundamentales del Bus PCI/PCIe</a><a class="headerlink" href="#conceptos-fundamentales-del-bus-pci-pcie" title="Link to this heading"></a></h2>
+<p>La interconexión de dispositivos de alto rendimiento en sistemas modernos descansa sobre la arquitectura <strong>PCI Express (PCIe)</strong>, una evolución punto a punto del bus paralelo tradicional PCI. Comprender la gestión de hardware a bajo nivel en Linux requiere analizar cómo el kernel descubre, enumera y proyecta los recursos de estos dispositivos.</p>
+<section id="jerarquia-y-topologia-pci">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">1. Jerarquía y Topología PCI</a><a class="headerlink" href="#jerarquia-y-topologia-pci" title="Link to this heading"></a></h3>
+<p>La topología del bus PCI está estructurada en un árbol jerárquico gestionado por la CPU y el chipset del sistema:</p>
+<ul class="simple">
+<li><p><strong>Host Bridge / Root Complex</strong>: El nodo raíz que conecta la CPU y el subsistema de memoria RAM con el árbol PCIe.</p></li>
+<li><p><strong>PCI Bridge / Switches</strong>: Dispositivos de interconexión que dividen o expanden segmentos del bus primario hacia buses secundarios.</p></li>
+<li><p><strong>Endpoints</strong>: Dispositivos finales (tarjetas de red, controladores NVMe, GPUs) que consumen o generan transacciones en el bus.</p></li>
+</ul>
+</section>
+<section id="identificacion-bdf-y-espacio-de-configuracion">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">2. Identificación BDF y Espacio de Configuración</a><a class="headerlink" href="#identificacion-bdf-y-espacio-de-configuracion" title="Link to this heading"></a></h3>
+<p>Cada función individual dentro de la jerarquía PCI se identifica unívocamente mediante la tripleta <strong>BDF</strong> (<em>Bus:Device.Function</em>), precedida por su dominio de segmento PCI:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[Dominio]   Bus : Dispositivo . Función
+ 0000     :  01  :    00       .   0
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Espacio de Configuración (Configuration Space)</strong>: Un conjunto estandarizado de registros de 256 bytes (4 KB en PCIe) que incluye los identificadores de hardware (<code class="docutils literal notranslate"><span class="pre">Vendor</span> <span class="pre">ID</span></code>, <code class="docutils literal notranslate"><span class="pre">Device</span> <span class="pre">ID</span></code>) y los registros de dirección base (BARs).</p></li>
+<li><p><strong>Base Address Registers (BARs)</strong>: Registros que le indican al sistema operativo qué cantidad de memoria o rango de puertos requiere el dispositivo para exponer sus controles e interfaces.</p></li>
+</ul>
+</section>
+<section id="acceso-a-memoria-mapeada-mmio-vs-port-i-o">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">3. Acceso a Memoria Mapeada (MMIO) vs. Port I/O</a><a class="headerlink" href="#acceso-a-memoria-mapeada-mmio-vs-port-i-o" title="Link to this heading"></a></h3>
+<p>El kernel de Linux interactúa con los registros del hardware PCI mediante dos métodos principales:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Comparativa de Direccionamiento E/S</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 35.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Mecanismo</p></th>
+<th class="head"><p>Descripción</p></th>
+<th class="head"><p>Uso Actual</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Port I/O</strong></p></td>
+<td><p>Espacio de direcciones aislado accesible mediante instrucciones explícitas de CPU (<code class="docutils literal notranslate"><span class="pre">in</span></code> / <code class="docutils literal notranslate"><span class="pre">out</span></code> en x86).</p></td>
+<td><p>Obsoleto / Dispositivos Legacy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>MMIO (Memory-Mapped I/O)</strong></p></td>
+<td><p>Mapeo de los registros del dispositivo directamente en el espacio de memoria física. Accesible con instrucciones normales de carga y almacenamiento (<code class="docutils literal notranslate"><span class="pre">mov</span></code>, <code class="docutils literal notranslate"><span class="pre">readl</span></code>, <code class="docutils literal notranslate"><span class="pre">writel</span></code>).</p></td>
+<td><p>Estándar en PCIe moderno (NVMe, GPUs, GbE/10GbE).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Para revisar los casos de prueba prácticos aplicados al descubrimiento y validación del bus, consulte la sección de pruebas asociadas en <a class="reference internal" href="BUS_tests.html"><span class="doc">Interrupciones y Comunicación con Bus PCI - Tests</span></a>.</p>
+</div>
+</section>
+</section>
+<section id="gestion-de-interrupciones-y-notificaciones">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Gestión de Interrupciones y Notificaciones</a><a class="headerlink" href="#gestion-de-interrupciones-y-notificaciones" title="Link to this heading"></a></h2>
+<p>Un componente crítico de la comunicación con hardware es la capacidad de un dispositivo para notificar a la CPU sobre eventos (p. ej., finalización de una transferencia DMA o recepción de paquetes de red).</p>
+<section id="lineas-de-interrupcion-tradicionales-intx">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">1. Líneas de Interrupción Tradicionales (INTx)</a><a class="headerlink" href="#lineas-de-interrupcion-tradicionales-intx" title="Link to this heading"></a></h3>
+<p>En la especificación PCI heredada, los dispositivos utilizan líneas físicas compartidas (<code class="docutils literal notranslate"><span class="pre">INTA#</span></code> a <code class="docutils literal notranslate"><span class="pre">INTD#</span></code>) vinculadas a un controlador programable de interrupciones (APIC).</p>
+<ul class="simple">
+<li><p><strong>Limitaciones</strong>: Al ser líneas compartidas por múltiples dispositivos, la CPU debe consultar en serie a cada driver registrado en la línea para determinar el origen del evento, generando latencia y sobrecarga de procesamiento.</p></li>
+</ul>
+</section>
+<section id="interrupciones-senaladas-por-mensaje-msi-msi-x">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">2. Interrupciones Señaladas por Mensaje (MSI / MSI-X)</a><a class="headerlink" href="#interrupciones-senaladas-por-mensaje-msi-msi-x" title="Link to this heading"></a></h3>
+<p>PCIe reemplaza las líneas físicas mediante <strong>MSI (Message Signaled Interrupts)</strong> y <strong>MSI-X</strong>:</p>
+<ul class="simple">
+<li><p>En lugar de conmutar un pin de voltaje, el dispositivo realiza una escritura en una dirección de memoria especial gestionada por la CPU/APIC.</p></li>
+<li><p><strong>MSI-X</strong>: Permite a un solo dispositivo asignar hasta 2048 vectores de interrupción independientes. Esto es fundamental para escalar en entornos multinúcleo, permitiendo asociar colas de E/S dedicadas a CPUs específicas.</p></li>
+</ul>
+</section>
+<section id="ciclo-de-vida-del-procesamiento-de-interrupciones-en-el-kernel">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">3. Ciclo de Vida del Procesamiento de Interrupciones en el Kernel</a><a class="headerlink" href="#ciclo-de-vida-del-procesamiento-de-interrupciones-en-el-kernel" title="Link to this heading"></a></h3>
+<p>Para mantener la reactividad del sistema, el kernel divide el procesamiento de interrupciones en dos fases (<em>Top Half</em> y <em>Bottom Half</em>):</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Fases del Tratamiento de Interrupciones</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 35.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Fase</p></th>
+<th class="head"><p>Contexto de Ejecución</p></th>
+<th class="head"><p>Tareas Típicas</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Top Half (ISR)</strong></p></td>
+<td><p>Contexto de Interrupción (Atómico, inhabilita IRQs).</p></td>
+<td><p>Acatamiento rápido del evento hardware, limpieza del registro de interrupción y encolado de trabajo pesado.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Bottom Half</strong></p></td>
+<td><p>SoftIRQs, Tasklets o Workqueues (Contexto de proceso).</p></td>
+<td><p>Procesamiento de datos recibidos, asignación de memoria y notificación a las capas superiores del kernel.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="estructuras-internas-del-kernel-y-sysfs">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Estructuras Internas del Kernel y Sysfs</a><a class="headerlink" href="#estructuras-internas-del-kernel-y-sysfs" title="Link to this heading"></a></h2>
+<section id="estructuras-c-del-subcistema-pci">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Estructuras C del Subcistema PCI</a><a class="headerlink" href="#estructuras-c-del-subcistema-pci" title="Link to this heading"></a></h3>
+<p>Dentro del código fuente del kernel de Linux, el subsistema PCI representa las abstracciones del hardware mediante las siguientes estructuras clave:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pci_dev</span></code>: Representa un dispositivo PCI individual en el sistema. Contiene información BDF, recursos BAR (<code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">resource</span></code>), clase del dispositivo e información de energía/interrupciones.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pci_driver</span></code>: Define la estructura del controlador del dispositivo, incluyendo funciones de callback esenciales como <code class="docutils literal notranslate"><span class="pre">probe()</span></code> (invocada al asociar un dispositivo) y <code class="docutils literal notranslate"><span class="pre">remove()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pci_bus</span></code>: Representa un segmento de bus PCI y gestiona la lista de dispositivos conectados a él.</p></li>
+</ul>
+</section>
+<section id="interfaz-en-espacio-de-usuario-mediante-sysfs">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Interfaz en Espacio de Usuario mediante Sysfs</a><a class="headerlink" href="#interfaz-en-espacio-de-usuario-mediante-sysfs" title="Link to this heading"></a></h3>
+<p>El kernel expone la jerarquía del bus PCI en el espacio de usuario a través del sistema de archivos virtual <strong>sysfs</strong>:</p>
+<ul class="simple">
+<li><p><strong>Ruta de dispositivos</strong>: <code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices/</span></code> contiene enlaces simbólicos para cada dispositivo detectado (p. ej. <code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices/0000:00:01.0/</span></code>).</p></li>
+<li><p><strong>Archivos clave</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code>: Permite la lectura/escritura directa del Espacio de Configuración PCI.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resource</span></code>: Muestra los rangos de memoria y BARs asignados al dispositivo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vendor</span></code> / <code class="docutils literal notranslate"><span class="pre">device</span></code>: Contienen los identificadores hexadecimales de fabricante y modelo.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Para analizar la ejecución de pruebas y verificación de dispositivos en el entono de laboratorio, consulte <a class="reference internal" href="BUS_tests.html"><span class="doc">Interrupciones y Comunicación con Bus PCI - Tests</span></a>.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="IO_tests.html" class="btn btn-neutral float-left" title="Entrada/Salida y Gestión de Memoria (E/S &amp; MM) - Tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="BUS_tests.html" class="btn btn-neutral float-right" title="Interrupciones y Comunicación con Bus PCI - Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

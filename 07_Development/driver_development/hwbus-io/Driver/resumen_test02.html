@@ -1,0 +1,212 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patrones de Validación IOCTL y Manejo Posicional &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Lectura Pci" href="4Breads.html" />
+    <link rel="prev" title="Pruebas para /dev/hwbusc" href="../Tests/testList.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../Foundry/index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">HwBus-IO</a></li>
+      <li class="breadcrumb-item active">Patrones de Validación IOCTL y Manejo Posicional</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/hwbus-io/Driver/resumen_test02.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="patrones-de-validacion-ioctl-y-manejo-posicional">
+<h1>Patrones de Validación IOCTL y Manejo Posicional<a class="headerlink" href="#patrones-de-validacion-ioctl-y-manejo-posicional" title="Link to this heading"></a></h1>
+<section id="proposito-y-alcance">
+<h2>1. Propósito y Alcance<a class="headerlink" href="#proposito-y-alcance" title="Link to this heading"></a></h2>
+<p>Este documento especifica los patrones de diseño y técnicas de validación binaria
+utilizados en la suite de pruebas LTP para el controlador <code class="docutils literal notranslate"><span class="pre">/dev/hwbusc</span></code>. Su
+objetivo es servir como referencia técnica dentro de la documentación oficial
+del controlador, justificando las decisiones de arquitectura de software en la
+capa de usuario.</p>
+</section>
+<section id="patrones-de-validacion-implementados">
+<h2>2. Patrones de Validación Implementados<a class="headerlink" href="#patrones-de-validacion-implementados" title="Link to this heading"></a></h2>
+<section id="extraccion-dinamica-de-metadatos-via-uapi">
+<h3>Extracción Dinámica de Metadatos vía UAPI<a class="headerlink" href="#extraccion-dinamica-de-metadatos-via-uapi" title="Link to this heading"></a></h3>
+<p>En lugar de duplicar valores constantes (offsets y anchos de palabra) en el
+espacio de usuario, la validación extrae la información directamente del comando
+IOCTL utilizando las macros estándar del kernel:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">offset</span> <span class="pre">=</span> <span class="pre">_IOC_NR(cmd)</span></code>: Obtiene el offset del registro PCI codificado en el
+comando.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span> <span class="pre">=</span> <span class="pre">_IOC_SIZE(cmd)</span></code>: Extrae el tamaño esperado de la transferencia en
+bytes.</p></li>
+</ul>
+<p>Con este enfoque se garantiza que si la UAPI actualiza un tipo de dato, las
+pruebas adaptan dinámicamente sus comprobaciones sin requerir refactorización
+del código de test.</p>
+</section>
+<section id="alineacion-de-tipos-de-datos-y-control-posicional-con-lseek">
+<h3>Alineación de Tipos de Datos y Control Posicional con <code class="docutils literal notranslate"><span class="pre">lseek</span></code><a class="headerlink" href="#alineacion-de-tipos-de-datos-y-control-posicional-con-lseek" title="Link to this heading"></a></h3>
+<p>Para garantizar la portabilidad entre arquitecturas y evitar errores de
+desbordamiento de enteros al manipular descriptores POSIX, la verificación del
+desplazamiento posicional se apoya en el casting explícito al tipo de dato
+nativo del sistema de archivos (<code class="docutils literal notranslate"><span class="pre">off_t</span></code>):</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lseek</span><span class="p">(</span><span class="n">sysfs_fd</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">SEEK_SET</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="kt">off_t</span><span class="p">)</span><span class="mi">-1</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Importancia de</strong> <code class="docutils literal notranslate"><span class="pre">(off_t)-1</span></code>: La constante <code class="docutils literal notranslate"><span class="pre">-1</span></code> puede sufrir expansiones
+de signo ambiguas dependiendo del ancho de palabra de la arquitectura (32 bits
+vs 64 bits). Castear a <code class="docutils literal notranslate"><span class="pre">(off_t)</span></code> asegura que la comparación contra el valor
+devuelto por <code class="docutils literal notranslate"><span class="pre">lseek()</span></code> responda exactamente a la firma
+<code class="docutils literal notranslate"><span class="pre">off_t</span> <span class="pre">lseek(int</span> <span class="pre">fd,</span> <span class="pre">off_t</span> <span class="pre">offset,</span> <span class="pre">int</span> <span class="pre">whence)</span></code> exigida por POSIX,
+descartando falsos positivos en el control de límites.</p></li>
+<li><p><strong>Validación de Límites</strong>: El offset extraído (<code class="docutils literal notranslate"><span class="pre">offset</span> <span class="pre">+</span> <span class="pre">size</span></code>) se audita
+antes de la llamada para asegurar que no exceda el límite físico de 4096 bytes
+del espacio de configuración PCI.</p></li>
+</ul>
+</section>
+<section id="enmascaramiento-dinamico-de-bits-por-ancho-de-palabra">
+<h3>Enmascaramiento Dinámico de Bits por Ancho de Palabra<a class="headerlink" href="#enmascaramiento-dinamico-de-bits-por-ancho-de-palabra" title="Link to this heading"></a></h3>
+<p>La comparación entre la respuesta del controlador y la fuente de verdad binaria
+(<code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices/.../config</span></code>) emplea máscaras explícitas en función de
+<code class="docutils literal notranslate"><span class="pre">_IOC_SIZE(cmd)</span></code>:</p>
+<ul class="simple">
+<li><p><strong>1 Byte</strong> (<code class="docutils literal notranslate"><span class="pre">0x000000FF</span></code>): Aísla el byte menos significativo, garantizando
+validez para registros como <code class="docutils literal notranslate"><span class="pre">PCI_REVISION_ID</span></code>.</p></li>
+<li><p><strong>2 Bytes</strong> (<code class="docutils literal notranslate"><span class="pre">0x0000FFFF</span></code>): Aísla palabras de 16 bits para registros como
+<code class="docutils literal notranslate"><span class="pre">PCI_VENDOR_ID</span></code>, <code class="docutils literal notranslate"><span class="pre">PCI_DEVICE_ID</span></code> y <code class="docutils literal notranslate"><span class="pre">PCI_COMMAND</span></code>.</p></li>
+<li><p><strong>4 Bytes</strong> (<code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>): Compara la totalidad del registro de 32 bits
+(ej. <code class="docutils literal notranslate"><span class="pre">PCI_BASE_ADDRESS_0</span></code>).</p></li>
+</ul>
+<p>Esta técnica garantiza la limpieza de bits residuales o no inicializados en el
+buffer del espacio de usuario (<code class="docutils literal notranslate"><span class="pre">val_ioctl</span> <span class="pre">&amp;=</span> <span class="pre">mask</span></code>), auditando implícitamente
+la integridad <em>little-endian</em> de los datos retornados por el driver.</p>
+</section>
+<section id="fuente-unica-de-verdad-sysfs-configuration-space">
+<h3>Fuente Única de Verdad (SysFS Configuration Space)<a class="headerlink" href="#fuente-unica-de-verdad-sysfs-configuration-space" title="Link to this heading"></a></h3>
+<p>Las pruebas comparan el resultado devuelto por la IOCTL del driver con la
+lectura binaria directa del archivo <code class="docutils literal notranslate"><span class="pre">config</span></code> en SysFS (<code class="docutils literal notranslate"><span class="pre">read_config_ref</span></code>).
+Al utilizar operaciones atómicas y <code class="docutils literal notranslate"><span class="pre">memset()</span></code> preventivo sobre los buffers de
+referencia, se descartan discrepancias derivadas del cacheo en espacio de
+usuario.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Tests/testList.html" class="btn btn-neutral float-left" title="Pruebas para /dev/hwbusc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="4Breads.html" class="btn btn-neutral float-right" title="Lectura Pci" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

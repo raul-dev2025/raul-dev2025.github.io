@@ -1,0 +1,203 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arquitectura del Procesador y Kernel &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unidad Central de Procesamiento (CPU)" href="cpu.html" />
+    <link rel="prev" title="Workflow for Using strace to Trap System Calls" href="../hardware_resources/hw_specs/workFlow-strace.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#processador">Processador</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Arquitectura del Procesador y Kernel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+      <li class="breadcrumb-item active">Arquitectura del Procesador y Kernel</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/Processador/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="arquitectura-del-procesador-y-kernel">
+<h1>Arquitectura del Procesador y Kernel<a class="headerlink" href="#arquitectura-del-procesador-y-kernel" title="Link to this heading"></a></h1>
+<p>En esta sección se abordan los fundamentos de la Unidad Central de Procesamiento (CPU), las arquitecturas de memoria avanzada, los mecanismos de sincronización sin bloqueos, la gestión de aislamiento de recursos mediante el kernel y las características de seguridad y vulnerabilidades a nivel de hardware.</p>
+<section id="contenidos">
+<h2>Contenidos<a class="headerlink" href="#contenidos" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Procesador y Gestión de Recursos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cpu.html">Unidad Central de Procesamiento (CPU)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cpu.html#arquitectura-interna-fundamental">Arquitectura Interna Fundamental</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpu.html#jerarquia-de-caches-y-coherencia">Jerarquía de Cachés y Coherencia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpu.html#anillos-de-proteccion-y-modos-de-ejecucion">Anillos de Protección y Modos de Ejecución</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpu.html#instrucciones-y-tecnologias-integradas">Instrucciones y Tecnologías Integradas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="numa.html">NUMA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="numa.html#conceptos-fundamentales">Conceptos Fundamentales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numa.html#evolucion-historica-y-justificacion-tecnica">Evolución Histórica y Justificación Técnica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numa.html#comparativa-uma-vs-numa">Comparativa: UMA vs. NUMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numa.html#metrica-de-distancia-numa-distance-slit">Métrica de Distancia (<em>NUMA Distance / SLIT</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numa.html#gestion-de-numa-en-el-kernel-de-linux">Gestión de NUMA en el Kernel de Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rcu.html">RCU (Read-Copy-Update)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rcu.html#concepto-y-principio-de-funcionamiento">Concepto y Principio de Funcionamiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rcu.html#fases-de-una-operacion-de-actualizacion">Fases de una Operación de Actualización</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rcu.html#primitivas-de-rcu-en-el-kernel-de-linux">Primitivas de RCU en el Kernel de Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rcu.html#casos-de-uso-e-importancia">Casos de Uso e Importancia</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cpusets.html">cpusets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cpusets.html#que-son-los-cpusets">Qué son los <code class="docutils literal notranslate"><span class="pre">cpusets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpusets.html#por-que-son-necesarios-los-cpusets">Por qué son necesarios los <code class="docutils literal notranslate"><span class="pre">cpusets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpusets.html#como-son-implementados-los-cpusets">Cómo son implementados los <code class="docutils literal notranslate"><span class="pre">cpusets</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nx-Bit.html">NX-Bit – No-eXecute</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nx-Bit.html#mecanismo-de-funcionamiento">Mecanismo de Funcionamiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nx-Bit.html#nomenclatura-segun-el-fabricante">Nomenclatura según el Fabricante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nx-Bit.html#mitigacion-de-vulnerabilidades-de-seguridad">Mitigación de Vulnerabilidades de Seguridad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nx-Bit.html#soporte-en-el-kernel-de-linux">Soporte en el Kernel de Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="foreShadow.html">breve historia de las cachés</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="foreShadow.html#como-hemos-llegado-hasta-aqui-breve-historia-de-las-caches-en-modernos-microprocesadores">Cómo hemos llegado hasta aquí: breve historia de las cachés, en modernos microprocesadores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foreShadow.html#direccionado-de-memoria-virtual-y-fisica">Direccionado de memoria virtual y física</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foreShadow.html#out-of-order-y-las-ejecuciones-especulativas">Out-of-Order y las ejecuciones especulativas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foreShadow.html#incrementar-la-especulacion-en-procesadores-intel">Incrementar la especulación, en procesadores Intel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foreShadow.html#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="resumen-de-modulos">
+<h2>Resumen de Módulos<a class="headerlink" href="#resumen-de-modulos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Arquitectura Base de la CPU</strong>: Introducción estructural en <a class="reference internal" href="cpu.html"><span class="doc">Unidad Central de Procesamiento (CPU)</span></a> (registros, jerarquía de cachés, anillos de ejecución y unidades funcionales).</p></li>
+<li><p><strong>Topología de Memoria y Sincronización</strong>: Arquitecturas de acceso no uniforme a memoria en <a class="reference internal" href="numa.html"><span class="doc">NUMA</span></a> y mecanismos de sincronización sin bloqueos para alto rendimiento en <a class="reference internal" href="rcu.html"><span class="doc">RCU (Read-Copy-Update)</span></a>.</p></li>
+<li><p><strong>Aislamiento y Control de Recursos</strong>: Controladores de subsistemas en <a class="reference internal" href="cpusets.html"><span class="doc">cpusets</span></a> junto a ejemplos prácticos de implementación en C (<code class="docutils literal notranslate"><span class="pre">cgroupsExamples.c</span></code>).</p></li>
+<li><p><strong>Seguridad y Vulnerabilidades</strong>: Protección de ejecución de datos a nivel de MMU en <a class="reference internal" href="nx-Bit.html"><span class="doc">NX-Bit – No-eXecute</span></a> y análisis de vulnerabilidades de ejecución especulativa en <a class="reference internal" href="foreShadow.html"><span class="doc">breve historia de las cachés</span></a> (<em>L1 Terminal Fault</em>).</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../hardware_resources/hw_specs/workFlow-strace.html" class="btn btn-neutral float-left" title="Workflow for Using strace to Trap System Calls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cpu.html" class="btn btn-neutral float-right" title="Unidad Central de Procesamiento (CPU)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

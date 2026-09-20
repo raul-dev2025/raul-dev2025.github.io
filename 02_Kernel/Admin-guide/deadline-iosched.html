@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parámetros de Ajuste del Planificador de E/S Deadline &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Arrancando un ARM" href="../arch/arm/Booting.html" />
+    <link rel="prev" title="Cónsola en serie Linux" href="serial-console.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="1-boot.html">Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="initrd.html">InitRD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kernParam.html">Parámetros para la línea de comandos del <em>kernel</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="serial-console.html">Cónsola en serie Linux</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Parámetros de Ajuste del Planificador de E/S Deadline</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#seleccion-del-planificador-de-e-s">Selección del Planificador de E/S</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parametros-de-configuracion-tunables">Parámetros de Configuración (<em>Tunables</em>)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Parámetros de Ajuste del Planificador de E/S Deadline</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/Admin-guide/deadline-iosched.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="parametros-de-ajuste-del-planificador-de-e-s-deadline">
+<h1>Parámetros de Ajuste del Planificador de E/S Deadline<a class="headerlink" href="#parametros-de-ajuste-del-planificador-de-e-s-deadline" title="Link to this heading"></a></h1>
+<p>Este documento describe el funcionamiento del planificador de E/S <strong>Deadline</strong> del kernel de Linux y detalla los parámetros de ajuste (<em>tunables</em>) expuestos a través de <code class="docutils literal notranslate"><span class="pre">sysfs</span></code> para la optimización del rendimiento de almacenamiento.</p>
+<section id="seleccion-del-planificador-de-e-s">
+<h2>Selección del Planificador de E/S<a class="headerlink" href="#seleccion-del-planificador-de-e-s" title="Link to this heading"></a></h2>
+<p>Para obtener información sobre cómo seleccionar un planificador de E/S específico para cada dispositivo de bloques, consulte la documentación general en <code class="docutils literal notranslate"><span class="pre">Documentation/block/switching-sched.rst</span></code>.</p>
+</section>
+<section id="parametros-de-configuracion-tunables">
+<h2>Parámetros de Configuración (<em>Tunables</em>)<a class="headerlink" href="#parametros-de-configuracion-tunables" title="Link to this heading"></a></h2>
+<section id="read-expire-milisegundos">
+<h3><code class="docutils literal notranslate"><span class="pre">read_expire</span></code> (milisegundos)<a class="headerlink" href="#read-expire-milisegundos" title="Link to this heading"></a></h3>
+<p>El objetivo principal del planificador <em>Deadline</em> es garantizar un tiempo máximo de inicio de servicio para las solicitudes de E/S. Dado que el sistema prioriza la latencia de lectura, este valor es configurable. Cuando una solicitud de lectura entra al planificador, se le asigna un tiempo límite (<em>deadline</em>) equivalente al tiempo actual más el valor de <code class="docutils literal notranslate"><span class="pre">read_expire</span></code> expresado en milisegundos.</p>
+</section>
+<section id="write-expire-milisegundos">
+<h3><code class="docutils literal notranslate"><span class="pre">write_expire</span></code> (milisegundos)<a class="headerlink" href="#write-expire-milisegundos" title="Link to this heading"></a></h3>
+<p>Funciona de forma análoga a <code class="docutils literal notranslate"><span class="pre">read_expire</span></code>, pero aplicado de manera exclusiva a las operaciones de escritura.</p>
+</section>
+<section id="fifo-batch-numero-de-solicitudes">
+<h3><code class="docutils literal notranslate"><span class="pre">fifo_batch</span></code> (número de solicitudes)<a class="headerlink" href="#fifo-batch-numero-de-solicitudes" title="Link to this heading"></a></h3>
+<p>Las solicitudes se agrupan en lotes (<em>batches</em>) orientados a una dirección de datos específica (lectura o escritura) y se procesan en orden ascendente de sectores. Para reducir desplazamientos innecesarios del cabezal de disco (<em>seeking</em>), el vencimiento de los tiempos límite solo se comprueba entre lotes. El parámetro <code class="docutils literal notranslate"><span class="pre">fifo_batch</span></code> controla el número máximo de solicitudes procesadas por cada lote.</p>
+<p>Este parámetro equilibra la latencia por solicitud y el rendimiento global (<em>throughput</em>):</p>
+<ul class="simple">
+<li><p><strong>Valores bajos</strong>: Ideales cuando la prioridad es una baja latencia (un valor de <code class="docutils literal notranslate"><span class="pre">1</span></code> establece un comportamiento estricto <em>First-Come, First-Served</em>).</p></li>
+<li><p><strong>Valores altos</strong>: Mejoran el rendimiento global a costa de una mayor variación en los tiempos de latencia.</p></li>
+</ul>
+</section>
+<section id="writes-starved-numero-de-despachos">
+<h3><code class="docutils literal notranslate"><span class="pre">writes_starved</span></code> (número de despachos)<a class="headerlink" href="#writes-starved-numero-de-despachos" title="Link to this heading"></a></h3>
+<p>Al transferir solicitudes desde la cola del planificador de E/S hacia la cola de despacho del dispositivo de bloques, el planificador otorga preferencia a las lecturas. Para evitar la inanición (<em>starvation</em>) indefinida de las escrituras, <code class="docutils literal notranslate"><span class="pre">writes_starved</span></code> define cuántas veces consecutivas se puede priorizar una lectura sobre una escritura. Una vez alcanzado dicho límite, se despachan solicitudes de escritura aplicando los mismos criterios de selección de las lecturas.</p>
+</section>
+<section id="front-merges-booleano">
+<h3><code class="docutils literal notranslate"><span class="pre">front_merges</span></code> (booleano)<a class="headerlink" href="#front-merges-booleano" title="Link to this heading"></a></h3>
+<p>Cuando se ingresa una solicitud contigua a otra existente en la cola, esta puede fusionarse por la parte posterior (<em>back merge</em>) o por la parte frontal (<em>front merge</em>). Debido a la estructura habitual del sistema de archivos, las fusiones posteriores son mucho más frecuentes.</p>
+<p>En cargas de trabajo donde la búsqueda de fusiones frontales resulte ineficiente, es posible desactivar esta función estableciendo <code class="docutils literal notranslate"><span class="pre">front_merges</span></code> a <code class="docutils literal notranslate"><span class="pre">0</span></code> (lo que deshabilita la búsqueda en el árbol rojo-negro). Las fusiones frontales residuales aún pueden ocurrir mediante el puntero en caché <code class="docutils literal notranslate"><span class="pre">last_merge</span></code>, dado que su coste de procesamiento es prácticamente nulo.</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><em>Documento original por Jens Axboe &lt;jens.axboe&#64;oracle.com&gt; (11 de noviembre de 2002).</em></p>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="serial-console.html" class="btn btn-neutral float-left" title="Cónsola en serie Linux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../arch/arm/Booting.html" class="btn btn-neutral float-right" title="Arrancando un ARM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

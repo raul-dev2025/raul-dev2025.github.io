@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe de Infraestructura: Nodo Admin (RHEL/Rocky) &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Informe de Estado: Restauración y Optimización IdM (FreeIPA)" href="ipa-maint02.html" />
+    <link rel="prev" title="Informe de Configuración Base de la VM: ipa02" href="IdM-replica.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#idm-configuracion">IdM - Configuracion</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Implementación de IdM Privado</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#documentos-de-implementacion">Documentos de Implementación</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Implementación de IdM Privado</a></li>
+      <li class="breadcrumb-item active">Informe de Infraestructura: Nodo Admin (RHEL/Rocky)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipaConfigurations.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-de-infraestructura-nodo-admin-rhel-rocky">
+<h1>Informe de Infraestructura: Nodo Admin (RHEL/Rocky)<a class="headerlink" href="#informe-de-infraestructura-nodo-admin-rhel-rocky" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-03-06</p>
+</dd>
+<dt class="field-even">Estado<span class="colon">:</span></dt>
+<dd class="field-even"><p>Estable / Configuración de Persistencia Completada</p>
+</dd>
+</dl>
+<section id="infraestructura-idm-freeipa">
+<h2>Infraestructura IdM/FreeIPA<a class="headerlink" href="#infraestructura-idm-freeipa" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Servidor Maestro:</strong> ipa.raulvilchez.org</p></li>
+<li><p><strong>Réplica:</strong> ipa02.raulvilchez.org</p></li>
+<li><p><strong>Usuarios Configurados:</strong> admin, maint-ipa, raul-ipa, tech-ipa.</p></li>
+</ul>
+<section id="acceso-y-seguridad-hbac">
+<h3>Acceso y Seguridad (HBAC)<a class="headerlink" href="#acceso-y-seguridad-hbac" title="Link to this heading"></a></h3>
+<p>Se han configurado las reglas de acceso basado en host (HBAC) para permitir:
+* Servicios: <code class="docutils literal notranslate"><span class="pre">sshd</span></code>, <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, <code class="docutils literal notranslate"><span class="pre">cockpit</span></code>, <code class="docutils literal notranslate"><span class="pre">gdm-password</span></code>, <code class="docutils literal notranslate"><span class="pre">gdm-launch-environment</span></code>, <code class="docutils literal notranslate"><span class="pre">systemd-user</span></code>.
+* <strong>Actualización Crítica:</strong> Se han añadido los servicios <code class="docutils literal notranslate"><span class="pre">su</span></code> y <code class="docutils literal notranslate"><span class="pre">su-l</span></code> para permitir el cambio de identidad desde usuarios locales hacia la red sin errores de “Permission Denied”.</p>
+</section>
+</section>
+<section id="persistencia-de-configuracion-bash-maestro">
+<h2>Persistencia de Configuración (Bash Maestro)<a class="headerlink" href="#persistencia-de-configuracion-bash-maestro" title="Link to this heading"></a></h2>
+<p>Se ha implementado la estrategia de “Persistencia Inmortal” para unificar la experiencia de usuario.</p>
+<section id="archivo-maestro">
+<h3>Archivo Maestro<a class="headerlink" href="#archivo-maestro" title="Link to this heading"></a></h3>
+<p>Ubicado en <code class="docutils literal notranslate"><span class="pre">/mnt/datos_raul/home_config/bashrc_master</span></code>. Contiene:
+* <strong>Mascara de red:</strong> <code class="docutils literal notranslate"><span class="pre">umask</span> <span class="pre">002</span></code>.
+* <strong>Protección de Datos:</strong> Función <code class="docutils literal notranslate"><span class="pre">rm()</span></code> personalizada que intercepta intentos de borrado en <code class="docutils literal notranslate"><span class="pre">/mnt/datos_raul/</span></code> lanzando una alerta roja y confirmación obligatoria.
+* <strong>Prompt Diferenciado:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Usuario <code class="docutils literal notranslate"><span class="pre">raul</span></code> (Local): Símbolo <code class="docutils literal notranslate"><span class="pre">$&gt;</span></code> en color Verde.</p></li>
+<li><p>Usuario <code class="docutils literal notranslate"><span class="pre">raul-ipa</span></code> (Red): Símbolo <code class="docutils literal notranslate"><span class="pre">$&gt;</span></code> en color Cian.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Integración Git:</strong> Detección de rama activa con <code class="docutils literal notranslate"><span class="pre">parse_git_branch</span></code>.</p></li>
+</ul>
+</section>
+<section id="enlaces-simbolicos-symlinks">
+<h3>Enlaces Simbólicos (Symlinks)<a class="headerlink" href="#enlaces-simbolicos-symlinks" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/home/raul/.bashrc</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">/mnt/datos_raul/home_config/bashrc_master</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/home/raul-ipa/.bashrc</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">/mnt/datos_raul/home_config/bashrc_master</span></code></p></li>
+<li><p>Los enlaces conservan la propiedad del usuario respectivo mediante <code class="docutils literal notranslate"><span class="pre">chown</span> <span class="pre">-h</span></code>.</p></li>
+</ul>
+</section>
+<section id="configuracion-especifica-bashrc-local">
+<h3>Configuración Específica (.bashrc.local)<a class="headerlink" href="#configuracion-especifica-bashrc-local" title="Link to this heading"></a></h3>
+<p>Se utiliza para alias no compartidos, como la configuración SSH específica de cada usuario para evitar conflictos de permisos entre el home local y el de red.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="IdM-replica.html" class="btn btn-neutral float-left" title="Informe de Configuración Base de la VM: ipa02" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ipa-maint02.html" class="btn btn-neutral float-right" title="Informe de Estado: Restauración y Optimización IdM (FreeIPA)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

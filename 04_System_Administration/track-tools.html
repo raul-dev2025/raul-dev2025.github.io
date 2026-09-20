@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Herramientas de Trazado e Inspección de Procesos &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../_static/simulation.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Flujo de Trabajo para la Captura de Llamadas con strace" href="workFlow-strace.html" />
+    <link rel="prev" title="Guía de Empaquetado y Despliegue de Documentación en Python" href="empaquetadoDocs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Índice de Administración de Sistemas</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#administracion">Administración</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="empaquetadoDocs.html">Guía de Empaquetado y Despliegue de Documentación en Python</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Herramientas de Trazado e Inspección de Procesos</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#relacion-y-vocabulario-tecnico">Relación y Vocabulario Técnico</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comparativa-de-herramientas">Comparativa de Herramientas</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="workFlow-strace.html">Flujo de Trabajo para la Captura de Llamadas con strace</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#imagenes-iso-9660-y-medios-opticos">Imágenes ISO 9660 y Medios Ópticos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#aplicaciones-de-sistema">Aplicaciones de sistema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#systemd">Systemd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#listas-de-control-de-acceso-acls">Listas de control de acceso(ACLs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configuracion-del-kernel">Configuración del Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configuracion-de-sistema">Configuración de sistema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#incidencias">Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Índice de Administración de Sistemas</a></li>
+      <li class="breadcrumb-item active">Herramientas de Trazado e Inspección de Procesos</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/04_System_Administration/track-tools.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="herramientas-de-trazado-e-inspeccion-de-procesos">
+<h1>Herramientas de Trazado e Inspección de Procesos<a class="headerlink" href="#herramientas-de-trazado-e-inspeccion-de-procesos" title="Link to this heading"></a></h1>
+<p>En los sistemas operativos tipo UNIX/Linux, el análisis en tiempo de ejecución de las ejecuciones binarias se apoya en mecanismos de trazado que permiten interceptar la interacción de un proceso con el espacio de usuario, las bibliotecas compartidas y el propio núcleo del sistema.</p>
+<section id="relacion-y-vocabulario-tecnico">
+<h2>Relación y Vocabulario Técnico<a class="headerlink" href="#relacion-y-vocabulario-tecnico" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>ptrace</strong> (<em>Process Trace</em>): Es la <strong>llamada al sistema</strong> (<em>syscall</em>) fundamental de bajo nivel que proporciona a un proceso (<em>debugger</em> o trazador) la capacidad de observar, controlar, pausar, inspeccionar la memoria y modificar los registros de otro proceso trazado (<em>tracee</em>). Constituye el bloque de construcción sobre el que se ejecutan los depuradores como <strong>GDB</strong> y las utilidades de análisis en tiempo de ejecución.</p></li>
+<li><p><strong>strace</strong> (<em>System Call Trace</em>): Es una herramienta de diagnóstico en espacio de usuario que utiliza la llamada al sistema <code class="docutils literal notranslate"><span class="pre">ptrace</span></code> para interceptar y registrar las <strong>llamadas al sistema</strong> (<em>syscalls</em>) que realiza un proceso, así como las señales (<em>signals</em>) que este recibe.</p></li>
+<li><p><strong>ltrace</strong> (<em>Library Call Trace</em>): Es una utilidad de depuración que intercepta y registra las <strong>llamadas a bibliotecas dinámicas</strong> (<em>shared libraries</em>, como <code class="docutils literal notranslate"><span class="pre">libc</span></code>) realizadas por un programa compilado dinámicamente, además de poder registrar las llamadas al sistema subyacentes.</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>+-------------------------------------------------------------+
+|                     Espacio de Usuario                      |
+|                                                             |
+|  [ Proceso Trazado ] --(Llamada a Biblioteca)--&gt; [ ltrace ]  |
+|           |                                                 |
++-----------|-------------------------------------------------+
+            | (Llamada al Sistema / Syscall)
++-----------|-------------------------------------------------+
+|           v             Espacio del Kernel                  |
+|      [ strace ] &lt;=====[ syscall ptrace() ]=====&gt; [ GDB ]    |
++-------------------------------------------------------------+
+</pre></div>
+</div>
+</section>
+<section id="comparativa-de-herramientas">
+<h2>Comparativa de Herramientas<a class="headerlink" href="#comparativa-de-herramientas" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Diferencias entre ptrace, strace y ltrace</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Tipo de Componente</p></th>
+<th class="head"><p>Nivel de Intercepción</p></th>
+<th class="head"><p>Caso de Uso Principal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ptrace</span></code></p></td>
+<td><p>Llamada al sistema (Kernel)</p></td>
+<td><p>Control total de registros/memoria</p></td>
+<td><p>Desarrollo de depuradores (GDB, LLDB).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">strace</span></code></p></td>
+<td><p>Utilidad CLI (Espacio de Usuario)</p></td>
+<td><p>Interfaz Kernel / Syscalls</p></td>
+<td><p>Diagnóstico de E/S, archivos y permisos.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ltrace</span></code></p></td>
+<td><p>Utilidad CLI (Espacio de Usuario)</p></td>
+<td><p>Funciones de bibliotecas (Symphony/libc)</p></td>
+<td><p>Análisis de flujo de ejecuciones y APIs.</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Ver <a class="reference internal" href="workFlow-strace.html"><span class="doc">Guía práctica de aplicación</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="empaquetadoDocs.html" class="btn btn-neutral float-left" title="Guía de Empaquetado y Despliegue de Documentación en Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="workFlow-strace.html" class="btn btn-neutral float-right" title="Flujo de Trabajo para la Captura de Llamadas con strace" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestor FPGA &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="FPGA Enlaces de zona para el DT" href="fpga-region.html" />
+    <link rel="prev" title="Tmpfs" href="../FileSystem/tmpfs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#fpga">Fpga</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Gestor FPGA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sumario">Sumario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#funciones-de-la-api">Funciones de la API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#como-escribir-una-imagen-de-bufer">Cómo escribir una imagen de bufer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#como-escribir-un-archivo-de-imagen">Cómo escribir un archivo de imagen</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#como-dar-soporte-a-un-nuevo-dispositivo">Cómo dar soporte a un nuevo dispositivo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fpga-region.html">FPGA Enlaces de <em>zona</em> para el DT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Gestor FPGA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/Fpga/fpga-mgr.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gestor-fpga">
+<h1>Gestor FPGA<a class="headerlink" href="#gestor-fpga" title="Link to this heading"></a></h1>
+<section id="sumario">
+<h2>Sumario<a class="headerlink" href="#sumario" title="Link to this heading"></a></h2>
+<p>El gestor FPGA <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, exporta un conjunto de funciones para progmar un FPGA con una imagen. La <em>API</em> proviene de un fabricante <em>desconocido</em> -probablemente ateo. Todas las especificaciones de fabricante, están ocultas en un controlador de <em>bajo nivel</em>, el cuál registra un conjunto de opciones, en el núcleo de la API. Los datos de la imagen FPGA, en sí mismos, son muy específicos de fabricante, pero en lo referido a ESTE documento, sólo son datos binarios. El gestor FPGA, no las interpretará.</p>
+</section>
+<section id="funciones-de-la-api">
+<h2>Funciones de la API<a class="headerlink" href="#funciones-de-la-api" title="Link to this heading"></a></h2>
+<p><strong>Programar el fpga desde un archivo o desde el bufer:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">fpga_mgr_buf_load</span><span class="p">(</span><span class="n">struct</span> <span class="n">fpga_manager</span> <span class="o">*</span><span class="n">mgr</span><span class="p">,</span>
+                                            <span class="n">struct</span> <span class="n">fpga_image_info</span> <span class="o">*</span><span class="n">info</span><span class="p">,</span>
+                                            <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">count</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Cargar en memoria el FPGA desde una imagen, la cuál existe, como bufer <strong>contiguo</strong> . Debería evitarse signar la memoria contigua del kernel al bufer, es preferible que el usuario, utilice la interfase <code class="docutils literal notranslate"><span class="pre">_sg</span></code> en su lugar.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">fpga_mgr_buf_load_sg</span><span class="p">(</span><span class="n">struct</span> <span class="n">fpga_manager</span> <span class="o">*</span><span class="n">mgr</span><span class="p">,</span>
+                                                 <span class="n">struct</span> <span class="n">fpga_image_info</span> <span class="o">*</span><span class="n">info</span><span class="p">,</span>
+                                                 <span class="n">struct</span> <span class="n">sg_table</span> <span class="o">*</span><span class="n">sgt</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Cargar el fpga desde una imagen en una memoria <strong>no contigua</strong>. Las llamadas podrán construir una <code class="docutils literal notranslate"><span class="pre">sg_table</span></code> utilizando la función <code class="docutils literal notranslate"><span class="pre">alloc_page</span></code> de una memoria guardada.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">fpga_mgr_firmware_load</span><span class="p">(</span><span class="n">struct</span> <span class="n">fpga_manager</span> <span class="o">*</span><span class="n">mgr</span><span class="p">,</span>
+                                                     <span class="n">struct</span> <span class="n">fpga_image_info</span> <span class="o">*</span><span class="n">info</span><span class="p">,</span>
+                                                     <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">image_name</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Cargar el FPGA desde una imagen, existente <strong>como archivo</strong>. La imagen deberá estar en la ruta de busqueda del <em>firmware</em>. Ver <code class="docutils literal notranslate"><span class="pre">firmware</span> <span class="pre">class</span> <span class="pre">documentation</span></code>. Si tiene éxito, el FPGA terminará en <em>modo operación</em>. Retornará <code class="docutils literal notranslate"><span class="pre">0</span></code> si no hay errores y, un código negativo de error, si sucede lo contrario.</p>
+<p>Un diseño FPGA, contenida en un archivo de imagen FPGA, bien tendrá las particularidades que afectan a <em>cómo la imagen es programada al FPGA</em>. La información está contenida en un <code class="docutils literal notranslate"><span class="pre">struct</span></code> llamado <code class="docutils literal notranslate"><span class="pre">fpga_image_info</span></code>. Por ahora, dicha particularidad sólo es un <em>bit</em> representado por una bandera(flag), indicando cuándo la imagen necesitará una reconfiguración total o, parcial.</p>
+<p><strong>Gestor FPGA, poner/obtener una referencia:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">fpga_manager</span> <span class="o">*</span><span class="n">of_fpga_mgr_get</span><span class="p">(</span><span class="n">struct</span> <span class="n">device_node</span> <span class="o">*</span><span class="n">node</span><span class="p">);</span>
+<span class="n">struct</span> <span class="n">fpga_manager</span> <span class="o">*</span><span class="n">fpga_mgr_get</span><span class="p">(</span><span class="n">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">dev</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Dado un nodo <em>DT</em> o, dispositivo, obtener una referencia exclusiva para el gestor FPGA.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">fpga_mgr_put</span><span class="p">(</span><span class="n">struct</span> <span class="n">fpga_manager</span> <span class="o">*</span><span class="n">mgr</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Liverar la referencia.</p>
+<p><strong>Registrar/quitar del registro, el controlador específico FPGA, de bajo
+nivel:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">fpga_mgr_register</span><span class="p">(</span><span class="n">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">dev</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">,</span>
+                                            <span class="n">const</span> <span class="n">struct</span> <span class="n">fpga_manager_ops</span> <span class="o">*</span><span class="n">mops</span><span class="p">,</span>
+                                            <span class="n">void</span> <span class="o">*</span><span class="n">priv</span><span class="p">);</span>
+
+<span class="n">void</span> <span class="n">fpga_mgr_unregister</span><span class="p">(</span><span class="n">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">dev</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>El <em>uso</em> de las anteriores funciones, es descrito en la sección <em>Cómo dar soporte a un</em>
+<em>nuevo dispositivo FPGA</em>.</p>
+</section>
+<section id="como-escribir-una-imagen-de-bufer">
+<h2>Cómo escribir una imagen de bufer<a class="headerlink" href="#como-escribir-una-imagen-de-bufer" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">Include</span> <span class="n">to</span> <span class="n">get</span> <span class="n">the</span> <span class="n">API</span> <span class="o">*/</span>
+<span class="c1">#include &lt;linux/fpga/fpga-mgr.h&gt;</span>
+
+<span class="o">/*</span> <span class="n">device</span> <span class="n">node</span> <span class="n">that</span> <span class="n">specifies</span> <span class="n">the</span> <span class="n">FPGA</span> <span class="n">manager</span> <span class="n">to</span> <span class="n">use</span> <span class="o">*/</span>
+<span class="n">struct</span> <span class="n">device_node</span> <span class="o">*</span><span class="n">mgr_node</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="o">/*</span> <span class="n">FPGA</span> <span class="n">image</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">buffer</span><span class="o">.</span>  <span class="n">count</span> <span class="ow">is</span> <span class="n">size</span> <span class="n">of</span> <span class="n">the</span> <span class="n">buffer</span><span class="o">.</span> <span class="o">*/</span>
+<span class="n">char</span> <span class="o">*</span><span class="n">buf</span> <span class="o">=</span> <span class="o">...</span>
+<span class="nb">int</span> <span class="n">count</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="o">/*</span> <span class="n">struct</span> <span class="k">with</span> <span class="n">information</span> <span class="n">about</span> <span class="n">the</span> <span class="n">FPGA</span> <span class="n">image</span> <span class="n">to</span> <span class="n">program</span><span class="o">.</span> <span class="o">*/</span>
+<span class="n">struct</span> <span class="n">fpga_image_info</span> <span class="n">info</span><span class="p">;</span>
+
+<span class="o">/*</span> <span class="n">flags</span> <span class="n">indicates</span> <span class="n">whether</span> <span class="n">to</span> <span class="n">do</span> <span class="n">full</span> <span class="ow">or</span> <span class="n">partial</span> <span class="n">reconfiguration</span> <span class="o">*/</span>
+<span class="n">info</span><span class="o">.</span><span class="n">flags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="nb">int</span> <span class="n">ret</span><span class="p">;</span>
+
+<span class="o">/*</span> <span class="n">Get</span> <span class="n">exclusive</span> <span class="n">control</span> <span class="n">of</span> <span class="n">FPGA</span> <span class="n">manager</span> <span class="o">*/</span>
+<span class="n">struct</span> <span class="n">fpga_manager</span> <span class="o">*</span><span class="n">mgr</span> <span class="o">=</span> <span class="n">of_fpga_mgr_get</span><span class="p">(</span><span class="n">mgr_node</span><span class="p">);</span>
+
+<span class="o">/*</span> <span class="n">Load</span> <span class="n">the</span> <span class="n">buffer</span> <span class="n">to</span> <span class="n">the</span> <span class="n">FPGA</span> <span class="o">*/</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">fpga_mgr_buf_load</span><span class="p">(</span><span class="n">mgr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">info</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+
+<span class="o">/*</span> <span class="n">Release</span> <span class="n">the</span> <span class="n">FPGA</span> <span class="n">manager</span> <span class="o">*/</span>
+<span class="n">fpga_mgr_put</span><span class="p">(</span><span class="n">mgr</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="como-escribir-un-archivo-de-imagen">
+<h2>Cómo escribir un archivo de imagen<a class="headerlink" href="#como-escribir-un-archivo-de-imagen" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">Include</span> <span class="n">to</span> <span class="n">get</span> <span class="n">the</span> <span class="n">API</span> <span class="o">*/</span>
+<span class="c1">#include &lt;linux/fpga/fpga-mgr.h&gt;</span>
+
+<span class="o">/*</span> <span class="n">device</span> <span class="n">node</span> <span class="n">that</span> <span class="n">specifies</span> <span class="n">the</span> <span class="n">FPGA</span> <span class="n">manager</span> <span class="n">to</span> <span class="n">use</span> <span class="o">*/</span>
+<span class="n">struct</span> <span class="n">device_node</span> <span class="o">*</span><span class="n">mgr_node</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="o">/*</span> <span class="n">FPGA</span> <span class="n">image</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">file</span> <span class="n">which</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">firmware</span> <span class="n">search</span> <span class="n">path</span> <span class="o">*/</span>
+<span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;fpga-image-9.rbf&quot;</span>
+
+<span class="o">/*</span> <span class="n">struct</span> <span class="k">with</span> <span class="n">information</span> <span class="n">about</span> <span class="n">the</span> <span class="n">FPGA</span> <span class="n">image</span> <span class="n">to</span> <span class="n">program</span><span class="o">.</span> <span class="o">*/</span>
+<span class="n">struct</span> <span class="n">fpga_image_info</span> <span class="n">info</span><span class="p">;</span>
+
+<span class="o">/*</span> <span class="n">flags</span> <span class="n">indicates</span> <span class="n">whether</span> <span class="n">to</span> <span class="n">do</span> <span class="n">full</span> <span class="ow">or</span> <span class="n">partial</span> <span class="n">reconfiguration</span> <span class="o">*/</span>
+<span class="n">info</span><span class="o">.</span><span class="n">flags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="nb">int</span> <span class="n">ret</span><span class="p">;</span>
+
+<span class="o">/*</span> <span class="n">Get</span> <span class="n">exclusive</span> <span class="n">control</span> <span class="n">of</span> <span class="n">FPGA</span> <span class="n">manager</span> <span class="o">*/</span>
+<span class="n">struct</span> <span class="n">fpga_manager</span> <span class="o">*</span><span class="n">mgr</span> <span class="o">=</span> <span class="n">of_fpga_mgr_get</span><span class="p">(</span><span class="n">mgr_node</span><span class="p">);</span>
+
+<span class="o">/*</span> <span class="n">Get</span> <span class="n">the</span> <span class="n">firmware</span> <span class="n">image</span> <span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="n">load</span> <span class="n">it</span> <span class="n">to</span> <span class="n">the</span> <span class="n">FPGA</span> <span class="o">*/</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">fpga_mgr_firmware_load</span><span class="p">(</span><span class="n">mgr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">info</span><span class="p">,</span> <span class="n">path</span><span class="p">);</span>
+
+<span class="o">/*</span> <span class="n">Release</span> <span class="n">the</span> <span class="n">FPGA</span> <span class="n">manager</span> <span class="o">*/</span>
+<span class="n">fpga_mgr_put</span><span class="p">(</span><span class="n">mgr</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="como-dar-soporte-a-un-nuevo-dispositivo">
+<h2>Cómo dar soporte a un nuevo dispositivo<a class="headerlink" href="#como-dar-soporte-a-un-nuevo-dispositivo" title="Link to this heading"></a></h2>
+<p>Para añadir otro gestor FPGA, escribir un controlador que implemente un conjunto de
+opciones. La prueba de funcionamiento, llamará a <code class="docutils literal notranslate"><span class="pre">fpga_mgr_register()</span></code>, como sigue:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>static const struct fpga_manager_ops socfpga_fpga_ops = {
+           .write_init = socfpga_fpga_ops_configure_init,
+           .write = socfpga_fpga_ops_configure_write,
+           .write_complete = socfpga_fpga_ops_configure_complete,
+           .state = socfpga_fpga_ops_state,
+};
+
+static int socfpga_fpga_probe(struct platform_device *pdev)
+{
+    struct device *dev = &amp;pdev-&gt;dev;
+    struct socfpga_fpga_priv *priv;
+    int ret;
+
+    priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
+    if (!priv)
+        return -ENOMEM;
+
+    /* ... do ioremaps, get interrupts, etc. and save
+         them in priv... */
+
+    return fpga_mgr_register(dev, &quot;Altera SOCFPGA FPGA Manager&quot;,
+                 &amp;socfpga_fpga_ops, priv);
+}
+
+static int socfpga_fpga_remove(struct platform_device *pdev)
+{
+    fpga_mgr_unregister(&amp;pdev-&gt;dev);
+
+    return 0;
+}
+</pre></div>
+</div>
+<p>Las <code class="docutils literal notranslate"><span class="pre">ops</span></code> serán implementadas, cuales quiera que sean, las escrituras de registro específicas del dispositivo, necesarias para programar la secuencia del fpga en concreto. Las <code class="docutils literal notranslate"><span class="pre">ops</span></code> retornan <code class="docutils literal notranslate"><span class="pre">0</span></code> si no hay errores y, un código negativo de error, si sucede lo contrario.</p>
+<p>La secuencia de programación es:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.write_init</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.write</span> <span class="pre">or</span> <span class="pre">.write_sg</span> <span class="pre">(may</span> <span class="pre">be</span> <span class="pre">called</span> <span class="pre">once</span> <span class="pre">or</span> <span class="pre">multiple</span> <span class="pre">times)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.write_complete</span></code>.</p></li>
+</ol>
+<p>La función <code class="docutils literal notranslate"><span class="pre">.write_init</span></code> preparará al FPGA para recibir la imagen de datos. El bufer
+<em>indicado</em> en <code class="docutils literal notranslate"><span class="pre">.write_init</span></code> será casi <code class="docutils literal notranslate"><span class="pre">.initial_header_size</span></code>(tamño_cabecera_inicial) <em>bytes</em> de tamaño, si todo el <em>torrente de bit</em>(bitstream), no está inmediatamente disponible, el núcleo del código del bufer, aumentará -por lo menos, ésta cantidad antes de empezar.</p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">.write</span></code> escribirá un bufer en el FPGA. El bufer podría contener la imagen al completo o, podría ser una porción más pequeña de la imagen FPGA. En el último caso, la función será llamada múltiples veces, por las sucesivas “porciones”. La interfase es equiparable a controladores que usan PIO.</p>
+<p>La versión <code class="docutils literal notranslate"><span class="pre">.write_sg</span></code> aduce un comportamiento similar a <code class="docutils literal notranslate"><span class="pre">.write</span></code>, excepto por la entrada <code class="docutils literal notranslate"><span class="pre">sg_table</span></code> que es una <em>lista de dispersión</em>. La interfase es equiparable a un controlador usando DMA.</p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">.write_complete</span></code> es llamada después de que la imagen haya sido escrita, con objeto de poner al FPGA en <em>modo operación</em>.</p>
+<p>Las <code class="docutils literal notranslate"><span class="pre">ops</span></code> incluyen una función <code class="docutils literal notranslate"><span class="pre">.state</span></code>, la cuál lee, el gestor FPGA de <em>hardware</em> y, retorna un tipo de código enumerable(enum) <code class="docutils literal notranslate"><span class="pre">fpga_mgr_states</span></code>. El resultado <em>no es</em>  un cambio en el estado del <em>hardware</em>.</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2>Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>FPGA — Field-programmable gate array(integrated circuit) matriz d puertas programables</p>
+</aside>
+</aside>
+<p><strong>Autor:</strong> Allan Tull 2015</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../FileSystem/tmpfs.html" class="btn btn-neutral float-left" title="Tmpfs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fpga-region.html" class="btn btn-neutral float-right" title="FPGA Enlaces de zona para el DT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

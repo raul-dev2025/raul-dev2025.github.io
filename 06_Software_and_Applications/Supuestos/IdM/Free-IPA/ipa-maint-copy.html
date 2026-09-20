@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe de Estado: Recuperación y Sincronización IdM &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Incidence Report: KDC Connection Timeout in Multi-Master IdM" href="ipa-maint-eng.html" />
+    <link rel="prev" title="Informe de Estado: Restauración y Optimización IdM (FreeIPA)" href="ipa-maint02.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#idm-configuracion">IdM - Configuracion</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Implementación de IdM Privado</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#documentos-de-implementacion">Documentos de Implementación</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Implementación de IdM Privado</a></li>
+      <li class="breadcrumb-item active">Informe de Estado: Recuperación y Sincronización IdM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/06_Software_and_Applications/Supuestos/IdM/Free-IPA/ipa-maint-copy.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="informe-de-estado-recuperacion-y-sincronizacion-idm">
+<h1>Informe de Estado: Recuperación y Sincronización IdM<a class="headerlink" href="#informe-de-estado-recuperacion-y-sincronizacion-idm" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2026-04-06</p>
+</dd>
+<dt class="field-even">Responsable<span class="colon">:</span></dt>
+<dd class="field-even"><p>Raul Vilchez(Administrador de Sistemas)</p>
+</dd>
+<dt class="field-odd">Infraestructura<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Nodo NAS (DSM) &amp; IdM Integration</p>
+</dd>
+<dt class="field-even">Estado Final<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>OPERACIONAL / SINCRONIZADO</strong></p>
+</dd>
+</dl>
+<section id="resumen-ejecutivo">
+<h2>Resumen Ejecutivo<a class="headerlink" href="#resumen-ejecutivo" title="Link to this heading"></a></h2>
+<p>Tras la restauración de un backup en el servidor maestro (<code class="docutils literal notranslate"><span class="pre">ipa.raulvilchez.org</span></code>), se detectó una desincronización crítica en la base de datos LDAP y en el vector de actualización de réplicas (RUV). El sistema presentaba inconsistencia de credenciales para el usuario <code class="docutils literal notranslate"><span class="pre">Directory</span> <span class="pre">Manager</span></code> y pérdida de visibilidad de la topología de certificados en el nodo principal.</p>
+</section>
+<section id="procedimiento-de-recuperacion">
+<h2>Procedimiento de Recuperación<a class="headerlink" href="#procedimiento-de-recuperacion" title="Link to this heading"></a></h2>
+<section id="restauracion-de-acceso-administrativo">
+<h3>1. Restauración de Acceso Administrativo<a class="headerlink" href="#restauracion-de-acceso-administrativo" title="Link to this heading"></a></h3>
+<p>Se procedió al cambio manual del hash de la contraseña de <code class="docutils literal notranslate"><span class="pre">Directory</span> <span class="pre">Manager</span></code> directamente en el archivo <code class="docutils literal notranslate"><span class="pre">dse.ldif</span></code>. Se aplicaron las siguientes correcciones de seguridad:</p>
+<ul class="simple">
+<li><p><strong>Sintaxis:</strong> Ajuste estricto del espaciado en la directiva <code class="docutils literal notranslate"><span class="pre">nsslapd-rootpw</span></code>.</p></li>
+<li><p><strong>Persistencia:</strong> Edición realizada con servicios detenidos para evitar sobrescritura por el proceso de cierre.</p></li>
+<li><p><strong>SELinux:</strong> Restauración del contexto de seguridad mediante <code class="docutils literal notranslate"><span class="pre">restorecon</span> <span class="pre">-v</span></code> para asegurar el arranque del servicio <code class="docutils literal notranslate"><span class="pre">dirsrv</span></code>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>antes de recrear la cadena de texto encriptada o hash, es conveniente asegurarse de que el servicio systemd correspondiente esta parado. Una vez incrustado en el archivo; reactivar el mismo.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl<span class="w"> </span>stop<span class="w"> </span>dirsrv@RAULVILCHEZ-ORG.service
+</pre></div>
+</div>
+</section>
+<section id="sincronizacion-de-topologia-y-datos-ruv">
+<h3>2. Sincronización de Topología y Datos (RUV)<a class="headerlink" href="#sincronizacion-de-topologia-y-datos-ruv" title="Link to this heading"></a></h3>
+<p>Se identificó una “amnesia” de replicación en el Maestro. El procedimiento de alineación consistió en:</p>
+<ul class="simple">
+<li><p><strong>Identificación de Vectores:</strong> Análisis mediante <code class="docutils literal notranslate"><span class="pre">ipa-replica-manage</span> <span class="pre">list-ruv</span></code>, detectando la falta de los IDs de réplica (3 y 5) en el Maestro.</p></li>
+<li><p><strong>Re-inicialización:</strong> Ejecución de <code class="docutils literal notranslate"><span class="pre">re-initialize</span> <span class="pre">--from</span></code> desde el Maestro apuntando a la Réplica (<code class="docutils literal notranslate"><span class="pre">ipa02</span></code>), asumiendo que la Réplica poseía el estado más completo de la base de datos post-backup.</p></li>
+<li><p><strong>Alineación de CA:</strong> Sincronización específica del subsistema de certificados mediante la herramienta de gestión de réplicas de CA.</p></li>
+</ul>
+</section>
+<section id="verificacion-de-continuidad">
+<h3>3. Verificación de Continuidad<a class="headerlink" href="#verificacion-de-continuidad" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>NTP:</strong> Sincronización horaria validada con <code class="docutils literal notranslate"><span class="pre">chrony</span></code> (offsets &lt; 100us).</p></li>
+<li><p><strong>Backups:</strong> Ejecución manual exitosa del script personalizado <code class="docutils literal notranslate"><span class="pre">/usr/sbin/ipa_backup</span></code>.</p></li>
+<li><p><strong>NAS:</strong> Verificación de transferencia de archivos <code class="docutils literal notranslate"><span class="pre">full</span></code> y <code class="docutils literal notranslate"><span class="pre">data</span></code> al almacenamiento externo.</p></li>
+</ul>
+</section>
+</section>
+<section id="estado-de-la-infraestructura">
+<h2>Estado de la Infraestructura<a class="headerlink" href="#estado-de-la-infraestructura" title="Link to this heading"></a></h2>
+<section id="sincronizacion-de-replicas">
+<h3>Sincronización de Réplicas<a class="headerlink" href="#sincronizacion-de-replicas" title="Link to this heading"></a></h3>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Estado de Vectores de Actualización (RUV)</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 35.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Subsistema</p></th>
+<th class="head"><p>ipa.raulvilchez.org (ID)</p></th>
+<th class="head"><p>ipa02.raulvilchez.org (ID)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LDAP (Domain)</p></td>
+<td><p>4, 3 (OK)</p></td>
+<td><p>3, 4 (OK)</p></td>
+</tr>
+<tr class="row-odd"><td><p>CA (Certificates)</p></td>
+<td><p>6, 5 (OK)</p></td>
+<td><p>5, 6 (OK)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="metricas-de-salud">
+<h3>Métricas de Salud<a class="headerlink" href="#metricas-de-salud" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Servicio Directory Server:</strong> Activo y respondiendo.</p></li>
+<li><p><strong>Web UI:</strong> Topología visual coherente con flechas de replicación bidireccionales activas.</p></li>
+<li><p><strong>Backup NAS:</strong> Ultima copia exitosa el 2026-04-06 19:43.</p></li>
+</ul>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>El clúster FreeIPA se encuentra en estado estable. La comunicación multi-maestro ha sido restaurada sin pérdida de integridad de datos. Se recomienda mantener la monitorización de los logs de replicación durante las próximas 24 horas.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ipa-maint02.html" class="btn btn-neutral float-left" title="Informe de Estado: Restauración y Optimización IdM (FreeIPA)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ipa-maint-eng.html" class="btn btn-neutral float-right" title="Incidence Report: KDC Connection Timeout in Multi-Master IdM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

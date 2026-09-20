@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Despliegue de Réplica FreeIPA y Sincronización de Directorio &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Índice ‘Single Sign-On’" href="../SSO/index.html" />
+    <link rel="prev" title="Diseño de Infraestructura IdM" href="planingIdM.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#idm-configuracion">IdM - Configuracion</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Implementación de IdM Privado</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#documentos-de-implementacion">Documentos de Implementación</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Implementación de IdM Privado</a></li>
+      <li class="breadcrumb-item active">Despliegue de Réplica FreeIPA y Sincronización de Directorio</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/06_Software_and_Applications/Supuestos/IdM/Free-IPA/redundant-IdM.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="despliegue-de-replica-freeipa-y-sincronizacion-de-directorio">
+<h1>Despliegue de Réplica FreeIPA y Sincronización de Directorio<a class="headerlink" href="#despliegue-de-replica-freeipa-y-sincronizacion-de-directorio" title="Link to this heading"></a></h1>
+<section id="objetivo-tecnico">
+<h2>Objetivo Técnico<a class="headerlink" href="#objetivo-tecnico" title="Link to this heading"></a></h2>
+<p>El objetivo principal de esta intervención ha sido la implementación de una <strong>réplica de alta disponibilidad</strong> del servidor FreeIPA (Identity Management) para la infraestructura de <code class="docutils literal notranslate"><span class="pre">raulvilchez.org</span></code>. Se busca garantizar la redundancia de los servicios de autenticación Kerberos, el servidor de certificados (CA) y la resolución de nombres (DNS), asegurando que la <strong>Global Password Policy</strong> definida en el nodo maestro se replique correctamente.</p>
+<section id="infraestructura-de-red">
+<h3>Infraestructura de Red<a class="headerlink" href="#infraestructura-de-red" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Maestro (idm):</strong> 192.168.17.39</p></li>
+<li><p><strong>Réplica (idm-replica):</strong> 192.168.17.40</p></li>
+<li><p><strong>Puerto crítico:</strong> 636 (LDAPS)</p></li>
+</ul>
+</section>
+</section>
+<section id="procedimiento-de-configuracion-y-resolucion">
+<h2>Procedimiento de Configuración y Resolución<a class="headerlink" href="#procedimiento-de-configuracion-y-resolucion" title="Link to this heading"></a></h2>
+<section id="preparacion-del-entorno-de-red-hosts">
+<h3>1. Preparación del Entorno de Red (Hosts)<a class="headerlink" href="#preparacion-del-entorno-de-red-hosts" title="Link to this heading"></a></h3>
+<p>Para evitar dependencias circulares del servicio DNS durante la fase crítica de instalación, se forzó la resolución estática en el archivo <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> de la réplica.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/idm/d&#39;</span><span class="w"> </span>/etc/hosts
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;192.168.17.39 idm.raulvilchez.org idm&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/hosts
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;192.168.17.40 idm-replica.raulvilchez.org idm-replica&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/hosts
+</pre></div>
+</div>
+</section>
+<section id="sincronizacion-de-tiempo-kerberos">
+<h3>2. Sincronización de Tiempo (Kerberos)<a class="headerlink" href="#sincronizacion-de-tiempo-kerberos" title="Link to this heading"></a></h3>
+<p>Se verificó que el sesgo de tiempo entre el maestro y la réplica fuera de <strong>0 segundos</strong>, fundamental para la validación de tickets GSSAPI.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificación cruzada desde la réplica</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Maestro: </span><span class="k">$(</span>ssh<span class="w"> </span>root@idm.raulvilchez.org<span class="w"> </span>date<span class="k">)</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Réplica: </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="limpieza-de-topologia-en-el-maestro">
+<h3>3. Limpieza de Topología en el Maestro<a class="headerlink" href="#limpieza-de-topologia-en-el-maestro" title="Link to this heading"></a></h3>
+<p>Para resolver conflictos de “Replication Agreement” existentes, se procedió a la eliminación forzosa de la topología previa en el nodo maestro.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kinit<span class="w"> </span>admin
+ipa<span class="w"> </span>server-del<span class="w"> </span>idm-replica.raulvilchez.org<span class="w"> </span>--force
+</pre></div>
+</div>
+</section>
+<section id="ejecucion-del-instalador-de-replica">
+<h3>4. Ejecución del Instalador de Réplica<a class="headerlink" href="#ejecucion-del-instalador-de-replica" title="Link to this heading"></a></h3>
+<p>Se utilizó el comando de instalación con parámetros de fuerza para sobreescribir registros de host y omitir comprobaciones de conectividad DNS externas.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">read</span><span class="w"> </span>-sp<span class="w"> </span><span class="s2">&quot;Contraseña de Admin: &quot;</span><span class="w"> </span>IPA_PASS<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+ipa-replica-install<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--principal<span class="w"> </span>admin<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IPA_PASS</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--server<span class="w"> </span>idm.raulvilchez.org<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--domain<span class="w"> </span>raulvilchez.org<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--realm<span class="w"> </span>RAULVILCHEZ.ORG<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--setup-ca<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--setup-dns<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--forwarder<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--skip-conncheck<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--force-join
+</pre></div>
+</div>
+</section>
+</section>
+<section id="justificacion-tecnica-de-parametros">
+<h2>Justificación Técnica de Parámetros<a class="headerlink" href="#justificacion-tecnica-de-parametros" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>–server idm.raulvilchez.org</strong>: Se prefiere el FQDN para asegurar la coincidencia con el <strong>Common Name (CN)</strong> de los certificados RSA de 2048 bits validados.</p></li>
+<li><p><strong>–skip-conncheck</strong>: Parámetro crítico para evitar que el instalador aborte si el registro DNS inverso (PTR) aún no está propagado en la zona <code class="docutils literal notranslate"><span class="pre">17.168.192.in-addr.arpa</span></code>.</p></li>
+<li><p><strong>–force-join</strong>: Necesario para reutilizar el objeto de host en el LDAP tras desinstalaciones incompletas que mantienen el <em>Keytab</em> original.</p></li>
+<li><p><strong>Certificados</strong>: Se validó el uso de una cadena de confianza basada en <strong>RSA con SHA-256</strong> y una validez de 2 años (Feb 2026 - Feb 2028).</p></li>
+</ul>
+</section>
+<section id="verificacion-de-configuracion">
+<h2>Verificación de Configuración<a class="headerlink" href="#verificacion-de-configuracion" title="Link to this heading"></a></h2>
+<p>La validez del canal de comunicación se comprobó mediante el cliente OpenSSL, confirmando el protocolo <strong>TLSv1.3</strong> y el cifrado <strong>TLS_AES_128_GCM_SHA256</strong>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>idm.raulvilchez.org:636<span class="w"> </span>-showcerts
+</pre></div>
+</div>
+<p>El resultado exitoso de la prueba fue <code class="docutils literal notranslate"><span class="pre">Verify</span> <span class="pre">return</span> <span class="pre">code:</span> <span class="pre">0</span> <span class="pre">(ok)</span></code>, garantizando que el Maestro está listo para la replicación de base de datos.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="planingIdM.html" class="btn btn-neutral float-left" title="Diseño de Infraestructura IdM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../SSO/index.html" class="btn btn-neutral float-right" title="Índice ‘Single Sign-On’" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

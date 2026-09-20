@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Réplica de Alta Disponibilidad FreeIPA &mdash; TecnicoSistemas  documentation</title>
+  <title>Réplica de Alta Disponibilidad FreeIPA &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Informe de Configuración Base de la VM: ipa02" href="IdM-replica.html" />
-    <link rel="prev" title="Preparación del Entorno (Paso 3)" href="preparacionEntornoPaso3.html" /> 
+    <link rel="prev" title="Notas hipervisor" href="../Hipervisor/notasHypervisor.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,28 +41,50 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
-<ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Infraestructura virtual</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../index.html#virtualization-management">Virtualization Management</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../IV-management.html">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Config/sharedFolder-nfs.html">Informe de Configuración: Repositorio de ISOs vía NFS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Config/configSSH.html">Configuración de Acceso Remoto Seguro (SSH)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Config/resumen.html">Infraestructura y Almacenamiento</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Testing/vmTunning.html">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Golden/indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="../index.html#gestion-de-identidad-idm">Gestión de Identidad (IdM)</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/Incidencias/index.html">Registro de Incidencias</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#supuestos-idm">Supuestos - IdM</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Réplica de Alta Disponibilidad FreeIPA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#resumen-ejecutivo">Resumen Ejecutivo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuracion-de-infraestructura">Configuración de Infraestructura</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hitos-del-despliegue-y-correcciones-realizadas">Hitos del Despliegue y Correcciones Realizadas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#verificacion-post-despliegue">Verificación Post-Despliegue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conclusion">Conclusión</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="IdM-replica.html">Informe de Configuración Base de la VM: ipa02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nasShutDown.html">Procedimiento de Apagado de Infraestructura (IdM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preparacionEntornoPaso3.html">Preparación del Entorno (Paso 3)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#idm-configuracion">IdM - Configuracion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
@@ -75,7 +97,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">TecnicoSistemas</a>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -83,8 +105,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
-          <li class="breadcrumb-item"><a href="../index.html">Infraestructura virtual</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
       <li class="breadcrumb-item active">Réplica de Alta Disponibilidad FreeIPA</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/06_Software_and_Applications/Supuestos/IdM/despliegue-replica.rst.txt" rel="nofollow"> View page source</a>
@@ -166,7 +187,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="preparacionEntornoPaso3.html" class="btn btn-neutral float-left" title="Preparación del Entorno (Paso 3)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Hipervisor/notasHypervisor.html" class="btn btn-neutral float-left" title="Notas hipervisor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="IdM-replica.html" class="btn btn-neutral float-right" title="Informe de Configuración Base de la VM: ipa02" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

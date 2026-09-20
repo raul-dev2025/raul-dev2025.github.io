@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How to Limit CPU Computation Consumption for Builds and Compilation &mdash; TecnicoSistemas  documentation</title>
+  <title>Limit CPU Computation &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
@@ -22,9 +22,7 @@
       <script src="../../_static/js/theme.js?v=0e654b99"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Workflow for Using strace to Trap System Calls" href="hw_specs/workFlow-strace.html" />
-    <link rel="prev" title="HOWTO –&gt; PCI-Express test scripts for LTP" href="pci-exp-tests-HOWTO.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,30 +39,20 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
-<ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../driver_development/index.html">Driver Development</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">Hardware and System Resources</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="index.html#system-tasks">System Tasks</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="sysTasks.html">Concurrent ltp build with system tasks</a></li>
-<li class="toctree-l4"><a class="reference internal" href="bus-map-refact.html">Bus Map</a></li>
-<li class="toctree-l4"><a class="reference internal" href="pci-exp-tests-HOWTO.html">HOWTO –&gt; PCI-Express test scripts for LTP</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">How to Limit CPU Computation Consumption for Builds and Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
 </ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#hardware-specifications">Hardware Specifications</a></li>
-<li class="toctree-l3"><a class="reference internal" href="index.html#network-infrastructure">Network Infrastructure</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
@@ -77,7 +65,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">TecnicoSistemas</a>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -85,9 +73,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Hardware and System Resources</a></li>
-      <li class="breadcrumb-item active">How to Limit CPU Computation Consumption for Builds and Compilation</li>
+      <li class="breadcrumb-item active">Limit CPU Computation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/01_Hardware/hardware_resources/compCPU.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -97,11 +83,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="how-to-limit-cpu-computation-consumption-for-builds-and-compilation">
-<h1>How to Limit CPU Computation Consumption for Builds and Compilation<a class="headerlink" href="#how-to-limit-cpu-computation-consumption-for-builds-and-compilation" title="Link to this heading"></a></h1>
+  <section id="limit-cpu-computation">
+<h1>Limit CPU Computation<a class="headerlink" href="#limit-cpu-computation" title="Link to this heading"></a></h1>
+<section id="how-to-limit-cpu-computation-consumption-for-builds-and-compilation">
+<h2>How to Limit CPU Computation Consumption for Builds and Compilation<a class="headerlink" href="#how-to-limit-cpu-computation-consumption-for-builds-and-compilation" title="Link to this heading"></a></h2>
 <p>This guide provides strategies to limit CPU usage for CPU-intensive processes like <strong>compilation</strong> or <strong>builds</strong>.</p>
 <section id="limit-parallel-jobs">
-<h2>1. Limit Parallel Jobs<a class="headerlink" href="#limit-parallel-jobs" title="Link to this heading"></a></h2>
+<h3>1. Limit Parallel Jobs<a class="headerlink" href="#limit-parallel-jobs" title="Link to this heading"></a></h3>
 <p>Many build systems and compilers allow you to control the number of parallel jobs, which directly affects CPU usage.</p>
 <ul>
 <li><p><strong>For</strong> <code class="docutils literal notranslate"><span class="pre">make</span></code>:
@@ -129,7 +117,7 @@ Use <code class="docutils literal notranslate"><span class="pre">-j</span></code
 </ul>
 </section>
 <section id="use-nice-and-renice">
-<h2>2. Use <code class="docutils literal notranslate"><span class="pre">nice</span></code> and <code class="docutils literal notranslate"><span class="pre">renice</span></code><a class="headerlink" href="#use-nice-and-renice" title="Link to this heading"></a></h2>
+<h3>2. Use <code class="docutils literal notranslate"><span class="pre">nice</span></code> and <code class="docutils literal notranslate"><span class="pre">renice</span></code><a class="headerlink" href="#use-nice-and-renice" title="Link to this heading"></a></h3>
 <p>Lower the priority of the build process to reduce its CPU impact on other tasks.</p>
 <ul>
 <li><p>Start the build with <code class="docutils literal notranslate"><span class="pre">nice</span></code>:</p>
@@ -145,7 +133,7 @@ Use <code class="docutils literal notranslate"><span class="pre">-j</span></code
 </ul>
 </section>
 <section id="limit-cpu-cores-with-taskset">
-<h2>3. Limit CPU Cores with <code class="docutils literal notranslate"><span class="pre">taskset</span></code><a class="headerlink" href="#limit-cpu-cores-with-taskset" title="Link to this heading"></a></h2>
+<h3>3. Limit CPU Cores with <code class="docutils literal notranslate"><span class="pre">taskset</span></code><a class="headerlink" href="#limit-cpu-cores-with-taskset" title="Link to this heading"></a></h3>
 <p>Restrict the build process to specific CPU cores to reduce overall CPU usage.</p>
 <ul>
 <li><p>Example: Limit the build to 2 CPU cores (e.g., cores 0 and 1):</p>
@@ -156,7 +144,7 @@ Use <code class="docutils literal notranslate"><span class="pre">-j</span></code
 </ul>
 </section>
 <section id="use-cpulimit">
-<h2>4. Use <code class="docutils literal notranslate"><span class="pre">cpulimit</span></code><a class="headerlink" href="#use-cpulimit" title="Link to this heading"></a></h2>
+<h3>4. Use <code class="docutils literal notranslate"><span class="pre">cpulimit</span></code><a class="headerlink" href="#use-cpulimit" title="Link to this heading"></a></h3>
 <p>Dynamically limit the CPU usage of the build process to a specific percentage.</p>
 <ul>
 <li><p>Example: Limit <code class="docutils literal notranslate"><span class="pre">make</span></code> to 50% CPU:</p>
@@ -167,7 +155,7 @@ Use <code class="docutils literal notranslate"><span class="pre">-j</span></code
 </ul>
 </section>
 <section id="control-system-wide-cpu-usage">
-<h2>5. Control System-Wide CPU Usage<a class="headerlink" href="#control-system-wide-cpu-usage" title="Link to this heading"></a></h2>
+<h3>5. Control System-Wide CPU Usage<a class="headerlink" href="#control-system-wide-cpu-usage" title="Link to this heading"></a></h3>
 <p>If you’re running builds in a shared environment, you can use system-wide tools to limit CPU usage.</p>
 <ul>
 <li><p><strong>Using</strong> <code class="docutils literal notranslate"><span class="pre">cgroups</span></code> <strong>(Linux):</strong>
@@ -187,7 +175,7 @@ If you’re running the build in a Docker container, limit CPU usage:</p>
 </ul>
 </section>
 <section id="throttle-i-o-and-cpu-together">
-<h2>6. Throttle I/O and CPU Together<a class="headerlink" href="#throttle-i-o-and-cpu-together" title="Link to this heading"></a></h2>
+<h3>6. Throttle I/O and CPU Together<a class="headerlink" href="#throttle-i-o-and-cpu-together" title="Link to this heading"></a></h3>
 <p>Build processes often involve heavy I/O operations. Use tools like <code class="docutils literal notranslate"><span class="pre">ionice</span></code> to prioritize I/O and reduce overall system load.</p>
 <ul>
 <li><p>Example:</p>
@@ -198,7 +186,7 @@ If you’re running the build in a Docker container, limit CPU usage:</p>
 </ul>
 </section>
 <section id="pause-and-resume-builds">
-<h2>7. Pause and Resume Builds<a class="headerlink" href="#pause-and-resume-builds" title="Link to this heading"></a></h2>
+<h3>7. Pause and Resume Builds<a class="headerlink" href="#pause-and-resume-builds" title="Link to this heading"></a></h3>
 <p>If you need to temporarily free up CPU resources, you can pause and resume the build process.</p>
 <ul>
 <li><p>Pause a process:</p>
@@ -214,7 +202,7 @@ If you’re running the build in a Docker container, limit CPU usage:</p>
 </ul>
 </section>
 <section id="use-build-system-specific-options">
-<h2>8. Use Build System-Specific Options<a class="headerlink" href="#use-build-system-specific-options" title="Link to this heading"></a></h2>
+<h3>8. Use Build System-Specific Options<a class="headerlink" href="#use-build-system-specific-options" title="Link to this heading"></a></h3>
 <p>Some build systems have built-in options to limit resource usage.</p>
 <ul>
 <li><p><strong>For</strong> <code class="docutils literal notranslate"><span class="pre">bazel``**:**</span>
@@ -232,7 +220,7 @@ Use the <code class="docutils literal notranslate"><span class="pre">--max-worke
 </ul>
 </section>
 <section id="monitor-and-adjust">
-<h2>9. Monitor and Adjust<a class="headerlink" href="#monitor-and-adjust" title="Link to this heading"></a></h2>
+<h3>9. Monitor and Adjust<a class="headerlink" href="#monitor-and-adjust" title="Link to this heading"></a></h3>
 <p>Use monitoring tools to observe CPU usage and adjust limits as needed.</p>
 <ul class="simple">
 <li><p><strong>Linux:</strong>
@@ -246,14 +234,12 @@ Use Activity Monitor.</p></li>
 <p>By combining these techniques, you can effectively limit CPU consumption during compilation or builds while still maintaining reasonable performance.</p>
 </section>
 </section>
+</section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="pci-exp-tests-HOWTO.html" class="btn btn-neutral float-left" title="HOWTO –&gt; PCI-Express test scripts for LTP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="hw_specs/workFlow-strace.html" class="btn btn-neutral float-right" title="Workflow for Using strace to Trap System Calls" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

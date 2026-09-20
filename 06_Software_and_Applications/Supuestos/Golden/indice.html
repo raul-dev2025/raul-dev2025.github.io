@@ -8,7 +8,7 @@
 <meta content="Sphinx, IdM, Automation, Devops" name="keywords" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Infraestructura RAULVILCHEZ.ORG &mdash; TecnicoSistemas  documentation</title>
+  <title>Infraestructura RAULVILCHEZ.ORG &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
@@ -25,8 +25,8 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Documentación de la Golden Image (Rocky 9)" href="goldenImage.html" />
-    <link rel="prev" title="Informe de Diagnóstico y Optimización del Entorno KVM/IdM" href="../Testing/vmTunning.html" /> 
+    <link rel="next" title="Resumen de Infraestructura - Servidor dev.raulvilchez.org" href="resumen_infra.html" />
+    <link rel="prev" title="Script de Post-Instalación: idm-join.sh" href="idm-join.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,28 +43,56 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
-<ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Infraestructura virtual</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../index.html#virtualization-management">Virtualization Management</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../IV-management.html">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Config/sharedFolder-nfs.html">Informe de Configuración: Repositorio de ISOs vía NFS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Config/configSSH.html">Configuración de Acceso Remoto Seguro (SSH)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Config/resumen.html">Infraestructura y Almacenamiento</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Testing/vmTunning.html">Informe de Diagnóstico y Optimización del Entorno KVM/IdM</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Infraestructura RAULVILCHEZ.ORG</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../index.html#gestion-de-identidad-idm">Gestión de Identidad (IdM)</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/ACL_configuration/index.html">Configuración de Control de Acceso</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/Incidencias/index.html">Registro de Incidencias</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="guestMount_offline.html">Procedimiento de Diagnóstico Offline de VM mediante Guestmount y Logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clone_golden.html">Script de Orquestación: clone_golden.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="get_otp.html">Script de Validación: get_otp.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="goldenImage.html">Documentación de la Golden Image (Rocky 9)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="golden_purificacion.html">Informe de Purificación: Imagen Maestra GOLDEN_ROCKY10_IDM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="idm-first-boot.html">Unidad de Servicio: idm-first-boot.service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="idm-join.html">Script de Post-Instalación: idm-join.sh</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Infraestructura RAULVILCHEZ.ORG</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#resumen">Resumen</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flujo-de-trabajo">Flujo de Trabajo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#secciones-detalladas">Secciones Detalladas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metricas-de-seguridad">Métricas de Seguridad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apendice-rutas-de-interes">Apéndice: Rutas de Interés</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="prepare_clone.html">Script de Personalización: prepare_clone.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Sellado.html">Procedimiento de Sellado: GOLDEN_ROCKY10_IDM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#idm-configuracion">IdM - Configuracion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
@@ -77,7 +105,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">TecnicoSistemas</a>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -85,8 +113,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
-          <li class="breadcrumb-item"><a href="../index.html">Infraestructura virtual</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
       <li class="breadcrumb-item active">Infraestructura RAULVILCHEZ.ORG</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/06_Software_and_Applications/Supuestos/Golden/indice.rst.txt" rel="nofollow"> View page source</a>
@@ -99,72 +126,30 @@
              
   <section id="infraestructura-raulvilchez-org">
 <h1>Infraestructura RAULVILCHEZ.ORG<a class="headerlink" href="#infraestructura-raulvilchez-org" title="Link to this heading"></a></h1>
-<p>Bienvenido a la documentación técnica del ecosistema de despliegue desatendido. Este portal centraliza los procedimientos de clonado, inyección de datos y enrolamiento automático en el Reino IdM.</p>
+<p>Bienvenido a la documentación técnica del ecosistema de despliegue desatendido. Este portal centraliza los procedimientos de clonado, inyección de datos y enrolamiento automático en el Dominio.</p>
+<section id="resumen">
+<h2>Resumen<a class="headerlink" href="#resumen" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Flujo de Trabajo:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="goldenImage.html">Documentación de la Golden Image (Rocky 9)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="goldenImage.html#descripcion-general">Descripción General</a></li>
-<li class="toctree-l2"><a class="reference internal" href="goldenImage.html#especificaciones-de-la-vm-base">Especificaciones de la VM Base</a></li>
-<li class="toctree-l2"><a class="reference internal" href="goldenImage.html#configuracion-de-repositorios-por-defecto">Configuración de Repositorios “Por Defecto”</a></li>
-<li class="toctree-l2"><a class="reference internal" href="goldenImage.html#paquetes-pre-instalados-seed-packages">Paquetes Pre-instalados (Seed Packages)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="goldenImage.html#proceso-de-sellado-sealing">Proceso de Sellado (Sealing)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="goldenImage.html#estado-actual-f-ipa">Estado Actual: f(ipa)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="goldenImage.html#gestion-de-clones-y-derivadas">Gestión de Clones y Derivadas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="goldenImage.html#gestion-de-acceso-remoto-ssh">Gestión de Acceso Remoto (SSH)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="clone_golden.html">Script de Orquestación: clone_golden.sh</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="clone_golden.html#descripcion-general">Descripción General</a></li>
-<li class="toctree-l2"><a class="reference internal" href="clone_golden.html#dependencias-del-sistema">Dependencias del Sistema</a></li>
-<li class="toctree-l2"><a class="reference internal" href="clone_golden.html#flujo-de-ejecucion">Flujo de Ejecución</a></li>
-<li class="toctree-l2"><a class="reference internal" href="clone_golden.html#uso-y-sintaxis">Uso y Sintaxis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="clone_golden.html#seguridad">Seguridad</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="get_otp.html">Script de Validación: get_otp.sh</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="get_otp.html#descripcion">Descripción</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_otp.html#funcionamiento">Funcionamiento</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_otp.html#integracion-con-el-orquestador">Integración con el Orquestador</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_otp.html#advertencias">Advertencias</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="idm-first-boot.html">Unidad de Servicio: idm-first-boot.service</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="idm-first-boot.html#descripcion">Descripción</a></li>
-<li class="toctree-l2"><a class="reference internal" href="idm-first-boot.html#dependencias-y-orden-de-ejecucion">Dependencias y Orden de Ejecución</a></li>
-<li class="toctree-l2"><a class="reference internal" href="idm-first-boot.html#configuracion-del-servicio">Configuración del Servicio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="idm-first-boot.html#instalacion">Instalación</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="prepare_clone.html">Script de Personalización: prepare_clone.sh</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="prepare_clone.html#descripcion">Descripción</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prepare_clone.html#mecanismo-de-inyeccion-paso-de-datos">Mecanismo de Inyección (Paso de Datos)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prepare_clone.html#procedimiento-tecnico">Procedimiento Técnico</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prepare_clone.html#advertencias-de-seguridad">Advertencias de Seguridad</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="idm-join.html">Script de Post-Instalación: idm-join.sh</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="idm-join.html#descripcion">Descripción</a></li>
-<li class="toctree-l2"><a class="reference internal" href="idm-join.html#logica-de-operacion">Lógica de Operación</a></li>
-<li class="toctree-l2"><a class="reference internal" href="idm-join.html#gestion-de-logs">Gestión de Logs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="idm-join.html#desactivacion">Desactivación</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Sellado.html">Procedimiento de Sellado: GOLDEN_ROCKY10_IDM</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Sellado.html#descripcion">Descripción</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Sellado.html#configuracion-de-identidad-de-red">Configuración de Identidad de Red</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Sellado.html#pasos-de-limpieza-y-sanitizacion">Pasos de Limpieza y “Sanitización”</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Sellado.html#cierre-de-la-imagen">Cierre de la Imagen</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="golden_purificacion.html">Informe de Purificación: Imagen Maestra GOLDEN_ROCKY10_IDM</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="golden_purificacion.html#descripcion-general">Descripción General</a></li>
-<li class="toctree-l2"><a class="reference internal" href="golden_purificacion.html#fases-del-proceso-de-saneamiento">Fases del Proceso de Saneamiento</a></li>
-<li class="toctree-l2"><a class="reference internal" href="golden_purificacion.html#estado-final">Estado Final</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="resumen_infra.html">Resumen de Infraestructura - Servidor dev.raulvilchez.org</a></li>
 </ul>
 </div>
+<p>Descripción general de las especificaciones de hardware, almacenamiento optimizado (VDO + XFS), aislamiento de CPU y seguridad de la infraestructura subyacente.</p>
+</section>
+<section id="flujo-de-trabajo">
+<h2>Flujo de Trabajo<a class="headerlink" href="#flujo-de-trabajo" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="guestMount_offline.html"><span class="doc">Diagnóstico Offline</span></a>
+<a class="reference internal" href="goldenImage.html"><span class="doc">goldenImage</span></a>
+<a class="reference internal" href="clone_golden.html"><span class="doc">clone_golden</span></a>
+<a class="reference internal" href="get_otp.html"><span class="doc">get_otp</span></a>
+<a class="reference internal" href="idm-first-boot.html"><span class="doc">idm-first-boot</span></a>
+<a class="reference internal" href="prepare_clone.html"><span class="doc">prepare_clone</span></a>
+<a class="reference internal" href="idm-join.html"><span class="doc">idm-join</span></a>
+<a class="reference internal" href="Sellado.html"><span class="doc">Sellado</span></a>
+<a class="reference internal" href="golden_purificacion.html"><span class="doc">golden_purificacion</span></a></p>
+</div></blockquote>
+</section>
 <section id="secciones-detalladas">
 <h2>Secciones Detalladas<a class="headerlink" href="#secciones-detalladas" title="Link to this heading"></a></h2>
 <ol class="arabic">
@@ -230,8 +215,8 @@ El sistema está diseñado bajo el principio de <strong>huella mínima</strong>:
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../Testing/vmTunning.html" class="btn btn-neutral float-left" title="Informe de Diagnóstico y Optimización del Entorno KVM/IdM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="goldenImage.html" class="btn btn-neutral float-right" title="Documentación de la Golden Image (Rocky 9)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="idm-join.html" class="btn btn-neutral float-left" title="Script de Post-Instalación: idm-join.sh" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="resumen_infra.html" class="btn btn-neutral float-right" title="Resumen de Infraestructura - Servidor dev.raulvilchez.org" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

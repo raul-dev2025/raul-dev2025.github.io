@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Man - InitRd &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Disco Ram de inicio" href="manInitrd-wiki.html" />
+    <link rel="prev" title="Man Dracut" href="dracutMan.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#boot">Boot</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Arranque del Sistema Operativo</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../index.html#boot">Boot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#boot-gestordearranque">Boot/GestorDeArranque</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#boot-man">Boot/Man</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#certificados-tls">Certificados-TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#file-system">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Sistemas Operativos</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Arranque del Sistema Operativo</a></li>
+      <li class="breadcrumb-item active">Man - InitRd</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/03_Operating_Systems/Boot/Man/manInitrd.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="man-initrd">
+<h1>Man - InitRd<a class="headerlink" href="#man-initrd" title="Link to this heading"></a></h1>
+<section id="disco-ram-de-inicio">
+<h2>Disco Ram de inicio<a class="headerlink" href="#disco-ram-de-inicio" title="Link to this heading"></a></h2>
+<p><em>Extraido de wikipedia:</em></p>
+<p>En computación, <code class="docutils literal notranslate"><span class="pre">initrd</span></code>(disco de inicio Ram) es un esquema para cargar temporalmente en memoria, el sistema de ficheros <em>root</em>, el cuál podría ser utilizado como parte del proceso de arranque de <em>Linux</em>.</p>
+<p>Referidos a métodos distintos de conseguir ésto <code class="docutils literal notranslate"><span class="pre">initrd</span></code> e <code class="docutils literal notranslate"><span class="pre">initramfs</span></code>, son comunmente usados, durante los preparativos de inicio de sistema y, que finalmente permitirán al <em>SO</em> poder montar el sistema de ficheros <code class="docutils literal notranslate"><span class="pre">root</span></code> definitivo.</p>
+<p><strong>Nombre</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">initrd</span></code> - cargador de arranque, inicializador del disco RAM.</p></li>
+</ul>
+</div></blockquote>
+<section id="configuracion">
+<h3>Configuración<a class="headerlink" href="#configuracion" title="Link to this heading"></a></h3>
+<p>El <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> es un dispositivo de bloque de <em>solo lectura</em> el cual viene siendo asignado con un número mayour <code class="docutils literal notranslate"><span class="pre">1</span></code> y uno menor <code class="docutils literal notranslate"><span class="pre">250</span></code>. El propietario de <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> es root.disk con modo 0400(acceso lectura sólo por el root). Si el sistema <em>Linux</em> no tiene creado <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> puede crearse con:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mknod<span class="w"> </span>-m<span class="w"> </span><span class="m">400</span><span class="w"> </span>/dev/initrd<span class="w"> </span>b<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">250</span>
+chown<span class="w"> </span>root:disk<span class="w"> </span>/dev/initrd
+</pre></div>
+</div>
+<p>De igual forma, es posible configurar el soporte para <code class="docutils literal notranslate"><span class="pre">RAM</span> <span class="pre">disk</span></code> y <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">RAM</span> <span class="pre">disk</span></code>, aunque para ello, habrá que configurar tales características compilándolas directamente en el núcleo del sistema:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CONFIG_BLK_DEV_RAM</span><span class="o">=</span>yes
+<span class="nv">CONFIG_BLK_DEV_INITRD</span><span class="o">=</span>yes
+</pre></div>
+</div>
+<p>Cuando se use <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> el <em>controlador del disco RAM</em>, no podrá ser cargado como módulo.</p>
+</section>
+<section id="descripcion">
+<h3>Descripción<a class="headerlink" href="#descripcion" title="Link to this heading"></a></h3>
+<p>El archivo especial <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> es un dispositivo de bloque de sólo lectura. Éste dispositivo, es un <em>disco RAM</em> inicializado(cargado) por el gestor de arranque, antes del <em>kernel</em>. Es entonces cuando el <em>núcleo</em> podrá usar el contenido de <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> para <em>levantar</em> el sistema en dos fases.</p>
+<p>En la primera fase, el <em>núcleo</em> monta el sistema de archivos raíz <code class="docutils literal notranslate"><span class="pre">root</span></code> con el contenido de <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> -ejem. disco <em>RAM</em> inicializado por el gestor de arranque. En la segunda fase, otros controladores y módulos adicionales, serán cargados desde el contenido del <em>dispositivo</em> raíz. Después de cargar los módulos adicionales, un nuevo <em>FS</em> raíz(ejem. el <em>FS</em> raíz normal) será montado desde un dispositivo distinto.</p>
+<section id="operacion-de-arranque">
+<h4>Operación de arranque*<a class="headerlink" href="#operacion-de-arranque" title="Link to this heading"></a></h4>
+<p>Cuando se arranca el sistema con <em>initrd</em>, lo hace de la siguiente
+forma:</p>
+<ol class="arabic simple">
+<li><p>El gestor de arranque carga el programa del núcleo y el contenido    <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> en memoria.</p></li>
+<li><p>Al inicio del <em>núcleo</em>, éste descomprime y copia el contenido del    dispositivo <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> dentro del dispositivo <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code> y    libera la memoria utilizada por <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code>.</p></li>
+<li><p>El núcleo monta en modo <em>lectura-escritura</em> el dispositivo <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code> como <em>FS</em> inicial raíz.</p></li>
+<li><p>Si el <em>FS</em> normal indicado, es también el <em>FS</em> raíz inicial, -ejem.    <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code> entonces el <em>kernel</em> evita el último paso, en cuanto a la secuencia de arranque.</p></li>
+<li><p>Si el archivo ejecutable <code class="docutils literal notranslate"><span class="pre">/linuxrc</span></code> está presente en el <em>FS</em> raíz inicial, <code class="docutils literal notranslate"><span class="pre">/linuxrc</span></code> es ejecutado con <code class="docutils literal notranslate"><span class="pre">UID</span> <span class="pre">0</span></code>. El archivo <code class="docutils literal notranslate"><span class="pre">/linuxrc</span></code> debe tener permisos de ejecución -puede ser cualquier ejecutable válido, incluído un <code class="docutils literal notranslate"><span class="pre">shell</span> <span class="pre">script</span></code>.</p></li>
+<li><p>si <code class="docutils literal notranslate"><span class="pre">/linuxrc</span></code> no es ejecutado -o si termina, el FS ráiz normal será montado. Si <code class="docutils literal notranslate"><span class="pre">/linurrc</span></code> sale con un FS montado en el FS raíz inicial, entonces el comportamiento del <em>kernel</em> será <code class="docutils literal notranslate"><span class="pre">UNSPECIFIED</span></code>(no especificado). Ver la sección de <strong>notas</strong> para el <em>comportamiento corriente del kernel</em>.</p></li>
+<li><p>Si el FS raíz normal, tiene un directorio <code class="docutils literal notranslate"><span class="pre">/initrd</span></code>, el dispositivo <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code> es movido desde <code class="docutils literal notranslate"><span class="pre">/</span></code> a <code class="docutils literal notranslate"><span class="pre">/initrd</span></code>. De otra forma, si el directorio <code class="docutils literal notranslate"><span class="pre">/initrd</span></code> no existe, el dispositivo <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code> será montado. Cuando sea movido <code class="docutils literal notranslate"><span class="pre">/</span></code> a <code class="docutils literal notranslate"><span class="pre">/initrd</span></code>, <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code> no será <em>desmontado</em>, además, el proceso podrá continuar <em>corriendo</em> desde <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code>. Si el directorio <code class="docutils literal notranslate"><span class="pre">/initrd</span></code> no existe en el FS normal y, cualquier proceso sigue corriendo desde <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code>, cuando <code class="docutils literal notranslate"><span class="pre">linuxrc</span></code> salga, el comportamiento del núcleo será <code class="docutils literal notranslate"><span class="pre">UNSPECIFIED</span></code>. Ver la sección de <strong>notas</strong> para el <em>comportamiento corriente del kernel</em>.</p></li>
+<li><p>La secuencia habitual de arranque -ejem. invocatioón de <code class="docutils literal notranslate"><span class="pre">/sbin/init</span></code>, será llevada a cabo por el FS raíz normal.</p></li>
+</ol>
+</section>
+<section id="opciones">
+<h4>Opciones<a class="headerlink" href="#opciones" title="Link to this heading"></a></h4>
+<p>Las siguientes opciones del cargador de arranque, cuando sea usado <strong>initrd</strong>, afectarán a las operaciones de arranque del kernel:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">initrd</span></code>= nombreDeArchivo Especifica el archivo a cargar, como contenido de <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code>. Para LOADLIN, es una opción de <em>línea de comando</em>. Para LILO, deberá ser utilizado este comando, en el archivo de configuración de LILO <code class="docutils literal notranslate"><span class="pre">/etc/lilo.config</span></code>. El nombre de archivo especificado con esta opción, aparce como un archivo comprimido -<em>gziped</em>, habitualmente.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">noinitrd</span></code> Esta opción de arranque, deshabilita la operación de <em>carga</em>, en dos fases. El kernel lleva a cabo la habitual secuencia de arranque, como si <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> no hubiese sido inicializado. Con esta opción, cualquier contenido de <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> cargado en memoria por el del cargador de arranque, es preservado. Esta opción, permite al contenido de <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code>, ser cualquier dato y, <strong>no es</strong> necesario, que esté limitado a una sóla imagen de <em>sistema de fichero</em>. En cualquier caso, el dispositivo <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> es de <em>sólo-lectura</em> y, podrá ser leído una vez -únicamente, tras el arranque del sistema.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">root</span></code>= nombreDeDispositivo Especifíca el dispositivo a ser utilizado, como sistema de ficheros raíz, habitual. En LOADLIN, es una opción de línea de comando. para LILO, es una opción durante el arranque, o puede ser utilizado como opción de <em>línea</em>, en el archivo de configuración <code class="docutils literal notranslate"><span class="pre">/etc/lilo.conifg</span></code>. El dispositivo especificado por esta opción, debe ser un dispositivo que pueda montarse, conteniendo un sistema de ficheros raíz.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="cambiando-el-sistema-de-ficheros-raiz-habitual">
+<h2>Cambiando el sistema de ficheros raíz, habitual<a class="headerlink" href="#cambiando-el-sistema-de-ficheros-raiz-habitual" title="Link to this heading"></a></h2>
+<p>Por defecto la configuración del kernel (ejemplo, configurado en el archivo del kernel, con <code class="docutils literal notranslate"><span class="pre">rdev(8)</span></code>, o compilado dentro del archivo del kernel), o la opción de configuración del cargador de arranque, es utilizada para el sistema de fichero raíz, normal. En un sistema de fichero raíz tipo NFS, ya montado, deben utilizarse las opciones de arranque <code class="docutils literal notranslate"><span class="pre">nfs_root_name</span></code> y <code class="docutils literal notranslate"><span class="pre">nfs_root_addrs</span></code>, <em>para dar la configuración NFS?</em>. Para más información al respecto, ver la documentación del kernel <code class="docutils literal notranslate"><span class="pre">Documentation/filesystems/nfsroot.txt</span></code>. Para más información sobre el sistemas de ficheros raíz, ver la documentación de LILO y LOADLIN.</p>
+<p>Es posible igualmente, cambiar el FS raíz <em>normal</em>, desde el ejecutable <code class="docutils literal notranslate"><span class="pre">linuxrc</span></code>. Para esto, es necesario montar <code class="docutils literal notranslate"><span class="pre">/proc</span></code>. Después de montar <code class="docutils literal notranslate"><span class="pre">/proc</span></code>, <code class="docutils literal notranslate"><span class="pre">linuxrc</span></code>, cambia al dispositivo raíz normal, escribiendo dentro de los archivos proc normales <code class="docutils literal notranslate"><span class="pre">/proc/sys/kernel/real-root-dev,</span> <span class="pre">/proc/sys/kernel/nfs-root-name,</span> <span class="pre">/proc/sys/kernel/nfs'root-addrs</span></code>.
+En un dispositivo raíz físico, el dispositivo raíz es cambiado por <code class="docutils literal notranslate"><span class="pre">/proc/sys/kernel/real-root-dev</span></code>. Para un sistema de archivos tipo NFS, el dispositivo raíz es cambiado, mediante un fichero <code class="docutils literal notranslate"><span class="pre">/linuxrc</span></code> -archivo de configuración, … [revisar párrafo]</p>
+<p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">0x365</span> <span class="pre">&gt;/proc/sys/kernel/real-root-dev</span></code></p>
+<p>Ejemplo, el siguiente comando de <em>shell</em>, cambiará el dispositivo raíz
+normal, al directorio NFS <code class="docutils literal notranslate"><span class="pre">/var/nfsroot/</span></code>, de un servidor en la red de
+area local. IP de servidor 193.8.232.7. La IP de sistema 193.8.232.2.
+Nombre <code class="docutils literal notranslate"><span class="pre">idefix</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>/var/nfsroot<span class="w"> </span>&gt;/proc/sys/kernel/nfs-root-n
+<span class="nb">echo</span><span class="w"> </span><span class="m">193</span>.8.232.2:193.8.232.7::255.255.255.0:idefix<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>&gt;/proc/sys/kernel/nfs-root-addrs
+<span class="nb">echo</span><span class="w"> </span><span class="m">255</span><span class="w"> </span>&gt;/proc/sys/kernel/real-root-dev
+</pre></div>
+</div>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>El empleo de <code class="docutils literal notranslate"><span class="pre">/proc/sys/kernel/real-root-dev</span></code> para cambiar el sistema de fichero raíz, está obsoleto. Ver el archivo <code class="docutils literal notranslate"><span class="pre">Documentation/initrd.txt</span></code> en la <em>fuente</em> del kernel de Linux. Es recomendable leer también <code class="docutils literal notranslate"><span class="pre">pivot_root(8)</span></code>, con información acerca del método más moderno, para cambiar el sistema de archivos raíz.</p>
+</div>
+</section>
+<section id="la-motivacion-principal">
+<h2>La motivación principal<a class="headerlink" href="#la-motivacion-principal" title="Link to this heading"></a></h2>
+<p>La motivación principal, en el momento de implementar <code class="docutils literal notranslate"><span class="pre">initrd</span></code>, fué permitir una configuración modular del kernel, en la instalación del sistema.</p>
+<p>Un escenario posible, en la instalación del sistema, es como sigue:</p>
+<ol class="arabic simple">
+<li><p>El programa cargador, arranca desde el disco 3 1/2, 5 1/4 -podría ser emulado, o cualquier otro medio con un kernel mínimo -ejemplo, <code class="docutils literal notranslate"><span class="pre">/dev/ram,</span> <span class="pre">/dev/initrd</span></code> y el sistema de archivo <code class="docutils literal notranslate"><span class="pre">ext2</span></code>, y carga <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> con una versión comprimida del sistema de archivo inicial.</p></li>
+<li><p>El ejecutable <code class="docutils literal notranslate"><span class="pre">/linuxrc</span></code> determina qué es necesario para montar el <em>sistema raíz</em> -emeplo, tipo de dispositivo, controlador de dispositivo, sistema de archivo y, el medio de distribución -ejemplo, CD-ROM, red, <em>cinta</em>… Podría hacerse preguntaddo el usuario, através de prueba, o utlizando una aproximación híbrida.</p></li>
+<li><p>El ejecutable <code class="docutils literal notranslate"><span class="pre">/linuxrc</span></code> cargará los módulos necesarios desde el sistema de archivo raíz inicial.</p></li>
+<li><p>El ejecutable <code class="docutils literal notranslate"><span class="pre">/linuxrc</span></code> crea y rellena el sistema de archivos raíz. En esta etapa, el FS aún no tiene que ser un <em>sistema completo</em>.</p></li>
+<li><p>El ejecutable <code class="docutils literal notranslate"><span class="pre">/linuxrc</span></code> configura <code class="docutils literal notranslate"><span class="pre">/proc/sys/kernel/real-root-dev</span></code>, <em>desmonta</em> <code class="docutils literal notranslate"><span class="pre">/proc</span></code>, el sistema de ficheros normal y, cualquier otro FS que hubies montado, depués finaliza.</p></li>
+<li><p>El kernel entonces, monta el FS raíz normal.</p></li>
+<li><p>Ahora que el FS es accesible y permanece intacto, el cargador de arranque podrá instalarse.</p></li>
+<li><p>El cargador de arranque es configurado para cargar <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code>; un FS con un conjunto de módulos que fueron utilizados para <em>traer al frente</em>, el sistema. Ejemplo, el sipositivo <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code> puede ser modificado, después desmontado y, finalmente, la imagen será escrita desde <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code> a un archivo.</p></li>
+<li><p>El sistema es ahora <em>arrancable</em> y, adicionalmente podrán ser llevadas a cabo, otras tareas.</p></li>
+</ol>
+<p><em>El rol clave</em>, de <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> en adelante, es la reutilización de los datos de configuración, durante la operación normal del sistema, sin tener que seleccionar el kernel inicial, un kernel <em>grande</em>, o tener que recompilar el kernel.</p>
+<p>Un segundo escenario, es para la instalación donde Linux corre sobre un sistema con distintas configuraciones de <em>hardware</em>, encima de una red administrativa. En tales casos, podría aparecer la necesidad, de utilizar un pequeño conjunto de <em>kernels</em> -ideal es uno y, guardar las partes específicas de la configuración del sistema, tan pequeña como sea posible. En éste caso, crear un archivo común, con todos los módulos necesarios. Así, sólo el archivo <code class="docutils literal notranslate"><span class="pre">linuxrc</span></code>, o un archivo ejecutado por <code class="docutils literal notranslate"><span class="pre">linuxrc</span></code>, debería ser distinto.</p>
+<p>Un tercer escenario, sería un disco de recuperación. Por que la información como la localicación de la partición del FS raíz, no es necesaria durante el arranque. El sistema cargado desde <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> puede utilizar un <em>diálogo</em> y/o la <em>auto detección</em>, seguida de una comprobación <em>saneada</em> -fiable.</p>
+<p>El último, pero no el menos importante; distribuciones Linux en CD-ROM, podrían utilizar <code class="docutils literal notranslate"><span class="pre">initrd</span></code> para facilitar la instalación desde el CD-ROM. La distribución podría utilizar <code class="docutils literal notranslate"><span class="pre">LOADLIN</span></code>, para cargar directamente <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> desde el CD-ROM, sin tener que utilizar un <em>floppy</em>. O podría utilizar un <em>disco</em> <code class="docutils literal notranslate"><span class="pre">LILO</span></code> y entonces <em>enganchar</em> un disco RAM vía <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> desde el CD-ROM.</p>
+<section id="archivos">
+<h3>Archivos<a class="headerlink" href="#archivos" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> <code class="docutils literal notranslate"><span class="pre">/de/ram0</span></code> <code class="docutils literal notranslate"><span class="pre">/linuxrc/</span></code> <code class="docutils literal notranslate"><span class="pre">/initrd</span></code></p>
+<p><strong>Notas</strong></p>
+<ol class="arabic simple">
+<li><p>Con actual kernel, cualquier FS que permanezca montado cunado <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code> sea movido desde <code class="docutils literal notranslate"><span class="pre">/</span></code> a <code class="docutils literal notranslate"><span class="pre">/initrd</span></code>, continuará siendo accesible. A pesar de ello, <code class="docutils literal notranslate"><span class="pre">/proc/mounts</span></code> no serán actualizados.</p></li>
+<li><p>Con el actual kernel, si el directoria <code class="docutils literal notranslate"><span class="pre">/initrd</span></code> no existe, entonces <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code> no será completamente desmontado, si <code class="docutils literal notranslate"><span class="pre">/dev/ram0</span></code> es utilizado por cualquier proceso, o un FS montado en él. Si <code class="docutils literal notranslate"><span class="pre">/dev/ram</span></code> no es completamente contado, permanecerá en memora.</p></li>
+<li><p>Usuarios de <code class="docutils literal notranslate"><span class="pre">/dev/initrd</span></code> no deberían depender del comportamiento <em>dado en notas anteriores</em>. Aunque podría cambiar en futuras versiones del kernel de Linux.</p></li>
+</ol>
+</section>
+<section id="ver-tambien">
+<h3>Ver también<a class="headerlink" href="#ver-tambien" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">chown(1),</span> <span class="pre">mknod(1),</span> <span class="pre">ram(4),</span> <span class="pre">freeramdisk(8),</span> <span class="pre">rdev(8)</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Documentation/initrd.txt</span></code> en el árbol de la fuente del kernel de
+Linux, la documentación LILO y, la documentación LOADLIN, también
+documentación de SYSLINUX.</p>
+</section>
+</section>
+<section id="colofon">
+<h2>Colofón<a class="headerlink" href="#colofon" title="Link to this heading"></a></h2>
+<p>Esta página es parte del lanzamiento de la <em>v4.04</em> del proyecto <em>página
+de manual de Linux</em>. Una descripción del proyecto, información sobre el
+registro de errores y, la última versión de ésta página, podrá
+encontrarse em <a class="reference external" href="http://www.kernel.org/doc/man-pages">http://www.kernel.org/doc/man-pages</a>.</p>
+<p><strong>Notas</strong></p>
+<p>El gestor de arranque, leerá el núcleo junto a un sistema de ficheros
+inicial llamado raíz(root), -como una imágen en memoria, y después
+activará el núcleo, pasando a la memoria, la dirección de la imagen.</p>
+<ul class="simple">
+<li><p>Carga estática</p></li>
+<li><p>Carga dinámica</p></li>
+<li><p>initrd</p></li>
+<li><p>initramfs</p></li>
+<li><p>Gestor de arranque</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dracutMan.html" class="btn btn-neutral float-left" title="Man Dracut" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="manInitrd-wiki.html" class="btn btn-neutral float-right" title="Disco Ram de inicio" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

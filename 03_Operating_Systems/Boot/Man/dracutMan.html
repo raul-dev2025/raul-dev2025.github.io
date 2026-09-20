@@ -1,0 +1,891 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Man Dracut &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Man - InitRd" href="manInitrd.html" />
+    <link rel="prev" title="Explicación del temido mensaje No init found. por parte del boot." href="../GestorDeArranque/init.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#boot">Boot</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Arranque del Sistema Operativo</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../index.html#boot">Boot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#boot-gestordearranque">Boot/GestorDeArranque</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#boot-man">Boot/Man</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#certificados-tls">Certificados-TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#file-system">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Sistemas Operativos</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Arranque del Sistema Operativo</a></li>
+      <li class="breadcrumb-item active">Man Dracut</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/03_Operating_Systems/Boot/Man/dracutMan.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="man-dracut">
+<h1><a class="toc-backref" href="#id11" role="doc-backlink">Man Dracut</a><a class="headerlink" href="#man-dracut" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#man-dracut" id="id11">Man Dracut</a></p>
+<ul>
+<li><p><a class="reference internal" href="#sinopsis" id="id12">Sinopsis</a></p></li>
+<li><p><a class="reference internal" href="#descripcion" id="id13">Descripción</a></p></li>
+<li><p><a class="reference internal" href="#invocaciion" id="id14">Invocaciión</a></p></li>
+<li><p><a class="reference internal" href="#inspeccionando-el-contenido" id="id15">Inspeccionando el contenido</a></p></li>
+<li><p><a class="reference internal" href="#anadiendo-modulos-dracut" id="id16">Añadiendo módulos dracut</a></p></li>
+<li><p><a class="reference internal" href="#omitiendo-modulos" id="id17">Omitiendo módulos</a></p></li>
+<li><p><a class="reference internal" href="#anadiendo-modulos-del-kernel" id="id18">Añadiendo módulos del kernel</a></p></li>
+<li><p><a class="reference internal" href="#parametros-de-arranque" id="id19">Parámetros de arranque</a></p></li>
+<li><p><a class="reference internal" href="#especificando-el-dispositivo-raiz" id="id20">Especificando el dispositivo raíz</a></p></li>
+<li><p><a class="reference internal" href="#configuracion-del-teclado" id="id21">Configuración del teclado</a></p></li>
+<li><p><a class="reference internal" href="#bloqueo-de-modulos" id="id22">Bloqueo de módulos</a></p></li>
+<li><p><a class="reference internal" href="#acelerando-el-proceso-de-arranque" id="id23">Acelerando el proceso de arranque</a></p></li>
+<li><p><a class="reference internal" href="#injectar-archivos-pesonalizados" id="id24">Injectar archivos pesonalizados</a></p></li>
+<li><p><a class="reference internal" href="#arranque-de-red" id="id25">Arranque de red</a></p></li>
+<li><p><a class="reference internal" href="#reduciendo-el-amano-de-la-imagen" id="id26">Reduciendo el amaño de la imagen</a></p></li>
+<li><p><a class="reference internal" href="#resolucion-de-problemas" id="id27">Resolución de problemas</a></p></li>
+<li><p><a class="reference internal" href="#datos-a-incluir-en-el-informe" id="id28">Datos a incluir en el informe</a></p></li>
+<li><p><a class="reference internal" href="#problemas-relacionados-con-el-dispositivo-raiz" id="id29">Problemas relacionados con el dispositivo raíz</a></p></li>
+<li><p><a class="reference internal" href="#depuracion-de-dracut" id="id30">depuración de dracut</a></p></li>
+<li><p><a class="reference internal" href="#uso-de-la-shell-de-dracut" id="id31">Uso de la shell de dracut</a></p></li>
+<li><p><a class="reference internal" href="#parametro-de-arranque-adicional-en-dracut" id="id32">Parámetro de arranque adicional, en dracut</a></p></li>
+<li><p><a class="reference internal" href="#depuracion-de-dracut-durante-el-apagado" id="id33">Depuración de dracut, durante el apagado</a></p></li>
+<li><p><a class="reference internal" href="#opciones" id="id34">Opciones</a></p></li>
+<li><p><a class="reference internal" href="#entorno" id="id35">ENTORNO</a></p></li>
+<li><p><a class="reference internal" href="#files" id="id36">FILES</a></p></li>
+<li><p><a class="reference internal" href="#configuracion-en-initramfs-etc-conf-d" id="id37">Configuración en initramfs <code class="docutils literal notranslate"><span class="pre">/etc/conf.d/</span></code></a></p></li>
+<li><p><a class="reference internal" href="#autores" id="id38">AUTORES</a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id39">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="sinopsis">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Sinopsis</a><a class="headerlink" href="#sinopsis" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dracut<span class="w"> </span><span class="o">[</span>OPTION<span class="o">]</span><span class="w"> </span><span class="o">[</span>&lt;image&gt;<span class="w"> </span><span class="o">[</span>&lt;kernel<span class="w"> </span>version&gt;<span class="o">]]</span>
+</pre></div>
+</div>
+</section>
+<section id="descripcion">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">Descripción</a><a class="headerlink" href="#descripcion" title="Link to this heading"></a></h2>
+<p>Crea una <em>initramfs</em> para el kernel, con la versión . Si es omitido, laversión del kernel activo será utilizada. Si es omitido o vacío <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>, será utilizada la localización por defecto <code class="docutils literal notranslate"><span class="pre">/boot/initramfs-&lt;kernel</span> <span class="pre">version&gt;.img</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">dracut</span></code> crea una imagen inicial, utilizada por el kernel, con el objeto de <em>pre-cargar</em>, los módulos de <em>bloque de dispositivo</em> -COMO IDE, SCSI, o RAID, necesarios para acceder al FS raíz, montar el FS raíz y arrancar dentro del <em>sistema real</em>.</p>
+<p>Durante el arranque, el kernel desempaquetará dicho archivo, en el <em>disco RAM</em>, montando y utilizando el mismo, como FS raíz inicial. Toda la busqueda del dispositivo raíz, sucederá en éste espacio de usuario temprano.</p>
+<p>Las imágenes <em>initramfs</em> son también llamadas “initrd”. Para una lista completa de comandos de línea, ver <code class="docutils literal notranslate"><span class="pre">dracut.cmdline(7)</span></code></p>
+<p>De ser dirigidos, hacia una <em>shell</em> de emergencia, durante el arranque con <em>initramfs</em>, será creado el archivo <code class="docutils literal notranslate"><span class="pre">/run/initramfs/rdsosreport.txt</span></code>, el cuál podrá ser guardado -montado manualmente, en la partición (habitualmente en <code class="docutils literal notranslate"><span class="pre">/boot</span></code>) o en un USB.
+Información de depuración adicional, podrá ser generada, añadiendo <code class="docutils literal notranslate"><span class="pre">rd.debug</span></code> a la línea de comando del kernel. <code class="docutils literal notranslate"><span class="pre">/run/initramfs/rdsosreport.txt</span></code> contiene todos los registros e <em>impresiones</em> de algunas herramientas. Deberían ser adjuntadas a
+cualquier informe, sobre problemas con <code class="docutils literal notranslate"><span class="pre">dracut</span></code>.</p>
+</section>
+<section id="invocaciion">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Invocaciión</a><a class="headerlink" href="#invocaciion" title="Link to this heading"></a></h2>
+<p>Para crear una imagen initramfs, el comando más simple es:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut</span>
+</pre></div>
+</div>
+<p>Esto generará una imgen initramfs, de propuesta general, con toda la funcionalidad posible, resultante de la combinación de los módulos instalados y herramientas de sistema. La imagen es <code class="docutils literal notranslate"><span class="pre">/boot/initramfs-&lt;kernel</span> <span class="pre">version&gt;.img</span></code> y contendrá los módulos del kernel activo, con version .</p>
+<p>Si la imagen initramfs ya existe, dracut mostrará un mensaje de error, por lo que habrá que utilizar la opción <code class="docutils literal notranslate"><span class="pre">--force</span></code>, para sobreescribir la imagen existente.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># drcut --force</span>
+</pre></div>
+</div>
+<p>Especificar otro nombre para el archivo de imagen resultante, podrá llevarse a cabo con:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut barraTonta.img</span>
+</pre></div>
+</div>
+<p>Para generar una imagen específica de una versión del kernel, el comando sería:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut barraTonta.img 2.6.40-1.rc5.f20</span>
+</pre></div>
+</div>
+<p>La forma abreviada de generar la imagen en la localización por defecto, para una versión específica del kernel es:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --kver 2.6.40-1.rc5.f20</span>
+</pre></div>
+</div>
+<p>Si es necesario crear una liviana, imagen más pequeña, podría ser especificada la opción <code class="docutils literal notranslate"><span class="pre">--hostonly</span></code> o <code class="docutils literal notranslate"><span class="pre">-H</span></code>. Utilizar esta opción, implica que la imagen resultante contendrá, únicamente aquellos módulos <em>dracut</em>, módulos del kernel y sistemas de archivos(FS), necesarios para arrancar una máquina específica. Esto tiene el inconveniente, que no podrá utilizarse el <em>disco</em>, sobre otro controlador o máquina y, tampoco podrá intercambiarse el FS raíz, sin tener que recrear la imagen initramfs. El empleo de la opción <code class="docutils literal notranslate"><span class="pre">--hostonly</span></code>, es únicamente para expertos, siendo necesario <em>guardar las piezas rotas</em>. Al menos, habrá que guardar una copia de propuesta general, de la imagen -y su coresspondiente kernel, como <em>respaldo</em>, para recuperar el sistema.</p>
+</section>
+<section id="inspeccionando-el-contenido">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Inspeccionando el contenido</a><a class="headerlink" href="#inspeccionando-el-contenido" title="Link to this heading"></a></h2>
+<p>Para ver el contenido creado por dracut, es apropiado el uso de la herramienta <code class="docutils literal notranslate"><span class="pre">lsinitrd</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># lsinitrd | less</span>
+</pre></div>
+</div>
+<p>Mostrar el contenido del archivo, en <em>initramfs</em>, es igualmente posible con la herramienta <code class="docutils literal notranslate"><span class="pre">lsinitrd</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># lsinitrd -f /etc/ld.so.conf</span>
+include<span class="w"> </span>ld.so.conf.d/*.conf
+</pre></div>
+</div>
+</section>
+<section id="anadiendo-modulos-dracut">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">Añadiendo módulos dracut</a><a class="headerlink" href="#anadiendo-modulos-dracut" title="Link to this heading"></a></h2>
+<p>Algunos módulos dracut, son desactivados por defecto y, deberán ser activados manualmente. Es posible hacerlo, añadiendo los módulos al archivo de configuración <code class="docutils literal notranslate"><span class="pre">/etc/dracut.conf</span></code> o <code class="docutils literal notranslate"><span class="pre">/etc/dracut.conf.d/myconf.conf</span></code>. Ver <code class="docutils literal notranslate"><span class="pre">dracut.conf(5)</span></code>. Es posible añadir módulos <em>dracut</em> desde la línea de comandos, mediante la opción <code class="docutils literal notranslate"><span class="pre">-a</span> <span class="pre">or</span> <span class="pre">--add</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --add bootchart initramfs-bootchart.img</span>
+</pre></div>
+</div>
+<p>Para ver la lista de módulos disponibles; opción <code class="docutils literal notranslate"><span class="pre">--list'modules</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --list-modules</span>
+</pre></div>
+</div>
+</section>
+<section id="omitiendo-modulos">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">Omitiendo módulos</a><a class="headerlink" href="#omitiendo-modulos" title="Link to this heading"></a></h2>
+<p>En ocasiones, será necesario omitir ciertos módulos, por razones de velocidad, tamaño o funcionalidad. Es en estas situaciones, donde la variable <code class="docutils literal notranslate"><span class="pre">omit_dracutmodules</span></code>, especificada desde el archvo de configuración <code class="docutils literal notranslate"><span class="pre">/etc/dracut.conf.d/myconf.conf</span></code>, resultará útils; <code class="docutils literal notranslate"><span class="pre">-o</span></code> ó <code class="docutils literal notranslate"><span class="pre">--omit</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut -o &quot;multipath lvm&quot; no-multipath-lvm.img</span>
+</pre></div>
+</div>
+</section>
+<section id="anadiendo-modulos-del-kernel">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">Añadiendo módulos del kernel</a><a class="headerlink" href="#anadiendo-modulos-del-kernel" title="Link to this heading"></a></h2>
+<p>De ser necesario un módulo concreto del kernel, el cuál no fuese seleccionado automáticamente por <code class="docutils literal notranslate"><span class="pre">dracut</span></code>, será posible añadir la opción <code class="docutils literal notranslate"><span class="pre">--add-drivers</span></code> desde la línea de comandos, o incluso, la <em>variable del controlador</em>, desde el archivo de configuración <code class="docutils literal notranslate"><span class="pre">/etc/dracut.conf</span> <span class="pre">or</span> <span class="pre">/etc/dracut.conf.d/myconf.conf</span></code>. Ver <code class="docutils literal notranslate"><span class="pre">dracut.conf(5)</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --add-drivers mymod initramfs-with-mymod.img</span>
+</pre></div>
+</div>
+</section>
+<section id="parametros-de-arranque">
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">Parámetros de arranque</a><a class="headerlink" href="#parametros-de-arranque" title="Link to this heading"></a></h2>
+<p>Un initramfs generado sin el modo <code class="docutils literal notranslate"><span class="pre">hostonly</span></code>, no contendrá ningún archivo de configuración de sistema -excepto en algunas excepciones. Así que la configuración, deberá realizarse desde la línea de comando del kernel. Con esta flexibilidad, fácilmente podrá arrancar el sistema, desde una partición ráiz, cambiada(chroot!). Es innecesario recompilar la imagen initramfs. Es posible cambiar por completo la partición raíz -mover la partición dentro de una <em>raid</em> <a class="footnote-reference brackets" href="#f9" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> encriptada, sobre un LVM <a class="footnote-reference brackets" href="#f2" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>, junto a la etiqueta(LABEL) o UUID <a class="footnote-reference brackets" href="#f3" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> , del sistema de archivos correcto. Dracut dracut lo encontrará y, arrancará desde él.</p>
+<p>La <em>shell</em> del kernel, también posría ser proporcionada desde el servidor DHCP, con la opción <em>root-path</em>. Ver la seccion Arranque desde red .. <a class="footnote-reference brackets" href="#f4" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+<p>Para una referencia completa, sobre parámetros del kernel, ver <code class="docutils literal notranslate"><span class="pre">dracut.cmdline(5)</span></code>.</p>
+<p>Un rápido repaso, de las opciones configuradas en el sistema con la opción <code class="docutils literal notranslate"><span class="pre">--print-cmdline</span></code>,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --print-cmdline</span>
+***salida***
+<span class="nv">root</span><span class="o">=</span><span class="nv">UUID</span><span class="o">=</span>8b8b6f91-95c7-4da2-831b-171e12179081<span class="w"> </span><span class="nv">rootflags</span><span class="o">=</span>rw,relatime,discard,data<span class="o">=</span>ordered<span class="w"> </span><span class="nv">rootfstype</span><span class="o">=</span>ext4
+</pre></div>
+</div>
+</section>
+<section id="especificando-el-dispositivo-raiz">
+<h2><a class="toc-backref" href="#id20" role="doc-backlink">Especificando el dispositivo raíz</a><a class="headerlink" href="#especificando-el-dispositivo-raiz" title="Link to this heading"></a></h2>
+<p>Esta es la única opción que necesita dracut, para arrancar desde la partición raíz. Puesto que la partición raíz, es posible situarla sobre varios entornos, existen abundantes formatos para la opción <code class="docutils literal notranslate"><span class="pre">root=&lt;ruta</span> <span class="pre">al</span> <span class="pre">nodo</span> <span class="pre">de</span> <span class="pre">dispositivo&gt;</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">root</span><span class="o">=</span>/dev/sda2
+</pre></div>
+</div>
+<p>Dado que los nombres de nodo pueden cambiar, dependiendo del orden en el disco, es aconsejable utilizar el identificador UUID, o la etiqueta (LABEL) para especificar la partición raíz.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">root</span><span class="o">=</span><span class="nv">UUID</span><span class="o">=</span>19e9dda3-5a38-484d-a9b0-fa6b067d0331
+</pre></div>
+</div>
+<p>ó</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">root</span><span class="o">=</span><span class="nv">LABEL</span><span class="o">=</span>myrootpartitionlabel
+</pre></div>
+</div>
+<p>Para ver todos los uuid o etiquetas en el sistema:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># ls -l /dev/disk/by-uuid</span>
+</pre></div>
+</div>
+<p>ó</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># ls -l /dev/disk/by-label</span>
+</pre></div>
+</div>
+<p>Si la partición está en la red, ver la seccion Arranque desde red <a class="footnote-reference brackets" href="#f4" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+</section>
+<section id="configuracion-del-teclado">
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">Configuración del teclado</a><a class="headerlink" href="#configuracion-del-teclado" title="Link to this heading"></a></h2>
+<p>Si es necesario introducir claves en volúmenes de disco encriptados, existe la posibilidad de establecer una configuración de teclado, con un conjunto de fuentes a mostrar.</p>
+<p>Un comando del kernel -típico alemán, sería:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rd.vconsole.font<span class="o">=</span>latarcyrheb-sun16<span class="w"> </span>rd.vconsole.keymap<span class="o">=</span>de-latin1-nodeadkeys<span class="w"> </span>rd.locale.LANG<span class="o">=</span>de_DE.UTF-8
+</pre></div>
+</div>
+<p>Al configurar estas opciones, será sobreescrita la configuración guardads en el sistema -en caso de usar un sistema <em>init</em> moderno, como <em>systemd</em>.</p>
+</section>
+<section id="bloqueo-de-modulos">
+<h2><a class="toc-backref" href="#id22" role="doc-backlink">Bloqueo de módulos</a><a class="headerlink" href="#bloqueo-de-modulos" title="Link to this heading"></a></h2>
+<p>Algunas veces, resulta conveniente prevenir la carga automática de módulos específicos. Añadir <code class="docutils literal notranslate"><span class="pre">rd.blacklist=&lt;kernel</span> <span class="pre">module</span> <span class="pre">name&gt;</span></code> a la línea de comandos, para lograrlo. El sufijo <code class="docutils literal notranslate"><span class="pre">.ko</span></code> del módulo en cuestión, no dee añadirse, por ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rd.driver.blacklist<span class="o">=</span>mptsas<span class="w"> </span>rd.driver.blacklist<span class="o">=</span>nouveau
+</pre></div>
+</div>
+<p>La opción podrá reptirse, de ser necesario.</p>
+</section>
+<section id="acelerando-el-proceso-de-arranque">
+<h2><a class="toc-backref" href="#id23" role="doc-backlink">Acelerando el proceso de arranque</a><a class="headerlink" href="#acelerando-el-proceso-de-arranque" title="Link to this heading"></a></h2>
+<p>Si resulta imprescindible acelerar el proceso de arranque, la alternativa consiste en especificar tanta información como sea posible, sobre la línea de comandos del kernel. Por ejemplo, explicitar que la partición raíz no es un volumen LVM, o partición RAID, o tal vez, que se encuentra dentro de un volumen concreto, tipo LUKS, enriptado. Por defecto, dracut busca en todo lugar. Un comando habitual de <em>línea</em>, para una partición primaria o lógica, contendría:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rd.luks<span class="o">=</span><span class="m">0</span><span class="w"> </span>rd.lvm<span class="o">=</span><span class="m">0</span><span class="w"> </span>rd.md<span class="o">=</span><span class="m">0</span><span class="w"> </span>rd.dm<span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<p>Esto apagaría el ensamblado automático de LVM, MD RAID, DM RAID y CRYPTO LUKS.</p>
+<p>Por supuesto, es posible omitir los módulos <em>dracut</em>, durnte el proceso de creación de initramfs. Anque se perdería la posibilidad de <em>adpatación circunstancial</em>.</p>
+</section>
+<section id="injectar-archivos-pesonalizados">
+<h2><a class="toc-backref" href="#id24" role="doc-backlink">Injectar archivos pesonalizados</a><a class="headerlink" href="#injectar-archivos-pesonalizados" title="Link to this heading"></a></h2>
+<p>Para añadir archivos personalizados a la imagen initramfs, aparecen distintas alternativas.</p>
+<p>La opción <code class="docutils literal notranslate"><span class="pre">--include</span></code> permite <em>relacionar</em> una ruta a la fuente y al <em>objetivo</em></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --include cmdline-preset /etc/cmdline.d/mycmdline.conf initramfs-cmdline-pre.img</span>
+</pre></div>
+</div>
+<p>Será creado una imagen initramfs, donde el archivo <code class="docutils literal notranslate"><span class="pre">cmdline-preset</span></code> será copiado dentro de initramfs a <code class="docutils literal notranslate"><span class="pre">/etc/cmdline.d/mycmdline.conf.</span> <span class="pre">--include</span></code>. Sólo puede ser especificado una vez.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mkdir -p rd.live.overlay/etc/cmdline.d</span>
+<span class="c1"># mkdir -p rd.live.overlay/etc/conf.d</span>
+<span class="c1"># echo &quot;ip=dhcp&quot; &gt;&gt; rd.live.overlay/etc/cmdline.d/mycmdline.conf</span>
+<span class="c1"># echo export FOO=testtest &gt;&gt; rd.live.overlay/etc/conf.d/testvar.conf</span>
+<span class="c1"># echo export BAR=testtest &gt;&gt; rd.live.overlay/etc/conf.d/testvar.conf</span>
+<span class="c1"># tree rd.live.overlay/</span>
+rd.live.overlay/
+<span class="sb">`</span>--<span class="w"> </span>etc
+<span class="w"> </span><span class="p">|</span>--<span class="w"> </span>cmdline.d
+<span class="w"> </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>mycmdline.conf
+<span class="w"> </span><span class="sb">`</span>--<span class="w"> </span>conf.d
+<span class="w">         </span><span class="sb">`</span>--<span class="w"> </span>testvar.conf
+
+
+<span class="c1"># dracut --include rd.live.overlay / initramfs-rd.live.overlay.img</span>
+</pre></div>
+</div>
+<p>Esto situará el contenido del directorio <code class="docutils literal notranslate"><span class="pre">rd.live.overlay</span></code>, dentro la raíz, en la imagen initramfs.</p>
+<p>La opción <code class="docutils literal notranslate"><span class="pre">--install</span></code> permite especificar varios archivos, los cuales serán instalados en la imagen initramfs, en la misma localización, presentada durante la creación de initramfs.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --install &#39;strace fsck.ext3 ssh&#39; initramfs-dbg.img</span>
+</pre></div>
+</div>
+<p>Creará una imagen initramfs con los ejecutables <code class="docutils literal notranslate"><span class="pre">strace,</span> <span class="pre">fsck.ext3</span> <span class="pre">y</span> <span class="pre">ssh</span></code>, junto a las librerías necesaris para lanzarlos. Es posible repetir la opción <code class="docutils literal notranslate"><span class="pre">--install</span></code>, en múltiples líneas.</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id5">1</a>,<a role="doc-backlink" href="#id6">2</a>)</span>
+</aside>
+</aside>
+</section>
+<section id="arranque-de-red">
+<h2><a class="toc-backref" href="#id25" role="doc-backlink">Arranque de red</a><a class="headerlink" href="#arranque-de-red" title="Link to this heading"></a></h2>
+<p>Si la partición raíz, no es un dispositivo de red, deberán tenerse los módulos dracut instalados, para crear una imagen de <em>emergencia</em>.</p>
+<p>Si es especificada la línea <em>ip=dhcp</em>, dracut preguntará a un servidor dhcp, sobre la direcciń IP, de una máquina. El sevidor DHCP, podrá servir una <em>dirección raíz</em> adicional, la cual configurará el dispositivo raíz para dracut. Con éste mecanismo, se consigue una configuración <em>estática</em>, para la máquina cliente y, una configuración centralizada, sobre el servidor TFTP/DHCP. Si no es posible pasar escribir sobre la línea, será posible injectar <a class="footnote-reference brackets" href="#f5" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> el archivo <code class="docutils literal notranslate"><span class="pre">/etc/cmdline.d/mycmdline.conf,</span></code>, con el método descrito en la sección llamada <a class="reference external" href="i13">Injectar archivos pesonalizados</a>.</p>
+</section>
+<section id="reduciendo-el-amano-de-la-imagen">
+<h2><a class="toc-backref" href="#id26" role="doc-backlink">Reduciendo el amaño de la imagen</a><a class="headerlink" href="#reduciendo-el-amano-de-la-imagen" title="Link to this heading"></a></h2>
+<p>Para reducir el tamaño de initramfs, debería crearse otra, omitiendo todos los módulos dracut, <strong>sabiendo</strong>, no es necesario reiniciar la máquina.</p>
+<p>Es igualmente posible, concretar los módulos dracut y del kernel, para producir una -muy pequeña, imagen initramfs.</p>
+<p>Por ejemplo,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut -m &quot;nfs network  base&quot; initramfs-nfs-only.img</span>
+</pre></div>
+</div>
+<p>Arrancar entonces, desde la imagen con la <em>máquina objetivo</em> y, reducir una vez más, su tamaño, creándola de nuevo, sobre la <em>máquina objetivo</em>; con la opción <code class="docutils literal notranslate"><span class="pre">--host-only</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut -m &quot;nfs network base&quot; --host-only initramfs-nfs-host-only.img</span>
+</pre></div>
+</div>
+<p>Esto reduciría el tamaño de la imagen initramfs, significativamente.</p>
+</section>
+<section id="resolucion-de-problemas">
+<h2><a class="toc-backref" href="#id27" role="doc-backlink">Resolución de problemas</a><a class="headerlink" href="#resolucion-de-problemas" title="Link to this heading"></a></h2>
+<p>Si el proceso de arranque no tiene éxito, hay varias opciones para <em>depurar la situación</em>. Algunas de las operaciones básicas, serán aquí tratadas. Para más información, visitar la página: <a class="reference external" href="https://www.kernel.org/pub/linux/utils/boot/dracut/dracut.html">dracut</a></p>
+<p>Identicicación del <em>area problemática</em>:</p>
+<ol class="arabic simple">
+<li><p>Retirar <code class="docutils literal notranslate"><span class="pre">rhgb</span></code> y <code class="docutils literal notranslate"><span class="pre">quiet</span></code> de la línea de comandos.</p></li>
+<li><p>Añadir <code class="docutils literal notranslate"><span class="pre">rd.shell</span></code> a la misma. Presentando entonces, una <em>shell    dracut</em>, incapaz de  localizar el dispositivo raíz.</p></li>
+<li><p>Añadir <code class="docutils literal notranslate"><span class="pre">rd.shell</span> <span class="pre">rd.debug</span> <span class="pre">log_buf_len=1M</span></code>, a la línea de comandos del kernel, para que los comandos de shell de dracut, sean impresos, tal y como son ejecutados.</p></li>
+<li><p>Es generado el archivo <code class="docutils literal notranslate"><span class="pre">/run/initramfs/rdsosreport.txt</span></code>, el cuál contiene todos los registros de salida y, el <em>retorno</em> de herramientas significantes, mencionadas posteriormente.</p></li>
+</ol>
+<p>De ser necesario <em>guardar</em> la salida; montar símplemente <code class="docutils literal notranslate"><span class="pre">/boot</span></code> de forma manual, o inserta una extensión USB, con el <em>mismo procedimiento</em>. Después podrá ser almacenda, para futuras inspecciones.</p>
+</section>
+<section id="datos-a-incluir-en-el-informe">
+<h2><a class="toc-backref" href="#id28" role="doc-backlink">Datos a incluir en el informe</a><a class="headerlink" href="#datos-a-incluir-en-el-informe" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="#bug">Todos los informes de error</a> En cualquier caso, lo siguiente debería ser mencionado como apéndice, al informe de error:</p>
+<ul class="simple">
+<li><p>La línea de comandos <strong>exacta</strong>. Habitualmente en el archivo de   configuración -ejemplo <code class="docutils literal notranslate"><span class="pre">/boot/grub2/grub.cfg</span></code> o desde <code class="docutils literal notranslate"><span class="pre">/proc/cmdline</span></code>.</p></li>
+<li><p>Una copia de la información de la partición del disco; desde el archivo <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code>, el cuál podrá ser obtenido arrancando dedde un initramfs anterior, o medio de rescate.</p></li>
+<li><p>Activar la <em>depuracion</em> de dracut -ver la sección depuración de dracut <a class="footnote-reference brackets" href="#f6" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> .</p></li>
+<li><p>Si es utilizado un archivo de configuración, por favor, inclúyanse los   archivos <code class="docutils literal notranslate"><span class="pre">/etc/</span> <span class="pre">dracut.conf</span></code> y todos los archivos en <code class="docutils literal notranslate"><span class="pre">/etc/dracut.conf.d/*.conf</span></code>.</p></li>
+</ul>
+</section>
+<section id="problemas-relacionados-con-el-dispositivo-raiz">
+<h2><a class="toc-backref" href="#id29" role="doc-backlink">Problemas relacionados con el dispositivo raíz</a><a class="headerlink" href="#problemas-relacionados-con-el-dispositivo-raiz" title="Link to this heading"></a></h2>
+<p>Esta sección detalla la información a incluir, tras experimentar problemas en un sistema cuyo dispositivo raíz, es localizado en un volumen adjunto, -ejemplo, ISCSI, NFS or NBD. También, la información referida en la sección <a class="reference external" href="i16">Datos a incluir en el informe</a>, incluida con el siguiente formato:</p>
+<p>Por favor, incluir la salida de:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># /sbin/ifup &lt;interfacename&gt;</span>
+<span class="c1"># ip addr show</span>
+</pre></div>
+</div>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f6" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">2</a><span class="fn-bracket">]</span></span>
+</aside>
+</aside>
+</section>
+<section id="depuracion-de-dracut">
+<h2><a class="toc-backref" href="#id30" role="doc-backlink">depuración de dracut</a><a class="headerlink" href="#depuracion-de-dracut" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Configuración de la cónsola en serie El correcto <em>depurado</em> de dracut,  requerirá algún tipo de inicialización de consola, durante el arranque del sistema. Esta sección, documenta la configuración de una cónsola en serie, donde conectar y guardar los mensajes de arranque.</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Primero, activar la salida por cónsola, tanto en el kernel, como en el gestor de arranque.</p></li>
+<li><p>Abrir el archivo <code class="docutils literal notranslate"><span class="pre">/boot/grub2/grub.cfg</span></code> en modo edición. Bajo la línea <code class="docutils literal notranslate"><span class="pre">timeout=5</span></code>, añadir lo siguiente:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>serial<span class="w"> </span>--unit<span class="o">=</span><span class="m">0</span><span class="w"> </span>--speed<span class="o">=</span><span class="m">9600</span>
+terminal<span class="w"> </span>--timeout<span class="o">=</span><span class="m">5</span><span class="w"> </span>serial<span class="w"> </span>console
+</pre></div>
+</div>
+<ol class="arabic" start="3">
+<li><p>Añadir de igual forma, el siguiente argumento a la <em>línea del kernel</em>. Archivo <code class="docutils literal notranslate"><span class="pre">/boot/grub2/grub.cfg</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">console</span><span class="o">=</span>tty0<span class="w"> </span><span class="nv">console</span><span class="o">=</span>ttyS0,9600
+</pre></div>
+</div>
+</li>
+<li><p>Tras finalizar, el archivo <code class="docutils literal notranslate"><span class="pre">/boot/grub2/grub.cfg</span></code>, guradará cierta    similitud con lo siguiente:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>...<span class="o">]</span>
+<span class="nv">default</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">timeout</span><span class="o">=</span><span class="m">5</span>
+serial<span class="w"> </span>--unit<span class="o">=</span><span class="m">0</span><span class="w"> </span>--speed<span class="o">=</span><span class="m">9600</span>
+terminal<span class="w"> </span>--timeout<span class="o">=</span><span class="m">5</span><span class="w"> </span>serial<span class="w"> </span>console
+title<span class="w"> </span>Fedora<span class="w"> </span><span class="o">(</span><span class="m">2</span>.6.29.5-191.fc11.x86_64<span class="o">)</span>
+<span class="w">    </span>root<span class="w"> </span><span class="o">(</span>hd0,0<span class="o">)</span>
+<span class="w">    </span>kernel<span class="w"> </span>/vmlinuz-2.6.29.5-191.fc11.x86_64<span class="w"> </span>ro<span class="w"> </span><span class="nv">root</span><span class="o">=</span>/dev/mapper/vg_uc1-lv_root<span class="w"> </span><span class="nv">console</span><span class="o">=</span>tty0<span class="w"> </span><span class="nv">console</span><span class="o">=</span>ttyS0,9600
+<span class="w">    </span>initrd<span class="w"> </span>/dracut-2.6.29.5-191.fc11.x86_64.img
+<span class="o">[</span>...<span class="o">]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Una configuración reciente, tendría este aspecto: […] set timeout_style=menu set timeout=5 serial –unit=0 –speed=9600 terminal –timeout=5 serial console # Fallback normal timeout code in case… […] linux16 /vmlinuz-releaseCandidate-Target
+root=UUID=some-uuid-uuid-uuid-uuid ro console=tty0 console=ttyS0,9600 initrd16 /initramfs-releaseCandidate-Target.img […]</p>
+<ol class="arabic simple" start="5">
+<li><p>Información más detallada sobre cómo configurar la salida por cónsola del kernel, en:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.faqs.org/docs/Linux-HOWTO/Remote-Serial-Console-HOWTO.html#CONFIGURE-KERNEL">Remote serial console HowTo</a></p></li>
+</ul>
+</li>
+<li><p>Redirigir la salida <em>no interactiva</em>:</p></li>
+</ol>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>Es posible redirigir toda la salida no interactia a
+<code class="docutils literal notranslate"><span class="pre">/dev/kmsg</span></code>, donde el kernel <em>volcará</em> los datos, cuando alcance el
+almacén de página<a class="footnote-reference brackets" href="#f7" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>, mediante:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># exec &gt;/dev/kmsg 2&gt;&amp;1 &lt;/dev/console</span>
+</pre></div>
+</div>
+</section>
+<section id="uso-de-la-shell-de-dracut">
+<h2><a class="toc-backref" href="#id31" role="doc-backlink">Uso de la shell de dracut</a><a class="headerlink" href="#uso-de-la-shell-de-dracut" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dracut</span></code> ofrece una <em>shell</em> para la depuración interactiva, en el caso de fallar en la localización del FS raíz. Para activar la <em>shell</em>:</p>
+<ol class="arabic simple">
+<li><p>Añadir el parámetro de arranque <code class="docutils literal notranslate"><span class="pre">rd.shell</span></code> al archivo de configuración del gestor <code class="docutils literal notranslate"><span class="pre">/boot/grub2/grub.cfg</span></code>.</p></li>
+<li><p>Retirar el argumento <code class="docutils literal notranslate"><span class="pre">rhgb</span></code> y <code class="docutils literal notranslate"><span class="pre">quiet</span></code>. Una muestra <code class="docutils literal notranslate"><span class="pre">/boot/grub2/grub.cfg</span></code>, del archivo de configuración del gestor:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">default</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">timeout</span><span class="o">=</span><span class="m">5</span>
+serial<span class="w"> </span>--unit<span class="o">=</span><span class="m">0</span><span class="w"> </span>--speed<span class="o">=</span><span class="m">9600</span>
+terminal<span class="w"> </span>--timeout<span class="o">=</span><span class="m">5</span><span class="w"> </span>serial<span class="w"> </span>console
+title<span class="w"> </span>Fedora<span class="w"> </span><span class="o">(</span><span class="m">2</span>.6.29.5-191.fc11.x86_64<span class="o">)</span>
+<span class="w">  </span>root<span class="w"> </span><span class="o">(</span>hd0,0<span class="o">)</span>
+<span class="w">  </span>kernel<span class="w"> </span>/vmlinuz-2.6.29.5-191.fc11.x86_64<span class="w"> </span>ro<span class="w"> </span><span class="nv">root</span><span class="o">=</span>/dev/mapper/vg_uc1-lv_root<span class="w"> </span><span class="nv">console</span><span class="o">=</span>tty0<span class="w"> </span>rd.shell
+<span class="w">  </span>initrd<span class="w"> </span>/dracut-2.6.29.5-191.fc11.x86_64.img
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Si el arranque del sistema falla, instará al usuario a ver algo similar a lo siguiente:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>No<span class="w"> </span>root<span class="w"> </span>device<span class="w"> </span>found
+Dropping<span class="w"> </span>to<span class="w"> </span>debug<span class="w"> </span>shell.
+
+<span class="c1">#</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Hacer uso del <em>prompt de shell</em>, para recopilar información, si procede: Ver sección <a class="reference external" href="bug">Todos los informes de error</a>.</p></li>
+</ol>
+<p>Accediendo al volumen raíz, desde la <em>shell</em> <code class="docutils literal notranslate"><span class="pre">dracut</span></code>. Es posible llevar a cabo tareas de localización y arreglos, sobre los que arrancar el volumen. Los pasos requeridos serán dependientes, en la medida en que fué configurado el volumen. Comunes escenarios incluyen:</p>
+<ul class="simple">
+<li><p>Un bloque de dispositivo -ejemplo, <code class="docutils literal notranslate"><span class="pre">/dev/sda7</span></code>.</p></li>
+<li><p>Un volumen lógico LVM -ejemplo, <code class="docutils literal notranslate"><span class="pre">/dev/VolGroup00/LogVol00</span></code></p></li>
+<li><p>Un dispositivo encriptado, <code class="docutils literal notranslate"><span class="pre">/dev/mapper/luks-4d5972ea-901c-4584-bd75-1da802417d83</span></code>.</p></li>
+<li><p>Una tarjeta de red adjunta: <code class="docutils literal notranslate"><span class="pre">netroot=iscsi:&#64;192.168.0.4::3260::iqn.2009-02.org.example:for.all</span></code>.</p></li>
+</ul>
+<p>El método exacto, para la localización y preparado, podría variar. Sin embargo, para continuar con un arranque satisfactorio, el objetivo será localizar en volumen raíz y, crear un enlace simbólico <code class="docutils literal notranslate"><span class="pre">/dev/root</span></code>, el cuál apunte al archivo de sistema. El siguiente ejemplo, demuestra cómo acceder y, arrancar, un volumen raíz que es un encriptado, detrás de un LVM.</p>
+<ol class="arabic simple">
+<li><p>Inspección de la partición, mediante <code class="docutils literal notranslate"><span class="pre">parted</span></code>.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># parted /dev/sda -s p</span>
+Model:<span class="w"> </span>ATA<span class="w"> </span>HTS541060G9AT00<span class="w"> </span><span class="o">(</span>scsi<span class="o">)</span>
+Disk<span class="w"> </span>/dev/sda:<span class="w"> </span><span class="m">60</span>.0GB
+Sector<span class="w"> </span>size<span class="w"> </span><span class="o">(</span>logical/physical<span class="o">)</span>:<span class="w"> </span>512B/512B
+Partition<span class="w"> </span>Table:<span class="w"> </span>msdos
+Number<span class="w">  </span>Start<span class="w">   </span>End<span class="w">     </span>Size<span class="w">    </span>Type<span class="w">      </span>File<span class="w"> </span>system<span class="w">  </span>Flags
+<span class="m">1</span><span class="w">      </span><span class="m">32</span>.3kB<span class="w">  </span><span class="m">10</span>.8GB<span class="w">  </span>107MB<span class="w">   </span>primary<span class="w">   </span>ext4<span class="w">         </span>boot
+<span class="m">2</span><span class="w">      </span><span class="m">10</span>.8GB<span class="w">  </span><span class="m">55</span>.6GB<span class="w">  </span><span class="m">44</span>.7GB<span class="w">  </span>logical<span class="w">                </span>lvm
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Es recordado que la raíz, es un volumen lógico en el LVM. Escanear y activar, cualquier volumen lógico, con la segunda instrucción:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># lvm vgscan</span>
+<span class="c1"># lvm vgchange -ay</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Debería poderse ver, cualquier volumen lógico por medio del comando:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># blkd</span>
+/dev/sda1:<span class="w"> </span><span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;3de247f3-5de4-4a44-afc5-1fe179750cf7&quot;</span><span class="w"> </span><span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;ext4&quot;</span>
+/dev/sda2:<span class="w"> </span><span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;Ek4dQw-cOtq-5MJu-OGRF-xz5k-O2l8-wdDj0I&quot;</span><span class="w"> </span><span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;LVM2_member&quot;</span>
+/dev/mapper/linux-root:<span class="w"> </span><span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;def0269e-424b-4752-acf3-1077bf96ad2c&quot;</span><span class="w"> </span><span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;crypto_LUKS&quot;</span>
+/dev/mapper/linux-home:<span class="w"> </span><span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;c69127c1-f153-4ea2-b58e-4cbfa9257c5e&quot;</span><span class="w"> </span><span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;ext3&quot;</span>
+/dev/mapper/linux-swap:<span class="w"> </span><span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;47b4d329-975c-4c08-b218-f9c9bf3635f1&quot;</span><span class="w"> </span><span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;swap&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>La salida de arriba, recuerda que el volumen raíz existe, en un bloque de dispositivo encriptado. Siguiendo la pauta, explicitada en el manual de instalación, será desencriptado el volumen raíz.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># UUID=$(cryptsetup luksUUID /dev/mapper/linux-root)</span>
+<span class="c1"># cryptsetup luksOpen /dev/mapper/linux-root luks-$UUID</span>
+Enter<span class="w"> </span>passphrase<span class="w"> </span><span class="k">for</span><span class="w"> </span>/dev/mapper/linux-root:
+Key<span class="w"> </span>slot<span class="w"> </span><span class="m">0</span><span class="w"> </span>unlocked.
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>A continuación, crear un enlace simbólico al volumen raíz desbloqueado.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># ln -s /dev/mapper/luks-$UUID /dev/root</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Con el <em>volumen</em> disponible, proseguir con el arranque del sistema,
+saliendo de la <em>shell</em>.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># exit</span>
+</pre></div>
+</div>
+</section>
+<section id="parametro-de-arranque-adicional-en-dracut">
+<h2><a class="toc-backref" href="#id32" role="doc-backlink">Parámetro de arranque adicional, en dracut</a><a class="headerlink" href="#parametro-de-arranque-adicional-en-dracut" title="Link to this heading"></a></h2>
+<p>Para más opciones en la depuración, ver <code class="docutils literal notranslate"><span class="pre">dracut.cmdline(7)</span></code>.</p>
+</section>
+<section id="depuracion-de-dracut-durante-el-apagado">
+<h2><a class="toc-backref" href="#id33" role="doc-backlink">Depuración de dracut, durante el apagado</a><a class="headerlink" href="#depuracion-de-dracut-durante-el-apagado" title="Link to this heading"></a></h2>
+<p>Para depurar la secuencia de apagado con el sistema <code class="docutils literal notranslate"><span class="pre">systemd</span></code>, situar <code class="docutils literal notranslate"><span class="pre">rd.break</span></code> en una <em>línea del kernel</em>, durante el apagado o pre-apagado.</p>
+<p>Desde un sistema en carrera:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mkdir -p /run/initramfs/etc/cmdline.d</span>
+<span class="c1"># echo &quot;rd.debug rd.break=pre-shutdown rd.break=shutdown&quot; &gt; /run/initramfs/etc/cmdline.d/debug.conf</span>
+<span class="c1"># touch /run/initramfs/.need_shutdown</span>
+</pre></div>
+</div>
+<p>Esto devolverá una <em>shell dracut</em>, al pivotar el sistema, de regreso a initramfs.</p>
+</section>
+<section id="opciones">
+<h2><a class="toc-backref" href="#id34" role="doc-backlink">Opciones</a><a class="headerlink" href="#opciones" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--kver<span class="w"> </span>&lt;kernel<span class="w"> </span>version&gt;
+</pre></div>
+</div>
+<p>Establece la versión del kernel. Da la posibilidad de especificar la versión del kernel, sin mencionar la localización de la imagen initramfs. Ejemplo;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --kver 3.5.0-0.rc7.git1.2.fc18.x86_64</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-f,</span> <span class="pre">--force</span></code></p></li>
+</ul>
+<p>Sobreescribe el archivo initramfs existente.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-a,</span> <span class="pre">--add</span> <span class="pre">&lt;list</span> <span class="pre">of</span> <span class="pre">dracut</span> <span class="pre">modules&gt;</span></code></p></li>
+</ul>
+<p>Añade una lista separada por espacios, de módulos dracut, al grupo de módulos por defecto. El parámetro podrá ser definido, múltiples veces.</p>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>Si [LIST] tuviese múltiples argumentos, deberían escribirse
+entre comillas. Ejemplo:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --force-add &quot;module1 module2&quot;  ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-o,</span> <span class="pre">--omit</span> <span class="pre">&lt;list</span> <span class="pre">of</span> <span class="pre">dracut</span> <span class="pre">modules&gt;</span></code> Omitir un lista separada por espacios, de módulos dracut. El parámetro podrá ser utilizado múltiples veces.</p></li>
+</ul>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>Si [LIST] tiene múltiples argumentos, deberán escribirse
+entre comillas. Por ejemplo:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --omit &quot;module1 module2&quot;  ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-m,</span> <span class="pre">--modules</span> <span class="pre">&lt;list</span> <span class="pre">of</span> <span class="pre">dracut</span> <span class="pre">modules&gt;</span></code> Especifica una lista separada por espacios, de módulos dracut, llamados durante la construcción de initramfs. Los módulos están localizados en <code class="docutils literal notranslate"><span class="pre">/usr/lib/dracut/modules.d</span></code>. El parámetro puede se especificado múltiples veces. La opción, fuerza a dracut a incluir sólo los módulos dracut, especificados. En la mayoría de casos, la opción <code class="docutils literal notranslate"><span class="pre">--add</span></code>, será lo que necesitemos usar.</p></li>
+</ul>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>Si [LIST] tiene múltiples argumentos, habrá que escribirlos
+entre comillas. Por ejemplo:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --modules &quot;module1 module2&quot;  ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-d,</span> <span class="pre">--drivers</span> <span class="pre">&lt;list</span> <span class="pre">of</span> <span class="pre">kernel</span> <span class="pre">modules&gt;</span></code> Especifica una lista separada por espacios, de módulos del kernel, para ser incluidos únicamente en initramfs. Los módulos del kernel, deben especificarse sin el sufijo <code class="docutils literal notranslate"><span class="pre">.ko</span></code>. El parámetro podrá ser especificado múltiples veces.</p></li>
+</ul>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>Si [LIST] tiene múltiples argumentos, habrá que escribirlos
+entre comillas. Por ejemplo:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --drivers &quot;kmodule1 kmodule2&quot;  ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--add-drivers</span> <span class="pre">&lt;list</span> <span class="pre">of</span> <span class="pre">kernel</span> <span class="pre">modules&gt;</span></code> Especifica una lista separada por espacios, de módulos del kernel, para ser incluidos en initramfs.</p></li>
+</ul>
+<p>Los módulos del kernel deberán ser especificados sin el sufijo <code class="docutils literal notranslate"><span class="pre">.ko</span></code>. El parámetro podrá ser especificado múltiples veces.</p>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>Si [LIST] tiene múltiples argumentos, habrá que escribirlos
+entre comillas. Por ejemplo:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --add-drivers &quot;kmodule1 kmodule2&quot;  ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--force-drivers</span> <span class="pre">&lt;list</span> <span class="pre">of</span> <span class="pre">kernel</span> <span class="pre">modules&gt;</span></code> Ver <code class="docutils literal notranslate"><span class="pre">--add-drivers</span></code> arriba. En este caso, se intentará la carga de los controladores en una <em>etapa inicial</em>, por medio de modprobe.</p></li>
+</ul>
+<p><strong>Nota</strong>: <em>si [LIST] tiene múltiples argumentos, habrá que escribirlos entre comillas. Por ejemplo:</em></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --force-drivers &quot;kmodule1 kmodule2&quot;  ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">dracut</span> <span class="pre">--force-drivers</span> <span class="pre">&quot;kmodule1</span> <span class="pre">kmodule2&quot;</span>&#160; <span class="pre">...</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--omit-drivers</span> <span class="pre">&lt;list</span> <span class="pre">of</span> <span class="pre">kernel</span> <span class="pre">modules&gt;</span></code> Especifica una lista separada por espacios, de módulos del kernel, para ser incluidos en initramfs. Los módulos del kernel deberán ser especificados sin el sufijo <code class="docutils literal notranslate"><span class="pre">.ko</span></code>. El parámetro podrá ser especificado múltiples veces.</p></li>
+</ul>
+<p><strong>Nota</strong>: si [LIST] tiene múltiples argumentos, habrá que escribirlos entre comillas. Por ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --omit-drivers &quot;kmodule1 kmodule2&quot;  ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--filesystems</span> <span class="pre">&lt;list</span> <span class="pre">of</span> <span class="pre">filesystems&gt;</span></code> Especifica una lista separada por espacios, de módulos del kernel, para ser incluidos únicamente en un initramfs genérico. Los módulos del kernel deberán ser especificados sin el sufijo <code class="docutils literal notranslate"><span class="pre">.ko</span></code>. El parámetro podrá ser especificado múltiples veces.</p></li>
+</ul>
+<p><strong>Nota</strong>: si [LIST] tiene múltiples argumentos, habrá que escribirlos entre comillas. Por ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --filesystems &quot;filesystem1 filesystem2&quot;  ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-k,</span> <span class="pre">--kmoddir</span> <span class="pre">&lt;kernel</span> <span class="pre">directory&gt;</span></code> Especifica el directorio donde buscar los módulos del kernel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--fwdir</span> <span class="pre">&lt;dir&gt;[:&lt;dir&gt;...]++</span></code> Especifica directorios adicionales, donde buscar código de fabricante -firmware. El parámetro podrá ser especificado múltiples veces.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--kernel-cmdline</span> <span class="pre">&lt;parameters&gt;</span></code> Especifica parámetros por defecto, para la <em>línea del kernel</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--kernel-only</span></code> Sólo instala archivos de los controladores y el <em>firmware</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--early-microcode</span></code> Combina microcódigo de inicio -temprano, early, con el <em>disco ram</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-early-microcode</span></code> No combina microcódigo de inicio -temprano, early, con el <em>disco ram</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--print-cmdline</span></code> Imprime los comandos de línea del kernel, para el esquema del disco en eactivo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--mdadmconf</span></code> Incluye el <code class="docutils literal notranslate"><span class="pre">/etc/mdadm.conf</span></code> local.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--nomdadmconf</span></code> No incluye el <code class="docutils literal notranslate"><span class="pre">/etc/mdadm.conf</span></code> local.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--lvmconf</span></code> Incluye el <code class="docutils literal notranslate"><span class="pre">/etc/lvm/lvm.conf</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--nolvmconf</span></code> No incluye el <code class="docutils literal notranslate"><span class="pre">/etc/lvm/lvm.conf</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--fscks</span> <span class="pre">[LIST]</span></code> Añade una lista separada por espadios, de herramientas <code class="docutils literal notranslate"><span class="pre">fsck</span></code>, complementando la especificación <em>dracut.conf</em>; la instalación es <em>oportunista</em> -herramientas no existentes serán ignoradas.</p></li>
+</ul>
+<dl class="simple">
+<dt><strong>Nota</strong>: si [LIST] tiene múltiples argumentos, habrá que escribirlos</dt><dd><p>entre comillas. Por ejemplo:</p>
+</dd>
+</dl>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --fscks &quot;fsck.foo barfsck&quot;  ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--nofscks</span></code> Inhibe la instalación de cualquier herramienta <code class="docutils literal notranslate"><span class="pre">fsck</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--strip</span></code> Enlista los binarios en initramfs. <a class="footnote-reference brackets" href="#f8" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--nostrip</span></code> No enlista los binarios en initramfs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--prelink</span></code> Pre enlaza los binarios en initramfs (por defecto).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--noprelink</span></code> No pre enlaza los binarios en initramfs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--hardlink</span></code> <em>Enlace duro</em> de archivos, en initfamfs (por defecto).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--nohardlink</span></code> No hace <em>Enlace duro</em> de archivos, en initfamfs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--prefix</span> <span class="pre">&lt;dir&gt;</span></code> Escribe el prefijo de archivo initramfs, con el directorio especificado.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--noprefix</span></code> No escribe el prefijo de archivo initramfs, con el directorio especificado.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-h,</span> <span class="pre">--help</span></code> Muestra el texto de ayuda y sale.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--debug</span></code> Muestra la información de depuración, del proceso de construcción.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-v,</span> <span class="pre">--verbose</span></code> Incrementa la cantidad de <em>texto ayuda</em> (por defecto es info(4))</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-q,</span> <span class="pre">--quiet</span></code> Reduce la cantidad de <em>texto ayuda</em> (por defecto es info(4))</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c,</span> <span class="pre">--conf</span> <span class="pre">&lt;dracut</span> <span class="pre">configuration</span> <span class="pre">file&gt;</span></code> Especifica el archivo de configuración a utilizar.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Por<span class="w"> </span>defecto:<span class="w"> </span><span class="sb">`</span>/etc/dracut.conf<span class="sb">`</span>.
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--confdir</span> <span class="pre">&lt;configuration</span> <span class="pre">directory&gt;</span></code> Especifica el directorio a utilizar.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Por<span class="w"> </span>defecto:<span class="w"> </span>/etc/dracut.conf.d
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--tmpdir</span> <span class="pre">&lt;temporary</span> <span class="pre">directory&gt;</span></code> Especifica el directorio temporal a utilizar.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Por<span class="w"> </span>defecto:<span class="w"> </span><span class="sb">`</span>/var/tmp<span class="sb">`</span>.
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--sshkey</span> <span class="pre">&lt;sshkey</span> <span class="pre">file&gt;</span></code> Archivo clave <em>ssh</em>, utilizado con el módulo <code class="docutils literal notranslate"><span class="pre">ssh-client</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--logfile</span> <span class="pre">&lt;logfile&gt;</span></code> <em>Archivo registro</em> a utilizar; sobreescribe los datos en los archivos de configuración.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Por<span class="w"> </span>defecto:<span class="w"> </span><span class="sb">`</span>/var/log/dracut.log<span class="sb">`</span>
+</pre></div>
+</div>
+<p><strong>Nota</strong>: ver <cite>systemd</cite> y <cite>journactl</cite> en sistemas más modernos.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-l,</span> <span class="pre">--local</span></code> Activa el modo local. <code class="docutils literal notranslate"><span class="pre">dracut</span></code> utilizará los módulos desde el directorio activo, en lugar de utilizar los módulos instalados en el sistema en <code class="docutils literal notranslate"><span class="pre">/usr/lib/dracut/modules.d</span></code>. Esto resulta útil desde una rama en git, <em>git checkout</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-H,</span> <span class="pre">--hostonly</span></code> Modo <em>Host-Only</em>: instala únicamente lo necesari para arrancar el anfitrión local, en lugar de un <em>host</em> genérico; genera una configuración especifica para el <em>host.</em></p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Si ha sido cambiada la raíz -chroot, del dispositivo “real”, usar <code class="docutils literal notranslate"><span class="pre">--fstab</span></code> proporcionando un <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> válido.</p>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-N,</span> <span class="pre">--no-hostonly</span></code> Desactiba el modo <em>Host-Only</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--hostonly-cmdline</span></code> Guarda los argumentos de la línea de comandos del kernel, necesarios en initramfs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-hostonly-cmdline</span></code> No guarda los argumentos de la línea de comandos del kernel, necesarios en initramfs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--hostonly-i18n</span></code> Instala únicamente los archivos del teclado y fuentes, de acuerdo con la configuración del <em>host</em> (por defecto).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-hostonly-i18n</span></code> Instala todos los archivos del teclado y fuentes disponibles.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--persistent-policy</span> <span class="pre">&lt;policy&gt;</span></code> Utiliza <code class="docutils literal notranslate"><span class="pre">&lt;policy&gt;</span></code> para direccionar discos y particiones. <code class="docutils literal notranslate"><span class="pre">&lt;policy&gt;</span></code> podría ser cualquier nombre de directorio, encontrado en <code class="docutils literal notranslate"><span class="pre">/dev/disk</span></code>. Ejemplo, “by-uuid”, “by-uuid” -por uuid, por etiqueta, respectivamente.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--fstab</span></code> Usa <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> en lugar de <code class="docutils literal notranslate"><span class="pre">/proc/self/mountinfo</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--add-fstab</span> <span class="pre">&lt;filename&gt;</span></code> Añade entradas de <code class="docutils literal notranslate"><span class="pre">&lt;filename&gt;</span></code> al initramfs <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--mount</span> <span class="pre">&quot;&lt;device&gt;</span> <span class="pre">&lt;mountpoint&gt;</span> <span class="pre">&lt;filesystem</span> <span class="pre">type&gt;</span> <span class="pre">[&lt;filesystem</span> <span class="pre">options&gt;</span> <span class="pre">[&lt;dump</span> <span class="pre">frequency&gt;</span> <span class="pre">[&lt;fsck</span> <span class="pre">order&gt;]]]&quot;</span></code></p></li>
+</ul>
+<p>Monta <code class="docutils literal notranslate"><span class="pre">&lt;device&gt;</span></code> en <code class="docutils literal notranslate"><span class="pre">&lt;mountpoint&gt;</span></code> con <code class="docutils literal notranslate"><span class="pre">&lt;filesystem</span> <span class="pre">type&gt;</span></code> en initramfs(monta el dispositivo en punto de montaje con sistema de ficheros tipo). <code class="docutils literal notranslate"><span class="pre">&lt;filesystem</span> <span class="pre">options&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;dump</span> <span class="pre">options&gt;</span></code> y <code class="docutils literal notranslate"><span class="pre">&lt;fsck</span> <span class="pre">order&gt;</span></code> pueden ser especificados, ver página de manual de <code class="docutils literal notranslate"><span class="pre">fstab</span></code>, para más detalles. Por defecto, la opción <code class="docutils literal notranslate"><span class="pre">&lt;filesystem</span> <span class="pre">options&gt;</span></code> es <code class="docutils literal notranslate"><span class="pre">0</span></code>. Por defecto <code class="docutils literal notranslate"><span class="pre">&lt;fsck</span> <span class="pre">order&gt;</span></code> es <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--mount</span> <span class="pre">&quot;&lt;mountpoint&gt;&quot;</span></code> Como arriba, pero <code class="docutils literal notranslate"><span class="pre">&lt;device&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;filesystem</span> <span class="pre">type&gt;</span></code> y <code class="docutils literal notranslate"><span class="pre">&lt;filesystem</span> <span class="pre">options&gt;</span></code>, son determinados buscando en los puntos de montaje activos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--add-device</span> <span class="pre">&lt;device&gt;</span></code> Entrega el <code class="docutils literal notranslate"><span class="pre">&lt;device&gt;</span></code> en initramfs, <code class="docutils literal notranslate"><span class="pre">&lt;device&gt;</span></code> debería ser el nombre de dispositivo. Resulta útil en modo <em>hostonly</em>, por el soporte a <em>resume</em>, cuando el dispositivo de intercambio se encuentra en un LVM, o en una partición encriptada. [NB –device, puede utilizarse por compatibilidad con entregas anteriores].</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-i,</span> <span class="pre">--include</span> <span class="pre">&lt;SOURCE&gt;</span> <span class="pre">&lt;TARGET&gt;</span></code> Incluye los archivos en el directorio SOURCE -fuente, dentro del directorio TARGET -objetivo, en el initramfs final. Si SOURCE, es un archivo, será instalado en TARGET, en el initramfs final. Este parámetro puede escribirse múltiples veces.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-I,</span> <span class="pre">--install</span> <span class="pre">&lt;file</span> <span class="pre">list&gt;</span></code> Instala una lista de archivos, separada pr espacios, en initramfs.</p></li>
+</ul>
+<p><strong>Nota</strong>: si [LIST] tiene múltiples argumentos, habrá que escribirlos entre comillas. Por ejemplo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># dracut --install &quot;/bin/foo /sbin/bar&quot;  ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--install-optional</span> <span class="pre">&lt;file</span> <span class="pre">list&gt;</span></code> Instala una lista de archivos, separada pr espacios, en initramfs, si existen.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--gzip</span></code> Comprime <em>initramfs</em> generado, por medio de <code class="docutils literal notranslate"><span class="pre">gzip</span></code>. Será llevado a cabo por defecto, a menos que sea pasada otra opción de compresión, o <code class="docutils literal notranslate"><span class="pre">--no-compress</span></code>. Es equivalente a <code class="docutils literal notranslate"><span class="pre">--compress=gzip</span> <span class="pre">-9</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bzip2</span></code> Comprime el initramfs generado, utilizando <code class="docutils literal notranslate"><span class="pre">bzip2</span></code>.</p></li>
+</ul>
+<p><strong>Nota:</strong> Advertencia Comprobar que fué compilado el soporte a la decompresión <code class="docutils literal notranslate"><span class="pre">bzip2</span></code>, junto al kernel. De otra forma, no sería posible el arranque. Equivalente a <code class="docutils literal notranslate"><span class="pre">--compress=bzip2</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lzma</span></code> Comprime el initramfs generado, utilizando <code class="docutils literal notranslate"><span class="pre">lzma</span></code>.</p></li>
+</ul>
+<p><strong>Nota:</strong> Comprobar que fué compilado el soporte a la decompresión <code class="docutils literal notranslate"><span class="pre">lzma</span></code>, junto al kernel. De otra forma, no sería posible el arranque. Equivalente a <code class="docutils literal notranslate"><span class="pre">--compress=lzma</span> <span class="pre">-9</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">xz</span></code> Comprime el initramfs generado, utilizando <code class="docutils literal notranslate"><span class="pre">lzma</span></code>.</p></li>
+</ul>
+<p><strong>Nota:</strong> Comprobar que fué compilado el soporte a la decompresión <code class="docutils literal notranslate"><span class="pre">xz</span></code>, junto al kernel. De otra forma, no sería posible el arranque. Equivalente a <code class="docutils literal notranslate"><span class="pre">--compress=lzma</span> <span class="pre">--compress=xz</span> <span class="pre">--check=crc32</span> <span class="pre">--lzma2=dict=1MiB</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--lzo</span></code> Comprime el initramfs generado, utilizando <code class="docutils literal notranslate"><span class="pre">lzop</span></code>.</p></li>
+</ul>
+<p><strong>Nota:</strong> Comprobar que fué compilado el soporte a la decompresión <code class="docutils literal notranslate"><span class="pre">lzo</span></code>, junto al kernel. De otra forma, no sería posible el arranque.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--lz4</span></code> Comprime el initramfs generado, utilizando <code class="docutils literal notranslate"><span class="pre">lz4</span></code>.</p></li>
+</ul>
+<p><strong>Nota:</strong> Comprobar que fué compilado el soporte a la decompresión <code class="docutils literal notranslate"><span class="pre">lz4</span></code>, junto al kernel. De otra forma, no sería posible el arranque.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--compress</span> <span class="pre">&lt;compressor&gt;</span></code> Comprime la imagen initramfs, generada por programa de compresión indicado. Si fue pasado sólo el nombre del programa, llamará al programa con los argument conocidos. Si fue pasada una cadena de texto, con argumentos entre comillas, será llamado con esos argumentos exáctamente. Dependiendo de lo que haya sido pasado, podría resulta en una imagen que no pueda ser descomprimida. El valor por defecto, podría establecerse por medio de la variable de entorno <code class="docutils literal notranslate"><span class="pre">INITRD_COMPRESS</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-compress</span></code> No comprimir la imagen initramfs generada. Sobreescribirá cualquier otra opción de compresión.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--reproducible</span></code> Crea imágenes reproducibles.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-reproducible</span></code> No crea imágenes reproducibles.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--list-modules</span></code> Lista todos los módulos dracut, disponibles.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-M,</span> <span class="pre">--show-modules</span></code> Imprime los nombres de módulos incluidos, sobre la salida estandar durante la construcción.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--keep</span></code> Guarda el directorio temporal de initramfs, para una posterior depuración.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--printsize</span></code> Muestra el tamaño de instalación del módulo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--profile</span></code> Extrae información del perfil, del proceso de construcción.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--ro-mnt</span></code> Monta <code class="docutils literal notranslate"><span class="pre">/</span></code> y <code class="docutils literal notranslate"><span class="pre">/usr</span></code> en modo sólo lectura por defecto.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-L,</span> <span class="pre">--stdlog</span> <span class="pre">&lt;level&gt;</span></code> [0-6] Especifica el nivel de mensajes(salida estandar -log level) 0 - suppress any messages [surpime todos los mensajes] 1 - only fatal errors [sólo rerrores fatales] 2 - all errors [todos los errores] 3 - warnings [Advertencias] 4 - info 5 - debug info (here starts lots of output) [info depuración, Abundante] 6 - trace info (and even more) [info de traza, Aún mas!!]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--regenerate-all</span></code> Regenera todas las imágenes initramfs, sobre la localización por defecto, partiendo de la versión del kernel encontrada en el sistema. Serán pasados parámetros.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--loginstall</span> <span class="pre">&lt;DIR&gt;</span></code> Log? todos los archivos instalados desde el <em>host</em> al</p></li>
+</ul>
+<DIR><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">uefi</span></code> En lugar de crear una imagen initramfs, dracut creará un ejecutable UEFI, el cuál podrá ser ejecutado por una BIOS UEFI. La salida por defecto del nombre de archivo es <code class="docutils literal notranslate"><span class="pre">&lt;EFI&gt;/EFI/Linux/linux-$kernel$-&lt;MACHINE_ID&gt;-&lt;BUILD_ID&gt;.efi</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;EFI&gt;</span></code> podría ser <code class="docutils literal notranslate"><span class="pre">/efi,</span> <span class="pre">/boot</span></code> o <code class="docutils literal notranslate"><span class="pre">/boot/efi</span></code>, dependiendo de donde fue montada la partición <code class="docutils literal notranslate"><span class="pre">ESP</span></code>. La <code class="docutils literal notranslate"><span class="pre">&lt;BUILD_ID&gt;</span></code> es tomada desde BUILD_ID en <code class="docutils literal notranslate"><span class="pre">/usr/lib/os-release</span></code> o si existe <code class="docutils literal notranslate"><span class="pre">/etc/os-release</span></code> y apartada si BUILD_ID, es iniexistente o vacía.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-machineid</span></code> Afecta a la salida del nombre de archivo por defecto de <code class="docutils literal notranslate"><span class="pre">--uefi</span></code> y, descartará la parte <code class="docutils literal notranslate"><span class="pre">&lt;MACHINE_ID&gt;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--uefi-stub</span> <span class="pre">&lt;FILE&gt;</span></code> Especifica la parte restante del cargador?, cargará el kernel <em>adjunto</em>, initramfs, la línea de comandos del kernel y, arrancará el kernel. Por defecto es <code class="docutils literal notranslate"><span class="pre">/lib/systemd/boot/efi/linux&lt;EFI-MACHINE-TYPE-NAME&gt;.efi.stub</span></code> o <code class="docutils literal notranslate"><span class="pre">/usr/lib/gummiboot/linux&lt;EFI-MACHINE-TYPE-NAME&gt;.efi.stub</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--kernel-image</span> <span class="pre">&lt;FILE&gt;</span></code> Especifica la imagen del kernel, a incluir en el ejecutable UEFI. Por defecto es <code class="docutils literal notranslate"><span class="pre">/lib/modules/&lt;KERNEL-VERSION&gt;/vmlinuz</span></code> o <code class="docutils literal notranslate"><span class="pre">/boot/vmlinuz-&lt;KERNEL-VERSION&gt;</span></code>.</p></li>
+</ul>
+</section>
+<section id="entorno">
+<h2><a class="toc-backref" href="#id35" role="doc-backlink">ENTORNO</a><a class="headerlink" href="#entorno" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>INITRD_COMPRESS
+</pre></div>
+</div>
+<p>Establece el programa por defecto, para la compresión. Ver
+<code class="docutils literal notranslate"><span class="pre">--compress</span></code></p>
+</section>
+<section id="files">
+<h2><a class="toc-backref" href="#id36" role="doc-backlink">FILES</a><a class="headerlink" href="#files" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/var/log/dracut.log
+</pre></div>
+</div>
+<p>Registro de texto, en la creación de initramfs.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/tmp/dracut.log
+</pre></div>
+</div>
+<p>Registro alternativo, sino existe <code class="docutils literal notranslate"><span class="pre">/var/log/dracut.log</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/dracut.conf
+</pre></div>
+</div>
+<p>Ver <code class="docutils literal notranslate"><span class="pre">dracut.conf</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/etc/dracut.conf.d/*.conf
+</pre></div>
+</div>
+<p>Ver <code class="docutils literal notranslate"><span class="pre">dracut.conf</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/usr/lib/dracut/dracut.conf.d/*.conf
+</pre></div>
+</div>
+<p>Ver <code class="docutils literal notranslate"><span class="pre">dracut.conf</span></code></p>
+</section>
+<section id="configuracion-en-initramfs-etc-conf-d">
+<h2><a class="toc-backref" href="#id37" role="doc-backlink">Configuración en initramfs <code class="docutils literal notranslate"><span class="pre">/etc/conf.d/</span></code></a><a class="headerlink" href="#configuracion-en-initramfs-etc-conf-d" title="Link to this heading"></a></h2>
+<p>Cualquier archivo encontrado en <code class="docutils literal notranslate"><span class="pre">/etc/conf.d/</span></code>, será <em>fuente</em> en initramfs, como conjunto de valores iniciales. Opciones de la línea de comando, sobreescribirán estos valores establecidos en los archivos de configuración.</p>
+<p><code class="docutils literal notranslate"><span class="pre">/etc/cmdline</span></code> Podría contener opciones adicionales para la línea de comandos. Depreciado, mejor utilizar <code class="docutils literal notranslate"><span class="pre">/etc/cmdline.d/*.conf</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">/etc/cmdline.d/*.conf.</span></code> El <em>comando</em> <code class="docutils literal notranslate"><span class="pre">dracut</span></code> es parte del paquete dracdut, disponible el <a class="reference external" href="https://dracut.wiki.kernel.org">https://dracut.wiki.kernel.org</a>.</p>
+</section>
+<section id="autores">
+<h2><a class="toc-backref" href="#id38" role="doc-backlink">AUTORES</a><a class="headerlink" href="#autores" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Harald Hoyer</p></li>
+<li><p>Victor Lowther</p></li>
+<li><p>Philippe Seewer</p></li>
+<li><p>Warren Togami</p></li>
+<li><p>Amadeusz Żołnowski</p></li>
+<li><p>Jeremy Katz</p></li>
+<li><p>David Dillow</p></li>
+<li><p>Will Woods</p></li>
+<li></li>
+</ul>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2><a class="toc-backref" href="#id39" role="doc-backlink">Referencias y agradecimientos</a><a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f8" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">3</a><span class="fn-bracket">]</span></span>
+<p>Strip, lista, tira. Traducido como <em>enlista</em>, pone consecutívamente uno detrás de otro.</p>
+</aside>
+<aside class="footnote brackets" id="f7" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">4</a><span class="fn-bracket">]</span></span>
+<p>n. de t.bufer, almacén. En Territorio Linux, hemos traducido el término de la siguiente manera: <em>almacén de página</em>, para resaltar que estamos tratando con un “bloque” de memoria, puesto que es habitual “delimitar” este bloque, aunque no siempre es así.</p>
+</aside>
+</aside>
+<p><a class="reference external" href="f6">depuración de dracut</a> – ?</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f5" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">5</a><span class="fn-bracket">]</span></span>
+<p>Injectar – se trata de una técnica de incrustado de datos, donde es detenido el flujo de lectura de un determinado archivo, para volcar sobre él, datos externos de <em>distinta índole</em> y, proseguir con la lectura del mismo, si procede!</p>
+</aside>
+<aside class="footnote brackets" id="f3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">6</a><span class="fn-bracket">]</span></span>
+<p>Ver <a class="reference external" href="/TerritorioLinux/siglas.html/#i1">siglas</a>.</p>
+</aside>
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">7</a><span class="fn-bracket">]</span></span>
+<p>LVM – Logical Volume Manager, Gestor de Volúmenes Lógicos.</p>
+</aside>
+<aside class="footnote brackets" id="f9" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">8</a><span class="fn-bracket">]</span></span>
+<p>RAID – Redundant Array of Independent Disks, Arreglo Redundante de Discos Independientes.</p>
+</aside>
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">9</a><span class="fn-bracket">]</span></span>
+<p>– vacio, la distinción del parámetro, <em>vacío/omitido</em>, indica que el programa buscará una cadena tipo    texto? que podría ser evaluada, antes de ser pasado como argumento a    la función.</p>
+</aside>
+</aside>
+<hr class="docutils" />
+<div class="admonition-fuente admonition">
+<p class="admonition-title">fuente</p>
+<p>Documentación extraida de la página de manual <code class="docutils literal notranslate"><span class="pre">dracut(8)</span></code>.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../GestorDeArranque/init.html" class="btn btn-neutral float-left" title="Explicación del temido mensaje No init found. por parte del boot." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="manInitrd.html" class="btn btn-neutral float-right" title="Man - InitRd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estado Global del Proyecto (foundry) &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Estado Global del Proyecto (<code class="docutils literal notranslate"><span class="pre">foundry</span></code>)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/Foundry/Metodologia_LTP/estado_last.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="estado-global-del-proyecto-foundry">
+<h1>Estado Global del Proyecto (<code class="docutils literal notranslate"><span class="pre">foundry</span></code>)<a class="headerlink" href="#estado-global-del-proyecto-foundry" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><strong>Objetivo principal</strong>: Desarrollo y validación de una suite de pruebas modulares sobre llamadas al sistema e infraestructura del kernel de Linux utilizando la librería LTP (<code class="docutils literal notranslate"><span class="pre">tst_test.h</span></code>).</p></li>
+<li><p><strong>Entorno de compilación y ejecución</strong>:</p></li>
+<li><p><strong>OS / Kernel</strong>: Rocky Linux 10 / RHEL 10.1 (<code class="docutils literal notranslate"><span class="pre">6.12.0-124.8.1.el10_1.x86_64</span></code>).</p></li>
+<li><p><strong>Host de build remoto</strong>: <code class="docutils literal notranslate"><span class="pre">builder&#64;buildlab</span></code> (<code class="docutils literal notranslate"><span class="pre">/mnt/build-output/Repos/foundry</span></code>).</p></li>
+<li><p><strong>Usuario de ejecución</strong>: <code class="docutils literal notranslate"><span class="pre">builder</span></code> (pruebas sin privilegios de <code class="docutils literal notranslate"><span class="pre">root</span></code>).</p></li>
+<li><p><strong>Estado de Fases</strong>:</p></li>
+<li><p><strong>Fase 1 (I/O &amp; Memory)</strong>: Concluida y validada (<code class="docutils literal notranslate"><span class="pre">mmap01</span></code>, <code class="docutils literal notranslate"><span class="pre">direct_io01</span></code>).</p></li>
+<li><p><strong>Fase 2 (Bus PCI &amp; Interrupciones)</strong>: Concluida y validada (<code class="docutils literal notranslate"><span class="pre">pci_config_test</span></code>, <code class="docutils literal notranslate"><span class="pre">pci_bar_test</span></code>, <code class="docutils literal notranslate"><span class="pre">pci_msi_test</span></code>).</p></li>
+<li><p><strong>Fase 3 (Gestión de Procesos y Recursos)</strong>: Concluida y validada (<code class="docutils literal notranslate"><span class="pre">sysconf01</span></code>, <code class="docutils literal notranslate"><span class="pre">fork01</span></code>).</p></li>
+</ul>
+<p>—</p>
+<section id="hitos-completados-por-subsistema">
+<h2>Hitos Completados por Subsistema<a class="headerlink" href="#hitos-completados-por-subsistema" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Resumen de Binarios Ejecutados y Validados en laboratorio</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><dl class="field-list simple">
+<dt class="field-odd">header<span class="colon">:</span></dt>
+<dd class="field-odd"><p>“Módulo”</p>
+</dd>
+</dl>
+</td>
+<td><p>Binario</p></td>
+<td><p>Syscalls / Interfaces</p></td>
+<td><p>Resultado</p></td>
+</tr>
+<tr class="row-even"><td><dl class="field-list simple">
+<dt class="field-odd">widths<span class="colon">:</span></dt>
+<dd class="field-odd"><p>15</p>
+</dd>
+</dl>
+</td>
+<td><p>15</p></td>
+<td><p>45</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p>“IO_tests”</p></li>
+</ul>
+</td>
+<td><p>mmap01</p></td>
+<td><p>mmap(), munmap(), msync()</p></td>
+<td><p>TPASS</p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p>“IO_tests”</p></li>
+</ul>
+</td>
+<td><p>direct_io01</p></td>
+<td><p>open(O_DIRECT), write(), read()</p></td>
+<td><p>TPASS</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p>“BUS_tests”</p></li>
+</ul>
+</td>
+<td><p>pci_config_test</p></td>
+<td><p>sysfs /proc/bus/pci</p></td>
+<td><p>TPASS</p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p>“BUS_tests”</p></li>
+</ul>
+</td>
+<td><p>pci_bar_test</p></td>
+<td><p>sysfs MMIO resource spaces</p></td>
+<td><p>TPASS</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p>“BUS_tests”</p></li>
+</ul>
+</td>
+<td><p>pci_msi_test</p></td>
+<td><p>/proc/interrupts, MSI/MSI-X</p></td>
+<td><p>TPASS</p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p>“PROC_tests”</p></li>
+</ul>
+</td>
+<td><p>sysconf01</p></td>
+<td><p>sysconf()</p></td>
+<td><p>TPASS</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p>“PROC_tests”</p></li>
+</ul>
+</td>
+<td><p>fork01</p></td>
+<td><p>fork(), waitpid(), COW</p></td>
+<td><p>TPASS</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="comparativa-de-estructuras-de-archivos-codigo-vs-documentacion">
+<h2>Comparativa de Estructuras de Archivos (Código vs Documentación)<a class="headerlink" href="#comparativa-de-estructuras-de-archivos-codigo-vs-documentacion" title="Link to this heading"></a></h2>
+<p>Para facilitar la visualización conjunta, a continuación se muestran en paralelo la estructura actual del código fuente (<code class="docutils literal notranslate"><span class="pre">src/</span></code>) y la estructura del árbol de documentación en Sphinx (<code class="docutils literal notranslate"><span class="pre">docs/</span></code>):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Estructura Código Fuente (src/)              Estructura Documentación (docs/)
+===============================              ================================
+src/                                         docs/
+├── BUS_tests                                ├── index.rst
+│   ├── Makefile                             ├── BUS_teorica.rst
+│   ├── pci_bar_test.c                       ├── BUS_tests.rst
+│   ├── pci_config_test.c                    ├── IO_teorica.rst
+│   └── pci_msi_test.c                       ├── IO_tests.rst
+├── hello                                    ├── PROC_teorica.rst
+│   ├── hello.c                              └── PROC_tests.rst
+│   └── Makefile
+├── IO_tests
+│   ├── direct_io_test.c
+│   ├── Makefile
+│   └── mmap01.c
+├── Makefile
+├── pci_dw
+│   ├── bus_map_log.rst
+│   ├── device_watcher.c
+│   ├── device_watcher.h
+│   ├── Makefile
+│   └── radeon_drv.c
+└── PROC_tests
+    ├── fork_test.c
+    ├── Makefile
+    └── sysconf_test.c
+
+6 directories, 18 files                      1 directory, 7 files
+</pre></div>
+</div>
+</section>
+<section id="proximos-pasos">
+<h2>Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Plan de Trabajo Consolidado</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><dl class="field-list simple">
+<dt class="field-odd">header<span class="colon">:</span></dt>
+<dd class="field-odd"><p>“Etapa”</p>
+</dd>
+</dl>
+</td>
+<td><p>Objetivo Principal</p></td>
+<td><p>Enfoque</p></td>
+</tr>
+<tr class="row-even"><td><dl class="field-list simple">
+<dt class="field-odd">widths<span class="colon">:</span></dt>
+<dd class="field-odd"><p>20</p>
+</dd>
+</dl>
+</td>
+<td><p>50</p></td>
+<td><p>30</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p>“Estudio de Subsistemas”</p></li>
+</ul>
+</td>
+<td><p>Análisis profundo de la arquitectura de E/S, PCI y Procesos</p></td>
+<td><p>Todos los tests que hagamos estarán relacionados con el objeto de estudio</p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p>“Revisión de Casos de Estudio”</p></li>
+</ul>
+</td>
+<td><p>Evaluación de trazas y comportamiento del kernel en Rocky 10</p></td>
+<td><p>Análisis teórico-práctico</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-nota-interna-de-formato admonition">
+<p class="admonition-title">Nota interna de formato</p>
+<p>En caso de requerir la reintroducción de este reporte en un nuevo hilo, mantén el renderizado en Markdown legible estándar para garantizar la continuidad fluida de la conversación.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

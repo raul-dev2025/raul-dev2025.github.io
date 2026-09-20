@@ -1,0 +1,224 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Puentes de Bus PCI - PCI Bus Bridges &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Conventional PCI - Peripheral Component Interconnect" href="busPCI.html" />
+    <link rel="prev" title="Southbridge" href="busSur.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#placa-base">Placa Base</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Arquitectura de la Placa Base</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Arquitectura de la Placa Base</a></li>
+      <li class="breadcrumb-item active">Puentes de Bus PCI - PCI Bus Bridges</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/PlacaBase/pciBusBridges.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="puentes-de-bus-pci-pci-bus-bridges">
+<h1>Puentes de Bus PCI - PCI Bus Bridges<a class="headerlink" href="#puentes-de-bus-pci-pci-bus-bridges" title="Link to this heading"></a></h1>
+<p>La especificación PCI contempla la interconexión de múltiples buses independientes dentro de un mismo sistema mediante el uso de <strong>puentes de bus</strong> (<em>PCI Bus Bridges</em>). Un puente de bus es un dispositivo de hardware (o una función dentro de un circuito integrado) que actúa como interfaz entre dos buses locales distintos, aislando sus dominios eléctricos y gestionando la transmisión selectiva de transacciones.</p>
+<section id="conceptos-fundamentales-y-proposito">
+<h2>Conceptos Fundamentales y Propósito<a class="headerlink" href="#conceptos-fundamentales-y-proposito" title="Link to this heading"></a></h2>
+<p>En las arquitecturas PCI tradicionales, un único segmento de bus paralelo presenta restricciones físicas estrictas en cuanto a la impedancia eléctrica, la capacitancia de la señal y el número máximo de carga por zócalos (<em>slots</em>).</p>
+<p>Los puentes de bus resuelven estas limitaciones permitiendo:</p>
+<ol class="arabic simple">
+<li><p><strong>Jerarquización del Bus</strong>: Permiten organizar la topología en forma de árbol, donde un bus principal o primario se subdivide en uno o varios buses secundarios.</p></li>
+<li><p><strong>Aislamiento Eléctrico y Muestreo</strong>: Filtran el tráfico para que las señales eléctricas de un segmento no saturen las líneas de otros segmentos, extendiendo la cantidad total de periféricos instalables.</p></li>
+<li><p><strong>Conversión de Protocolos y Frecuencias</strong>: Un puente puede interconectar segmentos que operan a diferentes velocidades o voltajes (por ejemplo, adaptar un bus PCI de 33 MHz a uno de 66 MHz, o traducir señales entre PCI y otros buses como CardBus o PCIe).</p></li>
+</ol>
+</section>
+<section id="tipos-de-puentes-de-bus-pci">
+<h2>Tipos de Puentes de Bus PCI<a class="headerlink" href="#tipos-de-puentes-de-bus-pci" title="Link to this heading"></a></h2>
+<section id="puentes-pci-a-pci-pci-to-pci-bridges-p2p">
+<h3>Puentes PCI-a-PCI (<em>PCI-to-PCI Bridges - P2P</em>)<a class="headerlink" href="#puentes-pci-a-pci-pci-to-pci-bridges-p2p" title="Link to this heading"></a></h3>
+<p>Son los puentes estándar definidos bajo la cabecera de configuración tipo 1 (<em>Header Type 1</em>). Un puente P2P conecta un bus primario (hacia la CPU) con un bus secundario (hacia los dispositivos o hacia otros puentes).</p>
+<ul class="simple">
+<li><p><strong>Filtrado de Direcciones</strong>: El puente examina cada transacción en el bus primario. Si la dirección de destino pertenece al rango configurado para su bus secundario (o subárbol descendiente), el puente captura la transacción y la retransmite (<em>forwarding</em>). De lo contrario, la ignora.</p></li>
+<li><p><strong>Transacciones Posteadas y No Posteadas</strong>: Implementa buffers internos para almacenar operaciones de escritura sin bloquear el bus de origen (<em>posted writes</em>), optimizando el flujo de trabajo.</p></li>
+</ul>
+</section>
+<section id="puentes-host-a-pci-host-to-pci-root-complex">
+<h3>Puentes Host-a-PCI (<em>Host-to-PCI / Root Complex</em>)<a class="headerlink" href="#puentes-host-a-pci-host-to-pci-root-complex" title="Link to this heading"></a></h3>
+<p>Ubicados en la cúspide de la jerarquía (históricamente dentro del <strong>Northbridge</strong> o en el <strong>Root Complex</strong> de PCIe), conectan el bus nativo del procesador y la memoria del sistema con el bus PCI primario (denominado <em>Bus 0</em>).</p>
+</section>
+</section>
+<section id="diferencias-del-uso-de-puentes-entre-pci-convencional-y-pci-express">
+<h2>Diferencias del Uso de Puentes entre PCI Convencional y PCI Express<a class="headerlink" href="#diferencias-del-uso-de-puentes-entre-pci-convencional-y-pci-express" title="Link to this heading"></a></h2>
+<p>Aunque la teoría de puentes aplica a ambas tecnologías, la práctica difiere de forma radical según el diseño del bus:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Comparativa de la Topología de Puentes entre PCI y PCIe</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 35.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parámetro</p></th>
+<th class="head"><p>PCI Convencional</p></th>
+<th class="head"><p>PCI Express (PCIe)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Estructura Física</strong></p></td>
+<td><p>Bus multipunto paralelo compartido.</p></td>
+<td><p>Enlaces punto a punto en serie.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Uso de Puentes</strong></p></td>
+<td><p>Infrecuente (normalmente 1 a 2 segmentos).</p></td>
+<td><p>Masivo e intensivo.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Representación Lógica</strong></p></td>
+<td><p>Múltiples dispositivos en un único bus.</p></td>
+<td><p>Cada enlace <span class="math notranslate nohighlight">\(x1, x4, x16\)</span> representa un bus independiente.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Mecanismo de Conmutación</strong></p></td>
+<td><p>Puentes P2P físicos discretos.</p></td>
+<td><p>Conmutadores virtuales internos (<em>PCIe Switches / Virtual P2P Bridges</em>).</p></td>
+</tr>
+</tbody>
+</table>
+<p>En <strong>PCI Express</strong>, la topología lógica se representa ante el sistema operativo exactamente igual que un árbol de puentes PCI tradicionales para preservar la compatibilidad con el software de enumeración. Sin embargo, en el plano físico, los <em>PCIe Switches</em> integran múltiples puentes virtuales P2P conectados internamente a un bus virtual secundario (<em>Virtual PCI Bus</em>), permitiendo la conmutación de paquetes a alta velocidad entre puertos sin las colisiones del bus paralelo.</p>
+</section>
+<section id="proceso-de-enumeracion-y-asignacion-de-numeros-de-bus">
+<h2>Proceso de Enumeración y Asignación de Números de Bus<a class="headerlink" href="#proceso-de-enumeracion-y-asignacion-de-numeros-de-bus" title="Link to this heading"></a></h2>
+<p>Durante el arranque (<em>bootstrapping</em>), el firmware (BIOS/UEFI) explora la topología mediante un algoritmo de búsqueda en profundidad (<em>Depth-First Search</em>), asignando tres registros clave en la cabecera de cada puente:</p>
+<ul class="simple">
+<li><p><strong>Primary Bus Number</strong>: El número del bus ubicado aguas arriba (<em>upstream</em>), más cercano a la CPU.</p></li>
+<li><p><strong>Secondary Bus Number</strong>: El número asignado directamente al segmento de bus aguas abajo (<em>downstream</em>) gestionado por este puente.</p></li>
+<li><p><strong>Subordinate Bus Number</strong>: El número de bus con el valor más alto ubicado en cualquier punto del subárbol descendiente de este puente.</p></li>
+</ul>
+<p>Este mecanismo de direccionamiento permite que los mensajes de E/S y las transacciones <em>MMIO</em> se enruten de forma transparente a través de múltiples niveles de puentes sin modificar las aplicaciones ni los controladores de los dispositivos finales.</p>
+</section>
+<section id="referencias">
+<h2>Referencias<a class="headerlink" href="#referencias" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pcisig.com/">PCI-to-PCI Bridge Architecture Specification</a> (PCI-SIG).</p></li>
+<li><p>Tom Shanley / Don Anderson: <em>PCI System Architecture</em>, MindShare Inc.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="busSur.html" class="btn btn-neutral float-left" title="Southbridge" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="busPCI.html" class="btn btn-neutral float-right" title="Conventional PCI - Peripheral Component Interconnect" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

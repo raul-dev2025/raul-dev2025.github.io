@@ -1,0 +1,944 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qemu - Quick Emulator &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Setting Up LTP Test Cases on a Linux VM Environment" href="../Testing/cxt4testing.html" />
+    <link rel="prev" title="Estrategia de Asignación de CPUs y Optimizaciones en KVM/QEMU" href="../Processor/cpuPinning.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#idm-configuracion">IdM - Configuracion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#supuestos-qemu">Supuestos - Qemu</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Qemu - Quick Emulator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#proceso-de-instalacion-de-una-imagen">1. PROCESO DE INSTALACION DE UNA IMAGEN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redimensionar-imagen">Redimensionar imagen</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trabajar-con-una-copia-de-imagen">TRABAJAR CON UNA COPIA DE IMAGEN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#con-o-sin-conexion-a-internet">CON O SIN CONEXION A INTERNET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#el-loopback">El loopback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#atajos-del-teclado">ATAJOS DEL TECLADO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#agradecimientos">AGRADECIMIENTOS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+      <li class="breadcrumb-item active">Qemu - Quick Emulator</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/Qemu/qemu_notas.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qemu-quick-emulator">
+<h1><a class="toc-backref" href="#id3" role="doc-backlink">Qemu - Quick Emulator</a><a class="headerlink" href="#qemu-quick-emulator" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#qemu-quick-emulator" id="id3">Qemu - Quick Emulator</a></p>
+<ul>
+<li><p><a class="reference internal" href="#proceso-de-instalacion-de-una-imagen" id="id4">1. PROCESO DE INSTALACION DE UNA IMAGEN</a></p>
+<ul>
+<li><p><a class="reference internal" href="#crear-imagen" id="id5">Crear imagen</a></p></li>
+<li><p><a class="reference internal" href="#convertir-imagen" id="id6">Convertir imagen</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#redimensionar-imagen" id="id7">Redimensionar imagen</a></p>
+<ul>
+<li><p><a class="reference internal" href="#aumentar-su-tamano" id="id8">Aumentar su tamaño</a></p></li>
+<li><p><a class="reference internal" href="#disminuir-el-tamano" id="id9">Disminuir el tamaño</a></p></li>
+<li><p><a class="reference internal" href="#imagenes-vhd" id="id10">Imágenes VHD</a></p></li>
+<li><p><a class="reference internal" href="#instalacion-unica" id="id11">Instalación única</a></p></li>
+<li><p><a class="reference internal" href="#instalacion-contigua" id="id12">Instalación contigua</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#trabajar-con-una-copia-de-imagen" id="id13">TRABAJAR CON UNA COPIA DE IMAGEN</a></p>
+<ul>
+<li><p><a class="reference internal" href="#backing-files-overlays" id="id14">Backing-files/overlays</a></p></li>
+<li><p><a class="reference internal" href="#snapshots" id="id15">SnapShots</a></p></li>
+<li><p><a class="reference internal" href="#captura-interna" id="id16">Captura interna</a></p></li>
+<li><p><a class="reference internal" href="#captura-externa" id="id17">Captura externa</a></p></li>
+<li><p><a class="reference internal" href="#estado-de-la-vm" id="id18">Estado de la VM</a></p></li>
+<li><p><a class="reference internal" href="#creando-capturas" id="id19">Creando capturas</a></p></li>
+<li><p><a class="reference internal" href="#proceso-de-reversion" id="id20">Proceso de reversión</a></p></li>
+<li><p><a class="reference internal" href="#confluencia-en-las-capturas" id="id21">Confluencia en las capturas</a></p></li>
+<li><p><a class="reference internal" href="#aprovado-de-bloque" id="id22">Aprovado de bloque</a></p></li>
+<li><p><a class="reference internal" href="#borrado-de-capturas" id="id23">Borrado de capturas</a></p></li>
+<li><p><a class="reference internal" href="#metodo-1" id="id24">Metodo 1</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#con-o-sin-conexion-a-internet" id="id25">CON O SIN CONEXION A INTERNET</a></p>
+<ul>
+<li><p><a class="reference internal" href="#modo-usuario" id="id26">Modo usuario:</a></p></li>
+<li><p><a class="reference internal" href="#configurar-una-mac-especifica" id="id27">Configurar una MAC específica</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#el-loopback" id="id28">El loopback</a></p>
+<ul>
+<li><p><a class="reference internal" href="#montar-un-loopback-para-comunicarnos-con-la-vm-sin-conexion" id="id29">MONTAR UN LOOPBACK PARA COMUNICARNOS CON LA VM SIN CONEXION</a></p></li>
+<li><p><a class="reference internal" href="#loopback-para-una-imagen-usando-moduos-en-el-kernel" id="id30">Loopback para una imagen (usando moduos en el kernel)</a></p></li>
+<li><p><a class="reference internal" href="#lanzar-la-vm-apuntando-al-servidor-nbd" id="id31">Lanzar la VM apuntando al servidor NBD</a></p></li>
+<li><p><a class="reference internal" href="#kvm-visrtualizacion-por-hardware" id="id32">KVM - Visrtualización por hardware</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#atajos-del-teclado" id="id33">ATAJOS DEL TECLADO</a></p>
+<ul>
+<li><p><a class="reference internal" href="#comandos-del-monitor-qemu" id="id34">Comandos del monitor Qemu</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#agradecimientos" id="id35">AGRADECIMIENTOS</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="proceso-de-instalacion-de-una-imagen">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">1. PROCESO DE INSTALACION DE UNA IMAGEN</a><a class="headerlink" href="#proceso-de-instalacion-de-una-imagen" title="Link to this heading"></a></h2>
+<section id="crear-imagen">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Crear imagen</a><a class="headerlink" href="#crear-imagen" title="Link to this heading"></a></h3>
+<p>Bien sea porque tenemos el disco original (en este caso un SO windows) o bien por que lo hayamos descargado, deberemos antes CREAR una imagen GUEST con la que QEMU, pueda trabajar. Para esto primero creamos la imagen. Una “caja” vacía:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qemu</span><span class="o">-</span><span class="n">img</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">qcow2</span> <span class="n">mi_imagen</span><span class="o">.</span><span class="n">img</span> <span class="mi">1</span><span class="n">G</span>
+</pre></div>
+</div>
+<p>Aquí el flag “-f” indica el tipo de formato con el que será creada nuestra imagen (aún vacia). También indicamos el archivo imagen y el tamaño en Gigabytes.</p>
+<p>Instalación de SUPUESTO OS en la imágen previamente creada:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qemu</span> <span class="o">-</span><span class="n">m</span> <span class="mi">256</span> <span class="o">-</span><span class="n">hda</span> <span class="n">mi_imagen</span><span class="o">.</span><span class="n">img</span> <span class="o">-</span><span class="n">cdrom</span> <span class="n">winxpsp2</span><span class="o">.</span><span class="n">iso</span> <span class="o">-</span><span class="n">boot</span> <span class="n">d</span>
+<span class="c1"># Este comando anterior es un poco confuso.</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Habrá que sustituir “qemu” con el comando apropiado, en relación a la arquitectura del sistema operativo GUEST con el que se vaya a trabajar. En este caso sería: <code class="docutils literal notranslate"><span class="pre">qemu-system-i386</span></code></p></li>
+<li><p>Nuevamente el flag <code class="docutils literal notranslate"><span class="pre">-m</span></code> indica la memoria RAM para el SUPUESTO SO.</p></li>
+<li><p>La siguiente opción <code class="docutils literal notranslate"><span class="pre">-hda</span></code> indica el archivo imagen donde vamos a instalar la imagen del SO.</p></li>
+<li><p>Sigue la opción <code class="docutils literal notranslate"><span class="pre">-cdrom</span></code>. Parece indicar el dispositivo físico un ‘CD’, pero todo apunta a que se trata de una denominación para diferenciarlo de la partición GUEST que acabamos de crear. Es decir, que utilizaremos el mismo flag <code class="docutils literal notranslate"><span class="pre">-cdrom</span></code> para tratar con una imagen descargada en el disco duro, o una imagen que previamente hayamos ‘quemado’ en un ‘CD’. La diferencia es que para utilizar un ‘CD’ a la hora de hacer la instalación en nuestra ‘caja vacía’ habrá que indicar la ruta hacia el dispositivo ejem. <code class="docutils literal notranslate"><span class="pre">/dev/cdrom</span></code>.</p></li>
+</ul>
+<p>La opción <code class="docutils literal notranslate"><span class="pre">-boot</span> <span class="pre">d</span></code> indica como ‘cadena’, la letra que será usada en el arranque del sistema. Es exáctamente igual a como interpreta la BIOS el ‘orden’ de arranque de sistema de nuestro HOST.</p>
+<ul class="simple">
+<li><p>‘a’ y ‘b’ para la floppy</p></li>
+<li><p>‘c’ para el disco duro</p></li>
+<li><p>‘d’ para el CD-ROM</p></li>
+<li><p>‘n-p’ arranque desde RED. Opcion muy interesente para un GUEST. Desde Linux, la cadena que representa el dispositivo de arranque, está muy claro, (pues nosotros no usamos letras para esto). Así que ‘c’ claramente representa al disco duro y ‘d’ a un CD-ROM. Desde una perspectiva Windows, habrá que asegurarse. Pués windows utiliza letras para denominar los dispositivos de almacenamiento.</p></li>
+</ul>
+</section>
+<section id="convertir-imagen">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Convertir imagen</a><a class="headerlink" href="#convertir-imagen" title="Link to this heading"></a></h3>
+<p>Por qué convertir imágenes antes de instalarlas:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># qemu-img convert -f vhd -O qcow2 source.vhd destination.qcow2</span>
+</pre></div>
+</div>
+<p>Es posible que la instrucción no funcione correctamente debido a algún cambio en la version utilizada con <em>qemu</em>. Este otro comando debería funcionar.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># qemu-img convert -O qcow2 filename file_output(autodetectada??)</span>
+</pre></div>
+</div>
+<p>Qemu tiene el conversor de imagenes mas versatil, en relación a otros emuladores. Esto lo convierte en una herramienta indispensable a la hora de trabajar con VMs. Así como otros emuladores, presentan limitaciones a la hora de trabajar con imagenes específicas, qemu es capaz de interpretar una gran variedad de éstas, además de poseer un tipo genérico ‘raw’ donde converge con otras ‘versiones’.</p>
+</section>
+</section>
+<section id="redimensionar-imagen">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Redimensionar imagen</a><a class="headerlink" href="#redimensionar-imagen" title="Link to this heading"></a></h2>
+<p>En Qemu hablamos de imágen, para referirnos a un dispositivo virtual, que hará las veces de disco duro. Ver sección <em>Crear imagen</em>. Partiremos desde este concepto principal, que es la <em>imagen</em>.</p>
+<p>Bajo el comando <code class="docutils literal notranslate"><span class="pre">qemu-img</span></code> tenemos la opción <code class="docutils literal notranslate"><span class="pre">resize</span></code>, utilizada para alterar el tamaño de una imagen, previamente creada. El tamaño de una imagen, únicamente puede ser alterada, cuando la própia imagen fue creada en formato <em>raw</em> o crudo en inglés.</p>
+<p>Sobre la distribución <em>fedora</em>(reseña al final del artículo), ha sido añadida otra característica para esta opción <code class="docutils literal notranslate"><span class="pre">resize</span></code>. Pueden modificarse tamaños de imagen, creados en formato qcow2, para aumentar su tamaño, unicamente. Es decir, no podrá disminuir su espacio o hacerla más pequeña.</p>
+<blockquote>
+<div><p>qcow2 – qemu copy on write, version 2.</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># qemu-img resize imagen tamaño</span>
+</pre></div>
+</div>
+<p>De esta forma añadimos espacio a la imagen ya creada, pero ojo, es un valor <em>absoluto</em>. Con esto quiero decir, que si la imagen tenía 10 Gigas, utilizando este anterior comando:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># qemu-img resize miImagen.raw 10G</span>
+<span class="c1">#### la imagen pasará a tener 20 Gigas !!!</span>
+</pre></div>
+</div>
+<p>Para un efecto más granulado, puden usarse los operadores <code class="docutils literal notranslate"><span class="pre">+</span></code> y <code class="docutils literal notranslate"><span class="pre">-</span></code>, así:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># qemu-img resize miImagen.raw +2G</span>
+</pre></div>
+</div>
+<p>Ahora nuestra imagen tendrá el tamaño deseado; 12 Gigas.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>****<span class="w"> </span>man<span class="w"> </span>page<span class="w"> </span>*****
+qemu-img<span class="w"> </span>resize<span class="w"> </span>filename<span class="w"> </span><span class="o">[</span>+<span class="se">\|</span>-<span class="o">]</span>size<span class="o">[</span>K<span class="p">|</span>M<span class="p">|</span>G<span class="p">|</span>T<span class="o">]</span>
+Los<span class="w"> </span>sufijos<span class="w"> </span>que<span class="w"> </span>pueden<span class="w"> </span>ser<span class="w"> </span>usados<span class="w"> </span>son:
+K<span class="w"> </span>–<span class="w"> </span>kilobytes
+M<span class="w"> </span>–<span class="w"> </span>megabytes
+G<span class="w"> </span>–<span class="w"> </span>gigabytes
+T<span class="w"> </span>–<span class="w"> </span>terabytes
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Un aspecto importante que debe tenerse en cuenta, es ajustar el dispositivo acorde al nuevo tamaño asignado a la imagen. De otra forma, es posible corromper los datos de la imagen.</p>
+</div>
+<section id="aumentar-su-tamano">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Aumentar su tamaño</a><a class="headerlink" href="#aumentar-su-tamano" title="Link to this heading"></a></h3>
+<p>Si el tamaño es aumentado, <em>después</em> de asignar el espacio a la imagen, con el comando descrito líneas arriba, debe ajustarse el tamaño del dispositivo, con las herramientas propias de particionado de disco.</p>
+</section>
+<section id="disminuir-el-tamano">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Disminuir el tamaño</a><a class="headerlink" href="#disminuir-el-tamano" title="Link to this heading"></a></h3>
+<p>Para reducir el tamaño, primero es obligatorio el uso de estas herramientas de particionado. Es decir, hay que lanzar la <em>Supuesta(VM)</em> y reducir el espacio de disco <em>antes</em> de redimensionar con qemu. Vemos que el orden del proceso es opuesto en cada caso!!</p>
+<p><strong>Reseña:</strong> en Territorio Linux, hemos encontrado que una de la librerías más importantes de Qemu <em>libvirt</em>, no están completamente <em>integradas</em> en otras distribuciones fuera de <em>Fedora</em>. Nuestro equipo utiliza generalmente máquinas <em>Debian</em>, y es verdad que las sibrerías están, pero nosotros no hemos sido capaces de instalarlas, <em>‘sin romper el sistema’</em>. Aconsejamos el uso de <em>Fedora</em>, que por otro lado tiene un entorno de usuario que, sencillamente es glorioso!. Perfecto para un usario medio.</p>
+</section>
+<section id="imagenes-vhd">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Imágenes VHD</a><a class="headerlink" href="#imagenes-vhd" title="Link to this heading"></a></h3>
+<p>Virtual hard drive o disco duro virtual, de sus siglas en inglés. Es relatívamente sencillo encontrarse con imágenes de este tipo, sobre todo si buscamos en alguno de los sitios oficiales u organismos gubernamentales.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#### Con esta línea arranca la máquina virtual.
+$ qemu-system-i386 -hda mi-imagen.vhd
+</pre></div>
+</div>
+<p>Lo bueno es que siempre están disponibles, imágenes de los sistemas operativos más comunes; esto es Windows y Linux, tambén imágenes OS X.</p>
+<p>Lo malo es que sulen ser imágenes con fecha de caducidad(unos 6 meses), después habrá que borrar el sistema operativo y volverlo a instalar…</p>
+<p>Debe tenerse en cuenta que si van a ser usadas imágenes de este tipo, la opción <code class="docutils literal notranslate"><span class="pre">cdrom</span></code> no funciona. Suelen ser imágenes pre-instaladas, por lo que no será necesaria su instalación en el disco duro virtual; basta con  iniciarla con el hipervisor o gestor de arranque de imágenes.</p>
+<p>Es una opción muy interesante para hacer pruebas rápidas con un sistema operativo.</p>
+<p>Aquí es donde surge la gran pregunta: ¿Cómo hacerlo para que la instalación sea permanente? Correcto, éstas imagenes pueden ser instaladas en el disco duro igual que cualquier otra aplicación, que no requira un gestor de  imágenes virtuales; pero antes habrá que llevar a cabo ciertas medidas:</p>
+<p><strong>Primero:</strong> comprobar que la imagen de la <em>supuesta</em> que va a ser instalada en el disco duro -<em>dispositivo físico</em>-, no estará contenida en ninguna partición en uso. Es decir, el distino de la imágen <strong>no</strong> debe ser un dispositivo usado por el sistema en activo: la imagen será instalada en un <em>usb</em>, en un <em>disco duro externo</em>, en un <em>cdrom</em> o en una <em>partición sin formato</em>!!.</p>
+<p><strong>Segundo:</strong> la intalación puede ser <em>contigua</em> a otro/s sistema operativo existente, o puede ser <em>única</em>; donde serán reescritos todos los datos del disco duro e instalado el nuevo sistema operativo.</p>
+<p>Un sistema operativo, sea Windows, Linux o cualquier otro, para que pueda ser arrancado, debe instalarse sobre una partición primaria. Esto no es del todo cierto, ver documentacion Disco Duro. Para no complicar las cosas más de lo necesario, aquí se llevarán a cabo estas operaciones sobre particiónes <em>primarias</em>.</p>
+<p>En cualquier caso, más que copiar la imagen directamente desde el formato descrito por el fabricante del virtualizador, Qemu, Vm-ware, Virtual-box, etc. es conveniente traducir la imagen a un formato estandar.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-img convert -O raw mi-imagen.vhd mi-imagen.raw
+</pre></div>
+</div>
+</section>
+<section id="instalacion-unica">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Instalación única</a><a class="headerlink" href="#instalacion-unica" title="Link to this heading"></a></h3>
+<p>En este caso, no importa que existan particiones descritas por el/los sistemas ya instalados, por que vamos a reescribir <em>todo el disco</em>. Pero si importa, que la <code class="docutils literal notranslate"><span class="pre">imagen.raw</span></code> esté fuera del disco duro. <em>Debe</em> estar fuera del diso, en otro dispositivo.</p>
+<p>Si la instalación es <em>única</em>, hay que arrancar el sistema operativo desde un disco <em>en vivo</em> o <em>live-CD</em>. Despúés debe ser montada la imagen y, una vez hecho esto, los datos serán volcados sobre el dispositivo:</p>
+<ol class="arabic simple">
+<li><p>Introducimos el CD y, reiniciamos sistema.</p></li>
+<li><p>Montamos la imágen. La imagén debe estar fuera del disco duro donde se hará la instalación; en otro disco duro, usb, etc.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo mount -o ro,loop /camino/a/la/imagen.raw
+/media/CDROM/o/USB/destino
+</pre></div>
+</div>
+<p>Como arrancamos desde <em>CDROM</em>, cuando el sistema pregunte por <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, dejaremos la clave en blanco: return.</p>
+<ol class="arabic simple" start="3">
+<li><p>Copiamos los datos de la imagen, sobre el disco:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo dd if=/camino/a/la/imagen.raw of=/dev/sdaX bs=1M
+</pre></div>
+</div>
+<p>Volvemos a dejar en blanco la pregunta <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, return, y especificamos que la copia sobre el dispositivo, sea realizada en bloques de 1 Megabyte. La denominación <em>sda</em>, se refiere al primer disco duro. <em>X</em> se refiere a la  partición número. <em>Ejemplo:</em> la partición 2 del disco duro 3, seria <code class="docutils literal notranslate"><span class="pre">/dev/sdc2</span></code>. En este caso concreto, la instalación toma todo el disco, por tanto: <code class="docutils literal notranslate"><span class="pre">/dev/sda</span></code>.</p>
+<p>Un dato importante, es que la imagen, debe ser menor o igual, al tamaño del disco donde va ser instalado el <em>SO</em>. Una vez hecho esto, con una herramienta de parti- cionado, como <em>gparted</em>, se comprueba que el sistema ha sido instalado correctamente y puede expandirse la partición para que ocupe todo el espacio de <em>disco duro</em>.</p>
+<blockquote>
+<div><p>En Windows, desde herramientas administrativas, gestor de  particiones, deberíamos poder reubicar la partición.</p>
+</div></blockquote>
+</section>
+<section id="instalacion-contigua">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Instalación contigua</a><a class="headerlink" href="#instalacion-contigua" title="Link to this heading"></a></h3>
+<p>Como estamos escribiendo datos sobre un dispositivo físico, ésta es la forma más segura de realizar este tipo de operaciones, pués no implica borrar datos de sistema ni de usuario.</p>
+<div class="admonition-cazado admonition">
+<p class="admonition-title">CAZADO</p>
+<p>Windows sólo puede ser instalado en la primera partición. Aunque es cierto, no es completamente exacto. Puede instalarse Windows en qualquier partición primaria ver: documentación disco duro, siempre y cuando el gestor de arranque apunte al dispositivo que lo aloja.</p>
+</div>
+<p>Al margen de la anterior anotación, cuando los sistemas operativos que conviven en el disco duro fueron instalados; en primer lugar se hizo la instalazión de Windows, más tarde se instaló Fedora. Habrá que tener en cuenta las siguientes consideraciones:</p>
+<ol class="arabic simple">
+<li><p>La versión del sistema operativo que constituye la imagen: <code class="docutils literal notranslate"><span class="pre">mi-imagen.raw</span></code>, debe ser la misma que la del disco <em>en vivo</em>.</p></li>
+<li><p>Si la imagen ya fué <em>quemada</em> en el <em>CD</em>, habrá que recuperarla, crear una nueva imagen a partir de éste, u obtener una nueva.</p></li>
+</ol>
+<p>Con esta técnica, lo que estamos haciendo es algo parecido a crear un <code class="docutils literal notranslate"><span class="pre">backup</span></code> de nuestro sistema, y después restaurarlo. Sólo que esta vez, en lugar de trabajar sobre el <code class="docutils literal notranslate"><span class="pre">backup</span></code> trabajaremos con los datos de una <code class="docutils literal notranslate"><span class="pre">VM</span></code>.</p>
+<p>Así que, a menos que tengamos el disco con el que los técnicos crearon el <code class="docutils literal notranslate"><span class="pre">file.vhd</span></code>, este tipo de instalación será completamente inútil, por que está pensado para que el sistema sea una <code class="docutils literal notranslate"><span class="pre">VM</span></code>. Pero sí, es posible crear el nuestro própio, teniendo la ISO original.</p>
+<p>Alguno se estará preguntando … ¿Por qué tanto royo, si puedo hacer la instalación directamente desde la ISO? claro que sí, pero ¿verdad que no es posible trabjar con dos sistemas operativos a la <em>vez?</em> de esta forma  podemos trabajar desde nuestro sistema, crear un entorno de desarrolo dentro de la <code class="docutils literal notranslate"><span class="pre">VM</span></code> y, cuando todo
+funciona, volcar los datos sobre nuestro sistema. Es mucho mejor que un <code class="docutils literal notranslate"><span class="pre">backup</span></code> por que no se corren riesgos!!.</p>
+<p>Dicho de otra forma; es posible desarrollar algo <em>muy dirigido</em>, a una tarea concreta, aislando nuestro trabajo, y poder disponer de las <em>capacidades</em> de una <code class="docutils literal notranslate"><span class="pre">VM</span></code> al mismo tiempo.</p>
+<p>Empezamos por crear la imagen:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ dd if=/dev/cdrom of=/destino/de/imagen.iso
+$ mkisofs -o /destino/mi-imagen.iso /directiorio/o/archivo/fuente
+</pre></div>
+</div>
+<p>En la primera línea copiamos el contenido de un disco <code class="docutils literal notranslate"><span class="pre">/dev/sr0</span></code>(en éste caso) y lo convertimos en un archivo de imagen ISO. La segunda línea demuestra como crear otra imagen <code class="docutils literal notranslate"><span class="pre">ISO</span></code> desde un directorio o archivo.</p>
+<p>Hay que recordar que en función del dispositivo de entrada, deberemos modificar la línea que arranca la instalación de la <code class="docutils literal notranslate"><span class="pre">VM</span></code> con <em>Qemu</em>: <code class="docutils literal notranslate"><span class="pre">-hda</span></code> o <code class="docutils literal notranslate"><span class="pre">cdrom</span></code> descrito en la sección <em>Crear imagen</em></p>
+<blockquote>
+<div><p>Fuente: <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> ubuntu-forum</p>
+</div></blockquote>
+</section>
+</section>
+<section id="trabajar-con-una-copia-de-imagen">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">TRABAJAR CON UNA COPIA DE IMAGEN</a><a class="headerlink" href="#trabajar-con-una-copia-de-imagen" title="Link to this heading"></a></h2>
+<section id="backing-files-overlays">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">Backing-files/overlays</a><a class="headerlink" href="#backing-files-overlays" title="Link to this heading"></a></h3>
+<p>La principal idea aquí, es la <em>copia de seguridad</em>. Una vez se ha instalado el sistema operativo, puede trabajarse sobre un archivo de <em>prueba/efecto</em>. Al que llamamos <em>Overlay</em>. Esto permite probar extensivamente un determinado GUEST, sin importar los cambios que hagamos, pues no serán aplicados al GUEST original, sino a la copia. La imagen del archivo que contiene la instalación original, o en un estado básico, la llamamos <em>BackingFile</em>.</p>
+<p>Para preparar este <em>entorno de prueba</em>, primero se crea una imagen en crudo, asignando un tamaño a la misma.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-img create -f raw image_file.raw 10G
+</pre></div>
+</div>
+<p>A continuación creamos el backing-file. Realmente no lo estamos creando, estamos formando la imágen en crudo, para que reconozca nuestro entorno de prueba, asociando ambos archivos: <em>raw/qcow2</em> en este caso. Lo hacemos con la siguiente línea:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-img create -o backing_file=image_file.raw,backing_fmt=raw \
+-f qcow2 overlay.cow
+</pre></div>
+</div>
+<p>Lo mas importante en este proceso, es asegurarnos de que el <em>overlay</em> apunta al backing-file. Podemos comprobarlo con la aplicación <em>file</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ file overlay.cow
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Cuando trabajamos con procedimientos de este tipo, es habitual separar los archivos, en distintos directorios. Una forma sencilla y eficaz de hacerlo sin tener que estar escribiendo una y otra vez rutas largas, es asignar la ruta a una variable ejem: crear-backing.sh</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+<span class="n">my_path</span><span class="o">=/</span><span class="n">ruta</span><span class="o">/</span><span class="n">a</span><span class="o">/</span><span class="n">directorio</span><span class="o">/</span><span class="n">respaldo</span>
+</pre></div>
+</div>
+<p>Se que algunos me tacharán de novato, pero escribiendo las rutas directamente en la línea de comando, no conseguí de ninguna manera, que el vínculo entre ambos: backing-overlay, no se rompiese.</p>
+<div class="admonition-cazado admonition">
+<p class="admonition-title">CAZADO</p>
+<p>Al llamar al ‘backing-file’ en el proceso de instalación de la imagen, qemu, parece no reconocer direcciones fuera del directorio que contiene la imagen ‘base’. Esto quiere decir que para instalar la imagen en el backing file es necesario encontrarse en el directorio contenedor: mezcla las rutas absolutas/relativas.</p>
+</div>
+<p>La VM arranca con:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qemu</span> <span class="n">overlay</span><span class="o">.</span><span class="n">cow</span> <span class="o">-</span><span class="n">m</span> <span class="mi">128</span>
+</pre></div>
+</div>
+</section>
+<section id="snapshots">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">SnapShots</a><a class="headerlink" href="#snapshots" title="Link to this heading"></a></h3>
+<p>Snapshot es la captura de <em>estado</em> de una determinada máquina virtual, en un momento concreto. Esto incluye al sistema operativo y todas las aplicaciones. Es como una fotografía instantánea: <em>en ella aparecerá todo lo que hay delante del objetivo de la cámara</em>.
+Aquí hablamos de instancias, como lo haríamos sobre una <em>clase</em>, por que en realidad es un concepto similar: definimos un <em>proceso</em>, que ya ha sido implementado en otro <em>escenario</em>. Configurándolo para cumplir una <em>tarea  específica</em>.
+Esto evita tener que modificar el proceso original, y trabajar directamente en él, con todas, o muchas, de sus características.</p>
+<p>La casualidad no existe. Qcow2(copy-on-write)podría traducirse como: <em>escritura sobre la copia</em>, que es exáctamente lo que se pretende en este <em>proceso</em>.
+Esta ténica puede ser tan complicada o simple como la necesidad a cubrir, pero siempre guarda la misma idea: mantener a salvo el archivo original, y realizar cambios, sobre una <em>copia</em>.
+Al realizar los cambios, modificaciones, pruebas, etc. aparece la alternativa de guardar ese <em>estado</em> en la imagen orignal, o tal vez descartarlo, por que ha sido un <em>horrible desastre</em>. Empezamos creando una relación BackingFile/Overlay:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-img create -b $mi_Ruta/base.img -f qcow2 \
+   $mi_ruta/Overlays/overlay1.qcow2
+$ qemu.img create -o backing_file=$mi_ruta/base.img,backing_fmt=raw \
+   -f qcow2 $mi_ruta/Overlays/overlay2.qcow2
+</pre></div>
+</div>
+<p>El flag <em>-b</em>, parece referirse a la <em>base</em>, pero ha queado obsoleto desde la version <em>qemu</em> actual. Es utilizado junto al comando <em>commit</em> que será visto, mas adelante.</p>
+<div class="admonition-man-page admonition">
+<p class="admonition-title">man page</p>
+<p>commit [–object objectdef] [–image-opts] [-q] [-f fmt] [-t cache]
+[-b base] [-d] [-p]</p>
+</div>
+<p>La bandera(flag): <strong>-o</strong> significa opciones. Cuando la imagen de disco, es creada con la <em>opción</em> <em>backing_file</em>, la imagen(overlay), sólo guardará la diferencia respecto a la base. El tamaño del archivo, puede ser omitido. <strong>-f</strong> hace referencia al formato de archivo, para el <strong>overlay</strong>. Puesto que es habitual guardar la <em>base</em> en <em>crudo</em>. <strong>$mi_ruta:</strong> no es más que una varible, que he utilizado para simplificar la línea.</p>
+<p>Es importante comprobar que el <em>vínculo</em> entre ambos archivos, es el <em>adecuado:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ file archivo
+$ qemu-img info --backing-chain $mi_ruta/Overlays/overlay2.qcow2
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>file</strong> ofrece una versión resumida si únicamente buscamos comprabar el vínculo.</p></li>
+<li><p><strong>qemu-img info –backing-chain</strong> aporta información más detallada:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">image</span><span class="p">:</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">BF</span><span class="o">/</span><span class="n">Overlays</span><span class="o">/</span><span class="n">img1</span><span class="o">.</span><span class="n">cow</span>
+<span class="n">file</span> <span class="nb">format</span><span class="p">:</span> <span class="n">qcow2</span>
+<span class="n">virtual</span> <span class="n">size</span><span class="p">:</span> <span class="mf">3.0</span><span class="n">G</span> <span class="p">(</span><span class="mi">3221225472</span> <span class="nb">bytes</span><span class="p">)</span>
+<span class="n">disk</span> <span class="n">size</span><span class="p">:</span> <span class="mf">1.5</span><span class="n">G</span>
+<span class="n">cluster_size</span><span class="p">:</span> <span class="mi">65536</span>
+<span class="n">backing</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">BF</span><span class="o">/</span><span class="n">image_file</span><span class="o">.</span><span class="n">raw</span>
+<span class="n">backing</span> <span class="n">file</span> <span class="nb">format</span><span class="p">:</span> <span class="n">raw</span>
+<span class="n">Format</span> <span class="n">specific</span> <span class="n">information</span><span class="p">:</span>
+<span class="n">compat</span><span class="p">:</span> <span class="mf">1.1</span>
+<span class="n">lazy</span> <span class="n">refcounts</span><span class="p">:</span> <span class="n">false</span>
+<span class="n">refcount</span> <span class="n">bits</span><span class="p">:</span> <span class="mi">16</span>
+<span class="n">corrupt</span><span class="p">:</span> <span class="n">false</span>
+
+<span class="n">image</span><span class="p">:</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">BF</span><span class="o">/</span><span class="n">image_file</span><span class="o">.</span><span class="n">raw</span>
+<span class="n">file</span> <span class="nb">format</span><span class="p">:</span> <span class="n">raw</span>
+<span class="n">virtual</span> <span class="n">size</span><span class="p">:</span> <span class="mf">3.0</span><span class="n">G</span> <span class="p">(</span><span class="mi">3221225472</span> <span class="nb">bytes</span><span class="p">)</span>
+<span class="n">disk</span> <span class="n">size</span><span class="p">:</span> <span class="mf">1.4</span><span class="n">G</span>
+</pre></div>
+</div>
+<p>Otro usuario <strong>Linux</strong>, desde la distribución <em>Fedora</em>, ha querido incluir en su documentación, un conjunto de términos utilizados junto a estas <em>capturas de estado</em>. Intentaré traducirlos sin cambiar su contenido…</p>
+</section>
+<section id="captura-interna">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">Captura interna</a><a class="headerlink" href="#captura-interna" title="Link to this heading"></a></h3>
+<p>Un archivo qcow2 que sostiene la captura y “delta” hasta el punto de guardado. Delta hace referencia al “direncial” escrito en la imagen, aquellas partes del disco que han sufrido modificación.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls -sh $my_path &amp;&amp; ls -sh $my_path/Overlays
+1,5G image_file.raw2,1G test01.img
+0 Overlays 0 Unsafe
+total 1,7G
+1,6G img1.cow134M test_over.qcow2
+</pre></div>
+</div>
+<p>En la última línea del siguiente bloque de código, puede verse como al archivo img1.cow, se han aplicando diferentes actualizaciones, quedando reflejadas en el tamaño de disco. El archivo test-over, represanta otra imagen, a la que se han aplicado “pocos” cambios.</p>
+<p><strong>Captura interna de disco:</strong>
+El estado del disco virtual dado en un punto del tiempo. Tanto la captura, como <em>delta</em> son almacenados en el mismo archivo qcow2. Pueden ser tomados igualmente, cuando el SUPUESTO esta ‘vivo/encendido’ u ‘offline/apagado’.</p>
+<ul class="simple">
+<li><p>libvirt: esta librería, usa el comando ‘qemu-img’ cuando el SUPUESTO está <em>apagado</em>.</p></li>
+<li><p>libvirt: usa el comando ‘savevm’ cuando el SUPUESTO está <em>encendido</em>.</p></li>
+</ul>
+<p><strong>Punto de guardado interno del sistema:</strong>
+Estado de la <em>RAM</em>, estaado del dispositivo y el estado del disco de un SUPUESTO en carrera.
+Todos son guardados en el mismo archivo original qcow2. Puede ser tomado durante la carrera.</p>
+<ul class="simple">
+<li><p>libvirt: usa el comando ‘savevm’ cuando el SUPUESTO está <em>encendido</em>.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>savevm(captura en vivo), es un comando accedido a través del monitor qemu.</p>
+<p><strong>ctrl+alt+2</strong> abre el monitor. El comando <em>help</em> lista la ayuda.
+<strong>ctrl+alt+1</strong> para volver al modo en el que hayamos lanzado la VM(gráfico/texto). <code class="docutils literal notranslate"><span class="pre">q|quit</span></code> cierra qemu en modo monitor.</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-img info /path/to/img.qcow2
+</pre></div>
+</div>
+<p>Éste comando lista las capturas que hayamos tomado. Si no establecemos Id o tag durante la captura con <code class="docutils literal notranslate"><span class="pre">(qemu</span> <span class="pre">)savevm</span> <span class="pre">id/tag</span></code>, es creado un nuevo archivo.</p>
+</section>
+<section id="captura-externa">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Captura externa</a><a class="headerlink" href="#captura-externa" title="Link to this heading"></a></h3>
+<p>Al tomar la captura se almacena el estado de disco en un archivo. En ese punto, la imagen se convierte a sólo lectura(<em>base</em>) y, un nuevo archivo(<em>overlay</em>) recogerá los <em>deltas</em> del <em>estado</em> guardado.</p>
+<p><strong>Captura externa de disco:</strong>
+La captura de disco, es guardada en un archivo y, <em>delta</em> hasta la captura, <em>seguido</em> en uno nuevo, con formato qcow2. Puede ser tomada en <em>vivo</em> o con la máquina apagada.</p>
+<ul class="simple">
+<li><p>libvirt: esta librería, usa el comando de shell <em>transaction</em>, durante la carrera del SUPUESTO.</p></li>
+<li><p>libvirt: usa el comando de cónsola <code class="docutils literal notranslate"><span class="pre">qemu-img</span></code> cuando el SUPUESTO está apagado.</p></li>
+</ul>
+<p><strong>Punto de guardado externo del sistema:</strong>
+Aquí, el estado de disco del SUPUESTO será guardado en un archivo, su <em>RAM</em> y el estado del dispositivo serán almacenados en un nuevo archivo.</p>
+</section>
+<section id="estado-de-la-vm">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">Estado de la VM</a><a class="headerlink" href="#estado-de-la-vm" title="Link to this heading"></a></h3>
+<p>Guarda la <em>RAM</em> y el estado del dispositivo de un supuesto en carrera, sin embargo, no el estado de disco; a un archivo. Así, podrá ser restaurado más tarde. El proceso es similar a la hibernación de sistema.</p>
+<blockquote>
+<div><p><strong>nota:</strong> el estado de disco, debería permanecer sin modificar,
+durante el tiempo de
+restauración.</p>
+</div></blockquote>
+</section>
+<section id="creando-capturas">
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">Creando capturas</a><a class="headerlink" href="#creando-capturas" title="Link to this heading"></a></h3>
+<p>Mediante el uso de una <em>captura externa</em>, una nueva imagen(<strong>overlay</strong>), es creada para facilitar la escritura del <em>supuesto</em>. La imagen previa se convierte en <em>captura</em>.</p>
+<p><strong>Crear capturas internas de disco</strong>
+Dada la máquina <code class="docutils literal notranslate"><span class="pre">myVm.file</span></code>, es posible crear una captura con el siguiente comando de línea:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># virsh snapshot-create-as myVm.file capt1 descripción-deCaptura</span>
+</pre></div>
+</div>
+<p>Funciona de la misma forma con o sin la <em>VM</em> encendida. Se añade una breve descripción. Ahora sería oportuno listar y revisar los datos:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># virsh snapshot-list myVm</span>
+<span class="c1"># qemu-img info /far/beyondThe/su/myVm.qcow2</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">qemu-img</span> <span class="pre">info</span></code> arroja información con detalle, sobre la captura interna.</p>
+<p><strong>Crear capturas externas de disco</strong>
+Primero es listado el dispositivo de bloque asociado a la supuesta.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># virsh domblklist myVm-base &lt;- domain block list</span>
+</pre></div>
+</div>
+<p>A continuación es creada la captura, con la supuesta en carrera.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># virsh snapshot-create-as --domain myVm-base capt1 capt1-desc \</span>
+<span class="o">--</span><span class="n">disk</span><span class="o">-</span><span class="n">only</span> <span class="o">--</span><span class="n">diskspec</span> <span class="n">vda</span><span class="p">,</span><span class="n">snapshot</span><span class="o">=</span><span class="n">external</span><span class="p">,</span><span class="n">file</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">capt</span><span class="o">-</span><span class="n">de</span><span class="o">-</span><span class="n">myVm</span><span class="o">-</span><span class="n">base</span><span class="o">.</span><span class="n">qcow2</span> \
+<span class="o">--</span><span class="n">atomic</span>
+</pre></div>
+</div>
+<p>La shell devuelve algo parecido a: <code class="docutils literal notranslate"><span class="pre">Domain</span> <span class="pre">snapshot</span> <span class="pre">capt1</span> <span class="pre">created</span></code> Es entonces cuando la imagen de disco original myVm-base es convertida a un <code class="docutils literal notranslate"><span class="pre">backing_file</span></code>. Por último. volvemos a listar el dispositivo de bloque, mediante la instrucción:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># virsh domblklist myVM-base</span>
+</pre></div>
+</div>
+</section>
+<section id="proceso-de-reversion">
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Proceso de reversión</a><a class="headerlink" href="#proceso-de-reversion" title="Link to this heading"></a></h3>
+<p>Revertir a un estado de <em>captura interna</em>, es posible; ya sea sobre un punto de guardado o disco.
+Esta característica podría sufrir cambios en sucesivas versiones de la aplicación.
+Para revertir a una cpatura llamada capt1 de myVm1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># virsh snapshot-revert --domain myVm1 capt1</span>
+</pre></div>
+</div>
+<p>Revertir a un estado de <em>captura de disco externa</em>, mediante <code class="docutils literal notranslate"><span class="pre">snapshot-revert</span></code> es algo más complicado, pués envuelve procesos algo complicados, como la negociación entre archivos de captura adicionales. Esto sería mezclar la <em>imagen base</em> con la última caprura, o al contrario, mezclar la última captura en la <em>imagen base</em>.</p>
+<p>Dicho esto, existen un par de formas de tratar con archivos de capturas externas. Mezclándolas, reduciríamos la <em>cadena</em> de capturas de imagen de disco, esto podŕia realizarse con comandos como <code class="docutils literal notranslate"><span class="pre">blockpull</span></code> o <code class="docutils literal notranslate"><span class="pre">blockcommit</span></code>, explicado a continuación. Cabe mencionar, que el equipo de desarrollo de <strong>Qemu</strong> continua trabajando en el desarrollo de estas y otras características de la aplicación.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>base – capt1 – capt2
+</pre></div>
+</div>
+<p>Esta figura expresa qué es la cadena de capturas.</p>
+</section>
+<section id="confluencia-en-las-capturas">
+<h3><a class="toc-backref" href="#id21" role="doc-backlink">Confluencia en las capturas</a><a class="headerlink" href="#confluencia-en-las-capturas" title="Link to this heading"></a></h3>
+<p>Las capturas externas, son icreiblemente útiles. Pero cuando tenemos un puñado de ellas, llegan los problemas, al tratar de gestionar todos estos archivos individuales. Más tarde, podríamos querer mezclar, algunos de estos  archivos de captura ( tanto <em>backing-files con overlays, o al contrario</em> ), para reducir la distancia de la cadena de imagenes. Para conseguir esto, hay dos mecanismos:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">blockcommit</span></code>: mezcla los datos desde la última captura <em>dentro</em> la base. En otras palabras; mezcla los <em>overlays</em> dentro de los <em>backing-files</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blockpull</span></code>: llena una imagen de disco con datos desde su <em>backing-file</em>, o mezcla los datos desde la base a la última captura. Esto es, mezcla el <em>backing</em> con el <em>overlay</em>.</p></li>
+</ul>
+</section>
+<section id="aprovado-de-bloque">
+<h3><a class="toc-backref" href="#id22" role="doc-backlink">Aprovado de bloque</a><a class="headerlink" href="#aprovado-de-bloque" title="Link to this heading"></a></h3>
+<p>La aceptación de bloque, permite mezclar desde la última captura de imagen, a una imagen <em>base</em>, situada en un lugar anterior de la cadena. Es decir, permite mezclar los <em>overlays</em> dentro de los <em>backing-files</em>. Una vez la operación de bloque ha terminado, cualquier otra parte, apuntado a la última captura; apuntará ahora a la <em>base</em>.
+Esto resulta útil para disminuir(colapsar o reducir) la longitud de la cadena, depués de que tomen efecto, distintas capturas externas.</p>
+<p>Tenemos la imagen base llamada <em>base-raíz</em>; la cúal despliega una cadena de imagen de disco, con cuatro capturas externas. Con <em>activa</em> o <em>capa-activa</em>, nos refierimos a la captura, donde sucede la escritura
+de la <em>supuesta</em>. Hay unas pocas alternativas donde la resultante cadena de imágenes, lleven a usar el <em>aprovado de bloque</em>:</p>
+<ol class="arabic simple">
+<li><p>Los datos de <code class="docutils literal notranslate"><span class="pre">capt-1,</span> <span class="pre">capt-2,</span></code> y <code class="docutils literal notranslate"><span class="pre">capt-3</span></code>, pueden ser mezclados con <code class="docutils literal notranslate"><span class="pre">base-raíz</span></code>. Resultando en que la <code class="docutils literal notranslate"><span class="pre">base-raíz</span></code> se convierte en el <em>backing-file</em> de la imagen <em>activa</em>, y por tanto, invalidando <code class="docutils literal notranslate"><span class="pre">capt-1,capt-2</span></code> y <code class="docutils literal notranslate"><span class="pre">capt-3</span></code>.</p></li>
+<li><p>Los datos de  <code class="docutils literal notranslate"><span class="pre">capt-1,</span> <span class="pre">y</span></code> capt-2 <code class="docutils literal notranslate"><span class="pre">pueden</span> <span class="pre">ser</span> <span class="pre">mezclados</span> <span class="pre">en</span></code> base-raíz <code class="docutils literal notranslate"><span class="pre">;</span> <span class="pre">resolviendo</span> <span class="pre">a</span></code> base-raíz <code class="docutils literal notranslate"><span class="pre">como</span> <span class="pre">el</span> <span class="pre">_backing-file_</span> <span class="pre">de</span></code> capt-3 <code class="docutils literal notranslate"><span class="pre">,</span> <span class="pre">e</span> <span class="pre">invalidando</span> <span class="pre">al</span> <span class="pre">mismo</span> <span class="pre">tiempo</span></code> capt-1 <code class="docutils literal notranslate"><span class="pre">y</span></code> capt-2.</p></li>
+<li><p>Los datos de <code class="docutils literal notranslate"><span class="pre">capt-1</span></code> son mezclados con <code class="docutils literal notranslate"><span class="pre">base-raíz</span></code>; resultando  en que <code class="docutils literal notranslate"><span class="pre">base-raíz</span></code>  se convierte en el <em>backing-file</em> de <code class="docutils literal notranslate"><span class="pre">capt-2</span></code>, e invalidando  igualmente <code class="docutils literal notranslate"><span class="pre">capt-1</span></code>.</p></li>
+<li><p>Los datos de <code class="docutils literal notranslate"><span class="pre">capt-2</span></code> son mezclados con <code class="docutils literal notranslate"><span class="pre">capt-1</span></code>; dando como  resultado que el  <em>backing-file</em>, es ahora <code class="docutils literal notranslate"><span class="pre">capt-3</span></code>, e invalidando <code class="docutils literal notranslate"><span class="pre">capt-2</span></code>.</p></li>
+<li><p>Los datos de <code class="docutils literal notranslate"><span class="pre">capt-3</span></code> se mezclan con <code class="docutils literal notranslate"><span class="pre">capt-2</span></code>; resultando que  <code class="docutils literal notranslate"><span class="pre">capt-2</span></code> advierte al <em>backing-file</em>, como la imagen activa, e invalida <code class="docutils literal notranslate"><span class="pre">capt-3</span></code>.</p></li>
+<li><p>Los datos de <code class="docutils literal notranslate"><span class="pre">capt-2</span></code> y <code class="docutils literal notranslate"><span class="pre">capt-3</span></code> son mezclados dentro de  <code class="docutils literal notranslate"><span class="pre">capt-1</span></code> convirtiéndose en  el <em>backing-file</em> de la <em>capa activa</em>, anulando <code class="docutils literal notranslate"><span class="pre">capt-2</span></code> y  <code class="docutils literal notranslate"><span class="pre">capt-3</span></code>.</p></li>
+</ol>
+<p>También es posible mezclar los datos de la <em>capa activa(último overlay)</em>, en su <em>backing-file</em>. Ésta  uncionalidad será incorporada a <strong>Qemu</strong>, en versiones posteriores, posibilitando el uso de la opción <code class="docutils literal notranslate"><span class="pre">top</span></code> como capa activa por defecto.</p>
+</section>
+<section id="borrado-de-capturas">
+<h3><a class="toc-backref" href="#id23" role="doc-backlink">Borrado de capturas</a><a class="headerlink" href="#borrado-de-capturas" title="Link to this heading"></a></h3>
+<p>Borrar <strong>capturas internas</strong> sea en vivo o con la máquina apagada, no es complicado:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># virsh snapshot-delete --domain myVm --snapshotname snap6</span>
+</pre></div>
+</div>
+<p>…alternativamente</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># virsh snapshot-delete myVm snap6</span>
+</pre></div>
+</div>
+<p>Mencionar aquí, que se está borrando la última captura, por lo que el vínculo con la <em>base</em> no se rompe. Es de suponer, que si varias capturas han sido creadas, el orden en que borramos éstas, es importante. Alternativamente podemos corromper tranquilamente la imagen y pasar a otra cosa …</p>
+<p>Libvirt aún no tiene la capacidad de borrar capturas externas, pero pueden llevarse a cabo con <code class="docutils literal notranslate"><span class="pre">qemu-img</span></code>.</p>
+<p>Supongamos; para no perder la costumbre, que se han tomado un par de capturas, sin aplicarse aún ningúna aceptación de cambio(commit):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-img info /path/to/somewereIn/Overlays/test_over.qcow2
+image: /path/to/somewereIn/Overlays/test_over.qcow2
+file format: qcow2
+virtual size: 3.0G (3221225472 bytes)
+disk size: 808M
+cluster_size: 65536
+backing file: /path/to/image_file.raw
+Snapshot list:
+IDTAG VM SIZEDATE VM CLOCK
+1 tagtag 273M 2016-07-30 11:51:54 00:03:51.796
+2 idid 273M 2016-07-30 11:52:10 00:04:01.967
+Format specific information:
+compat: 1.1
+lazy refcounts: false
+refcount bits: 16
+corrupt: false
+</pre></div>
+</div>
+<p>La línea importante es la que dice <code class="docutils literal notranslate"><span class="pre">backing</span> <span class="pre">file</span></code>, hacia mitad de párrafo.</p>
+<p>Así que aquí no hay <em>problema</em>, podrían borarse ambas capturas, en cualquier orden. Pero son capturas internas y; sencillamente, no puden ser borradas.</p>
+<p>Borrar <strong>capturas externas</strong> Con la máquina apagada, de dos formas, puede realizarse la tarea:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">base</span> <span class="o">&lt;-</span> <span class="n">capt1</span> <span class="o">&lt;-</span> <span class="n">capt2</span> <span class="o">&lt;-</span> <span class="n">capt3</span>
+</pre></div>
+</div>
+<p>La flecha se lee …capt3 tiene su base en capt2 (capt==snapshot)</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">base</span> <span class="pre">&lt;-</span> <span class="pre">sn1</span> <span class="pre">&lt;-</span> <span class="pre">sn3</span></code> (copiando sn2 en sn1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">base</span> <span class="pre">&lt;-</span> <span class="pre">sn1</span> <span class="pre">&lt;-</span> <span class="pre">sn3</span></code> (copiando sn2 en sn3)</p></li>
+</ol>
+</section>
+<section id="metodo-1">
+<h3><a class="toc-backref" href="#id24" role="doc-backlink">Metodo 1</a><a class="headerlink" href="#metodo-1" title="Link to this heading"></a></h3>
+<p>El diagrama muestra la intención de hacer <em>desaparecer</em> la captura 2, pero no sin antes <em>aceptar</em> los cambios en alguna de las capturas contiguas. Igualmente, es necesario que sn1 no sea la <em>base</em> de ninguna otra captura, de lo contrario tendríamos una base a la que han sido aplicados cambios, donde otras capturas esperan encontrarla sin esos cambios, consecuentemente los datos se malograían.</p>
+<p>La implentación de la librería <em>libvirt</em> está aún en desarrollo, por lo que parte de su funcionalidad no se  encuentra disponible, al menos en la rama estable. En Debian los paquetes necesarios son libvirt-bin y  libvirt-daemon, pero es probable romper el sistema si se instalan desde ésta rama(alternativa <em>filo  sangrante?</em>). Actualizaré la sección, cuando el problema con estos paquetes sea resuelto. Puede pasar mucho tiempo. 28-07-16. Herramientas como <em>transaction</em> <em>virsh</em> no están disponibles. <a class="reference external" href="https://kashyapc.fedorapeople.org/virt/lc-2012/snapshots-handout.html">Manual snapShots</a> – en inglés.</p>
+</section>
+</section>
+<section id="con-o-sin-conexion-a-internet">
+<h2><a class="toc-backref" href="#id25" role="doc-backlink">CON O SIN CONEXION A INTERNET</a><a class="headerlink" href="#con-o-sin-conexion-a-internet" title="Link to this heading"></a></h2>
+<p>Seguramente no seré la única persona que esté tratando de instalar un windows en una GUEST, a mi me dió algunos problemas con los dispositivos y drivers para la NIC. Que he solucionado añadiendo como apendice, la opción que detalla la línea de comando un poco más abajo.</p>
+<p>Da la casualidad que mi tarjeta de red es exactamente la que instala qemu, una Realtek, así que desconozco si a otras personas les será esto de ayuda.
+Pero para que conste el dato: cuando instalamos el sistema operativo en la guest, no hay que indicar ningún comando especial para tener acceso a internet. Por defecto, qemu establece el modo usuario.</p>
+<p>El dispositivo que ha quedado instalado en mi GUEST: <em>Realtec RTL8139 family PCI Fast ethernet NIC</em> (y su draiver con nombre similar).</p>
+<p>En caso de que este dispositivo no funcione lo mejor es echar mano del manual de qemu-system-tu-<em>arquitectura-de-maquina</em> y mirar que alternativas hay:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">net</span> <span class="n">nic</span><span class="p">[,</span><span class="n">vlan</span><span class="o">=</span><span class="n">n</span><span class="p">][,</span><span class="n">macaddr</span><span class="o">=</span><span class="n">mac</span><span class="p">][,</span><span class="n">model</span><span class="o">=</span><span class="nb">type</span><span class="p">]</span> <span class="p">[,</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">][,</span><span class="n">addr</span><span class="o">=</span><span class="n">addr</span><span class="p">][,</span><span class="n">vectors</span><span class="o">=</span><span class="n">v</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition-man-qemu admonition">
+<p class="admonition-title">Man Qemu</p>
+<p>Create a new Network Interface Card and connect it to VLAN n (n = 0 is the default). The NIC is an e1000 by default on the PC target. Optionally, the MAC address can be changed to mac, the device address set to addr (PCI cards only), and a name can be assigned for use in monitor commands. Optionally, for PCI cards, you can specify the number v of MSI-X vectors that the card should have; this option currently only affects virtio cards; set v = 0 to disable MSI-X. If no -net option is specified, a single NIC is created. QEMU can emulate several different models of network card. Valid values for type are “virtio”, “i82551”, “i82557b”, “i82559er”, “ne2k_pci”, “ne2k_isa”, “pcnet”, “rtl8139”, “e1000”, “smc91c111”, “lance” and “mcf_fec”. Not all devices are supported on all targets. Use “-net nic,model=help” for a list of available devices for your target.</p>
+</div>
+<p>Añadiendo la opcion -net parametro <em>nic</em>, qemu instala una targeta virtual de red genérica. De hecho, el manual que sugiere gentoo, es el que me ha funcionado a mi. La versión de qemu que corre mi máquina es la 2.6, es posible que en sucesivas actualizaciones vemamos otros cambios.</p>
+<p>El comando quedaría algo así:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-system-(arch) -net nic,model8139 ...
+</pre></div>
+</div>
+<p>Hay dos formas básicas de dotar a la VM con conexión a internet:</p>
+<ul class="simple">
+<li><p>Modo usuario (slirp)</p></li>
+<li><p>Modo Tap</p></li>
+</ul>
+<section id="modo-usuario">
+<h3><a class="toc-backref" href="#id26" role="doc-backlink">Modo usuario:</a><a class="headerlink" href="#modo-usuario" title="Link to this heading"></a></h3>
+<p>Un problema con el que nos encontraremos, es que la tarjeta virtual que estamos creando tiene asociado otro compenente, una especie de CTR o conector que debe ser único para cada GEST. Esto puede resolverse asociando el dispositivo al conector, mediante un ID único. Habrá que constituir una nueva interfase de red, sobre la que se realizarán las conexiones, tanto del Host como del Guest, una <em>Vlan</em>.</p>
+<dl class="simple">
+<dt><strong>Vinculo a VLAN</strong></dt><dd><p>…Los administradores de red configuran las VLAN mediante software en lugar de hardware, lo que las hace extremadamente fuertes. <a class="footnote-reference brackets" href="#f2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-&lt;arch&gt; -net nic,vlan=id -net user,vlan=id
+</pre></div>
+</div>
+<p>Cada uno de los dispositivos de red debe asociarse a su conector único.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">net</span> <span class="n">nic</span><span class="p">,</span><span class="n">vlan</span><span class="o">=</span><span class="n">id1</span> <span class="o">-</span><span class="n">net</span> <span class="n">user</span><span class="p">,</span><span class="n">vlan</span><span class="o">=</span><span class="n">id2</span> <span class="o">**</span><span class="n">NO</span> <span class="n">FUNCIONARÁ</span><span class="o">**</span>
+</pre></div>
+</div>
+</section>
+<section id="configurar-una-mac-especifica">
+<h3><a class="toc-backref" href="#id27" role="doc-backlink">Configurar una MAC específica</a><a class="headerlink" href="#configurar-una-mac-especifica" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">netdev</span> <span class="n">user</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">mynet0</span><span class="p">,</span><span class="n">net</span><span class="o">=</span><span class="mf">192.168.76.0</span><span class="o">/</span><span class="mi">24</span><span class="p">,</span><span class="n">dhcpstart</span><span class="o">=</span><span class="mf">192.168.76.9</span>
+</pre></div>
+</div>
+<p>De esta forma la MAC de la VM tendrá un identificador por defecto. Esto puede ser un inconveniente, si corremos mas de una máquina, y queremos tener acceso a internet en todas ellas, puesto que la aplicación genera siempre la misma MAC.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-system-i386 -net nic,macaddr=52:54:XX:XX:XX:XX -net vde disk_image
+</pre></div>
+</div>
+<p>Para que esto no ocurra debe indicarse un identificador. Reempaza las “X” con números hexadecimales arbitrarios, pero recuerda conservar las primeras dos cifras, que hacen referencia al <em>id</em> de fabricante(qemu).</p>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>Otra idea es probar qemu-ga. Éste es un demonio que funciona desde dentro de la SUPUESTA, así que en teoría, el host via injection/algo puede gestionar la particion de la VM, pero habrá que averiguar que tipo de  operaciones puede hacer GUEST-AGENT.</p>
+</div>
+</section>
+</section>
+<section id="el-loopback">
+<h2><a class="toc-backref" href="#id28" role="doc-backlink">El loopback</a><a class="headerlink" href="#el-loopback" title="Link to this heading"></a></h2>
+<p>La traducción de loopback significa: bucle hacia atrás(ma o meno), o ‘camino de regreso’. La idea es utilizar una partición o disco, que se encuentra fuera de la imagen de la VM. Antes de seguir, debo recordar que las  operaciones con particiones y sobre módulos que afectan directamente al <em>kernel</em>, hay que hacerlas con permisos de administrador. Por precaución, siempre es recomendable hacer este tipo de opereaciones con la VM apagada. De otra forma, se corre el riesgo de corromper los datos de la imagen.</p>
+<p>En determidas ocasiones, la máquina virtual no tiene conexión a internet. Es el caso de una instalación con Qemu. Así que la mejor forma de comunicarnos con la VM es mediante la técnica del <em>loopback</em>. Las técnicas que  describiré a continuación, pueden llevarse a cabo sobre particiones con formato de disco usease formateadas: ejem Ext3, NTFS, FAT32 etc. o sobre una imagén sin una partición en concreto.</p>
+<p>Esto quiere decir, que puede montarse una copia de “respaldo” de <em>old-games</em>, en una imagen lo suficientemente grande, sin necesidad de crear una partición dentro de la imagen. En realidad lo que ocurre, es que la partición abarca todo el disco, no significa que no haya partición, significa que todo el disco está ocupado por una única partición.
+En este “marco” qemu no tiene problema para leer la tabla de nodos de partición, porque solo hay una, con un formato determinado, Así que antes de describir las dos alternativas, quiero dejar anotado un concepto que
+puede ser aplicado a ambas técnicas: <em>montaje simple</em>. Si <em>no</em> se crea una partición en la imagen(la VM), los datos podrán ser montados sobre cualquier formato. Sin embargo, si tenemos alojadas particiones dentro de la imagen, únicamente podremos montarlas en formato raw(crudo en inglés). Esto es para que qemu pueda manejar las particiones alojadas.</p>
+<p>En este caso como trabajaremos sobre una imagen ISO, parece apropiado seguir los pasos descritos al principio del artículo. Crear la caja vaía, y escribirla en el formato apropiado. Pero como problamente no queramos lanzar otra GUEST, sino únicamente acceder al contenido del la imagem. La operación de calcular el offset de la partición, puede ser omitida <em>-ver mas adelante</em>.</p>
+<p>Esto es de lo que hablaba: el <em>montaje simple</em>. Puede determinarse mirando el contenido de la imagen:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ file imagen.iso
+imagen.iso: ISO 9660 CD-ROM filesystem data &#39;GRTMPVOL_EN&#39; (bootable)
+</pre></div>
+</div>
+<p>Vemos que únicamente contiene una partición. A continuación, tan sólo queda montar la imagen. Para esto utilizamos la aplicación <em>losetup:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ losetup /dev/loop0 /path/to/imagen.iso
+</pre></div>
+</div>
+<p>En caso de utilizar este método <em>montaje simple</em>, para evitar que el sistema nos devuelva algún mensaje de aviso, acerca de los permisos con los que se monta la unidad, podemos especificar que lo haga en modo solo lectura.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mount -o ro,loop /path/to/image.iso /mnt/point</span>
+</pre></div>
+</div>
+<div class="admonition-nota admonition">
+<p class="admonition-title">nota</p>
+<p>aquí va otra nota sobre el uso de los shasum y file, sobre la importancia de hacer las comprobaciones oportunas en cuanto a imágenes descargadas. Y un especial comentario acerca del cambio que se produce en un sha, cuando queremos montar una imagen con permisos de escritura.</p>
+</div>
+<section id="montar-un-loopback-para-comunicarnos-con-la-vm-sin-conexion">
+<h3><a class="toc-backref" href="#id29" role="doc-backlink">MONTAR UN LOOPBACK PARA COMUNICARNOS CON LA VM SIN CONEXION</a><a class="headerlink" href="#montar-un-loopback-para-comunicarnos-con-la-vm-sin-conexion" title="Link to this heading"></a></h3>
+<p>Este método es útil cuando necesitamos averiguar donde empieza la partición con la que vamos a trabajar. En el punto dos, puede verse en la última columna <em>System</em> el tipo de partición que contiene la imagen de disco. La primera es una swap, la segunda debe ser una tipo EXT.
+Qemu-img no formatea la imagen de disco, crea una imagen de disco vacía, con una formato de archivo, pero aún no  tiene partición. Esto se ve claro cuando instalamos un sistema operativo dentro de la imagen creada con qemu-img. Es el propio sistema operativo que vamos a instalar, quien crea la partición y le da formato.</p>
+<p>Solo quiero aclarar, que si creamos una imagen con qemu-img y, tratamos de copiar un archivo dentro, NUNCA  FUNCIONARÁ. Por que es como si antes de instalar el sistema operativo en nuestro host, normal(no hablo de VMs), tratásemos de meter algo en el disco duro, No chutaría nada, ni siquiera se encendería la pantalla.</p>
+<p>Link aquí a <code class="docutils literal notranslate"><span class="pre">fdisk</span> <span class="pre">dd</span> <span class="pre">gpart</span></code> crear imagenes. Calcular el <em>offset</em> antes de montar la imagen de disco.</p>
+<ol class="arabic simple">
+<li><p>Asociar el dispositivo de imagen de disco, a la partición que vayamos a montar.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tux</span><span class="nd">@venus</span><span class="p">:</span><span class="o">~&gt;</span> <span class="n">losetup</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">loop0</span> <span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">sles11sp1_base</span><span class="o">.</span><span class="n">raw</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Tamaño de sector y número de inicio de sector, de la partición a montar.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tux</span><span class="nd">@venus</span><span class="p">:</span><span class="o">~&gt;</span> <span class="n">fdisk</span> <span class="o">-</span><span class="n">lu</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">loop0</span>
+<span class="n">Disk</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">loop0</span><span class="p">:</span> <span class="mi">4294</span> <span class="n">MB</span><span class="p">,</span> <span class="mi">4294967296</span> <span class="nb">bytes</span>
+<span class="mi">255</span> <span class="n">heads</span><span class="p">,</span> <span class="mi">63</span> <span class="n">sectors</span><span class="o">/</span><span class="n">track</span><span class="p">,</span> <span class="mi">522</span> <span class="n">cylinders</span><span class="p">,</span> <span class="n">total</span> <span class="mi">8388608</span> <span class="n">sectors</span>
+<span class="n">Units</span> <span class="o">=</span> <span class="n">sectors</span> <span class="n">of</span> <span class="mi">1</span> \<span class="o">*</span> <span class="mi">512</span> <span class="o">=</span> <span class="mi">512</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nb">bytes</span>
+<span class="n">Disk</span> <span class="n">identifier</span><span class="p">:</span> <span class="mh">0x000ceca8</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Device</span> <span class="n">BootStart</span> <span class="n">EndBlocks</span> <span class="n">IdSystem</span>
+
+<span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">loop0p1</span> <span class="mi">63</span> <span class="mi">1542239</span> <span class="mi">771088</span><span class="o">+</span> <span class="mi">82</span> <span class="n">Linux</span> <span class="n">swap</span>
+<span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">loop0p2</span> \<span class="o">*</span> <span class="mi">1542240</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="mi">8385929</span> <span class="mi">3421845</span> <span class="mi">83</span> <span class="n">Linux</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>[1] Tamaño del sector.</p></li>
+<li><p>[2] Sector de inicio de la partición.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Calcular el <em>offset</em> de inicio, de la partición.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sector_size</span> <span class="o">*</span> <span class="n">sector_start</span> <span class="o">=</span> <span class="mi">512</span> <span class="o">*</span> <span class="mi">1542240</span> <span class="o">=</span> <span class="mi">789626880</span>
+</pre></div>
+</div>
+<ol class="arabic" start="4">
+<li><p>Borrar el loop y montar la partición, dentro de la imagen de disco.  Con el cálculo  del <em>offset</em> dentro del directorio ya preparado.</p>
+<p><a class="reference external" href="mailto:tux&#37;&#52;&#48;venus">tux<span>&#64;</span>venus</a>:~&gt; losetup -d /dev/loop0
+<a class="reference external" href="mailto:tux&#37;&#52;&#48;venus">tux<span>&#64;</span>venus</a>:~&gt; mount -o loop,offset=789626880
+/images/sles11sp1_base.raw /mnt/sles11sp1/
+<a class="reference external" href="mailto:tux&#37;&#52;&#48;venus">tux<span>&#64;</span>venus</a>:~&gt; ls -l /mnt/sles11sp1/
+total 112
+drwxr-xr-x 2 root root 4096 Nov 16 10:02 bin
+drwxr-xr-x 3 root root 4096 Nov 16 10:27 boot
+drwxr-xr-x 5 root root 4096 Nov 16 09:11 dev […]
+drwxrwxrwt 14 root root 4096 Nov 24 09:50 tmp
+drwxr-xr-x 12 root root 4096 Nov 16 09:16 usr
+drwxr-xr-x 15 root root 4096 Nov 16 09:22 var</p>
+</li>
+<li><p>Copiar uno o mas archivos dentro de la partición montada y desmontar  al terminar.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tux</span><span class="nd">@venus</span><span class="p">:</span><span class="o">~&gt;</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">X11</span><span class="o">/</span><span class="n">xorg</span><span class="o">.</span><span class="n">conf</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">sles11sp1</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">tmp</span>
+<span class="n">tux</span><span class="nd">@venus</span><span class="p">:</span><span class="o">~&gt;</span> <span class="n">ls</span> <span class="o">-</span><span class="n">l</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">sles11sp1</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">tmp</span>
+<span class="n">tux</span><span class="nd">@venus</span><span class="p">:</span><span class="o">~&gt;</span> <span class="n">umount</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">sles11sp1</span><span class="o">/</span>
+</pre></div>
+</div>
+</section>
+<section id="loopback-para-una-imagen-usando-moduos-en-el-kernel">
+<h3><a class="toc-backref" href="#id30" role="doc-backlink">Loopback para una imagen (usando moduos en el kernel)</a><a class="headerlink" href="#loopback-para-una-imagen-usando-moduos-en-el-kernel" title="Link to this heading"></a></h3>
+<p>Aquí primero preparamos el dispositivo que será leído por el módulo de kernel NBD. Para ello debemos tener cargado dicho módulo o cargarlo en todo caso. Recuerda que para llevar a cabo este tipo de operaciones, debemos escalar privilegios.</p>
+<p>Primero comprobamos si tenemos instalados los módulos que vamos a usar … normalmente en /lib/… (editar) Comprobar si el módulo está cargado o no, en el sistema. Puede determinarse con:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ lsmod |cat -n |grep modulo-en-cuestion
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>La primera instrucción lista los módulos cargados en el kernel.</p></li>
+<li><p>Através de tubería cuantificamos su número, por razones de stress.</p></li>
+<li><p>y le pasamos un filtro grep, para concretar la salida.</p></li>
+</ul>
+<p>Si el modulo no está cargado, lo cargamos dándole un parámetro <code class="docutils literal notranslate"><span class="pre">max_part</span></code> para poder acceder a los nodos de cada una de las particiones. En caso de no iniciar la variable, como el valor por defecto es 0(cero) podrá accederse al disco, pero no a los nodos de ninguna de las particiones</p>
+<p>Esto puede hacerse en una misma línea(root):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># modprobe nbd max_part=N</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>‘N’ representa el número de particiones que tiene la imagen que vamos a montar Por lo que teniendo esto en  cuenta, debe ajustarse con criterio. Si se trata de una imagen, sin una partición especifica, puede omitirse el parametro.</p></li>
+</ul>
+<p>Si el módulo está cargado, lo mejor es descargarlo y cargarlo de nuevo, iniciando la variable. En Debian esto parece que tiene un bug. Cuando comprobamos la información del módulo(antes y despues de la asignación):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># modinfo nbd</span>
+</pre></div>
+</div>
+<p>Si está cargado, lo descargamos:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># rmmod nbd</span>
+</pre></div>
+</div>
+<p>…vemos que aparece la ĺinea, pero no el entero! parece un bug. Es la segunda línea empezando por abajo.</p>
+<ul class="simple">
+<li><p><em>nota:</em> deberías comprobar si en el mailing de Debian se ha escrito el ‘report’.</p></li>
+</ul>
+<p><strong>antes:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span><span class="p">:</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">algo</span><span class="o">-</span><span class="n">aqui</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">block</span><span class="o">/</span><span class="n">nbd</span><span class="o">.</span><span class="n">ko</span>
+<span class="n">license</span><span class="p">:</span> <span class="n">GPL</span>
+<span class="n">description</span><span class="p">:</span> <span class="n">Network</span> <span class="n">Block</span> <span class="n">Device</span>
+<span class="n">depends</span><span class="p">:</span>
+<span class="n">intree</span><span class="p">:</span> <span class="n">Y</span>
+<span class="n">vermagic</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">hash</span><span class="o">&gt;</span> <span class="n">SMP</span> <span class="n">mod</span><span class="o">-</span><span class="n">unload</span> <span class="n">modversions</span> <span class="mi">086</span>
+<span class="n">param</span><span class="p">:</span> <span class="n">nbds</span><span class="o">-</span><span class="nb">max</span><span class="p">:</span><span class="n">number</span> <span class="n">of</span> <span class="n">network</span> <span class="n">block</span> <span class="n">devices</span> <span class="n">to</span> <span class="n">initialize</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">16</span><span class="p">)</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">param</span><span class="p">:</span> <span class="nb">max</span><span class="o">-</span><span class="n">part</span><span class="p">:</span><span class="n">number</span> <span class="n">of</span> <span class="n">partitions</span> <span class="n">per</span> <span class="n">device</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">param</span><span class="p">:</span> <span class="n">debugflags</span><span class="p">:</span><span class="n">flags</span> <span class="k">for</span> <span class="n">controlling</span> <span class="n">debug</span> <span class="n">output</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>después:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># modprobe nbd max_part=8</span>
+<span class="c1"># modinfo nbd</span>
+<span class="n">filename</span><span class="p">:</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">algo</span><span class="o">-</span><span class="n">aqui</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">block</span><span class="o">/</span><span class="n">nbd</span><span class="o">.</span><span class="n">ko</span>
+<span class="n">license</span><span class="p">:</span> <span class="n">GPL</span>
+<span class="n">description</span><span class="p">:</span> <span class="n">Network</span> <span class="n">Block</span> <span class="n">Device</span>
+<span class="n">depends</span><span class="p">:</span>
+<span class="n">intree</span><span class="p">:</span><span class="n">Y</span>
+<span class="n">vermagic</span><span class="p">:</span><span class="n">algo</span><span class="o">-</span><span class="n">aqui</span> <span class="n">SMP</span> <span class="n">mod_unload</span> <span class="n">modversions</span> <span class="mi">086</span>
+<span class="n">parm</span><span class="p">:</span><span class="n">nbds_max</span><span class="p">:</span><span class="n">number</span> <span class="n">of</span> <span class="n">network</span> <span class="n">block</span> <span class="n">devices</span> <span class="n">to</span> <span class="n">initialize</span><span class="p">(</span><span class="n">default</span><span class="p">:</span><span class="mi">16</span><span class="p">)(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">parm</span><span class="p">:</span><span class="n">max_part</span><span class="p">:</span><span class="n">number</span> <span class="n">of</span> <span class="n">partitions</span> <span class="n">per</span> <span class="n">device</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">parm</span><span class="p">:</span><span class="n">debugflags</span><span class="p">:</span><span class="n">flags</span> <span class="k">for</span> <span class="n">controlling</span> <span class="n">debug</span> <span class="n">output</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Este comando identifica la imagen, como un dispositivo de bloque llamado <code class="docutils literal notranslate"><span class="pre">/dev/nbd0</span></code>, y la partición dentro de éste, como sub-dispositivo, que sería: <code class="docutils literal notranslate"><span class="pre">/dev/nbd0p1</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qemu</span><span class="o">-</span><span class="n">nbd</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nbd0</span> <span class="n">_vdi</span><span class="o">-</span><span class="n">file_</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>CARGAMOS EL MÓDULO</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># modprobe nbd -- Esto carga el módulo de no estar cargado.</span>
+<span class="c1"># modprobe nbd max_part=16</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>A continuación preparamos el dispositivo donde montaremos la unidad. Este proceso inicia una especie de servidor. Realmente la carga en memoria es mínima, es decir, no es como si lanzásemos Apache.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># qemu-nbd -c /dev/nbd0/ /path/to/vhd_file -- Esto conecta el dispositivo.</span>
+<span class="c1"># partprobe /dev/nbd0 -- indica al SO los cambios que se han llevado</span>
+  <span class="n">a</span> <span class="n">cabo</span> <span class="n">en</span> <span class="n">la</span> <span class="n">tabla</span> <span class="n">de</span> <span class="n">particiones</span><span class="o">.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Este último paso, es el que realmente monta la unidad virtual en el sistema.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># mount /dev/nbd0p1 /imagen/a/montar(vhd en este caso!!)
+$ umount /imagen/montada(vhd) -- Desmontamos imagen.
+# qemu-nbd -d /dev/nbd0 -- desconectamos dispositivo.
+</pre></div>
+</div>
+</section>
+<section id="lanzar-la-vm-apuntando-al-servidor-nbd">
+<h3><a class="toc-backref" href="#id31" role="doc-backlink">Lanzar la VM apuntando al servidor NBD</a><a class="headerlink" href="#lanzar-la-vm-apuntando-al-servidor-nbd" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ QEMU -object tls-creds-x509,id=tls0,dir=$HOME/.pki/qemutls,endpoint=client \
+-drive driver=nbd,host=localhost,port=10809,tls-creds=tls0 \
+/path/to/img
+</pre></div>
+</div>
+<p>Ahora podríamos ejecutar cfdisk en el dispositivo de bloque, y montarlo como partición individual.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mount /dev/nbd0p1 /mnt -- &quot;/mnt&quot; es el punto de montaje.</span>
+</pre></div>
+</div>
+<p>Al terminar podemos desmontar la unidad y el dispositivo, así.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ unmount /mnt
+# qemu-nbd -d /dev/nbd0
+</pre></div>
+</div>
+</section>
+<section id="kvm-visrtualizacion-por-hardware">
+<h3><a class="toc-backref" href="#id32" role="doc-backlink">KVM - Visrtualización por hardware</a><a class="headerlink" href="#kvm-visrtualizacion-por-hardware" title="Link to this heading"></a></h3>
+</section>
+</section>
+<section id="atajos-del-teclado">
+<h2><a class="toc-backref" href="#id33" role="doc-backlink">ATAJOS DEL TECLADO</a><a class="headerlink" href="#atajos-del-teclado" title="Link to this heading"></a></h2>
+<p>Son combinaciones de teclas, para acceder a funcionalidades própias de Qemu:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ctrl</span> <span class="pre">+</span> <span class="pre">alt</span> <span class="pre">+</span> <span class="pre">tecla</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ctrl+alt</span></code>: acopla el ratón a la ventanta donde corremos qemu. Pero también las funciones de acceso rápido(teclas vinculadas). Éstas, toman los valores de la máquina en carrera. ejem:</p></li>
+</ul>
+<p>VM linux: <code class="docutils literal notranslate"><span class="pre">ctrl+alt+suprimir</span></code>, cierra sessión.
+VM windows: <code class="docutils literal notranslate"><span class="pre">ctrl+alt+surpimir</span></code>, lanza el administrador de procesos.</p>
+<p>Es decir, hereda las funciones relacionadas con dispositivos de entrada, del proceso emulado/virtualizado.
+- <code class="docutils literal notranslate"><span class="pre">ctrl+alt+f</span></code>: maximiza/desmaximiza ventana de la VM.
+- <code class="docutils literal notranslate"><span class="pre">ctrl+alt+u</span></code>: Recupera el tamaño de la ventana a su dimensión original.
+- <code class="docutils literal notranslate"><span class="pre">ctrl+alt+1</span></code>: volver al modo en el que hayamos lanzado la VM(gráfico/texto).
+- <code class="docutils literal notranslate"><span class="pre">ctrl+alt+2</span></code>: Monitor de qemu.
+- <code class="docutils literal notranslate"><span class="pre">ctrl+alt+3</span></code>: Cónsola en serie.
+- <code class="docutils literal notranslate"><span class="pre">ctrl+alt+4</span></code>: Cónsola en paralelo.
+- <code class="docutils literal notranslate"><span class="pre">ctrl+alt+avance</span></code> página: control de panatalla en qemu monitor y cónsolas.
+- <code class="docutils literal notranslate"><span class="pre">ctrl+alt+retroceso</span></code> página: control de panatalla en qemu monitor y cónsolas.
+- <code class="docutils literal notranslate"><span class="pre">ctrl+alt+arriba</span></code>: control de panatalla en qemu monitor y cónsolas.
+- <code class="docutils literal notranslate"><span class="pre">ctrl+alt+abajo</span></code>: control de panatalla en qemu monitor y cónsolas.</p>
+<section id="comandos-del-monitor-qemu">
+<h3><a class="toc-backref" href="#id34" role="doc-backlink">Comandos del monitor Qemu</a><a class="headerlink" href="#comandos-del-monitor-qemu" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>commit device|all: Aplica cambios en imagenes de disco (capturas).</p></li>
+<li><p>info subcommand: información de la VM.</p></li>
+<li><p>q|quit: cierra qemu.</p></li>
+<li><p>eject[-f] dispositivo: expulsa un soportes en la supuesta, cd/flopy(probar HD?)</p></li>
+<li><p>change device filename: cambia uno de los soportes de la VM. CD y floppy (HD?)</p></li>
+<li><p>screendump filename: captura de pantalla.</p></li>
+<li><p>savevm ta|id: guarda recupera y borra instantáneas de la supuesta.</p></li>
+<li><p>loadvm tag|id: guarda recupera y borra instantáneas de la supuesta.</p></li>
+<li><p>delvm tag|id: guarda recupera y borra instantáneas de la supuesta.</p></li>
+<li><p>stop / ccont: detiene y reanuda la emulación.</p></li>
+<li><p>sendkey keys: envía secuencia de teclas a la VM. Ejem. inicio sesion Windows.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">system_reset</span></code>: equivale a reset(reboot).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">system_powerdown</span></code>: equivale a apagado(shutdown).</p></li>
+</ul>
+</section>
+</section>
+<section id="agradecimientos">
+<h2><a class="toc-backref" href="#id35" role="doc-backlink">AGRADECIMIENTOS</a><a class="headerlink" href="#agradecimientos" title="Link to this heading"></a></h2>
+<p><strong>Documentation/Networking:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://wiki.qemu.org/Documentation/Networking">QEMU</a></p></li>
+<li><p>Virtualization Api <a class="reference external" href="http://libvirt.org/index.html">Libvirt</a></p></li>
+<li><p>Manual Capturas(inglés) <a class="reference external" href="https://kashyapc.fedorapeople.org/virt/lc-2012/snapshots-handout.html">snapshots-handout</a></p></li>
+<li><p>ArchWiki <a class="reference external" href="https://wiki.archlinux.org/index.php/QEMU#qxl">QEMU</a></p></li>
+<li><p>Departamento de informática de IPC <a class="reference external" href="http://elpuig.xeill.net/Members/vcarceler/articulos/qemu">IPC</a></p></li>
+<li><p>Suse <a class="reference external" href="https://www.suse.com/documentation/sles11/book_kvm/data/cha_qemu_guest_inst_qemu-img.html">QEMU</a></p></li>
+<li><p>Debian <a class="reference external" href="https://wiki.debian.org/es/NetworkConfiguration#C.2BAPM-mo_utilizar_VLAN_.28dot1q.2C_802.1q.2C_trunk.29_.28Etch.2C_Lenny.29">VLAN</a></p></li>
+<li><p>IEEE 802.1Q <a class="reference external" href="https://es.wikipedia.org/wiki/IEEE_802.1Q">Wikia</a></p></li>
+<li><p>Javier Cristóbal  <a class="reference external" href="http://markdown.es/sintaxis-markdown/">Markdowns y otras recomendaciones</a> -</p></li>
+<li><p><a class="reference external" href="http://limni.net/blog/">productividad mac</a></p></li>
+</ul>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://es.wikipedia.org/wiki/VLAN">Vlan</a></p>
+</aside>
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">2</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://askubuntu.com/questions/32499/migrate-from-a-virtual-machine-vm-to-a-physical-system">ubuntu-forum</a></p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Processor/cpuPinning.html" class="btn btn-neutral float-left" title="Estrategia de Asignación de CPUs y Optimizaciones en KVM/QEMU" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Testing/cxt4testing.html" class="btn btn-neutral float-right" title="Setting Up LTP Test Cases on a Linux VM Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

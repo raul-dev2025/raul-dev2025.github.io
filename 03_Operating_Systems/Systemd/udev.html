@@ -1,0 +1,176 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestor de dispositivos &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Índice de Administración de Sistemas" href="../../04_System_Administration/index.html" />
+    <link rel="prev" title="Systemd.unit" href="systemd-unit.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#boot">Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#certificados-tls">Certificados-TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#file-system">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#man">Man</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#systemd">Systemd</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="systemd-device.html">Systemd.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="systemd.html">Systemd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="systemd-unit.html">Systemd.unit</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Gestor de dispositivos</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#udev">Udev</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#archivos-de-reglas">Archivos de reglas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Sistemas Operativos</a></li>
+      <li class="breadcrumb-item active">Gestor de dispositivos</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/03_Operating_Systems/Systemd/udev.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gestor-de-dispositivos">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Gestor de dispositivos</a><a class="headerlink" href="#gestor-de-dispositivos" title="Link to this heading"></a></h1>
+<nav class="contents" id="contenido">
+<p class="topic-title">Contenido</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#gestor-de-dispositivos" id="id1">Gestor de dispositivos</a></p>
+<ul>
+<li><p><a class="reference internal" href="#udev" id="id2">Udev</a></p></li>
+<li><p><a class="reference internal" href="#archivos-de-reglas" id="id3">Archivos de reglas</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="udev">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Udev</a><a class="headerlink" href="#udev" title="Link to this heading"></a></h2>
+<p>Proporciona los eventos de dispositivo, al software de sistema[need rev.], maneja permisos en los nodos de dispositivo y, crea enlaces simbólicos en el directorio <code class="docutils literal notranslate"><span class="pre">/dev</span></code> o renombra las interfases de red. Normalmente el núcleo, sólo asigna nombres de dispositivos <em>no predecibles</em>, basados en el orden en el que son descubiertos.</p>
+<p>Significativamente, los enlaces simbólicos o los nombres de dispositivos de red, proporcionan un camino/forma confiable, de identificar dispositivos, basándose en sus propiedades o configuración al corriente.</p>
+</section>
+<section id="archivos-de-reglas">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Archivos de reglas</a><a class="headerlink" href="#archivos-de-reglas" title="Link to this heading"></a></h2>
+<p>Los archivos de reglas son leídos desde los archivos localizados en el directorio de reglas de sistema <code class="docutils literal notranslate"><span class="pre">/usr/lib/udev/rules.d</span></code>, el volátil directorio en <em>tiempo de carrera</em> <code class="docutils literal notranslate"><span class="pre">/run/udev/rules.d</span></code> y el directorio local de administración <code class="docutils literal notranslate"><span class="pre">/etc/udev/rules.d</span></code>. Todos los archivos de reglas son colectivamente ordenados y procesados en orden alfabético, en lugar del directorio en el que están contenidos.</p>
+<p>Los archivos en <code class="docutils literal notranslate"><span class="pre">/etc</span></code>, tienen la prioridad más alta; archivos en <code class="docutils literal notranslate"><span class="pre">/run</span></code> toman precedencia sobre archivos con el mismo nombre, colocados sobre <code class="docutils literal notranslate"><span class="pre">/usr/lib</span></code>. Esto puede ser usado para sobreescribir las reglas porporcionadas por el sistema, con un archivo local si fuese necesario.</p>
+<p>Un enlace simbólico en <code class="docutils literal notranslate"><span class="pre">/etc</span></code> con el mismo nombre que el archivo de regla en <code class="docutils literal notranslate"><span class="pre">/usr/lib</span></code>, apuntando a <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>, deshabilita la regla por completo. Los archivos de reglas deben terminar con la extensión <code class="docutils literal notranslate"><span class="pre">.rules</span></code>; otras extensiones son ignoradas.</p>
+<p>Todas las líneas en un archivo de reglas, contienen por lo menos un par, <em>llave-valor</em>; excepto aquellas líneas vacías o empezando por <code class="docutils literal notranslate"><span class="pre">#</span></code> (almohadilla); las cuáles serán ignoradas. Hay dos tipos de <em>llaves</em>: <strong>coincidendia</strong> y <strong>asignación</strong>. Si todas las llaves de conincidencia determinan su valor, la regla será aplicada y las <em>llaves</em> de asignación asignarán el valor especificado a la variable.</p>
+<p>Una llave de coincidencia, puede renombrar una interfase de red, añadir enlaces simbólicos apuntando al nodo de dispositivo o, lanzar un programa específicado como parte del evento controlado.</p>
+<p>Una regla consiste en una lista separada por comas, de uno o más, pares de <em>llave-valor</em>. Cada <em>llave</em> tiene una operación distintiva, dependiendo del operador usado. Operadores válidos son:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>==comparación o igualdad
+!=comparación o igualdad
+= asignación
++=asigna un valor a una llave. LLaves representando una lista, son sobreescritos con éste.
+-=añade el valor a la llave que sostiene la lista de entradas.
+:=asigna un valor a la llave, por mandato??; deshabilita cualquier cambio posterior
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="systemd-unit.html" class="btn btn-neutral float-left" title="Systemd.unit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../04_System_Administration/index.html" class="btn btn-neutral float-right" title="Índice de Administración de Sistemas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E.L.A. &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Cadena de invocación" href="cadenaInvocacion.html" />
+    <link rel="prev" title="INFORME DE CIERRE DE HITO Y ESTADO DEL REPOSITORIO" href="ci-integration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../Foundry/index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">HwBus-IO</a></li>
+      <li class="breadcrumb-item active">E.L.A.</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/hwbus-io/ci-cd/ela.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="e-l-a">
+<h1>E.L.A.<a class="headerlink" href="#e-l-a" title="Link to this heading"></a></h1>
+<section id="rediseno-de-arquitectura-ci-cd-pipeline-orquestado-v2-0-0">
+<h2>Rediseño de Arquitectura CI/CD: Pipeline Orquestado v2.0.0<a class="headerlink" href="#rediseno-de-arquitectura-ci-cd-pipeline-orquestado-v2-0-0" title="Link to this heading"></a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">Proyecto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>hwbus-io</p>
+</dd>
+<dt class="field-even">Versión<span class="colon">:</span></dt>
+<dd class="field-even"><p>v2.0.0-ci-integration</p>
+</dd>
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Agosto 2026</p>
+</dd>
+</dl>
+</section>
+<section id="justificacion-del-cambio-de-version-major">
+<h2>Justificación del Cambio de Versión Major<a class="headerlink" href="#justificacion-del-cambio-de-version-major" title="Link to this heading"></a></h2>
+<p>La transición hacia la versión <code class="docutils literal notranslate"><span class="pre">v2.0.0-ci-integration</span></code> responde a un rediseño estructural en la forma en que los scripts de integración orquestan el ciclo de vida del módulo <code class="docutils literal notranslate"><span class="pre">hwbus_io</span></code> durante las fases de validación.</p>
+<p>En la versión anterior, la ejecución de binarios LTP se realizaba de manera genérica y aislada, asumiendo un entorno estático. El nuevo paradigma introduce <strong>matriz de ejecución determinista basada en manifiestos</strong> y un <strong>ejecutor local autónomo (ELA) especializado para módulos de kernel</strong>, garantizando el acoplamiento limpio entre la compilación/firma del módulo y las pruebas funcionales.</p>
+</section>
+<section id="matriz-de-ejecucion-determinista">
+<h2>Matriz de Ejecución Determinista<a class="headerlink" href="#matriz-de-ejecucion-determinista" title="Link to this heading"></a></h2>
+<p>El flujo de CI/CD clasifica los entregables mediante las variables de estado <code class="docutils literal notranslate"><span class="pre">TARGET_TYPE</span></code> y <code class="docutils literal notranslate"><span class="pre">RUNNER_TYPE</span></code>:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Matriz de Clasificación y Ruteo de Pruebas
+ :widths: 20 20 20 40
+ :header-rows: 1</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>TARGET_TYPE</p></td>
+<td><p>RUNNER_TYPE</p></td>
+<td><p>Executor</p></td>
+<td><p>Comportamiento y Propósito</p></td>
+</tr>
+<tr class="row-even"><td><p>KO</p></td>
+<td><p>N/A</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ci-runner.sh</span></code></p></td>
+<td><p>Verificación de carga/descarga y registros de Kernel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>LTP</p></td>
+<td><p>GENERIC</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ci-runner.sh</span></code></p></td>
+<td><p>Pruebas de entorno independientes del driver (IO/BUS/PROC).</p></td>
+</tr>
+<tr class="row-even"><td><p>LTP</p></td>
+<td><p>KMOD_TEST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ci-kmod-runner.sh</span></code></p></td>
+<td><p>Pruebas funcionales LTP con orquestación remota del módulo.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="componentes-implementados-en-v2-0-0">
+<h2>Componentes Implementados en v2.0.0<a class="headerlink" href="#componentes-implementados-en-v2-0-0" title="Link to this heading"></a></h2>
+<p><strong>1. Biblioteca de Manifiesto Dinámico</strong> (<code class="docutils literal notranslate"><span class="pre">ci-manifest.sh</span></code>)</p>
+<p>Sustituye la generación estática de archivos por funciones atómicas que registran el estado exacto del build en <code class="docutils literal notranslate"><span class="pre">build_state.env</span></code>:</p>
+<ul class="simple">
+<li><p><strong>Módulo Kernel</strong> (<code class="docutils literal notranslate"><span class="pre">generate_ko_manifest</span></code>): Exporta la ruta del binario <code class="docutils literal notranslate"><span class="pre">.ko</span></code> firmado y los metadatos de compilación.</p></li>
+<li><p><strong>Prueba LTP</strong> (<code class="docutils literal notranslate"><span class="pre">generate_ltp_manifest</span></code>): Asocia el tipo de ejecutor requerido (<code class="docutils literal notranslate"><span class="pre">RUNNER_TYPE=&quot;KMOD_TEST&quot;</span></code> o <code class="docutils literal notranslate"><span class="pre">GENERIC</span></code>), vinculando explícitamente el binario de prueba con la ruta del driver.</p></li>
+</ul>
+<p><strong>2. Ejecutor Local Autónomo para Módulos</strong> (<code class="docutils literal notranslate"><span class="pre">ci-kmod-runner.sh</span></code>)</p>
+<p>Diseñado específicamente para escenarios <code class="docutils literal notranslate"><span class="pre">KMOD_TEST</span></code>:</p>
+<ul class="simple">
+<li><p><strong>Validación de Artefactos</strong>: Inspecciona la presencia y permisos de ejecución de <code class="docutils literal notranslate"><span class="pre">MODULE_KO_PATH</span></code> y <code class="docutils literal notranslate"><span class="pre">TEST_BINARY_PATH</span></code> antes de intervenir el Kernel.</p></li>
+<li><p><strong>Gestión Segura del Módulo</strong>: Garantiza la purga previa de instancias colgadas y realiza la carga dinámicamente mediante <code class="docutils literal notranslate"><span class="pre">insmod</span></code>.</p></li>
+<li><p><strong>Descarga Garantizada vía Trap</strong>: Asigna una trampa del sistema (<code class="docutils literal notranslate"><span class="pre">trap</span> <span class="pre">cleanup</span> <span class="pre">EXIT</span></code>) para invocar <code class="docutils literal notranslate"><span class="pre">rmmod</span></code> de forma incondicional al finalizar el script.</p></li>
+<li><p><strong>Aislamiento de Descriptores</strong>: Redirige únicamente <code class="docutils literal notranslate"><span class="pre">STDERR</span></code> (fd2) de LTP hacia el log objetivo <code class="docutils literal notranslate"><span class="pre">/var/log/Sandbox/hwbus-io/ltp_latest.log</span></code>, preservando la limpieza del log sin romper el flujo de ejecución con <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-e</span></code>.</p></li>
+</ul>
+</section>
+<section id="estado-final-del-sistema">
+<h2>Estado Final del Sistema<a class="headerlink" href="#estado-final-del-sistema" title="Link to this heading"></a></h2>
+<p>El pipeline permite compilar, firmar, desplegar y validar pruebas LTP integradas sobre el driver <code class="docutils literal notranslate"><span class="pre">/dev/hwbusc</span></code> sin intervención manual, cerrando el ciclo de ejecución de manera totalmente aislada y trazable.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ci-integration.html" class="btn btn-neutral float-left" title="INFORME DE CIERRE DE HITO Y ESTADO DEL REPOSITORIO" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cadenaInvocacion.html" class="btn btn-neutral float-right" title="Cadena de invocación" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kernel documents &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../_static/simulation.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="El depurador AML" href="Acpi/aml-debugger.html" />
+    <link rel="prev" title="Ejercicios" href="../01_Hardware/sistema/Ejercicios.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Kernel documents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#acpi">Acpi</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Acpi/aml-debugger.html">El depurador AML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Acpi/debug.html">Salida de depuración ACPI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#admin-guide">Admin-guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Admin-guide/1-boot.html">Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin-guide/initrd.html">InitRD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin-guide/kernParam.html">Parámetros para la línea de comandos del <em>kernel</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin-guide/of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin-guide/serial-console.html">Cónsola en serie Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin-guide/deadline-iosched.html">Parámetros de Ajuste del Planificador de E/S Deadline</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#arch-arm">arch/arm</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arch/arm/Booting.html">Arrancando un ARM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#arch-powerpc">arch/powerpc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arch/powerpc/booting-without-of.html">El arranque del núcleo deLinux/ppc sin Open Firmware</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#arch-x86">arch/x86</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arch/x86/zero-page.html">Zero page</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bus-devices">bus-devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bus-devices/ti-gpmc.html">GPMC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#devicetree">DeviceTree</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DeviceTree/0-of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="DeviceTree/changesets.html">conjunto de cambios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DeviceTree/device-tree-usage.html">Uso del árbol de dispositivo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DeviceTree/dynamic-resolution-notes.html">Resolución dinámica, notas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DeviceTree/overlay-notes.html"><em>Sobreposición</em> del árbol de dispositivo, notas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DeviceTree/usage-model.html">Linux y el árbol de dispositivo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#devicetree-bindings-pci">DeviceTree/bindings/pci</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DeviceTree/bindings/pci/pci.html">Vinculaciones Pci</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#driver-api-media">driver-api/media</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="driver-api/media/dtv-udev.html">Reglas UDEV para DVB</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#earlyuserspace">EarlyUserSpace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="EarlyUserSpace/buffer-format.html">Formato de bufer para <code class="docutils literal notranslate"><span class="pre">initramfs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="EarlyUserSpace/README.html">Soporte al <em>espacio temprano de usuario</em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#filesystem">FileSystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FileSystem/Nfs/nfs.html">El cliente NFS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileSystem/nfsroot.html">Montando el sistema de ficheros raíz, vía NFS(nfsroot)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileSystem/rams-rootfs-initramfs.html">Qué es ramfs?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileSystem/tmpfs.html">Tmpfs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fpga">Fpga</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Fpga/fpga-mgr.html">Gestor FPGA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Fpga/fpga-region.html">FPGA Enlaces de <em>zona</em> para el DT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#input">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Input/input.html">Inpunt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kbuild/makefiles.html">Makefiles en el kernel de Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kbuild/modules.html">Construcción de módulos externos</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#networking">networking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="networking/netconsole.html">NetConsole</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pci">PCI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PCI/host-generic-pci.html">Controlador de <em>host</em> PCI, genérico</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#process">Process</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Process/changes.html">Cambios</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rcu">RCU</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RCU/listRCU.html">List RCU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RCU/rcu.html">RCU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RCU/UP.html">RCU en sistemas uniprocesador</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#trace">trace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trace/ring-buffer-design.html">Ring buffer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#x86">x86</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="x86/1-IO-APIC.html">IO-APIC</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Kernel documents</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/02_Kernel/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="kernel-documents">
+<h1>Kernel documents<a class="headerlink" href="#kernel-documents" title="Link to this heading"></a></h1>
+<section id="acpi">
+<h2>Acpi<a class="headerlink" href="#acpi" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Acpi/aml-debugger.html">El depurador AML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acpi/debug.html">Salida de depuración ACPI</a></li>
+</ul>
+</div>
+<p>Documentación técnica sobre las herramientas de depuración del subsistema ACPI en el kernel de Linux. Detalla la configuración y uso del depurador integrado de lenguaje interpretable AML (<em>ACPI Machine Language</em>) y los niveles de depuración del subsistema de diagnóstico.</p>
+</section>
+<section id="admin-guide">
+<h2>Admin-guide<a class="headerlink" href="#admin-guide" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Admin-guide/1-boot.html">Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Admin-guide/initrd.html">InitRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Admin-guide/kernParam.html">Parámetros para la línea de comandos del <em>kernel</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Admin-guide/of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Admin-guide/serial-console.html">Cónsola en serie Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Admin-guide/deadline-iosched.html">Parámetros de Ajuste del Planificador de E/S Deadline</a></li>
+</ul>
+</div>
+<p>Documentación orientada a administradores de sistemas sobre los parámetros esenciales del kernel de Linux durante el arranque del sistema. Incluye instrucciones para la configuración del cargador de arranque y las opciones de la línea de comandos de inicio.</p>
+</section>
+<section id="arch-arm">
+<h2>arch/arm<a class="headerlink" href="#arch-arm" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arch/arm/Booting.html">Arrancando un ARM</a></li>
+</ul>
+</div>
+<p>Especificación del protocolo de arranque para arquitecturas ARM de 32 bits. Detalla los requisitos mínimos que debe cumplir el gestor de arranque (<em>bootloader</em>) antes de pasar el control al kernel, como la configuración de registros y la memoria RAM.</p>
+</section>
+<section id="arch-powerpc">
+<h2>arch/powerpc<a class="headerlink" href="#arch-powerpc" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arch/powerpc/booting-without-of.html">El arranque del núcleo deLinux/ppc sin Open Firmware</a></li>
+</ul>
+</div>
+<p>Describe el procedimiento de arranque del kernel en plataformas PowerPC que carecen de una implementación nativa de Open Firmware. Explica la estructura e inicialización mediante el árbol de dispositivos reducido (<em>Flattened Device Tree</em> / FDT).</p>
+</section>
+<section id="arch-x86">
+<h2>arch/x86<a class="headerlink" href="#arch-x86" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arch/x86/zero-page.html">Zero page</a></li>
+</ul>
+</div>
+<p>Documenta la estructura de datos de la «Página Cero» (<cite>struct boot_params</cite>) en arquitecturas x86. Detalla los mapas de memoria y parámetros de hardware que el cargador de arranque debe inicializar en modo real de 16 bits.</p>
+</section>
+<section id="bus-devices">
+<h2>bus-devices<a class="headerlink" href="#bus-devices" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bus-devices/ti-gpmc.html">GPMC</a></li>
+</ul>
+</div>
+<p>Guía de especificaciones y vinculaciones (<em>bindings</em>) para el controlador de memoria general de Texas Instruments (GPMC). Aborda la configuración de buses de memoria paralela, tiempos de interfaz y acceso a dispositivos periféricos NOR/NAND.</p>
+</section>
+<section id="devicetree">
+<h2>DeviceTree<a class="headerlink" href="#devicetree" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DeviceTree/0-of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeviceTree/changesets.html">conjunto de cambios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeviceTree/device-tree-usage.html">Uso del árbol de dispositivo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeviceTree/dynamic-resolution-notes.html">Resolución dinámica, notas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeviceTree/overlay-notes.html"><em>Sobreposición</em> del árbol de dispositivo, notas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeviceTree/usage-model.html">Linux y el árbol de dispositivo</a></li>
+</ul>
+</div>
+<p>Conjunto de documentos sobre la arquitectura del Árbol de Dispositivos (<em>Device Tree</em>). Incluye pruebas unitarias de la interfaz Open Firmware, mecanismos para modificaciones dinámicas del árbol (<em>changesets</em>) y la guía fundamental sobre cómo el kernel analiza la información del hardware.</p>
+</section>
+<section id="devicetree-bindings-pci">
+<h2>DeviceTree/bindings/pci<a class="headerlink" href="#devicetree-bindings-pci" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DeviceTree/bindings/pci/pci.html">Vinculaciones Pci</a></li>
+</ul>
+</div>
+<p>Define las vinculaciones y propiedades estándar en Device Tree para puentes y controladores de bus PCI / PCIe. Cubre la asignación fija de dominios PCI y la especificación de velocidades máximas de enlace para los nodos del sistema.</p>
+</section>
+<section id="driver-api-media">
+<h2>driver-api/media<a class="headerlink" href="#driver-api-media" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driver-api/media/dtv-udev.html">Reglas UDEV para DVB</a></li>
+</ul>
+</div>
+<p>Documentación histórica sobre la interacción entre el subsistema de televisión digital (DVB) de Linux y el gestor de dispositivos Udev. Explica las limitaciones originales de <em>sysfs</em> para la creación de nodos de dispositivos multimedia en <cite>/dev</cite>.</p>
+</section>
+<section id="earlyuserspace">
+<h2>EarlyUserSpace<a class="headerlink" href="#earlyuserspace" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="EarlyUserSpace/buffer-format.html">Formato de bufer para <code class="docutils literal notranslate"><span class="pre">initramfs</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="EarlyUserSpace/README.html">Soporte al <em>espacio temprano de usuario</em></a></li>
+</ul>
+</div>
+<p>Explica los conceptos y arquitectura del espacio de usuario temprano (<em>initramfs</em> / <em>initrd</em>). Detalla el proceso de transición desde la inicialización del kernel hasta la ejecución del primer proceso de usuario (<cite>/init</cite>).</p>
+</section>
+<section id="filesystem">
+<h2>FileSystem<a class="headerlink" href="#filesystem" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="FileSystem/Nfs/nfs.html">El cliente NFS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FileSystem/nfsroot.html">Montando el sistema de ficheros raíz, vía NFS(nfsroot)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FileSystem/rams-rootfs-initramfs.html">Qué es ramfs?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FileSystem/tmpfs.html">Tmpfs</a></li>
+</ul>
+</div>
+<p>Documentación técnica y guías de configuración para los sistemas de archivos en el kernel de Linux (NFS, sistemas de archivos en RAM y tmpfs).</p>
+</section>
+<section id="fpga">
+<h2>Fpga<a class="headerlink" href="#fpga" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Fpga/fpga-mgr.html">Gestor FPGA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fpga/fpga-region.html">FPGA Enlaces de <em>zona</em> para el DT</a></li>
+</ul>
+</div>
+<p>Documentación sobre la gestión y vinculaciones (<em>bindings</em>) en el árbol de dispositivos (Device Tree) para la reconfiguración y control de regiones FPGA.</p>
+</section>
+<section id="input">
+<h2>Input<a class="headerlink" href="#input" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Input/input.html">Inpunt</a></li>
+</ul>
+</div>
+</section>
+<section id="compilacion-de-modulos-kbuild">
+<h2>Compilación de Módulos (Kbuild)<a class="headerlink" href="#compilacion-de-modulos-kbuild" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="kbuild/makefiles.html">Makefiles en el kernel de Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kbuild/modules.html">Construcción de módulos externos</a></li>
+</ul>
+</div>
+<p>Guía de referencia sobre la infraestructura Kbuild del kernel de Linux para la compilación de módulos externos y dentro del árbol de código fuente (<em>in-tree</em> y <em>out-of-tree</em>). Incluye la sintaxis de los archivos Makefile internos, targets del Makefile, parámetros de compilación y gestión de dependencias.</p>
+</section>
+<section id="networking">
+<h2>networking<a class="headerlink" href="#networking" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="networking/netconsole.html">NetConsole</a></li>
+</ul>
+</div>
+<p>Instrucciones para la configuración y uso del subsistema <em>netconsole</em>. Permite capturar y enviar los mensajes del búfer de impresión del kernel (<cite>dmesg</cite>) hacia un equipo remoto a través de paquetes de red UDP.</p>
+</section>
+<section id="pci">
+<h2>PCI<a class="headerlink" href="#pci" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="PCI/host-generic-pci.html">Controlador de <em>host</em> PCI, genérico</a></li>
+</ul>
+</div>
+<p>Especificaciones para el controlador genérico de puente host PCI del kernel. Detalla la configuración de las ventanas de direcciones de memoria I/O, el mapeo de interrupciones y el soporte para arquitecturas basadas en Device Tree o ACPI.</p>
+</section>
+<section id="process">
+<h2>Process<a class="headerlink" href="#process" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Process/changes.html">Cambios</a></li>
+</ul>
+</div>
+<p>Lista de requisitos mínimos de software, herramientas de compilación, bibliotecas y versiones de utilidades en el espacio de usuario necesarias para compilar y ejecutar versiones específicas del kernel de Linux.</p>
+</section>
+<section id="rcu">
+<h2>RCU<a class="headerlink" href="#rcu" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="RCU/listRCU.html">List RCU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RCU/rcu.html">RCU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RCU/UP.html">RCU en sistemas uniprocesador</a></li>
+</ul>
+</div>
+<p>Documentación exhaustiva sobre el mecanismo de sincronización <em>Read-Copy Update</em> (RCU). Cubre la teoría del subsistema, el manejo de listas enlazadas protegidas por RCU y las garantías del período de gracia en sistemas uniprocesador (UP).</p>
+</section>
+<section id="trace">
+<h2>trace<a class="headerlink" href="#trace" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="trace/ring-buffer-design.html">Ring buffer</a></li>
+</ul>
+</div>
+<p>Análisis del diseño e implementación del algoritmo del búfer circular (<em>ring buffer</em>) sin bloqueos utilizado por Ftrace. Detalla las estructuras de datos atómicas y la gestión de picos de eventos entre productores y consumidores.</p>
+</section>
+<section id="x86">
+<h2>x86<a class="headerlink" href="#x86" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="x86/1-IO-APIC.html">IO-APIC</a></li>
+</ul>
+</div>
+<p>Especificaciones técnicas y enrutamiento de interrupciones mediante el controlador avanzado programable de interrupciones de E/S (<em>IO-APIC</em>) en arquitecturas x86/x86-64.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../01_Hardware/sistema/Ejercicios.html" class="btn btn-neutral float-left" title="Ejercicios" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Acpi/aml-debugger.html" class="btn btn-neutral float-right" title="El depurador AML" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

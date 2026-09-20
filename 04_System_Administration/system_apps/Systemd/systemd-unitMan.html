@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>systemd.unit &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Saneamiento de Permisos en Documents" href="../../system_configuration/ACL_configuration/ACLsDocuments.html" />
+    <link rel="prev" title="Systemd" href="systemdMan.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Administración de Sistemas</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#administracion">Administración</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#imagenes-iso-9660-y-medios-opticos">Imágenes ISO 9660 y Medios Ópticos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#aplicaciones-de-sistema">Aplicaciones de sistema</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#systemd">Systemd</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="systemdMan.html">Systemd</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">systemd.unit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#descripcion">Descripción</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#listas-de-control-de-acceso-acls">Listas de control de acceso(ACLs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuracion-del-kernel">Configuración del Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuracion-de-sistema">Configuración de sistema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#incidencias">Incidencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Administración de Sistemas</a></li>
+      <li class="breadcrumb-item active">systemd.unit</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/04_System_Administration/system_apps/Systemd/systemd-unitMan.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="systemd-unit">
+<h1>systemd.unit<a class="headerlink" href="#systemd-unit" title="Link to this heading"></a></h1>
+<section id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Link to this heading"></a></h2>
+<p>Un archivo de configuración de <em>Unidad</em>, codifica información sobre un servicio, un zócalo, un dispositivo, un punto de montaje, un punto de montaje automático, una partición o archivo de intercambio, un objetivo de arranque, una ruta vigilada para un sistema de ficheros, un <em>reloj(timer)</em> controlado y, supervisado por <em>systemd(1)</em>, una porción de un recurso de gestión o, grupo de un poroceso externamente creado.</p>
+<div class="admonition-socket admonition">
+<p class="admonition-title">socket</p>
+<p>Traducido como zócalo, podría traducirse como puerto, pero debido a que el término    <em>puerto</em> es utilizado para referirse a un conenctor físico y también a una arquitectura de máquina(ejem. <code class="docutils literal notranslate"><span class="pre">086</span></code>, <code class="docutils literal notranslate"><span class="pre">x86_64</span></code>, <code class="docutils literal notranslate"><span class="pre">ARM</span></code>, etc), es preferible evitar su traducción de esa forma.</p>
+</div>
+<p>La sintaxis está inspirada por una especificación[1]de archivo <code class="docutils literal notranslate"><span class="pre">.desktop</span></code> dada en <code class="docutils literal notranslate"><span class="pre">XDG</span>&#160; <span class="pre">Desktop</span></code> que en resumidas cuentas, está inspirado por los archivos <code class="docutils literal notranslate"><span class="pre">.ini</span></code> <em>Microsoft  Windows</em>.</p>
+<p>Ésta página de manual, las oconfiguraciones de opciones comunes, de todos los tipos de unidades. Estas opciones, deben ser configuradas en las secciones <code class="docutils literal notranslate"><span class="pre">[Unit]</span></code> ó <code class="docutils literal notranslate"><span class="pre">[Install]</span></code> de los archivos de configuración.</p>
+<p>Además de las secciones genéricas <code class="docutils literal notranslate"><span class="pre">[Unit]</span></code> y <code class="docutils literal notranslate"><span class="pre">[Install]</span></code> aquí descritas, cada unidad, podría tener una sección de <em>tipo</em> específico, ejem.: <code class="docutils literal notranslate"><span class="pre">[Service]</span></code> para un servicio de  unidad. ver las respectivas páginas de manual(man pages), para más información: <code class="docutils literal notranslate"><span class="pre">systemd.service(5)</span></code>, <code class="docutils literal notranslate"><span class="pre">systemd.socket(5)</span></code>, <code class="docutils literal notranslate"><span class="pre">systemd.device((5)</span></code>, <code class="docutils literal notranslate"><span class="pre">systemd.mount(5)</span></code>, <code class="docutils literal notranslate"><span class="pre">systemd.automount(5)</span></code>, <code class="docutils literal notranslate"><span class="pre">systemd.swap(5)</span></code>, <code class="docutils literal notranslate"><span class="pre">systemd.target(5)</span></code>, <code class="docutils literal notranslate"><span class="pre">systemd.path(5)</span></code>, <code class="docutils literal notranslate"><span class="pre">systemd.timer(5)</span></code>, <code class="docutils literal notranslate"><span class="pre">systemd.slice(5)</span></code>, <code class="docutils literal notranslate"><span class="pre">systemd.scope(5)</span></code>.</p>
+<p><strong>slice:</strong> portion or share, trozo, porción.</p>
+<p>Son permitidas varias configuraciones, especificadas más de una vez, en cuyo caso, su interpretación dependerá de la configuración. A menudo, múltiples configuraciones forman una lista y, configurar un valor vacío reinicia la variable``(void)``, lo que significa que una previa asignación será ignorada.</p>
+<p>Cuando esto está permitido, es mencionado en la descripción de la configuración. Nótese que el uso de múltiples asignaciones al mismo valor, provoca que un archivo sea incompatible con los analizadores de sentencia(parsers) de <em>XDG</em> en los archivos con formato <code class="docutils literal notranslate"><span class="pre">.desktop</span></code>.</p>
+<p>Los archivos de unidad, son leídos desde un conjunto de rutas determinadas durante la compilación, escrita en la siguiente sección.</p>
+<p>Argumentos <em>boleanos</em> usados en archivos de unidad, pueden ser escritos en varios formatos. Para configuraciones <em>positivas</em>, la cadena <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">yes</span></code>, <code class="docutils literal notranslate"><span class="pre">true</span></code> y <code class="docutils literal notranslate"><span class="pre">on</span></code>, son equivalentes. Para <em>los</em> negativos, la cadena <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">no</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code> y <code class="docutils literal notranslate"><span class="pre">off</span></code>, son equivalentes.</p>
+<p>Los valores de <em>lapso de tiempo</em>, codificados en archivos de unidad, pueden ser escritos de varias formas. Un único número, especifica <em>tiempo en segundos</em>. Si es especificado con un sufijo de <em>unidad de tiempo</em>, hace honor a la unidad.
+Una concatenación de múltiples valores, igualmente es válida, en cuyo caso, será añadido. Ejemplo: <code class="docutils literal notranslate"><span class="pre">50</span></code> se refiere a <em>50 segundos</em>; <code class="docutils literal notranslate"><span class="pre">2min</span> <span class="pre">200ms</span></code> indica <em>dos minutos añadidos y 200</em> <em>milisegundos</em>, ejem. <em>120200ms</em>.</p>
+<p>Son entendidas las siguientes undiades de tiempo: <code class="docutils literal notranslate"><span class="pre">s,</span> <span class="pre">min,</span> <span class="pre">h,</span> <span class="pre">d,</span> <span class="pre">w,</span> <span class="pre">ms,</span> <span class="pre">us</span></code>.
+Para más detalles ver <code class="docutils literal notranslate"><span class="pre">systemd.time(7)</span></code>.</p>
+<p>Líneas vacías o empezando por <code class="docutils literal notranslate"><span class="pre">#</span></code> ó <code class="docutils literal notranslate"><span class="pre">;</span></code>, son ignoradas. Son usdos para <em>comentar</em>. Líneas terminadas en una barra invertida <code class="docutils literal notranslate"><span class="pre">\</span></code>, son concatenadas con la siguiente línea y, tal  aracter <code class="docutils literal notranslate"><span class="pre">\</span></code> reemplazado por un espacio en blanco. Ésto puede ser utilizado para agrupar línea largas.</p>
+<p>Junto a un archivo de unidad <code class="docutils literal notranslate"><span class="pre">foo.service</span></code>, el directorio <code class="docutils literal notranslate"><span class="pre">foo.service.wants/</span></code> podría existir.
+Todos los <em>enlaces simbólicos(symlinks)</em> de archivos de unidad desde ese directorio, son implícitamente añadidos como dependencia del tipo <code class="docutils literal notranslate"><span class="pre">Wants=</span></code> a la unidad. Ésto es útil para engarfiar unidades, con el arranque de otras unidades, sin tener que modificar su archivo de  unidad. Para los detalles sobre la semántica de <code class="docutils literal notranslate"><span class="pre">Wants=</span></code>, ver abajo.</p>
+<p>La forma apropiada de crear <em>enlaces simbólicos</em> en el directorio <code class="docutils literal notranslate"><span class="pre">.wants/</span></code> de un archivo de unidad, es con el comando <code class="docutils literal notranslate"><span class="pre">enable</span></code> de la herramienta <code class="docutils literal notranslate"><span class="pre">systemctl(1)</span></code>, quien lee la  información de la sección <code class="docutils literal notranslate"><span class="pre">[Install]</span></code> del archivo de unidad (ver abajo).</p>
+<p>Existe una funcionalidad similar para el typo de dependencia``Requires=``; el <em>sufijo de directorio</em> es en este caso <code class="docutils literal notranslate"><span class="pre">.requires/</span></code>.</p>
+<p>Junto al archivo de unidad <code class="docutils literal notranslate"><span class="pre">foo.service</span></code>, podría existir un directorio <code class="docutils literal notranslate"><span class="pre">foo.service.d/</span></code>. Todos los archivos con el sufijo <code class="docutils literal notranslate"><span class="pre">.conf</span></code> dentro de este directorio, serán interpretados después de ser interpretado el própio archivo. Ésto es útil, para alterar o añadir datos de configuración a la unidad, sin tener que modificar los archivos de unidad.</p>
+<p>Cada archivo contenido, debe tener una sección de cabecera apropiada. Nótese que para las unidades instanciadas, ésta lógica buscará primero la instancia, en el subdirectorio <code class="docutils literal notranslate"><span class="pre">.d/</span></code> y, leerá sus archivos <code class="docutils literal notranslate"><span class="pre">.conf</span></code>, seguidos de la plantilla de subdirectorio <code class="docutils literal notranslate"><span class="pre">.d</span></code> y los archovos <code class="docutils literal notranslate"><span class="pre">.conf</span></code> allí alojados. Nótese también, que la configuración dentro de la sección <code class="docutils literal notranslate"><span class="pre">[Install]</span></code> no se refiere a al <em>subdirectorio</em> y, no tendrá efecto.</p>
+<p>Ademas de <code class="docutils literal notranslate"><span class="pre">etc/systemd/system</span></code>, los archivos <code class="docutils literal notranslate"><span class="pre">.conf</span></code> dentron de <code class="docutils literal notranslate"><span class="pre">.d</span></code>, para los servicios de sistema, podrían alojarse en <code class="docutils literal notranslate"><span class="pre">/usr/lib/systemd/system/</span></code> o en <code class="docutils literal notranslate"><span class="pre">/run/systemd/system</span></code>. Archivos sueltos en <code class="docutils literal notranslate"><span class="pre">/etc</span></code> toman precedencia sobre aquellos en <code class="docutils literal notranslate"><span class="pre">/run</span></code> que a su vez, toman precedencia de los colocados sobre <code class="docutils literal notranslate"><span class="pre">/usr/lib</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="systemdMan.html" class="btn btn-neutral float-left" title="Systemd" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../system_configuration/ACL_configuration/ACLsDocuments.html" class="btn btn-neutral float-right" title="Saneamiento de Permisos en Documents" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

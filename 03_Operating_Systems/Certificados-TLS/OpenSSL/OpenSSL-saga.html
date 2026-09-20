@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenSSL Certificado de Autoridad &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="certificados" href="../TLS-libvirt/1-concepts.html" />
+    <link rel="prev" title="Ataques Man-in-the-Middle (MitM) y TLS" href="../MiTm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Sistemas Operativos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#boot">Boot</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#certificados-tls">Certificados-TLS</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../apuntesTLS.html">Apuntes sobre Protocolo TLS y Gestión de Certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../compCA.html">Comprobación y Supervisión de Certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MiTm.html">Ataques Man-in-the-Middle (MitM) y TLS</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">OpenSSL Certificado de Autoridad</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#estructura-del-directorio-de-la-ca">Estructura del Directorio de la CA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuracion-de-openssl-openssl-cnf">Configuración de OpenSSL (<code class="docutils literal notranslate"><span class="pre">openssl.cnf</span></code>)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creacion-de-la-entidad-de-certificacion-raiz-root-ca">Creación de la Entidad de Certificación Raíz (Root CA)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proceso-de-emision-de-certificados">Proceso de Emisión de Certificados</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#verificacion-y-despliegue-del-certificado">Verificación y Despliegue del Certificado</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recomendaciones-de-seguridad-para-la-ca">Recomendaciones de Seguridad para la CA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias">Referencias</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../TLS-libvirt/1-concepts.html">certificados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TLS-libvirt/2-CA.html">TLSCreateCACert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TLS-libvirt/3creSerCer.html">Certificados</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuration">configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#file-system">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#maint">Maint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#man">Man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#systemd">Systemd</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Sistemas Operativos</a></li>
+      <li class="breadcrumb-item active">OpenSSL Certificado de Autoridad</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/03_Operating_Systems/Certificados-TLS/OpenSSL/OpenSSL-saga.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="openssl-certificado-de-autoridad">
+<h1><a class="toc-backref" href="#id4" role="doc-backlink">OpenSSL Certificado de Autoridad</a><a class="headerlink" href="#openssl-certificado-de-autoridad" title="Link to this heading"></a></h1>
+<nav class="contents" id="indice-de-contenidos">
+<p class="topic-title">Índice de contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#openssl-certificado-de-autoridad" id="id4">OpenSSL Certificado de Autoridad</a></p>
+<ul>
+<li><p><a class="reference internal" href="#introduccion" id="id5">Introducción</a></p></li>
+<li><p><a class="reference internal" href="#estructura-del-directorio-de-la-ca" id="id6">Estructura del Directorio de la CA</a></p></li>
+<li><p><a class="reference internal" href="#configuracion-de-openssl-openssl-cnf" id="id7">Configuración de OpenSSL (<code class="docutils literal notranslate"><span class="pre">openssl.cnf</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#creacion-de-la-entidad-de-certificacion-raiz-root-ca" id="id8">Creación de la Entidad de Certificación Raíz (Root CA)</a></p></li>
+<li><p><a class="reference internal" href="#proceso-de-emision-de-certificados" id="id9">Proceso de Emisión de Certificados</a></p></li>
+<li><p><a class="reference internal" href="#verificacion-y-despliegue-del-certificado" id="id10">Verificación y Despliegue del Certificado</a></p></li>
+<li><p><a class="reference internal" href="#recomendaciones-de-seguridad-para-la-ca" id="id11">Recomendaciones de Seguridad para la CA</a></p></li>
+<li><p><a class="reference internal" href="#referencias" id="id12">Referencias</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="introduccion">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Introducción</a><a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>Con este archivo, empezamos en TécnicoSistemas a trabajar en una serie de artículos para la gestión de certificados.</p>
+<p>En anteriores entregas, habíamos hablado de la configuración TLS para máquinas virtuales con la librería Libvirt. Con esta nueva serie de artículos, pretendemos cubrir un uso más generalizado para este protocolo.</p>
+<p>El método usado es prácticamente idéntico, cambiaremos algunas herramientas y hablaremos de otras normas o consejos de seguridad que se quedaron en el tintero.</p>
+</section>
+<section id="estructura-del-directorio-de-la-ca">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Estructura del Directorio de la CA</a><a class="headerlink" href="#estructura-del-directorio-de-la-ca" title="Link to this heading"></a></h2>
+<p>Para gestionar una Entidad de Certificación (CA) de manera ordenada y segura, es necesario establecer un directorio de trabajo estructurado y mantener los archivos de estado del sistema.</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Estructura de archivos de la CA</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Archivo / Directorio</p></th>
+<th class="head"><p>Función</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">private/</span></code></p></td>
+<td><p>Almacena la clave privada de la CA con permisos restringidos (<code class="docutils literal notranslate"><span class="pre">0700</span></code> / <code class="docutils literal notranslate"><span class="pre">0400</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">certs/</span></code></p></td>
+<td><p>Almacena los certificados emitidos en formato PEM.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">newcerts/</span></code></p></td>
+<td><p>Copias de seguridad de los certificados firmados indexados por su número de serie.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">index.txt</span></code></p></td>
+<td><p>Base de datos en texto plano que registra el estado de los certificados (válido, revocado, expirado).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">serial</span></code></p></td>
+<td><p>Archivo de texto que contiene el siguiente número de serie hexadecimal a asignar.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="configuracion-de-openssl-openssl-cnf">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Configuración de OpenSSL (<code class="docutils literal notranslate"><span class="pre">openssl.cnf</span></code>)</a><a class="headerlink" href="#configuracion-de-openssl-openssl-cnf" title="Link to this heading"></a></h2>
+<p>Antes de inicializar la CA, es fundamental preparar o ajustar el archivo de configuración general de OpenSSL.</p>
+<p>Secciones principales de configuración:</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Secciones clave de <code class="docutils literal notranslate"><span class="pre">openssl.cnf</span></code></span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Sección</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">ca</span> <span class="pre">]</span></code></p></td>
+<td><p>Define la CA predeterminada que utilizará el comando <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">ca</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">CA_default</span> <span class="pre">]</span></code></p></td>
+<td><p>Especifica las rutas de directorios, ubicación del archivo <code class="docutils literal notranslate"><span class="pre">index.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">serial</span></code> y el algoritmo de resumen por defecto (p. ej., SHA-256).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">req</span> <span class="pre">]</span></code></p></td>
+<td><p>Opciones por defecto para la generación de claves y solicitudes de firma de certificado (CSR).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">v3_ca</span> <span class="pre">]</span></code></p></td>
+<td><p>Extensiones X.509v3 aplicadas al certificado de la propia CA (<code class="docutils literal notranslate"><span class="pre">basicConstraints</span> <span class="pre">=</span> <span class="pre">CA:TRUE</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">v3_req</span> <span class="pre">]</span></code></p></td>
+<td><p>Extensiones aplicadas a las solicitudes de certificados de servidor o cliente (p. ej., <code class="docutils literal notranslate"><span class="pre">subjectAltName</span></code>).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="creacion-de-la-entidad-de-certificacion-raiz-root-ca">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Creación de la Entidad de Certificación Raíz (Root CA)</a><a class="headerlink" href="#creacion-de-la-entidad-de-certificacion-raiz-root-ca" title="Link to this heading"></a></h2>
+<section id="inicializacion-del-entorno">
+<h3>1. Inicialización del Entorno<a class="headerlink" href="#inicializacion-del-entorno" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="p">{</span><span class="n">certs</span><span class="p">,</span><span class="n">crt</span><span class="p">,</span><span class="n">newcerts</span><span class="p">,</span><span class="n">private</span><span class="p">}</span>
+<span class="n">chmod</span> <span class="mi">700</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">private</span>
+<span class="n">touch</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">echo</span> <span class="mi">1000</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">serial</span>
+</pre></div>
+</div>
+</section>
+<section id="generacion-de-la-clave-privada-de-la-ca">
+<h3>2. Generación de la Clave Privada de la CA<a class="headerlink" href="#generacion-de-la-clave-privada-de-la-ca" title="Link to this heading"></a></h3>
+<p>Se genera una clave RSA de 4096 bits cifrada mediante AES-256 para proteger el acceso no autorizado:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openssl</span> <span class="n">genrsa</span> <span class="o">-</span><span class="n">aes256</span> <span class="o">-</span><span class="n">out</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span> <span class="mi">4096</span>
+<span class="n">chmod</span> <span class="mi">400</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+</section>
+<section id="creacion-del-certificado-autofirmado-de-la-ca">
+<h3>3. Creación del Certificado Autofirmado de la CA<a class="headerlink" href="#creacion-del-certificado-autofirmado-de-la-ca" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openssl</span> <span class="n">req</span> <span class="o">-</span><span class="n">config</span> <span class="n">openssl</span><span class="o">.</span><span class="n">cnf</span> <span class="o">-</span><span class="n">key</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span> \
+    <span class="o">-</span><span class="n">new</span> <span class="o">-</span><span class="n">x509</span> <span class="o">-</span><span class="n">days</span> <span class="mi">7300</span> <span class="o">-</span><span class="n">sha256</span> <span class="o">-</span><span class="n">extensions</span> <span class="n">v3_ca</span> \
+    <span class="o">-</span><span class="n">out</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">cert</span><span class="o">.</span><span class="n">pem</span>
+
+<span class="n">chmod</span> <span class="mi">444</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">cert</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="proceso-de-emision-de-certificados">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Proceso de Emisión de Certificados</a><a class="headerlink" href="#proceso-de-emision-de-certificados" title="Link to this heading"></a></h2>
+<section id="paso-1-generar-la-clave-privada-y-la-csr-del-servidor">
+<h3>Paso 1: Generar la Clave Privada y la CSR del Servidor<a class="headerlink" href="#paso-1-generar-la-clave-privada-y-la-csr-del-servidor" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openssl</span> <span class="n">genrsa</span> <span class="o">-</span><span class="n">out</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">servidor</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span> <span class="mi">2048</span>
+<span class="n">chmod</span> <span class="mi">400</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">servidor</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span>
+
+<span class="n">openssl</span> <span class="n">req</span> <span class="o">-</span><span class="n">config</span> <span class="n">openssl</span><span class="o">.</span><span class="n">cnf</span> <span class="o">-</span><span class="n">key</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">servidor</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span> \
+    <span class="o">-</span><span class="n">new</span> <span class="o">-</span><span class="n">sha256</span> <span class="o">-</span><span class="n">out</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">servidor</span><span class="o">.</span><span class="n">csr</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+</section>
+<section id="paso-2-firmar-el-certificado-con-la-ca">
+<h3>Paso 2: Firmar el Certificado con la CA<a class="headerlink" href="#paso-2-firmar-el-certificado-con-la-ca" title="Link to this heading"></a></h3>
+<p>La CA valida la solicitud CSR y emite el certificado firmado añadiendo las extensiones de servidor correspondientes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openssl</span> <span class="n">ca</span> <span class="o">-</span><span class="n">config</span> <span class="n">openssl</span><span class="o">.</span><span class="n">cnf</span> <span class="o">-</span><span class="n">extensions</span> <span class="n">server_cert</span> \
+    <span class="o">-</span><span class="n">days</span> <span class="mi">375</span> <span class="o">-</span><span class="n">notext</span> <span class="o">-</span><span class="n">md</span> <span class="n">sha256</span> \
+    <span class="o">-</span><span class="ow">in</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">servidor</span><span class="o">.</span><span class="n">csr</span><span class="o">.</span><span class="n">pem</span> \
+    <span class="o">-</span><span class="n">out</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">servidor</span><span class="o">.</span><span class="n">cert</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="verificacion-y-despliegue-del-certificado">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Verificación y Despliegue del Certificado</a><a class="headerlink" href="#verificacion-y-despliegue-del-certificado" title="Link to this heading"></a></h2>
+<section id="inspeccion-del-certificado-emitido">
+<h3>Inspección del Certificado Emitido<a class="headerlink" href="#inspeccion-del-certificado-emitido" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openssl</span> <span class="n">x509</span> <span class="o">-</span><span class="n">noout</span> <span class="o">-</span><span class="n">text</span> <span class="o">-</span><span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">servidor</span><span class="o">.</span><span class="n">cert</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+</section>
+<section id="validacion-de-la-cadena-de-confianza">
+<h3>Validación de la Cadena de Confianza<a class="headerlink" href="#validacion-de-la-cadena-de-confianza" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openssl</span> <span class="n">verify</span> <span class="o">-</span><span class="n">CAfile</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">cert</span><span class="o">.</span><span class="n">pem</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ca</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">servidor</span><span class="o">.</span><span class="n">cert</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="recomendaciones-de-seguridad-para-la-ca">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Recomendaciones de Seguridad para la CA</a><a class="headerlink" href="#recomendaciones-de-seguridad-para-la-ca" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Buenas prácticas de administración de la CA</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Práctica</p></th>
+<th class="head"><p>Recomendación</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Aislamiento</p></td>
+<td><p>La CA Raíz (<em>Root CA</em>) debe mantenerse fuera de línea (<em>offline</em>) o aislada de la red en entornos de producción.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Subordinación</p></td>
+<td><p>Emplear una CA Intermedia para la firma periódica de los certificados operativos de servicios.</p></td>
+</tr>
+<tr class="row-even"><td><p>Control de Accesos</p></td>
+<td><p>Establecer permisos <code class="docutils literal notranslate"><span class="pre">0400</span></code> en las claves privadas y restringir la ejecución mediante perfiles de <code class="docutils literal notranslate"><span class="pre">sudo</span></code> dedicados.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vigencia Reducida</p></td>
+<td><p>Limitar la validez de los certificados finales a períodos no superiores a 397 días para alinearse con los estándares web vigentes.</p></td>
+</tr>
+<tr class="row-even"><td><p>Listas de Revocación (CRL)</p></td>
+<td><p>Generar y mantener publicadas periódicamente las listas de revocación CRL para invalidar certificados comprometidos.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="referencias">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Referencias</a><a class="headerlink" href="#referencias" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.openssl.org/docs/">OpenSSL Official Documentation</a></p></li>
+<li><p><a class="reference external" href="https://wiki.archlinux.org/title/OpenSSL">Arch Linux Wiki - OpenSSL / Creating a CA</a></p></li>
+<li><p><a class="reference external" href="https://pki-tutorial.readthedocs.io/">OpenSSL PKI Tutorial</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../MiTm.html" class="btn btn-neutral float-left" title="Ataques Man-in-the-Middle (MitM) y TLS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../TLS-libvirt/1-concepts.html" class="btn btn-neutral float-right" title="certificados" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

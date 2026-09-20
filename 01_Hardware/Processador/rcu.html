@@ -1,0 +1,227 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RCU (Read-Copy-Update) &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="cpusets" href="cpusets.html" />
+    <link rel="prev" title="NUMA" href="numa.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#processador">Processador</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Arquitectura del Procesador y Kernel</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Arquitectura del Procesador y Kernel</a></li>
+      <li class="breadcrumb-item active">RCU (Read-Copy-Update)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/Processador/rcu.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rcu-read-copy-update">
+<h1>RCU (Read-Copy-Update)<a class="headerlink" href="#rcu-read-copy-update" title="Link to this heading"></a></h1>
+<p><strong>RCU</strong> (<em>Read-Copy-Update</em> o <em>Leer-Copiar-Actualizar</em>) es un mecanismo de sincronización para sistemas operativos y entornos multihilo de alto rendimiento que permite la lectura concurrente de datos compartidos sin necesidad de aplicar bloqueos (<em>lockless reads</em>).</p>
+<p>A diferencia de los mecanismos tradicionales de exclusión mutua (como los <em>spinlocks</em> o semáforos), RCU optimiza de forma drástica las operaciones de lectura a costa de trasladar la complejidad y la sobrecarga computacional a los procesos que realizan las actualizaciones.</p>
+<section id="concepto-y-principio-de-funcionamiento">
+<h2>Concepto y Principio de Funcionamiento<a class="headerlink" href="#concepto-y-principio-de-funcionamiento" title="Link to this heading"></a></h2>
+<p>RCU no implementa la exclusión mutua en un sentido convencional: los <strong>lectores RCU</strong> pueden (y de hecho lo hacen) ejecutarse de manera estrictamente concurrente con las <strong>actualizaciones RCU</strong>.</p>
+<p>En lugar de forzar a los lectores a esperar a que una actualización finalice, RCU mantiene múltiples versiones de las estructuras de datos en memoria (un caso claro de compromiso o <em>trade-off</em> espacio-tiempo):</p>
+<ol class="arabic simple">
+<li><p><strong>Lectura</strong>: Los lectores acceden directamente a los datos mediante punteros sin adquirir bloqueos ni modificar contadores atómicos, procediendo con la misma eficiencia que si no existiera sincronización.</p></li>
+<li><p><strong>Copia y Actualización</strong>: El hilo actualizador no modifica la estructura de datos <em>in situ</em>. En su lugar, asigna una nueva copia en memoria, realiza los cambios sobre dicha copia y finalmente actualiza el puntero global utilizando una operación atómica para que apunte a la nueva versión.</p></li>
+<li><p><strong>Periodo de Gracia (*Grace Period*)</strong>: Los lectores preexistentes continúan leyendo de forma segura la versión antigua. El actualizador espera a que todos los lectores que mantenían referencias a la versión previa terminen sus secciones críticas antes de liberar la memoria de la estructura antigua.</p></li>
+</ol>
+</section>
+<section id="fases-de-una-operacion-de-actualizacion">
+<h2>Fases de una Operación de Actualización<a class="headerlink" href="#fases-de-una-operacion-de-actualizacion" title="Link to this heading"></a></h2>
+<p>Toda actualización basada en RCU consta de tres fases bien diferenciadas:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[ Estructura A ] &lt;--- Puntero Global (Lectores activos leen A)
+       |
+(Fase 1: Copia y Modificación)
+       v
+[ Estructura B ] (Nueva versión con cambios)
+       |
+(Fase 2: Publicación Atómica)
+       v
+[ Estructura B ] &lt;--- Puntero Global (Nuevos lectores leen B)
+       |
+(Fase 3: Periodo de Gracia / Grace Period)
+[ Esperar a que los lectores de A terminen ]
+       |
+       v
+[ Liberar Estructura A ]
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Publicación</strong>: Cambio atómico del puntero mediante primitivas como <code class="docutils literal notranslate"><span class="pre">rcu_assign_pointer()</span></code>.</p></li>
+<li><p><strong>Espera del Periodo de Gracia</strong>: Retraso en la liberación de recursos hasta garantizar que ninguna CPU ni hilo mantenga referencias a la versión obsoleta (mediante funciones como <code class="docutils literal notranslate"><span class="pre">synchronize_rcu()</span></code> o <code class="docutils literal notranslate"><span class="pre">call_rcu()</span></code>).</p></li>
+<li><p><strong>Reclamación</strong>: Liberación física de la memoria de la versión antigua (por ejemplo, mediante <code class="docutils literal notranslate"><span class="pre">kfree()</span></code>).</p></li>
+</ul>
+</section>
+<section id="primitivas-de-rcu-en-el-kernel-de-linux">
+<h2>Primitivas de RCU en el Kernel de Linux<a class="headerlink" href="#primitivas-de-rcu-en-el-kernel-de-linux" title="Link to this heading"></a></h2>
+<p>En el kernel de Linux, RCU proporciona una API estandarizada para delimitar las secciones críticas de lectura y las secuencias de modificación:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Primitivas Principales de RCU</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Función / Primitiva</p></th>
+<th class="head"><p>Descripción / Propósito</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rcu_read_lock()</span></code></p></td>
+<td><p>Marca el inicio de una sección crítica de lectura RCU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rcu_read_unlock()</span></code></p></td>
+<td><p>Marca el final de una sección crítica de lectura.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rcu_dereference()</span></code></p></td>
+<td><p>Obtiene de forma segura un puntero gestionado por RCU dentro de un lector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rcu_assign_pointer()</span></code></p></td>
+<td><p>Asigna atómicamente un nuevo puntero garantizando las barreras de memoria necesarias.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">synchronize_rcu()</span></code></p></td>
+<td><p>Bloquea al actualizador hasta que haya transcurrido un periodo de gracia completo.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">call_rcu()</span></code></p></td>
+<td><p>Registra una función de <em>callback</em> asíncrona para liberar la memoria al finalizar el periodo de gracia sin bloquear al actualizador.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="casos-de-uso-e-importancia">
+<h2>Casos de Uso e Importancia<a class="headerlink" href="#casos-de-uso-e-importancia" title="Link to this heading"></a></h2>
+<p>RCU es el mecanismo de sincronización preferido dentro del núcleo de Linux para estructuras de datos con una <strong>frecuencia de lectura muy superior a la de escritura</strong> (<em>read-mostly data structures</em>).</p>
+<p>Algunos ejemplos prácticos de uso incluyen:</p>
+<ul class="simple">
+<li><p>Tablas de enrutamiento de red (IP routing tables).</p></li>
+<li><p>Tablas de descriptores de archivos y montajes del sistema de archivos (VFS dcache/inode lookup).</p></li>
+<li><p>Listas de permisos y estructuras de control de acceso del sistema.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="numa.html" class="btn btn-neutral float-left" title="NUMA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cpusets.html" class="btn btn-neutral float-right" title="cpusets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

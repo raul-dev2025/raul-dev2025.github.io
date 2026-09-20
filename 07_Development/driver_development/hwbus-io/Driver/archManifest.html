@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manifiesto de Arquitectura hwbus-io &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Arquitectura del Módulo" href="modArch.html" />
+    <link rel="prev" title="Modo de empleo: Scripts de Integración CI" href="../ci-cd/modoDeEmpleo.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../Foundry/index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">HwBus-IO</a></li>
+      <li class="breadcrumb-item active">Manifiesto de Arquitectura hwbus-io</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/hwbus-io/Driver/archManifest.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="manifiesto-de-arquitectura-hwbus-io">
+<h1>Manifiesto de Arquitectura hwbus-io<a class="headerlink" href="#manifiesto-de-arquitectura-hwbus-io" title="Link to this heading"></a></h1>
+<p>Este documento define la estructura de directorios, la organización de las cabeceras y las responsabilidades del código dentro del proyecto <strong>hwbus-io</strong>.</p>
+<section id="vision-general-de-la-arquitectura">
+<h2>Visión General de la Arquitectura<a class="headerlink" href="#vision-general-de-la-arquitectura" title="Link to this heading"></a></h2>
+<p>El proyecto está diseñado bajo el principio de que <strong>el núcleo principal es un controlador de dispositivo del kernel de Linux (driver module)</strong>. Por esta razón, el código reside de forma predeterminada en el espacio de kernel, mientras que el espacio de usuario se aísla explícitamente dentro de subdirectorios denominados <code class="docutils literal notranslate"><span class="pre">user/</span></code>.</p>
+<ul class="simple">
+<li><p><strong>Espacio de Kernel (Driver Core):</strong> Implementa la lógica del controlador, acceso a hardware y exposición de interfaces vía <code class="docutils literal notranslate"><span class="pre">sysfs</span></code>.</p></li>
+<li><p><strong>Espacio de Usuario (Userland/LTP):</strong> Proporciona utilidades y herramientas auxiliares para facilitar la ejecución de pruebas automatizadas (Linux Test Project) y diagnóstico.</p></li>
+</ul>
+</section>
+<section id="estructura-del-arbol-de-directorios">
+<h2>Estructura del Árbol de Directorios<a class="headerlink" href="#estructura-del-arbol-de-directorios" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hwbus-io/
+├── include/
+│   ├── hwbus-io.h            # Interfaz pública / IOCTL del driver
+│   ├── sysfs_driver.h        # Declaraciones nativas del driver para exponencia en sysfs
+│   ├── sysfs_pci.h           # Estructuras y macros PCI para el driver
+│   └── user/
+│       ├── hwbus_error.h     # Cabecera de errores exclusiva para espacio de usuario
+│       └── sysfs_utils.h     # Helpers POSIX para herramientas de usuario y tests
+│
+└── src/
+    ├── core/                 # Lógica genérica y utilidades
+    │   ├── source.c          # Abstracciones auxiliares genéricas
+    │   └── user/             # Implementación C para espacio de usuario (LTP, CLI)
+    │       ├── hwbus_error.c
+    │       └── sysfs_utils.c
+    │
+    └── driver/               # CÓDIGO DEL CONTROLADOR (Infraestructura de estudio)
+        └── sysfs_driver.c    # Implementación de callbacks y nodos sysfs
+</pre></div>
+</div>
+</section>
+<section id="definicion-de-directorios-y-componentes">
+<h2>Definición de Directorios y Componentes<a class="headerlink" href="#definicion-de-directorios-y-componentes" title="Link to this heading"></a></h2>
+<section id="directorio-include">
+<h3>1. Directorio <code class="docutils literal notranslate"><span class="pre">include/</span></code><a class="headerlink" href="#directorio-include" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Raíz de</strong> <code class="docutils literal notranslate"><span class="pre">include/</span></code>:
+Ámbito exclusivo del controlador. Contiene cabeceras que utilizan tipos del kernel de Linux (<code class="docutils literal notranslate"><span class="pre">&lt;linux/...&gt;</span></code>). No deben incluirse cabeceras de la biblioteca C estándar (<code class="docutils literal notranslate"><span class="pre">glibc</span></code>).</p></li>
+<li><p><strong>Subdirectorio</strong> <code class="docutils literal notranslate"><span class="pre">include/user/</span></code>:
+Alojamiento exclusivo para la infraestructura de espacio de usuario.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">hwbus_error.h</span></code>: Definición de la interfaz de traducción de errores mediante <code class="docutils literal notranslate"><span class="pre">hwbus_strerror()</span></code> para espacio de usuario.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sysfs_utils.h</span></code>: Declaración de utilidades POSIX (<code class="docutils literal notranslate"><span class="pre">sysfs_read_*</span></code>, <code class="docutils literal notranslate"><span class="pre">sysfs_build_path</span></code>) para inspección de <code class="docutils literal notranslate"><span class="pre">/sys</span></code> desde tests.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="directorio-src">
+<h3>2. Directorio <code class="docutils literal notranslate"><span class="pre">src/</span></code><a class="headerlink" href="#directorio-src" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src/core/</span></code>:
+Almacena la lógica genérica y funciones auxiliares transversales (<code class="docutils literal notranslate"><span class="pre">source.c</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/core/user/</span></code>:
+Contiene la implementación en C de las librerías auxiliares de espacio de usuario (<code class="docutils literal notranslate"><span class="pre">hwbus_error.c</span></code>, <code class="docutils literal notranslate"><span class="pre">sysfs_utils.c</span></code>). Se compila usando la cadena de herramientas estándar POSIX/glibc.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/driver/</span></code>:
+Contiene el código fuente del controlador del kernel relativo a la infraestructura de estudio (PCI, NVMe, Net).</p>
+<ul>
+<li><p>Implementa los callbacks <code class="docutils literal notranslate"><span class="pre">show</span></code>/<code class="docutils literal notranslate"><span class="pre">store</span></code> y registra los atributos de <code class="docutils literal notranslate"><span class="pre">sysfs</span></code> en el módulo (<code class="docutils literal notranslate"><span class="pre">sysfs_driver.c</span></code>).</p></li>
+<li><p><strong>Regla:</strong> Queda prohibido hacer <code class="docutils literal notranslate"><span class="pre">#include</span></code> de archivos ubicados en <code class="docutils literal notranslate"><span class="pre">include/user/</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="soporte-y-pruebas">
+<h3>3. Soporte y Pruebas<a class="headerlink" href="#soporte-y-pruebas" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Scripts/</span></code>:
+Scripts de shell para la orquestación del flujo de CI/CD remoto, firma con certificados Secure Boot (<code class="docutils literal notranslate"><span class="pre">kmod-sign-file</span></code>) y gestión de logs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/</span></code>:
+Entorno de pruebas y arnés Makefile para la compilación de módulos de test independientes (ej. <code class="docutils literal notranslate"><span class="pre">hello.ko</span></code>).</p></li>
+</ul>
+</section>
+</section>
+<section id="reglas-de-estilo-y-compilacion">
+<h2>Reglas de Estilo y Compilación<a class="headerlink" href="#reglas-de-estilo-y-compilacion" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Alineación de Punteros:</strong>
+El código C en espacio de kernel y usuario sigue la guía de estilo oficial del Kernel de Linux (<em>Linux Kernel Coding Style</em>). Los punteros se alinean con la variable (<code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">*buf</span></code>) y no con el tipo.</p></li>
+<li><p><strong>Aislamiento de Dependencias:</strong>
+Las fuentes bajo <code class="docutils literal notranslate"><span class="pre">src/driver/</span></code> se compilan exclusivamente mediante <strong>Kbuild</strong> contra las cabeceras del kernel objetivo. Las fuentes bajo <code class="docutils literal notranslate"><span class="pre">src/core/user/</span></code> se compilan con la biblioteca estándar de C.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ci-cd/modoDeEmpleo.html" class="btn btn-neutral float-left" title="Modo de empleo: Scripts de Integración CI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modArch.html" class="btn btn-neutral float-right" title="Arquitectura del Módulo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

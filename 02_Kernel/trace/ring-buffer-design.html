@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ring buffer &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="IO-APIC" href="../x86/1-IO-APIC.html" />
+    <link rel="prev" title="RCU en sistemas uniprocesador" href="../RCU/UP.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#trace">trace</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Ring buffer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diseno-del-anillo-de-bufer">Diseño del anillo de búfer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias">Referencias</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#agradecimientos">Agradecimientos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Ring buffer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/trace/ring-buffer-design.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ring-buffer">
+<h1>Ring buffer<a class="headerlink" href="#ring-buffer" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="diseno-del-anillo-de-bufer">
+<h2>Diseño del anillo de búfer<a class="headerlink" href="#diseno-del-anillo-de-bufer" title="Link to this heading"></a></h2>
+<section id="terminologia-utilizada">
+<h3>Terminología utilizada<a class="headerlink" href="#terminologia-utilizada" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tail</span></code> - Dónde las <em>nuevas escrituras</em>, suceden en el <em>anillo del búfer</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">head</span></code> - Dónde las <em>nuevas lecturas</em>, suceden en el <em>anillo del búfer</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">producer</span></code> - La tarea de escribir dentro del <em>anillo del búfer</em> (igual que <code class="docutils literal notranslate"><span class="pre">writer</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">writer</span></code> - Igual que <code class="docutils literal notranslate"><span class="pre">producer</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">consumer</span></code> - La tarea de escribir desde el <em>búfer</em> (igual que <code class="docutils literal notranslate"><span class="pre">reader</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reader</span></code> - Igual que <code class="docutils literal notranslate"><span class="pre">consumer</span></code>. <code class="docutils literal notranslate"><span class="pre">reader_page</span></code> - Una página fuera del <em>anillo de búfer</em>, únicamente utilizada -mayor- mente, por el <code class="docutils literal notranslate"><span class="pre">reader</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">head_page</span></code> - Puntero a la página, que el <code class="docutils literal notranslate"><span class="pre">reader</span></code> leerá en la próxima lectura. <code class="docutils literal notranslate"><span class="pre">tail_page</span></code> - Puntero a la página, que el <code class="docutils literal notranslate"><span class="pre">writer</span></code> escribirá en la próxima escritura.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">commit_page</span></code> - Puntero a la página, con la última y finalizada, escritura no anidada. <code class="docutils literal notranslate"><span class="pre">cmpxchg</span></code> - Transacción <em>atómica</em> asistida por <em>hardware</em>, que lleva a cabo lo siguiente: * <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">B</span></code> si previamente <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">==</span> <span class="pre">C</span></code>. * <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">cmpxchg(A,</span> <span class="pre">C,</span> <span class="pre">B)</span></code>, está diciendo que será reemplazado <code class="docutils literal notranslate"><span class="pre">A</span></code> por <code class="docutils literal notranslate"><span class="pre">B</span></code> si, y sólo <em>si</em>(condicional), el <em>presente</em> <code class="docutils literal notranslate"><span class="pre">A</span></code> es igual a <code class="docutils literal notranslate"><span class="pre">C</span></code>, se pondrá el antiguo(presente) <code class="docutils literal notranslate"><span class="pre">A</span></code> dentro de <code class="docutils literal notranslate"><span class="pre">R</span></code>. * <code class="docutils literal notranslate"><span class="pre">R</span></code> obtiene el anterior <code class="docutils literal notranslate"><span class="pre">A</span></code>, en <em>función</em> de <em>si</em> <code class="docutils literal notranslate"><span class="pre">A</span></code> es actualizado con <code class="docutils literal notranslate"><span class="pre">B</span></code> o <em>no</em>. * Para ver si la <em>actualización</em>, fué existosa, una comparación <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">==</span> <span class="pre">C</span></code> podrá ser usada.</p></li>
+</ul>
+</section>
+<section id="el-anillo-de-bufer-generico">
+<h3>El anillo de búfer genérico<a class="headerlink" href="#el-anillo-de-bufer-generico" title="Link to this heading"></a></h3>
+<p>El <em>anillo de búfer</em> puede ser utilizado en ambos casos; en <em>modo sobreescritura</em>, o en <em>modo</em> <code class="docutils literal notranslate"><span class="pre">producer/consumer</span></code>.</p>
+<p>El <em>modo</em><code class="docutils literal notranslate"><span class="pre">producer/consumer</span></code>es donde el <code class="docutils literal notranslate"><span class="pre">producer</span></code> estaba <em>rellenando el búfer</em>, antes de que el <code class="docutils literal notranslate"><span class="pre">consumer</span></code> pudiese <em>liberar</em> cualquier cosa. El <code class="docutils literal notranslate"><span class="pre">producer</span></code> dejará de escribir en el búfer. Ésto perderá los <em>eventos</em> más recientes.</p>
+<p>El <em>modo sobreescritura</em>, sucede si el <code class="docutils literal notranslate"><span class="pre">producer</span></code> estaba rellenando el búfer, antes de que el <code class="docutils literal notranslate"><span class="pre">consumer</span></code>, pudiese <em>liberar</em> nada. El <code class="docutils literal notranslate"><span class="pre">producer</span></code> sobreescribirá los datos más antiguos. Ésto perderá los <em>eventos</em> más antiguos.</p>
+<p>Dos <code class="docutils literal notranslate"><span class="pre">writer</span></code>s, no pueden escribir al mismo tiempo -<em>en el mismo búfer por CPU</em>, pero un <code class="docutils literal notranslate"><span class="pre">writer</span></code> podrá interrumpit a otro <code class="docutils literal notranslate"><span class="pre">writer</span></code>, aunque deberá finaliar la escritura, antes de que el previo <code class="docutils literal notranslate"><span class="pre">writer</span></code> pueda continuar. Ésto es muy importante, para el <em>algoritmo</em>, El <code class="docutils literal notranslate"><span class="pre">writer</span></code> actúa como <em>pila(stack)</em>. La forma en que trabajan las interrupciones, refuerzan su comportamiento.</p>
+<p><code class="docutils literal notranslate"><span class="pre">writer1</span> <span class="pre">start</span>&#160; <span class="pre">&lt;preempted&gt;</span> <span class="pre">writer2</span> <span class="pre">start</span>&#160; <span class="pre">&lt;preempted&gt;</span> <span class="pre">writer3</span> <span class="pre">start</span>&#160; <span class="pre">writer3</span> <span class="pre">finishes</span> <span class="pre">writer2</span> <span class="pre">finishes</span>&#160; <span class="pre">writer1</span> <span class="pre">finishes</span></code></p>
+<p>Ésto es mas como un <code class="docutils literal notranslate"><span class="pre">writer</span></code> es adelantado por la <em>interrupción</em> y también como la interrupción hace la escritura.</p>
+<p>Los <code class="docutils literal notranslate"><span class="pre">reader</span></code>s pueden sucederse en cualquier momento. Pero dos <code class="docutils literal notranslate"><span class="pre">reader</span></code>s, no podrán <em>correr</em> al mismo tiempo, ni podrá un <code class="docutils literal notranslate"><span class="pre">reader</span></code> <em>adelantar/interrumpir</em> a otro <code class="docutils literal notranslate"><span class="pre">reader</span></code>. Un <code class="docutils literal notranslate"><span class="pre">reader</span></code> no podrá <em>adelantar/interrumpir</em> a un <code class="docutils literal notranslate"><span class="pre">writer</span></code>, pero podrá <em>leer/usar</em>, desde el búfer, al mismo tiempo que el <code class="docutils literal notranslate"><span class="pre">writer</span></code> esté escribiendo. El <code class="docutils literal notranslate"><span class="pre">reader</span></code> deberá encontrase en otro <em>procesador</em> para hacer esto. Un <code class="docutils literal notranslate"><span class="pre">reader</span></code> podrá leer en su própio <em>procesador</em>, y también ser adelantado por el <code class="docutils literal notranslate"><span class="pre">writer</span></code>.</p>
+<p>Un <code class="docutils literal notranslate"><span class="pre">writer</span></code> podrá adelantar a un <code class="docutils literal notranslate"><span class="pre">reader</span></code>. pero un <code class="docutils literal notranslate"><span class="pre">reader</span></code> no puede adelantar a un <code class="docutils literal notranslate"><span class="pre">writer</span></code>. Sin embargo, un <code class="docutils literal notranslate"><span class="pre">reader</span></code> podrá leer el búfer al mismo tiempo -en otro proce - sador, que un writer.</p>
+<p>El <em>anillo de búfer</em> está constituido por una lista de páginas agrupadas por una lista enlazada.</p>
+<p>En la inicialización un <code class="docutils literal notranslate"><span class="pre">reader</span></code> de página, es asignado por el <code class="docutils literal notranslate"><span class="pre">reader</span></code> que no pertenece al <em>anillo de búfer</em>.</p>
+<p>La <code class="docutils literal notranslate"><span class="pre">head_page</span></code>, <code class="docutils literal notranslate"><span class="pre">tail_page</span></code>, y <code class="docutils literal notranslate"><span class="pre">commit_page</span></code>, son inicializados apuntando a la misma página.</p>
+<p>El <code class="docutils literal notranslate"><span class="pre">reader</span></code> de página, es inicializado para tener su siguiente <em>puntero</em> apuntando al <code class="docutils literal notranslate"><span class="pre">head</span></code> de página y, a su <em>puntero</em> anterior, a la página antes de <code class="docutils literal notranslate"><span class="pre">head</span></code> de página.</p>
+<p>El <code class="docutils literal notranslate"><span class="pre">reader</span></code> una página para su própio uso. Durante el inicio, esta página es asignada, pero no adjuntada a la lista. Cuando el <code class="docutils literal notranslate"><span class="pre">reader</span></code> quiera leer desde el búfer, si su página está vacía -como lo está durante el inicio, intercambiará su página, con la <code class="docutils literal notranslate"><span class="pre">head_page</span></code>. El anterior <code class="docutils literal notranslate"><span class="pre">reader</span></code> de página,se convertirá en parte del anillo de búfer y, el <code class="docutils literal notranslate"><span class="pre">head_page</span></code> será retirado. La página después de la inserción de página -viejo <code class="docutils literal notranslate"><span class="pre">reader_page</span></code> será la nueva <code class="docutils literal notranslate"><span class="pre">head</span></code> de página.</p>
+<p>Una vez la nueva página, sea entregada al <code class="docutils literal notranslate"><span class="pre">reader</span></code>, el lector hará lo que él quiera con ella, tan pronto como el <code class="docutils literal notranslate"><span class="pre">writer</span></code> haya dejado la página.</p>
+<p>Un ejemplo de como el <code class="docutils literal notranslate"><span class="pre">reader</span></code> de página es intercambiado: nótese que ésto no muestra el <code class="docutils literal notranslate"><span class="pre">head</span></code> de página en el anillo de búfer, únicamente es para demostrar el intercambio.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema1</span></code></p>
+<p>Es posible que la página intercambiada sea la página entregada y lapágina <code class="docutils literal notranslate"><span class="pre">tail</span></code>, si lo que está en el <em>anillo de búfer</em> es menos, que lo que está soportadom en una página de <em>búfer</em>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema2</span></code></p>
+<p>En este caso, es aún válido para el <em>algoritmo</em>. Cuando el <code class="docutils literal notranslate"><span class="pre">writer</span></code> deja la página, símplemente se va dentro del anillo de búfer, hasta que el lector de página, apunta la siguiente localización en el <em>anillo de búfer</em>.</p>
+<p>Los punteros principales:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">reader</span></code> de página - La página únicamente utilizada por el <code class="docutils literal notranslate"><span class="pre">reader</span></code> que no es parte del <em>anillo de buffer</em> -podría   intercambiarse dentro.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">head</span></code> de página - la siguiente página en el <em>anillo de búfer</em> que sea intercambiada con el lector de página.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tail</span></code>de página - La página donde toma lugar, la siguiente escritura.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">commit</span></code> de página - la página que terminó por última vez una escritura.</p></li>
+</ul>
+<p>La página de <code class="docutils literal notranslate"><span class="pre">commit</span></code> sólo es actualizada por el <code class="docutils literal notranslate"><span class="pre">writer</span></code> más alejado en la pila de <code class="docutils literal notranslate"><span class="pre">writer</span></code>s. Una escritura que adelanta a otra escritura, no moverá la página cometida.</p>
+<p>Cuando los datos son escritos al <code class="docutils literal notranslate"><span class="pre">anillo</span> <span class="pre">de</span> <span class="pre">búfer</span></code>, es reservada una posición en el mismo y, traspasado al <code class="docutils literal notranslate"><span class="pre">writer</span></code>. Cuando la escritura termina de escribir los datos en esa posición, acomete la escritura.</p>
+<p>Otra escritura -o lectura, podrá tomar lugar en cualquier momento, durante su transacción. Si sucede otra escritura, debe finalizar antes de continuar con la escritura anterior.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema3</span></code></p>
+<p>El puntero de <code class="docutils literal notranslate"><span class="pre">commit</span></code> apunta a última localización de escritura, que fué acometida sin adelantar a otra escritura. Cuando una escritura <em>adelanta</em> a otra, únicamente aparecerá como pendiente, y no será <em>cometida</em>, hasta que hayan sido realizadas todas las escrituras.</p>
+<p>La página de consignación(<em>commit</em>) apunta a la página donde fue realizado el último <em>commit</em>. La página <code class="docutils literal notranslate"><span class="pre">tail</span></code> apunta a la página con la última escritura -antes de acomenterla.</p>
+<p>El orden de páginas es:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pagina<span class="w"> </span>head
+pagina<span class="w"> </span>commit
+pagina<span class="w"> </span>tail
+</pre></div>
+</div>
+<p>Escenario posible:</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema4</span></code></p>
+<p>Hay un caso especial, en el que la página <code class="docutils literal notranslate"><span class="pre">head</span></code>, pueda encontrarse detrás de la página <code class="docutils literal notranslate"><span class="pre">commit</span></code> y de la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>. Sucede cuando las páginas <code class="docutils literal notranslate"><span class="pre">commit</span></code> -y <code class="docutils literal notranslate"><span class="pre">tail</span></code>, han sido intercambiadas con la página <code class="docutils literal notranslate"><span class="pre">reader</span></code>. Ésto es por que la página <code class="docutils literal notranslate"><span class="pre">head</span></code> es siempre parte del <em>anillo de búfer</em>, pero la página <code class="docutils literal notranslate"><span class="pre">reader</span></code> no. Siempre que la página cometida haya sido menos que la página cometida en el <em>anillo de búfer</em>, y un <code class="docutils literal notranslate"><span class="pre">reder</span></code> haya intercambiado la página, intercambiará la página <code class="docutils literal notranslate"><span class="pre">comit</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema5</span></code></p>
+<p>En éste caso, la página <code class="docutils literal notranslate"><span class="pre">head</span></code>, no será movida cuando <code class="docutils literal notranslate"><span class="pre">tail</span></code> y <code class="docutils literal notranslate"><span class="pre">commit</span></code> sean movidos de vuelta a <em>anillo de búfer</em>.</p>
+<p>El <code class="docutils literal notranslate"><span class="pre">reader</span></code> no puede cambiar a la página dentro del búfer, si la página <code class="docutils literal notranslate"><span class="pre">mcommit</span></code> continua en <em>esa</em> página. Si la <em>lectura</em>, encuentra el último <code class="docutils literal notranslate"><span class="pre">commit</span></code> -<em>commit</em> real no pendiente o reservado, entonces no habrá nada más que leer. El búfer es considerado <em>vacío</em>, hasta que otro <em>commit</em> finalice.</p>
+<p>Cuando <code class="docutils literal notranslate"><span class="pre">tail</span></code> encuentre la págian <code class="docutils literal notranslate"><span class="pre">head</span></code>, si el búfer está en modo <em>msobreescritura</em>, la página <code class="docutils literal notranslate"><span class="pre">head</span></code>, será adelantada una vez. Si el búfer, se encuentra en modo <code class="docutils literal notranslate"><span class="pre">producer/consumer</span></code>, la <em>escritura</em> fallará.</p>
+<p>Modo sobreescritura:</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema6</span></code></p>
+<p><strong>noata,</strong> la página <code class="docutils literal notranslate"><span class="pre">reader</span></code> seguirá apuntando a la página <em>anterior</em> <code class="docutils literal notranslate"><span class="pre">head</span></code>. Pero cuando tenga lugar un intercambio,, utilizará una página <code class="docutils literal notranslate"><span class="pre">head</span></code> más reciente.</p>
+</section>
+<section id="desbloqueando-el-anillo-de-bufer">
+<h3>“Desbloqueando” el anillo de búfer<a class="headerlink" href="#desbloqueando-el-anillo-de-bufer" title="Link to this heading"></a></h3>
+<p>La idea, detrás del <em>algoritmo</em> de “desbloqueo(lockless)”, es combinar el movimiento del puntero de <code class="docutils literal notranslate"><span class="pre">head_page</span></code> intercambiando la página con el <code class="docutils literal notranslate"><span class="pre">reader</span></code>. La <em>banderas de estado*[#f1], son colocados dentro del puntero a la página. Para hacer ésto, cada página debe estar alineada en memoria, con *4 byttes</em>. Ésto permitirá a los <em>2 bits</em> menos significativos de la dirección, ser usados como “bandera”, ya que siempre serán cero en la dirección. Para obtener la dirección, simplemente habrá que desmarcar dicha <em>bandera</em>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MASK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>~3
+address<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>MASK
+</pre></div>
+</div>
+<p>Las dos <em>banderas</em> serán guardas, por estos dos <em>bits</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>HEADER<span class="w"> </span>--<span class="w"> </span>la<span class="w"> </span>página<span class="w"> </span>siendo<span class="w"> </span>apuntada,<span class="w"> </span>es<span class="w"> </span>la<span class="w"> </span>página<span class="w"> </span><span class="sb">`</span>head<span class="sb">`</span>.
+UPDATE<span class="w"> </span>--<span class="w"> </span>la<span class="w"> </span>página<span class="w"> </span>siendo<span class="w"> </span>apuntada,<span class="w"> </span>está<span class="w"> </span>siendo<span class="w"> </span>actualizada<span class="w"> </span>por<span class="w"> </span>el<span class="w"> </span><span class="sb">`</span>writer<span class="sb">`</span>
+-será<span class="w"> </span>o<span class="w"> </span>va<span class="w"> </span>a<span class="w"> </span>ser,<span class="w"> </span>la<span class="w"> </span>pagina<span class="w"> </span><span class="sb">`</span>head<span class="sb">`</span>.
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">esquema7</span></code></p>
+<p>El puntero de arriba, “-H-&gt;” tendría la bandera <code class="docutils literal notranslate"><span class="pre">HEADER</span></code> configurada. Así que la siguiente página es la página próxima(más cercana), para ser intercambiada por el <code class="docutils literal notranslate"><span class="pre">reader</span></code>.</p>
+<p>Cuando la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>, encuentra el puntero <code class="docutils literal notranslate"><span class="pre">head</span></code>, utilizará <code class="docutils literal notranslate"><span class="pre">cmpxchg</span></code> para cambiar el puntero al estado ACTUALIZAR(UPDATE):</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema8</span></code></p>
+<p>“-U-&gt;” representa al puntero en estado <code class="docutils literal notranslate"><span class="pre">UPDATE</span></code>.</p>
+<p>Cualquier acceso al <code class="docutils literal notranslate"><span class="pre">reader</span></code>, necesitará usar algún tipo de <em>bloqueo</em>, par <em>serializar</em> los <code class="docutils literal notranslate"><span class="pre">reader</span></code> s. Pero los <code class="docutils literal notranslate"><span class="pre">writer</span></code> s, nunca utilizarán un <em>bloqueo</em>, para escribir en el <em>anillo de búfer</em>. Ésto significa que, no es necesario preocuparse por un único <code class="docutils literal notranslate"><span class="pre">reader</span></code>, y las escrituras sólo adelantarán en formación de <em>pila(stack)</em>.</p>
+<p>Cuando un <code class="docutils literal notranslate"><span class="pre">reader</span></code> intenta intercambiar la página con el <em>anillo de búfer</em>, también usará <code class="docutils literal notranslate"><span class="pre">cmpxchg</span></code>. Si la bandera de <em>bit</em>, en el puntero de la página <code class="docutils literal notranslate"><span class="pre">head</span></code>, no tiene configurado la bandera <code class="docutils literal notranslate"><span class="pre">HEADER</span></code>, la comparación fallará, y el <code class="docutils literal notranslate"><span class="pre">reader</span></code> necesitará mirar a la nueva página <code class="docutils literal notranslate"><span class="pre">head</span></code> e intentarlo de nuevo.</p>
+<p>El lector intercambia la página <code class="docutils literal notranslate"><span class="pre">reader</span></code>, cómo sigue:</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema9</span></code></p>
+<p>El lector configura el siguiente puntero de la página <code class="docutils literal notranslate"><span class="pre">reader</span></code>, cómo CABECERA(<code class="docutils literal notranslate"><span class="pre">HEADER</span></code>) detrás de la página <code class="docutils literal notranslate"><span class="pre">head</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esqquema10</span></code></p>
+<p>Hace un <code class="docutils literal notranslate"><span class="pre">cmpxchg</span></code> (comparación/cambio?), con el puntero a laprevia página <code class="docutils literal notranslate"><span class="pre">head</span></code>, para hacerla apuntar a la página <code class="docutils literal notranslate"><span class="pre">reader</span></code>. Nótese, que el nuevo puntero, no tiene la <em>bandera</em> <code class="docutils literal notranslate"><span class="pre">HEADER</span></code> configurada. Ésta acción <em>atómica</em>, mueve la página <code class="docutils literal notranslate"><span class="pre">head</span></code> hacia delante.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esqquema11</span></code></p>
+<p>Después de ser configurada la nueva página <code class="docutils literal notranslate"><span class="pre">head</span></code>, el puntero anterior de la página <code class="docutils literal notranslate"><span class="pre">head</span></code>, es actualizado a la página <code class="docutils literal notranslate"><span class="pre">reader</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esqquema12</span></code></p>
+<p>Otro punto importante: la página a la que vuelve a apuntar la página <code class="docutils literal notranslate"><span class="pre">reader</span></code> por su previo puntero, -la que ahora apunta a la nueva página <code class="docutils literal notranslate"><span class="pre">head</span></code>, nunca volverá a aapuntar a la página <code class="docutils literal notranslate"><span class="pre">reader</span></code>. Ésto es por que la página <code class="docutils literal notranslate"><span class="pre">reader</span></code> no es parte del anillo de búfer. Atravesar el anillo de búfer, vía <em>siguiente</em> puntero, siempre permanecerá en el <em>anillo</em>. Atravesar el anillo de búfer, vía <em>previo</em> puntero, puede que no.</p>
+<p>Nótese que la mforma de determinar una página <code class="docutils literal notranslate"><span class="pre">reader</span></code>, es simplemente examinandoel puntero anterior de la página. Si el siguiente puntero de la página anterior, no apunta de nuevo a la página original, entonces la página original es la página <code class="docutils literal notranslate"><span class="pre">reader</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema13</span></code></p>
+<p>La forma en qque la página <code class="docutils literal notranslate"><span class="pre">head</span></code>, se mueve hacia delante:</p>
+<p>Cuando la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>, enccuentra a la página <code class="docutils literal notranslate"><span class="pre">head</span></code> y, en búfer se encuentra en modo sobreescritura, y tienen lugar otras <em>escrituras</em>, la página <code class="docutils literal notranslate"><span class="pre">head</span></code> debe moverse hacia delante antes de que el <code class="docutils literal notranslate"><span class="pre">writer</span></code> pueda mover la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>. La foma en que ésto se realiza es permitiendo que el <code class="docutils literal notranslate"><span class="pre">writer</span></code> lleve a cabo un <code class="docutils literal notranslate"><span class="pre">cmpxchg</span></code> para convertir el puntero a la página <code class="docutils literal notranslate"><span class="pre">head</span></code> con la <em>bandera</em> <code class="docutils literal notranslate"><span class="pre">HEADER</span></code>, cambiándole la <em>bandera</em> a <code class="docutils literal notranslate"><span class="pre">UPDATE</span></code>. Una vez esté hecho esto, el <em>lector</em>, no será capaz de intercambiar la página <code class="docutils literal notranslate"><span class="pre">head</span></code>, desde el búfer, así como tampoco mover la página <code class="docutils literal notranslate"><span class="pre">head</span></code>, hasta que el <code class="docutils literal notranslate"><span class="pre">writer</span></code> finalice la tarea.</p>
+<p>Ésto elimina cualquier trabajo que el <code class="docutils literal notranslate"><span class="pre">reader</span></code> pueda tener sobre el <code class="docutils literal notranslate"><span class="pre">writer</span></code>. El <code class="docutils literal notranslate"><span class="pre">reader</span></code> deberá <em>acelerar</em>, por esta razón el <code class="docutils literal notranslate"><span class="pre">reader</span></code> no podrá <em>adelantar</em> al <code class="docutils literal notranslate"><span class="pre">writer</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema14</span></code></p>
+<p>La siguiente página, se llevará a término en la nueva página <code class="docutils literal notranslate"><span class="pre">head</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema15</span></code></p>
+<p>Después de haber sido configurada la nueva página <code class="docutils literal notranslate"><span class="pre">head</span></code>, podrá configurarse el <em>antiguo</em> puntero de la página <code class="docutils literal notranslate"><span class="pre">head</span></code> a la normalidad.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema16</span></code></p>
+<p>Tras mover la página <code class="docutils literal notranslate"><span class="pre">head</span></code>, la página <code class="docutils literal notranslate"><span class="pre">tail</span></code> no podrá moverse adelante.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema17</span></code></p>
+<p>Arriba se muestran actualizaciones <em>triviales</em>. A partir de ahora, se mostrarán escenarios más complejos.</p>
+<p>Como se indicó anteriormente, si las suficientes <em>escrituras</em>, adelantan a la primera, la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>, podrá hacer todo el camino alrededor del búfer y, <em>cometer</em> la página. En éste punto, se deberán realizar <em>escrituras</em> -normalmente con algún tipo de aviso al usuario. Pero ¿qué sucede si <em>lo cometido</em> continuase en la págian <code class="docutils literal notranslate"><span class="pre">reader</span></code>? La página
+<code class="docutils literal notranslate"><span class="pre">commit</span></code> no es parte del anillo búfer. La página <code class="docutils literal notranslate"><span class="pre">tail</span></code> debe contar con esto.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema18</span></code></p>
+<p>Si la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>, tuviese que simplemente empujar la página <code class="docutils literal notranslate"><span class="pre">head</span></code> hacia delante, cuando el <code class="docutils literal notranslate"><span class="pre">commit</span></code> dejase la página <code class="docutils literal notranslate"><span class="pre">reader</span></code>, no apuntaría a la página correcta.</p>
+<p>La solución a ésto, es probar si la página <code class="docutils literal notranslate"><span class="pre">commit</span></code> continua en la página <code class="docutils literal notranslate"><span class="pre">reader</span></code>, antes de <em>empujar</em> la página <code class="docutils literal notranslate"><span class="pre">head</span></code>. Si es así, entonces se podrá asumir que la página <code class="docutils literal notranslate"><span class="pre">tail</span></code> <em>wrapped the buffer</em> , y se deberán realizar nuevas <em>escrituras</em>.</p>
+<p>Ésto no es una condición de carrera, por que la página <code class="docutils literal notranslate"><span class="pre">commit</span></code> sólo puede ser movida por el <code class="docutils literal notranslate"><span class="pre">writer</span></code> más alejado -el <code class="docutils literal notranslate"><span class="pre">writer</span></code> adelantado. Ésto significa que el <code class="docutils literal notranslate"><span class="pre">commit</span></code> no se moverá, hasta que el <code class="docutils literal notranslate"><span class="pre">writer</span></code> mueva la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>. El lector no puede intercambiar la página <code class="docutils literal notranslate"><span class="pre">reader</span></code> si también está siendo utilizado por la página <code class="docutils literal notranslate"><span class="pre">commit</span></code>. El <em>lector</em> podrá únicamente comprobar si el <code class="docutils literal notranslate"><span class="pre">commit</span></code> está fuera de la página <code class="docutils literal notranslate"><span class="pre">commit</span></code>. Una vez la página <code class="docutils literal notranslate"><span class="pre">commit</span></code> deje la página <code class="docutils literal notranslate"><span class="pre">reader</span></code> no volverá nunca atrás, a menos que el <code class="docutils literal notranslate"><span class="pre">reader</span></code>, haga otro intercambio con la página de búfer, que también es la página <code class="docutils literal notranslate"><span class="pre">commit</span></code>.</p>
+</section>
+<section id="escrituras-anidadas">
+<h3>Escrituras anidadas<a class="headerlink" href="#escrituras-anidadas" title="Link to this heading"></a></h3>
+<p>Cuando se <em>empuja</em> adelante la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>, primero debe adelantarse la página <code class="docutils literal notranslate"><span class="pre">head</span></code>, si ésta es la siguiente página. Si la página <code class="docutils literal notranslate"><span class="pre">head</span></code> no es la siguiente, la página <code class="docutils literal notranslate"><span class="pre">tail</span></code> simplemente será actualizada con <code class="docutils literal notranslate"><span class="pre">cmpxchg</span></code>.</p>
+<p>Únicamente los <code class="docutils literal notranslate"><span class="pre">writers</span> <span class="pre">moverán</span> <span class="pre">la</span> <span class="pre">página</span></code>tail`. Ésto se hace automáticamente para proteger <em>escrituras anidadas</em>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">temp_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>tail_page
+<span class="nv">next_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>temp_page-&gt;next
+cmpxchg<span class="o">(</span>tail_page,<span class="w"> </span>temp_page,<span class="w"> </span>next_page<span class="o">)</span>
+</pre></div>
+</div>
+<p>Arriba se muestra la actualización de la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>, si aún continúa apuntando a la página esperada. Si esto falla, se empujará adelante una <em>escritura anidada</em>, la escritura en curso, no necesitará hacerlo.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema19</span></code></p>
+<p>Actúa la <em>escrituras anidada</em>, moviendo la página <code class="docutils literal notranslate"><span class="pre">tail</span></code> hacia adelante.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema20</span></code></p>
+<p>The above would fail the cmpxchg, puesto que la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>, ha sido movida hacia delante, el <code class="docutils literal notranslate"><span class="pre">writer</span></code> intentará reservar estacio otra vez, en la nueva página tail.</p>
+<p>Mover la página <code class="docutils literal notranslate"><span class="pre">head</span></code>, es algo más complicado.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema21</span></code></p>
+<p>La escritura convierte el puntero de la página <code class="docutils literal notranslate"><span class="pre">head</span></code> a <code class="docutils literal notranslate"><span class="pre">UPDATE</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema22</span></code></p>
+<p>Si un <code class="docutils literal notranslate"><span class="pre">writer</span></code> <em>anidado</em> adelanta aquí, verá que la página siguiente es la página <code class="docutils literal notranslate"><span class="pre">head</span></code> también está <em>anidada</em>, lo detectará y guardará la información. La detección consiste, de hecho, en ver la <em>bandera</em> <code class="docutils literal notranslate"><span class="pre">UPDATE</span></code> en lugar de un puntero <code class="docutils literal notranslate"><span class="pre">HEADER</span></code> o <code class="docutils literal notranslate"><span class="pre">NORMAL</span></code>.</p>
+<p>El <code class="docutils literal notranslate"><span class="pre">writer</span></code> <em>anidado</em>, establecerá el nuevo puntero de la página <code class="docutils literal notranslate"><span class="pre">head</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema23</span></code></p>
+<p>Pero no <em>reseteará</em> la actualización de vuelta a <em>lo normal</em>. Sólo el <code class="docutils literal notranslate"><span class="pre">writer</span></code> que convirtió el puntero de <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> a <code class="docutils literal notranslate"><span class="pre">UPDATE</span></code> lo convertirá otra vez a <code class="docutils literal notranslate"><span class="pre">NORMAL</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema24</span></code></p>
+<p>Después de que el <code class="docutils literal notranslate"><span class="pre">writer</span></code> anidado termine, el más alejado de ellos, convertirá el puntero <code class="docutils literal notranslate"><span class="pre">UPDATE</span></code> a <code class="docutils literal notranslate"><span class="pre">NORMAL</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema25</span></code></p>
+<p>Podría ser aún más complicado, si suceden distintas <em>escrituras anidadas</em> y, mueven la pámgina <code class="docutils literal notranslate"><span class="pre">tail</span></code> <em>por encima</em> de otras páginas:</p>
+<p>(primer <code class="docutils literal notranslate"><span class="pre">writer</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema26</span></code></p>
+<p>La escritura convierte el puntero de la página <code class="docutils literal notranslate"><span class="pre">head</span></code> a <code class="docutils literal notranslate"><span class="pre">UPDATE</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema27</span></code></p>
+<p>El siguiente <code class="docutils literal notranslate"><span class="pre">writer</span></code> <em>actúa</em>, y vé la actualización, estableciendo la nueva página <code class="docutils literal notranslate"><span class="pre">head</span></code>.</p>
+<p>(segundo <code class="docutils literal notranslate"><span class="pre">writer</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema28</span></code></p>
+<p>El <code class="docutils literal notranslate"><span class="pre">writer</span></code> anidado, mueve la página <code class="docutils literal notranslate"><span class="pre">tail</span></code> hacia delante. Pero no establece la <em>antigua</em> actualización de página a <code class="docutils literal notranslate"><span class="pre">NORMAL</span></code>, por que no es el <code class="docutils literal notranslate"><span class="pre">writer</span></code> más alejado.</p>
+<p>(tercer <code class="docutils literal notranslate"><span class="pre">writer</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema29</span></code></p>
+<p>El <code class="docutils literal notranslate"><span class="pre">writer</span></code> moverá la página <code class="docutils literal notranslate"><span class="pre">head</span></code> hacia delante:</p>
+<p>(tercer <code class="docutils literal notranslate"><span class="pre">writer</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema30</span></code></p>
+<p>El tercer <code class="docutils literal notranslate"><span class="pre">writer</span></code> que hizo el cambió de la <em>bandera</em> <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> a <code class="docutils literal notranslate"><span class="pre">UPDATE</span></code>, cambiará a normal:</p>
+<p>(tercer <code class="docutils literal notranslate"><span class="pre">writer</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema31</span></code></p>
+<p>Moverá entonces la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>, y retornará al segundo <code class="docutils literal notranslate"><span class="pre">writer</span></code></p>
+<p>(segundo <code class="docutils literal notranslate"><span class="pre">writer</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema32</span></code></p>
+<p>El segundo <code class="docutils literal notranslate"><span class="pre">writer</span></code> fallará al mover la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>, por que ya había sido movido, así que lo intentará de nuevo, añadiendo <em>sus datos</em> a la nueva página <code class="docutils literal notranslate"><span class="pre">tail</span></code>. Retornará al primer <code class="docutils literal notranslate"><span class="pre">writer</span></code>.</p>
+<p>(primer <code class="docutils literal notranslate"><span class="pre">writer</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema33</span></code></p>
+<p>El primer <code class="docutils literal notranslate"><span class="pre">writer</span></code>, no puede saber automáticamente si la página <code class="docutils literal notranslate"><span class="pre">tail</span></code>, fue movida mientra actualizó a <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> en la página.</p>
+<p>(primer <code class="docutils literal notranslate"><span class="pre">writer</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema34</span></code></p>
+<p>Puesto que <code class="docutils literal notranslate"><span class="pre">cmpxchg</span></code> devuelve el anterior valor del puntero, el primer <code class="docutils literal notranslate"><span class="pre">writer</span></code> verá si ha tenido éxito, al actualizar el puntero de <code class="docutils literal notranslate"><span class="pre">NORMAR</span></code> a <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>. Podrá verse, que esto aún no es suficiente. También deberá comprobar si la página <code class="docutils literal notranslate"><span class="pre">tail</span></code> <em>está en su lugar</em>:</p>
+<p>(primer <code class="docutils literal notranslate"><span class="pre">writer</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema35</span></code></p>
+<p>Si la página <code class="docutils literal notranslate"><span class="pre">tail</span></code> <code class="docutils literal notranslate"><span class="pre">!=</span> <span class="pre">A</span></code> y página <code class="docutils literal notranslate"><span class="pre">tail</span></code> <code class="docutils literal notranslate"><span class="pre">!=</span> <span class="pre">B</span></code>, entonces debe <em>resetear</em> el puntero de nevo a <code class="docutils literal notranslate"><span class="pre">NORMAL</span></code>. De hecho, no necesita preocuparse por <code class="docutils literal notranslate"><span class="pre">writers</span></code> <em>anidados</em>, significando esto, que únicamente necesita comprobarlo después de establecer el <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> de página.</p>
+<p>(primer <code class="docutils literal notranslate"><span class="pre">writer</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema36</span></code></p>
+<p>puede ahora el <code class="docutils literal notranslate"><span class="pre">writer</span></code>, acutalizar la página <code class="docutils literal notranslate"><span class="pre">head</span></code>. Por esta misma razón, la página <code class="docutils literal notranslate"><span class="pre">head</span></code> deberá permanecer en <code class="docutils literal notranslate"><span class="pre">UPDATE</span></code> y, únicamente <em>resetear</em> el <code class="docutils literal notranslate"><span class="pre">writer</span></code> más alejado. Previniendo esto último, que el <em>lector</em> vea la página <code class="docutils literal notranslate"><span class="pre">head</span></code> incorrecta.</p>
+<p>(primer <code class="docutils literal notranslate"><span class="pre">writer</span></code>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">esquema37</span></code></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="referencias">
+<h2>Referencias<a class="headerlink" href="#referencias" title="Link to this heading"></a></h2>
+<p><em>nota d.t.</em> <strong>atómica:</strong> que la operación no se detendrá, hasta que haya
+completado.</p>
+<p><em>nota d.t.</em> <strong>buffer:</strong> la traducción literal es <em>almacén</em>, sin embargo, es un término muy utilizado en programación, para referirnos a una parte de la maquinaría o del código de programa, de un computador.</p>
+<p><em>banderas de estado</em>, <strong>state flags</strong>: argumentos o parámetros. ejem. <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span></code>. Una especie de “tecla vinculada” en éste caso al comando <em>listar(ls)</em>.</p>
+</section>
+<hr class="docutils" />
+<section id="agradecimientos">
+<h2>Agradecimientos<a class="headerlink" href="#agradecimientos" title="Link to this heading"></a></h2>
+<p><em>Copyright 2009 Red Hat Inc.</em> <strong>Author:</strong> Steven Rostedt <a class="reference external" href="mailto:srostedt&#37;&#52;&#48;redhat&#46;com">srostedt<span>&#64;</span>redhat<span>&#46;</span>com</a> <strong>License:</strong> The GNU Free Documentation License, Version 1.2 (dual licensed under the GPL v2) <strong>Reviewers:</strong> Mathieu Desnoyers, Huang Ying, Hidetoshi Seto, and Frederic Weisbecker. <strong>Traductor:</strong> Heliogabalo S. J.</p>
+<p><em>Written for: 2.6.31</em></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../RCU/UP.html" class="btn btn-neutral float-left" title="RCU en sistemas uniprocesador" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../x86/1-IO-APIC.html" class="btn btn-neutral float-right" title="IO-APIC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fundamentos de Arquitectura de Sistemas &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones" href="GeorgeBoole.html" />
+    <link rel="prev" title="Generación y Sincronización de Señales" href="../PlacaBase/clk-signal.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#sistema">sistema</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Fundamentos de Arquitectura de Sistemas</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+      <li class="breadcrumb-item active">Fundamentos de Arquitectura de Sistemas</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/sistema/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fundamentos-de-arquitectura-de-sistemas">
+<h1>Fundamentos de Arquitectura de Sistemas<a class="headerlink" href="#fundamentos-de-arquitectura-de-sistemas" title="Link to this heading"></a></h1>
+<p>En esta sección se exploran los principios teóricos y físicos que rigen los sistemas informáticos, desde la lógica booleana y el modelo clásico de Von Neumann hasta las arquitecturas de memoria modernas, buses de datos, buses gráficos, firmware UEFI y periféricos del sistema.</p>
+<section id="contenidos">
+<h2>Contenidos<a class="headerlink" href="#contenidos" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Fundamentos y Arquitectura</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GeorgeBoole.html">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="GeorgeBoole.html#linea-de-tiempo-del-algebra-de-boole">Línea de Tiempo del Álgebra de Boole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GeorgeBoole.html#aplicaciones-en-programacion">Aplicaciones en Programación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GeorgeBoole.html#conclusion">Conclusión</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="arquitecturaVonNeuman.html">La arquitectura Von Neumann</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="arquitecturaVonNeuman.html#caracteristicas-principales">Características principales:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arquitecturaVonNeuman.html#ventajas">Ventajas:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arquitecturaVonNeuman.html#desventajas">Desventajas:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arquitecturaVonNeuman.html#soluciones-modernas">Soluciones Modernas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arquitecturaVonNeuman.html#esquema-de-un-procesador-moderno">Esquema de un Procesador Moderno</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arquitecturaVonNeuman.html#componentes-clave">Componentes Clave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arquitecturaVonNeuman.html#conclusion">Conclusión</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="VonNeumann.html">John von Neumann</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="VonNeumann.html#decada-de-1930-fundamentos-matematicos-y-computacion">1. Década de 1930: Fundamentos matemáticos y computación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VonNeumann.html#decada-de-1940-arquitectura-de-computadoras-y-eniac">2. Década de 1940: Arquitectura de computadoras y ENIAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VonNeumann.html#finales-de-los-1940s-instituto-de-estudios-avanzados-ias-y-la-maquina-ias">3. Finales de los 1940s: Instituto de Estudios Avanzados (IAS) y la máquina IAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VonNeumann.html#decada-de-1950-teoria-de-algoritmos-y-aplicaciones">4. Década de 1950: Teoría de algoritmos y aplicaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VonNeumann.html#ultimos-anos-hasta-su-muerte-en-1957">5. Últimos años (hasta su muerte en 1957)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VonNeumann.html#legado-en-programacion-y-tecnologia">Legado en programación y tecnología</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="evolucionProcesadores.html#intel">Intel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evolucionProcesadores.html#amd">AMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evolucionProcesadores.html#apple">Apple</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evolucionProcesadores.html#tendencias-clave">Tendencias Clave</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Prefetching_en_Procesadores.html">Prefetching en Procesadores</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Prefetching_en_Procesadores.html#que-es-el-prefetching">¿Qué es el prefetching?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Prefetching_en_Procesadores.html#tipos-de-prefetching">Tipos de prefetching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Prefetching_en_Procesadores.html#ejemplo-practico">Ejemplo práctico</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Prefetching_en_Procesadores.html#configuracion-en-bios">Configuración en BIOS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Buses.html">Buses del equipo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Buses.html#caracteristicas">Características</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Buses.html#tipos-de-buses-de-un-so-sistema-operativo">Tipos de Buses de un SO (Sistema Operativo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Buses.html#bus-asociado-a-un-estandar-de-conexion">Bus asociado a un estandar de conexión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Buses.html#resumen-comparativo-de-buses-comunes">Resumen Comparativo de Buses Comunes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="anchoBusGPU.html#que-es-el-ancho-del-bus-en-una-gpu">1. ¿Qué es el “Ancho del Bus” en una GPU?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anchoBusGPU.html#calculo-del-ancho-de-banda-de-la-memoria">2. Cálculo del Ancho de Banda de la Memoria</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anchoBusGPU.html#por-que-se-confunde-con-pcie">3. ¿Por qué se confunde con PCIe?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anchoBusGPU.html#comparativa-ancho-de-bus-vs-pcie">4. Comparativa: Ancho de Bus vs. PCIe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anchoBusGPU.html#cuando-importa-mas-el-ancho-del-bus">5. ¿Cuándo importa más el ancho del bus?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="anchoBusGPU.html#conclusion">6. Conclusión</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Memorias.html">Tipos y características de memoria</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Memorias.html#memoria-principal-ram-memoria-de-acceso-aleatorio">1. Memoria Principal (RAM - Memoria de Acceso Aleatorio)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Memorias.html#memoria-rom-read-only-memory">2. Memoria ROM (Read-Only Memory)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Memorias.html#memoria-virtual">3. Memoria Virtual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Memorias.html#memoria-flash">4. Memoria Flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Memorias.html#memoria-de-almacenamiento-secundario">5. Memoria de Almacenamiento Secundario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Memorias.html#memoria-cache">6. Memoria Caché</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Memorias.html#modulos-de-memoria-gddr">7. Módulos de Memoria GDDR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Memorias.html#modulos-de-memoria-so-dimm">8. Módulos de Memoria SO-DIMM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Memorias.html#ancho-de-banda-y-velocidad-de-reloj">9. Ancho de Banda y Velocidad de Reloj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Memorias.html#que-es-mas-importante">10. ¿Qué es Más Importante?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Memorias.html#memoria-instalada-en-el-equipo">11. Memoria instalada en el equipo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modulosMemActuales.html#ddr4-sdram">1. <strong>DDR4 SDRAM</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modulosMemActuales.html#ddr5-sdram">2. <strong>DDR5 SDRAM</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modulosMemActuales.html#lpddr4-lpddr4x">3. <strong>LPDDR4/LPDDR4X</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modulosMemActuales.html#lpddr5-lpddr5x">4. <strong>LPDDR5/LPDDR5X</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modulosMemActuales.html#hbm-high-bandwidth-memory">5. <strong>HBM (High Bandwidth Memory)</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modulosMemActuales.html#gddr6-gddr6x">6. <strong>GDDR6/GDDR6X</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modulosMemActuales.html#memoria-cxl-compute-express-link">7. <strong>Memoria CXL (Compute Express Link)</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modulosMemActuales.html#tabla-comparativa">Tabla Comparativa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modulosMemActuales.html#tendencias-futuras">Tendencias Futuras</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="velocidadModulDDR.html">Velocidad en módulos DDR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="velocidadModulDDR.html#velocidad-de-reloj-del-bus-frecuencia-de-operacion">1. Velocidad de Reloj del Bus (Frecuencia de Operación)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="velocidadModulDDR.html#ancho-de-banda-teorico">2. Ancho de Banda Teórico</a></li>
+<li class="toctree-l2"><a class="reference internal" href="velocidadModulDDR.html#conclusion-relacion-entre-ambos-criterios">Conclusión: Relación entre Ambos Criterios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="velocidadModulDDR.html#resumen-tabular">Resumen Tabular</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integratedCards.html#sistemas-windows">Sistemas Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integratedCards.html#sistemas-linux">Sistemas Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integratedCards.html#notas-importantes">Notas importantes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI.html">¿Qué es el estándar UEFI?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#caracteristicas-principales">Características principales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#diferencias-clave-frente-al-bios">Diferencias clave frente al BIOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#ventajas-adicionales">Ventajas adicionales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#limitaciones">Limitaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#conclusion">Conclusión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#diferencias-en-la-implementacion-de-uefi-entre-intel-y-amd">Diferencias en la implementación de UEFI entre Intel y AMD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#introduccion">Introducción</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#inicio-de-plataforma-platform-initialization-pi">1. Inicio de Plataforma (Platform Initialization - PI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#seguridad-y-firmware">2. Seguridad y Firmware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#compatibilidad-y-soporte-legacy">3. Compatibilidad y Soporte Legacy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#overclocking-y-personalizacion">4. Overclocking y Personalización</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#diferencias-en-arquitectura">5. Diferencias en Arquitectura</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#consideraciones-finales">Consideraciones Finales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI.html#notas-adicionales">Notas Adicionales</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="UEFI-refs.html#introduccion">Introducción</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI-refs.html#estructura-basica-de-identificacion">1. Estructura básica de identificación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI-refs.html#proceso-de-referencia-completo">2. Proceso de referencia completo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI-refs.html#identificadores-importantes">3. Identificadores importantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI-refs.html#busqueda-de-identificadores">4. Búsqueda de identificadores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI-refs.html#consideraciones-avanzadas">5. Consideraciones avanzadas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI-refs.html#ejemplo-completo">Ejemplo completo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UEFI-refs.html#referencias-adicionales">Referencias adicionales</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="conectoresDelEquipo.html">Conectores externos del equipo.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="conectoresDelEquipo.html#descripcion-de-conectores">Descripción de conectores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conectoresDelEquipo.html#conectores-en-uso">Conectores en uso</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="perifericos.html">Periféricos clasificados por tipo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="perifericos.html#lista-de-los-perifericos-en-equipo-de-usuario">Lista de los periféricos en equipo de usuario</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Ejercicios.html">Ejercicios</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Ejercicios.html#ejercicio-1-1-identificacion-de-componentes-de-un-ordenador">Ejercicio 1.1: Identificación de Componentes de un Ordenador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejercicios.html#ejercicio-1-2-diagrama-de-la-arquitectura-de-von-neuman">Ejercicio 1.2: Diagrama de la Arquitectura de Von Neuman</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejercicios.html#ejercicio-1-3-comparativa-de-buses-de-expansion-pcie-vs-usb-vs-sata">Ejercicio 1.3: Comparativa de Buses de Expansión: PCIe vs USB vs SATA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejercicios.html#tabla-comparativa">Tabla Comparativa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejercicios.html#claves-tecnicas">Claves Técnicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejercicios.html#recomendaciones-de-uso">Recomendaciones de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejercicios.html#notas-adicionales">Notas Adicionales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejercicios.html#ejercicio-1-4-configuracion-de-un-equipo-informatico">Ejercicio 1.4: Configuración de un equipo informático</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejercicios.html#o-aplicaciones-web-y-de-ofimatica">1º Aplicaciones web y de ofimática</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejercicios.html#a-aplicaciones-de-renderizado-3d">2ª Aplicaciones de renderizado 3D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejercicios.html#o-juegos-como-call-of-duty">3º Juegos como Call of Duty</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="resumen-de-modulos">
+<h2>Resumen de Módulos<a class="headerlink" href="#resumen-de-modulos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Fundamentos Teóricos e Historia</strong>: Bases de la lógica digital en <a class="reference internal" href="GeorgeBoole.html"><span class="doc">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</span></a>, el modelo de arquitectura de programa almacenado en <a class="reference internal" href="arquitecturaVonNeuman.html"><span class="doc">La arquitectura Von Neumann</span></a> y <a class="reference internal" href="VonNeumann.html"><span class="doc">John von Neumann</span></a>, y la línea temporal de cómputo en <a class="reference internal" href="evolucionProcesadores.html"><span class="doc">Evolución de Procesadores (Años 90 - Actualidad)</span></a>.</p></li>
+<li><p><strong>Procesamiento y Buses</strong>: Mecanismos de precarga de instrucciones en <a class="reference internal" href="Prefetching_en_Procesadores.html"><span class="doc">Prefetching en Procesadores</span></a>, topologías de interconexión en <a class="reference internal" href="Buses.html"><span class="doc">Buses del equipo</span></a> y cálculo de tasa de transferencia de vídeo en <a class="reference internal" href="anchoBusGPU.html"><span class="doc">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</span></a>.</p></li>
+<li><p><strong>Jerarquía y Módulos de Memoria</strong>: Clasificación general de <a class="reference internal" href="Memorias.html"><span class="doc">Tipos y características de memoria</span></a>, tecnologías contemporáneas de RAM en <a class="reference internal" href="modulosMemActuales.html"><span class="doc">Módulos de Memoria RAM Actuales (2024)</span></a> y cálculo de tasas de transferencia en <a class="reference internal" href="velocidadModulDDR.html"><span class="doc">Velocidad en módulos DDR</span></a>.</p></li>
+<li><p><strong>Subsistemas y Firmware</strong>: Controladores gráficos en <a class="reference internal" href="integratedCards.html"><span class="doc">Verificar si la placa base integra tarjeta gráfica (GPU)</span></a>, inicialización moderna del sistema en <a class="reference internal" href="UEFI.html"><span class="doc">¿Qué es el estándar UEFI?</span></a> y sus referencias avanzadas en <a class="reference internal" href="UEFI-refs.html"><span class="doc">Referenciando funciones en UEFI mediante identificadores</span></a>.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../PlacaBase/clk-signal.html" class="btn btn-neutral float-left" title="Generación y Sincronización de Señales" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="GeorgeBoole.html" class="btn btn-neutral float-right" title="Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

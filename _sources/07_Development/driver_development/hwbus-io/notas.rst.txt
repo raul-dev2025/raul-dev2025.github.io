@@ -1,0 +1,54 @@
+:orphan:
+
+/hwbus_ioctl.c
+hwbus_io_suite00r.c
+
+
+Neciseto preparar documentar el "modo de empleo" de los scripts de integración. 
+
+1. Te pasaré los scripts agrupados por rol, para que hagas un breve resumen de dos o tres líneas, describiendo su funcionalidad o cometido.
+
+   - constructores:
+
+      - ci-builder.sh
+      - ci-signer.sh
+      - ci-manifest.sh
+
+      Estos archivos intervienen en el proceso de construcción del módulo o del test, en función del tipo seleccionado BUILD_TYPE="" ``KO`` o ``LTP``.
+
+   - selectores:
+
+     - ci-kmod-runner.sh
+     - ci-runLauncher.sh
+     - ci-runner.sh
+
+   Estos determinan el tipo de test que debe lanzarse y que recursos son necesarios para su correcta inmvocación y funcionamiento.
+   El lanzador 'ci-runLauncher', pone en funcionamiento la "máquinaria" y determina el tipo de test. 
+   Los otros dos, invocan un tipo de test determinado. Por ejemplo, si acabamos de compilar el módulo y únicamente queremos hacer una prueba genérica de funcionalidad del módulo, sin cambiar el target ``BUILD_TYPE="KO"`` al invocar al lanzador(ci-runLauncher), éste determinará que solo queremos probar el módulo invocando a ci-signer y ejecutando una prueba básica.
+   Si se pretende probar un test(LTP), primero habrá que seleccionar el objetivo ``BUILD_TYPE="LTP"``, volver a compilar, esta vez el test desarrollado y, con el módulo en su sitio y el test preparado, llamar al lanzador.
+
+   Hay "dos tipos" de tests LTP; aquellos que necesitan permisos para operar con módulos y, los que simplemente necesitan hacer la prueba. 
+   La distinción radica en la carga de algún parámetro que modifica el funcionamiento del módulo, durante la carga del mismo en el sistema; ``insmod`` y demás. Para poder capturar los mensajes que arroja la operación, se utilizan los métodos que expone la infraestructura LTP. Este tipo de tests con permisos especiales son identificados mediante la ``r`` en la nomenclatura del archivo; fácilmente distingibles del resto.
+   La suite de tests, que no siendo un test própiamente, previsiblemente invocará alguno que lo necesite; puede nombrarse de esta manera. Los procesos recurrentes partirán con la configuración necesaria en cuanto a permisos.
+
+   El otro tipo de test, serán invocados mediante la operativa CI/CD, para lo cuál se desarrollaron las siguiente reglas sudoers:
+
+   .. code-block:: bash
+
+      cat /etc/sudoers.d/builder-kernel 
+      builder ALL=(ALL) NOPASSWD: /usr/sbin/insmod, /usr/sbin/rmmod, /usr/bin/dmesg, /usr/sbin/modinfo, /usr/bin/kmod-sign-file, /usr/bin/perf, /usr/bin/trace-cmd, /usr/sbin/bpftool, /usr/share/bcc/tools/*
+
+      cat /etc/sudoers.d/hwbus-tests 
+      builder ALL=(ALL) NOPASSWD: /mnt/build-output/Repos/hwbus-io.git/tests/hwbus_io/hwbus_io*r
+
+      cat /etc/sudoers.d/ltp-builder 
+      builder ALL=(ALL) NOPASSWD: /opt/ltp/runltp, /opt/ltp/testcases/bin/*
+ 
+   Hay un tercer grupo de tests, que son aquellos que podemos implementar sin la librería de "Linux Test Project(LTP)". para ello, solo es necesario situar otra carpeta dentro del directorio ``tests/`` y conlfigurar adecuadamente los ``Makefiles`` tanto en la raíz de tests como en la subcarpeta. Se utiliza una metodología de construcción en cascada, delegando el proceso de configuración a los Makefiles situados respectivamente.
+
+
+TODO:
+=====
+
+- Terminar de implementar la suite de tests.
+- Planificación para la prueba específica del comando iocreset

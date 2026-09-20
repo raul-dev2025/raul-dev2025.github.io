@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Informe de Mantenimiento: Infraestructura de Virtualización KVM" href="mantenimientoIV.html" />
+    <link rel="prev" title="Capa de Networking &amp; Security Layers" href="../IdM/SSO/C_SSO_Integration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#idm-configuracion">IdM - Configuracion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#contexto-de-almacenamiento">Contexto de Almacenamiento</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comandos-de-verificacion-del-host">Comandos de Verificación del Host</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operativa-con-virsh">Operativa con virsh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#estrategia-de-despliegue-clonacion">Estrategia de Despliegue (Clonación)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mantenimientoIV.html">Informe de Mantenimiento: Infraestructura de Virtualización KVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="planificacion_vdo.html">Informe de Infraestructura: Optimización de Almacenamiento y Topología PCIe</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+      <li class="breadcrumb-item active">Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/Maint/IV-management.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gestion-de-infraestructura-almacenamiento-vdo-libvirt">
+<h1>Gestión de Infraestructura: Almacenamiento VDO &amp; Libvirt<a class="headerlink" href="#gestion-de-infraestructura-almacenamiento-vdo-libvirt" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Autor<span class="colon">:</span></dt>
+<dd class="field-odd"><p>raul-ipa</p>
+</dd>
+<dt class="field-even">Fecha<span class="colon">:</span></dt>
+<dd class="field-even"><p>2026-03-17</p>
+</dd>
+<dt class="field-odd">Estrategia<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Zero-Footprint (Nodos Desechables)</p>
+</dd>
+</dl>
+<section id="contexto-de-almacenamiento">
+<h2>Contexto de Almacenamiento<a class="headerlink" href="#contexto-de-almacenamiento" title="Link to this heading"></a></h2>
+<p>La arquitectura se apoya en un volumen <strong>VDO</strong> con sistema de archivos <strong>XFS</strong>, optimizado para la de-duplicación y el ahorro de espacio mediante <em>reflinks</em>.</p>
+<ul class="simple">
+<li><p><strong>Punto de Montaje:</strong> <code class="docutils literal notranslate"><span class="pre">/var/lib/virt_storage</span></code></p></li>
+<li><dl class="simple">
+<dt><strong>Pools de Libvirt:</strong></dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">vdo_infra</span></code>     -&gt; <code class="docutils literal notranslate"><span class="pre">/vms/</span></code> (Discos de sistema)
+* Función: Es el Tier de Producción/Base. Aquí es donde debemos alojar la Golden Image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vdo_iso</span></code>       -&gt; <code class="docutils literal notranslate"><span class="pre">/iso_images/</span></code> (Fuentes de instalación)
+* Función: Actúa como tu repositorio de solo lectura para las imágenes .iso.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">boot-scratch</span></code>  -&gt; <code class="docutils literal notranslate"><span class="pre">/iso_images/</span></code> (Almacenamiento volátil)
+* Función: Almacenamiento volátil o de arranque rápido.
+* Uso estratégico: Ideal para archivos temporales o volúmenes que no requieran la persistencia crítica del almacenamiento de infraestructura.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="comandos-de-verificacion-del-host">
+<h2>Comandos de Verificación del Host<a class="headerlink" href="#comandos-de-verificacion-del-host" title="Link to this heading"></a></h2>
+<p>Antes de operar, es crítico validar que el sistema de archivos soporta la clonación CoW (Copy-on-Write).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Localizar el dispositivo VDO y verificar opciones (discard, rw)</span>
+df<span class="w"> </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>vdo
+mount<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>xfs
+
+<span class="c1"># Confirmar que reflink está activo (debe devolver reflink=1)</span>
+xfs_info<span class="w"> </span>/var/lib/virt_storage<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>reflink
+</pre></div>
+</div>
+</section>
+<section id="operativa-con-virsh">
+<h2>Operativa con virsh<a class="headerlink" href="#operativa-con-virsh" title="Link to this heading"></a></h2>
+<p>Gestión de los recursos de almacenamiento desde la CLI de virtualización.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Consultar el estado y capacidad real detectada por Libvirt</span>
+virsh<span class="w"> </span>pool-list<span class="w"> </span>--all
+virsh<span class="w"> </span>pool-info<span class="w"> </span>vdo_infra
+</pre></div>
+</div>
+<ol class="upperalpha simple">
+<li><p>Localización de Volúmenes (vdo_iso)</p></li>
+</ol>
+<p>Para listar las ISOs disponibles y usarlas en la instalación:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virsh<span class="w"> </span>vol-list<span class="w"> </span>vdo_iso
+</pre></div>
+</div>
+<ol class="upperalpha simple" start="2">
+<li><p>Creación del Volumen Base (vdo_infra)</p></li>
+</ol>
+<p>Antes de lanzar el virt-install, creamos el “contenedor” vacío en el pool de infraestructura:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crear el volumen base para la Golden Image</span>
+<span class="c1"># Formato RAW es esencial para la eficiencia de VDO</span>
+virsh<span class="w"> </span>vol-create-as<span class="w"> </span>vdo_infra<span class="w"> </span>GOLDEN_ROCKY10_BASE.raw<span class="w"> </span>20G<span class="w"> </span>--format<span class="w"> </span>raw
+</pre></div>
+</div>
+<ol class="upperalpha simple" start="3">
+<li><p>Uso de boot-scratch (Entorno Volátil)</p></li>
+</ol>
+<p>Si necesitas un disco adicional para intercambio de datos temporal que no deba persistir en la Golden Image:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virsh<span class="w"> </span>vol-create-as<span class="w"> </span>boot-scratch<span class="w"> </span>temp_data.raw<span class="w"> </span>5G<span class="w"> </span>--format<span class="w"> </span>raw
+</pre></div>
+</div>
+</section>
+<section id="estrategia-de-despliegue-clonacion">
+<h2>Estrategia de Despliegue (Clonación)<a class="headerlink" href="#estrategia-de-despliegue-clonacion" title="Link to this heading"></a></h2>
+<p>Para instanciar nuevas máquinas sin penalización de espacio ni tiempo.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clonación instantánea mediante reflink de XFS</span>
+cp<span class="w"> </span>--reflink<span class="o">=</span>always<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>/var/lib/virt_storage/vms/GOLDEN_ROCKY10_BASE.raw<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>/var/lib/virt_storage/vms/VM_PRUEBA_INTEGRIDAD.raw
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La clonación via <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">--reflink</span></code> es transparente para Libvirt, pero requiere un <code class="docutils literal notranslate"><span class="pre">virsh</span> <span class="pre">pool-refresh</span> <span class="pre">vdo_infra</span></code> posterior para que la nueva imagen sea visible en el inventario de volúmenes.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../IdM/SSO/C_SSO_Integration.html" class="btn btn-neutral float-left" title="Capa de Networking &amp; Security Layers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mantenimientoIV.html" class="btn btn-neutral float-right" title="Informe de Mantenimiento: Infraestructura de Virtualización KVM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>breve historia de las cachés &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Arquitectura de la Placa Base" href="../PlacaBase/index.html" />
+    <link rel="prev" title="NX-Bit – No-eXecute" href="nx-Bit.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#processador">Processador</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Arquitectura del Procesador y Kernel</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Arquitectura del Procesador y Kernel</a></li>
+      <li class="breadcrumb-item active">breve historia de las cachés</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/Processador/foreShadow.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="breve-historia-de-las-caches">
+<h1>breve historia de las cachés<a class="headerlink" href="#breve-historia-de-las-caches" title="Link to this heading"></a></h1>
+<section id="como-hemos-llegado-hasta-aqui-breve-historia-de-las-caches-en-modernos-microprocesadores">
+<h2>Cómo hemos llegado hasta aquí: breve historia de las cachés, en modernos microprocesadores<a class="headerlink" href="#como-hemos-llegado-hasta-aqui-breve-historia-de-las-caches-en-modernos-microprocesadores" title="Link to this heading"></a></h2>
+<p>Los microprocesadores en modernas computadoras, son maquinas complejas, complementadas con muchas optimizaciones desiñadas, para <em>delimitar</em> hasta el <em>último gramo</em> de rendimiento disponible.</p>
+<p>Los primeros programa de guardado para computadora, en contraste, fueron máquinas relativamente sencillas. Ejecutaron los programas proporcionados por el usuario, siguiendo cada una de las instrucciones binarias codificadas, de forma precisa. En el orden dado, entregando el curso predecible del programa -flujo y, su resultado.Esto funcionó bien en las primeras etapas de la computación, en gran parte, debido a que los distintos componentes de la computadora, operaban a velocidades similares. El procesador (CPU), no era mucho más rápido que los <em>chips</em> de memoria acoplados a él, por ejemplo. Como resultado, el procesador podía esperar a cargar datos en ememoria, tan pronto fuesen requeridos por el programa.</p>
+<p>Con el tiempo, el rendimiento relativo, en distintos componentes de la computadora, cambió dramáticamente. Los microprocesadores, continuaron incrementando -en términos de <em>frecuencia</em>, desde unos pocos miles de instrucciones por segundo, a millones, incluso billones de instrucciones por segundo.</p>
+<p>Al mismo tiempo, la cantidad de transistores(area), integrados en un sólo <em>chip</em>, tembién fue incrementada en orden de magnitud, de miles, a varios millones de transistores encontrados en los procesadores de hoy en día. Esto ha permitido el desarrollo de complejos diseños. Es más, mientras determinadas partes de la computadora han experimentado un cierto avance -los chips de memoria han pasado de <em>megabytes</em> a <em>gigabytes</em>, el rendimiento relativo de los procesadores, ha sido mucísimo mayor. Como sonsecuencia directa, de esta disparidad en cuanto a rendimiento, los procesadores han empezado a experimentar <em>cuellos de botella</em>, en memorias externas más lentas, a menudo, retrasando cientos, miles, o millones de “ciclos” de datos.</p>
+<p>La <em>Academia</em>, viene al rescate con la innovación de cachés para computadora. Las cachés almacenan copias de datos recientemente utilizados, en las unidades funcionales del procesador -las partes en que son realizados los cálculos. El valor de los datos, son almacenados en memorias externas y, tal como son cargados por el programa, son también almacenados en las cachés del procesador. De hecho, procesadores modernos -casi, nunca operan directamente sobre datos almacenados en memorias externas. En su lugar, son optimizados para trabajar con datos contenidos en las cachés. Éstas, forman una jerarquía en cuyo nivel más alto <code class="docutils literal notranslate"><span class="pre">L1</span></code>, está más cerca del núcleo del procesador, mientras que sucesivos niveles <code class="docutils literal notranslate"><span class="pre">L2,</span> <span class="pre">L3</span></code>, etc, son conceptualmente más lejanos. Cada nivel envuelve distintas características.</p>
+<p>En <em>electrónica digital</em>, es habitual decir “pequeño y rápido” o “grande y lento”, puesto que en <em>raras</em> ocasiones encontramos ambas <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. Así, la caché de datos <code class="docutils literal notranslate"><span class="pre">L1</span></code>, dentro de un procesador moderno, es del orden de 32 kilobytes -a penas suficiente, para la fotografía de un gato, mientras que la <code class="docutils literal notranslate"><span class="pre">L3</span></code> -en ocasiones <code class="docutils literal notranslate"><span class="pre">LLC</span></code>; <em>Last Level Cache</em>, cercana a la memoria externa, podría ser de 32 megabytes, o incluso mayor, en servidores modernos.</p>
+<p>La forma en que son designadas las cachés -organizadas, varía de un diseño a otro, pero incluso en un diseño clásico, copias de los mismos datos, serán contenidas en múltiples niveles de la caché, dependiendo de dónde fueron utilizados por última vez. Un algoritmo de reemplazo dentro del procesador, formulará un evicto, a las entradas menos utilizadas en la caché <code class="docutils literal notranslate"><span class="pre">L1</span></code>, con objeto de cargar nuevos datos, mientras guarda copias en <code class="docutils literal notranslate"><span class="pre">L2</span></code> y <code class="docutils literal notranslate"><span class="pre">L3</span></code>. Así, resulta raro que datos usados recientemente, deban ser cargados desde memoria. Aunque bien podrían provenir de cachés más grandes, lentas y de nivel inferior, a <code class="docutils literal notranslate"><span class="pre">L1</span></code> cuando fuese necesario.</p>
+<p>Las cachés son un recurso compartido entre múltiples núcleos individuales, hilos y programas. Chips de procesadores modernos, contienen múltiples núcleos. Cada uno, se comporta como un único procesador de una computadora tradicional. Cada uno podría ejecutar programas individuales, o correr múltiples hilos del mismo programa y operar sobre la memoria compartida. Cada núcleo tiene su própia caché <code class="docutils literal notranslate"><span class="pre">L1</span></code> y, podría tener una caché <code class="docutils literal notranslate"><span class="pre">L2</span></code> asociada, donde la caché <code class="docutils literal notranslate"><span class="pre">L3</span></code>, es habitualmente compartida por todos los núcleos del procesador. Una técnica conocida como <em>coherencia de caché</em>, es empleada por el procesador, para guardar una copia interna de una localización de memoria, en sincronización con otra copia guardada en la caché de otro núcleo. Esto es conseguido a través del <em>seguimiento propietario</em>, de la memoria y, enviando a otro, peqeños mensajes “en segundo plano”, cada vez que la memoria es actualizada.</p>
+<p>La naturaleza <em>compartida</em> de las cachés, es tanto un <em>beneficio</em>, como una <em>potencial fuente</em> de explotación. Hemos aprendido de las vulnerabilidades Spectre y Meltdown, que las cachés podrían servir como “canal-de-doble-efecto”, a través del cuál la información podría experimentar <em>fugas</em>.</p>
+<p>En un análisis específico, los datos no son diréctamente accedidos, en su lugar, serán inferidos por medio de <em>alguna</em> propiedad del sistema bajo observación. En el caso de las cachés, la diferencia en rendimiento relativo, entre la memoria caché y, -la mucho más lenta, memoria principal externa al procesador; representa la principal razón, en el empleo de cachés. Desafortunadamente, esta misma diferencia puede ser explotada, midiendo la diferencia relativa en tiempos de acceso, para determinar si una memoria se encuentra en la caché o no. Si está contenida en la caché, ha sido accedida recientemente, como resultado de la actividad del procesador. Ejemplo, los datos cargados durante una ejecución especulativa por un procesador, alterarán el <em>estado de la caché</em>.</p>
+</section>
+<section id="direccionado-de-memoria-virtual-y-fisica">
+<h2>Direccionado de memoria virtual y física<a class="headerlink" href="#direccionado-de-memoria-virtual-y-fisica" title="Link to this heading"></a></h2>
+<p>Las cachés en procesadores modernos, acostumbran a utilizar una combinación de direccionado -o direccionamiento, de memoria virtual y física, para referenciar los datos. Las direcciones físicas son utilizadas para acceder a la memoria principal. Conceptualmente, asociación de un chip de memoria DIMM o DDR en la computadora, como un <em>arreglo</em> de valores gigante, empezando en la dirección <em>cero</em> y, continuando hasta agotar la memoria.</p>
+<p>La cantidad de memoria física varía de una máquina a otra; desde 8GB en un <em>portatil</em>, a cientos de gigabytes -o incluso más, en una máquina servidor contemporánea. Los programadores, antaño tuvieron que preocuparse de la memoria física, cuando escribían programas. Aquellos días, exigían al programador explicitar, el contenido de cada localización de memoria física, para evitar potenciales conflictos con otras aplicaciones que utilizasen la memoria.</p>
+<p>Actualmente, las máquinas hacen uso de la memoria virtual. La memoria virtual, significa que el sistema operativo es capaz de presentar, conceptualmente, cada aplicación desde su própia <em>vista aislada</em> del mundo.</p>
+<p>Los programas perciben la memoria casi como un rago_infinito, donde pueden hacer lo que necesiten. Cada vez que un programa accede a una localización de memoria, la dirección es traducida por un <em>dispositivo</em> especial, dentro del procesador; conocido como MMU <a class="footnote-reference brackets" href="#f2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, El MMU trabaja en conjunción con el Sistema operativo(SO), el cuál créa y gestiona un conjunto de <em>tablas de página</em>, que traducen las direcciones de memoria virtual, en direcciones físicas.</p>
+<p>La memoria física está dividida en <em>pequeños bloques</em>, conocidos como páginas, de unos 4KB en tamaño. Las tablas de páginas, contienen traducciones de estas páginas, como la dirección virtual en un rango de 4KB, que será traducida a un rango de 4KB de <em>otra</em> física. En una optimización posterior, las tablas de página aluden a una naturaleza jerárquica, con una sóla dirección, siendo decodificada mediante una secuencia de “paseos”, a través de distintas capas de la tabla; hasta completar la <em>traducción</em>.</p>
+<p>MMU contiene un <em>hardware</em> especial, capaz de leer e incluso actualizar, las tablas de páginas gestionadas por el SO. Esto incluye a <em>walkers</em> de tablas de página, que recorren el proceso de un <em>paseo de página</em>, así como también hardware adicional con capacidad para actualizar entradas en tablas de páina, que indican el acceso reciente a datos. El último, es utilizado por el SO para vigilar qué datos podrían ser <em>paginados</em> o <em>intercambiados</em> fuera de disco, de no haber sido recientemente utilizados. Una entrada de tabla de página, puede ser marcada como <em>not present</em> -no presente, significando que cualquier intento de acceso a la dirección asociada, generará una condición especial conocida como <em>page fault</em> -falla de página, indicando al SO qué acción tomar. Así, el SO podrá interceptar intentos de acceso a datos, que fueron previamente <em>intercambiados -swapped</em> fuera de disco, retornándolos de nuevo a memoria y, proseguir sin que la aplicación advierta el hecho ocurrido. Como resultado, el paginado es utilizado para crear la ilusión de tener mas memoria física, de la existente en realidad.</p>
+<p>Es de imaginar, que los paseos <em>en tablas de página</em>, resultan costosos desde una perspectiva de rendimiento. La tabla de página es gestionada por el SO; <em>existe</em> en la memoria física real, la cual debe cargarse en el procesador cuando lee. <em>Atravesar</em> una tabla de página, puede tomar cierto tiempo, siendo prohibitívamente lento de sucederse con frecuencia. Por lo tanto, en lugar de <em>atravesar</em> la tabla de página cada vez que un programa accede a memoria, el procesador guardará en la caché el resultado de estos <em>paseos por tabla</em>, en una estructura por separado, del procesador; conocida como <em>Translation Lookaside Buffer(TLB)</em> -Traducción Lateral del Bufer. Otras traducciones recientes, son mucho más rápidas en resolver las direcciones físicas, ya que el procesador sólo necesita buscar en ?. Si una entrada no existe, el procesador llevará a cabo una incursión más costosa a través de la tabla de página, poblando TLB; posiblemente para evitar(desauciar) otra entrada en el proceso. Por otro lado, es conocido otro ataque reciente contra TLBs, en forma de la vulnerabilidad <a class="reference external" href="https://www.redhat.com/en/blog/temporal-side-channels-and-you-understanding-tlbleed">TLBleed vulnerability</a>.</p>
+<p>Cuando los programas leen o escriben a memoria, los accesos suceden en el nivel más alto de caché de datos <code class="docutils literal notranslate"><span class="pre">L1</span></code>, la cuál -en la mayoría de implementaciones modernas, es conocida como VIPT <a class="footnote-reference brackets" href="#f3" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>. Esto significa que la caché utilizará direciones virtuales y físicas, para buscar una localización de memoria. Como la dirección virtual es examinada durante la carga, el procesador realizará una búsqueda simultánea en TLB, para la traducción de la página virtual a física. Mientras, empieza la búsqueda en la caché, para una posible entrada coincidente, mediante el empleo de un <code class="docutils literal notranslate"><span class="pre">offset</span></code> dentro de una página. Es más, el proceso de lectuar desde la localización de una memoria virtual, es extremádamente complicada en la mayor parte de procesadores modernos. <em>Para los curiosos</em>; éste diseño de optimización común, explica por qué la caché de datos <code class="docutils literal notranslate"><span class="pre">L1</span></code>, es típicamente de 32KB, en procesadores con tamaños de página de 4KB, debido al límite en número de bits en los <code class="docutils literal notranslate"><span class="pre">offset</span></code> s disponibles dentro de una página, para empezar la búsqueda en caché.</p>
+<p>Los procesadores Intel, contienen optimizaciones avanzadas, en relación a cómo gestionan el proceso de un <em>paseo</em> por tabla de página y “falla de terminal”(not present). <em>Será discutido más adelante</em>, pero antes revisaremos la naturaleza especulativa en procesadores modernos. Omítase la siguiente sección, en caso de estar familiarizado con vulnerabilidades tipo <a class="reference external" href="https://www.redhat.com/en/blog/what-are-meltdown-and-spectre-heres-what-you-need-know">Meltdown</a>.</p>
+</section>
+<section id="out-of-order-y-las-ejecuciones-especulativas">
+<h2>Out-of-Order y las ejecuciones especulativas<a class="headerlink" href="#out-of-order-y-las-ejecuciones-especulativas" title="Link to this heading"></a></h2>
+<p>La adopción de cachés, permitió una mejora en el rendimiento, en comparación a otras partes de un computador moderno. Academia, e Industria, trabajan juntas para crear <em>innovaciones fundacionales</em> -como OoO(Out-of-Order <a class="footnote-reference brackets" href="#f4" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> y ejecuciones especulativas). Sirven un contexto, de ganancia consistente en cuanto a resolución y rendimiento, vistos en años recientes. Similar al incremento en cantidad de transistores, los procesadores alcanzán mayor complejidad, junto a posibles optimizaciones avanzadas. Aunque continúan estando construidos sobre un diseño <em>OoO</em> -el procesador.</p>
+<p>En OoO, el procesador es dividido conceptualmente en <em>interfaz frontal</em> para “in-order” <a class="footnote-reference brackets" href="#f5" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> e <em>interfaz posterior</em> para “Out-of-Order”. La interfaz frontral toma como entrada el programa usuario. Este programa es de naturaleza secuencial, formado por bloques de código y ramas ocasionales -como estamentos <code class="docutils literal notranslate"><span class="pre">if</span></code> <a class="footnote-reference brackets" href="#f6" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>, en base a otros bloques, sobre los que evaluar datos. La interfaz frontal “in-order”, despacha instrucciones contenidas en el programa, mediante la interfaz posterior “out-of-order”. Tal y como son despachadas estas instrucciones, será dispuesta una entrada en la estructura del procesador, conocida como ROB <a class="footnote-reference brackets" href="#f7" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>. El ROB, activa el seguimiento de <em>datos dependientes</em>, conviertiéndose en la clave innovadora de OoO, que podrá ejecutar las instrucciones, en cualquier orden; al final, el programador será incapaz de advertir la diferencia. El programador observará el mismo efecto que en el modelo de ejecución secuencial.</p>
+<p>La efectividad de ROB, sirve para convertir una máquina “in-order”, en lo que se conoce como máquina de <em>flujo de datos -dataflow</em>, en cuyas instrucciones dependientes, son forzadas a esperar la ejecución, hasta que los valores de entrada estén disponibles. Siempre que una entrada en ROB, contenga una instrucción de programa, tendrá todos los valores de datos dependientes, disponibles. Ejemplo, cargados desde memoria. Serán ayudados por las unidades funcionales del procesador y, el resultado, vuelto a ser guardado en ROB, para de nuevo, ser utilizado por las sucesivas instrucciones. Tan pronto como salgan las entradas en ROB -convertidas en las instrucciones <em>antiguas</em> en la máquina, serán conocidas como <em>retiradas -retired</em> y, puestas a disposición del programador de la máquina, en la <em>vista visible</em>. Esto es llamado estado “estructural visible -architecturally visible”, idéntico al obtenido desde una ejecución secuencial de un programa, El <em>reordenado de instrucciones</em>, proporciona un <em>acelerante</em>, en este sentido.</p>
+<p>Considerar el ejemplo de pseudo-código:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">LOAD</span><span class="w"> </span><span class="n">R1</span>
+<span class="n">LOAD</span><span class="w"> </span><span class="n">R2</span>
+<span class="n">R3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">R2</span>
+<span class="n">R4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">R5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R4</span><span class="w"> </span><span class="o">+</span><span class="mi">1</span>
+<span class="n">R6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R3</span><span class="w"> </span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>El ejemplo utiliza la letra R para designar una pequeña localización en la memoria interna del procesador, conocida como registro, o más conocido como GPRs(Registros de propuesta general). Habitualmente son un pequeño conjunto de registros, 16 en caso de máquinas Intel <code class="docutils literal notranslate"><span class="pre">x86-64</span></code>. Por conveniencia, numeramos R1, R2, etc, mientra que en realidad, tienen otros nombres; RAX, RBX, etc.</p>
+<p>En un modelo de ejecución secuencial, clásico, las primeras dos instrucciones podrían causar una espera a la máquina -<em>stall</em>, durante el acceso a localizaciones en memorias externas. Las cachés aceleran esto, pero incluso si los dos valores son contenidos dentro de algún nivel de caché en el procesador, continuará habiendo un pequeño retardo durante la consecución en la carga de instrucciones. En lugar de esperar, una máquina OoO, omitirá esto, notificando la dependencia de la instrucción número 3, respecto a las dos primeras -tiene una dependencia de datos “data dependency”, las intrucciones 4 y, 5, son independientes. De hecho, estas dos instrucciones no tienen dependencias en absoluto, en cuanto a previas instrucciones. Podrán ser ejecutadas en cualquier momento y, tampoco dependerán de memorias externas. Su resultado será guardado en ROB hasta el momento, en que esas instrucciones previas hayan sido completadas, momento en que serán retiradas.</p>
+<p>La instrucción número 6 del anterior ejemplo, es llamada <em>dependencia de datos</em>, igual que la instrucción 3, depende del resultado de cargar las localizaciones de memoria A y B. La instrucción 6, depende del resultado de añadir esas dos localizaciones de memoria. Un programa real, tendrá distintas dependencias, todas ellas vigiladas en ROB, el cuál podría ser bastante grande, en tamaño. Como resultado del tamaño de esta estructura, es posible anteponer otra capa delante de OoO.</p>
+<p>Speculation es construido delante de OoO. En una ejecución especulativa, el procesador realiza instrucciones en una secuencia distinta, a la que realiza el programa, de igual modo, bajo otras ramas del código de programa.</p>
+<p>Considerar la siguiente sentencia:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">it_is_raining</span><span class="p">)</span>
+<span class="w">  </span><span class="n">pack_umbrella</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>El valor <code class="docutils literal notranslate"><span class="pre">it_is_raining</span></code> podría estar contenido en una memoria externa -más lenta. Consecuentemente, sería util para el procesador, ser capaz de continuar realizando un trabajo adecuado, a la vez que espera que la condición de la rama sea resuelta. En lugar de esperar -igual que en un diseño simple, el procesador especulativo supondrá -predecirá, la dirección de la rama basándose en el historial. El procesador continuará ejecutando instrucciones siguiendo la <em>rama</em>, pero etiquetará el resultado en ROB, para indicar su caracter especulativo pudiendo ser desestimado. Una <em>noción</em> de guardado dentro del procesador permite deshacer rápidamente sin que por ello sea visible al programa, aunque algunos <em>artificios</em> de actividad especulativa sí posrían ser visibles.</p>
+<p>Con la vulnerabilidad Spectre, aprendimos que las predicciones de la rama del procesador podría ser alterada -entrenada, para hacer predicciones particulares. El código podría ser ejecutado de manera especulativa y tener un efecto obserbable ante las cachés del procesador. De aparecer extensiones en código existente, podría utilizarse para causar ejecuciones especulativas de código, que en condiciones normales, no formaría parte del programa. Ejemplo, excediendo el límite en un arreglo (Spectre-v1) y, provocando que otras instrucciones dependientes, alterasen localizaciiones en la caché e inferir de esta manera, un valor de datos, al cuál no tendríamos acceso. Más información acerca de la <em>vulnerabilidad Spectre</em>, referida en la entrada de blog anterior.</p>
+</section>
+<section id="incrementar-la-especulacion-en-procesadores-intel">
+<h2>Incrementar la especulación, en procesadores Intel<a class="headerlink" href="#incrementar-la-especulacion-en-procesadores-intel" title="Link to this heading"></a></h2>
+<p>Procesadores modernos, hacen un uso extensivo de las <em>especulaciones</em>, más allá, de la simple ejecución de un programa. Puesto que el <em>aparato especulativo</em>, ha sido creado y continua en uso, los fabricantes de microprocesadores como Intel, han añadido <em>funcionalidades especulativas</em>, combinándolas con toda clase de estados del procesador. Esto incluiría el resultado de una tabla de página, <em>atravesada</em> por el MMU, durante la traducción tanto de una dirección de memoria virtual como física.</p>
+<p>Intel define el término <em>terminal fault</em>, para significar la condición que alcanza cuando una entrada de tabla de página(PTE), determinado como “not present”, durante un <em>paseo pr tabla</em>. Esto sucede habitualmente, debido a un intercambio de página a disco, realizado por el SO -o sin demandar la carga, y es marcada la página como no presente, disparando posteriormente una <em>falla en acceso</em>. Anteriormente explicado, la <em>ilusión</em> de intercambo, permite al SO, proporcionar mucha más memoria virtual, quememoria física. Las <em>page fault</em>, ocurren en caso de no estar presente una página, pudiendo el SO determinar qué localización de memoria necesita ser intercambiada de regreso desde disco.</p>
+<p>El SO hace esto, mediante el uso de bits de un PTE <em>not present</em>, para almacenar varios datos de <em>guardado</em>; como la localización física en disco, del contenido de una página. El manual de desarrollador de software de Intel(SDM), mantiene las páginas marcadas como <em>no presentes</em>, así, mantendrá el resto de bits ignorados -distinto al bit presente, puesto que estarán disponibles para el SO. En ambos casos; <em>Linux y Windows</em> y otros sistemas operativos, hacen un uso extensivo de bits PTE, en páginas: <em>no presente</em>, para dar soporte al intercambio, así como también otros particulares permitidos.</p>
+<p>Mencionado previamente, los procesadores como los Intel, utilizan una optimización en común, en cuya traducción de derección virtual, toma efecto el acceso a caché en paralelo, la caché de datos L1, VIPT. En una optimización intensiva, Intel concluye un caso óptimo -<em>ruta lógica crítica</em>, donde el valor de los datos cargados desde memoria, está presente en caché, habiendo una traducción de tabla de página válida.</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<h2>Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Referido a las cachés, una chaché pequeña contiene menos datos, por lo que fácilmente entendemos que será más rápida.</p>
+</aside>
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Ver <a class="reference external" href="http://www.territoriolinux.net/TerritorioLinux/siglas.html/#2">siglas</a></p>
+</aside>
+<aside class="footnote brackets" id="f3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>Ver siglas – <a class="reference external" href="http://www.territoriolinux.net/TerritorioLinux/siglas.html/#4">VIPT</a></p>
+</aside>
+<aside class="footnote brackets" id="f4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p><strong>Out-of-Order</strong>, <em>fuera de orden, fuera de línea</em>.</p>
+</aside>
+<aside class="footnote brackets" id="f5" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
+<p><strong>in-order</strong>, <em>dentro de orden, en línea</em>.</p>
+</aside>
+<aside class="footnote brackets" id="f6" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
+<p><strong>estamentos</strong>, sentencias; palabras reservadas en un lenguaje de programación.</p>
+</aside>
+<aside class="footnote brackets" id="f7" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">7</a><span class="fn-bracket">]</span></span>
+<p>Ver siglas – <a class="reference external" href="http://www.territoriolinux.net/TerritorioLinux/siglas.html/#4">ROB</a></p>
+</aside>
+</aside>
+<ul class="simple">
+<li><p><strong>[1]</strong> Gadgets, extensión a un programa. Aporta funcionalidad extra.</p></li>
+<li><p><strong>[2]</strong> <strong>memoria de intercambio</strong>, swap, una memoria capaz de emular las características de la memoria principal del sistema, RAM. El sistema opertivo se encarga de asiganar un tamaño adecudo, teniendo en cuenta ciertas consideraciones. Por ejemplo, <em>la regla es el doble de la memoria principal</em>, aunque es considerada una regla <em>obsoleta</em> debido al notable crecimiento de la misma, en computadoras modernas. Para conseguir un dispositivo de intercambio, el sistema operativo contruye un FS, con unas características particulares, mediante el uso de <em>espacio físico en disco</em>.</p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.redhat.com/en/blog/deeper-look-l1-terminal-fault-aka-foreshadow">Deeper dive</a></p></li>
+<li><p><a class="reference external" href="https://www.redhat.com/en/blog/understanding-l1-terminal-fault-aka-foreshadow-what-you-need-know">Foreshadow</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nx-Bit.html" class="btn btn-neutral float-left" title="NX-Bit – No-eXecute" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../PlacaBase/index.html" class="btn btn-neutral float-right" title="Arquitectura de la Placa Base" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

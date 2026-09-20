@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones &mdash; TecnicoSistemas  documentation</title>
+  <title>Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="La arquitectura Von Neumann" href="arquitecturaVonNeuman.html" />
-    <link rel="prev" title="Evolución de Procesadores (Años 90 - Actualidad)" href="evolucionProcesadores.html" /> 
+    <link rel="prev" title="Fundamentos de Arquitectura de Sistemas" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,83 +41,38 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../../99_General/Hub/academico/index.html#indices-y-tablas">Indices y tablas</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="evolucionProcesadores.html">Evolución de Procesadores (Años 90 - Actualidad)</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#linea-de-tiempo-del-algebra-de-boole">Línea de Tiempo del Álgebra de Boole</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#aplicaciones-en-programacion">Aplicaciones en Programación</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#conclusion">Conclusión</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="arquitecturaVonNeuman.html">La arquitectura Von Neumann</a></li>
-<li class="toctree-l3"><a class="reference internal" href="VonNeumann.html">John von Neumann</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Memorias.html">Tipos y características de memoria</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Buses.html">Buses del equipo</a></li>
-<li class="toctree-l3"><a class="reference internal" href="velocidadModulDDR.html">Velocidad en módulos DDR</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modulosMemActuales.html">Módulos de Memoria RAM Actuales (2024)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="perifericos.html">Periféricos clasificados por tipo</a></li>
-<li class="toctree-l3"><a class="reference internal" href="integratedCards.html">Verificar si la placa base integra tarjeta gráfica (GPU)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="anchoBusGPU.html">Interpretación del “Ancho del Bus” en Tarjetas Gráficas (GPU)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conectoresDelEquipo.html">Conectores externos del equipo.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="UEFI.html">¿Qué es el estándar UEFI?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="UEFI-refs.html">Referenciando funciones en UEFI mediante identificadores</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Prefetching_en_Procesadores.html">Prefetching en Procesadores</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ejercicios.html">Ejercicios</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../A5-Hardware/Processador/procesador.html">Procesador</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/Boot/EFIpartWindows.html">Windows hardening, EFI</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/Boot/tipoArranquePS.html">Información del Sistema relacionada con UEFI usando PowerShell</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/caracteristicasEquipo.html">Caracteristicas del equipo</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/particionadorDeWindows.html"><code class="docutils literal notranslate"><span class="pre">diskpark</span></code> - particionado</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/SO_portatil.html">Creación de medios de instalación</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/funcionesSO.html">Funciones del Sistema Operativo</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/recuperarCuentas.html">Recuperación de cuentas de usuario</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/recuperarCuentasPractica.html">Práctica - Recuperación de cuentas de usuario</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/resetUserpwd.html">Reiniciar contraseña de usuario</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/explorerWindows.html">Práctica - forzar la carga del explorer de windows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/caracteristicasDeWindows10.html">Características de us sistema Windows 10</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/caracteristicasDeWindows11.html">Características principales de Windows 11</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/caracteristicasDeLinux-rhelVSdebian.html">Características de un sistema Linux</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/VirtualBox.html">Virtual Box</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/info.html">Información del sistema</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/plataforma.html">Concepto “Plataforma” en Computación</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/proxmox.html">PROXMOX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/atributos.html">Comando <code class="docutils literal notranslate"><span class="pre">Attrib</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/administradorEquipos.html">Administrador de equipos</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/asistenciaRemota.html">Asistencia remota</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/puntosRestauracion_Bauckups.html">Puntos de restauración y Copias de seguridad</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../03_Operating_Systems/configuration/ResgistroWindows.html">El Registro de Windows: Guía Básica y Ejemplo Práctico</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../04_System_Administration/system_apps/aplicacionesPortables.html">Aplicaciones Portables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../04_System_Administration/system_apps/Cobian.html">Cobian</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../04_System_Administration/system_apps/antivirus.html">¿Qué es un antivirus?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../04_System_Administration/system_apps/cortafuegos.html">¿Qué es un cortafuegos?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../04_System_Administration/system_apps/OS-msconfig.html">Arranque del sistema en Windows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../05_Networking/legacy_lan/ProtocoloTCP_IP.html">Protocolo TCP/IP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../05_Networking/legacy_lan/Redes.html">Redes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../05_Networking/legacy_lan/redesInalambricas.html">Redes inalámbricas</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../05_Networking/legacy_lan/ElementosLAN.html">Elementos de una red de área local</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../05_Networking/legacy_lan/instConfApp.html">Instalación y configuración de aplicadiones informáticas</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../05_Networking/legacy_lan/dispositivosDeRed.html">Patchpanel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../05_Networking/legacy_lan/dispositivosDeRed.html#switch">Switch</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../06_Software_and_Applications/office/Word-apuntes-parte1.html">Primera parte</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../06_Software_and_Applications/office/Word-apuntes-parte2.html">Segunda parte</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../06_Software_and_Applications/office/Word-apuntes-parte3.html">Tercera parte</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../06_Software_and_Applications/office/apuntesRaulV-v3.html">Tercera Parte</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../06_Software_and_Applications/office/excel.html">Parte 1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../06_Software_and_Applications/office/excel-2.html">Parte 2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../06_Software_and_Applications/office/excel-3.html">Parte 3</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../06_Software_and_Applications/office/cuestionarios.html">Enlace a cuestionarios</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../06_Software_and_Applications/office/PowerPoint.html">Power Point</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../99_General/Hub/academico/index.html#perfil-profesional">Perfil profesional</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../99_General/Hub/academico/index.html#downloadable-files">Downloadable files</a></li>
-</ul>
-</li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#sistema">sistema</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Fundamentos de Arquitectura de Sistemas</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
@@ -130,7 +85,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">TecnicoSistemas</a>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -138,7 +93,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Fundamentos de Arquitectura de Sistemas</a></li>
       <li class="breadcrumb-item active">Álgebra de Boole en Programación: Contexto Histórico y Aplicaciones</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/01_Hardware/sistema/GeorgeBoole.rst.txt" rel="nofollow"> View page source</a>
@@ -214,7 +170,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="evolucionProcesadores.html" class="btn btn-neutral float-left" title="Evolución de Procesadores (Años 90 - Actualidad)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Fundamentos de Arquitectura de Sistemas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="arquitecturaVonNeuman.html" class="btn btn-neutral float-right" title="La arquitectura Von Neumann" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

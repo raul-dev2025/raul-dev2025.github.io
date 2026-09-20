@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interrupciones y Comunicación con Bus PCI - Tests &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Macros, Constantes y Helpers (LTP y Kernel)" href="macros_y_constantes.html" />
+    <link rel="prev" title="Interrupciones y Comunicación con Bus PCI - Teoría" href="BUS_teorica.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwbus-io/index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Metodología para el estudio de “The Linux Test Project(LTP)”</a></li>
+      <li class="breadcrumb-item active">Interrupciones y Comunicación con Bus PCI - Tests</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/Foundry/Metodologia_LTP/BUS_tests.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="interrupciones-y-comunicacion-con-bus-pci-tests">
+<h1>Interrupciones y Comunicación con Bus PCI - Tests<a class="headerlink" href="#interrupciones-y-comunicacion-con-bus-pci-tests" title="Link to this heading"></a></h1>
+<nav class="contents local" id="pruebas-evaluadas">
+<p class="topic-title">Pruebas Evaluadas</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#analisis-del-caso-de-prueba-identificacion-del-bus-y-espacio-de-configuracion" id="id5">Análisis del Caso de Prueba: Identificación del Bus y Espacio de Configuración</a></p>
+<ul>
+<li><p><a class="reference internal" href="#analisis-de-ejecucion" id="id6">Análisis de Ejecución</a></p></li>
+<li><p><a class="reference internal" href="#resultados-en-entorno-buildlab" id="id7">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#analisis-del-caso-de-prueba-asignacion-y-control-de-interrupciones-msi-msi-x" id="id8">Análisis del Caso de Prueba: Asignación y Control de Interrupciones (MSI/MSI-X)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id9">Análisis de Ejecución</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id10">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#analisis-del-caso-de-prueba-mapeo-de-memoria-y-regiones-bar-mmio-pio" id="id11">Análisis del Caso de Prueba: Mapeo de Memoria y Regiones BAR (MMIO/PIO)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id3" id="id12">Análisis de Ejecución</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id13">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="analisis-del-caso-de-prueba-identificacion-del-bus-y-espacio-de-configuracion">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Análisis del Caso de Prueba: Identificación del Bus y Espacio de Configuración</a><a class="headerlink" href="#analisis-del-caso-de-prueba-identificacion-del-bus-y-espacio-de-configuracion" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Subsistema</strong>: <code class="docutils literal notranslate"><span class="pre">drivers/pci</span></code> / <code class="docutils literal notranslate"><span class="pre">sysfs</span></code></p></li>
+<li><p><strong>Objetivo</strong>: Verificar la correcta detección, enumeración y lectura del Espacio de Configuración de los dispositivos PCI en la topología del sistema.</p></li>
+<li><p><strong>Fundamento Teórico</strong>: Consulte <a class="reference internal" href="BUS_teorica.html"><span class="doc">Interrupciones y Comunicación con Bus PCI - Teoría</span></a> para revisar la estructura de la jerarquía BDF, los registros BAR y la exposición en <code class="docutils literal notranslate"><span class="pre">sysfs</span></code>.</p></li>
+</ul>
+<section id="analisis-de-ejecucion">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Análisis de Ejecución</a><a class="headerlink" href="#analisis-de-ejecucion" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Configuración del Entorno</strong> (<code class="docutils literal notranslate"><span class="pre">setup</span></code>):
+Se comprueba la existencia de la jerarquía de dispositivos PCI en <code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices/</span></code> y la disponibilidad de permisos para la lectura de los recursos del bus.</p></li>
+<li><p><strong>Invocación y Lectura</strong> (<code class="docutils literal notranslate"><span class="pre">run</span></code>):
+Acceso a los atributos de los dispositivos (identificadores <code class="docutils literal notranslate"><span class="pre">vendor</span></code>, <code class="docutils literal notranslate"><span class="pre">device</span></code> y archivo de configuración <code class="docutils literal notranslate"><span class="pre">config</span></code>) para validar la consistencia de la lectura de cabeceras PCI.</p></li>
+<li><p><strong>Verificación</strong>:
+Comprobación de que las direcciones de memoria mapeada (MMIO) declaradas en los registros BAR corresponden a rangos válidos del mapa de memoria del sistema.</p></li>
+</ol>
+</section>
+<section id="resultados-en-entorno-buildlab">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a><a class="headerlink" href="#resultados-en-entorno-buildlab" title="Link to this heading"></a></h3>
+<div class="admonition-test-pci-config01 admonition">
+<p class="admonition-title">Test pci_config01</p>
+<p>Sección reservada para documentar las salidas de ejecución y registros en <code class="docutils literal notranslate"><span class="pre">buildlab</span></code>
+clasificando los resultados según la metodología LTP (<code class="docutils literal notranslate"><span class="pre">TPASS</span></code>, <code class="docutils literal notranslate"><span class="pre">TFAIL</span></code>, <code class="docutils literal notranslate"><span class="pre">TCONF</span></code>).</p>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tst_test.c:1900: TINFO: LTP version: 20250130
+tst_test.c:1904: TINFO: Tested kernel: 6.12.0-124.8.1.el10_1.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Nov 11 22:54:28 UTC 2025 x86_64
+tst_kconfig.c:88: TINFO: Parsing kernel config &#39;/lib/modules/6.12.0-124.8.1.el10_1.x86_64/build/.config&#39;
+tst_test.c:1722: TINFO: Overall timeout per run is 0h 00m 30s
+pci_config_test.c:30: TINFO: Escaneando dispositivos en /sys/bus/pci/devices...
+pci_config_test.c:48: TINFO: BDF: 0000:03:00.0 -&gt; VendorID: 0x1af4 | DeviceID: 0x1043
+pci_config_test.c:48: TINFO: BDF: 0000:00:1f.2 -&gt; VendorID: 0x8086 | DeviceID: 0x2922
+pci_config_test.c:48: TINFO: BDF: 0000:0a:01.0 -&gt; VendorID: 0x1234 | DeviceID: 0x1111
+pci_config_test.c:48: TINFO: BDF: 0000:09:00.0 -&gt; VendorID: 0x1b36 | DeviceID: 0x000e
+pci_config_test.c:48: TINFO: BDF: 0000:00:01.2 -&gt; VendorID: 0x1b36 | DeviceID: 0x000c
+pci_config_test.c:65: TPASS: Se leyo correctamente el Espacio de Configuracion PCI de 5 dispositivos
+
+Summary:
+passed   1
+failed   0
+broken   0
+skipped  0
+warnings 0
+</pre></div>
+</div>
+</section>
+</section>
+<section id="analisis-del-caso-de-prueba-asignacion-y-control-de-interrupciones-msi-msi-x">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Análisis del Caso de Prueba: Asignación y Control de Interrupciones (MSI/MSI-X)</a><a class="headerlink" href="#analisis-del-caso-de-prueba-asignacion-y-control-de-interrupciones-msi-msi-x" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Subsistema</strong>: <code class="docutils literal notranslate"><span class="pre">kernel/irq</span></code> / <code class="docutils literal notranslate"><span class="pre">drivers/pci</span></code></p></li>
+<li><p><strong>Objetivo</strong>: Validar el registro y la entrega de vectores de interrupción en dispositivos PCI, verificando la transición a mecanismos MSI/MSI-X.</p></li>
+<li><p><strong>Fundamento Teórico</strong>: Consulte <a class="reference internal" href="BUS_teorica.html"><span class="doc">Interrupciones y Comunicación con Bus PCI - Teoría</span></a> para revisar el ciclo de vida de las interrupciones, las diferencias entre líneas INTx y vectores MSI-X, y la gestión mediante <em>Top Half</em> / <em>Bottom Half</em>.</p></li>
+</ul>
+<section id="id1">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Análisis de Ejecución</a><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Configuración del Entorno</strong> (<code class="docutils literal notranslate"><span class="pre">setup</span></code>):
+Inspección de las líneas de interrupción asignadas al dispositivo en prueba a través de la interfaz <code class="docutils literal notranslate"><span class="pre">/proc/interrupts</span></code>.</p></li>
+<li><p><strong>Invocación y Eventos</strong> (<code class="docutils literal notranslate"><span class="pre">run</span></code>):
+Generación de eventos de E/S sobre el dispositivo seleccionado para provocar el disparo de interrupciones y verificar la respuesta del manejador (<em>Interrupt Service Routine</em> - ISR).</p></li>
+<li><p><strong>Verificación</strong>:
+Confirmación del incremento en los contadores de vectores de interrupción en la CPU correspondiente y ausencia de anomalías o desbalanceo de líneas compartidas.</p></li>
+</ol>
+</section>
+<section id="id2">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a><a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<div class="admonition-test-pci-msi01 admonition">
+<p class="admonition-title">Test pci_msi01</p>
+<p>Sección reservada para documentar las salidas de ejecución y registros en <code class="docutils literal notranslate"><span class="pre">buildlab</span></code>
+clasificando los resultados según la metodología LTP (<code class="docutils literal notranslate"><span class="pre">TPASS</span></code>, <code class="docutils literal notranslate"><span class="pre">TFAIL</span></code>, <code class="docutils literal notranslate"><span class="pre">TCONF</span></code>).</p>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tst_test.c:1900: TINFO: LTP version: 20250130
+tst_test.c:1904: TINFO: Tested kernel: 6.12.0-124.8.1.el10_1.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Nov 11 22:54:28 UTC 2025 x86_64
+tst_kconfig.c:88: TINFO: Parsing kernel config &#39;/lib/modules/6.12.0-124.8.1.el10_1.x86_64/build/.config&#39;
+tst_test.c:1722: TINFO: Overall timeout per run is 0h 00m 30s
+pci_msi_test.c:73: TINFO: Analizando asignacion de interrupciones en /sys/bus/pci/devices...
+pci_msi_test.c:40: TINFO: BDF: 0000:03:00.0 -&gt; Asignados 2 vectores MSI/MSI-X
+pci_msi_test.c:40: TINFO: BDF: 0000:00:1f.2 -&gt; Asignados 1 vectores MSI/MSI-X
+pci_msi_test.c:54: TINFO: BDF: 0000:0a:01.0 -&gt; Asignada linea IRQ tradicional (INTx): 0
+pci_msi_test.c:54: TINFO: BDF: 0000:09:00.0 -&gt; Asignada linea IRQ tradicional (INTx): 22
+pci_msi_test.c:40: TINFO: BDF: 0000:00:01.2 -&gt; Asignados 1 vectores MSI/MSI-X
+pci_msi_test.c:89: TPASS: Se verifico correctamente la asignacion de interrupciones en 5 dispositivos
+
+Summary:
+passed   1
+failed   0
+broken   0
+skipped  0
+warnings 0
+</pre></div>
+</div>
+</section>
+</section>
+<section id="analisis-del-caso-de-prueba-mapeo-de-memoria-y-regiones-bar-mmio-pio">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Análisis del Caso de Prueba: Mapeo de Memoria y Regiones BAR (MMIO/PIO)</a><a class="headerlink" href="#analisis-del-caso-de-prueba-mapeo-de-memoria-y-regiones-bar-mmio-pio" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Subsistema</strong>: <code class="docutils literal notranslate"><span class="pre">drivers/pci</span></code> / <code class="docutils literal notranslate"><span class="pre">sysfs</span></code> / <code class="docutils literal notranslate"><span class="pre">mm</span></code></p></li>
+<li><p><strong>Objetivo</strong>: Inspeccionar la asignación de espacios de memoria MMIO y direcciones de puerto (Port I/O) declarados en los registros BAR (Base Address Registers) de los dispositivos PCI.</p></li>
+<li><p><strong>Fundamento Teórico</strong>: Consulte <a class="reference internal" href="BUS_teorica.html"><span class="doc">Interrupciones y Comunicación con Bus PCI - Teoría</span></a> para revisar el mapeo de memoria E/S, la diferenciación entre rangos de 32/64 bits, atributos de prefetcheabilidad y la reserva en espacio físico.</p></li>
+</ul>
+<section id="id3">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Análisis de Ejecución</a><a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Configuración del Entorno</strong> (<code class="docutils literal notranslate"><span class="pre">setup</span></code>):
+Lectura de la interfaz de recursos en <code class="docutils literal notranslate"><span class="pre">/sys/bus/pci/devices/&lt;BDF&gt;/resource</span></code> para verificar los rangos de inicio, fin y atributos (<em>flags</em>) de cada región.</p></li>
+<li><p><strong>Invocación y Cálculo</strong> (<code class="docutils literal notranslate"><span class="pre">run</span></code>):
+Parseo de las direcciones mapeadas, cálculo del tamaño de ventana por BAR ($Base_{end} - Base_{start} + 1$) y clasificación entre regiones MMIO (Prefetchable / Non-Prefetchable) y Port I/O.</p></li>
+<li><p><strong>Verificación</strong>:
+Confirmación de la validez de los rangos declarados en el archivo de recursos frente a las reservas de memoria física expuestas en el sistema.</p></li>
+</ol>
+</section>
+<section id="id4">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Resultados en Entorno <code class="docutils literal notranslate"><span class="pre">buildlab</span></code></a><a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<div class="admonition-test-pci-bar01 admonition">
+<p class="admonition-title">Test pci_bar01</p>
+<p>Sección reservada para documentar las salidas de ejecución y registros en <code class="docutils literal notranslate"><span class="pre">buildlab</span></code>
+clasificando los resultados según la metodología LTP (<code class="docutils literal notranslate"><span class="pre">TPASS</span></code>, <code class="docutils literal notranslate"><span class="pre">TFAIL</span></code>, <code class="docutils literal notranslate"><span class="pre">TCONF</span></code>).</p>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Tu código aquí
+tst_test.c:1900: TINFO: LTP version: 20250130
+tst_test.c:1904: TINFO: Tested kernel: 6.12.0-124.8.1.el10_1.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Nov 11 22:54:28 UTC 2025 x86_64
+tst_kconfig.c:88: TINFO: Parsing kernel config &#39;/lib/modules/6.12.0-124.8.1.el10_1.x86_64/build/.config&#39;
+tst_test.c:1722: TINFO: Overall timeout per run is 0h 00m 30s
+pci_bar_test.c:83: TINFO: Analizando regiones BAR/MMIO en /sys/bus/pci/devices...
+pci_bar_test.c:55: TINFO: BDF: 0000:03:00.0 | BAR1: [0x82800000 - 0x82800fff] | Tamano: 4 KB | Tipo: MMIO (Non-Prefetchable)
+pci_bar_test.c:55: TINFO: BDF: 0000:03:00.0 | BAR4: [0x381000000000 - 0x381000003fff] | Tamano: 16 KB | Tipo: MMIO (Prefetchable)
+pci_bar_test.c:55: TINFO: BDF: 0000:00:1f.2 | BAR4: [0x6040 - 0x605f] | Tamano: 0 KB | Tipo: Port I/O
+pci_bar_test.c:55: TINFO: BDF: 0000:00:1f.2 | BAR5: [0x82e40000 - 0x82e40fff] | Tamano: 4 KB | Tipo: MMIO (Non-Prefetchable)
+pci_bar_test.c:55: TINFO: BDF: 0000:0a:01.0 | BAR0: [0x80000000 - 0x80ffffff] | Tamano: 16384 KB | Tipo: MMIO (Prefetchable)
+pci_bar_test.c:55: TINFO: BDF: 0000:0a:01.0 | BAR2: [0x81000000 - 0x81000fff] | Tamano: 4 KB | Tipo: MMIO (Non-Prefetchable)
+pci_bar_test.c:55: TINFO: BDF: 0000:09:00.0 | BAR0: [0x81100000 - 0x811000ff] | Tamano: 0 KB | Tipo: MMIO (Non-Prefetchable)
+pci_bar_test.c:55: TINFO: BDF: 0000:00:01.2 | BAR0: [0x82e4d000 - 0x82e4dfff] | Tamano: 4 KB | Tipo: MMIO (Non-Prefetchable)
+pci_bar_test.c:99: TPASS: Se inspeccionaron correctamente las regiones BAR de 5 dispositivos
+
+Summary:
+passed   1
+failed   0
+broken   0
+skipped  0
+warnings 0
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="BUS_teorica.html" class="btn btn-neutral float-left" title="Interrupciones y Comunicación con Bus PCI - Teoría" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="macros_y_constantes.html" class="btn btn-neutral float-right" title="Macros, Constantes y Helpers (LTP y Kernel)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

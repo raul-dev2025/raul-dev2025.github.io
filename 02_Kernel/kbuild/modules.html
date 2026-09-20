@@ -1,0 +1,565 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Construcción de módulos externos &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="NetConsole" href="../networking/netconsole.html" />
+    <link rel="prev" title="Makefiles en el kernel de Linux" href="makefiles.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-powerpc">arch/powerpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#input">Input</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="makefiles.html">Makefiles en el kernel de Linux</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Construcción de módulos externos</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#como-construir-modulos-externos">Cómo construir módulos externos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sintaxis-de-comandos">Sintaxis de comandos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#opciones">Opciones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#objetivos">Objetivos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#construiccon-de-archivos-separados">Construiccón de archivos separados</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#crear-un-archivo-kbuild-para-un-modulo-externo">Crear un archivo Kbuild para un módulo externo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#makefile-compartido">Makefile compartido</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#archivos-kbuild-y-makefile-separados">Archivos Kbuild y Makefile separados.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#blobs-binarios-f1">Blobs binarios <span>[f1]</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#construccion-de-multiples-modulos">Construcción de múltiples módulos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#archivos-includes">Archivos includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-includes">Kernel includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#un-unico-subdirectorio">Un único subdirectorio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#distintos-subdirectorio">Distintos subdirectorio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instalacion-de-modulos">Instalación de módulos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-mod-path">INSTALL_MOD_PATH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-mod-dir">INSTALL_MOD_DIR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#versionando-modulos">Versionando módulos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simbolos-desde-el-kernel-vmlinux-modulos">Símbolos desde el kernel (vmlinux + módulos)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simbolos-y-modulos-externos">Símbolos y módulos externos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simbolos-desde-un-modulo-externo">Símbolos desde un módulo externo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#truco-o-trato">Truco o trato</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prueba-config-foo-bar">Prueba <code class="docutils literal notranslate"><span class="pre">CONFIG_FOO_BAR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos">Referencias y agradecimientos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#x86">x86</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Kernel documents</a></li>
+      <li class="breadcrumb-item active">Construcción de módulos externos</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/02_Kernel/kbuild/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <nav class="contents local" id="tabla-de-contenidos" role="doc-toc">
+<p class="topic-title">Tabla de contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#construccion-de-modulos-externos" id="id2">Construcción de módulos externos</a></p>
+<ul>
+<li><p><a class="reference internal" href="#introduccion" id="id3">Introducción</a></p></li>
+<li><p><a class="reference internal" href="#como-construir-modulos-externos" id="id4">Cómo construir módulos externos</a></p></li>
+<li><p><a class="reference internal" href="#sintaxis-de-comandos" id="id5">Sintaxis de comandos</a></p></li>
+<li><p><a class="reference internal" href="#opciones" id="id6">Opciones</a></p></li>
+<li><p><a class="reference internal" href="#objetivos" id="id7">Objetivos</a></p></li>
+<li><p><a class="reference internal" href="#construiccon-de-archivos-separados" id="id8">Construiccón de archivos separados</a></p></li>
+<li><p><a class="reference internal" href="#crear-un-archivo-kbuild-para-un-modulo-externo" id="id9">Crear un archivo Kbuild para un módulo externo</a></p></li>
+<li><p><a class="reference internal" href="#makefile-compartido" id="id10">Makefile compartido</a></p></li>
+<li><p><a class="reference internal" href="#archivos-kbuild-y-makefile-separados" id="id11">Archivos Kbuild y Makefile separados.</a></p></li>
+<li><p><a class="reference internal" href="#blobs-binarios-f1" id="id12">Blobs binarios <a class="reference internal" href="#f1" id="id1"><span>[f1]</span></a></a></p></li>
+<li><p><a class="reference internal" href="#construccion-de-multiples-modulos" id="id13">Construcción de múltiples módulos</a></p></li>
+<li><p><a class="reference internal" href="#archivos-includes" id="id14">Archivos includes</a></p></li>
+<li><p><a class="reference internal" href="#kernel-includes" id="id15">Kernel includes</a></p></li>
+<li><p><a class="reference internal" href="#un-unico-subdirectorio" id="id16">Un único subdirectorio</a></p></li>
+<li><p><a class="reference internal" href="#distintos-subdirectorio" id="id17">Distintos subdirectorio</a></p></li>
+<li><p><a class="reference internal" href="#instalacion-de-modulos" id="id18">Instalación de módulos</a></p></li>
+<li><p><a class="reference internal" href="#install-mod-path" id="id19">INSTALL_MOD_PATH</a></p></li>
+<li><p><a class="reference internal" href="#install-mod-dir" id="id20">INSTALL_MOD_DIR</a></p></li>
+<li><p><a class="reference internal" href="#versionando-modulos" id="id21">Versionando módulos</a></p></li>
+<li><p><a class="reference internal" href="#simbolos-desde-el-kernel-vmlinux-modulos" id="id22">Símbolos desde el kernel (vmlinux + módulos)</a></p></li>
+<li><p><a class="reference internal" href="#simbolos-y-modulos-externos" id="id23">Símbolos y módulos externos</a></p></li>
+<li><p><a class="reference internal" href="#simbolos-desde-un-modulo-externo" id="id24">Símbolos desde un módulo externo</a></p></li>
+<li><p><a class="reference internal" href="#truco-o-trato" id="id25">Truco o trato</a></p></li>
+<li><p><a class="reference internal" href="#prueba-config-foo-bar" id="id26">Prueba <code class="docutils literal notranslate"><span class="pre">CONFIG_FOO_BAR</span></code></a></p></li>
+<li><p><a class="reference internal" href="#referencias-y-agradecimientos" id="id27">Referencias y agradecimientos</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="construccion-de-modulos-externos">
+<span id="modules-2"></span><h1>Construcción de módulos externos<a class="headerlink" href="#construccion-de-modulos-externos" title="Link to this heading"></a></h1>
+<p>Este documento describe como construir módulos del kernel, de forma externa.</p>
+<section id="introduccion">
+<span id="modules-3"></span><h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p><em>Kbuild</em> es el sistema de construcción utilizado por el kernel de Linux.
+Los módulos deben usar <em>Kbuild</em> a efectos de compatibilidad, con sucesivos cambios en la infraestructura del mismo y, aportar las opciones adecuadas al compilador <code class="docutils literal notranslate"><span class="pre">gcc</span></code>. Funcionalmente, en el momento de construir los módulos, tanto dentro como fuera del árbol, deberá estar presente. El método de construcción es similar en ambos casos. Todos los módulos son desarrollados y construidos inicialmente, <em>fuera del árbol</em>.</p>
+<p>La información cubierta por este documento, está destinada a desarrolladores que trabajen en la construción de módulos <em>externos</em>. El autor de un módulo externo, debería aportar un <code class="docutils literal notranslate"><span class="pre">makefile</span></code> que oculte su complejidad. Tan sólo escribiendo <code class="docutils literal notranslate"><span class="pre">make</span></code>, será construido el módulo. Esto se consigue facilmente; será presentado un ejemplo en la sección 3.</p>
+</section>
+<section id="como-construir-modulos-externos">
+<span id="modules-4"></span><h2>Cómo construir módulos externos<a class="headerlink" href="#como-construir-modulos-externos" title="Link to this heading"></a></h2>
+<p>Para la construcción de módulos externos, es necesarios disponer de un <em>kernel</em> anterior, conteniendo los archivos de cabecera y configuración utilizados en la misma. Igualmente, el kernel deberá haber sido construido con tal capacidad: módulos activos -enabled modules. Si es utilizada una distribución del núcleo, habrá un paquete para el kernel utilizado, provisto por la distribución en uso.</p>
+<p>Una alternativa es el empleo de <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">&lt;target&gt;</span> <span class="pre">modules_prepare</span></code>, garantizando que el kernel contendrá la información requerida. El <code class="docutils literal notranslate"><span class="pre">&lt;target&gt;</span></code> existe únicamente, con la intención de preparar la <em>fuente</em> del kernel, para la construcción de módulos externos.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">modules_prepare</span></code>, no construirá <code class="docutils literal notranslate"><span class="pre">Module.symvers</span></code>
+incluso si <code class="docutils literal notranslate"><span class="pre">CONFIG_MODVERSIONS</span></code> fué establecido; es más, será
+necesaria una construcción completa del kernel para conseguir que el
+<em>versionado</em> del módulo funcione.</p>
+</div>
+</section>
+<section id="sintaxis-de-comandos">
+<span id="modules-5"></span><h2>Sintaxis de comandos<a class="headerlink" href="#sintaxis-de-comandos" title="Link to this heading"></a></h2>
+<p>El comando para la construcción de un módulo externo es:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>-C<span class="w"> </span>&lt;path_to_kernel_src&gt;<span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$PWD</span>
+</pre></div>
+</div>
+<p>El sistema <em>kbuild</em> reconoce que está siendo construido un módulo, puesto que la opción <code class="docutils literal notranslate"><span class="pre">M=&lt;dir&gt;</span></code>, así lo indica.</p>
+<p>Utilizar lo siguiente, sobre un kernel en uso:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>-C<span class="w"> </span>/lib/modules/<span class="sb">`</span>uname<span class="w"> </span>-r<span class="sb">`</span>/build<span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$PWD</span>
+</pre></div>
+</div>
+<p>Instalar entonces, el módulo recién construido y, añadir el <em>objetivo</em> <code class="docutils literal notranslate"><span class="pre">modules_install</span></code> a la línea de comandos:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>-C<span class="w"> </span>/lib/modules/<span class="sb">`</span>uname<span class="w"> </span>-r<span class="sb">`</span>/build<span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$PWD</span><span class="w"> </span>modules_install
+</pre></div>
+</div>
+</section>
+<section id="opciones">
+<span id="modules-6"></span><h2>Opciones<a class="headerlink" href="#opciones" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">$KDIR</span></code> hace referencia a la ruta, fuente del kernel.</p>
+</div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>-C<span class="w"> </span><span class="nv">$KDIR</span><span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$PWD</span>
+
+-C<span class="w"> </span><span class="nv">$KDIR</span>
+</pre></div>
+</div>
+<ul>
+<li><p>El directorio donde es localizada la fuente del kernel. <code class="docutils literal notranslate"><span class="pre">make</span></code> apuntará hacia el directorio especificado, regresando, al terminar.</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nv">M</span><span class="o">=</span><span class="nv">$PWD</span>
+</pre></div>
+</div>
+</li>
+<li><p>Informa a <em>kbuild</em>, que un módulo externo está siendo construido. El valor de <code class="docutils literal notranslate"><span class="pre">M</span></code>, denota la ruta hacia el direcotorio, donde es localizado el módulo externo -el archivo <em>kbuild</em>.</p></li>
+</ul>
+</section>
+<section id="objetivos">
+<span id="modules-7"></span><h2>Objetivos<a class="headerlink" href="#objetivos" title="Link to this heading"></a></h2>
+<p>Al construir un módulo externo, sólo un subconjunto de objetivos en el <code class="docutils literal notranslate"><span class="pre">make</span></code>, estarán disponibles.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>-C<span class="w"> </span><span class="nv">$KDIR</span><span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$PWD</span><span class="w"> </span><span class="o">[</span>target<span class="o">]</span>
+</pre></div>
+</div>
+<p>Por defecto, serán construidos los módulo localizados en el directorio en uso, de esta forma no será necesario especificar el <code class="docutils literal notranslate"><span class="pre">target</span></code>.
+Todos los archivos de salida, serán generados en el mismo direcotiro.
+No se llevará a cabo ningún intento por actualizar la fuente del kernel, siendo requisito que un <code class="docutils literal notranslate"><span class="pre">make</span></code> haya sido exitósamente ejecutado en el kernel.</p>
+<p><code class="docutils literal notranslate"><span class="pre">modules</span></code> El objetivo por defecto, en módulos externos. Tiene la misma funcionalidad, incluso sin especificar el <em>objetivo</em>. Ver la descripción arriba.</p>
+<p><code class="docutils literal notranslate"><span class="pre">modules_install</span></code> Instala módulos externos. La localización por defecto es <code class="docutils literal notranslate"><span class="pre">/lib/modules/&lt;kernel_release&gt;/extra/</span></code>, aunque podría ser añadio un prefijo con <code class="docutils literal notranslate"><span class="pre">INSTALL_MOD_PATH</span></code> -discutido en la sección 5.</p>
+<p><code class="docutils literal notranslate"><span class="pre">clean</span></code> Retira todos los archivos generados, sólo en el directorio <em>module</em>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">help</span></code> Lista los objetivos disponibles para módulos externos.</p>
+</section>
+<section id="construiccon-de-archivos-separados">
+<span id="modules-8"></span><h2>Construiccón de archivos separados<a class="headerlink" href="#construiccon-de-archivos-separados" title="Link to this heading"></a></h2>
+<p>Es posible construir un sólo archivo, como parte de un módulo. Esto funciona de la misma forma para el kernel, un módulo e incluso para módulos externos.</p>
+<p>Ejemplo; el módulo _foo.ko_ consta de _bar.o_ y _baz.o_</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>-C<span class="w"> </span><span class="nv">$KDIR</span><span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$PWD</span><span class="w"> </span>bar.lst
+make<span class="w"> </span>-C<span class="w"> </span><span class="nv">$KDIR</span><span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$PWD</span><span class="w"> </span>baz.o
+make<span class="w"> </span>-C<span class="w"> </span><span class="nv">$KDIR</span><span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$PWD</span><span class="w"> </span>foo.ko
+make<span class="w"> </span>-C<span class="w"> </span><span class="nv">$KDIR</span><span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$PWD</span><span class="w"> </span>/
+</pre></div>
+</div>
+</section>
+<section id="crear-un-archivo-kbuild-para-un-modulo-externo">
+<span id="modules-9"></span><h2>Crear un archivo Kbuild para un módulo externo<a class="headerlink" href="#crear-un-archivo-kbuild-para-un-modulo-externo" title="Link to this heading"></a></h2>
+<p>En la última sección, vimos el comando para constuir un módulo del kernel activo. El módulo <em>no es construido</em>, puesto que es necesario un archivo de <em>construcción</em>. Contenido en este archivo de construcción, aparrecerá el nombre del módulo/s que está siendo construido, junto a una lista de software requerido. El archivo podría ser tan simple como una sóla línea:</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nv">obj-m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>&lt;module_name&gt;.o
+</pre></div>
+</div>
+<p>El sistema <em>kbuild</em> construirá <code class="docutils literal notranslate"><span class="pre">&lt;module_name&gt;.o</span></code> desde <code class="docutils literal notranslate"><span class="pre">&lt;module_name&gt;.c</span></code> y, después de enlazarlo, resultará en el módulo del kernel <code class="docutils literal notranslate"><span class="pre">&lt;module_name&gt;.ko</span></code>. La línea de arriba, puede colocarse tanto en un archivo <em>kbuild</em> como en otro <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>. Cuando el módulo sea construido, desde múltiples fuentes, será necesaria una línea adicional, para listar los mismos:</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">&lt;module_name&gt;-y </span><span class="o">:</span>= &lt;<span class="n">src</span>1&gt;.<span class="n">o</span> &lt;<span class="n">src</span>2&gt;.<span class="n">o</span> ...
+</pre></div>
+</div>
+<p><strong>Nota</strong>: documentación más extensa, acerca de la sintaxis utilizada por <em>kbuild</em>, podrá encontrarse en <code class="docutils literal notranslate"><span class="pre">Documentation/kbuild/makefiles.txt</span></code>.</p>
+<p>Los ejemplos que siguen, demuestran cómo crear y construir un archivo, para el módulo <em>8123.ko</em>, el cuál es construido desde los archivos a continuación:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>8123_if.c
+8123_if.h
+8123_pci.c
+8123_bin.o_shipped  &lt;= Binary blob
+</pre></div>
+</div>
+</section>
+<section id="makefile-compartido">
+<span id="modules-10"></span><h2>Makefile compartido<a class="headerlink" href="#makefile-compartido" title="Link to this heading"></a></h2>
+<p>Un módulo externo, simpre incluye un <em>makefile</em>, con soporte para construir el módulo utilizando <code class="docutils literal notranslate"><span class="pre">make</span></code>, sin argumentos. El objetivo no es utilizado por <em>kbuild</em> únicamente es utilizado por conveniencia.
+Otras funcionalidades, como elementos de prueba, podrían ser incluidos, aunque deberían filtrarse, desde fuera de <em>kbuild</em>, para evitar <em>conflicto de nombres</em>.</p>
+<p>Ejemplo 1 –&gt; filename: Makefile ifneq ($(KERNELRELEASE),) # kbuild part of makefile obj-m := 8123.o 8123-y := 8123_if.o 8123_pci.o 8123_bin.o</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="cp">else</span>
+<span class="c"># normal makefile</span>
+<span class="nv">KDIR</span><span class="w"> </span><span class="o">?=</span><span class="w"> </span>/lib/modules/<span class="sb">`</span>uname<span class="w"> </span>-r<span class="sb">`</span>/build
+
+<span class="nf">default</span><span class="o">:</span>
+<span class="w">    </span><span class="k">$(</span>MAKE<span class="k">)</span><span class="w"> </span>-C<span class="w"> </span><span class="k">$(</span>KDIR<span class="k">)</span><span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$$</span>PWD
+
+<span class="c"># Module specific targets</span>
+<span class="nf">genbin</span><span class="o">:</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;X&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>8123_bin.o_shipped
+
+<span class="cp">endif</span>
+</pre></div>
+</div>
+<p>La comprobación para el KERNELRELEASE-<em>lanzamiento del kernel</em>, es utilizada para separar las dos partes del <em>makefile</em>. En el ejemplo, <em>kbuild</em> sólo verá las dos asignaciones, en cambio <em>make</em>, verá todo, excepto estas dos asignaciones. Esto se lleva a cabo con dos <em>pasadas</em> sobre el archivo: La primera pasada, es realizada por una instancia del “make”, corriendo en la línea de comandos; la segunda, la lleva a cabo el sistema kabuild, el cuál es iniciado por el parámetro “make”, en el objetivo por defecto.</p>
+</section>
+<section id="archivos-kbuild-y-makefile-separados">
+<span id="modules-11"></span><h2>Archivos Kbuild y Makefile separados.<a class="headerlink" href="#archivos-kbuild-y-makefile-separados" title="Link to this heading"></a></h2>
+<p>En versiones recientes del kernel, kbuild buscará primero un archivo llamado “kbuild”, y sólo en caso de no encontrarlo, buscará el makefile.
+Utilizar un archivo “kbuild”, permite separar el makefile del ejemplo 1, en dos archivos:</p>
+<p>Ejemplo 2</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">--&gt; filename</span><span class="o">:</span><span class="w"> </span><span class="n">Kbuild</span>
+<span class="nv">obj-m</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="m">8123</span>.o
+<span class="nv">8123-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>8123_if.o<span class="w"> </span>8123_pci.o<span class="w"> </span>8123_bin.o
+<span class="nf">--&gt; filename</span><span class="o">:</span><span class="w"> </span><span class="n">Makefile</span>
+<span class="nv">KDIR</span><span class="w"> </span><span class="o">?=</span><span class="w"> </span>/lib/modules/<span class="sb">`</span>uname<span class="w"> </span>-r<span class="sb">`</span>/build
+<span class="nf">default</span><span class="o">:</span>
+<span class="w">        </span><span class="k">$(</span>MAKE<span class="k">)</span><span class="w"> </span>-C<span class="w"> </span><span class="k">$(</span>KDIR<span class="k">)</span><span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$$</span>PWD
+<span class="c"># Module specific targets</span>
+<span class="nf">genbin</span><span class="o">:</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;X&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>8123_bin.o_shipped
+</pre></div>
+</div>
+<p>La separación en el ejemplo 2, es cuestionable debido a la simplicidad de cada archivo; aunque, algunos módulos externos usan <em>makefiles</em> consistentes en varios cientos de líneas, por lo que cuesta separar la parte <em>kbuild</em>, del resto.</p>
+<p>El siguiente ejemplo, muestra versiones compatibles anteriores.</p>
+<p>Ejemplo 3</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">--&gt; filename</span><span class="o">:</span><span class="w"> </span><span class="n">Kbuild</span>
+<span class="nv">obj-m</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="m">8123</span>.o
+<span class="nv">8123-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>8123_if.o<span class="w"> </span>8123_pci.o<span class="w"> </span>8123_bin.o
+
+<span class="nf">--&gt; filename</span><span class="o">:</span><span class="w"> </span><span class="n">Makefile</span>
+<span class="cp">ifneq ($(KERNELRELEASE),)</span>
+<span class="c"># kbuild part of makefile</span>
+<span class="cp">include Kbuild</span>
+
+<span class="cp">else</span>
+<span class="c"># normal makefile</span>
+<span class="nv">KDIR</span><span class="w"> </span><span class="o">?=</span><span class="w"> </span>/lib/modules/<span class="sb">`</span>uname<span class="w"> </span>-r<span class="sb">`</span>/build
+
+<span class="nf">default</span><span class="o">:</span>
+<span class="w">    </span><span class="k">$(</span>MAKE<span class="k">)</span><span class="w"> </span>-C<span class="w"> </span><span class="k">$(</span>KDIR<span class="k">)</span><span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$$</span>PWD
+
+<span class="c"># Module specific targets</span>
+<span class="nf">genbin</span><span class="o">:</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;X&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>8123_bin.o_shipped
+
+<span class="cp">endif</span>
+</pre></div>
+</div>
+<p>Aquí, el archivo “kbuild” es incluído desde el makefile. Permitiendo a viejas versiones de kbuild -el cuál sólo conoce el makefile, ser utilizadas cuando la parte “make” y kbuild, son archivos separados.</p>
+</section>
+<section id="blobs-binarios-f1">
+<span id="modules-12"></span><h2>Blobs binarios <a class="reference internal" href="#f1" id="id1"><span>[f1]</span></a><a class="headerlink" href="#blobs-binarios-f1" title="Link to this heading"></a></h2>
+<p>Algunos módulos externos necesitan incluir un <em>archivo de objeto</em>, como <em>blob</em>. Kbuild da soporte a esto, pero requiere que el archivo blob sea llamado <code class="docutils literal notranslate"><span class="pre">&lt;filename&gt;_shipped</span></code>. Cuando la reglas kbuild actúan, es creada una copia de <code class="docutils literal notranslate"><span class="pre">&lt;filename&gt;_shipped</span></code> quitando <code class="docutils literal notranslate"><span class="pre">_shipped</span></code> y, entregando el nombre del archivo <code class="docutils literal notranslate"><span class="pre">&lt;filename&gt;</span></code>. El nombre corto, puede ser utilizado en la asignación del módulo.</p>
+<p>Através de esta sección, <code class="docutils literal notranslate"><span class="pre">8123_bin.o_shipped</span></code> ha sido utilizado para constuir el módulo del kernel <code class="docutils literal notranslate"><span class="pre">8123.ko</span></code>; siendo incluído como <code class="docutils literal notranslate"><span class="pre">8123_bin.o</span></code></p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nv">8123-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>8123_if.o<span class="w"> </span>8123_pci.o<span class="w"> </span>8123_bin.o
+</pre></div>
+</div>
+<p>A pesar de ello, no hay distinción entre los archivos fuente ordinarios y, los archivos binarios. kbuild seleccionará distintas reglas, al ser creado el <em>archivo objeto</em> del módulo.</p>
+</section>
+<section id="construccion-de-multiples-modulos">
+<span id="modules-13"></span><h2>Construcción de múltiples módulos<a class="headerlink" href="#construccion-de-multiples-modulos" title="Link to this heading"></a></h2>
+<p>kbuild da soporte a la construcción de múltiples módulos, en una sóla construcción. Por ejemplo, para la construcción de dos módulos, <code class="docutils literal notranslate"><span class="pre">foo.ko</span></code> y <code class="docutils literal notranslate"><span class="pre">bar.ko</span></code>, las líneas kbuild serían:</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nv">obj-m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>foo.o<span class="w"> </span>bar.o
+<span class="nv">foo-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>&lt;foo_srcs&gt;
+<span class="nv">bar-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>&lt;bar_srcs&gt;
+</pre></div>
+</div>
+<p>Es así de simple!</p>
+</section>
+<section id="archivos-includes">
+<span id="modules-14"></span><h2>Archivos includes<a class="headerlink" href="#archivos-includes" title="Link to this heading"></a></h2>
+<p>Dentro del kernel, los archivos de cabecera son guardados en localizaciones estandar, de acuerdo a las siguientes reglas:</p>
+<ul class="simple">
+<li><p>Si el archivo de cabecera describe la interfase interna de un módulo,
+el archivo será colocado en el mismo directorio que los archivos
+<em>fuente</em>.</p></li>
+<li><p>Si el archivo de cabecera describe una interfase utilizada por otras
+partes del kernel, localizadas en directorios diferentes, el archivo
+será colocado en <code class="docutils literal notranslate"><span class="pre">include/linux/.</span></code>.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Nota</strong>: Existen dos excepciones significativas: sistemas grandes,
+tienen su própio directorio bajo <code class="docutils literal notranslate"><span class="pre">include/</span></code>, -ejemplo,
+<code class="docutils literal notranslate"><span class="pre">include/scsi</span></code>. Cabeceras específicas de la <em>arquitectura</em>, son
+localizadas bajo <code class="docutils literal notranslate"><span class="pre">arch/$(ARCH)/include/</span></code>.</p>
+</div></blockquote>
+</section>
+<section id="kernel-includes">
+<span id="modules-15"></span><h2>Kernel includes<a class="headerlink" href="#kernel-includes" title="Link to this heading"></a></h2>
+<p>Para incluir un archivo de cabecera bajo <code class="docutils literal notranslate"><span class="pre">include/linux/</span></code>, simplemente utilizar:</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#include &lt;linux/module.h&gt;</span>
+</pre></div>
+</div>
+<p>kbuild añadirá las opciones a <em>gcc</em>, para buscar en los directorios relevantes.</p>
+</section>
+<section id="un-unico-subdirectorio">
+<span id="modules-16"></span><h2>Un único subdirectorio<a class="headerlink" href="#un-unico-subdirectorio" title="Link to this heading"></a></h2>
+<p>Módulos externos tienden a situar los archivos de cabecera en directios <code class="docutils literal notranslate"><span class="pre">include/</span></code> separados, donde también es localizada la fuente, a pesar de no ser el <em>estilo</em> habitual del kernel. Para informar a kbuild del directorio, usar <code class="docutils literal notranslate"><span class="pre">ccflags-y</span></code> o <code class="docutils literal notranslate"><span class="pre">CFLAGS_&lt;filename&gt;.o</span></code>.</p>
+<p>El uso del ejemplo en la sección 3, si hubiésemos movido <code class="docutils literal notranslate"><span class="pre">8123_if.h</span></code> al subdirectorio llamado <em>include</em>, el resultante archivo kbuild tendría el siguiente aspecto:</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">--&gt; filename</span><span class="o">:</span><span class="w"> </span><span class="n">Kbuild</span>
+<span class="nv">obj-m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="m">8123</span>.o
+
+<span class="nv">ccflags-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-Iinclude
+<span class="nv">8123-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>8123_if.o<span class="w"> </span>8123_pci.o<span class="w"> </span>8123_bin.o
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Nota</strong>: En la asignación, no hay espacio entre <code class="docutils literal notranslate"><span class="pre">-I</span></code> y la ruta. Se
+trata de una limitación de kbuild: deben aparecer <em>ningún</em> espacio
+presente.</p>
+</div></blockquote>
+</section>
+<section id="distintos-subdirectorio">
+<span id="modules-17"></span><h2>Distintos subdirectorio<a class="headerlink" href="#distintos-subdirectorio" title="Link to this heading"></a></h2>
+<p>kbuild podrá gestionar archivos por separados, sobre distintos directorios. Considerar el siguiente ejemplo:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
+|__ src
+|   |__ complex_main.c
+|   |__ hal
+|   |__ hardwareif.c
+|   |__ include
+|       |__ hardwareif.h
+|__ include
+      |__ complex.h
+</pre></div>
+</div>
+<p>Para constuir el módulo <code class="docutils literal notranslate"><span class="pre">complex.ko</span></code> es necesario el siguiente archivo <em>kbuild</em>:</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">--&gt; filename</span><span class="o">:</span><span class="w"> </span><span class="n">Kbuild</span>
+<span class="nv">obj-m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>complex.o
+<span class="nv">complex-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>src/complex_main.o
+<span class="nv">complex-y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>src/hal/hardwareif.o
+
+<span class="nv">ccflags-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>-I<span class="k">$(</span>src<span class="k">)</span>/include
+<span class="nv">ccflags-y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-I<span class="k">$(</span>src<span class="k">)</span>/src/hal/include
+</pre></div>
+</div>
+<p>Como puede verse, kbuild sabe como gestionar <em>archivos objeto</em> localizados en otros directorios. El truco es especificar el directorio relativo a la localización de los archivos kbuild. Dicho esto, NO es una práctica recomendable.</p>
+<p>Para los archivos cabecera, kbuild debe explicitar <em>dónde mirar</em>. Cuando kbuild ejecuta el directorio, activo, es siempre la ráiz del <em>árbol del kernel</em> -argumento a <code class="docutils literal notranslate"><span class="pre">-C</span></code> y, por lo tanto es necesaria una <em>ruta absoluta</em>. <code class="docutils literal notranslate"><span class="pre">$(src)</span></code> proporciona una ruta absolura, apuntando al directorio donde el archivo en activo, está siendo ejecutado.</p>
+</section>
+<section id="instalacion-de-modulos">
+<span id="modules-18"></span><h2>Instalación de módulos<a class="headerlink" href="#instalacion-de-modulos" title="Link to this heading"></a></h2>
+<p>Módulos incluidos en el kernel, serán instalados en el directorio:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/lib/modules/$(KERNELRELEASE)/kernel/
+</pre></div>
+</div>
+<p>Módulos externos, instalados en:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/lib/modules/$(KERNELRELEASE)/extra/
+</pre></div>
+</div>
+</section>
+<section id="install-mod-path">
+<span id="modules-19"></span><h2>INSTALL_MOD_PATH<a class="headerlink" href="#install-mod-path" title="Link to this heading"></a></h2>
+<p>Arriba aparecen los directorios por defecto -como siempre, cierto grado de <em>personalización</em> es posible. Podrá añadirse un prefijo a la ruta de instalación, por medio de la variable <code class="docutils literal notranslate"><span class="pre">INSTALL_MOD_PATH</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span><span class="nv">INSTALL_MOD_PATH</span><span class="o">=</span>/frodo<span class="w"> </span><span class="nv">modules_install</span>
+<span class="o">=</span>&gt;<span class="w"> </span>Install<span class="w"> </span>dir:<span class="w"> </span>/frodo/lib/modules/<span class="k">$(</span>KERNELRELEASE<span class="k">)</span>/kernel/
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">INSTALL_MOD_PATH</span></code> podría ser configurado como una <em>variable de shell ordinaria</em> -o, tal y como es mostrada arriba, especificada através de la línea de comandos al llamar a <code class="docutils literal notranslate"><span class="pre">make</span></code>. Esto toma efecto, al instalar tanto módulos dentro del árbol, como desde fuera.</p>
+</section>
+<section id="install-mod-dir">
+<span id="modules-20"></span><h2>INSTALL_MOD_DIR<a class="headerlink" href="#install-mod-dir" title="Link to this heading"></a></h2>
+<p>Módulos externos serán, por defecto, instalados en un directorio bajo <code class="docutils literal notranslate"><span class="pre">/lib/modules/$(KERNELRELEASE)/extra/</span></code>, aunque podría ser de interés, localizar los módules -con una funcionalidad específica, en directorios separados. En este sentido, <code class="docutils literal notranslate"><span class="pre">INSTALL_MOD_DIR</span></code>, podría utilizarse de forma alternativa con un nombre “extra”.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span><span class="nv">INSTALL_MOD_DIR</span><span class="o">=</span>gandalf<span class="w"> </span>-C<span class="w"> </span><span class="nv">$KDIR</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span><span class="nv">M</span><span class="o">=</span><span class="nv">$PWD</span><span class="w"> </span><span class="nv">modules_install</span>
+<span class="o">=</span>&gt;<span class="w"> </span>Install<span class="w"> </span>dir:<span class="w"> </span>/lib/modules/<span class="k">$(</span>KERNELRELEASE<span class="k">)</span>/gandalf/
+</pre></div>
+</div>
+</section>
+<section id="versionando-modulos">
+<span id="modules-21"></span><h2>Versionando módulos<a class="headerlink" href="#versionando-modulos" title="Link to this heading"></a></h2>
+<p>El <em>versionado</em> de módulos, es activado por la etiqueta <code class="docutils literal notranslate"><span class="pre">CONFIG_MODVERSIONS</span></code> y, utilizado como un sencillo ABI para <em>pruebas de consistencia</em>. Un valor CRC del prototipo al completo, para un símbolo -siendo exportado éste, es creado. Cuando un módulo es cargado/usado, los valores CRC contenidos en el kernel, son comparados con valores similares en el módulo; si no son iguales, el kernel rechazará la carga del módulo.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Module.symvers</span></code>, contiene una lista de símbolos exportados, desde la construciión del kernel.</p>
+</section>
+<section id="simbolos-desde-el-kernel-vmlinux-modulos">
+<span id="modules-22"></span><h2>Símbolos desde el kernel (vmlinux + módulos)<a class="headerlink" href="#simbolos-desde-el-kernel-vmlinux-modulos" title="Link to this heading"></a></h2>
+<p>Durante la cnsturcción del kernel, será generado un archivo llamado <code class="docutils literal notranslate"><span class="pre">Module.symvers</span></code>. <code class="docutils literal notranslate"><span class="pre">Module.symvers</span></code> contiene todos los símbolos exportados y módulos compilados, desde el kernel. Para cada símbolo, el correspondiente valor CRC, también será guardado.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>The syntax of the Module.symvers file is:
+    &lt;CRC&gt;       &lt;Symbol&gt;           &lt;module&gt;
+
+0x2d036834  scsi_remove_host   drivers/scsi/scsi_mod
+</pre></div>
+</div>
+<p>En una construcción del kernel sin <code class="docutils literal notranslate"><span class="pre">CONFIG_MODVERSIONS</span></code> activada, el CRC sería <code class="docutils literal notranslate"><span class="pre">0x00000000</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Module.symvers</span></code>, sirve a dos propósitos: 1. Listar todos los símbolos exportados y módulos, desde <em>vmlinux</em>. 2. Listar el CRC y activar <code class="docutils literal notranslate"><span class="pre">CONFIG_MODVERSIONS</span></code>.</p>
+</section>
+<section id="simbolos-y-modulos-externos">
+<span id="modules-23"></span><h2>Símbolos y módulos externos<a class="headerlink" href="#simbolos-y-modulos-externos" title="Link to this heading"></a></h2>
+<p>Al construir módulos externos, el sistema de construcción, necesitará tener acceso a los símbolos del kernel, para comprobar si todos los símbolos externos fueron definidos. Realizado en el paso <code class="docutils literal notranslate"><span class="pre">MODPOST</span></code> <em>modpost</em> obtendrá los símbolos leyendo <code class="docutils literal notranslate"><span class="pre">Module.symvers</span></code> desde el árbol fuente del kernel. Si un archivo <code class="docutils literal notranslate"><span class="pre">Module.symvers</span></code> está presente en el directorio donde el módulo externo está siendo construido, el archivo también será leido. Durante el paso <code class="docutils literal notranslate"><span class="pre">MODPOST</span></code>, un nuevo archivo <code class="docutils literal notranslate"><span class="pre">Module.symvers</span></code> será escrito conteniendo todos los símbolos exportados que no fueron definidos en el kernel.</p>
+</section>
+<section id="simbolos-desde-un-modulo-externo">
+<span id="modules-24"></span><h2>Símbolos desde un módulo externo<a class="headerlink" href="#simbolos-desde-un-modulo-externo" title="Link to this heading"></a></h2>
+<p>En ocasiones, un módulo externo utiliza símbolos exportados desde otros <em>módulos externos</em>. Kbuild necesitará conocer todos los símbolos, para evitar <em>lanzar avisos</em>, relacionados con símbolos no definidos -<code class="docutils literal notranslate"><span class="pre">undefined</span></code>. Tres soluciones, existen para esta situación.</p>
+<p><strong>Nota</strong>: Es recomendado el método, en el <em>nivel superior</em> del archivo kbuild, aunque podría ser impracticable, en ciertas situaciones.</p>
+<p><strong>Uso del nivel superior en un archivo kbuild</strong> Teniendo dos módulos, <code class="docutils literal notranslate"><span class="pre">foo.ko</span></code> y <code class="docutils literal notranslate"><span class="pre">bar.ko</span></code>, donde <code class="docutils literal notranslate"><span class="pre">foo.ko</span></code> necesita los símbolos de <code class="docutils literal notranslate"><span class="pre">bar.ko</span></code>, es posible utilizar un archivo kbuild en común. Así, ambos módulos serán compilados en la misma construcción. Considerar, la siguiente capa de directorio:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>./foo/ &lt;= contains foo.ko
+./bar/ &lt;= contains bar.ko
+</pre></div>
+</div>
+<p>El <em>nivel superior</em> del archivo kbuild, tendría el aspecto:</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#./Kbuild (or ./Makefile):</span>
+<span class="w">    </span>obj-y<span class="w"> </span>:<span class="o">=</span><span class="w"> </span>foo/<span class="w"> </span>bar/
+</pre></div>
+</div>
+<p>…y ejecutando</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>-C<span class="w"> </span><span class="nv">$KDIR</span><span class="w"> </span><span class="nv">M</span><span class="o">=</span><span class="nv">$PWD</span>
+</pre></div>
+</div>
+<p>… realizará lo esperado, compilando ambos módulos con pleno conocimiento de sus símbolos.</p>
+<p><strong>Uso de un archivo extra ``Module.symvers``</strong></p>
+<p>En la construcción de un módulo externo, será generado un archivo <code class="docutils literal notranslate"><span class="pre">Module.symvers</span></code> , conteniendo todos los símbolos exportados, los cuales no fueron definidos en el kernel. Obtener el acceso a los símbolos de <code class="docutils literal notranslate"><span class="pre">bar.ko</span></code>, copiando el archivo <code class="docutils literal notranslate"><span class="pre">Module.symvers</span></code> desde la compilación de <code class="docutils literal notranslate"><span class="pre">bar.ko</span></code>, al directorio donde es construido <code class="docutils literal notranslate"><span class="pre">foo.ko</span></code>.
+Durante la construcción del módulo, kbuild leerá el archivo <code class="docutils literal notranslate"><span class="pre">Module.symvers</span></code> en el directorio del módulo externo y, tras finalizar la construcción, será creado un nuevo archivo <code class="docutils literal notranslate"><span class="pre">Module.symvers</span></code>, conteniendo la suma de todos los símbolos definidos, que no sean parte del kernel.</p>
+</section>
+<section id="truco-o-trato">
+<span id="modules-25"></span><h2>Truco o trato<a class="headerlink" href="#truco-o-trato" title="Link to this heading"></a></h2>
+</section>
+<section id="prueba-config-foo-bar">
+<span id="modules-26"></span><h2>Prueba <code class="docutils literal notranslate"><span class="pre">CONFIG_FOO_BAR</span></code><a class="headerlink" href="#prueba-config-foo-bar" title="Link to this heading"></a></h2>
+<p>A menudo, los módulos necesitan comprobar ciertas opciones <code class="docutils literal notranslate"><span class="pre">CONFIG_</span></code>, para decidir si una característica específica, es incluida en el módulo.
+En kbuild, es comprobado referenciando la variable <code class="docutils literal notranslate"><span class="pre">CONFIG_</span></code> diréctamente.</p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="c">#fs/ext2/Makefile</span>
+<span class="nv">obj-$(CONFIG_EXT2_FS)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>ext2.o
+
+<span class="nv">ext2-y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>balloc.o<span class="w"> </span>bitmap.o<span class="w"> </span>dir.o
+<span class="nv">ext2-$(CONFIG_EXT2_FS_XATTR)</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>xattr.o
+</pre></div>
+</div>
+<p>Módulos externos, tradicionalmente han utilizado <code class="docutils literal notranslate"><span class="pre">grep</span></code>, para comprobar una configuración específica de <code class="docutils literal notranslate"><span class="pre">CONFIG_</span></code>, diréctamente sobre el archivo <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">.config</span></code>, sin ser correcto. Tal y como se dijo anteriormente, módulos externos deberían usar kbuild y, por lo tanto, utilizar los mismos métodos que los módulos dentro del árbol, al hacer pruebas sobre <em>definiciones</em> en <code class="docutils literal notranslate"><span class="pre">CONFIG_</span></code>.</p>
+</section>
+<section id="referencias-y-agradecimientos">
+<span id="modules-27"></span><h2>Referencias y agradecimientos<a class="headerlink" href="#referencias-y-agradecimientos" title="Link to this heading"></a></h2>
+<div role="list" class="citation-list">
+<div class="citation" id="f1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">f1</a><span class="fn-bracket">]</span></span>
+<p><strong>blobs</strong>: son una especie de archivos “condensados/pequeños”!!!!!!! [cita requerida]</p>
+</div>
+</div>
+<ul id="firma">
+      <li><b>Traducción:</b> Heliogabalo S.J.</li>
+      <li><em>www.territoriolinux.net</em></li>
+</ul></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="makefiles.html" class="btn btn-neutral float-left" title="Makefiles en el kernel de Linux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../networking/netconsole.html" class="btn btn-neutral float-right" title="NetConsole" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

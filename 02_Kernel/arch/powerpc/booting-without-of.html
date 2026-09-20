@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>El arranque del núcleo deLinux/ppc sin Open Firmware &mdash; TecnicoSistemas  documentation</title>
+  <title>El arranque del núcleo deLinux/ppc sin Open Firmware &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
@@ -23,8 +23,8 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Arrancando un ARM" href="../../arm/Booting.html" />
-    <link rel="prev" title="Boot" href="../../Admin-guide/1-boot.html" /> 
+    <link rel="next" title="Zero page" href="../x86/zero-page.html" />
+    <link rel="prev" title="Arrancando un ARM" href="../arm/Booting.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,18 +41,18 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
-<ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/test_environment_setup/index.html">Testing Environment Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/driver_development/index.html">Driver Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../01_Hardware/hardware_resources/index.html">Hardware and System Resources</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../04_System_Administration/system_configuration/index.html">System Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../../Admin-guide/1-boot.html">Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Kernel documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#acpi">Acpi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#admin-guide">Admin-guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#arch-arm">arch/arm</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#arch-powerpc">arch/powerpc</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">El arranque del núcleo deLinux/ppc sin Open Firmware</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#informacion-acerca-de-las-revisiones">Información acerca de las <em>revisiones</em></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
@@ -94,16 +94,32 @@
 <li class="toctree-l4"><a class="reference internal" href="#referencias-y-agradecimientos-1553">Referencias y agradecimientos ####1553</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../arm/Booting.html">Arrancando un ARM</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../DeviceTree/0-of_unittest.html"><em>Unidad de prueba</em>, del árbol de dispositivo <em>Open Firmware</em></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../DeviceTree/changesets.html">conjunto de cambios</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../EarlyUserSpace/README.html">Soporte al <em>espacio temprano de usuario</em></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../PCI/host-generic-pci.html">Controlador de <em>host</em> PCI, genérico</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../04_System_Administration/system_apps/fdisk.html">Repaso de fdisk</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#arch-x86">arch/x86</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#bus-devices">bus-devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#devicetree">DeviceTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#devicetree-bindings-pci">DeviceTree/bindings/pci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#driver-api-media">driver-api/media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#earlyuserspace">EarlyUserSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#filesystem">FileSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#fpga">Fpga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#compilacion-de-modulos-kbuild">Compilación de Módulos (Kbuild)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#networking">networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#pci">PCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#rcu">RCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#trace">trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#x86">x86</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
@@ -116,7 +132,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">TecnicoSistemas</a>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -124,8 +140,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
-          <li class="breadcrumb-item"><a href="../../../99_General/Hub/desarrollo/Kernel/index.html">Documentación del Kernel</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Kernel documents</a></li>
       <li class="breadcrumb-item active">El arranque del núcleo deLinux/ppc sin Open Firmware</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/02_Kernel/arch/powerpc/booting-without-of.rst.txt" rel="nofollow"> View page source</a>
@@ -960,8 +975,8 @@ bc$ 1000000000000000000000000000000
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../../Admin-guide/1-boot.html" class="btn btn-neutral float-left" title="Boot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../arm/Booting.html" class="btn btn-neutral float-right" title="Arrancando un ARM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../arm/Booting.html" class="btn btn-neutral float-left" title="Arrancando un ARM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../x86/zero-page.html" class="btn btn-neutral float-right" title="Zero page" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -1,0 +1,216 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro de Arranque Maestro (MBR) &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Evolución del Particionado: De MBR a GPT y UEFI" href="mbr_gpt_uefi.html" />
+    <link rel="prev" title="Estructura y Discos Duros" href="hd.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Almacenamiento y Discos Duros</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#placa-base">Placa Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Almacenamiento y Discos Duros</a></li>
+      <li class="breadcrumb-item active">Registro de Arranque Maestro (MBR)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/DiscoDuro/mbr.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="registro-de-arranque-maestro-mbr">
+<h1>Registro de Arranque Maestro (MBR)<a class="headerlink" href="#registro-de-arranque-maestro-mbr" title="Link to this heading"></a></h1>
+<p>El <strong>Master Boot Record (MBR)</strong> o <em>Registro de Arranque Maestro</em> es el primer sector físico (Sector 0) de un dispositivo de almacenamiento de datos dividido bajo el esquema de particionado tradicional. Ocupa exactamente 512 bytes al inicio del disco y contiene la información crítica necesaria para inicializar el arranque del sistema operativo y definir la estructura de particiones.</p>
+<section id="estructura-interna-del-mbr">
+<h2>Estructura Interna del MBR<a class="headerlink" href="#estructura-interna-del-mbr" title="Link to this heading"></a></h2>
+<p>Los 512 bytes que componen el sector MBR están divididos estrictamente en tres secciones principales:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Estructura del Sector MBR (512 Bytes)</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 20.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset (Bytes)</p></th>
+<th class="head"><p>Tamaño (Bytes)</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0x0000</span> <span class="pre">-</span> <span class="pre">0x01BD</span></code></p></td>
+<td><p>446 bytes</p></td>
+<td><p><strong>Código de arranque principal (*Bootstrap code*)</strong>: Código ejecutable del cargador de arranque.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0x01BE</span> <span class="pre">-</span> <span class="pre">0x01FE</span></code></p></td>
+<td><p>64 bytes</p></td>
+<td><p><strong>Tabla de particiones primarias</strong>: 4 entradas de 16 bytes cada una.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0x01FE</span> <span class="pre">-</span> <span class="pre">0x01FF</span></code></p></td>
+<td><p>2 bytes</p></td>
+<td><p><strong>Firma de arranque (*Magic Number*)</strong>: Valor binario <code class="docutils literal notranslate"><span class="pre">0x55AA</span></code> para validar el sector.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="codigo-de-arranque-principal-446-bytes">
+<h3>1. Código de Arranque Principal (446 Bytes)<a class="headerlink" href="#codigo-de-arranque-principal-446-bytes" title="Link to this heading"></a></h3>
+<p>Es el código en lenguaje ensamblador que ejecuta la BIOS tras completar el POST (<em>Power-On Self-Test</em>). Su función principal es examinar la tabla de particiones en busca de la partición activa (marcada como arrancable o <em>bootable</em>), cargar el sector de arranque de dicha partición (<em>Volume Boot Record</em> o VBR) en memoria RAM y transferirle el control de la ejecución.</p>
+</section>
+<section id="tabla-de-particiones-primarias-64-bytes">
+<h3>2. Tabla de Particiones Primarias (64 Bytes)<a class="headerlink" href="#tabla-de-particiones-primarias-64-bytes" title="Link to this heading"></a></h3>
+<p>Contiene 4 entradas fijas de 16 bytes cada una, lo que impone la limitación histórica de un máximo de <strong>4 particiones primarias</strong> por disco físico (o 3 primarias y 1 extendida).</p>
+<p>Cada entrada de 16 bytes describe:</p>
+<ul class="simple">
+<li><p><strong>Estado de la partición (1 byte)</strong>: Indica si la partición es activa/arrancable (<code class="docutils literal notranslate"><span class="pre">0x80</span></code>) o inactiva (<code class="docutils literal notranslate"><span class="pre">0x00</span></code>).</p></li>
+<li><p><strong>Geometría CHS inicial (3 bytes)</strong>: Cilindro, Cabeza y Sector donde inicia la partición (en desuso).</p></li>
+<li><p><strong>Tipo de sistema de archivos (1 byte)</strong>: Código identificador del sistema de archivos (ej. <code class="docutils literal notranslate"><span class="pre">0x83</span></code> para Linux, <code class="docutils literal notranslate"><span class="pre">0x07</span></code> para NTFS/exFAT).</p></li>
+<li><p><strong>Geometría CHS final (3 bytes)</strong>: Cilindro, Cabeza y Sector donde finaliza la partición.</p></li>
+<li><p><strong>Dirección LBA inicial (4 bytes)</strong>: Sector de inicio en direccionamiento lógico de bloques (<em>Logical Block Addressing</em>).</p></li>
+<li><p><strong>Número total de sectores (4 bytes)</strong>: Tamaño total de la partición medido en número de sectores.</p></li>
+</ul>
+</section>
+<section id="firma-de-arranque-2-bytes">
+<h3>3. Firma de Arranque (2 Bytes)<a class="headerlink" href="#firma-de-arranque-2-bytes" title="Link to this heading"></a></h3>
+<p>Los últimos dos bytes del sector (posiciones 510 y 511) deben contener la secuencia hex <code class="docutils literal notranslate"><span class="pre">0x55AA</span></code>. Si la BIOS no detecta este valor específico al examinar el sector 0, considerará que el dispositivo no es arrancable (<em>No bootable device found</em>).</p>
+</section>
+</section>
+<section id="limitaciones-del-esquema-mbr">
+<h2>Limitaciones del Esquema MBR<a class="headerlink" href="#limitaciones-del-esquema-mbr" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Límite de capacidad (2 TiB)</strong>: Al utilizar campos de 32 bits para registrar el número de sectores LBA, el tamaño máximo direccionable por MBR es de $2^{32} times 512text{ bytes} = 2.199.023.255.552text{ bytes}$ (2 TiB).</p></li>
+<li><p><strong>Número de particiones</strong>: Limitado a 4 particiones primarias. Para superar este límite se requiere crear una partición extendida que albergue Particiones Lógicas mediante <em>EBR (Extended Boot Record)</em>.</p></li>
+<li><p><strong>Sin redundancia</strong>: A diferencia del esquema GPT, el MBR no guarda copias de respaldo de la tabla de particiones; si el sector 0 se corrompe, el disco pierde el acceso a la estructura de datos.</p></li>
+</ul>
+</section>
+<section id="inspeccion-de-mbr-desde-la-terminal">
+<h2>Inspección de MBR desde la Terminal<a class="headerlink" href="#inspeccion-de-mbr-desde-la-terminal" title="Link to this heading"></a></h2>
+<p>En sistemas Linux, es posible volcar y examinar el sector MBR de un disco mediante el uso de la herramienta <code class="docutils literal notranslate"><span class="pre">dd</span></code> y un visor hexadecimal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extraer el sector MBR (512 bytes) a un archivo</span>
+<span class="c1"># sudo dd if=/dev/sda of=mbr_backup.bin bs=512 count=1</span>
+
+<span class="c1"># Inspeccionar el contenido en formato hexadecimal</span>
+<span class="c1"># hexdump -C mbr_backup.bin</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hd.html" class="btn btn-neutral float-left" title="Estructura y Discos Duros" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mbr_gpt_uefi.html" class="btn btn-neutral float-right" title="Evolución del Particionado: De MBR a GPT y UEFI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

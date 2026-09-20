@@ -1,0 +1,190 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generación y Sincronización de Señales &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../_static/simulation.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Fundamentos de Arquitectura de Sistemas" href="../sistema/index.html" />
+    <link rel="prev" title="Submódulos de Almacenamiento, Red y Seguridad" href="drive-mod.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Índice de Hardware</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-de-energia-y-acpi">Gestión de Energía y ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#gestion-heredada-de-energia-apm">Gestión Heredada de Energía (APM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistemas-de-almacenamiento-masivo">Sistemas de Almacenamiento Masivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#controladores-y-bus-usb-drivers">Controladores y Bus USB (Drivers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-resources">hardware_resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#hardware-specifications">Hardware Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processador">Processador</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#placa-base">Placa Base</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Arquitectura de la Placa Base</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#contenidos">Contenidos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#resumen-de-modulos">Resumen de Módulos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sistema">sistema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Índice de Hardware</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Arquitectura de la Placa Base</a></li>
+      <li class="breadcrumb-item active">Generación y Sincronización de Señales</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/01_Hardware/PlacaBase/clk-signal.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="generacion-y-sincronizacion-de-senales">
+<h1>Generación y Sincronización de Señales<a class="headerlink" href="#generacion-y-sincronizacion-de-senales" title="Link to this heading"></a></h1>
+<p>El subsistema de generación y sincronización de señales es el encargado de proveer los trenes de pulso periódicos que coordinan el flujo de datos y las transacciones de cómputo en la placa base. Garantiza que la CPU, la memoria RAM, los buses de expansión y los chipsets operen de forma armónica a través de un dominio de tiempo común.</p>
+<section id="generador-de-reloj-clock-generator-y-cristales-de-cuarzo">
+<h2>Generador de Reloj (Clock Generator) y Cristales de Cuarzo<a class="headerlink" href="#generador-de-reloj-clock-generator-y-cristales-de-cuarzo" title="Link to this heading"></a></h2>
+<p>El <strong>Generador de Reloj</strong> (o <em>sintetizador de reloj</em>) es un circuito integrado especializado (fabricado por empresas como Realtek o IDT) acoplado a un oscilador de cristal de cuarzo de alta precisión.</p>
+<section id="principio-de-funcionamiento">
+<h3>Principio de Funcionamiento<a class="headerlink" href="#principio-de-funcionamiento" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Oscilador de Cuarzo</strong>: El cristal de cuarzo aprovecha el efecto piezoeléctrico para vibrar a una frecuencia fundamental sumamente estable y fija, típicamente de <span class="math notranslate nohighlight">\(14.318\text{ MHz}\)</span> o <span class="math notranslate nohighlight">\(25\text{ MHz}\)</span>.</p></li>
+<li><p><strong>Bucle de Captura de Fase (*Phase-Locked Loop* - PLL)</strong>: Circuito interno del generador de reloj que utiliza comparadores de fase, multiplicadores y divisores de frecuencia para multiplicar la señal básica del cristal de cuarzo y generar las señales de reloj maestras del sistema.</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>+--------------------+      +-----------------------+      +-------------------------------+
+| Cristal de Cuarzo  | ---&gt; | Generador de Reloj    | ---&gt; | Reloj Base (BCLK) = 100 MHz   |
+| (14.318 / 25 MHz)  |      | (Circuito PLL)        |      | PCI / PCIe CLK = 100 MHz      |
++--------------------+      +-----------------------+      | USB CLK = 48 MHz              |
+                                                           +-------------------------------+
+</pre></div>
+</div>
+</section>
+</section>
+<section id="frecuencias-de-reloj-derivadas-bclk">
+<h2>Frecuencias de Reloj Derivadas (BCLK)<a class="headerlink" href="#frecuencias-de-reloj-derivadas-bclk" title="Link to this heading"></a></h2>
+<p>En las arquitecturas modernas, el generador de reloj sintetiza una frecuencia base denominada <strong>BCLK</strong> (<em>Base Clock</em>), establecida por defecto en <span class="math notranslate nohighlight">\(100\text{ MHz}\)</span>. A partir de este reloj base, las distintas unidades del sistema derivan sus frecuencias operativas mediante multiplicadores y divisores internos:</p>
+<ul class="simple">
+<li><p><strong>Frecuencia de la CPU</strong>: Se calcula mediante la fórmula <span class="math notranslate nohighlight">\(f_{\text{CPU}} = \text{BCLK} \times \text{Multiplicador}\)</span>.</p></li>
+<li><p><strong>Frecuencia de la Memoria RAM</strong>: Las frecuencias de los módulos DDR se generan aplicando multiplicadores específicos al BCLK (ej. <span class="math notranslate nohighlight">\(100\text{ MHz} \times 32 = 3200\text{ MT/s}\)</span>).</p></li>
+<li><p><strong>Reloj PCIe / NVMe</strong>: Opera de forma estandarizada a <span class="math notranslate nohighlight">\(100\text{ MHz}\)</span>, pudiendo estar síncrono con el BCLK o gestionado mediante un generador de reloj independiente (<em>Spread Spectrum Clocking</em>).</p></li>
+<li><p><strong>Frecuencias de Periféricos (USB/SATA)</strong>: Requieren frecuencias fijas independientes, como <span class="math notranslate nohighlight">\(48\text{ MHz}\)</span> para los controladores USB.</p></li>
+</ul>
+</section>
+<section id="mecanismos-de-sincronizacion-y-reduccion-de-emi">
+<h2>Mecanismos de Sincronización y Reducción de EMI<a class="headerlink" href="#mecanismos-de-sincronizacion-y-reduccion-de-emi" title="Link to this heading"></a></h2>
+<p>Llegar a frecuencias de varios gigahertz sin degradar la señal requiere solucionar fenómenos físicos en el trazado de la placa base:</p>
+<section id="desviacion-de-reloj-clock-skew">
+<h3>Desviación de Reloj (<em>Clock Skew</em>)<a class="headerlink" href="#desviacion-de-reloj-clock-skew" title="Link to this heading"></a></h3>
+<p>Fenómeno por el cual la misma señal de reloj llega a diferentes componentes en momentos ligeramente distintos debido a variaciones en la longitud física de las pistas de cobre. Para corregirlo:</p>
+<ul class="simple">
+<li><p>Se utilizan trazados de pistas en forma de serpentín (<em>serpentine routing</em>) para igualar de forma milimétrica la longitud de las pistas diferenciales.</p></li>
+<li><p>Se emplean distribuidores de reloj con buffers de retraso cero (<em>Zero-Delay Buffers</em> - ZDB).</p></li>
+</ul>
+</section>
+<section id="modulacion-por-dispersion-espectral-spread-spectrum-clocking-ssc">
+<h3>Modulación por Dispersión Espectral (<em>Spread Spectrum Clocking - SSC</em>)<a class="headerlink" href="#modulacion-por-dispersion-espectral-spread-spectrum-clocking-ssc" title="Link to this heading"></a></h3>
+<p>Las señales de reloj cuadradas de alta frecuencia emiten gran cantidad de interferencia electromagnética (<strong>EMI</strong>) en sus armónicos.</p>
+<p>La técnica <strong>SSC</strong> modula levemente la frecuencia del BCLK (por ejemplo, variándola un <span class="math notranslate nohighlight">\(\pm 0.5\%\)</span> en forma de onda triangular a una frecuencia de decenas de kilohertz). Esta pequeña variación distribuye la energía del pico de radiación electromagnética en un rango de frecuencias más amplio, permitiendo al equipo cumplir con las normativas de compatibilidad electromagnética (EMC).</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="drive-mod.html" class="btn btn-neutral float-left" title="Submódulos de Almacenamiento, Red y Seguridad" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../sistema/index.html" class="btn btn-neutral float-right" title="Fundamentos de Arquitectura de Sistemas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

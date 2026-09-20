@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saneamiento de Directorios de Perfil &mdash; TecnicoSistemas  documentation</title>
+  <title>Saneamiento de Directorios de Perfil &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
@@ -23,8 +23,8 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Saneamiento de Permisos en Documents" href="ACLsDocuments.html" />
-    <link rel="prev" title="Configuración de Control de Acceso" href="index.html" /> 
+    <link rel="next" title="Informe de Configuración: ACLs para Nodo Virt-metadatos" href="ACLsVirtMetadatos.html" />
+    <link rel="prev" title="Informe de Configuración: Directorios Compartidos de Usuario" href="ACLsMultimediaDescargas.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,12 +41,24 @@
   </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Hub de Contenidos:</span></p>
-<ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../../06_Software_and_Applications/Supuestos/index.html">Infraestructura virtual</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">Configuración de Control de Acceso</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Administración de Sistemas</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#administracion">Administración</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#imagenes-iso-9660-y-medios-opticos">Imágenes ISO 9660 y Medios Ópticos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#aplicaciones-de-sistema">Aplicaciones de sistema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#systemd">Systemd</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#listas-de-control-de-acceso-acls">Listas de control de acceso(ACLs)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ACLsDocuments.html">Saneamiento de Permisos en Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ACLsMultimediaDescargas.html">Informe de Configuración: Directorios Compartidos de Usuario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ACLsMultimediaDescargas.html#informe-de-configuracion-politica-unificada-de-no-ejecucion">Informe de Configuración: Política Unificada de No-Ejecución</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Saneamiento de Directorios de Perfil</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#objetivos-de-la-intervencion">Objetivos de la Intervención</a></li>
@@ -55,16 +67,18 @@
 <li class="toctree-l4"><a class="reference internal" href="#implementacion-tecnica">Implementación Técnica</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="ACLsDocuments.html">Saneamiento de Permisos en Documents</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ACLsMultimediaDescargas.html">Informe de Configuración: Directorios Compartidos de Usuario</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ACLsMultimediaDescargas.html#informe-de-configuracion-politica-unificada-de-no-ejecucion">Informe de Configuración: Política Unificada de No-Ejecución</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ACLsVirtMetadatos.html">Informe de Configuración: ACLs para Nodo Virt-metadatos</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../Incidencias/index.html">Registro de Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuracion-del-kernel">Configuración del Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuracion-de-sistema">Configuración de sistema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#incidencias">Incidencias</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
@@ -77,7 +91,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">TecnicoSistemas</a>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -85,8 +99,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Configuración de Control de Acceso</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Administración de Sistemas</a></li>
       <li class="breadcrumb-item active">Saneamiento de Directorios de Perfil</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/04_System_Administration/system_configuration/ACL_configuration/ACLsText.rst.txt" rel="nofollow"> View page source</a>
@@ -151,8 +164,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Configuración de Control de Acceso" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ACLsDocuments.html" class="btn btn-neutral float-right" title="Saneamiento de Permisos en Documents" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ACLsMultimediaDescargas.html" class="btn btn-neutral float-left" title="Informe de Configuración: Directorios Compartidos de Usuario" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ACLsVirtMetadatos.html" class="btn btn-neutral float-right" title="Informe de Configuración: ACLs para Nodo Virt-metadatos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

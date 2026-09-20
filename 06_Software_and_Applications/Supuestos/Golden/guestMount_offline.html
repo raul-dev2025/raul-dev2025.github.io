@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Procedimiento de Diagnóstico Offline de VM mediante Guestmount y Logs &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/simulation.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Script de Orquestación: clone_golden.sh" href="clone_golden.html" />
+    <link rel="prev" title="Guía de Referencia: Gestión de Contenedores" href="../Containers/GuiaContenedores.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Índice de Software, Aplicaciones y Supuestos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#incidencias">Incidencias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#office">office</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos">Supuestos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#proceso-de-arranque-en-vms">Proceso de arranque en VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#configuracion-de-vms">Configuración de VMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#contenedores">Contenedores</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#supuestos-imagenes-base-golden">Supuestos, imágenes Base(Golden)</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Procedimiento de Diagnóstico Offline de VM mediante Guestmount y Logs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requisitos-previos">Requisitos Previos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#procedimiento-de-diagnostico">Procedimiento de Diagnóstico</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#verificacion-del-estado">Verificación del Estado</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="clone_golden.html">Script de Orquestación: clone_golden.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="get_otp.html">Script de Validación: get_otp.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="goldenImage.html">Documentación de la Golden Image (Rocky 9)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="golden_purificacion.html">Informe de Purificación: Imagen Maestra GOLDEN_ROCKY10_IDM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="idm-first-boot.html">Unidad de Servicio: idm-first-boot.service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="idm-join.html">Script de Post-Instalación: idm-join.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="indice.html">Infraestructura RAULVILCHEZ.ORG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prepare_clone.html">Script de Personalización: prepare_clone.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Sellado.html">Procedimiento de Sellado: GOLDEN_ROCKY10_IDM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#hipervisor">Hipervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-idm">Supuestos - IdM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#idm-configuracion">IdM - Configuracion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#idm-single-sing-on-sso">IdM - Single Sing-On(SSO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-mantenimiento">Supuestos - Mantenimiento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-procesador">Supuestos - Procesador</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-qemu">Supuestos - Qemu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#supuestos-testing">Supuestos - Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_Development/index.html">Índice de Desarrollo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+      <li class="breadcrumb-item active">Procedimiento de Diagnóstico Offline de VM mediante Guestmount y Logs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/06_Software_and_Applications/Supuestos/Golden/guestMount_offline.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="procedimiento-de-diagnostico-offline-de-vm-mediante-guestmount-y-logs">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Procedimiento de Diagnóstico Offline de VM mediante Guestmount y Logs</a><a class="headerlink" href="#procedimiento-de-diagnostico-offline-de-vm-mediante-guestmount-y-logs" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Fecha<span class="colon">:</span></dt>
+<dd class="field-odd"><p>23 de julio de 2026</p>
+</dd>
+<dt class="field-even">Autor<span class="colon">:</span></dt>
+<dd class="field-even"><p>Raúl Vílchez</p>
+</dd>
+<dt class="field-odd">Categoría<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Administración de Sistemas / Virtualización (libvirt / guestfs)</p>
+</dd>
+<dt class="field-even">Estado<span class="colon">:</span></dt>
+<dd class="field-even"><p>Aprobado</p>
+</dd>
+</dl>
+<nav class="contents" id="tabla-de-contenidos">
+<p class="topic-title">Tabla de Contenidos</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#procedimiento-de-diagnostico-offline-de-vm-mediante-guestmount-y-logs" id="id1">Procedimiento de Diagnóstico Offline de VM mediante Guestmount y Logs</a></p>
+<ul>
+<li><p><a class="reference internal" href="#introduccion" id="id2">Introducción</a></p></li>
+<li><p><a class="reference internal" href="#requisitos-previos" id="id3">Requisitos Previos</a></p></li>
+<li><p><a class="reference internal" href="#procedimiento-de-diagnostico" id="id4">Procedimiento de Diagnóstico</a></p></li>
+<li><p><a class="reference internal" href="#verificacion-del-estado" id="id5">Verificación del Estado</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="introduccion">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Introducción</a><a class="headerlink" href="#introduccion" title="Link to this heading"></a></h2>
+<p>Durante el despliegue no interactivo de imágenes base (<em>Golden Images</em>) con enrolamiento automático en <strong>FreeIPA / IdM</strong>, pueden presentarse fallos en la fase de primer arranque (<em>first boot</em>).</p>
+<p>Si el acceso interactivo por TTY o SSH no está disponible (por ejemplo, por no disponer de contraseñas locales activas o llaves inyectadas), es necesario inspeccionar los registros del sistema de forma <strong>offline</strong> utilizando herramientas de manipulación de discos sin necesidad de arrancar el dominio virtualizado.</p>
+</section>
+<section id="requisitos-previos">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Requisitos Previos</a><a class="headerlink" href="#requisitos-previos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Permisos de superusuario (<code class="docutils literal notranslate"><span class="pre">root</span></code> o reglas de <code class="docutils literal notranslate"><span class="pre">sudo</span></code> configuradas).</p></li>
+<li><p>Paquete <code class="docutils literal notranslate"><span class="pre">libguestfs-tools</span></code> o la utilidad <code class="docutils literal notranslate"><span class="pre">guestmount</span></code> instalada en el hipervisor.</p></li>
+<li><p>La máquina virtual objetivo debe estar <strong>completamente apagada</strong>.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Riesgo de Corrupción de Datos:</strong> Nunca intente montar el disco de una máquina virtual activa con <code class="docutils literal notranslate"><span class="pre">guestmount</span></code> en modo lectura/escritura (<code class="docutils literal notranslate"><span class="pre">--rw</span></code>). Siempre asegúrese de detener la máquina antes o de utilizar el modo de solo lectura (<code class="docutils literal notranslate"><span class="pre">--ro</span></code>).</p>
+</div>
+</section>
+<section id="procedimiento-de-diagnostico">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Procedimiento de Diagnóstico</a><a class="headerlink" href="#procedimiento-de-diagnostico" title="Link to this heading"></a></h2>
+<section id="apagado-forzado-o-controlado-del-nodo">
+<h3>1. Apagado Forzado o Controlado del Nodo<a class="headerlink" href="#apagado-forzado-o-controlado-del-nodo" title="Link to this heading"></a></h3>
+<p>Asegurar el estado inactivo del dominio virtual mediante <code class="docutils literal notranslate"><span class="pre">virsh</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virsh<span class="w"> </span>destroy<span class="w"> </span>buildlab
+</pre></div>
+</div>
+</section>
+<section id="creacion-del-punto-de-montaje-operativo">
+<h3>2. Creación del Punto de Montaje Operativo<a class="headerlink" href="#creacion-del-punto-de-montaje-operativo" title="Link to this heading"></a></h3>
+<p>Crear un directorio temporal en el hipervisor para albergar el sistema de archivos guest:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/mnt_buildlab
+</pre></div>
+</div>
+</section>
+<section id="montaje-del-disco-en-modo-solo-lectura">
+<h3>3. Montaje del Disco en Modo Solo Lectura<a class="headerlink" href="#montaje-del-disco-en-modo-solo-lectura" title="Link to this heading"></a></h3>
+<p>Inspeccionar el disco inyectando el controlador FUSE en modo seguro (<code class="docutils literal notranslate"><span class="pre">--ro</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>guestmount<span class="w"> </span>-d<span class="w"> </span>buildlab<span class="w"> </span>-i<span class="w"> </span>--ro<span class="w"> </span>/mnt/mnt_buildlab
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>El parámetro <code class="docutils literal notranslate"><span class="pre">-i</span></code> (inspect) detecta automáticamente las particiones, el volumen LVM y la raíz (<code class="docutils literal notranslate"><span class="pre">/</span></code>) del sistema operativo huésped.</p>
+</div>
+</section>
+<section id="inspeccion-del-log-de-enrolamiento">
+<h3>4. Inspección del Log de Enrolamiento<a class="headerlink" href="#inspeccion-del-log-de-enrolamiento" title="Link to this heading"></a></h3>
+<p>Consultar el archivo de log inyectado para determinar el motivo exacto de la falla en el script <code class="docutils literal notranslate"><span class="pre">idm-join.sh</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>/mnt/mnt_buildlab/var/log/idm-setup.log
+</pre></div>
+</div>
+</section>
+<section id="resolucion-de-incidencias-comunes">
+<h3>Resolución de Incidencias Comunes<a class="headerlink" href="#resolucion-de-incidencias-comunes" title="Link to this heading"></a></h3>
+<p>Si el log muestra el error:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Joining realm failed: SASL Bind failed
+    Invalid credentials
+</pre></div>
+</div>
+<p>El motivo suele responder a un token OTP caducado o a la presencia de caracteres de control invisibles (saltos de línea <code class="docutils literal notranslate"><span class="pre">\r\n</span></code>) introducidos al copiar y pegar las credenciales.</p>
+</section>
+<section id="desmontaje-limpio-del-sistema-de-ficheros">
+<h3>5. Desmontaje Limpio del Sistema de Ficheros<a class="headerlink" href="#desmontaje-limpio-del-sistema-de-ficheros" title="Link to this heading"></a></h3>
+<p>Una vez completada la revisión o corrección offline, desmontar la estructura FUSE:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>guestunmount<span class="w"> </span>/mnt/mnt_buildlab
+</pre></div>
+</div>
+</section>
+</section>
+<section id="verificacion-del-estado">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Verificación del Estado</a><a class="headerlink" href="#verificacion-del-estado" title="Link to this heading"></a></h2>
+<p>Una vez desmontado el volumen, se puede reanudar la ejecución normal del dominio para reintentar el flujo de enrolamiento:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virsh<span class="w"> </span>start<span class="w"> </span>buildlab
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Containers/GuiaContenedores.html" class="btn btn-neutral float-left" title="Guía de Referencia: Gestión de Contenedores" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="clone_golden.html" class="btn btn-neutral float-right" title="Script de Orquestación: clone_golden.sh" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

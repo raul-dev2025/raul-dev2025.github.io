@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fase 0: Preparación e Hito Base (GOLDEN-00) &mdash; TecnicoSistemas (v2.1.99) 2.1.99 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=193045fc" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/simulation.png"/>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/js/theme.js?v=0e654b99"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Fase 1: Despliegue de Cadena de Herramientas Local" href="fase01_toolchain.html" />
+    <link rel="prev" title="Foundry: Visión General del Proyecto" href="foundry.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+  <div class="wy-side-nav-search" style="background: #2980B9">
+    <a href="https://raulvilchez.org/" class="icon icon-home" title="Técnico de Sistemas">TécnicoSistemas</a>
+
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+    </form>
+  </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/academico/index.html">Técnico Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/profesional/index.html">Sistema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/Hub/desarrollo/index.html">Development</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../01_Hardware/index.html">Índice de Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../02_Kernel/index.html">Kernel documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../03_Operating_Systems/index.html">Índice de Sistemas Operativos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_System_Administration/index.html">Índice de Administración de Sistemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../05_Networking/index.html">Índice de Redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../06_Software_and_Applications/index.html">Índice de Software, Aplicaciones y Supuestos</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Índice de Desarrollo</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#driver-development">driver_development</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Driver Development</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwbus-io/index.html">HwBus-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hwnet-io/index.html">HwNet-IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../watcherDocs/index.html">Watcher Docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../drv_refs/index.html">Driver references</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#scripts">scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/miscellaneous/index.html">Unordered Topics</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../99_General/siglas.html">Siglas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Release Notes &amp; Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TecnicoSistemas (v2.1.99)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Índice de Desarrollo</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Driver Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Foundry: Laboratorio de Compilación y Kernel Space</a></li>
+      <li class="breadcrumb-item active">Fase 0: Preparación e Hito Base (GOLDEN-00)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/07_Development/driver_development/Foundry/EntornoLTP/fase00_base_os.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fase-0-preparacion-e-hito-base-golden-00">
+<h1>Fase 0: Preparación e Hito Base (GOLDEN-00)<a class="headerlink" href="#fase-0-preparacion-e-hito-base-golden-00" title="Link to this heading"></a></h1>
+<section id="objetivos-de-la-fase">
+<h2>Objetivos de la Fase<a class="headerlink" href="#objetivos-de-la-fase" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Creación e inicialización de la estructura del laboratorio y control de versiones.</p></li>
+<li><p>Definición de la estructura base para la documentación en formato <strong>reStructuredText (rST)</strong>.</p></li>
+<li><p>Creación del punto de restauración e imagen base <strong>GOLDEN-00</strong> mediante clonado <em>CoW</em> (<em>reflink</em>).</p></li>
+<li><p>Configuración de permisos administrativos delegados para la gestión del almacenamiento.</p></li>
+</ol>
+</section>
+<section id="estructura-del-proyecto">
+<h2>Estructura del Proyecto<a class="headerlink" href="#estructura-del-proyecto" title="Link to this heading"></a></h2>
+<p>El entorno de trabajo se organiza bajo la siguiente jerarquía de directorios:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code>: Documentación técnica del laboratorio estructurada en Sphinx.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/</span></code>: Herramientas de automatización de entornos, clonado y preparación.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config/</span></code>: Archivos de configuración de build, kernel y políticas de seguridad.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vms/Buildlab-images/</span></code>: Directorio dedicado al almacenamiento de las imágenes base y clones.</p></li>
+</ul>
+</section>
+<section id="procedimiento-tecnico-ejecutado">
+<h2>Procedimiento Técnico Ejecutado<a class="headerlink" href="#procedimiento-tecnico-ejecutado" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Creación del Baseline GOLDEN-00:</strong></p>
+<p>Se inicializó la máquina virtual de referencia <code class="docutils literal notranslate"><span class="pre">buildlab</span></code> y se generó el snapshot base en formato <em>raw</em> utilizando clonado Copy-on-Write a nivel de bloque para evitar sobrecostes de metadatos de <code class="docutils literal notranslate"><span class="pre">qemu-img</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>--reflink<span class="o">=</span>always<span class="w"> </span>vms/Buildlab-images/buildlab.raw<span class="w"> </span>vms/Buildlab-images/GOLDEN_BUILDLAB_BASE.raw
+</pre></div>
+</div>
+</li>
+<li><p><strong>Delegación de Privilegios para Gestión de Storage:</strong></p>
+<p>Con el fin de ejecutar las tareas de administración de almacenamiento sin elevación completa a root, se codificaron las reglas en <code class="docutils literal notranslate"><span class="pre">/etc/sudoers.d/virt-admin-storage</span></code> permitiendo la ejecución de:</p>
+<ul class="simple">
+<li><p>Inspección de volúmenes VDO / almacenamiento (<code class="docutils literal notranslate"><span class="pre">vdostats</span></code>).</p></li>
+<li><p>Automatización de clonado (<code class="docutils literal notranslate"><span class="pre">prepare_clone.sh</span></code>).</p></li>
+<li><p>Clonado por reflink (<code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">--reflink=always</span></code>).</p></li>
+<li><p>Operaciones de clonado de dominios (<code class="docutils literal notranslate"><span class="pre">virt-clone</span></code>).</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="estado-del-hito">
+<h2>Estado del Hito<a class="headerlink" href="#estado-del-hito" title="Link to this heading"></a></h2>
+<p>El punto de restauración <strong>GOLDEN-00</strong> queda fijado y listo en <code class="docutils literal notranslate"><span class="pre">vms/Buildlab-images/GOLDEN_BUILDLAB_BASE.raw</span></code> como base limpia e inmutable para cualquier despliegue o rollback futuro.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="foundry.html" class="btn btn-neutral float-left" title="Foundry: Visión General del Proyecto" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fase01_toolchain.html" class="btn btn-neutral float-right" title="Fase 1: Despliegue de Cadena de Herramientas Local" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Raul Vilchez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
