@@ -23,6 +23,7 @@ Descripción general del laboratorio Foundry y la preparación del sistema opera
    /07_Development/driver_development/Foundry/EntornoLTP/fase03_debugging
    /07_Development/driver_development/Foundry/EntornoLTP/fase04_ltp
    /07_Development/driver_development/Foundry/EntornoLTP/fase05_ci
+   /07_Development/driver_development/Foundry/EntornoLTP/pci-exp-tests-HOWTO.rst
 
 Pasos de despliegue progresivo: toolchains, espacio de usuario, herramientas de depuración, suite LTP e integración continua.
 

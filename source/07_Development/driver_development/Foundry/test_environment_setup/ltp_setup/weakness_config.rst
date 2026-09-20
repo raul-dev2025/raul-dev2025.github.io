@@ -3,8 +3,6 @@ LTP build log
 
 While the ``configure`` log indicates a successful configuration process, there are a few *weak points* or potential areas of concern that could be improved or might cause issues later in the build process. These are not critical failures, but they are worth noting for future reference or troubleshooting:
 
-----
-
 1. Missing Headers	
 ------------------
 
@@ -24,7 +22,6 @@ While the ``configure`` log indicates a successful configuration process, there 
 	
 		- **Action**: Ensure the JFS development package is installed if needed.
 
-----
 
 2. Missing Structs
 ------------------
@@ -36,7 +33,6 @@ While the ``configure`` log indicates a successful configuration process, there 
 	- ``struct signalfd_siginfo.signo``: Not found. The script found `ssi_signo` instead, which is a similar field. This might cause issues if the software expects the `signo` field specifically.
 		- **Action**: Verify the software's compatibility with the available `signalfd_siginfo` struct.
 
-----
 
 3. XFS Quota Support
 --------------------
@@ -45,7 +41,6 @@ While the ``configure`` log indicates a successful configuration process, there 
    
 		- **Action**: Ensure the XFS development package is installed (e.g., ``xfsprogs-devel`` or similar).
 
-----
 
 4. Weak or Missing Kernel Features
 ----------------------------------
@@ -71,8 +66,6 @@ While the ``configure`` log indicates a successful configuration process, there 
 	
 	  - **Action**: Verify that the system has NUMA-enabled hardware and that the kernel supports NUMA operations.
 
-----
-
 6. SELinux and Capabilities
 -----------------------------
 
@@ -80,8 +73,6 @@ While the ``configure`` log indicates a successful configuration process, there 
 	- **Action**: Ensure SELinux is properly configured and enabled if the software relies on it.
 	- **Capabilities**: The script checks for ``PR_CAPBSET_DROP`` and ``PR_CAPBSET_READ``, which are found. However, if the system's capability model is restrictive, this could limit functionality.
 	- **Action**: Verify that the system's capability model aligns with the software's requirements.
-
-----
 
 7. Weak Points in Subdirectory Configuration (``utils/ffsb-6.0-rc2``)
 ------------------------------------------------------------------------
@@ -91,7 +82,6 @@ While the ``configure`` log indicates a successful configuration process, there 
 	- ``lrand48_r`` and ``srand48_r``: Found, but these functions are not thread-safe on all systems. If the software relies on thread-safe random number generation, this could cause issues.
 		- **Action**: Consider using alternative thread-safe random number generators if needed.
 
-----
 
 8. General Recommendations
 ----------------------------
@@ -99,9 +89,6 @@ While the ``configure`` log indicates a successful configuration process, there 
    - **Kernel Headers**: Several missing headers (``dmapi.h``, ``mm.h``, ``linux/module.h``) suggest that the kernel headers might not be fully installed. Ensure the correct kernel headers are installed for your system.
    - **Library Versions**: While the required libraries are found, their versions might not be optimal. Ensure all libraries (e.g., ``libaio``, ``libnuma``, ``libselinux``) are up to date.
    - **System Configuration**: Some features (e.g., NUMA, SELinux, XFS quotas) depend on system configuration. Verify that the system is properly configured for these features.
-
-
-----
 
 
 Summary of Actions:

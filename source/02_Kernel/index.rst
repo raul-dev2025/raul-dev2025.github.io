@@ -24,6 +24,7 @@ Admin-guide
    /02_Kernel/Admin-guide/kernParam
    /02_Kernel/Admin-guide/of_unittest
    /02_Kernel/Admin-guide/serial-console
+   /02_Kernel/Admin-guide/deadline-iosched.rst
 
 Documentación orientada a administradores de sistemas sobre los parámetros esenciales del kernel de Linux durante el arranque del sistema. Incluye instrucciones para la configuración del cargador de arranque y las opciones de la línea de comandos de inicio.
 

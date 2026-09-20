@@ -1,45 +1,43 @@
-PCIe Symobls
+.. SPDX-License-Identifier: GPL-2.0-or-later
+
+============================================================
+Concepto MMCFG (Memory-Mapped Configuration) en PCI Express
+============================================================
+
+En el contexto de **PCI Express (PCIe)** y el kernel de Linux, el término **MMCFG** hace referencia a *Memory-Mapped Configuration Space* (Espacio de Configuración Mapeado en Memoria)[cite: 10]. Se trata del mecanismo definido en la especificación PCIe para acceder al espacio de configuración de los dispositivos del bus[cite: 10].
+
+¿Qué es MMCFG?
 ==============
 
+* Los dispositivos PCIe disponen de un **espacio de configuración**, compuesto por un conjunto de registros utilizados para configurar y controlar el dispositivo[cite: 10].
+* En el bus PCI tradicional, el acceso al espacio de configuración se realiza mediante puertos de E/S (por ejemplo, los puertos ``CONFIG_ADDRESS`` y ``CONFIG_DATA``)[cite: 10].
+* En PCIe, este acceso se realiza a través de **Entrada/Salida Mapeada en Memoria (MMIO)** mediante el mecanismo **MMCFG**[cite: 10].
+* La región MMCFG es una porción del espacio de direccionamiento de la memoria física del sistema reservada exclusivamente para acceder al espacio de configuración PCIe[cite: 10]. La dirección base de esta región la define el firmware en las tablas ACPI del sistema (específicamente en la tabla ``MCFG``)[cite: 10].
 
-In the context of PCI Express (PCIe) and the Linux kernel, **MMCFG** stands for *Memory-Mapped Configuration Space*. It refers to the mechanism used by the PCIe specification to access the configuration space of PCIe devices.
+Funcionamiento de MMCFG
+=======================
 
+1. El firmware del sistema (BIOS o UEFI) proporciona la dirección base de la región MMCFG dentro de la tabla ACPI ``MCFG``[cite: 10].
+2. El sistema operativo (kernel de Linux) utiliza esta dirección base para mapear el espacio de configuración PCIe en su propio espacio de direcciones virtuales[cite: 10].
+3. A partir de ese momento, el kernel puede acceder a los registros de configuración de los dispositivos PCIe realizando operaciones directas de lectura y escritura en memoria dentro de la región MMCFG[cite: 10].
 
-What is MMCFG?
-----------------
+MMCFG en el Kernel de Linux
+===========================
 
-* PCIe devices have a *configuration space*, which is a set of registers used to configure and control the device.
-* In traditional PCI, the configuration space is accessed using I/O ports (e.g., ``CONFIG_ADDRESS`` and ``CONFIG_DATA`` ports).
-* In PCIe, the configuration space is accessed via ``memory-mapped I/O (MMIO)``. This is called the *MMCFG (Memory-Mapped Configuration)* mechanism.
-* The MMCFG region is a portion of the system's physical memory address space reserved for accessing PCIe configuration space. The base address of this region is typically defined in the system's ACPI tables (e.g., the `MCFG` table).
+En el kernel de Linux, el soporte para MMCFG se gestiona mediante la siguiente opción de configuración:
 
+.. code-block:: Kconfig
 
-How MMCFG Works
------------------
+   CONFIG_PCI_MMCONFIG
 
-1. The firmware (e.g., *BIOS* or *UEFI*) provides the base address of the MMCFG region in the ACPI ``MCFG`` table.
-2. The operating system (e.g., Linux kernel) uses this base address to map the PCIe configuration space into its virtual address space.
-3. The kernel can then access the configuration space of PCIe devices by reading from or writing to specific memory addresses within the MMCFG region.
+* Esta opción habilita el uso del espacio de configuración mapeado en memoria para dispositivos PCIe[cite: 10].
+* En los kernels modernos suele estar activada por defecto, dado que la práctica totalidad de los sistemas actuales utilizan PCIe y dependen de MMCFG para gestionar los dispositivos[cite: 10].
 
+Importancia de MMCFG
+====================
 
-MMCFG in the Linux Kernel
----------------------------
+* **Rendimiento**: Proporciona un método significativamente más rápido y eficiente para acceder al espacio de configuración en comparación con el mecanismo legado de puertos de E/S de PCI[cite: 10].
+* **Gestión de Dispositivos**: Es fundamental para la detección, inicialización y administración de dispositivos PCIe durante el proceso de arranque y en tiempo de ejecución[cite: 10].
 
-In the Linux kernel, MMCFG support is enabled by the following configuration option:
-
-.. code-block:: C
-
-	CONFIG_PCI_MMCONFIG
-
-* This option enables the use of the memory-mapped configuration space for PCIe devices.
-* It is typically enabled by default in modern kernels, as most systems use PCIe and rely on MMCFG for configuration space access.
-
-
-Why MMCFG is Important
-------------------------
-
-* MMCFG provides a faster and more efficient way to access PCIe configuration space compared to the legacy PCI mechanism.
-* It is essential for systems with PCIe devices, as it allows the kernel to discover, configure, and manage these devices during boot and runtime.
-
-If you're debugging or working with PCIe devices in the Linux kernel, you might encounter references to MMCFG in logs or code related to PCIe initialization and configuration. For example, during boot, the kernel might log the MMCFG base address and the size of the MMCFG region.
-
+.. note::
+   Durante la fase de depuración o análisis del arranque del kernel, es habitual encontrar referencias a MMCFG en los registros del sistema (``dmesg``)[cite: 10]. El kernel suele notificar la dirección base asignada a MMCFG y el tamaño de la región detectada a partir de las tablas ACPI[cite: 10].

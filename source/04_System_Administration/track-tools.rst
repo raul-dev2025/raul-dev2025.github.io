@@ -50,3 +50,5 @@ Comparativa de Herramientas
      - Utilidad CLI (Espacio de Usuario)
      - Funciones de bibliotecas (Symphony/libc)
      - Análisis de flujo de ejecuciones y APIs.
+
+* Ver :doc:`Guía práctica de aplicación </04_System_Administration/workFlow-strace.rst>`

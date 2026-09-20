@@ -10,6 +10,7 @@ Incidencias
    :maxdepth: 1
 
    /06_Software_and_Applications/Incidencias/incidencia-win10-tpm
+   /06_Software_and_Applications/Incidencias/weakness_config.rst
 
 Registro y resolución de incidencias en aplicaciones y entornos de usuario, incluyendo el diagnóstico de fallos relacionados con el módulo TPM en Windows 10.
 
@@ -48,8 +49,8 @@ Supuestos
 Casos prácticos, escenarios de prueba e índice general de supuestos prácticos, incluyendo montaje offline de imágenes de disco de máquinas virtuales.
 
 
-Supuestos/Boot
-==============
+Proceso de arranque en VMs
+==========================
 
 .. toctree::
    :maxdepth: 1
@@ -66,8 +67,8 @@ Supuestos/Boot
 Escenarios prácticos sobre gestores de arranque (GRUB), depuración de secuencias de boot, configuración de Secure Boot e identificación del cargador en máquinas virtuales.
 
 
-Supuestos/Config
-================
+Configuración de VMs
+====================
 
 .. toctree::
    :maxdepth: 1
@@ -81,8 +82,8 @@ Supuestos/Config
 Guías de configuración de servicios esenciales: acceso seguro vía SSH, consulta de archivos de configuración XML, recursos compartidos NFS y aprovisionamiento de VMs.
 
 
-Supuestos/Containers
-====================
+Contenedores
+============
 
 .. toctree::
    :maxdepth: 1
@@ -92,8 +93,8 @@ Supuestos/Containers
 Documentación sobre arquitectura y gestión de contenedores, guías de despliegue base y especificaciones asociadas al hardware de soporte para virtualización ligera.
 
 
-Supuestos/Golden
-================
+Supuestos, imágenes Base(Golden)
+================================
 
 .. toctree::
    :maxdepth: 1
@@ -112,8 +113,8 @@ Supuestos/Golden
 Procedimientos para la creación, purificación, clonación y sellado de imágenes patrón (*Golden Images*), incluyendo su vinculación e integración con servicios de identidad (IdM).
 
 
-Supuestos/Hipervisor
-====================
+Hipervisor
+==========
 
 .. toctree::
    :maxdepth: 1
@@ -123,8 +124,8 @@ Supuestos/Hipervisor
    /06_Software_and_Applications/Supuestos/Hipervisor/notasHypervisor
 
 
-Supuestos/IdM
-=============
+Supuestos - IdM
+===============
 
 .. toctree::
    :maxdepth: 1
@@ -137,8 +138,8 @@ Supuestos/IdM
 Casos prácticos de despliegue de infraestructura de gestión de identidades, preparación de entornos y réplicas de servidores IdM.
 
 
-Supuestos/IdM/Free-IPA
-======================
+IdM - Configuracion 
+===================
 
 .. toctree::
    :maxdepth: 1
@@ -149,8 +150,8 @@ Supuestos/IdM/Free-IPA
 Configuración, mantenimiento y planificación de soluciones FreeIPA/Kerberos (KDC), generación de contraseñas de un solo uso (OTP) y redundancia de servicios de autenticación.
 
 
-Supuestos/IdM/SSO
-=================
+IdM - Single Sing-On(SSO)
+=========================
 
 .. toctree::
    :maxdepth: 1
@@ -160,8 +161,8 @@ Supuestos/IdM/SSO
 Fases de integración, hoja de ruta y despliegue de mecanismos de Inicio de Sesión Único (*Single Sign-On* / SSO) dentro de la arquitectura de red.
 
 
-Supuestos/Maint
-===============
+Supuestos - Mantenimiento
+=========================
 
 .. toctree::
    :maxdepth: 1
@@ -173,8 +174,8 @@ Supuestos/Maint
 Mantenimiento de infraestructuras virtuales (IV) y gestión de optimización de almacenamiento mediante VDO (*Virtual Data Optimizer*).
 
 
-Supuestos/Processor
-===================
+Supuestos - Procesador
+======================
 
 .. toctree::
    :maxdepth: 1
@@ -185,8 +186,8 @@ Supuestos/Processor
 Ajustes avanzados a nivel de procesador para entornos virtualizados, habilitación de extensiones de virtualización hardware (AMD-V) y asignación fija de vCPUs (*CPU Pinning*).
 
 
-Supuestos/Qemu
-==============
+Supuestos - Qemu
+================
 
 .. toctree::
    :maxdepth: 1
@@ -194,8 +195,8 @@ Supuestos/Qemu
    /06_Software_and_Applications/Supuestos/Qemu/qemu_notas
 
 
-Supuestos/Testing
-=================
+Supuestos - Testing
+===================
 
 .. toctree::
    :maxdepth: 1

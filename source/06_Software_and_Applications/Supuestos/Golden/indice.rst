@@ -8,6 +8,17 @@ Infraestructura RAULVILCHEZ.ORG
 
 Bienvenido a la documentación técnica del ecosistema de despliegue desatendido. Este portal centraliza los procedimientos de clonado, inyección de datos y enrolamiento automático en el Dominio.
 
+
+Resumen
+=======
+
+.. toctree::
+   :maxdepth: 1
+
+   /06_Software_and_Applications/Supuestos/Golden/resumen_infra
+
+Descripción general de las especificaciones de hardware, almacenamiento optimizado (VDO + XFS), aislamiento de CPU y seguridad de la infraestructura subyacente.
+
 Flujo de Trabajo
 ================
 
@@ -65,6 +76,7 @@ Secciones Detalladas
 
    * :download:`Descargar idm-join.sh <./idm-join.rst>`
    * :download:`Descargar idm-first-boot.service </07_Development/scripts/idm-first-boot.service>`
+
 
 Métricas de Seguridad
 =====================

@@ -1,149 +1,115 @@
-Briefing: Memory-Mapped I/O vs. I/O Ports
-=========================================
+.. SPDX-License-Identifier: GPL-2.0-or-later
 
-In computer systems, communication between the CPU and peripheral devices (e.g., network cards, storage controllers, GPUs) is achieved through two primary mechanisms: **Memory-Mapped I/O (MMIO)** and **I/O Ports**. Both methods allow the CPU to interact with hardware devices, but they differ in how they are implemented and accessed.
+=====================================================
+Informe Técnico: Memory-Mapped I/O vs. Puertos de E/S
+=====================================================
 
-----
+En los sistemas informáticos, la comunicación entre la CPU y los dispositivos periféricos (como tarjetas de red, controladores de almacenamiento o GPUs) se realiza a través de dos mecanismos principales: **Memory-Mapped I/O (MMIO)** y **Puertos de Entrada/Salida (PMIO / I/O Ports)**. Ambos métodos permiten al procesador interactuar con el hardware, pero difieren en su implementación y en las instrucciones utilizadas para su acceso.
 
+1. Entrada/Salida Mapeada en Memoria (MMIO)
+===========================================
 
-1. Memory-Mapped I/O (MMIO)
----------------------------
+Definición
+----------
 
-Definition:
-~~~~~~~~~~~
+* **Memory-Mapped I/O (MMIO)** mapea los registros de un dispositivo de hardware dentro del espacio de direcciones de la memoria física del sistema.
+* Los registros del dispositivo se comportan como posiciones de memoria ordinarias, permitiendo que la CPU acceda a ellos mediante instrucciones estándar de lectura y escritura en memoria.
 
-* Memory-Mapped I/O (MMIO) maps the registers of a hardware device into the system's *physical memory address space*.
-* The device's registers appear as if they are regular memory locations, and the CPU accesses them using standard memory read/write instructions.
+Funcionamiento
+--------------
 
-**How It Works:**
+* Al dispositivo de hardware se le asigna un rango dentro del espacio de direcciones de memoria.
+* Cuando la CPU lee o escribe en estas direcciones, el controlador de memoria encamina las operaciones hacia los registros del dispositivo en lugar de la memoria RAM.
+* Permite al procesador utilizar las mismas instrucciones de acceso a memoria habituales (por ejemplo, `MOV` en arquitecturas x86).
 
-* The hardware device is assigned a range of memory addresses in the system's address space.
-* When the CPU reads from or writes to these addresses, the memory controller routes the operations to the device's registers instead of RAM.
-* This allows the CPU to interact with the device using the same instructions it uses to access memory (e.g., ``MOV`` on x86 architectures).
+Ventajas
+--------
 
-Advantages:
-~~~~~~~~~~~
+* **Programación simplificada**: Emplea instrucciones estándar de acceso a memoria, facilitando el desarrollo.
+* **Amplio espacio de direcciones**: Soporta un elevado número de dispositivos y registros.
+* **Eficiencia en dispositivos de alta velocidad**: Adecuado para periféricos que requieren un ancho de banda elevado o comunicación frecuente (GPUs, tarjetas de red).
 
-* **Simplified programming**: Uses standard memory access instructions, making it easier to program.
-* **Large address space**: Can support a large number of devices and registers.
-* **Efficient for high-speed devices**: Suitable for devices that require frequent or high-bandwidth communication (e.g., GPUs, network cards).
+Desventajas
+-----------
 
-Disadvantages:
-~~~~~~~~~~~~~~
+* **Consumo de espacio de direcciones**: Ocupa rango de direcciones del mapa de memoria física que de otro modo podría ser asignado a la memoria RAM.
+* **Complejidad en la gestión de direcciones**: Requiere una administración rigurosa de las asignaciones de memoria.
 
-* **Address space consumption**: Uses up physical memory address space, which could otherwise be used for RAM.
-* **Complexity in address management**: Requires careful management of memory address mappings.
+Ejemplo
+-------
 
-Example:
-~~~~~~~~
+El búfer de tramas (*framebuffer*) de una tarjeta gráfica se mapea en el espacio de direcciones de memoria del sistema. La CPU escribe directamente los datos de píxeles en esta región de memoria y la GPU los procesa para su salida en pantalla.
 
-* A GPU's frame buffer might be mapped into the system's memory address space. The CPU can write pixel data directly to this memory region, and the GPU will display it on the screen.
+2. Puertos de Entrada/Salida (I/O Ports / PMIO)
+==============================================
 
+Definición
+----------
 
-----
+* **Port-Mapped I/O (PMIO)** utiliza un espacio de direcciones dedicado y separado de la memoria principal para la comunicación con los dispositivos.
+* La CPU accede a estos puertos utilizando instrucciones específicas de E/S (por ejemplo, `IN` y `OUT` en arquitecturas x86).
 
+Funcionamiento
+--------------
 
-2. I/O Ports
-------------
+* Cada dispositivo de hardware tiene asignado uno o varios números de puerto de E/S.
+* La CPU utiliza instrucciones dedicadas para transferir datos a través de estos puertos, los cuales son gestionados habitualmente por el controlador de E/S del sistema.
 
-Definition:
-~~~~~~~~~~~
+Ventajas
+--------
 
-* I/O Ports (also called **Port-Mapped I/O** or **PMIO**) use a separate address space specifically for device communication.
-* The CPU accesses these ports using special instructions (e.g., ``IN`` and ``OUT`` on x86 architectures).
+* **Espacio de direcciones dedicado**: No consume espacio de direccionamiento de la memoria principal, preservando capacidad para la RAM.
+* **Simplicidad para dispositivos de baja velocidad**: Ideal para periféricos con requisitos reducidos de ancho de banda o baja frecuencia de acceso (puertos serie heredados, teclados PS/2).
 
-**How It Works:**
-* Each hardware device is assigned one or more I/O port numbers.
-* The CPU uses dedicated instructions to read from or write to these ports, which are separate from the memory address space.
-* The I/O ports are typically managed by the system's I/O controller.
+Desventajas
+-----------
 
-Advantages:
-~~~~~~~~~~~
+* **Instrucciones especializadas**: Requiere el uso de instrucciones de ensamblador específicas, lo que puede complicar la abstracción en software.
+* **Espacio de direcciones limitado**: El número de puertos de E/S disponibles está restringido por la arquitectura (por ejemplo, 64K puertos en sistemas x86).
 
-* **Dedicated address space**: Does not consume memory address space, leaving more room for RAM.
-* **Simplicity for low-speed devices**: Ideal for devices that require infrequent or low-bandwidth communication (e.g., legacy serial ports, PS/2 keyboards).
+Ejemplo
+-------
 
-Disadvantages:
-~~~~~~~~~~~~~~
+Un puerto serie heredado utiliza puertos de E/S para la transmisión de datos y configuración. La CPU envía información escribiendo directamente en el número de puerto asignado.
 
-* **Specialized instructions**: Requires the use of specific I/O instructions, which can complicate programming.
-* **Limited address space**: The number of available I/O ports is limited (e.g., 64K ports on x86 systems).
+Diferencias Principales
+=======================
 
-Example:
-~~~~~~~~
-
-* A legacy serial port might use I/O ports for configuration and data transfer. The CPU sends data to the serial port by writing to a specific I/O port number.
-
-
-----
-
-Key Differences Between MMIO and I/O Ports
-------------------------------------------
-
-.. list-table:: Comparison of MMIO vs PMIO
-   :widths: 20 40 40
+.. list-table::
+   :widths: 25 35 40
    :header-rows: 1
 
-   * - Feature
+   * - Característica
      - Memory-Mapped I/O (MMIO)
-     - I/O Ports (PMIO)
+     - Puertos de E/S (PMIO)
+   * - **Espacio de Direcciones**
+     - Compartido con la memoria principal (RAM).
+     - Dedicado e independiente de la RAM.
+   * - **Instrucciones CPU**
+     - Lectura/Escritura en memoria convencionales (`MOV`).
+     - Instrucciones dedicadas de E/S (`IN`, `OUT`).
+   * - **Capacidad**
+     - Gran escala (limitada por la arquitectura de bus/64-bit).
+     - Restringida (ej. 64K puertos en x86).
+   * - **Uso Principal**
+     - Dispositivos de alto rendimiento (GPUs, PCIe, NICs).
+     - Dispositivos heredados y de baja velocidad (PS/2, UART).
 
-   * - **Address Space**
-     - Uses memory address space.
-     - Uses a separate I/O address space.
+Aplicaciones Prácticas
+======================
 
-   * - **Access Instructions**
-     - Standard memory instructions (``LDR``, ``STR``, ``MOV``).
-     - Special I/O instructions (``IN``, ``OUT``).
+Memory-Mapped I/O
+-----------------
 
-   * - **Performance**
-     - Faster (caching and pipelining possible).
-     - Slower (I/O instructions are often serializing).
+* Tarjetas gráficas modernas (GPUs), controladoras de red (NICs) y dispositivos en el bus PCIe.
+* Periféricos que demandan transferencias continuas a alta velocidad.
 
-   * - **Address Size**
-     - Large (limited by system RAM address bus).
-     - Small (limited, e.g., 65536 ports on x86).
+Puertos de Entrada/Salida
+-------------------------
 
-   * - **Caching**
-     - Can be cached (needs ``ioremap`` / non-cacheable).
-     - Generally not cacheable.
+* Hardware heredado como teclados PS/2, puertos serie/paralelo y controladoras de disco antiguas.
+* Control de registros de bajo nivel con requisitos sencillos de ancho de banda.
 
-   * - **Protection**
-     - Handled via MMU (Page Tables).
-     - Handled via I/O Permission Bitmap (TSS).
+.. note::
 
-   * - **Hardware Visibility**
-     - Visible to the CPU as standard memory.
-     - Requires a separate control bus/signal (IOR/IOW).
-
-   * - **Use Cases**
-     - Modern high-speed devices (PCIe, NVMe, GPUs).
-     - Legacy devices, keyboard controllers, PIT, UARTs.
-
-
------
-
-
-Practical Applications
-----------------------
-
-**Memory-Mapped I/O:**
-
-* Modern GPUs, network interface cards (NICs), and PCIe devices.
-* Devices that require high-speed communication with the CPU.
-
-I/O Ports:
-----------
-
-* Legacy hardware like PS/2 keyboards, serial ports, and older storage controllers.
-* Devices that require simple, low-bandwidth communication.
-
-
-----
-
-
-Conclusion
-----------
-
-Both Memory-Mapped I/O and I/O Ports are essential for CPU-device communication, but they serve different purposes and are suited to different types of hardware. Modern systems increasingly rely on MMIO due to its efficiency and flexibility, while I/O ports remain relevant for compatibility with legacy devices. Understanding these mechanisms is crucial for low-level system programming, driver development, and hardware debugging.
-
+   *Conclusión*: Tanto MMIO como los Puertos de E/S son mecanismos fundamentales para la interacción procesador-hardware. Los sistemas modernos priorizan el uso de MMIO debido a su flexibilidad y rendimiento, mientras que los puertos de E/S se mantienen principalmente por compatibilidad con arquitecturas heredadas.
