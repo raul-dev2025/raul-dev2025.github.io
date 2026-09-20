@@ -6,7 +6,8 @@
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
-BUILDDIR      = build
+GIT_BRANCH    := $(shell git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "default")
+BUILDDIR      = build/$(GIT_BRANCH)
 
 # List of targets that are not actual files
 .PHONY: help clean html
@@ -17,7 +18,7 @@ html:
 
 # Target to clean the build directory
 clean:
-	@$(SPHINXBUILD) -M clean "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	rm -rf "$(BUILDDIR)"
 
 clean-ready:
 	rm -rf build/ready
