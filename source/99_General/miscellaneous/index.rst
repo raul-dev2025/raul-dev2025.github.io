@@ -25,10 +25,7 @@ Available documents about *git repositories*.
    :maxdepth: 1
    :caption: Mathematical:
    
-   gnuPlot-usage
-   gnuPlot-intro
-   newOrigin2
-   mathSymbols
+   /99_General/miscellaneous/Maths/index
 
 Available documents about Mathematical representation.
 
