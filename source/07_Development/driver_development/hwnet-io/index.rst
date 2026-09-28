@@ -12,7 +12,7 @@ Infraestructura de automatización, pipelines de compilación remota e integraci
 .. toctree::
    :maxdepth: 1
    
-   /07_Development/driver_development/hwnet-io/ci-cd/modoDeEmpleo
+   ci-cd/modoDeEmpleo
 
 * :doc:`Index hwbus-io </07_Development/driver_development/hwbus-io/index>`
 
@@ -24,14 +24,19 @@ Especificaciones de arquitectura, manifiesto de diseño y capacidades funcionale
 .. toctree::
    :maxdepth: 1
 
-   /07_Development/driver_development/hwnet-io/intro
-
+   intro
+   implementation_doc.rst
+   netlab   
 
 .. toctree::
    :maxdepth: 2
 
-   /07_Development/driver_development/hwnet-io/arch_drv0
-   /07_Development/driver_development/hwnet-io/arch_drv1
-   /07_Development/driver_development/hwnet-io/arch_drv2
-   /07_Development/driver_development/hwnet-io/arch_drv3
-   /07_Development/driver_development/hwnet-io/arch_drv4
+   arch_drv0
+   arch_drv1
+   arch_drv2
+   arch_drv3
+   arch_drv4
+   arch_drv5
+   arch_drv6
+   netlab
+
