@@ -7,8 +7,8 @@ Development
 Este documento constituye el índice principal de la sección de Desarrollo. Centraliza la documentación sobre desarrollo de controladores (*drivers*), referencias de hardware, administración de sistemas y guías misceláneas de desarrollo.
 
 
-Drver development
-=================
+Driver development
+==================
 
    :doc:`Development index </07_Development/driver_development/index>`
 

@@ -1,6 +1,7 @@
-=============
-Ciclo de vida
-=============
+=======================================
+Ciclo de vida - inicialización/apertura
+=======================================
+
 
 Siguiendo el orden lógico de vida de un dispositivo de red, empezaremos analizando en detalle el primer bloque: ``hwnet_setup`` y ``hwnet_init_module``.
 
