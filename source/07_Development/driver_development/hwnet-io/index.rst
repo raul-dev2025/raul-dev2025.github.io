@@ -7,14 +7,13 @@ Documentación técnica y guías del proyecto **hwnet-io**.
 CI-CD
 =====
 
-Infraestructura de automatización, pipelines de compilación remota e integración continua para el módulo del kernel. A continuación se muestran los cambios específicos de la máquina virtual en modo de empleo. El resto puede seguir consultándose en el índice original.
+Infraestructura de automatización, pipelines de compilación remota e integración continua para el módulo del kernel. A continuación se muestran los cambios específicos de la máquina virtual en modo de empleo. El resto puede seguir consultándose en el :ref:`índice original <HwBus-IO>`.
 
 .. toctree::
    :maxdepth: 1
    
    ci-cd/modoDeEmpleo
 
-* :doc:`Index hwbus-io </07_Development/driver_development/hwbus-io/index>`
 
 Driver
 ======
@@ -46,3 +45,12 @@ Especificación y provisión del nodo enrutador virtualizado en Rocky Linux 10 p
    :maxdepth: 1
 
    Nodo_router/index.rst
+
+
+LTP
+===
+
+.. toctree::
+   :maxdepth: 1
+
+   LTP/index.rst

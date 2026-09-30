@@ -14,7 +14,6 @@ Esta función es un callback de configuración que utiliza la pila de red al inv
 
 * **Valores Ethernet predeterminados:** Al ser un controlador virtual de :ref:`capa 2 del modelo TCP/IP <modelo_tcpip_section>`, la función de soporte ``ether_setup(dev)`` (invocada automáticamente por ``alloc_etherdev``) rellena parámetros clave como:
 
-
 * Tipo de hardware (``ARPHRD_ETHER``).
 * Longitud de dirección MAC (``ETH_ALEN``, 6 bytes).
 * Tamaño de MTU (``ETH_DATA_LEN``, 1500 bytes).

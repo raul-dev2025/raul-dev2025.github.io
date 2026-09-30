@@ -2,6 +2,8 @@
 HwBus-IO
 ========
 
+.. _HwBus-IO:
+
 Documentación técnica y guías del proyecto **hwbus-io**.
 
 CI-CD
