@@ -11,7 +11,9 @@ Siguiendo el orden lógico de vida de un dispositivo de red, empezaremos analiza
 Esta función es un callback de configuración que utiliza la pila de red al invocar ``alloc_netdev`` (o internamente dentro de ``alloc_etherdev``). Su propósito es preparar el objeto ``struct net_device`` antes de ser registrado:
 
 * **Asignación de operaciones:** Asigna nuestra tabla de callbacks ``struct net_device_ops`` (que contiene las firmas de ``open``, ``close`` y ``xmit``) al campo ``dev->netdev_ops``.
-* **Valores Ethernet predeterminados:** Al ser un controlador virtual de capa 2, la función de soporte ``ether_setup(dev)`` (invocada automáticamente por ``alloc_etherdev``) rellena parámetros clave como:
+
+* **Valores Ethernet predeterminados:** Al ser un controlador virtual de :ref:`capa 2 del modelo TCP/IP <modelo_tcpip_section>`, la función de soporte ``ether_setup(dev)`` (invocada automáticamente por ``alloc_etherdev``) rellena parámetros clave como:
+
 
 * Tipo de hardware (``ARPHRD_ETHER``).
 * Longitud de dirección MAC (``ETH_ALEN``, 6 bytes).

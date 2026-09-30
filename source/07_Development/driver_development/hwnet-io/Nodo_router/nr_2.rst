@@ -30,7 +30,7 @@ Una premisa de diseño fundamental en esta arquitectura es el uso eficiente de l
      - Habilitado (``net.ipv4.ip_forward = 1``)
 
 Activación del Reenvío de Paquetes (IP Forwarding)
-=================================================
+==================================================
 
 El reenvío de paquetes en el nivel de red (Capas 3/4) está controlado por la variable del subsistema sysctl. Para asegurar que los paquetes entrantes por la interfaz LAN (``enp9s0``) sean conmutados hacia la interfaz WAN (``enp1s0``), el valor del parámetro en tiempo de ejecución debe ser unitario:
 

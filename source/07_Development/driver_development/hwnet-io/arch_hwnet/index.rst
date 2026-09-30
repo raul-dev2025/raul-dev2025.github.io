@@ -6,7 +6,7 @@ Especificación técnica detallada sobre la arquitectura interna, diseño de est
 Cubre los flujos de transmisión (TX) y recepción (RX), la gestión de memoria y búferes de socket (``sk_buff``), así como la topología del laboratorio de red para pruebas.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    arch_drv0
    arch_drv1
@@ -15,4 +15,4 @@ Cubre los flujos de transmisión (TX) y recepción (RX), la gestión de memoria 
    arch_drv4
    arch_drv5
    arch_drv6
-   netlab
+   /07_Development/driver_development/hwnet-io/netlab

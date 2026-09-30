@@ -1,6 +1,10 @@
 Redes
 =====
 
+.. contents:: Tabla de Contenido
+   :depth: 2
+
+
 Podría definirse como un conjunto de dispositivos interconectados entre sí; un mecanismo que permite la comunicación entre dos o más computadoras.
 
 Clasificación
@@ -296,6 +300,7 @@ La trama Ethernet es utilizada en redes Ethernet y en la capa de enlace de datos
 
 En esencia, la trama Ethernet está compuesta por cuatro campos fundamentales; las direcciones MAC de los equipos de origen y destino, un relleno que asegura una longitud fija, y un código de redundancia cíclica (CRC) que se utiliza para detectar errores en la transmisión.
 
+.. _modelo_tcpip_section:
 
 Modelo TCP/IP
 -------------
@@ -304,34 +309,26 @@ A diferencia del modelo OSI, que es un marco teórico, el modelo TCP/IP es un co
 
 A continuación se muestra la equivalencia y los nombres que pueden recibir las capas:
 
-.. list-table:: Comparación Modelos OSI y TCP/IP
-   :header-rows: 1
+.. table:: Comparación Modelos OSI y TCP/IP
    :widths: 30 35 35
 
-   * - Capa OSI
-     - Capa TCP/IP (Estándar)
-     - Capa TCP/IP (Alternativo)
-   * - 7. Aplicación
-     - **Aplicación**
-     - **Aplicación**
-   * - 6. Presentación
-     -
-     -
-   * - 5. Sesión
-     -
-     -
-   * - 4. Transporte
-     - **Transporte**
-     - **Transporte**
-   * - 3. Red
-     - **Internet**
-     - **Interred**
-   * - 2. Enlace
-     - **Acceso a la Red**
-     - **Subred**
-   * - 1. Físico
-     -
-     -
+   +-----------------+-----------------------------------+-----------------------------------+
+   | Capa OSI        | Capa TCP/IP (Estándar)            | Capa TCP/IP (Alternativo)         |
+   +=================+===================================+===================================+
+   | 7. Aplicación   |                                   |                                   |
+   +-----------------+         **Aplicación**            |          **Aplicación**           |
+   | 6. Presentación |                                   |                                   |
+   +-----------------+                                   |                                   |
+   | 5. Sesión       |                                   |                                   |
+   +-----------------+-----------------------------------+-----------------------------------+
+   | 4. Transporte   | **Transporte**                    | **Transporte**                    |
+   +-----------------+-----------------------------------+-----------------------------------+
+   | 3. Red          | **Internet**                      | **Interred**                      |
+   +-----------------+-----------------------------------+-----------------------------------+
+   | 2. Enlace       | **Acceso a la Red**               | **Subred**                        |
+   +-----------------+                                   |                                   |
+   | 1. Físico       |                                   |                                   |
+   +-----------------+-----------------------------------+-----------------------------------+
 
 - **Capa de Acceso a la Red (o Subred)**: Agrupa las funciones de las capas Física y de Enlace del modelo OSI. Se encarga de la transmisión de datos por el medio físico (cables, ondas de radio) y del direccionamiento físico (direcciones MAC) dentro de una misma red local.
 
