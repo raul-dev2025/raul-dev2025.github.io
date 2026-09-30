@@ -304,25 +304,34 @@ A diferencia del modelo OSI, que es un marco teórico, el modelo TCP/IP es un co
 
 A continuación se muestra la equivalencia y los nombres que pueden recibir las capas:
 
-.. table:: Comparación Modelos OSI y TCP/IP
+.. list-table:: Comparación Modelos OSI y TCP/IP
+   :header-rows: 1
+   :widths: 30 35 35
 
-   +-----------------+--------------------------------------+-----------------------------------+
-   | Capa OSI        | Capa TCP/IP (Estándar)               | Capa TCP/IP (Alternativo)         |
-   +=================+======================================+===================================+
-   | 7. Aplicación   |                                      |                                   |
-   +-----------------+ \multirow{3}{*}{**Aplicación**}      | \multirow{3}{*}{**Aplicación**}   |
-   | 6. Presentación |                                      |                                   |
-   +-----------------+                                      |                                   |
-   | 5. Sesión       |                                      |                                   |
-   +-----------------+--------------------------------------+-----------------------------------+
-   | 4. Transporte   | **Transporte**                       | **Transporte**                    |
-   +-----------------+--------------------------------------+-----------------------------------+
-   | 3. Red          | **Internet**                         | **Interred**                      |
-   +-----------------+--------------------------------------+-----------------------------------+
-   | 2. Enlace       | \multirow{2}{*}{**Acceso a la Red**} | \multirow{2}{*}{**Subred**}       |
-   +-----------------+                                      |                                   |
-   | 1. Físico       |                                      |                                   |
-   +-----------------+--------------------------------------+-----------------------------------+
+   * - Capa OSI
+     - Capa TCP/IP (Estándar)
+     - Capa TCP/IP (Alternativo)
+   * - 7. Aplicación
+     - **Aplicación**
+     - **Aplicación**
+   * - 6. Presentación
+     -
+     -
+   * - 5. Sesión
+     -
+     -
+   * - 4. Transporte
+     - **Transporte**
+     - **Transporte**
+   * - 3. Red
+     - **Internet**
+     - **Interred**
+   * - 2. Enlace
+     - **Acceso a la Red**
+     - **Subred**
+   * - 1. Físico
+     -
+     -
 
 - **Capa de Acceso a la Red (o Subred)**: Agrupa las funciones de las capas Física y de Enlace del modelo OSI. Se encarga de la transmisión de datos por el medio físico (cables, ondas de radio) y del direccionamiento físico (direcciones MAC) dentro de una misma red local.
 

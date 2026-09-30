@@ -7,7 +7,7 @@ Documentación técnica y guías del proyecto **hwnet-io**.
 CI-CD
 =====
 
-Infraestructura de automatización, pipelines de compilación remota e integración continua para el módulo del kernel. A continuación se muestra los cambios específicos de la IV en modo de empleo. El resto puede seguir consultándose en el índice original.
+Infraestructura de automatización, pipelines de compilación remota e integración continua para el módulo del kernel. A continuación se muestran los cambios específicos de la máquina virtual en modo de empleo. El resto puede seguir consultándose en el índice original.
 
 .. toctree::
    :maxdepth: 1
@@ -26,17 +26,23 @@ Especificaciones de arquitectura, manifiesto de diseño y capacidades funcionale
 
    intro
    implementation_doc.rst
-   netlab   
+
+Arquitectura del Controlador
+----------------------------
+
+Detalles del diseño técnico e implementación del driver en desarrollo.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-   arch_drv0
-   arch_drv1
-   arch_drv2
-   arch_drv3
-   arch_drv4
-   arch_drv5
-   arch_drv6
-   netlab
+   arch_hwnet/index.rst
 
+Infraestructura de Red y Enrutamiento
+-------------------------------------
+
+Especificación y provisión del nodo enrutador virtualizado en Rocky Linux 10 para el aislamiento de pruebas de kernel.
+
+.. toctree::
+   :maxdepth: 1
+
+   Nodo_router/index.rst
