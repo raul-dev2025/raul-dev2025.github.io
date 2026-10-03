@@ -70,7 +70,6 @@ Internal Changes
 *   **Build Configuration**: Build-specific files (like ``.gitignore`` and theme configurations) were moved into an ``extra`` directory for better organization.
 *   **Theme**: The custom "Search docs" text feature was temporarily deactivated in the theme configuration.
 
-
 .. _release_v1.2.2:
 
 Version 1.2.2
