@@ -1,6 +1,6 @@
-====================================
+===================================
 Herramientas de Graficación y Maths
-====================================
+===================================
 
 .. list-table::
    :widths: 20 80
@@ -19,7 +19,6 @@ Contenidos de la Sección
 
 .. toctree::
    :maxdepth: 2
-   :caption: Documentos Disponibles:
 
    gnuPlot-intro
    gnuPlot-usage
@@ -32,13 +31,12 @@ Contenidos de la Sección
 ==============================
 
 .. toctree::
-   :maxdepth: 1
-   :caption: Unidades de Estudio:
+   :maxdepth: 2
 
    capitulo-1
+   capitulo-6
+   capitulo-7
    capitulo-16
-
-
 
 
 **Cálculo - Frank Ayres, Jr. & Elliott Mendelson (4ª Ed)**
