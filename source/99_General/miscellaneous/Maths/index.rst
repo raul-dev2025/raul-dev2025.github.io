@@ -37,6 +37,8 @@ Contenidos de la Sección
    capitulo-6
    capitulo-7
    capitulo-8
+   capitulo-9
+   capitulo-10
    capitulo-16
 
 

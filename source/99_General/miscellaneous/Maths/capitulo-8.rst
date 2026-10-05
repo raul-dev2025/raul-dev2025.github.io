@@ -1,6 +1,13 @@
-========================
-Capítulo 8 — Continuidad
-========================
+==========
+Capítulo 8
+==========
+
+.. contents:: Tabla de Contenido
+   :depth: 2
+
+
+Continuidad
+===========
 
 Se considera una función continua en un punto :math:`x_0` si se cumplen las siguientes tres condiciones:
 
