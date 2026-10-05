@@ -14,8 +14,8 @@ Infraestructura de automatización, pipelines de compilación remota e integraci
    
    ci-cd/modoDeEmpleo
    ci-cd/router-node
-   ci-cd/redLanLTP.rst
-   ci-cd/net-preflight-check.rst
+   ci-cd/redLanLTP
+   ci-cd/net-preflight-check
 
 Driver
 ======
