@@ -26,7 +26,7 @@ Especificaciones de arquitectura, manifiesto de diseño y capacidades funcionale
    :maxdepth: 1
 
    intro
-   implementation_doc.rst
+   codigoEstructurado
 
 Arquitectura del Controlador
 ----------------------------
@@ -36,7 +36,7 @@ Detalles del diseño técnico e implementación del driver en desarrollo.
 .. toctree::
    :maxdepth: 1
 
-   arch_hwnet/index.rst
+   arch_hwnet/index
 
 Infraestructura de Red y Enrutamiento
 -------------------------------------
@@ -46,7 +46,7 @@ Especificación y provisión del nodo enrutador virtualizado en Rocky Linux 10 p
 .. toctree::
    :maxdepth: 1
 
-   Nodo_router/index.rst
+   Nodo_router/index
 
 
 LTP
@@ -55,4 +55,4 @@ LTP
 .. toctree::
    :maxdepth: 1
 
-   LTP/index.rst
+   LTP/index

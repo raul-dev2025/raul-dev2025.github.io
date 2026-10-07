@@ -1,5 +1,5 @@
 ===================
-código estructurado
+Código estructurado
 ===================
 
 Éste documento describe cómo organizar el archivo fuente C del controlador en **bloques funcionales limpios y acoplados**, siguiendo las convenciones del desarrollo del kernel de Linux.
