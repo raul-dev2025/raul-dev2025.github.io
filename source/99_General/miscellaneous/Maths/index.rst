@@ -40,6 +40,8 @@ Contenidos de la Sección
    capitulo-9
    capitulo-10
    capitulo-16
+   capitulo-21
+   capitulo-22
 
 
 **Cálculo - Frank Ayres, Jr. & Elliott Mendelson (4ª Ed)**
