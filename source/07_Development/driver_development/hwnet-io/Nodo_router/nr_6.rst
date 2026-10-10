@@ -6,14 +6,13 @@
 
    Como la idea es dedicar el nodo-router a eso; un router, la opción de instalar el paquete ``dnsmasq``, nos permitirá configurar ampliamente, los requisitos que necesitemos cumplir. Pero dnsmasq *es un servidor dns/dhcp local...*. 
    
-   El nodo-router debe operar como si fuese un router de verdad, solo que al tener un sisteema operativo, debería ser aún más capaz que cualquier router convencional. A todos los efectos la vm "nodo-router" debe comportarse como un router físico.
+   El nodo-router debe operar como si fuese un router de verdad, solo que al tener un sistema operativo, debería ser aún más capaz que cualquier router convencional. A todos los efectos la vm "nodo-router" debe comportarse como un router físico.
    
    Lo que nos lleva a preguntarnos, es eso lo que necesitamos?
 
 
 Que ``dnsmasq`` sea ligero no significa que sea un servicio "solo para VMs"; de hecho, **la inmensa mayoría de los routers físicos del mercado** (desde routers domésticos TP-Link, ASUS o Netgear con firmware propietario, hasta sistemas profesionales integrados como OpenWrt, DD-WRT o PfSense) utilizan ``dnsmasq`` internamente como su motor de DHCP y DNS local.
 
------
 
 Por qué lo convierte en un Router Físico Real
 =============================================
