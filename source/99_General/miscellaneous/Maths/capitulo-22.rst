@@ -5,13 +5,12 @@ Capítulo 22
 Antiderivadas
 =============
 
-
 Si :math:`F'(x) = f(x)`, la función F(x) se denomina una **antiderivada** (o primitiva) de :math:`f`.
 
 Notación
 --------
 
-La operación de determinar todas las antiderivadas de una función se denota mediante la integral indefinida:
+La operación de determinar todas las antiderivadas de una función se denota mediante la :ref:`integral <integrales>` indefinida:
 
 .. math::
 

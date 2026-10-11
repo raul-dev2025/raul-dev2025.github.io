@@ -191,3 +191,11 @@ Recordatorio: Productos Notables
   .. math::
 
      (a \pm b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k
+
+
+Funciones inversas
+==================
+
+Derivadas superiores
+====================
+
