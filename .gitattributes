@@ -1,10 +1,6 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
 * text=auto
 
-#
-# The above will handle all files NOT found below
-#
-
 # These files are text and should be normalized (Convert CRLF to LF)
 *.c        text
 *.cpp      text
