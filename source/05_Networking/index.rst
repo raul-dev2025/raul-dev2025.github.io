@@ -15,6 +15,17 @@ Networking
 Documentación sobre la configuración avanzada de filtrado de paquetes con Nftables y la gestión de espacios de nombres de red (Network Namespaces / NS2) en sistemas Linux.
 
 
+Infraestructura de Red 
+======================
+
+.. toctree::
+   :maxdepth: 1
+
+   /05_Networking/Cableado/index
+
+Guía técnica y dosier de ingeniería para la implementación de cableado Cat-6 apantallado en espacios confinados, incluyendo especificaciones de componentes de derivación activa, directrices de apantallamiento en campo y protocolos de certificación de alta velocidad.
+
+
 Redes LAN
 =========
 
