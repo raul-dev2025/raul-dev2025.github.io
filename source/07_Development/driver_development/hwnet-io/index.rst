@@ -7,15 +7,14 @@ Documentación técnica y guías del proyecto **hwnet-io**.
 CI-CD
 =====
 
-Infraestructura de automatización, pipelines de compilación remota e integración continua para el módulo del kernel. A continuación se muestran los cambios específicos de la máquina virtual en modo de empleo. El resto puede seguir consultándose en el :ref:`índice original <HwBus-IO>`.
+Infraestructura de automatización, pipelines de compilación remota e integración continua para el módulo del kernel. A continuación se muestra los cambios específicos de la IV en modo de empleo. El resto puede seguir consultándose en el índice original.
 
 .. toctree::
    :maxdepth: 1
    
-   ci-cd/modoDeEmpleo
-   ci-cd/router-node
-   ci-cd/redLanLTP
-   ci-cd/net-preflight-check
+   /07_Development/driver_development/hwnet-io/ci-cd/modoDeEmpleo
+
+* :doc:`Index hwbus-io </07_Development/driver_development/hwbus-io/index>`
 
 Driver
 ======
@@ -25,34 +24,18 @@ Especificaciones de arquitectura, manifiesto de diseño y capacidades funcionale
 .. toctree::
    :maxdepth: 1
 
-   intro
-   codigoEstructurado
-
-Arquitectura del Controlador
-----------------------------
-
-Detalles del diseño técnico e implementación del driver en desarrollo.
+   /07_Development/driver_development/hwnet-io/intro
+   /07_Development/driver_development/hwnet-io/hojaDeRuta
+   
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :caption: Estructura del Controlador
 
-   arch_hwnet/index
-
-Infraestructura de Red y Enrutamiento
--------------------------------------
-
-Especificación y provisión del nodo enrutador virtualizado en Rocky Linux 10 para el aislamiento de pruebas de kernel.
-
-.. toctree::
-   :maxdepth: 1
-
-   Nodo_router/index
-
-
-LTP
-===
-
-.. toctree::
-   :maxdepth: 1
-
-   LTP/index
+   /07_Development/driver_development/hwnet-io/registro
+   /07_Development/driver_development/hwnet-io/estructuraBase
+   /07_Development/driver_development/hwnet-io/cicloVida
+   /07_Development/driver_development/hwnet-io/gestionFiltros
+   /07_Development/driver_development/hwnet-io/funciones
+   /07_Development/driver_development/hwnet-io/estadisticas
+   
