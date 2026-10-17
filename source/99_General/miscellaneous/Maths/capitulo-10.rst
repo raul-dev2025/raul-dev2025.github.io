@@ -1,15 +1,14 @@
-===========
-Capítulo 10
-===========
+===========================================
+Capítulo 10 - Reglas para derivar funciones
+===========================================
 
 .. contents:: Tabla de Contenido
    :depth: 2
 
-Reglas para derivar funciones
-=============================
 
 Diferenciabilidad
------------------
+=================
+
 Una función :math:`f` es **diferenciable** (o derivable) en :math:`x_0` si existe la derivada :math:`f'(x_0)`. Una función es diferenciable en un conjunto si existe la derivada en cada uno de sus puntos. La afirmación general «una función es diferenciable» significa que es diferenciable en todo número real.
 
 Diferenciación

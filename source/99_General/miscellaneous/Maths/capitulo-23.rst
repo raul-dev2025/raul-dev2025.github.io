@@ -1,6 +1,9 @@
-===========
-Capítulo 23
-===========
+=======================================================
+Capítulo 23 - La integral definida. Área bajo una curva
+=======================================================
+
+.. contents:: Contenido
+   :depth: 2
 
 .. _integrales:
 
@@ -8,8 +11,6 @@ Capítulo 23
    
    Una integral representa la acumulalción de cantidades (ejemplo; áreas bajo una curva) y es la operación inversa a la derivada.
 
-La integral definida. Área bajo una curva
-=========================================
 
 **Notación Sigma:** La notación sigma (suma repetida) se emplea para denotar la suma de un conjunto finito de términos:
 
@@ -153,8 +154,6 @@ donde :math:`\Delta x = \frac{b - a}{n}` y :math:`x_i^*` es un punto muestra en 
 
 -----
 
-Área bajo una curva
-===================
 
 Es considerada una función :math:`f` no negativa, es decir, tal que :math:`f(x) \ge 0` en todo el intervalo cerrado :math:`[a, b]`. Su representación gráfica dibuja una curva situada por encima del eje :math:`x` (como se observa en la figura 23-1). Partimos de la noción intuitiva de lo que significa el área :math:`A` de la región :math:`\mathcal{R}` comprendida debajo de dicha curva, delimitada inferiormente por el eje horizontal y limitada a los lados por las líneas verticales :math:`x = a` y :math:`x = b`. A continuación, desarrollaremos el procedimiento formal para calcular dicho valor de :math:`A`.
 
@@ -170,9 +169,7 @@ Son seleccionados los puntos :math:`x_1, x_2, \dots, x_{n-1}` entre :math:`a` y 
    :width: 300px
    :height: 200px
 
-.. math::
-
-   \tag{Fig 23-1}
+   Fig. 23-1
 
 .. figure:: /descargas/Math/fig23-2.jpg
    :alt: Gráfica de la función f(x)
@@ -180,9 +177,7 @@ Son seleccionados los puntos :math:`x_1, x_2, \dots, x_{n-1}` entre :math:`a` y 
    :width: 300px
    :height: 200px
 
-.. math::
-
-   \tag{Fig 23-2}
+   Fig. 23-2
 
 El intervalo :math:`[a, b]` está dividido en :math:`n` subintervalos :math:`[x_0, x_1], [x_1, x_2], \dots, [x_{n-1}, x_n]`. Para referirse a la longitud de los subintervalos, se utilizarán las expresiones; :math:`\Delta_1 x, \Delta_2 x, \dots, \Delta_n x`. De tal forma que :math:`1 \le k \le n`:
 
@@ -200,7 +195,7 @@ Para calcular de forma aproximada el área :math:`\Delta_k A` de una de estas ti
 
 .. math::
 
-   \sum_{k=1}^{n} f(x_k^*) \Delta_k x = f(x_1^*) \Delta_1 x + f(x_2^*) \Delta_2 x + \dots + f(x_n^*) \Delta_n x \quad (23.1)
+   \sum_{k=1}^{n} f(x_k^*) \Delta_k x = f(x_1^*) \Delta_1 x + f(x_2^*) \Delta_2 x + \dots + f(x_n^*) \Delta_n x \quad \tag{23.1}
 
 .. figure:: /descargas/Math/fig23-3.jpg
    :alt: Gráfica de la función f(x)
@@ -208,11 +203,9 @@ Para calcular de forma aproximada el área :math:`\Delta_k A` de una de estas ti
    :width: 300px
    :height: 200px
 
-.. math::
+   Fig. 23-3
 
-   \tag{Fig 23-3}
-
-Esta aproximación se vuelve cada vez más precisa a medida que partimos el intervalo :math:`[a, b]` en porciones más abundantes y hacemos que las anchuras de dichos subintervalos se reduzcan al mínimo. Cuando estas estimaciones se van acercando de manera estable hacia un número determinado conforme refinamos la partición, dicho límite se denota formalmente como:
+Esta aproximación se vuelve cada vez más precisa a medida que partimos el intervalo :math:`[a, b]` en más porciones y hacemos que las anchuras de dichos subintervalos se reduzcan al mínimo. Cuando estas estimaciones se van acercando de manera estable hacia un número determinado conforme refinamos la partición, dicho límite se denota formalmente como:
 
 .. math::
 
@@ -234,13 +227,13 @@ Como regla general que asumiremos en adelante, toda función :math:`f` continua 
 
 .. math::
 
-   \int_{a}^{b} 1 \, dx = b - a \quad (23.2)
+   \int_{a}^{b} 1 \, dx = b - a \quad \tag{23.2}
 
 Si planteamos una subdivisión cualquiera :math:`a = x_0 < x_1 < \dots < x_n = b`, la suma de aproximación correspondiente adopta la forma:
 
 .. math::
 
-   \sum_{k=1}^{n} f(x_k^*) \Delta_k x = \sum_{k=1}^{n} \Delta_k x = (x_1 - x_0) + (x_2 - x_1) + \dots + (x_n - x_{n-1}) = b - a \quad (\text{dado que } f(x) = 1)
+   \sum_{k=1}^{n} f(x_k^*) \Delta_k x = \sum_{k=1}^{n} \Delta_k x = (x_1 - x_0) + (x_2 - x_1) + \\ \dots + (x_n - x_{n-1}) = b - a \quad (\text{dado que } f(x) = 1)
 
 Como el resultado de cualquier suma de aproximación arroja siempre :math:`b - a`, el límite de esta secuencia constante es trivialmente :math:`b - a`.
 
@@ -254,9 +247,7 @@ Como el resultado de cualquier suma de aproximación arroja siempre :math:`b - a
    :width: 300px
    :height: 200px
 
-.. math::
-
-   \tag{Fig 23-4}
+   Fig. 23-4
 
 **EJEMPLO 3:** Calculemos la integral lineal básica:
 

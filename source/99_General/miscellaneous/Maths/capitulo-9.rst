@@ -1,12 +1,10 @@
-==========
-Capítulo 9
-==========
+========================
+Capítulo 9 - La derivada
+========================
 
 .. contents:: Tabla de Contenido
    :depth: 2
 
-La derivada
-===========
 
 Incrementos y Tasa de Cambio Promedio
 =====================================

@@ -1,10 +1,10 @@
-===========
-Capítulo 21
-===========
+=============================================
+Capítulo 21 - Diferenciales. Método de Newton
+=============================================
 
+.. contents:: Contenido
+   :depth: 2
 
-Diferenciales. Método de Newton
-===============================
 
 El concepto de diferencial permite aproximar el cambio :math:`\Delta y` en los valores de una función :math:`y = f(x)` cuando la variable independiente experimenta un pequeño incremento :math:`dx` (o :math:`\Delta x`). 
 

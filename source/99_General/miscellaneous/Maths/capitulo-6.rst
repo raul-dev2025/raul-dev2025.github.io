@@ -1,9 +1,9 @@
-==========
-Capítulo 6
-==========
+======================
+Capítulo 6 - Funciones
+======================
 
-Funciones
-=========
+.. contents:: Contenido
+   :depth: 2
 
 Se dice que una variable :math:`y` es función de otra variable :math:`x`, si el valor de :math:`y` es hallado mediante el valor de :math:`x`.
 
@@ -33,7 +33,7 @@ En esencia:
 
 
 Dominio y Rango de una Función
-------------------------------
+==============================
 
 * **Dominio**: El dominio de una función es el conjunto de números al cual se permite aplicar la función; es decir, el conjunto de todos los posibles valores de entrada que tienen posibilidad de ser asignados a la variable.
 

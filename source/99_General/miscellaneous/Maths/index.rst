@@ -19,6 +19,8 @@ Cálculo
    capitulo-22
    capitulo-23
    capitulo-24
+   capitulo-25
+   capitulo-35
 
 
 **Cálculo - Frank Ayres, Jr. & Elliott Mendelson (4ª Ed)**

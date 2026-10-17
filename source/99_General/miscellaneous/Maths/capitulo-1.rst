@@ -1,12 +1,9 @@
-==========
-Capítulo 1
-==========
+============================================================================
+Capítulo 1 - Sistemas de coordenadas lineales. Valor absoluto. Desigualdades
+============================================================================
 
 .. contents:: Tabla de Contenido
    :depth: 2
-
-Sistemas de coordenadas lineales. Valor absoluto. Desigualdades
-===============================================================
 
 .. list-table::
    :widths: 30 70
@@ -25,7 +22,7 @@ Sistemas de coordenadas lineales. Valor absoluto. Desigualdades
 
 
 Establecimiento de un Sistema de Coordenadas
---------------------------------------------
+============================================
 
 Para establecer cualquier sistema de coordenadas:
 
@@ -314,7 +311,7 @@ En la figura 1-3, el valor absoluto de :math:`x_1` es igual a la distancia entre
 
 
 Intervalos finitos
-------------------
+==================
 
 * **Intervalo abierto**: Representa un conjunto de números comprendidos entre los dos puntos de referencia y sin incluir ambos extremos, definidos por la sintaxis del intervalo: :math:`(a, b)`.
 
@@ -330,7 +327,7 @@ Intervalos finitos
 
 
 Intervalos infinitos
---------------------
+====================
 
 * :math:`(a, \infty)`: Representa todas las :math:`x`, de forma tal que :math:`a` es menor que :math:`x` (:math:`a < x`). En otras palabras, si tratásemos de representar con una línea el primer término del intervalo, seguiríamos dibujando la línea sin llegar nunca al último punto.
 
@@ -340,9 +337,8 @@ Intervalos infinitos
 
 * :math:`(-\infty, b]`: Igual que el segundo caso. Se trata de un intervalo semiabierto y sí se conoce el punto o está determinado por el valor de :math:`b` en el intervalo.
 
-
 Desigualdades
--------------
+=============
 
 Toda desigualdad determina un intervalo. Al resolver la desigualdad aparecen ambos términos del intervalo.
 

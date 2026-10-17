@@ -1,12 +1,13 @@
-===========
-Capítulo 24
-===========
+=============================================
+Capítulo 24 - Teorema fundamental del cálculo
+=============================================
 
-Teorema fundamental del cálculo
-===============================
+.. contents:: Contenido
+   :depth: 2
+
 
 Teorema del valor medio para integrales
----------------------------------------
+=======================================
 
 Si tenemos una función :math:`f` que es continua en todo el intervalo cerrado :math:`[a, b]`, este teorema nos asegura la existencia de al menos un punto :math:`c` dentro de dicho intervalo tal que la integral de la función se puede expresar exactamente como el valor de la función en ese punto multiplicado por la longitud del intervalo:
 
@@ -67,7 +68,7 @@ Por otra parte, si consideramos una función continua :math:`f` en :math:`[a, b]
 
 
 Teorema fundamental del cálculo
--------------------------------
+===============================
 
 Si una función :math:`f` es continua en todo el intervalo cerrado :math:`[a, b]`, y definimos :math:`F(x) = \int f(x) \, dx` como una de sus antiderrivadas, el teorema fundamental nos proporciona la herramienta definitiva para evaluar integrales definidas de forma directa:
 

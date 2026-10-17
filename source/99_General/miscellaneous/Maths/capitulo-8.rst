@@ -1,13 +1,9 @@
-==========
-Capítulo 8
-==========
+========================
+Capítulo 8 - Continuidad
+========================
 
 .. contents:: Tabla de Contenido
    :depth: 2
-
-
-Continuidad
-===========
 
 Se considera una función continua en un punto :math:`x_0` si se cumplen las siguientes tres condiciones:
 
@@ -172,7 +168,7 @@ Si una función :math:`f` es continua en el intervalo cerrado :math:`[a, b]`, y 
 
 
 Continuidad en un intervalo cerrado
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===================================
 
 Se considera que una función :math:`f` es continua en el intervalo cerrado :math:`[a, b]` si se verifican las siguientes condiciones:
 
@@ -199,7 +195,7 @@ El uso del intervalo cerrado :math:`[a, b]` abarca los puntos extremos, mientras
 
 
 Corolario 8.6 (Teorema de Bolzano)
-----------------------------------
+==================================
 
 Si :math:`f` es una función continua en el intervalo cerrado :math:`[a, b]` y los valores en los extremos :math:`f(a)` y :math:`f(b)` tienen signos opuestos, entonces la ecuación:
 

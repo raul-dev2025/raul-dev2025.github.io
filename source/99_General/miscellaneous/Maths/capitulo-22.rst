@@ -1,14 +1,15 @@
-===========
-Capítulo 22
-===========
+===========================
+Capítulo 22 - Antiderivadas
+===========================
 
-Antiderivadas
-=============
+.. contents:: Contenido
+   :depth: 2
+
 
 Si :math:`F'(x) = f(x)`, la función F(x) se denomina una **antiderivada** (o primitiva) de :math:`f`.
 
 Notación
---------
+========
 
 La operación de determinar todas las antiderivadas de una función se denota mediante la :ref:`integral <integrales>` indefinida:
 
@@ -19,7 +20,8 @@ La operación de determinar todas las antiderivadas de una función se denota me
 donde C representa la constante de integración.
 
 Terminología
-------------
+============
+
 
 * Una antiderivada de una función también se denomina de forma equivalente **integral indefinida**.
 * La función f(x) que se integra es denominada el integrando.

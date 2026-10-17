@@ -1,10 +1,6 @@
-==========
-Capítulo 7
-==========
-
-Límites
-=======
-
+====================
+Capítulo 7 - Límites
+====================
 
 Se toma :math:`f` como el nombre de la función prototipo, y a :math:`x` como el único argumento de dicha función.
 
@@ -91,7 +87,7 @@ De esta forma, dado :math:`0 < |x - 2| < \delta`, tomando :math:`\delta = \frac{
    4|x - 2| < 4\delta = \epsilon \implies |(4x - 5) - 3| < \epsilon
 
 Límites por la derecha y por la izquierda
------------------------------------------
+=========================================
 
 * **Límite por la izquierda**: 
 
@@ -190,7 +186,7 @@ Teorema 7.6 (Raíz n-ésima de una función)
 
 
 Límites infinitos
------------------
+=================
 
 Definición del algoritmo de límite infinito positivo:
 
