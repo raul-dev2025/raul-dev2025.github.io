@@ -3,7 +3,7 @@ Estructura del Controlador, HwNet-IO
 ====================================
 
 Especificación técnica detallada sobre la arquitectura interna, diseño de estructuras y ciclo de vida del controlador sintético ``hwnet-io``.
-Cubre los flujos de transmisión (TX) y recepción (RX), la gestión de memoria y búferes de socket (``sk_buff``), así como la topología del laboratorio de red para pruebas.
+Cubre los flujos de transmisión (TX) y recepción (RX), la gestión de memoria y búferes de socket (``sk_buff``).
 
 .. toctree::
    :maxdepth: 2
@@ -16,5 +16,6 @@ Cubre los flujos de transmisión (TX) y recepción (RX), la gestión de memoria 
    memManagement
    estadisticas
    funciones
-   gestionFiltros   
+   gestionFiltros
+   reglasDeFiltrado
    netlab

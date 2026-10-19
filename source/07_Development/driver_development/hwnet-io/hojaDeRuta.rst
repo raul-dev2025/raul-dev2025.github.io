@@ -5,8 +5,8 @@ Hoja de Ruta
 **Evolución y Funcionalidad de Filtrado para el Controlador hwnet_io**
 
 :author: Raúl Vílchez Ruiz
-:date: 2026-10-16
-:status: Borrador formal / Actualizado al modelo binario de registros
+:date: 2026-10-19
+:status: Borrador formal / Actualizado a Sockets Netlink
 
 Introducción
 ============
@@ -24,11 +24,11 @@ El presente documento establece la hoja de ruta técnica para la evolución del 
    * - Fase 2
      - Diseño del punto de intercepción y separación de modos (local vs. Netfilter).
    * - Fase 3
-     - Diseño del espacio de registros estructurados y validación binaria.
+     - Implementación de la familia de sockets Netlink para control y transmisión binaria.
    * - Fase 4
-     - Integración del motor de políticas de filtrado mediante estructuras de control de longitud (*LF*).
+     - Integración del motor de políticas de filtrado mediante mensajes estructurados y delimitación de longitud (*LF*).
    * - Fase 5
-     - Creación de la interfaz de control por dispositivo de caracteres/sysfs y monitorización mediante procfs.
+     - Establecimiento de la interfaz asíncrona de control y monitorización de métricas mediante procfs.
 
 Fase 1: Estabilización del Driver Base
 ======================================
@@ -47,26 +47,26 @@ Para supervisar y gestionar el tráfico sin comprometer el rendimiento, se defin
 * **Camino Rápido Local** (*Fast-Path*): Inspección nativa optimizada sobre el tráfico que cruza estrictamente la interfaz virtual ``hwnet_io``.
 * **Auditoría Global Bajo Demanda:** Integración opcional de ganchos de Netfilter activados exclusivamente por orden explícita del administrador de red.
 
-Fase 3: Espacio de Registros Estructurados
+Fase 3: Infraestructura de Sockets Netlink
 ==========================================
 
-El núcleo funcional encargado de recibir las directrices del administrador sin parseo de texto:
+El núcleo funcional encargado de canalizar las directrices del administrador sin parseo de texto:
 
-* **Independencia del Código Fuente y Ficheros:** Supresión de reglas hardcodeadas y de intérpretes de texto en el kernel; el driver expone un espacio de configuración estructurado en binario (análogo a los registros PCI).
-* **Validación de Integridad:** Comprobación estricta de rangos y coherencia sobre los campos binarios recibidos con permisos de lectura y escritura.
+* **Independencia del Código Fuente y Ficheros:** Supresión de reglas hardcodeadas y de intérpretes de texto en el kernel; el driver habilita la familia de sockets ``AF_NETLINK`` para recibir registros binarios estructurados.
+* **Validación de Integridad:** Comprobación estricta de rangos y coherencia sobre los atributos binarios recibidos de manera segura.
 
 Fase 4: Motor de Políticas y Filtrado (Policy Engine)
 =====================================================
 
 Módulo de decisión automatizada basado en la tabla de búsqueda residente en memoria de núcleo:
 
-* **Estructuras Secuenciales y Delimitación:** Recepción de bloques estructurados que incorporan un campo de longitud (*LF*) para determinar el fin de la regla o conjunto de reglas.
-* **Acciones de Control:** Aplicación eficiente de políticas de aceptación o descarta (*Drop*) evaluadas a máxima velocidad.
+* **Mensajes Secuenciales y Delimitación:** Recepción de bloques estructurados mediante Netlink que incorporan un campo de longitud (*LF*) para determinar el fin de la regla o conjunto de reglas.
+* **Acciones de Control:** Aplicación eficiente de políticas de aceptación o descarte (*Drop*) evaluadas a máxima velocidad.
 
 Fase 5: Interfaz de Control y Monitorización
 ============================================
 
 Canal de comunicación asíncrona y pasiva con el espacio de usuario:
 
-* **Nodos R/W y Procfs:** Canales de control con privilegios restringidos para volcar la estructura de registros binarios y ficheros virtuales de lectura para consultar contadores y métricas de filtrado implícitas.
+* **Netlink Asíncrono y Procfs:** Canales de comunicación bidireccional para el envío de eventos proactivos o alertas desde el kernel, combinados con ficheros virtuales de lectura en procfs para consultar contadores y métricas de filtrado implícitas.
 * **Separación de Responsabilidades:** El controlador opera de forma silenciosa bajo demanda, dejando la gestión de archivos de salvaguarda y la traducción de políticas estrictamente en manos del administrador de red.

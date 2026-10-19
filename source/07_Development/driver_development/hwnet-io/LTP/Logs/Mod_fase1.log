@@ -1,0 +1,18 @@
+🚀 Cargando módulo kernel: hwnet_io...
+📋 Registros de dmesg tras la carga:
+[    4.692455] XFS (vda2): Mounting V5 Filesystem edefa4d2-b4b8-4c89-8b89-782813351767
+[    4.693295] XFS (vdc1): Mounting V5 Filesystem 8001158a-aa03-45b7-9a14-a2d5d6076fd4
+[    4.697033] XFS (vdb1): Mounting V5 Filesystem 28a27181-2ad9-461b-a41f-3fc49f4d5575
+[    4.702675] XFS (vdc1): Ending clean mount
+[    4.704682] XFS (vda2): Ending clean mount
+[    4.705668] XFS (vdb1): Ending clean mount
+[    4.778269] systemd-journald[573]: Received client request to flush runtime journal.
+[    4.814463] kvm_amd: TSC scaling supported
+[    4.814864] kvm_amd: Nested Virtualization enabled
+[    4.815322] kvm_amd: Nested Paging enabled
+[    4.815697] kvm_amd: LBR virtualization supported
+[    4.816187] kvm_amd: Virtual VMLOAD VMSAVE supported
+[    4.816189] kvm_amd: Virtual GIF supported
+[    6.309389] block vda: the capability attribute has been deprecated.
+[   11.867340] hwnet_io: loading out-of-tree module taints kernel.
+🛑 Descargando módulo kernel: hwnet_io...

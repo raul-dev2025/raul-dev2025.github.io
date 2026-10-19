@@ -9,3 +9,11 @@ Gu√≠a detallada sobre la estrategia de desarrollo guiado por pruebas y validaci√
 
    resumen
    codigoEstructurado
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Plan de trabajo
+
+
+   Validacion/index

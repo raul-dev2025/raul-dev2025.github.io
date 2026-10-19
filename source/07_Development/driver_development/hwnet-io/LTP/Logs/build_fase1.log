@@ -1,0 +1,27 @@
+make: Entering directory '/mnt/build-output/Repos/hwnet-io.git'
+make -C /lib/modules/6.12.0-124.8.1.el10_1.x86_64/build M=/mnt/build-output/Repos/hwnet-io.git/src/core clean 2>/dev/null || true
+make[1]: Entering directory '/usr/src/kernels/6.12.0-124.8.1.el10_1.x86_64'
+  CLEAN   /mnt/build-output/Repos/hwnet-io.git/src/core/Module.symvers
+make[1]: Leaving directory '/usr/src/kernels/6.12.0-124.8.1.el10_1.x86_64'
+make -C /lib/modules/6.12.0-124.8.1.el10_1.x86_64/build M=/mnt/build-output/Repos/hwnet-io.git/ clean 2>/dev/null || true
+make[1]: Entering directory '/usr/src/kernels/6.12.0-124.8.1.el10_1.x86_64'
+make[1]: Leaving directory '/usr/src/kernels/6.12.0-124.8.1.el10_1.x86_64'
+make -C tests clean 2>/dev/null || true
+make[1]: Entering directory '/mnt/build-output/Repos/hwnet-io.git/tests'
+make[2]: Entering directory '/mnt/build-output/Repos/hwnet-io.git/tests/hwnet_io'
+rm -f  *.ko *.o hwnet_io.ko
+make[2]: Leaving directory '/mnt/build-output/Repos/hwnet-io.git/tests/hwnet_io'
+make[1]: Leaving directory '/mnt/build-output/Repos/hwnet-io.git/tests'
+make: Leaving directory '/mnt/build-output/Repos/hwnet-io.git'
+make: Entering directory '/mnt/build-output/Repos/hwnet-io.git'
+make -C /lib/modules/6.12.0-124.8.1.el10_1.x86_64/build M=/mnt/build-output/Repos/hwnet-io.git/src/core modules
+make[1]: Entering directory '/usr/src/kernels/6.12.0-124.8.1.el10_1.x86_64'
+  CC [M]  /mnt/build-output/Repos/hwnet-io.git/src/core/main.o
+  LD [M]  /mnt/build-output/Repos/hwnet-io.git/src/core/hwnet_io.o
+  MODPOST /mnt/build-output/Repos/hwnet-io.git/src/core/Module.symvers
+  CC [M]  /mnt/build-output/Repos/hwnet-io.git/src/core/hwnet_io.mod.o
+  CC [M]  /mnt/build-output/Repos/hwnet-io.git/src/core/.module-common.o
+  LD [M]  /mnt/build-output/Repos/hwnet-io.git/src/core/hwnet_io.ko
+  BTF [M] /mnt/build-output/Repos/hwnet-io.git/src/core/hwnet_io.ko
+make[1]: Leaving directory '/usr/src/kernels/6.12.0-124.8.1.el10_1.x86_64'
+make: Leaving directory '/mnt/build-output/Repos/hwnet-io.git'
