@@ -37,10 +37,10 @@ Evidencias de Compilación y Ciclo de Vida
 Como parte del proceso de pruebas y auditoría, se adjuntan los registros de compilación del módulo y las trazas del anillo del kernel correspondientes al cumplimiento de los primeros objetivos:
 
 * :download:`Log de Compilación: <../Logs/build_fase1.log>` Se verifica la correcta construcción del objeto binario ``hwnet_io.ko`` y sus metadatos BTF para el kernel en ejecución.
-* :download:`text_link <../Logs/Mod_fase1.log>` Se comprueba la inserción exitosa del módulo out-of-tree y su comportamiento ante la descarga.
+* :download:`Trazas de Carga <../Logs/Mod_fase1.log>` ``(dmesg)`` Se comprueba la inserción exitosa del módulo out-of-tree y su comportamiento ante la descarga.
 
 Próximos Pasos: Validación de la Gestión de Colas
-==================================================
+=================================================
 
 Para cerrar formalmente la Fase 1, el plan de trabajo contempla los siguientes puntos de verificación sobre el flujo de paquetes:
 
