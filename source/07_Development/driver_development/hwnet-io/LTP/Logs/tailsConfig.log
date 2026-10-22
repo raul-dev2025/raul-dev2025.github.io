@@ -1,0 +1,37 @@
+tst_test.c:1900: TINFO: LTP version: 20250130
+tst_test.c:1904: TINFO: Tested kernel: 6.12.0-124.8.1.el10_1.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Nov 11 22:54:28 UTC 2025 x86_64
+tst_kconfig.c:88: TINFO: Parsing kernel config '/lib/modules/6.12.0-124.8.1.el10_1.x86_64/build/.config'
+tst_test.c:1722: TINFO: Overall timeout per run is 0h 00m 30s
+tst_timer_test.c:357: TINFO: CLOCK_MONOTONIC resolution 1ns
+tst_timer_test.c:369: TINFO: prctl(PR_GET_TIMERSLACK) = 50us
+tst_test.c:1743: TINFO: Updating runtime to 0h 00m 09s
+tst_test.c:1722: TINFO: Overall timeout per run is 0h 00m 39s
+tst_timer_test.c:379: TINFO: Failed to set zero latency constraint: Permission denied
+tst_timer_test.c:263: TINFO: (null) sleeping for 1000us 500 iterations, threshold 450.01us
+hwnet_io01.c:46: TPASS: Interfaz de red 'hwnet_io' encontrada: 4
+tst_timer_test.c:270: TINFO: sampling function failed, exiting
+tst_timer_test.c:263: TINFO: (null) sleeping for 2000us 500 iterations, threshold 450.01us
+hwnet_io01.c:46: TPASS: Interfaz de red 'hwnet_io' encontrada: 4
+tst_timer_test.c:270: TINFO: sampling function failed, exiting
+tst_timer_test.c:263: TINFO: (null) sleeping for 5000us 300 iterations, threshold 450.04us
+hwnet_io01.c:46: TPASS: Interfaz de red 'hwnet_io' encontrada: 4
+tst_timer_test.c:270: TINFO: sampling function failed, exiting
+tst_timer_test.c:263: TINFO: (null) sleeping for 10000us 100 iterations, threshold 450.33us
+hwnet_io01.c:46: TPASS: Interfaz de red 'hwnet_io' encontrada: 4
+tst_timer_test.c:270: TINFO: sampling function failed, exiting
+tst_timer_test.c:263: TINFO: (null) sleeping for 25000us 50 iterations, threshold 451.29us
+hwnet_io01.c:46: TPASS: Interfaz de red 'hwnet_io' encontrada: 4
+tst_timer_test.c:270: TINFO: sampling function failed, exiting
+tst_timer_test.c:263: TINFO: (null) sleeping for 100000us 10 iterations, threshold 537.00us
+hwnet_io01.c:46: TPASS: Interfaz de red 'hwnet_io' encontrada: 4
+tst_timer_test.c:270: TINFO: sampling function failed, exiting
+tst_timer_test.c:263: TINFO: (null) sleeping for 1000000us 2 iterations, threshold 4400.00us
+hwnet_io01.c:46: TPASS: Interfaz de red 'hwnet_io' encontrada: 4
+tst_timer_test.c:270: TINFO: sampling function failed, exiting
+
+Summary:
+passed   7
+failed   0
+broken   0
+skipped  0
+warnings 0

@@ -13,8 +13,7 @@ Especificaciones de arquitectura, manifiesto de diseño y capacidades funcionale
 .. toctree::
    :maxdepth: 1
    
-   intro
-   hojaDeRuta
+   intro   
    arch_hwnet/index
    
 

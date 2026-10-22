@@ -1,6 +1,6 @@
-================
-Gestión de Colas
-================
+=========================
+Fase 1 - Gestión de Colas
+=========================
 
 Plan de Trabajo: Registro del Dispositivo y Gestión de Colas (``hwnet_io``)
 ===========================================================================
@@ -12,6 +12,9 @@ El trabajo se estructurará en cuatro pasos técnicos secuenciales antes de pasa
 
 * **Objetivo:** Reservar e inicializar la estructura base que representa la interfaz virtual regular en el núcleo.
 * **Acción:** Utilizar la función de asignación genérica del kernel ``alloc_netdev`` especificando el tamaño de la estructura privada (``sizeof(struct hwnet_priv)``), el nombre de la interfaz (``hwnet_io``), el nombre de tipo de dispositivo (``NET_NAME_UNKNOWN``) y la función de inicialización de parámetros de capa de enlace (``hwnet_setup``). En dicha función se establecerán las operaciones de red (``net_device_ops``) y las dimensiones físicas como la unidad máxima de transferencia (``MTU``).
+
+* :download:`Log LTP <../Logs/tailsConfig.log>`
+
 
 2. Definición de los Callbacks Esenciales (``net_device_ops``)
 --------------------------------------------------------------

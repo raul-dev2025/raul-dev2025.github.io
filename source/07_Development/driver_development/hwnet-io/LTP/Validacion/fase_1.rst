@@ -47,3 +47,7 @@ Para cerrar formalmente la Fase 1, el plan de trabajo contempla los siguientes p
 1. **Apertura y Activación:** Comprobación del enganche correcto de las colas de red al habilitar la interfaz virtual.
 2. **Transmisión de Búferes:** Validación del procesamiento de estructuras ``sk_buff`` salientes sin interbloqueos (*deadlocks*).
 3. **Cierre Controlado:** Drenaje seguro de colas pendientes durante la desactivación del dispositivo.
+
+.. tip::
+
+   * Ver hoja de control :doc:`Gestión de Colas <fase1_tailMng>`.
