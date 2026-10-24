@@ -19,3 +19,4 @@ Cubre los flujos de transmisión (TX) y recepción (RX), la gestión de memoria 
    gestionFiltros
    reglasDeFiltrado
    netlab
+   errorDef
